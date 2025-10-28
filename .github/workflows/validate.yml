@@ -1,0 +1,27 @@
+name: Validate Nutrition Bank
+
+on:
+  push:
+    paths:
+      - 'data/**.md'
+      - 'scripts/**.py'
+  pull_request:
+    paths:
+      - 'data/**.md'
+      - 'scripts/**.py'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run validator
+        run: |
+          python scripts/validate_bank.py data/food-data-bank.md --warn-only

@@ -1,0 +1,6 @@
+nutrition-tracker-skill/
+  SKILL.md
+  data/food-data-bank.md
+  references/health-profile.yaml
+  scripts/validate_data_bank.py
+  scripts/new_dish_from_template.py

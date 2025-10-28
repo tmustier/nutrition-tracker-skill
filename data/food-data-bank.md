@@ -1,0 +1,1981 @@
+---
+title: data-bank
+schema_version:  1.1
+timezone: Europe/London
+id_convention: "{slug}_{venue_slug}_v{n}"
+default_units:
+  - "mass: g"
+  - "energy: kcal"
+  - "sodium: mg"
+  - "potassium: mg"
+  - "sterols: mg"
+  - "fats: g"
+  - "carbs: g"
+  - "fiber: g"
+  - "protein: g"
+  - \"sugar: g"
+  - \"cholesterol: mg"
+  - \"manganese: mg"
+  - \"vitamin_c: mg"
+  - \"zinc: mg"
+created: 2025-10-28
+modified: 2025-10-28
+---
+
+<!-- system: This file is designed for large language models to READ and WRITE safely.
+Follow the edit protocol below. Do not rename keys. Use nulls for unknowns. -->
+
+---
+
+## Edit Protocol
+
+- **Update flow**: Locate dish by `id` → edit numbers → bump `version` → set `last_verified` → append `change_log` item.
+    
+- **Change log item shape**:
+    
+    ```yaml
+    - timestamp: 2025-10-28T17:00:00+00:00  # Europe/London
+      updated_by: "Thomas" | "LLM: GPT-5 Thinking"
+      reason: "Filled MUFA/PUFA from venue PDF"
+      fields_changed: ["per_portion.mufa_g", "per_portion.pufa_g"]
+      sources:
+        - url: ""
+          note: ""
+    ```
+    
+- **Estimation rules** (state in `assumptions`): oil type, salting scheme, portion weight method (label vs estimate), conversions applied.
+    
+
+---
+
+## Schema TEMPLATE (copy for new dishes)
+
+```yaml
+id: {stable_id}_v1
+version: 2
+last_verified: YYYY-MM-DD
+source:
+  venue: {Venue}
+  menu_page: ""
+  evidence: []   # list of URLs or short notes
+aliases: []
+category: main|side|ingredient|drink|dessert
+portion:
+  description: ""
+  est_weight_g: null
+  notes: ""
+units:
+  mass: g
+  energy: kcal
+  sodium: mg
+  potassium: mg
+  sterols: mg
+  fats: g
+  carbs: g
+  fiber: g
+assumptions:
+  salt_scheme: "light|normal|heavy|unsalted"
+  oil_type: ""
+  prep: ""
+per_100g:
+  energy_kcal: null
+  protein_g: null
+  fat_g: null
+  sat_fat_g: null
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: null
+  sugar_g: null
+  fiber_total_g: null
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: null
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+per_portion:
+  energy_kcal: null
+  protein_g: null
+  fat_g: null
+  sat_fat_g: null
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: null
+  sugar_g: null
+  fiber_total_g: null
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: null
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium:
+    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
+    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: low|medium|high
+  gaps: []
+notes: []
+change_log: []
+```
+
+---
+
+# Dishes Index
+- [Sweet Potato Wedges (Simple Health Kitchen)](#sweet-potato-wedges-simple-health-kitchen) {#sweet_potato_wedges_shk_v1}
+- [Hummus Side Pot (Simple Health Kitchen)](#hummus-side-pot-simple-health-kitchen) {#hummus_side_pot_shk_v1}
+- [Broccoli Stems (Simple Health Kitchen)](#broccoli-stems-simple-health-kitchen) {#broccoli_stems_shk_v1}
+- [Zesty Lemon Broccoli (Simple Health Kitchen)](#zesty-lemon-broccoli-simple-health-kitchen) {#zesty_lemon_broccoli_shk_v1}
+- [Lemon & Herb Chicken Breast (Simple Health Kitchen)](#lemon-and-herb-chicken-breast-simple-health-kitchen) {#lemon_herb_chicken_breast_shk_v1}
+- [Whole Wheat Pesto Pasta (Simple Health Kitchen)](#whole-wheat-pesto-pasta-simple-health-kitchen) {#whole_wheat_pesto_pasta_shk_v1}
+- [Grilled Salmon Fillet (Simple Health Kitchen)](#grilled-salmon-fillet-simple-health-kitchen) {#grilled_salmon_fillet_shk_v1}
+- [Pistachios, 30 g](#pistachios-30-g) {#pistachios_30g_v1}
+- [Sunflower Seeds, 30 g](#sunflower-seeds-30-g) {#sunflower_seeds_30g_v1}
+- [Hazelnuts, 30 g](#hazelnuts-30-g) {#hazelnuts_30g_v1}
+- [ON Gold Standard Whey – Double Rich Chocolate (1 scoop ≈30 g)](#on-gold-standard-whey---double-rich-chocolate-1-scoop-≈30-g) {#on_whey_drc_30g_v1}
+- [PACK'D Mixed Summer Berries (150 g)](#pack'd-mixed-summer-berries-150-g) {#packd_mixed_summer_berries_150g_v1}
+- [Blueberries - 150 g](#blueberries---150-g) {#blueberries_150g_v1}
+- [Oats - dry (50 g)](#oats---dry-50-g) {#oats_dry_50g_v1}
+- [Skyr - plain (200 g)](#skyr---plain-200-g) {#skyr_plain_200g_v1}
+- [Mixed Pineapple/Mango/Passion Fruit (150 g)](#mixed-pineapple/mango/passion-fruit-150-g) {#pine_mango_passion_150g_v1}
+- [Joe & the Juice - Joe’s Identity juice](#joe-and-the-juice---joes-identity-juice) {#joes_identity_juice_jtj_v1}
+
+---
+
+## Sweet Potato Wedges (Simple Health Kitchen)
+
+```yaml
+id: sweet_potato_wedges_shk_v1
+version: 4
+last_verified: 2025-10-28
+source:
+  venue: Simple Health Kitchen, Baker Street (London)
+  menu_page: ""
+  evidence: []
+aliases: []
+category: side
+portion:
+  description: "restaurant side serving"
+  est_weight_g: null
+  notes: "skin-on wedges; roasted; normal salt"
+units:
+  mass: g
+  energy: kcal
+  sodium: mg
+  potassium: mg
+  sterols: mg
+  fats: g
+  carbs: g
+  fiber: g
+assumptions:
+  salt_scheme: "normal"
+  oil_type: ""
+  prep: ""
+per_100g:
+  energy_kcal: null
+  protein_g: null
+  fat_g: null
+  sat_fat_g: null
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: null
+  sugar_g: null
+  fiber_total_g: null
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: null
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+per_portion:
+  energy_kcal: 156
+  protein_g: 2.0
+  fat_g: 1.9
+  sat_fat_g: 1.0
+  mufa_g: 0.5
+  pufa_g: 0.4
+  trans_fat_g: 0.1
+  cholesterol_mg: null
+  carbs_g: 32.0
+  sugar_g: 10.1
+  fiber_total_g: 5.1
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: 350
+  potassium_mg: 734
+  iodine_ug: 2
+  magnesium_mg: 42
+  calcium_mg: 59
+  iron_mg: 1
+  zinc_mg: 0
+  vitamin_c_mg: 30
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium:
+    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
+    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: low
+  gaps: ['Fat breakdown (1.94 g) exceeds total_fat (1.0 g); keep as provided and flag inconsistency.']
+notes: []
+change_log:
+- timestamp: 2025-10-28T18:51:39+0000
+  updated_by: "LLM: GPT-5 Thinking"
+  reason: "Populate per_portion from user-provided data"
+  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.trans_fat_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
+  sources:
+    - url: "user_input"
+      note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T18:57:05+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Consistency fix for fat totals/splits"
+    fields_changed: ['per_portion.fat_g']
+    sources:
+      - url: "user_input"
+        note: "Correction approved by user on 2025-10-28"
+  - timestamp: 2025-10-28T19:02:30+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
+    fields_changed: ['per_portion.protein_g', 'per_portion.sat_fat_g', 'per_portion.pufa_g', 'per_portion.trans_fat_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.iodine_ug', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
+    sources:
+      - url: "formatting-pass"
+        note: "Automated rounding pass"
+```
+
+---
+
+## Grilled Salmon Fillet (Simple Health Kitchen)
+
+```yaml
+id: grilled_salmon_fillet_shk_v1
+version: 4
+last_verified: 2025-10-28
+source:
+  venue: Simple Health Kitchen, Baker Street (London)
+  menu_page: ""
+  evidence: []
+aliases: []
+category: main
+portion:
+  description: "grilled salmon fillet"
+  est_weight_g: null
+  notes: "assume skin-on unless specified; lightly oiled; normal salt"
+units:
+  mass: g
+  energy: kcal
+  sodium: mg
+  potassium: mg
+  sterols: mg
+  fats: g
+  carbs: g
+  fiber: g
+assumptions:
+  salt_scheme: "normal"
+  oil_type: ""
+  prep: ""
+per_100g:
+  energy_kcal: null
+  protein_g: null
+  fat_g: null
+  sat_fat_g: null
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: null
+  sugar_g: null
+  fiber_total_g: null
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: null
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+per_portion:
+  energy_kcal: 273
+  protein_g: 28.0
+  fat_g: 16.0
+  sat_fat_g: 3.1
+  mufa_g: 6.2
+  pufa_g: 6.7
+  trans_fat_g: null
+  cholesterol_mg: 80
+  carbs_g: 1.0
+  sugar_g: null
+  fiber_total_g: null
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: 370
+  potassium_mg: 486
+  iodine_ug: 17
+  magnesium_mg: 38
+  calcium_mg: 19
+  iron_mg: 0
+  zinc_mg: 1
+  vitamin_c_mg: 5
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium:
+    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
+    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: medium
+  gaps: []
+notes: []
+change_log:
+- timestamp: 2025-10-28T18:51:39+0000
+  updated_by: "LLM: GPT-5 Thinking"
+  reason: "Populate per_portion from user-provided data"
+  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.cholesterol_mg', 'per_portion.carbs_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
+  sources:
+    - url: "user_input"
+      note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T18:57:05+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Consistency fix for fat totals/splits"
+    fields_changed: ['per_portion.mufa_g', 'per_portion.pufa_g']
+    sources:
+      - url: "user_input"
+        note: "Correction approved by user on 2025-10-28"
+  - timestamp: 2025-10-28T19:02:30+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
+    fields_changed: ['per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.carbs_g', 'per_portion.iodine_ug', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
+    sources:
+      - url: "formatting-pass"
+        note: "Automated rounding pass"
+```
+
+---
+
+## Whole Wheat Pesto Pasta (Simple Health Kitchen)
+
+```yaml
+id: whole_wheat_pesto_pasta_shk_v1
+version: 4
+last_verified: 2025-10-28
+source:
+  venue: Simple Health Kitchen, Baker Street (London)
+  menu_page: ""
+  evidence: []
+aliases: []
+category: side
+portion:
+  description: "side serving"
+  est_weight_g: null
+  notes: "pesto includes oil, nuts; salting normal"
+units:
+  mass: g
+  energy: kcal
+  sodium: mg
+  potassium: mg
+  sterols: mg
+  fats: g
+  carbs: g
+  fiber: g
+assumptions:
+  salt_scheme: "normal"
+  oil_type: ""
+  prep: ""
+per_100g:
+  energy_kcal: null
+  protein_g: null
+  fat_g: null
+  sat_fat_g: null
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: null
+  sugar_g: null
+  fiber_total_g: null
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: null
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+per_portion:
+  energy_kcal: 220
+  protein_g: 6.3
+  fat_g: 7.9
+  sat_fat_g: 1.2
+  mufa_g: 4.7
+  pufa_g: 1.9
+  trans_fat_g: 0.1
+  cholesterol_mg: null
+  carbs_g: 28.0
+  sugar_g: 2.4
+  fiber_total_g: 4.0
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: 600
+  potassium_mg: 235
+  iodine_ug: null
+  magnesium_mg: 56
+  calcium_mg: 66
+  iron_mg: 2
+  zinc_mg: 1
+  vitamin_c_mg: 3
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium:
+    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
+    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: medium
+  gaps: []
+notes: []
+change_log:
+- timestamp: 2025-10-28T18:51:39+0000
+  updated_by: "LLM: GPT-5 Thinking"
+  reason: "Populate per_portion from user-provided data"
+  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.trans_fat_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
+  sources:
+    - url: "user_input"
+      note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T18:57:05+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Consistency fix for fat totals/splits"
+    fields_changed: ['per_portion.mufa_g', 'per_portion.pufa_g']
+    sources:
+      - url: "user_input"
+        note: "Correction approved by user on 2025-10-28"
+  - timestamp: 2025-10-28T19:02:30+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
+    fields_changed: ['per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.trans_fat_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
+    sources:
+      - url: "formatting-pass"
+        note: "Automated rounding pass"
+```
+
+---
+
+## Lemon & Herb Chicken Breast (Simple Health Kitchen)
+
+```yaml
+id: lemon_herb_chicken_breast_shk_v1
+version: 4
+last_verified: 2025-10-28
+source:
+  venue: Simple Health Kitchen, Baker Street (London)
+  menu_page: ""
+  evidence: []
+aliases: []
+category: main
+portion:
+  description: "grilled chicken breast"
+  est_weight_g: null
+  notes: "lemon & herb marinade; normal salt"
+units:
+  mass: g
+  energy: kcal
+  sodium: mg
+  potassium: mg
+  sterols: mg
+  fats: g
+  carbs: g
+  fiber: g
+assumptions:
+  salt_scheme: "normal"
+  oil_type: ""
+  prep: ""
+per_100g:
+  energy_kcal: null
+  protein_g: null
+  fat_g: null
+  sat_fat_g: null
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: null
+  sugar_g: null
+  fiber_total_g: null
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: null
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+per_portion:
+  energy_kcal: 159
+  protein_g: 36.0
+  fat_g: 1.9
+  sat_fat_g: 0.6
+  mufa_g: 0.8
+  pufa_g: 0.5
+  trans_fat_g: null
+  cholesterol_mg: 130
+  carbs_g: null
+  sugar_g: null
+  fiber_total_g: null
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: 275
+  potassium_mg: 385
+  iodine_ug: 1
+  magnesium_mg: 36
+  calcium_mg: 7
+  iron_mg: 1
+  zinc_mg: 1
+  vitamin_c_mg: null
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium:
+    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
+    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: medium
+  gaps: ['No carbs/fibre provided; trans fat not provided; ~0.09 g of fat unassigned (trace/trans).']
+notes: []
+change_log:
+- timestamp: 2025-10-28T18:51:39+0000
+  updated_by: "LLM: GPT-5 Thinking"
+  reason: "Populate per_portion from user-provided data"
+  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.cholesterol_mg', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg']
+  sources:
+    - url: "user_input"
+      note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T18:57:05+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Consistency fix for fat totals/splits"
+    fields_changed: ['per_portion.fat_g']
+    sources:
+      - url: "user_input"
+        note: "Correction approved by user on 2025-10-28"
+  - timestamp: 2025-10-28T19:02:30+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
+    fields_changed: ['per_portion.protein_g', 'per_portion.sat_fat_g', 'per_portion.pufa_g', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg']
+    sources:
+      - url: "formatting-pass"
+        note: "Automated rounding pass"
+```
+
+---
+
+## Broccoli Stems (Simple Health Kitchen)
+
+```yaml
+id: broccoli_stems_shk_v1
+version: 4
+last_verified: 2025-10-28
+source:
+  venue: Simple Health Kitchen, Baker Street (London)
+  menu_page: ""
+  evidence: []
+aliases: []
+category: side
+portion:
+  description: "steamed/roasted broccoli stems"
+  est_weight_g: null
+  notes: "no raisins variant; zest optional; normal salt"
+units:
+  mass: g
+  energy: kcal
+  sodium: mg
+  potassium: mg
+  sterols: mg
+  fats: g
+  carbs: g
+  fiber: g
+assumptions:
+  salt_scheme: "normal"
+  oil_type: ""
+  prep: ""
+per_100g:
+  energy_kcal: null
+  protein_g: null
+  fat_g: null
+  sat_fat_g: null
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: null
+  sugar_g: null
+  fiber_total_g: null
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: null
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+per_portion:
+  energy_kcal: 156
+  protein_g: 5.0
+  fat_g: 5.1
+  sat_fat_g: 0.6
+  mufa_g: 3.6
+  pufa_g: 0.9
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: 21.5
+  sugar_g: 9.4
+  fiber_total_g: 6.9
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: 540
+  potassium_mg: 630
+  iodine_ug: 1
+  magnesium_mg: 45
+  calcium_mg: 84
+  iron_mg: 1
+  zinc_mg: 1
+  vitamin_c_mg: 130
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium:
+    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
+    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: medium
+  gaps: ['No trans fat provided; ~0.52 g of fat unassigned (likely trace/trans/rounding).']
+notes: []
+change_log:
+- timestamp: 2025-10-28T18:51:39+0000
+  updated_by: "LLM: GPT-5 Thinking"
+  reason: "Populate per_portion from user-provided data"
+  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
+  sources:
+    - url: "user_input"
+      note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T18:57:05+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Consistency fix for fat totals/splits"
+    fields_changed: ['per_portion.fat_g']
+    sources:
+      - url: "user_input"
+        note: "Correction approved by user on 2025-10-28"
+  - timestamp: 2025-10-28T19:02:30+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
+    fields_changed: ['per_portion.protein_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.iron_mg', 'per_portion.zinc_mg']
+    sources:
+      - url: "formatting-pass"
+        note: "Automated rounding pass"
+```
+
+---
+
+## Zesty Lemon Broccoli (Simple Health Kitchen)
+
+```yaml
+id: zesty_lemon_broccoli_shk_v1
+version: 4
+last_verified: 2025-10-28
+source:
+  venue: Simple Health Kitchen, Baker Street (London)
+  menu_page: ""
+  evidence: []
+aliases: []
+category: side
+portion:
+  description: "broccoli with lemon zest/juice"
+  est_weight_g: null
+  notes: "light dressing; normal salt"
+units:
+  mass: g
+  energy: kcal
+  sodium: mg
+  potassium: mg
+  sterols: mg
+  fats: g
+  carbs: g
+  fiber: g
+assumptions:
+  salt_scheme: "normal"
+  oil_type: ""
+  prep: ""
+per_100g:
+  energy_kcal: null
+  protein_g: null
+  fat_g: null
+  sat_fat_g: null
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: null
+  sugar_g: null
+  fiber_total_g: null
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: null
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+per_portion:
+  energy_kcal: 113
+  protein_g: 4.5
+  fat_g: 4.7
+  sat_fat_g: 0.8
+  mufa_g: 3.2
+  pufa_g: 0.8
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: 10.5
+  sugar_g: 2.7
+  fiber_total_g: 3.5
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: 150
+  potassium_mg: 556
+  iodine_ug: 1
+  magnesium_mg: 40
+  calcium_mg: 76
+  iron_mg: 1
+  zinc_mg: 1
+  vitamin_c_mg: 123
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium:
+    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
+    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: medium
+  gaps: ['No trans fat provided; ~0.49 g of fat unassigned (trace/trans/rounding).']
+notes: []
+change_log:
+- timestamp: 2025-10-28T18:51:39+0000
+  updated_by: "LLM: GPT-5 Thinking"
+  reason: "Populate per_portion from user-provided data"
+  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
+  sources:
+    - url: "user_input"
+      note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T18:57:05+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Consistency fix for fat totals/splits"
+    fields_changed: ['per_portion.fat_g']
+    sources:
+      - url: "user_input"
+        note: "Correction approved by user on 2025-10-28"
+  - timestamp: 2025-10-28T19:02:30+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
+    fields_changed: ['per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg']
+    sources:
+      - url: "formatting-pass"
+        note: "Automated rounding pass"
+```
+
+---
+
+## Hummus Side Pot (Simple Health Kitchen)
+
+```yaml
+id: hummus_side_pot_shk_v1
+version: 4
+last_verified: 2025-10-28
+source:
+  venue: Simple Health Kitchen, Baker Street (London)
+  menu_page: ""
+  evidence: []
+aliases: []
+category: side
+portion:
+  description: "small side pot"
+  est_weight_g: null
+  notes: "tahini-based; normal salt"
+units:
+  mass: g
+  energy: kcal
+  sodium: mg
+  potassium: mg
+  sterols: mg
+  fats: g
+  carbs: g
+  fiber: g
+assumptions:
+  salt_scheme: "normal"
+  oil_type: ""
+  prep: ""
+per_100g:
+  energy_kcal: null
+  protein_g: null
+  fat_g: null
+  sat_fat_g: null
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: null
+  sugar_g: null
+  fiber_total_g: null
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: null
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+per_portion:
+  energy_kcal: 211
+  protein_g: 9.0
+  fat_g: 11.0
+  sat_fat_g: 1.3
+  mufa_g: 3.7
+  pufa_g: 6.0
+  trans_fat_g: 0.0
+  cholesterol_mg: null
+  carbs_g: 14.0
+  sugar_g: 0.6
+  fiber_total_g: 5.1
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: 379
+  potassium_mg: 360
+  iodine_ug: null
+  magnesium_mg: 86
+  calcium_mg: 54
+  iron_mg: 3
+  zinc_mg: 2
+  vitamin_c_mg: null
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium:
+    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
+    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: medium
+  gaps: ['Unsaturated total (8.75 g) + saturated + trans ≈ 10.07 g < total_fat (11 g); ~0.9 g unaccounted (rounding/other fats).']
+notes: []
+change_log:
+- timestamp: 2025-10-28T18:51:39+0000
+  updated_by: "LLM: GPT-5 Thinking"
+  reason: "Populate per_portion from user-provided data"
+  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.trans_fat_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg']
+  sources:
+    - url: "user_input"
+      note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T18:57:05+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Consistency fix for fat totals/splits"
+    fields_changed: ['per_portion.mufa_g', 'per_portion.pufa_g']
+    sources:
+      - url: "user_input"
+        note: "Correction approved by user on 2025-10-28"
+  - timestamp: 2025-10-28T19:02:30+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
+    fields_changed: ['per_portion.protein_g', 'per_portion.fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.trans_fat_g', 'per_portion.carbs_g', 'per_portion.iron_mg', 'per_portion.zinc_mg']
+    sources:
+      - url: "formatting-pass"
+        note: "Automated rounding pass"
+```
+---
+
+## Pistachios, 30 g
+
+```yaml
+id: pistachios_30g_v1
+version: 2
+last_verified: 2025-10-28
+source:
+  venue: pack/ingredient
+  menu_page: ""
+  evidence: []
+aliases: []
+category: ingredient
+portion:
+  description: "fixed pack portion"
+  est_weight_g: 30
+  notes: "shelled; unsalted"
+units:
+  mass: g
+  energy: kcal
+  sodium: mg
+  potassium: mg
+  sterols: mg
+  fats: g
+  carbs: g
+  fiber: g
+assumptions:
+  salt_scheme: "normal"
+  oil_type: ""
+  prep: ""
+per_100g:
+  energy_kcal: null
+  protein_g: null
+  fat_g: null
+  sat_fat_g: null
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: null
+  sugar_g: null
+  fiber_total_g: null
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: null
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+per_portion:
+  energy_kcal: 168
+  protein_g: 6.0
+  fat_g: 13.5
+  sat_fat_g: 1.7
+  mufa_g: 7.0
+  pufa_g: 4.3
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: 8.4
+  sugar_g: 2.3
+  fiber_total_g: 3.2
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: 1
+  potassium_mg: 308
+  iodine_ug: null
+  magnesium_mg: 36
+  calcium_mg: 30
+  iron_mg: 1
+  zinc_mg: 1
+  vitamin_c_mg: null
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium:
+    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
+    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: high
+  gaps: []
+notes: []
+change_log:
+- timestamp: 2025-10-28T18:51:39+0000
+  updated_by: "LLM: GPT-5 Thinking"
+  reason: "Populate per_portion from user-provided data"
+  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg']
+  sources:
+    - url: "user_input"
+      note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T19:02:30+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
+    fields_changed: ['per_portion.protein_g', 'per_portion.mufa_g', 'per_portion.potassium_mg', 'per_portion.magnesium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg']
+    sources:
+      - url: "formatting-pass"
+        note: "Automated rounding pass"
+```
+
+---
+
+## Sunflower Seeds, 30 g
+
+```yaml
+id: sunflower_seeds_30g_v1
+version: 2
+last_verified: 2025-10-28
+source:
+  venue: pack/ingredient
+  menu_page: ""
+  evidence: []
+aliases: []
+category: ingredient
+portion:
+  description: "fixed pack portion"
+  est_weight_g: 30
+  notes: "hulled; unsalted"
+units:
+  mass: g
+  energy: kcal
+  sodium: mg
+  potassium: mg
+  sterols: mg
+  fats: g
+  carbs: g
+  fiber: g
+assumptions:
+  salt_scheme: "normal"
+  oil_type: ""
+  prep: ""
+per_100g:
+  energy_kcal: null
+  protein_g: null
+  fat_g: null
+  sat_fat_g: null
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: null
+  sugar_g: null
+  fiber_total_g: null
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: null
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+per_portion:
+  energy_kcal: 175
+  protein_g: 6.2
+  fat_g: 15.5
+  sat_fat_g: 1.4
+  mufa_g: 3.0
+  pufa_g: 10.9
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: 6.0
+  sugar_g: 0.8
+  fiber_total_g: 2.6
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: 3
+  potassium_mg: 194
+  iodine_ug: null
+  magnesium_mg: 98
+  calcium_mg: 23
+  iron_mg: 2
+  zinc_mg: 2
+  vitamin_c_mg: 0
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium:
+    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
+    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: high
+  gaps: []
+notes: []
+change_log:
+- timestamp: 2025-10-28T18:51:39+0000
+  updated_by: "LLM: GPT-5 Thinking"
+  reason: "Populate per_portion from user-provided data"
+  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
+  sources:
+    - url: "user_input"
+      note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T19:02:30+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
+    fields_changed: ['per_portion.mufa_g', 'per_portion.carbs_g', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
+    sources:
+      - url: "formatting-pass"
+        note: "Automated rounding pass"
+```
+
+---
+
+## Hazelnuts, 30 g
+
+```yaml
+id: hazelnuts_30g_v1
+version: 3
+last_verified: 2025-10-28
+source:
+  venue: pack/ingredient
+  menu_page: ""
+  evidence: []
+aliases: []
+category: ingredient
+portion:
+  description: "fixed pack portion"
+  est_weight_g: 30
+  notes: "raw; unsalted"
+units:
+  mass: g
+  energy: kcal
+  sodium: mg
+  potassium: mg
+  sterols: mg
+  fats: g
+  carbs: g
+  fiber: g
+assumptions:
+  salt_scheme: "normal"
+  oil_type: ""
+  prep: ""
+per_100g:
+  energy_kcal: null
+  protein_g: null
+  fat_g: null
+  sat_fat_g: null
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: null
+  sugar_g: null
+  fiber_total_g: null
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: null
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+per_portion:
+  energy_kcal: 188
+  protein_g: 4.5
+  fat_g: 18.2
+  sat_fat_g: 1.3
+  mufa_g: 14.4
+  pufa_g: 2.5
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: 5.0
+  sugar_g: 1.3
+  fiber_total_g: 2.9
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: 1
+  potassium_mg: 204
+  iodine_ug: null
+  magnesium_mg: 49
+  calcium_mg: 34
+  iron_mg: 1
+  zinc_mg: 1
+  vitamin_c_mg: 2
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium:
+    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
+    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: low
+  gaps: ['MUFA/PUFA profile appears atypical for hazelnuts (expected MUFA >> PUFA); values recorded as provided.']
+notes: []
+change_log:
+- timestamp: 2025-10-28T18:51:39+0000
+  updated_by: "LLM: GPT-5 Thinking"
+  reason: "Populate per_portion from user-provided data"
+  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
+  sources:
+    - url: "user_input"
+      note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T18:57:05+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Consistency fix for fat totals/splits"
+    fields_changed: ['per_portion.mufa_g', 'per_portion.pufa_g']
+    sources:
+      - url: "user_input"
+        note: "Correction approved by user on 2025-10-28"
+  - timestamp: 2025-10-28T19:02:30+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
+    fields_changed: ['per_portion.carbs_g', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
+    sources:
+      - url: "formatting-pass"
+        note: "Automated rounding pass"
+```
+
+---
+
+## ON Gold Standard Whey – Double Rich Chocolate (1 scoop ≈30 g)
+
+```yaml
+id: on_whey_drc_30g_v1
+version: 2
+last_verified: 2025-10-28
+source:
+  venue: Optimum Nutrition (pack/ingredient)
+  menu_page: ""
+  evidence: []
+aliases: []
+category: ingredient
+portion:
+  description: "scoop (~30 g)"
+  est_weight_g: 30
+  notes: "Ranges provided; midpoints used where sensible; iron omitted due to likely error."
+units:
+  mass: g
+  energy: kcal
+  sodium: mg
+  potassium: mg
+  sterols: mg
+  fats: g
+  carbs: g
+  fiber: g
+assumptions:
+  salt_scheme: "normal"
+  oil_type: ""
+  prep: ""
+per_100g:
+  energy_kcal: null
+  protein_g: null
+  fat_g: null
+  sat_fat_g: null
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: null
+  sugar_g: null
+  fiber_total_g: null
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: null
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+per_portion:
+  energy_kcal: 120
+  protein_g: 24.0
+  fat_g: 1.4
+  sat_fat_g: 0.5
+  mufa_g: 0.5
+  pufa_g: 0.4
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: 3.0
+  sugar_g: 1.3
+  fiber_total_g: 0.7
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: 86
+  potassium_mg: 177
+  iodine_ug: 18
+  magnesium_mg: 52
+  calcium_mg: 130
+  iron_mg: null
+  zinc_mg: 2
+  vitamin_c_mg: null
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium:
+    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
+    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: low
+  gaps: ['Original data were ranges; iron value inconsistent (0.6–126 mg).']
+notes: []
+change_log:
+- timestamp: 2025-10-28T18:51:39+0000
+  updated_by: "LLM: GPT-5 Thinking"
+  reason: "Populate per_portion from user-provided data"
+  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.zinc_mg']
+  sources:
+    - url: "user_input"
+      note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T19:02:30+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
+    fields_changed: ['per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.pufa_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.zinc_mg']
+    sources:
+      - url: "formatting-pass"
+        note: "Automated rounding pass"
+```
+
+---
+
+## PACK'D Mixed Summer Berries (150 g)
+
+```yaml
+id: packd_mixed_summer_berries_150g_v1
+version: 2
+last_verified: 2025-10-28
+source:
+  venue: PACK'D (pack/ingredient)
+  menu_page: ""
+  evidence: []
+aliases: []
+category: ingredient
+portion:
+  description: "fixed pack portion"
+  est_weight_g: 150
+  notes: "Pack'd mix; per-portion as provided."
+units:
+  mass: g
+  energy: kcal
+  sodium: mg
+  potassium: mg
+  sterols: mg
+  fats: g
+  carbs: g
+  fiber: g
+assumptions:
+  salt_scheme: "normal"
+  oil_type: ""
+  prep: ""
+per_100g:
+  energy_kcal: null
+  protein_g: null
+  fat_g: null
+  sat_fat_g: null
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: null
+  sugar_g: null
+  fiber_total_g: null
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: null
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+per_portion:
+  energy_kcal: 57
+  protein_g: 1.4
+  fat_g: 0.3
+  sat_fat_g: null
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: 9.8
+  sugar_g: 9.8
+  fiber_total_g: 4.4
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: null
+  potassium_mg: 194
+  iodine_ug: null
+  magnesium_mg: 24
+  calcium_mg: 30
+  iron_mg: 1
+  zinc_mg: 1
+  vitamin_c_mg: 29
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium:
+    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
+    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: medium
+  gaps: []
+notes: []
+change_log:
+- timestamp: 2025-10-28T18:51:39+0000
+  updated_by: "LLM: GPT-5 Thinking"
+  reason: "Populate per_portion from user-provided data"
+  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.potassium_mg', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
+  sources:
+    - url: "user_input"
+      note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T19:02:30+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
+    fields_changed: ['per_portion.protein_g', 'per_portion.fiber_total_g', 'per_portion.iron_mg', 'per_portion.zinc_mg']
+    sources:
+      - url: "formatting-pass"
+        note: "Automated rounding pass"
+```
+
+---
+
+## Blueberries - 150 g
+
+```yaml
+id: blueberries_150g_v1
+version: 2
+last_verified: 2025-10-28
+source:
+  venue: pack/ingredient
+  menu_page: ""
+  evidence: []
+aliases: []
+category: ingredient
+portion:
+  description: "fixed pack portion"
+  est_weight_g: 150
+  notes: "Fresh blueberries."
+units:
+  mass: g
+  energy: kcal
+  sodium: mg
+  potassium: mg
+  sterols: mg
+  fats: g
+  carbs: g
+  fiber: g
+assumptions:
+  salt_scheme: "normal"
+  oil_type: ""
+  prep: ""
+per_100g:
+  energy_kcal: null
+  protein_g: null
+  fat_g: null
+  sat_fat_g: null
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: null
+  sugar_g: null
+  fiber_total_g: null
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: null
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+per_portion:
+  energy_kcal: 86
+  protein_g: 1.0
+  fat_g: 0.4
+  sat_fat_g: null
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: 21.8
+  sugar_g: 15.0
+  fiber_total_g: 3.6
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: 2
+  potassium_mg: 116
+  iodine_ug: null
+  magnesium_mg: 9
+  calcium_mg: 9
+  iron_mg: 0
+  zinc_mg: 0
+  vitamin_c_mg: 15
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium:
+    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
+    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: high
+  gaps: []
+notes: []
+change_log:
+- timestamp: 2025-10-28T18:51:39+0000
+  updated_by: "LLM: GPT-5 Thinking"
+  reason: "Populate per_portion from user-provided data"
+  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
+  sources:
+    - url: "user_input"
+      note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T19:02:30+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
+    fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.sugar_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
+    sources:
+      - url: "formatting-pass"
+        note: "Automated rounding pass"
+```
+
+---
+
+## Oats - dry (50 g)
+
+```yaml
+id: oats_dry_50g_v1
+version: 2
+last_verified: 2025-10-28
+source:
+  venue: pack/ingredient
+  menu_page: ""
+  evidence: []
+aliases: []
+category: ingredient
+portion:
+  description: "fixed pack portion"
+  est_weight_g: 50
+  notes: "Dry rolled oats."
+units:
+  mass: g
+  energy: kcal
+  sodium: mg
+  potassium: mg
+  sterols: mg
+  fats: g
+  carbs: g
+  fiber: g
+assumptions:
+  salt_scheme: "normal"
+  oil_type: ""
+  prep: ""
+per_100g:
+  energy_kcal: null
+  protein_g: null
+  fat_g: null
+  sat_fat_g: null
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: null
+  sugar_g: null
+  fiber_total_g: null
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: null
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+per_portion:
+  energy_kcal: 195
+  protein_g: 8.5
+  fat_g: 3.5
+  sat_fat_g: 0.6
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: 33.2
+  sugar_g: 0.5
+  fiber_total_g: 5.3
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: 1
+  potassium_mg: 215
+  iodine_ug: 1
+  magnesium_mg: 69
+  calcium_mg: 27
+  iron_mg: 2
+  zinc_mg: 2
+  vitamin_c_mg: null
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium:
+    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
+    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: high
+  gaps: []
+notes: []
+change_log:
+- timestamp: 2025-10-28T18:51:39+0000
+  updated_by: "LLM: GPT-5 Thinking"
+  reason: "Populate per_portion from user-provided data"
+  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg']
+  sources:
+    - url: "user_input"
+      note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T19:02:30+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
+    fields_changed: ['per_portion.potassium_mg', 'per_portion.iron_mg']
+    sources:
+      - url: "formatting-pass"
+        note: "Automated rounding pass"
+```
+
+---
+
+## Skyr - plain (200 g)
+
+```yaml
+id: skyr_plain_200g_v1
+version: 2
+last_verified: 2025-10-28
+source:
+  venue: pack/ingredient
+  menu_page: ""
+  evidence: []
+aliases: []
+category: ingredient
+portion:
+  description: "fixed pack portion"
+  est_weight_g: 200
+  notes: "Plain skyr yoghurt."
+units:
+  mass: g
+  energy: kcal
+  sodium: mg
+  potassium: mg
+  sterols: mg
+  fats: g
+  carbs: g
+  fiber: g
+assumptions:
+  salt_scheme: "normal"
+  oil_type: ""
+  prep: ""
+per_100g:
+  energy_kcal: null
+  protein_g: null
+  fat_g: null
+  sat_fat_g: null
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: null
+  sugar_g: null
+  fiber_total_g: null
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: null
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+per_portion:
+  energy_kcal: 124
+  protein_g: 22.0
+  fat_g: 0.4
+  sat_fat_g: 0.2
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: 10
+  carbs_g: 7.4
+  sugar_g: 7.4
+  fiber_total_g: null
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: 104
+  potassium_mg: 340
+  iodine_ug: 60
+  magnesium_mg: 24
+  calcium_mg: 300
+  iron_mg: null
+  zinc_mg: 1
+  vitamin_c_mg: null
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium:
+    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
+    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: high
+  gaps: []
+notes: []
+change_log:
+- timestamp: 2025-10-28T18:51:39+0000
+  updated_by: "LLM: GPT-5 Thinking"
+  reason: "Populate per_portion from user-provided data"
+  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.cholesterol_mg', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.zinc_mg']
+  sources:
+    - url: "user_input"
+      note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T19:02:30+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
+    fields_changed: ['per_portion.protein_g', 'per_portion.zinc_mg']
+    sources:
+      - url: "formatting-pass"
+        note: "Automated rounding pass"
+```
+
+---
+
+## Mixed Pineapple/Mango/Passion Fruit (150 g)
+
+```yaml
+id: pine_mango_passion_150g_v1
+version: 2
+last_verified: 2025-10-28
+source:
+  venue: pack/ingredient
+  menu_page: ""
+  evidence: []
+aliases: []
+category: ingredient
+portion:
+  description: "fixed pack portion"
+  est_weight_g: 150
+  notes: "Fresh fruit mix."
+units:
+  mass: g
+  energy: kcal
+  sodium: mg
+  potassium: mg
+  sterols: mg
+  fats: g
+  carbs: g
+  fiber: g
+assumptions:
+  salt_scheme: "normal"
+  oil_type: ""
+  prep: ""
+per_100g:
+  energy_kcal: null
+  protein_g: null
+  fat_g: null
+  sat_fat_g: null
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: null
+  sugar_g: null
+  fiber_total_g: null
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: null
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+per_portion:
+  energy_kcal: 75
+  protein_g: 0.9
+  fat_g: 0.5
+  sat_fat_g: 0.2
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: 16.1
+  sugar_g: 15.9
+  fiber_total_g: 1.4
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: 6
+  potassium_mg: 277
+  iodine_ug: null
+  magnesium_mg: 22
+  calcium_mg: 18
+  iron_mg: 1
+  zinc_mg: 0
+  vitamin_c_mg: 54
+  manganese_mg: 1
+
+derived:
+  salt_g_from_sodium:
+    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
+    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: medium
+  gaps: []
+notes: []
+change_log:
+- timestamp: 2025-10-28T18:51:39+0000
+  updated_by: "LLM: GPT-5 Thinking"
+  reason: "Populate per_portion from user-provided data"
+  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg', 'per_portion.manganese_mg']
+  sources:
+    - url: "user_input"
+      note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T19:02:30+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
+    fields_changed: ['per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.magnesium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.manganese_mg']
+    sources:
+      - url: "formatting-pass"
+        note: "Automated rounding pass"
+```
+
+---
+
+## Joe & the Juice - Joe’s Identity juice
+
+```yaml
+id: joes_identity_juice_jtj_v1
+version: 2
+last_verified: 2025-10-28
+source:
+  venue: Joe & the Juice
+  menu_page: ""
+  evidence: []
+aliases: []
+category: drink
+portion:
+  description: "menu serving"
+  est_weight_g: null
+  notes: "Green juice; exact recipe varies by location."
+units:
+  mass: g
+  energy: kcal
+  sodium: mg
+  potassium: mg
+  sterols: mg
+  fats: g
+  carbs: g
+  fiber: g
+assumptions:
+  salt_scheme: "normal"
+  oil_type: ""
+  prep: ""
+per_100g:
+  energy_kcal: null
+  protein_g: null
+  fat_g: null
+  sat_fat_g: null
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: null
+  sugar_g: null
+  fiber_total_g: null
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: null
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+per_portion:
+  energy_kcal: 72
+  protein_g: 4.0
+  fat_g: 2.0
+  sat_fat_g: null
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: 9.0
+  sugar_g: null
+  fiber_total_g: 4.0
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: 27
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium:
+    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
+    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: low
+  gaps: ['No sugars/potassium etc. provided; venue formulations may vary.']
+notes: []
+change_log:
+- timestamp: 2025-10-28T18:51:39+0000
+  updated_by: "LLM: GPT-5 Thinking"
+  reason: "Populate per_portion from user-provided data"
+  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.carbs_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg']
+  sources:
+    - url: "user_input"
+      note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T19:02:30+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
+    fields_changed: ['per_portion.protein_g', 'per_portion.fat_g', 'per_portion.carbs_g', 'per_portion.fiber_total_g']
+    sources:
+      - url: "formatting-pass"
+        note: "Automated rounding pass"
+```
