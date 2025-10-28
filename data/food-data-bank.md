@@ -155,7 +155,10 @@ change_log: []
 - [Oats - dry (50 g)](#oats---dry-50-g) {#oats_dry_50g_v1}
 - [Skyr - plain (200 g)](#skyr---plain-200-g) {#skyr_plain_200g_v1}
 - [Mixed Pineapple/Mango/Passion Fruit (150 g)](#mixed-pineapple/mango/passion-fruit-150-g) {#pine_mango_passion_150g_v1}
-- [Joe & the Juice - Joe’s Identity juice](#joe-and-the-juice---joes-identity-juice) {#joes_identity_juice_jtj_v1}
+- [Joe & the Juice - Joe's Identity juice](#joe-and-the-juice---joes-identity-juice) {#joes_identity_juice_jtj_v1}
+- [Sakura Wagyu Beef Sandwich (Jean-Georges at The Connaught)](#sakura-wagyu-beef-sandwich-jean-georges-at-the-connaught) {#sakura_wagyu_beef_sandwich_connaught_v1}
+- [Home-made Chips (Jean-Georges at The Connaught)](#home-made-chips-jean-georges-at-the-connaught) {#homemade_chips_connaught_v1}
+- [Ketchup Pot, 25g (Jean-Georges at The Connaught)](#ketchup-pot-25g-jean-georges-at-the-connaught) {#ketchup_pot_connaught_v1}
 
 ---
 
@@ -1979,3 +1982,306 @@ change_log:
       - url: "formatting-pass"
         note: "Automated rounding pass"
 ```
+
+---
+
+## Sakura Wagyu Beef Sandwich (Jean-Georges at The Connaught)
+
+```yaml
+id: sakura_wagyu_beef_sandwich_connaught_v1
+version: 2
+last_verified: 2025-10-28
+source:
+  venue: Jean-Georges at The Connaught, London
+  menu_page: "https://deliveroo.co.uk/menu/london/mayfair/jean-georges-at-the-connaught"
+  evidence:
+    - "Deliveroo listing: 879 kcal (sandwich only, excludes chips)"
+    - "ChatGPT analysis: sandwich weight ~360g, energy density ~2.4 kcal/g"
+    - "Macros estimated from pain de mie + seared wagyu + dressing composition"
+aliases: []
+category: main
+portion:
+  description: "restaurant serving"
+  est_weight_g: 360
+  notes: "Sakura wagyu beef sandwich on pain de mie; served with chips (separate item)"
+units:
+  mass: g
+  energy: kcal
+  sodium: mg
+  potassium: mg
+  sterols: mg
+  fats: g
+  carbs: g
+  fiber: g
+assumptions:
+  salt_scheme: "normal"
+  oil_type: "likely neutral oil for wagyu searing"
+  prep: "seared wagyu beef on pain de mie with dressing"
+per_100g:
+  energy_kcal: null
+  protein_g: null
+  fat_g: null
+  sat_fat_g: null
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: null
+  sugar_g: null
+  fiber_total_g: null
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: null
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+per_portion:
+  energy_kcal: 879
+  protein_g: 42.0
+  fat_g: 44.0
+  sat_fat_g: 16.0
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: 78.0
+  sugar_g: null
+  fiber_total_g: 4.0
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: 1100
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium:
+    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
+    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: medium
+  gaps: ["MUFA/PUFA breakdown not provided", "micronutrients beyond sodium not available", "±15-25% variance expected per source analysis"]
+notes: ["Deliveroo shows 879 kcal for sandwich; chips listed separately at 459 kcal", "Energy density check: 879 kcal / 360g = 2.44 kcal/g (realistic for rich beef sandwich)"]
+change_log:
+  - timestamp: 2025-10-28T20:00:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Initial population from Deliveroo + ChatGPT nutritional analysis"
+    fields_changed: ["per_portion.energy_kcal", "per_portion.protein_g", "per_portion.fat_g", "per_portion.sat_fat_g", "per_portion.carbs_g", "per_portion.fiber_total_g", "per_portion.sodium_mg", "portion.est_weight_g"]
+    sources:
+      - url: "https://deliveroo.co.uk/menu/london/mayfair/jean-georges-at-the-connaught"
+        note: "Deliveroo calorie listing: 879 kcal"
+      - url: "user_input"
+        note: "ChatGPT nutritional breakdown provided by Thomas on 2025-10-28"
+```
+
+---
+
+## Home-made Chips (Jean-Georges at The Connaught)
+
+```yaml
+id: homemade_chips_connaught_v1
+version: 2
+last_verified: 2025-10-28
+source:
+  venue: Jean-Georges at The Connaught, London
+  menu_page: "https://deliveroo.co.uk/menu/london/mayfair/jean-georges-at-the-connaught"
+  evidence:
+    - "Deliveroo listing: 459 kcal"
+    - "Macros scaled from McDonald's UK medium fries profile to match 459 kcal anchor"
+aliases: []
+category: side
+portion:
+  description: "restaurant side serving"
+  est_weight_g: null
+  notes: "Home-made chips; served with Sakura Wagyu Beef Sandwich"
+units:
+  mass: g
+  energy: kcal
+  sodium: mg
+  potassium: mg
+  sterols: mg
+  fats: g
+  carbs: g
+  fiber: g
+assumptions:
+  salt_scheme: "normal"
+  oil_type: "neutral frying oil"
+  prep: "deep-fried"
+per_100g:
+  energy_kcal: null
+  protein_g: null
+  fat_g: null
+  sat_fat_g: null
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: null
+  sugar_g: null
+  fiber_total_g: null
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: null
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+per_portion:
+  energy_kcal: 459
+  protein_g: 4.5
+  fat_g: 23.2
+  sat_fat_g: 2.0
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: 57.2
+  sugar_g: null
+  fiber_total_g: 4.9
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: 321
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium:
+    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
+    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: medium
+  gaps: ["MUFA/PUFA breakdown not available", "micronutrients beyond sodium not provided"]
+notes: ["Macros scaled from McDonald's UK medium fries to anchor 459 kcal from Deliveroo", "Listed separately from Sakura sandwich on Deliveroo"]
+change_log:
+  - timestamp: 2025-10-28T20:00:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Initial population from Deliveroo + ChatGPT nutritional analysis"
+    fields_changed: ["per_portion.energy_kcal", "per_portion.protein_g", "per_portion.fat_g", "per_portion.sat_fat_g", "per_portion.carbs_g", "per_portion.fiber_total_g", "per_portion.sodium_mg"]
+    sources:
+      - url: "https://deliveroo.co.uk/menu/london/mayfair/jean-georges-at-the-connaught"
+        note: "Deliveroo calorie listing: 459 kcal"
+      - url: "user_input"
+        note: "ChatGPT nutritional breakdown provided by Thomas on 2025-10-28"
+```
+
+---
+
+## Ketchup Pot, 25g (Jean-Georges at The Connaught)
+
+```yaml
+id: ketchup_pot_connaught_v1
+version: 2
+last_verified: 2025-10-28
+source:
+  venue: Jean-Georges at The Connaught, London
+  menu_page: "https://deliveroo.co.uk/menu/london/mayfair/jean-georges-at-the-connaught"
+  evidence:
+    - "Based on Heinz UK ketchup profile (102 kcal per 100g, 23.2g carbs, 1.8g salt/707mg sodium per 100g)"
+    - "Scaled to 25g pot"
+aliases: []
+category: side
+portion:
+  description: "condiment pot (25g)"
+  est_weight_g: 25
+  notes: "Tomato ketchup; assumed Heinz UK profile"
+units:
+  mass: g
+  energy: kcal
+  sodium: mg
+  potassium: mg
+  sterols: mg
+  fats: g
+  carbs: g
+  fiber: g
+assumptions:
+  salt_scheme: "normal"
+  oil_type: "n/a"
+  prep: "commercial ketchup"
+per_100g:
+  energy_kcal: 102
+  protein_g: 1.2
+  fat_g: 0.0
+  sat_fat_g: 0.0
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: 23.2
+  sugar_g: null
+  fiber_total_g: 0.4
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: 707
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+per_portion:
+  energy_kcal: 26
+  protein_g: 0.3
+  fat_g: 0.0
+  sat_fat_g: 0.0
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_g: 5.8
+  sugar_g: null
+  fiber_total_g: 0.1
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: 177
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium:
+    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
+    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: high
+  gaps: ["sugar content not specified but likely ~20g per 100g", "micronutrients beyond sodium not tracked"]
+notes: ["25g pot assumed based on typical UK restaurant ketchup portion", "If pot was 30g: add ~5 kcal, +1.2g carbs, +35mg sodium"]
+change_log:
+  - timestamp: 2025-10-28T20:00:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Initial population based on Heinz UK ketchup profile scaled to 25g"
+    fields_changed: ["per_100g.energy_kcal", "per_100g.protein_g", "per_100g.fat_g", "per_100g.sat_fat_g", "per_100g.carbs_g", "per_100g.fiber_total_g", "per_100g.sodium_mg", "per_portion.energy_kcal", "per_portion.protein_g", "per_portion.fat_g", "per_portion.sat_fat_g", "per_portion.carbs_g", "per_portion.fiber_total_g", "per_portion.sodium_mg", "portion.est_weight_g"]
+    sources:
+      - url: "user_input"
+        note: "ChatGPT nutritional breakdown provided by Thomas on 2025-10-28, based on Heinz UK"
+```
+
