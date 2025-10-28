@@ -29,6 +29,46 @@ No jargon, no mystery—just reproducible numbers and clear assumptions.
 > Packaging and validation of skills follow the **skill‑creator** guidance; see that skill’s docs
 > for `init_skill.py` / `package_skill.py` usage. This skill stays lean and defers heavy logic to scripts.
 
+## Complete workflow for adding dishes
+
+**CRITICAL: Follow this complete workflow when adding new dishes. Do NOT skip steps.**
+
+1. **Research thoroughly** (use multiple sources):
+   - Start with delivery platforms (Deliveroo/Uber Eats) for calorie counts and ingredient lists
+   - Search for venue PDFs, allergen menus, nutrition guides
+   - Look at photos (venue website, Google Maps, social media) to estimate portions
+   - Check reviews for portion size hints ("massive", "small", etc.)
+   - Search for chef recipes, prep videos, or ingredient breakdowns
+   - **Be creative**: if standard sources fail, use comparable dishes, USDA data, or ingredient analysis
+   - **Goal**: Fill in ALL nutrition fields, not just calories and macros
+
+2. **Create template and populate data**:
+   - Use `scripts/new_dish_from_template.py` to create the YAML block
+   - Fill in ALL available fields: macros, micronutrients, MUFA/PUFA breakdown
+   - For estimated values, document your reasoning in `assumptions` and `notes`
+   - Add comprehensive `source.evidence` with URLs and methods used
+   - Update `change_log` with timestamp and what you added
+
+3. **Update the index**:
+   - Add dish to the index in `data/food-data-bank.md` under `# Dishes Index`
+   - Add section header (e.g., `## Dish Name (Venue)`) before the YAML block
+   - Keep index alphabetically organized by venue, then by dish
+
+4. **Validate before committing**:
+   - Run `python scripts/validate_data_bank.py data/food-data-bank.md`
+   - Fix any errors (energy math, fat splits, sodium/salt)
+   - Re-run validation until ALL items pass
+
+5. **Update scratchpad** (if applicable):
+   - Add learnings, tips, or venue-specific guidance to the Scratchpad section
+   - Include useful research methods, data sources, or estimation techniques
+
+6. **Commit with clear message**:
+   - Commit changes with descriptive message
+   - Include calorie counts and what was added in the commit message
+
+**Do NOT default to generic values. If exact data is unavailable, use ingredient-based estimation and document your method.**
+
 ## Core procedures
 
 ### A) Lookup & summarize a dish
@@ -118,3 +158,30 @@ The script adds a new YAML block at the end and suggests an index bullet; review
 
 ## Scratchpad
 When relevant, write timestamped notes on tips and tricks you have learned in this section
+
+### 2025-10-28: Jean-Georges at The Connaught research
+**Finding nutrition data for high-end restaurants:**
+- Deliveroo UK typically shows calorie counts for items (legal requirement)
+- Some items may be blocked from web scraping (403 errors) - ask user to check their app
+- For items without full nutritional breakdown:
+  - Use calorie count as anchor
+  - Estimate macros from menu descriptions (e.g., "coconut & lime" → high sat fat from coconut)
+  - For soups: estimate ~300g portion for restaurant serving
+  - For sandwiches: weigh if possible, or estimate from typical bread + filling weights
+
+**Micronutrient estimation strategy:**
+- For beef dishes: high in iron, zinc, potassium, cholesterol (wagyu ~90mg cholesterol per 100g)
+- For broccoli-based: high vitamin C (40mg per serving), good potassium, calcium
+- For coconut-based: very high saturated fat (~80% of total fat in coconut milk)
+- For chips/fries: use McDonald's UK profile as reasonable baseline, scale to match stated calories
+
+**MUFA/PUFA breakdown when not provided:**
+- Wagyu beef: MUFA > PUFA (roughly 40% MUFA, 20% PUFA of total fat)
+- Restaurant fries: depends on oil used, but typically low sat fat (~2-3g per 450 kcal serving)
+- Ketchup: essentially zero fat
+
+**Validation tips:**
+- Atwater calculation: protein×4 + carbs×4 + fat×9 should match ±5-8%
+- Fat split: sat + MUFA + PUFA + trans should be ≤ total fat
+- For soup with coconut: sat fat will be ~75-80% of total fat (this is normal, not an error)
+- Document estimation methods clearly in `notes` field for future reference
