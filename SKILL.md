@@ -98,6 +98,65 @@ Always write down what was used. Put links/notes under `source.evidence`.
 - Estimate **portion weight** from photos: plate diameter, container size, standard yields (e.g., pasta ~140–160 g per cup cooked; salmon cooks down ~25% from raw). State the method in `assumptions`.
 - If nothing authoritative exists, choose the **closest canonical ingredient profile** and **record the choice**.
 
+**Component-based estimation (REQUIRED for multi-ingredient dishes):**
+
+When a dish has multiple identifiable components (e.g., eggs + yogurt + bread + butter), use this rigorous method:
+
+1. **List all components** from the ingredient list (e.g., "2 poached eggs, garlic yogurt, sourdough, kale, chilli butter")
+
+2. **Estimate weights for known components** using standard portions:
+   - Eggs: 50g each (100g for 2 eggs)
+   - Yogurt base: 100-120g typical for restaurant
+   - Bread slice: 50-70g (NOT 100g - be conservative!)
+   - Vegetables: 50-80g cooked portions
+   - Leave one component (usually fat/oil/butter) as the "closing variable"
+
+3. **Calculate sub-totals** for known components using USDA/MyFoodData profiles:
+   - Example: 2 eggs (140 kcal) + yogurt 120g (72 kcal) + bread 60g (150 kcal) + kale 50g (17 kcal) = 379 kcal
+
+4. **Solve for the unknown component** (usually butter/oil) to close the calorie gap:
+   - If venue lists 592 kcal total: 592 - 379 = 213 kcal from butter
+   - Butter is ~7.2 kcal/g → 213 ÷ 7.2 = ~30g butter
+   - Check reasonableness: 30g (2 tbsp) is plausible for chilli butter
+
+5. **Calculate complete macros** by summing all components with their precise weights:
+   - Get USDA profiles for each (protein, fat, carbs, sat fat, MUFA, PUFA, sodium, etc.)
+   - Scale each component to its estimated weight
+   - Sum all values
+   - **Document the calculation method in `notes`**
+
+6. **Apply finishing salt** per salt_scheme (0.5% of total dish weight):
+   - Total weight = sum of all components (e.g., 352g)
+   - Finishing salt = 352g × 0.005 = 1.76g salt = ~704mg additional sodium
+   - Add this to intrinsic sodium from ingredients (bread, salted butter, etc.)
+
+7. **Validate** using Atwater formula: Should be within ±5% of venue kcal
+
+**Example worked calculation:**
+```
+Dish: Chilli Poached Eggs (L'ETO, 592 kcal listed)
+Components: 2 eggs, garlic yogurt, sourdough, kale, chilli butter
+
+Step 1 - Estimate known components:
+- 2 poached eggs: 2×50g = 100g → 140 kcal, 12.6g P, 9.5g F, 0.7g C
+- Greek yogurt (whole): 120g → 72 kcal, 9.6g P, 3.8g F, 4.8g C
+- Sourdough: 60g slice → 150 kcal, 5.4g P, 0.9g F, 29g C
+- Kale (cooked): 50g → 17 kcal, 1.6g P, 0.3g F, 3.3g C
+Sub-total: 379 kcal, 29.2g P, 14.5g F, 37.8g C
+
+Step 2 - Solve for butter to close calorie gap:
+592 - 379 = 213 kcal needed → ~30g butter
+(Refine with actual profiles to 22.2g for exact match)
+
+Step 3 - Apply finishing salt:
+Dish weight: 352g → salt 1.76g = 704mg sodium
+Add intrinsic sodium from bread + butter
+TOTAL SODIUM: ~1,543mg
+
+Step 4 - Validate Atwater:
+4×30.4 + 4×40.3 + 9×34.2 = 590.6 kcal (±0.2% of 592)
+```
+
 **Standard assumptions (write them in `assumptions`):**
 - `salt_scheme: "normal"` → add ~**0.5% of finished dish weight** as salt (≈ **sodium_mg = salt_g * 400**).
 - `oil_type:` venue norm (e.g., olive oil for SHK). Use typical FA split (~73% MUFA / ~11% PUFA / ~14% SFA).
@@ -185,3 +244,30 @@ When relevant, write timestamped notes on tips and tricks you have learned in th
 - Fat split: sat + MUFA + PUFA + trans should be ≤ total fat
 - For soup with coconut: sat fat will be ~75-80% of total fat (this is normal, not an error)
 - Document estimation methods clearly in `notes` field for future reference
+
+### 2025-10-29: L'ETO Soho - Component-based methodology lessons
+**Critical errors to avoid:**
+- DON'T overestimate bread portions (use 60g slice, not 100g) - bread slices are typically 50-70g
+- DON'T underestimate butter/oil in restaurant dishes - they're generous with fats
+- DON'T forget finishing salt (0.5% of dish weight) PLUS intrinsic sodium from ingredients
+- DON'T guess at component weights - work backwards from calorie anchor using the "solve for X" method
+
+**Component-based calculation checklist:**
+1. List all components from ingredient list
+2. Estimate known component weights conservatively (eggs 50g each, yogurt 120g, bread slice 60g, veg 50-80g)
+3. Calculate sub-totals for known components using MyFoodData/USDA
+4. Solve for unknown component (usually butter/oil) to close calorie gap
+5. Get complete profiles for ALL components (including sat/MUFA/PUFA splits)
+6. Calculate total dish weight and apply finishing salt (0.5%)
+7. Sum all sodium: finishing salt + salted butter + bread + intrinsic sodium
+8. Validate with Atwater formula (should be within ±5%)
+
+**Why this matters:**
+- L'ETO Chilli Poached Eggs: Initial estimate had carbs 54% too high (62g vs 40.3g) and fat 32% too low (26g vs 34.2g)
+- Sodium was 81% underestimated (850mg vs 1,543mg) due to missing finishing salt calculation
+- Result: Would have given user false confidence about sat fat budget (actually at 93% of daily max, not 79%)
+
+**Key references for component-based dishes:**
+- MyFoodData.com: USDA-derived profiles with full macro/micro breakdowns
+- Standard portions: eggs 50g, bread slice 60g, yogurt 100-120g, cooked veg 50-80g
+- Butter solving: Use ~7.2 kcal/g to calculate weight needed to close calorie gap
