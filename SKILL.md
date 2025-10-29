@@ -2,9 +2,9 @@
 name: nutrition-tracker
 description: >
   Personal nutrition tracking skill for Thomas. Use when analyzing meals, estimating
-  nutrients from venue sources (menus, PDFs, photos), comparing to Thomas’s targets,
+  nutrients from venue sources (menus, PDFs, photos), comparing to Thomas's targets,
   and updating a versioned Data Bank with change logs.
-license: Personal use only
+license: Apache-2.0
 ---
 
 # Nutrition Tracker
