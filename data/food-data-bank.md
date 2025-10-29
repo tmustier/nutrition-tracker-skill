@@ -106,6 +106,7 @@ change_log: []
 # Dishes Index
 - [Sweet Potato Wedges (Simple Health Kitchen)](#sweet-potato-wedges-simple-health-kitchen) {#sweet_potato_wedges_shk_v1}
 - [Hummus Side Pot (Simple Health Kitchen)](#hummus-side-pot-simple-health-kitchen) {#hummus_side_pot_shk_v1}
+- [Carrot Juice (Simple Health Kitchen)](#carrot-juice-simple-health-kitchen) {#carrot_juice_shk_v1}
 - [Broccoli Stems (Simple Health Kitchen)](#broccoli-stems-simple-health-kitchen) {#broccoli_stems_shk_v1}
 - [Zesty Lemon Broccoli (Simple Health Kitchen)](#zesty-lemon-broccoli-simple-health-kitchen) {#zesty_lemon_broccoli_shk_v1}
 - [Lemon & Herb Chicken Breast (Simple Health Kitchen)](#lemon-and-herb-chicken-breast-simple-health-kitchen) {#lemon_herb_chicken_breast_shk_v1}
@@ -2025,3 +2026,70 @@ change_log:
       - url: "https://tools.myfooddata.com/nutrition-facts/173410/wt1"
         note: "Butter salted - 22.2g calculated to close calorie gap"
 ```
+
+## Carrot Juice (Simple Health Kitchen)
+
+```yaml
+id: carrot_juice_shk_v1
+version: 1
+last_verified: 2025-10-29
+source:
+  venue: Simple Health Kitchen
+  menu_page: ""
+  evidence:
+    - "USDA FoodData Central FDC #170491 (carrot juice, canned) scaled to 250mL"
+    - "User confirmed: 250mL fresh carrot juice from Simple Health Kitchen"
+aliases: []
+category: drink
+portion:
+  description: "250mL fresh carrot juice"
+  est_weight_g: 250
+  notes: "Fresh-pressed carrot juice; no added salt or sugar"
+assumptions:
+  salt_scheme: "unsalted"
+  oil_type: "none"
+  prep: "fresh-pressed"
+per_portion:
+  energy_kcal: 100
+  protein_g: 2.4
+  fat_g: 0.4
+  sat_fat_g: 0.1
+  mufa_g: 0.1
+  pufa_g: 0.2
+  trans_fat_g: 0.0
+  cholesterol_mg: 0
+  carbs_g: 23.3
+  sugar_g: 21.3
+  fiber_total_g: 2.0
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: 70
+  potassium_mg: 730
+  iodine_ug: 1
+  magnesium_mg: 35
+  calcium_mg: 60
+  iron_mg: 1
+  zinc_mg: 0
+  vitamin_c_mg: 21
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: medium
+  gaps: ['Fiber sub-types not available', 'Manganese not available', 'Fat breakdown estimated from USDA carrot juice profile']
+notes:
+  - "USDA data for carrot juice (100g base): 40 kcal, 0.95g P, 0.15g F, 9.3g C, 0.8g fiber, scaled to 250mL"
+  - "Fresh carrot juice is naturally high in sugars (21.3g) from carrots; no added sugar"
+  - "Sodium represents intrinsic sodium in carrots; no added salt"
+  - "Excellent source of potassium (730mg) and vitamin A precursors (beta-carotene)"
+change_log:
+  - timestamp: 2025-10-29T00:00:00+0000
+    updated_by: "Claude Code"
+    reason: "Initial entry for Simple Health Kitchen carrot juice using USDA nutrition data"
+    fields_changed: ['all fields']
+    sources:
+      - url: "USDA FoodData Central FDC #170491"
+        note: "Carrot juice nutrition data scaled from per 100g to 250mL serving"
+```
+
