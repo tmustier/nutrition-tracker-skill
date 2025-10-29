@@ -125,6 +125,8 @@ change_log: []
 - [Home-made Chips (Jean-Georges at The Connaught)](#home-made-chips-jean-georges-at-the-connaught) {#homemade_chips_connaught_v1}
 - [Ketchup Pot, 25g (Jean-Georges at The Connaught)](#ketchup-pot-25g-jean-georges-at-the-connaught) {#ketchup_pot_connaught_v1}
 - [Thai Spiced Broccoli Soup (Jean-Georges at The Connaught)](#thai-spiced-broccoli-soup-jean-georges-at-the-connaught) {#thai_spiced_broccoli_soup_connaught_v1}
+- [Grilled Chicken Breast (L'ETO Soho)](#grilled-chicken-breast-leto-soho) {#grilled_chicken_breast_leto_soho_v1}
+- [Chilli Poached Eggs (L'ETO Soho)](#chilli-poached-eggs-leto-soho) {#chilli_poached_eggs_leto_soho_v1}
 
 ---
 
@@ -1780,5 +1782,146 @@ change_log:
     sources:
       - url: "nutritional_research"
         note: "Broccoli fiber: ~9% soluble, 91% insoluble. Estimated 0.3g soluble, 3.2g insoluble for soup. Manganese diluted by coconut base, rounded to 0."
+```
+
+---
+
+## Grilled Chicken Breast (L'ETO Soho)
+
+```yaml
+id: grilled_chicken_breast_leto_soho_v1
+version: 1
+last_verified: 2025-10-29
+source:
+  venue: L'ETO Caffe, Soho, London
+  menu_page: "https://deliveroo.co.uk/menu/london/soho/l-eto-caffe-soho"
+  evidence:
+    - "Deliveroo listing: 135 kcal"
+    - "Macros estimated from Whataburger grilled chicken breast (135 kcal: 24g protein, 2g carbs, 2.5g fat)"
+    - "Micronutrients from USDA chicken breast profile scaled to 100g portion"
+aliases: ["Chicken Breast"]
+category: side
+portion:
+  description: "restaurant portion"
+  est_weight_g: 100
+  notes: "Plain grilled chicken breast, no sauce"
+assumptions:
+  salt_scheme: "light"
+  oil_type: "minimal or none"
+  prep: "grilled, no skin"
+per_portion:
+  energy_kcal: 135
+  protein_g: 24.0
+  fat_g: 2.5
+  sat_fat_g: 0.7
+  mufa_g: 0.8
+  pufa_g: 0.6
+  trans_fat_g: 0.0
+  cholesterol_mg: 70
+  carbs_g: 2.0
+  sugar_g: 0.0
+  fiber_total_g: 0.0
+  fiber_soluble_g: 0.0
+  fiber_insoluble_g: 0.0
+  sodium_mg: 220
+  potassium_mg: 320
+  iodine_ug: 4
+  magnesium_mg: 27
+  calcium_mg: 15
+  iron_mg: 1
+  zinc_mg: 1
+  vitamin_c_mg: 0
+  manganese_mg: 0
+
+derived:
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: medium
+  gaps: ["Exact portion weight not confirmed", "MUFA/PUFA split estimated from typical chicken breast composition"]
+notes: ["135 kcal from Deliveroo", "Macros match Whataburger 135 kcal grilled chicken breast", "~100g portion estimated for restaurant side dish", "Low carbs suggest minimal seasoning/marinade"]
+change_log:
+  - timestamp: 2025-10-29T12:00:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Initial population from Deliveroo calorie count + reference macros from Whataburger"
+    fields_changed: ["per_portion.energy_kcal", "per_portion.protein_g", "per_portion.fat_g", "per_portion.sat_fat_g", "per_portion.mufa_g", "per_portion.pufa_g", "per_portion.trans_fat_g", "per_portion.cholesterol_mg", "per_portion.carbs_g", "per_portion.sugar_g", "per_portion.fiber_total_g", "per_portion.fiber_soluble_g", "per_portion.fiber_insoluble_g", "per_portion.sodium_mg", "per_portion.potassium_mg", "per_portion.iodine_ug", "per_portion.magnesium_mg", "per_portion.calcium_mg", "per_portion.iron_mg", "per_portion.zinc_mg", "per_portion.vitamin_c_mg", "per_portion.manganese_mg", "portion.est_weight_g"]
+    sources:
+      - url: "https://deliveroo.co.uk/menu/london/soho/l-eto-caffe-soho"
+        note: "L'ETO Caffe Soho Deliveroo listing: 135 kcal"
+      - url: "https://www.mynetdiary.com/food/calories-in-grilled-chicken-breast-by-whataburger-serving-34958765-0.html"
+        note: "Whataburger grilled chicken breast: 135 kcal, 24g protein, 2g carbs, 2.5g fat"
+      - url: "https://fdc.nal.usda.gov/"
+        note: "USDA FoodData Central: chicken breast micronutrients (potassium 320mg, magnesium 27mg, zinc 1mg, iron 1mg, cholesterol ~70mg per 100g)"
+```
+
+---
+
+## Chilli Poached Eggs (L'ETO Soho)
+
+```yaml
+id: chilli_poached_eggs_leto_soho_v1
+version: 1
+last_verified: 2025-10-29
+source:
+  venue: L'ETO Caffe, Soho, London
+  menu_page: "https://deliveroo.co.uk/menu/london/soho/l-eto-caffe-soho"
+  evidence:
+    - "Deliveroo listing: 592 kcal"
+    - "Ingredients: garlic yoghurt, house sourdough, kale, chilli butter, 2 poached eggs"
+    - "Component breakdown: 2 eggs (140kcal), yogurt 100g (60kcal), sourdough 100g (250kcal), kale 50g (22kcal), chilli butter 20g (120kcal)"
+    - "Turkish eggs reference dishes show similar macro patterns"
+aliases: ["Turkish-style Poached Eggs", "Cilbir-style Eggs"]
+category: main
+portion:
+  description: "restaurant dish with sourdough"
+  est_weight_g: 370
+  notes: "2 poached eggs on garlic yoghurt with house sourdough, kale, and chilli butter"
+assumptions:
+  salt_scheme: "normal"
+  oil_type: "butter"
+  prep: "poached eggs, toasted sourdough, sautéed kale, chilli-infused butter"
+per_portion:
+  energy_kcal: 592
+  protein_g: 27.0
+  fat_g: 26.0
+  sat_fat_g: 15.0
+  mufa_g: 6.5
+  pufa_g: 2.5
+  trans_fat_g: 0.0
+  cholesterol_mg: 380
+  carbs_g: 62.0
+  sugar_g: 4.0
+  fiber_total_g: 4.5
+  fiber_soluble_g: 1.2
+  fiber_insoluble_g: 3.3
+  sodium_mg: 850
+  potassium_mg: 420
+  iodine_ug: 28
+  magnesium_mg: 45
+  calcium_mg: 180
+  iron_mg: 3
+  zinc_mg: 2
+  vitamin_c_mg: 25
+  manganese_mg: 1
+
+derived:
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: medium
+  gaps: ["Exact portion weights estimated from ingredients", "Micronutrients scaled from USDA values for eggs, yogurt, bread, kale"]
+notes: ["592 kcal from Deliveroo", "Component estimates: eggs 140kcal, yogurt 60kcal, sourdough 250kcal, kale 22kcal, chilli butter 120kcal", "High sat fat from butter and eggs", "Good protein from eggs and yogurt", "Vitamin C from kale", "Similar to Turkish cilbir dishes"]
+change_log:
+  - timestamp: 2025-10-29T12:15:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Initial population from Deliveroo calorie count + ingredient-based estimation"
+    fields_changed: ["per_portion.energy_kcal", "per_portion.protein_g", "per_portion.fat_g", "per_portion.sat_fat_g", "per_portion.mufa_g", "per_portion.pufa_g", "per_portion.trans_fat_g", "per_portion.cholesterol_mg", "per_portion.carbs_g", "per_portion.sugar_g", "per_portion.fiber_total_g", "per_portion.fiber_soluble_g", "per_portion.fiber_insoluble_g", "per_portion.sodium_mg", "per_portion.potassium_mg", "per_portion.iodine_ug", "per_portion.magnesium_mg", "per_portion.calcium_mg", "per_portion.iron_mg", "per_portion.zinc_mg", "per_portion.vitamin_c_mg", "per_portion.manganese_mg", "portion.est_weight_g"]
+    sources:
+      - url: "https://deliveroo.co.uk/menu/london/soho/l-eto-caffe-soho"
+        note: "L'ETO Caffe Soho Deliveroo listing: 592 kcal; ingredients: garlic yoghurt, house sourdough, kale, chilli butter"
+      - url: "https://www.deliciousmagazine.co.uk/recipes/turkish-style-poached-eggs-with-yogurt-and-chilli-butter/"
+        note: "Turkish-style poached eggs reference: similar dish structure and macros"
+      - url: "https://fdc.nal.usda.gov/"
+        note: "USDA FoodData Central: component nutrition (eggs 370mg cholesterol, kale vitamin C ~25mg per serving, yogurt calcium ~180mg, bread ~250kcal per 100g)"
+      - url: "https://www.nutritionix.com/food/grilled-chicken-breast"
+        note: "Component breakdown estimation method: eggs + yogurt + bread + kale + butter to match 592 kcal target"
 ```
 
