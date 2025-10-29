@@ -22,6 +22,10 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Install dependencies
+        run: |
+          pip install pyyaml
+
       - name: Run validator
         run: |
-          python scripts/validate_bank.py data/food-data-bank.md --warn-only
+          python scripts/validate_data_bank.py data/food-data-bank.md
