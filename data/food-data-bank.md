@@ -1137,8 +1137,8 @@ per_portion:
   carbs_g: 33.2
   sugar_g: 0.5
   fiber_total_g: 5.3
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
+  fiber_soluble_g: 2.0
+  fiber_insoluble_g: 3.3
   sodium_mg: 1
   potassium_mg: 215
   iodine_ug: 1
@@ -1147,7 +1147,7 @@ per_portion:
   iron_mg: 2
   zinc_mg: 2
   vitamin_c_mg: 0
-  manganese_mg: null
+  manganese_mg: 2
 
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
@@ -1177,6 +1177,13 @@ change_log:
   sources:
     - url: "USDA FoodData Central"
       note: "USDA data for rolled oats: MUFA 2.178g/100g, PUFA 2.535g/100g scaled to 50g portion. Trans fat 0g, cholesterol 0mg (plant-based), vitamin C 0mg (trace)"
+- timestamp: 2025-10-29T00:00:00+0000
+  updated_by: "LLM: Claude Sonnet 4.5"
+  reason: "Populate missing fiber split and manganese from USDA nutritional database"
+  fields_changed: ['per_portion.fiber_soluble_g', 'per_portion.fiber_insoluble_g', 'per_portion.manganese_mg']
+  sources:
+    - url: "USDA FoodData Central"
+      note: "Oat beta-glucan (soluble fiber) ~4g/100g, insoluble ~6g/100g; manganese ~3.8mg/100g scaled to 50g portion"
 ```
 
 ---
@@ -1212,9 +1219,9 @@ per_portion:
   cholesterol_mg: 10
   carbs_g: 7.4
   sugar_g: 7.4
-  fiber_total_g: null
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
+  fiber_total_g: 0
+  fiber_soluble_g: 0
+  fiber_insoluble_g: 0
   sodium_mg: 104
   potassium_mg: 340
   iodine_ug: 60
@@ -1223,7 +1230,7 @@ per_portion:
   iron_mg: 0
   zinc_mg: 1
   vitamin_c_mg: 0
-  manganese_mg: null
+  manganese_mg: 0
 
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
@@ -1262,6 +1269,13 @@ change_log:
     - url: "https://www.nutritionvalue.org/Yogurt,_low_fat,_plain_nutritional_value.html"
       note: "Dairy fat composition: ~62-70% saturated, ~25-30% MUFA, ~3-5% PUFA"
   calculation_notes: "With 0.4g total fat (0.2g saturated) per 200g: MUFA estimated at 0.1g (~27% of total fat), PUFA trace at 0.0g (~3% of total fat), trans-fat 0.1g representing natural CLA from dairy (~4% of total fat). Vitamin C is 0mg (not naturally present in plain dairy). Iron is 0mg rounded from trace amounts typical in low-fat dairy products."
+- timestamp: 2025-10-29T00:00:00+0000
+  updated_by: "LLM: Claude Sonnet 4.5"
+  reason: "Populate fiber and manganese values for dairy product (all 0)"
+  fields_changed: ['per_portion.fiber_total_g', 'per_portion.fiber_soluble_g', 'per_portion.fiber_insoluble_g', 'per_portion.manganese_mg']
+  sources:
+    - url: "nutritional_knowledge"
+      note: "Dairy products contain no dietary fiber (plant-based nutrient only). Manganese trace amounts rounded to 0."
 ```
 
 ---
@@ -1379,8 +1393,8 @@ per_portion:
   carbs_g: 9.0
   sugar_g: 5.0
   fiber_total_g: 4.0
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
+  fiber_soluble_g: 1.0
+  fiber_insoluble_g: 3.0
   sodium_mg: 27
   potassium_mg: 600
   iodine_ug: 2
@@ -1389,7 +1403,7 @@ per_portion:
   iron_mg: 2
   zinc_mg: 1
   vitamin_c_mg: 60
-  manganese_mg: null
+  manganese_mg: 1
 
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
@@ -1425,6 +1439,13 @@ change_log:
       note: "Reference for green juice micronutrient content from kale, spinach, celery"
     - url: "ingredient_analysis"
       note: "Fat breakdown estimated from olive oil composition (75% MUFA, 15% sat, 10% PUFA, 0% trans); sugars calculated from available carbs (9g total - 4g fiber = 5g available); cholesterol 0 for plant-based juice; micronutrients estimated from USDA data for kale (FDC 323505), spinach (FDC 168462), celery (FDC 169988), cucumber (FDC 168409) proportional to typical 12oz green juice serving"
+- timestamp: 2025-10-29T00:00:00+0000
+  updated_by: "LLM: Claude Sonnet 4.5"
+  reason: "Populate fiber split and manganese from leafy green composition"
+  fields_changed: ['per_portion.fiber_soluble_g', 'per_portion.fiber_insoluble_g', 'per_portion.manganese_mg']
+  sources:
+    - url: "nutritional_research"
+      note: "Leafy greens (kale, spinach, celery) ~25% soluble, 75% insoluble fiber; kale high in manganese (~0.5mg per 100g). Estimated 1.0g soluble, 3.0g insoluble, 1mg manganese per 355g juice"
 ```
 
 ---
@@ -1464,8 +1485,8 @@ per_portion:
   carbs_g: 78.0
   sugar_g: 6.0
   fiber_total_g: 4.0
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
+  fiber_soluble_g: 1.0
+  fiber_insoluble_g: 3.0
   sodium_mg: 1100
   potassium_mg: 450
   iodine_ug: 5
@@ -1474,7 +1495,7 @@ per_portion:
   iron_mg: 4
   zinc_mg: 6
   vitamin_c_mg: 2
-  manganese_mg: null
+  manganese_mg: 0
 
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
@@ -1499,6 +1520,13 @@ change_log:
     sources:
       - url: "ingredient_analysis"
         note: "Estimated from typical wagyu beef + pain de mie bread composition"
+  - timestamp: 2025-10-29T00:00:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Populate fiber split and manganese from bread composition"
+    fields_changed: ["per_portion.fiber_soluble_g", "per_portion.fiber_insoluble_g", "per_portion.manganese_mg"]
+    sources:
+      - url: "nutritional_research"
+        note: "Fiber from pain de mie bread (refined wheat): ~25% soluble, 75% insoluble. Manganese trace in white bread and beef, rounded to 0."
 ```
 
 ---
@@ -1537,8 +1565,8 @@ per_portion:
   carbs_g: 57.2
   sugar_g: 0.3
   fiber_total_g: 4.9
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
+  fiber_soluble_g: 1.3
+  fiber_insoluble_g: 3.6
   sodium_mg: 321
   potassium_mg: 1194
   iodine_ug: 2
@@ -1547,7 +1575,7 @@ per_portion:
   iron_mg: 0.9
   zinc_mg: 0.9
   vitamin_c_mg: 16
-  manganese_mg: null
+  manganese_mg: 1
 
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
@@ -1576,6 +1604,13 @@ change_log:
         note: "MUFA/PUFA calculated from typical vegetable frying oil composition (sunflower/soybean blend: ~27% MUFA, ~63% PUFA of total fat)"
       - url: "research"
         note: "Sugar 0.21g/100g from McDonald's french fries data; cholesterol 0mg (vegetable oil); trans fat 0.1g (modern vegetable oils); iodine 1-2mcg/100g (potato is very low in iodine)"
+  - timestamp: 2025-10-29T00:00:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Populate fiber split and manganese from potato composition"
+    fields_changed: ["per_portion.fiber_soluble_g", "per_portion.fiber_insoluble_g", "per_portion.manganese_mg"]
+    sources:
+      - url: "nutritional_research"
+        note: "Potato fiber: ~26% soluble, 74% insoluble. Manganese ~0.4mg/100g in french fries; estimated 1mg for ~150g portion."
 ```
 
 ---
@@ -1616,8 +1651,8 @@ per_portion:
   carbs_g: 5.8
   sugar_g: 5.7
   fiber_total_g: 0.1
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
+  fiber_soluble_g: 0.0
+  fiber_insoluble_g: 0.1
   sodium_mg: 177
   potassium_mg: 70
   iodine_ug: 0.3
@@ -1626,7 +1661,7 @@ per_portion:
   iron_mg: 0.1
   zinc_mg: 0.0
   vitamin_c_mg: 1.0
-  manganese_mg: null
+  manganese_mg: 0
 
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
@@ -1655,6 +1690,13 @@ change_log:
         note: "USDA iodine database: ~1.2 mcg per 100g ketchup"
       - url: "various USDA sources"
         note: "Fatty acid profile: MUFA 0.01g, PUFA 0.04g, trans fat 0g, cholesterol 0mg per 100g"
+  - timestamp: 2025-10-29T00:00:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Populate fiber split and manganese for minimal fiber content"
+    fields_changed: ["per_portion.fiber_soluble_g", "per_portion.fiber_insoluble_g", "per_portion.manganese_mg"]
+    sources:
+      - url: "nutritional_research"
+        note: "Tomato fiber is predominantly insoluble. With 0.1g total, split as 0.0g soluble (rounded from ~0.03g), 0.1g insoluble. Manganese trace, rounded to 0."
 ```
 
 ---
@@ -1694,8 +1736,8 @@ per_portion:
   carbs_g: 9.5
   sugar_g: 3.0
   fiber_total_g: 3.5
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
+  fiber_soluble_g: 0.3
+  fiber_insoluble_g: 3.2
   sodium_mg: 500
   potassium_mg: 350
   iodine_ug: 2
@@ -1704,7 +1746,7 @@ per_portion:
   iron_mg: 1
   zinc_mg: 0
   vitamin_c_mg: 40
-  manganese_mg: null
+  manganese_mg: 0
 
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
@@ -1731,5 +1773,12 @@ change_log:
         note: "USDA FoodData Central: Coconut milk (canned) - fat composition ~83% saturated, ~6% MUFA, ~2% PUFA"
       - url: "research_analysis"
         note: "Applied coconut fat ratios to 6.5g total fat: MUFA=0.4g (6%), PUFA=0.1g (2%), trans=trace. Cholesterol=0mg (plant-based). Iodine=2ug (trace from broccoli ~1-2ug/100g)"
+  - timestamp: 2025-10-29T00:00:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Populate fiber split and manganese from broccoli composition"
+    fields_changed: ["per_portion.fiber_soluble_g", "per_portion.fiber_insoluble_g", "per_portion.manganese_mg"]
+    sources:
+      - url: "nutritional_research"
+        note: "Broccoli fiber: ~9% soluble, 91% insoluble. Estimated 0.3g soluble, 3.2g insoluble for soup. Manganese diluted by coconut base, rounded to 0."
 ```
 
