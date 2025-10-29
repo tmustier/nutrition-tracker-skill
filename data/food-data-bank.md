@@ -64,43 +64,10 @@ portion:
   description: ""
   est_weight_g: null
   notes: ""
-units:
-  mass: g
-  energy: kcal
-  sodium: mg
-  potassium: mg
-  sterols: mg
-  fats: g
-  carbs: g
-  fiber: g
 assumptions:
   salt_scheme: "light|normal|heavy|unsalted"
   oil_type: ""
   prep: ""
-per_100g:
-  energy_kcal: null
-  protein_g: null
-  fat_g: null
-  sat_fat_g: null
-  mufa_g: null
-  pufa_g: null
-  trans_fat_g: null
-  cholesterol_mg: null
-  carbs_g: null
-  sugar_g: null
-  fiber_total_g: null
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
-  sodium_mg: null
-  potassium_mg: null
-  iodine_ug: null
-  magnesium_mg: null
-  calcium_mg: null
-  iron_mg: null
-  zinc_mg: null
-  vitamin_c_mg: null
-  manganese_mg: null
-
 per_portion:
   energy_kcal: null
   protein_g: null
@@ -126,9 +93,7 @@ per_portion:
   manganese_mg: null
 
 derived:
-  salt_g_from_sodium:
-    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
-    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: low|medium|high
   gaps: []
@@ -179,43 +144,10 @@ portion:
   description: "restaurant side serving"
   est_weight_g: null
   notes: "skin-on wedges; roasted; normal salt"
-units:
-  mass: g
-  energy: kcal
-  sodium: mg
-  potassium: mg
-  sterols: mg
-  fats: g
-  carbs: g
-  fiber: g
 assumptions:
   salt_scheme: "normal"
   oil_type: ""
   prep: ""
-per_100g:
-  energy_kcal: null
-  protein_g: null
-  fat_g: null
-  sat_fat_g: null
-  mufa_g: null
-  pufa_g: null
-  trans_fat_g: null
-  cholesterol_mg: null
-  carbs_g: null
-  sugar_g: null
-  fiber_total_g: null
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
-  sodium_mg: null
-  potassium_mg: null
-  iodine_ug: null
-  magnesium_mg: null
-  calcium_mg: null
-  iron_mg: null
-  zinc_mg: null
-  vitamin_c_mg: null
-  manganese_mg: null
-
 per_portion:
   energy_kcal: 156
   protein_g: 2.0
@@ -241,9 +173,7 @@ per_portion:
   manganese_mg: null
 
 derived:
-  salt_g_from_sodium:
-    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
-    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: low
   gaps: ['Fat breakdown (1.94 g) exceeds total_fat (1.0 g); keep as provided and flag inconsistency.']
@@ -290,43 +220,10 @@ portion:
   description: "grilled salmon fillet"
   est_weight_g: null
   notes: "assume skin-on unless specified; lightly oiled; normal salt"
-units:
-  mass: g
-  energy: kcal
-  sodium: mg
-  potassium: mg
-  sterols: mg
-  fats: g
-  carbs: g
-  fiber: g
 assumptions:
   salt_scheme: "normal"
   oil_type: ""
   prep: ""
-per_100g:
-  energy_kcal: null
-  protein_g: null
-  fat_g: null
-  sat_fat_g: null
-  mufa_g: null
-  pufa_g: null
-  trans_fat_g: null
-  cholesterol_mg: null
-  carbs_g: null
-  sugar_g: null
-  fiber_total_g: null
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
-  sodium_mg: null
-  potassium_mg: null
-  iodine_ug: null
-  magnesium_mg: null
-  calcium_mg: null
-  iron_mg: null
-  zinc_mg: null
-  vitamin_c_mg: null
-  manganese_mg: null
-
 per_portion:
   energy_kcal: 273
   protein_g: 28.0
@@ -352,9 +249,7 @@ per_portion:
   manganese_mg: null
 
 derived:
-  salt_g_from_sodium:
-    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
-    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: medium
   gaps: []
@@ -401,43 +296,10 @@ portion:
   description: "side serving"
   est_weight_g: null
   notes: "pesto includes oil, nuts; salting normal"
-units:
-  mass: g
-  energy: kcal
-  sodium: mg
-  potassium: mg
-  sterols: mg
-  fats: g
-  carbs: g
-  fiber: g
 assumptions:
   salt_scheme: "normal"
   oil_type: ""
   prep: ""
-per_100g:
-  energy_kcal: null
-  protein_g: null
-  fat_g: null
-  sat_fat_g: null
-  mufa_g: null
-  pufa_g: null
-  trans_fat_g: null
-  cholesterol_mg: null
-  carbs_g: null
-  sugar_g: null
-  fiber_total_g: null
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
-  sodium_mg: null
-  potassium_mg: null
-  iodine_ug: null
-  magnesium_mg: null
-  calcium_mg: null
-  iron_mg: null
-  zinc_mg: null
-  vitamin_c_mg: null
-  manganese_mg: null
-
 per_portion:
   energy_kcal: 220
   protein_g: 6.3
@@ -463,9 +325,7 @@ per_portion:
   manganese_mg: null
 
 derived:
-  salt_g_from_sodium:
-    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
-    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: medium
   gaps: []
@@ -512,43 +372,10 @@ portion:
   description: "grilled chicken breast"
   est_weight_g: null
   notes: "lemon & herb marinade; normal salt"
-units:
-  mass: g
-  energy: kcal
-  sodium: mg
-  potassium: mg
-  sterols: mg
-  fats: g
-  carbs: g
-  fiber: g
 assumptions:
   salt_scheme: "normal"
   oil_type: ""
   prep: ""
-per_100g:
-  energy_kcal: null
-  protein_g: null
-  fat_g: null
-  sat_fat_g: null
-  mufa_g: null
-  pufa_g: null
-  trans_fat_g: null
-  cholesterol_mg: null
-  carbs_g: null
-  sugar_g: null
-  fiber_total_g: null
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
-  sodium_mg: null
-  potassium_mg: null
-  iodine_ug: null
-  magnesium_mg: null
-  calcium_mg: null
-  iron_mg: null
-  zinc_mg: null
-  vitamin_c_mg: null
-  manganese_mg: null
-
 per_portion:
   energy_kcal: 159
   protein_g: 36.0
@@ -574,9 +401,7 @@ per_portion:
   manganese_mg: null
 
 derived:
-  salt_g_from_sodium:
-    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
-    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: medium
   gaps: ['No carbs/fibre provided; trans fat not provided; ~0.09 g of fat unassigned (trace/trans).']
@@ -623,43 +448,10 @@ portion:
   description: "steamed/roasted broccoli stems"
   est_weight_g: null
   notes: "no raisins variant; zest optional; normal salt"
-units:
-  mass: g
-  energy: kcal
-  sodium: mg
-  potassium: mg
-  sterols: mg
-  fats: g
-  carbs: g
-  fiber: g
 assumptions:
   salt_scheme: "normal"
   oil_type: ""
   prep: ""
-per_100g:
-  energy_kcal: null
-  protein_g: null
-  fat_g: null
-  sat_fat_g: null
-  mufa_g: null
-  pufa_g: null
-  trans_fat_g: null
-  cholesterol_mg: null
-  carbs_g: null
-  sugar_g: null
-  fiber_total_g: null
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
-  sodium_mg: null
-  potassium_mg: null
-  iodine_ug: null
-  magnesium_mg: null
-  calcium_mg: null
-  iron_mg: null
-  zinc_mg: null
-  vitamin_c_mg: null
-  manganese_mg: null
-
 per_portion:
   energy_kcal: 156
   protein_g: 5.0
@@ -685,9 +477,7 @@ per_portion:
   manganese_mg: null
 
 derived:
-  salt_g_from_sodium:
-    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
-    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: medium
   gaps: ['No trans fat provided; ~0.52 g of fat unassigned (likely trace/trans/rounding).']
@@ -734,43 +524,10 @@ portion:
   description: "broccoli with lemon zest/juice"
   est_weight_g: null
   notes: "light dressing; normal salt"
-units:
-  mass: g
-  energy: kcal
-  sodium: mg
-  potassium: mg
-  sterols: mg
-  fats: g
-  carbs: g
-  fiber: g
 assumptions:
   salt_scheme: "normal"
   oil_type: ""
   prep: ""
-per_100g:
-  energy_kcal: null
-  protein_g: null
-  fat_g: null
-  sat_fat_g: null
-  mufa_g: null
-  pufa_g: null
-  trans_fat_g: null
-  cholesterol_mg: null
-  carbs_g: null
-  sugar_g: null
-  fiber_total_g: null
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
-  sodium_mg: null
-  potassium_mg: null
-  iodine_ug: null
-  magnesium_mg: null
-  calcium_mg: null
-  iron_mg: null
-  zinc_mg: null
-  vitamin_c_mg: null
-  manganese_mg: null
-
 per_portion:
   energy_kcal: 113
   protein_g: 4.5
@@ -796,9 +553,7 @@ per_portion:
   manganese_mg: null
 
 derived:
-  salt_g_from_sodium:
-    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
-    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: medium
   gaps: ['No trans fat provided; ~0.49 g of fat unassigned (trace/trans/rounding).']
@@ -845,43 +600,10 @@ portion:
   description: "small side pot"
   est_weight_g: null
   notes: "tahini-based; normal salt"
-units:
-  mass: g
-  energy: kcal
-  sodium: mg
-  potassium: mg
-  sterols: mg
-  fats: g
-  carbs: g
-  fiber: g
 assumptions:
   salt_scheme: "normal"
   oil_type: ""
   prep: ""
-per_100g:
-  energy_kcal: null
-  protein_g: null
-  fat_g: null
-  sat_fat_g: null
-  mufa_g: null
-  pufa_g: null
-  trans_fat_g: null
-  cholesterol_mg: null
-  carbs_g: null
-  sugar_g: null
-  fiber_total_g: null
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
-  sodium_mg: null
-  potassium_mg: null
-  iodine_ug: null
-  magnesium_mg: null
-  calcium_mg: null
-  iron_mg: null
-  zinc_mg: null
-  vitamin_c_mg: null
-  manganese_mg: null
-
 per_portion:
   energy_kcal: 211
   protein_g: 9.0
@@ -907,9 +629,7 @@ per_portion:
   manganese_mg: null
 
 derived:
-  salt_g_from_sodium:
-    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
-    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: medium
   gaps: ['Unsaturated total (8.75 g) + saturated + trans ≈ 10.07 g < total_fat (11 g); ~0.9 g unaccounted (rounding/other fats).']
@@ -955,43 +675,10 @@ portion:
   description: "fixed pack portion"
   est_weight_g: 30
   notes: "shelled; unsalted"
-units:
-  mass: g
-  energy: kcal
-  sodium: mg
-  potassium: mg
-  sterols: mg
-  fats: g
-  carbs: g
-  fiber: g
 assumptions:
   salt_scheme: "normal"
   oil_type: ""
   prep: ""
-per_100g:
-  energy_kcal: null
-  protein_g: null
-  fat_g: null
-  sat_fat_g: null
-  mufa_g: null
-  pufa_g: null
-  trans_fat_g: null
-  cholesterol_mg: null
-  carbs_g: null
-  sugar_g: null
-  fiber_total_g: null
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
-  sodium_mg: null
-  potassium_mg: null
-  iodine_ug: null
-  magnesium_mg: null
-  calcium_mg: null
-  iron_mg: null
-  zinc_mg: null
-  vitamin_c_mg: null
-  manganese_mg: null
-
 per_portion:
   energy_kcal: 168
   protein_g: 6.0
@@ -1017,9 +704,7 @@ per_portion:
   manganese_mg: null
 
 derived:
-  salt_g_from_sodium:
-    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
-    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: high
   gaps: []
@@ -1059,43 +744,10 @@ portion:
   description: "fixed pack portion"
   est_weight_g: 30
   notes: "hulled; unsalted"
-units:
-  mass: g
-  energy: kcal
-  sodium: mg
-  potassium: mg
-  sterols: mg
-  fats: g
-  carbs: g
-  fiber: g
 assumptions:
   salt_scheme: "normal"
   oil_type: ""
   prep: ""
-per_100g:
-  energy_kcal: null
-  protein_g: null
-  fat_g: null
-  sat_fat_g: null
-  mufa_g: null
-  pufa_g: null
-  trans_fat_g: null
-  cholesterol_mg: null
-  carbs_g: null
-  sugar_g: null
-  fiber_total_g: null
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
-  sodium_mg: null
-  potassium_mg: null
-  iodine_ug: null
-  magnesium_mg: null
-  calcium_mg: null
-  iron_mg: null
-  zinc_mg: null
-  vitamin_c_mg: null
-  manganese_mg: null
-
 per_portion:
   energy_kcal: 175
   protein_g: 6.2
@@ -1121,9 +773,7 @@ per_portion:
   manganese_mg: null
 
 derived:
-  salt_g_from_sodium:
-    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
-    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: high
   gaps: []
@@ -1163,43 +813,10 @@ portion:
   description: "fixed pack portion"
   est_weight_g: 30
   notes: "raw; unsalted"
-units:
-  mass: g
-  energy: kcal
-  sodium: mg
-  potassium: mg
-  sterols: mg
-  fats: g
-  carbs: g
-  fiber: g
 assumptions:
   salt_scheme: "normal"
   oil_type: ""
   prep: ""
-per_100g:
-  energy_kcal: null
-  protein_g: null
-  fat_g: null
-  sat_fat_g: null
-  mufa_g: null
-  pufa_g: null
-  trans_fat_g: null
-  cholesterol_mg: null
-  carbs_g: null
-  sugar_g: null
-  fiber_total_g: null
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
-  sodium_mg: null
-  potassium_mg: null
-  iodine_ug: null
-  magnesium_mg: null
-  calcium_mg: null
-  iron_mg: null
-  zinc_mg: null
-  vitamin_c_mg: null
-  manganese_mg: null
-
 per_portion:
   energy_kcal: 188
   protein_g: 4.5
@@ -1225,9 +842,7 @@ per_portion:
   manganese_mg: null
 
 derived:
-  salt_g_from_sodium:
-    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
-    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: low
   gaps: ['MUFA/PUFA profile appears atypical for hazelnuts (expected MUFA >> PUFA); values recorded as provided.']
@@ -1274,43 +889,10 @@ portion:
   description: "scoop (~30 g)"
   est_weight_g: 30
   notes: "Ranges provided; midpoints used where sensible; iron omitted due to likely error."
-units:
-  mass: g
-  energy: kcal
-  sodium: mg
-  potassium: mg
-  sterols: mg
-  fats: g
-  carbs: g
-  fiber: g
 assumptions:
   salt_scheme: "normal"
   oil_type: ""
   prep: ""
-per_100g:
-  energy_kcal: null
-  protein_g: null
-  fat_g: null
-  sat_fat_g: null
-  mufa_g: null
-  pufa_g: null
-  trans_fat_g: null
-  cholesterol_mg: null
-  carbs_g: null
-  sugar_g: null
-  fiber_total_g: null
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
-  sodium_mg: null
-  potassium_mg: null
-  iodine_ug: null
-  magnesium_mg: null
-  calcium_mg: null
-  iron_mg: null
-  zinc_mg: null
-  vitamin_c_mg: null
-  manganese_mg: null
-
 per_portion:
   energy_kcal: 120
   protein_g: 24.0
@@ -1336,9 +918,7 @@ per_portion:
   manganese_mg: null
 
 derived:
-  salt_g_from_sodium:
-    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
-    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: low
   gaps: ['Original data were ranges; iron value inconsistent (0.6–126 mg).']
@@ -1378,43 +958,10 @@ portion:
   description: "fixed pack portion"
   est_weight_g: 150
   notes: "Pack'd mix; per-portion as provided."
-units:
-  mass: g
-  energy: kcal
-  sodium: mg
-  potassium: mg
-  sterols: mg
-  fats: g
-  carbs: g
-  fiber: g
 assumptions:
   salt_scheme: "normal"
   oil_type: ""
   prep: ""
-per_100g:
-  energy_kcal: null
-  protein_g: null
-  fat_g: null
-  sat_fat_g: null
-  mufa_g: null
-  pufa_g: null
-  trans_fat_g: null
-  cholesterol_mg: null
-  carbs_g: null
-  sugar_g: null
-  fiber_total_g: null
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
-  sodium_mg: null
-  potassium_mg: null
-  iodine_ug: null
-  magnesium_mg: null
-  calcium_mg: null
-  iron_mg: null
-  zinc_mg: null
-  vitamin_c_mg: null
-  manganese_mg: null
-
 per_portion:
   energy_kcal: 57
   protein_g: 1.4
@@ -1440,9 +987,7 @@ per_portion:
   manganese_mg: null
 
 derived:
-  salt_g_from_sodium:
-    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
-    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: medium
   gaps: []
@@ -1498,43 +1043,10 @@ portion:
   description: "fixed pack portion"
   est_weight_g: 150
   notes: "Fresh blueberries."
-units:
-  mass: g
-  energy: kcal
-  sodium: mg
-  potassium: mg
-  sterols: mg
-  fats: g
-  carbs: g
-  fiber: g
 assumptions:
   salt_scheme: "normal"
   oil_type: ""
   prep: ""
-per_100g:
-  energy_kcal: null
-  protein_g: null
-  fat_g: null
-  sat_fat_g: null
-  mufa_g: null
-  pufa_g: null
-  trans_fat_g: null
-  cholesterol_mg: null
-  carbs_g: null
-  sugar_g: null
-  fiber_total_g: null
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
-  sodium_mg: null
-  potassium_mg: null
-  iodine_ug: null
-  magnesium_mg: null
-  calcium_mg: null
-  iron_mg: null
-  zinc_mg: null
-  vitamin_c_mg: null
-  manganese_mg: null
-
 per_portion:
   energy_kcal: 86
   protein_g: 1.0
@@ -1560,9 +1072,7 @@ per_portion:
   manganese_mg: null
 
 derived:
-  salt_g_from_sodium:
-    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
-    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: high
   gaps: []
@@ -1611,43 +1121,10 @@ portion:
   description: "fixed pack portion"
   est_weight_g: 50
   notes: "Dry rolled oats."
-units:
-  mass: g
-  energy: kcal
-  sodium: mg
-  potassium: mg
-  sterols: mg
-  fats: g
-  carbs: g
-  fiber: g
 assumptions:
   salt_scheme: "normal"
   oil_type: ""
   prep: ""
-per_100g:
-  energy_kcal: null
-  protein_g: null
-  fat_g: null
-  sat_fat_g: null
-  mufa_g: null
-  pufa_g: null
-  trans_fat_g: null
-  cholesterol_mg: null
-  carbs_g: null
-  sugar_g: null
-  fiber_total_g: null
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
-  sodium_mg: null
-  potassium_mg: null
-  iodine_ug: null
-  magnesium_mg: null
-  calcium_mg: null
-  iron_mg: null
-  zinc_mg: null
-  vitamin_c_mg: null
-  manganese_mg: null
-
 per_portion:
   energy_kcal: 195
   protein_g: 8.5
@@ -1673,9 +1150,7 @@ per_portion:
   manganese_mg: null
 
 derived:
-  salt_g_from_sodium:
-    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
-    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: high
   gaps: []
@@ -1722,43 +1197,10 @@ portion:
   description: "fixed pack portion"
   est_weight_g: 200
   notes: "Plain skyr yoghurt."
-units:
-  mass: g
-  energy: kcal
-  sodium: mg
-  potassium: mg
-  sterols: mg
-  fats: g
-  carbs: g
-  fiber: g
 assumptions:
   salt_scheme: "normal"
   oil_type: ""
   prep: ""
-per_100g:
-  energy_kcal: null
-  protein_g: null
-  fat_g: null
-  sat_fat_g: null
-  mufa_g: null
-  pufa_g: null
-  trans_fat_g: null
-  cholesterol_mg: null
-  carbs_g: null
-  sugar_g: null
-  fiber_total_g: null
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
-  sodium_mg: null
-  potassium_mg: null
-  iodine_ug: null
-  magnesium_mg: null
-  calcium_mg: null
-  iron_mg: null
-  zinc_mg: null
-  vitamin_c_mg: null
-  manganese_mg: null
-
 per_portion:
   energy_kcal: 124
   protein_g: 22.0
@@ -1784,9 +1226,7 @@ per_portion:
   manganese_mg: null
 
 derived:
-  salt_g_from_sodium:
-    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
-    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: high
   gaps: []
@@ -1842,43 +1282,10 @@ portion:
   description: "fixed pack portion"
   est_weight_g: 150
   notes: "Fresh fruit mix."
-units:
-  mass: g
-  energy: kcal
-  sodium: mg
-  potassium: mg
-  sterols: mg
-  fats: g
-  carbs: g
-  fiber: g
 assumptions:
   salt_scheme: "normal"
   oil_type: ""
   prep: ""
-per_100g:
-  energy_kcal: null
-  protein_g: null
-  fat_g: null
-  sat_fat_g: null
-  mufa_g: null
-  pufa_g: null
-  trans_fat_g: null
-  cholesterol_mg: null
-  carbs_g: null
-  sugar_g: null
-  fiber_total_g: null
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
-  sodium_mg: null
-  potassium_mg: null
-  iodine_ug: null
-  magnesium_mg: null
-  calcium_mg: null
-  iron_mg: null
-  zinc_mg: null
-  vitamin_c_mg: null
-  manganese_mg: null
-
 per_portion:
   energy_kcal: 75
   protein_g: 0.9
@@ -1904,9 +1311,7 @@ per_portion:
   manganese_mg: 1
 
 derived:
-  salt_g_from_sodium:
-    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
-    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: medium
   gaps: []
@@ -1958,43 +1363,10 @@ portion:
   description: "menu serving"
   est_weight_g: 355
   notes: "Green juice (12 oz); contains kale, celery, spinach, lemon, cucumber, olive oil. Recipe varies by location."
-units:
-  mass: g
-  energy: kcal
-  sodium: mg
-  potassium: mg
-  sterols: mg
-  fats: g
-  carbs: g
-  fiber: g
 assumptions:
   salt_scheme: "normal"
   oil_type: "olive"
   prep: "cold-pressed juice"
-per_100g:
-  energy_kcal: null
-  protein_g: null
-  fat_g: null
-  sat_fat_g: null
-  mufa_g: null
-  pufa_g: null
-  trans_fat_g: null
-  cholesterol_mg: null
-  carbs_g: null
-  sugar_g: null
-  fiber_total_g: null
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
-  sodium_mg: null
-  potassium_mg: null
-  iodine_ug: null
-  magnesium_mg: null
-  calcium_mg: null
-  iron_mg: null
-  zinc_mg: null
-  vitamin_c_mg: null
-  manganese_mg: null
-
 per_portion:
   energy_kcal: 72
   protein_g: 4.0
@@ -2020,9 +1392,7 @@ per_portion:
   manganese_mg: null
 
 derived:
-  salt_g_from_sodium:
-    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
-    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: medium
   gaps: ['Micronutrients estimated from ingredient composition; venue formulations may vary by location.']
@@ -2078,43 +1448,10 @@ portion:
   description: "restaurant serving"
   est_weight_g: 360
   notes: "Sakura wagyu beef sandwich on pain de mie; served with chips (separate item)"
-units:
-  mass: g
-  energy: kcal
-  sodium: mg
-  potassium: mg
-  sterols: mg
-  fats: g
-  carbs: g
-  fiber: g
 assumptions:
   salt_scheme: "normal"
   oil_type: "likely neutral oil for wagyu searing"
   prep: "seared wagyu beef on pain de mie with dressing"
-per_100g:
-  energy_kcal: null
-  protein_g: null
-  fat_g: null
-  sat_fat_g: null
-  mufa_g: null
-  pufa_g: null
-  trans_fat_g: null
-  cholesterol_mg: null
-  carbs_g: null
-  sugar_g: null
-  fiber_total_g: null
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
-  sodium_mg: null
-  potassium_mg: null
-  iodine_ug: null
-  magnesium_mg: null
-  calcium_mg: null
-  iron_mg: null
-  zinc_mg: null
-  vitamin_c_mg: null
-  manganese_mg: null
-
 per_portion:
   energy_kcal: 879
   protein_g: 42.0
@@ -2140,9 +1477,7 @@ per_portion:
   manganese_mg: null
 
 derived:
-  salt_g_from_sodium:
-    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
-    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: medium
   gaps: ["±15-25% variance expected for estimated values"]
@@ -2186,43 +1521,10 @@ portion:
   description: "restaurant side serving"
   est_weight_g: null
   notes: "Home-made chips; served with Sakura Wagyu Beef Sandwich"
-units:
-  mass: g
-  energy: kcal
-  sodium: mg
-  potassium: mg
-  sterols: mg
-  fats: g
-  carbs: g
-  fiber: g
 assumptions:
   salt_scheme: "normal"
   oil_type: "neutral frying oil"
   prep: "deep-fried"
-per_100g:
-  energy_kcal: null
-  protein_g: null
-  fat_g: null
-  sat_fat_g: null
-  mufa_g: null
-  pufa_g: null
-  trans_fat_g: null
-  cholesterol_mg: null
-  carbs_g: null
-  sugar_g: null
-  fiber_total_g: null
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
-  sodium_mg: null
-  potassium_mg: null
-  iodine_ug: null
-  magnesium_mg: null
-  calcium_mg: null
-  iron_mg: null
-  zinc_mg: null
-  vitamin_c_mg: null
-  manganese_mg: null
-
 per_portion:
   energy_kcal: 459
   protein_g: 4.5
@@ -2248,9 +1550,7 @@ per_portion:
   manganese_mg: null
 
 derived:
-  salt_g_from_sodium:
-    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
-    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: medium
   gaps: ["Portion weight estimated from calorie content", "Per 100g values not calculated", "MUFA/PUFA estimated from typical frying oil composition"]
@@ -2300,43 +1600,10 @@ portion:
   description: "condiment pot (25g)"
   est_weight_g: 25
   notes: "Tomato ketchup; assumed Heinz UK profile"
-units:
-  mass: g
-  energy: kcal
-  sodium: mg
-  potassium: mg
-  sterols: mg
-  fats: g
-  carbs: g
-  fiber: g
 assumptions:
   salt_scheme: "normal"
   oil_type: "n/a"
   prep: "commercial ketchup"
-per_100g:
-  energy_kcal: 102
-  protein_g: 1.2
-  fat_g: 0.0
-  sat_fat_g: 0.0
-  mufa_g: 0.01
-  pufa_g: 0.04
-  trans_fat_g: 0.0
-  cholesterol_mg: 0
-  carbs_g: 23.2
-  sugar_g: 22.8
-  fiber_total_g: 0.4
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
-  sodium_mg: 707
-  potassium_mg: 281
-  iodine_ug: 1.2
-  magnesium_mg: 13
-  calcium_mg: 15
-  iron_mg: 0.35
-  zinc_mg: 0.17
-  vitamin_c_mg: 4.1
-  manganese_mg: null
-
 per_portion:
   energy_kcal: 26
   protein_g: 0.3
@@ -2362,9 +1629,7 @@ per_portion:
   manganese_mg: null
 
 derived:
-  salt_g_from_sodium:
-    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
-    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: high
   gaps: []
@@ -2413,43 +1678,10 @@ portion:
   description: "restaurant serving"
   est_weight_g: 300
   notes: "Thai spiced broccoli soup with coconut & lime froth, coriander"
-units:
-  mass: g
-  energy: kcal
-  sodium: mg
-  potassium: mg
-  sterols: mg
-  fats: g
-  carbs: g
-  fiber: g
 assumptions:
   salt_scheme: "normal"
   oil_type: "coconut oil/milk"
   prep: "blended soup with coconut, Thai spices, lime"
-per_100g:
-  energy_kcal: null
-  protein_g: null
-  fat_g: null
-  sat_fat_g: null
-  mufa_g: null
-  pufa_g: null
-  trans_fat_g: null
-  cholesterol_mg: null
-  carbs_g: null
-  sugar_g: null
-  fiber_total_g: null
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
-  sodium_mg: null
-  potassium_mg: null
-  iodine_ug: null
-  magnesium_mg: null
-  calcium_mg: null
-  iron_mg: null
-  zinc_mg: null
-  vitamin_c_mg: null
-  manganese_mg: null
-
 per_portion:
   energy_kcal: 110
   protein_g: 3.5
@@ -2475,9 +1707,7 @@ per_portion:
   manganese_mg: null
 
 derived:
-  salt_g_from_sodium:
-    per_100g: "= per_100g.sodium_mg * 2.5 / 1000"
-    per_portion: "= per_portion.sodium_mg * 2.5 / 1000"
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: low
   gaps: ["Macros estimated from ingredient composition (broccoli + coconut)", "Micronutrients scaled from typical broccoli soup profiles", "No official nutritional breakdown available beyond calories", "Fatty acid breakdown (MUFA/PUFA) calculated from coconut milk composition"]
