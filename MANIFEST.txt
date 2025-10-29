@@ -1,6 +1,8 @@
 nutrition-tracker-skill/
   SKILL.md
+  LICENSE
   data/food-data-bank.md
   references/health-profile.yaml
+  references/research-notes.md
   scripts/validate_data_bank.py
   scripts/new_dish_from_template.py
