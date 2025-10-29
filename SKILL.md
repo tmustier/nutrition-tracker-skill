@@ -23,11 +23,11 @@ No jargon, no mystery—just reproducible numbers and clear assumptions.
 ## Files in this skill
 - `data/food-data-bank.md` — Source of truth for dishes (append‑only, versioned).
 - `references/health-profile.yaml` — Daily targets and monitored fields.
+- `Makefile` — Quick commands for validation, search, and data bank manipulation.
 - `scripts/validate_data_bank.py` — Consistency checks (energy math, fat split, sodium↔salt, missing fields).
 - `scripts/new_dish_from_template.py` — Append a new schema block (quick start for new dishes).
-
-> Packaging and validation of skills follow the **skill‑creator** guidance; see that skill’s docs
-> for `init_skill.py` / `package_skill.py` usage. This skill stays lean and defers heavy logic to scripts.
+- `scripts/bank_build_index.py` — Build byte-offset index for large files (use when file >100KB).
+- `scripts/bank_extract_block.py` — Extract single dish by ID (efficient for large files).
 
 ## Complete workflow for adding dishes
 
@@ -181,7 +181,26 @@ Step 4 - Validate Atwater:
   cholesterol, iodine, magnesium, calcium, iron, zinc, vitamin C.
 - Offer next‑food suggestions to close gaps without blowing limits (esp. sat fat and sodium).
 
-## CLI helpers (scripts)
+## CLI helpers (scripts & Makefile)
+
+### Quick commands (Makefile)
+
+For daily workflows, use the Makefile commands:
+
+```bash
+make help              # Show all available commands
+make validate          # Run full validation on data bank
+make list              # List all dishes with IDs (sorted)
+make search TERM=salmon  # Search for dishes by keyword
+```
+
+For large files (when `data/food-data-bank.md` grows beyond 100KB or 50+ dishes):
+
+```bash
+make index             # Build byte-offset index
+make extract ID=grilled_salmon_fillet_shk_v1  # Extract single dish
+make clean             # Remove generated index files
+```
 
 ### `scripts/validate_data_bank.py`
 Validate `data/food-data-bank.md`. Checks:
@@ -191,6 +210,8 @@ Validate `data/food-data-bank.md`. Checks:
 Usage:
 ```bash
 python scripts/validate_data_bank.py data/food-data-bank.md
+# or
+make validate
 ```
 
 ### `scripts/new_dish_from_template.py`
@@ -209,11 +230,56 @@ python scripts/new_dish_from_template.py \\
 
 The script adds a new YAML block at the end and suggests an index bullet; review and commit the change.
 
+### `scripts/bank_build_index.py` & `scripts/bank_extract_block.py`
+
+These scripts optimize workflows when the data bank becomes large (>100KB or >50 dishes).
+
+**Build index** (do this after adding/editing dishes):
+```bash
+python scripts/bank_build_index.py data/food-data-bank.md
+# or
+make index
+```
+
+Creates `data/food-data-bank.md.index.json` with byte offsets for each dish.
+
+**Extract single dish** (avoids loading entire file):
+```bash
+python scripts/bank_extract_block.py --bank data/food-data-bank.md --id grilled_salmon_fillet_shk_v1
+# or
+make extract ID=grilled_salmon_fillet_shk_v1
+```
+
+Outputs the YAML block for that dish. Edit it, then paste back into the data bank.
+
 ## Style guide (data entry)
 - Keep numbers **consistent with evidence** and **state assumptions** in one line.
 - Prefer **fewer, better** sources; list them in `source.evidence` (URLs or short notes).
 - If Deliveroo vs venue PDF disagree, choose the **exact‑match prep** as the macro anchor and explain.
 - Keep language neutral and terse—future‑you will thank current‑you.
+
+## Working with large files
+
+When `data/food-data-bank.md` grows beyond comfortable reading size (>100KB or >50 dishes):
+
+**Do not load the whole file.** Instead:
+
+1. **Build an index** once per update session:
+   ```bash
+   make index
+   ```
+   This creates `data/food-data-bank.md.index.json` with byte offsets for each dish.
+
+2. **Extract only the needed dish** by ID:
+   ```bash
+   make extract ID=grilled_salmon_fillet_shk_v1
+   ```
+   This outputs just that dish's YAML block—edit it, validate, and paste back into the file.
+
+3. **Alternative: Use grep with multiline mode** if the runtime supports it:
+   ```regex
+   ```yaml\s*id:\s*<dish_id>[\s\S]*?```
+   ```
 
 ## Research notes
 For accumulated research findings, methodology lessons, and venue-specific guidance, see `references/research-notes.md`.
