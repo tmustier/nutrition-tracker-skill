@@ -130,6 +130,9 @@ change_log: []
 - [Ham and Cheese Croissant (Generic Bakery)](#ham-and-cheese-croissant-generic-bakery) {#ham_cheese_croissant_generic_v1}
 - [Grilled Chicken Breast (L'ETO Soho)](#grilled-chicken-breast-leto-soho) {#grilled_chicken_breast_leto_soho_v1}
 - [Chilli Poached Eggs (L'ETO Soho)](#chilli-poached-eggs-leto-soho) {#chilli_poached_eggs_leto_soho_v1}
+- [Grenade Carb Killa White Oreo Bar (60g)](#grenade-carb-killa-white-oreo-bar-60g) {#grenade_white_oreo_60g_v1}
+- [Amisa Buckwheat Crispbread (per piece, 5g)](#amisa-buckwheat-crispbread-per-piece-5g) {#amisa_buckwheat_crispbread_5g_v1}
+- [Yarden Houmous (30g serving)](#yarden-houmous-30g-serving) {#yarden_houmous_30g_v1}
 
 ---
 
@@ -2170,5 +2173,220 @@ change_log:
         note: "USDA cooked ham profile (per 100g): 145 kcal, 19g P, 8g F"
       - url: "https://www.ermitage.com/en/cheese/emmental/"
         note: "Emmental cheese (per 100g): 377 kcal, 28g P, 29g F, 1000mg Ca"
+```
+
+---
+
+## Grenade Carb Killa White Oreo Bar (60g)
+
+```yaml
+id: grenade_white_oreo_60g_v1
+version: 1
+last_verified: 2025-10-30
+source:
+  venue: Grenade (Packaged Product)
+  menu_page: ""
+  evidence:
+    - "Grenade official nutrition data"
+    - "Multiple UK retailer listings"
+aliases: ['Carb Killa White Oreo']
+category: ingredient
+portion:
+  description: "1 protein bar"
+  est_weight_g: 60
+  notes: "High protein bar with white chocolate coating and Oreo pieces"
+assumptions:
+  salt_scheme: "normal"
+  oil_type: ""
+  prep: "packaged product"
+per_portion:
+  energy_kcal: 250
+  protein_g: 21.0
+  fat_g: 10.0
+  sat_fat_g: 5.7
+  mufa_g: 2.0
+  pufa_g: 2.3
+  trans_fat_g: 0.0
+  cholesterol_mg: 10
+  carbs_g: 20.0
+  sugar_g: 1.3
+  fiber_total_g: 0.9
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: 180
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: high
+  gaps: ['MUFA/PUFA estimated from total unsaturated fat', 'Micronutrients not provided on label', 'Contains sugar alcohols (17g polyols not included in main carb count)']
+notes:
+  - "Contains 17g sugar alcohols/polyols (maltitol) not included in carb count"
+  - "Atwater validation: 4×21.0 + 4×20.0 + 9×10.0 = 254 kcal (within ±2% of 250 kcal)"
+  - "Fat split estimated: remaining 4.3g unsaturated divided into MUFA/PUFA based on typical protein bar composition"
+  - "Sodium estimated from typical Grenade bar range (0.45g salt = ~180mg sodium)"
+change_log:
+  - timestamp: 2025-10-30T00:00:00+0000
+    updated_by: "Claude Code"
+    reason: "Initial entry for Thomas's food diary tracking"
+    fields_changed: ['all fields']
+    sources:
+      - url: "https://www.healthyplanetcanada.com/grenade-high-protein-bar-oreo-60g.html"
+        note: "Grenade White Oreo bar nutrition facts"
+```
+
+---
+
+## Amisa Buckwheat Crispbread (per piece, 5g)
+
+```yaml
+id: amisa_buckwheat_crispbread_5g_v1
+version: 2
+last_verified: 2025-10-30
+source:
+  venue: Amisa (Packaged Product)
+  menu_page: ""
+  evidence:
+    - "Amisa official UK product page"
+    - "Multiple UK retailer listings (Tesco, Ocado, Holland & Barrett)"
+aliases: ['Amisa Organic Gluten Free Buckwheat Crispbread']
+category: ingredient
+portion:
+  description: "1 crispbread slice"
+  est_weight_g: 5
+  notes: "Organic, gluten-free, only 2 ingredients: buckwheat flour (98.5%) + sea salt (1.5%)"
+assumptions:
+  salt_scheme: "light"
+  oil_type: ""
+  prep: "baked crispbread"
+per_portion:
+  energy_kcal: 17
+  protein_g: 0.5
+  fat_g: 0.1
+  sat_fat_g: 0.0
+  mufa_g: 0.1
+  pufa_g: 0.0
+  trans_fat_g: 0.0
+  cholesterol_mg: 0
+  carbs_g: 3.4
+  sugar_g: 0.1
+  fiber_total_g: 0.4
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: 24
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: high
+  gaps: ['Fat split estimated from buckwheat composition', 'Micronutrients not labeled']
+notes:
+  - "Scaled from per 100g values: 340 kcal, 10.8g P, 2.7g F (0.63g sat), 68.2g C, 1.3g sugar, 8.4g fiber, 1.2g salt (480mg sodium)"
+  - "Weight per crispbread confirmed at 5g by user"
+  - "120g package contains 24 crispbreads"
+  - "Atwater validation: 4×0.5 + 4×3.4 + 9×0.1 = 16.5 kcal (matches 17 kcal)"
+  - "Vegan, organic, gluten-free certified"
+change_log:
+  - timestamp: 2025-10-30T00:00:00+0000
+    updated_by: "Claude Code"
+    reason: "Initial entry for Thomas's food diary tracking"
+    fields_changed: ['all fields']
+    sources:
+      - url: "https://amisa.co.uk/products/amisa-organic-gluten-free-buckwheat-crispbread/"
+        note: "Amisa buckwheat crispbread nutrition (per 100g)"
+  - timestamp: 2025-10-30T00:00:00+0000
+    updated_by: "Claude Code"
+    reason: "Corrected weight from 8g to 5g per crispbread based on user confirmation; recalculated all nutrition values"
+    fields_changed: ['portion.est_weight_g', 'per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.carbs_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'id']
+    sources:
+      - url: "user_correction"
+        note: "User confirmed crispbread weight is 5g per piece"
+```
+
+---
+
+## Yarden Houmous (30g serving)
+
+```yaml
+id: yarden_houmous_30g_v1
+version: 1
+last_verified: 2025-10-30
+source:
+  venue: Yarden (Packaged Product)
+  menu_page: ""
+  evidence:
+    - "Tesco product page #250438255"
+    - "Waitrose product listing"
+    - "FatSecret UK nutritional database"
+aliases: ['Yarden Hummus']
+category: ingredient
+portion:
+  description: "dollop / 2 tbsp"
+  est_weight_g: 30
+  notes: "Kosher, vegetarian, tahini-based houmous"
+assumptions:
+  salt_scheme: "normal"
+  oil_type: "sunflower or olive oil"
+  prep: "packaged tahini-based houmous"
+per_portion:
+  energy_kcal: 106
+  protein_g: 2.0
+  fat_g: 9.6
+  sat_fat_g: 1.0
+  mufa_g: 4.5
+  pufa_g: 4.1
+  trans_fat_g: 0.0
+  cholesterol_mg: 0
+  carbs_g: 2.1
+  sugar_g: 0.2
+  fiber_total_g: 1.4
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: 120
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: medium
+  gaps: ['MUFA/PUFA estimated from typical tahini/oil composition', 'Micronutrients not on label', 'Portion size "dollop" estimated at 30g']
+notes:
+  - "Scaled from per 100g values: 352 kcal, 6.8g P, 32g F (3.2g sat), 7.0g C, 0.6g sugar, 4.5g fiber, 1.0g salt"
+  - "30g serving = typical 'dollop' or 2 tablespoons"
+  - "Fat composition estimated from sesame tahini (high MUFA) + vegetable oil blend"
+  - "Atwater validation: 4×2.0 + 4×2.1 + 9×9.6 = 102.8 kcal (within ±3% of 106 kcal)"
+  - "Contains sesame; may contain eggs, soya, and mustard"
+  - "Available at Tesco, Waitrose, Morrisons; 250g tubs"
+change_log:
+  - timestamp: 2025-10-30T00:00:00+0000
+    updated_by: "Claude Code"
+    reason: "Initial entry for Thomas's food diary tracking"
+    fields_changed: ['all fields']
+    sources:
+      - url: "https://www.tesco.com/groceries/en-GB/products/250438255"
+        note: "Yarden Houmous 250g nutrition facts (per 100g)"
 ```
 
