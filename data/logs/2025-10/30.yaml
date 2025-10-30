@@ -1,64 +1,267 @@
-# Nutrition log for 2025-10-30
 date: 2025-10-30
 day_type: rest
 
 entries:
-  - timestamp: "2025-10-30T13:15:00+00:00"
+  - timestamp: "2025-10-30T08:10:00+00:00"
     items:
-      - name: "Grilled Salmon Fillet"
-        food_bank_id: grilled_salmon_fillet_shk_v1
+      - name: "Skyr - plain"
+        food_bank_id: skyr_plain_200g_v1
         quantity: 1
         unit: portion
         nutrition:
-          energy_kcal: 273
-          protein_g: 28.0
-          fat_g: 16.0
-          sat_fat_g: 3.1
-          mufa_g: 6.2
-          pufa_g: 6.7
-          trans_fat_g: null
-          cholesterol_mg: 80
-          carbs_g: 1.0
-          sugar_g: null
-          fiber_total_g: null
-          fiber_soluble_g: null
-          fiber_insoluble_g: null
-          sodium_mg: 370
-          potassium_mg: 486
-          iodine_ug: 17
-          magnesium_mg: 38
-          calcium_mg: 19
+          energy_kcal: 124
+          protein_g: 22.0
+          fat_g: 0.4
+          sat_fat_g: 0.2
+          mufa_g: 0.1
+          pufa_g: 0.0
+          trans_fat_g: 0.1
+          cholesterol_mg: 10
+          carbs_g: 7.4
+          sugar_g: 7.4
+          fiber_total_g: 0
+          fiber_soluble_g: 0
+          fiber_insoluble_g: 0
+          sodium_mg: 104
+          potassium_mg: 340
+          iodine_ug: 60
+          magnesium_mg: 24
+          calcium_mg: 300
           iron_mg: 0
           zinc_mg: 1
-          vitamin_c_mg: 5
-          manganese_mg: null
+          vitamin_c_mg: 0
+          manganese_mg: 0
 
-      - name: "Sweet Potato Wedges"
-        food_bank_id: sweet_potato_wedges_shk_v1
+      - name: "PACK'D Mixed Summer Berries"
+        food_bank_id: packd_mixed_summer_berries_150g_v1
         quantity: 1
         unit: portion
         nutrition:
-          energy_kcal: 156
-          protein_g: 2.0
-          fat_g: 1.9
-          sat_fat_g: 1.0
-          mufa_g: 0.5
-          pufa_g: 0.4
-          trans_fat_g: 0.1
-          cholesterol_mg: null
-          carbs_g: 32.0
-          sugar_g: 10.1
-          fiber_total_g: 5.1
+          energy_kcal: 57
+          protein_g: 1.4
+          fat_g: 0.3
+          sat_fat_g: null
+          mufa_g: 0.03
+          pufa_g: 0.18
+          trans_fat_g: 0
+          cholesterol_mg: 0
+          carbs_g: 9.8
+          sugar_g: 9.8
+          fiber_total_g: 4.4
           fiber_soluble_g: null
           fiber_insoluble_g: null
-          sodium_mg: 350
-          potassium_mg: 734
-          iodine_ug: 2
-          magnesium_mg: 42
-          calcium_mg: 59
+          sodium_mg: null
+          potassium_mg: 194
+          iodine_ug: 1
+          magnesium_mg: 24
+          calcium_mg: 30
           iron_mg: 1
-          zinc_mg: 0
-          vitamin_c_mg: 30
+          zinc_mg: 1
+          vitamin_c_mg: 29
           manganese_mg: null
 
-    notes: "lunch from SHK, ordered on Deliveroo"
+      - name: "Oats - dry"
+        food_bank_id: oats_dry_50g_v1
+        quantity: 1
+        unit: portion
+        nutrition:
+          energy_kcal: 195
+          protein_g: 8.5
+          fat_g: 3.5
+          sat_fat_g: 0.6
+          mufa_g: 1.1
+          pufa_g: 1.3
+          trans_fat_g: 0
+          cholesterol_mg: 0
+          carbs_g: 33.2
+          sugar_g: 0.5
+          fiber_total_g: 5.3
+          fiber_soluble_g: 2.0
+          fiber_insoluble_g: 3.3
+          sodium_mg: 1
+          potassium_mg: 215
+          iodine_ug: 1
+          magnesium_mg: 69
+          calcium_mg: 27
+          iron_mg: 2
+          zinc_mg: 2
+          vitamin_c_mg: 0
+          manganese_mg: 2
+
+      - name: "ON Gold Standard Whey"
+        food_bank_id: on_whey_drc_30g_v1
+        quantity: 1
+        unit: scoop
+        nutrition:
+          energy_kcal: 120
+          protein_g: 24.0
+          fat_g: 1.4
+          sat_fat_g: 0.5
+          mufa_g: 0.5
+          pufa_g: 0.4
+          trans_fat_g: null
+          cholesterol_mg: null
+          carbs_g: 3.0
+          sugar_g: 1.3
+          fiber_total_g: 0.7
+          fiber_soluble_g: null
+          fiber_insoluble_g: null
+          sodium_mg: 86
+          potassium_mg: 177
+          iodine_ug: 18
+          magnesium_mg: 52
+          calcium_mg: 130
+          iron_mg: null
+          zinc_mg: 2
+          vitamin_c_mg: null
+          manganese_mg: null
+
+      - name: "Pistachios, 30g"
+        food_bank_id: pistachios_30g_v1
+        quantity: 1
+        unit: portion
+        nutrition:
+          energy_kcal: 168
+          protein_g: 6.0
+          fat_g: 13.5
+          sat_fat_g: 1.7
+          mufa_g: 7.0
+          pufa_g: 4.3
+          trans_fat_g: null
+          cholesterol_mg: null
+          carbs_g: 8.4
+          sugar_g: 2.3
+          fiber_total_g: 3.2
+          fiber_soluble_g: null
+          fiber_insoluble_g: null
+          sodium_mg: 1
+          potassium_mg: 308
+          iodine_ug: null
+          magnesium_mg: 36
+          calcium_mg: 30
+          iron_mg: 1
+          zinc_mg: 1
+          vitamin_c_mg: null
+          manganese_mg: null
+
+    notes: "Breakfast smoothie blended together"
+
+  - timestamp: "2025-10-30T10:51:00+00:00"
+    items:
+      - name: "Ham and Cheese Croissant"
+        food_bank_id: ham_cheese_croissant_generic_v1
+        quantity: 1
+        unit: portion
+        nutrition:
+          energy_kcal: 403
+          protein_g: 17.0
+          fat_g: 22.9
+          sat_fat_g: 13.0
+          mufa_g: 6.2
+          pufa_g: 1.3
+          trans_fat_g: 0.4
+          cholesterol_mg: 50
+          carbs_g: 30.4
+          sugar_g: 3.5
+          fiber_total_g: 1.8
+          fiber_soluble_g: null
+          fiber_insoluble_g: null
+          sodium_mg: 730
+          potassium_mg: 182
+          iodine_ug: null
+          magnesium_mg: 11
+          calcium_mg: 226
+          iron_mg: 1.7
+          zinc_mg: 2.1
+          vitamin_c_mg: 0
+          manganese_mg: null
+
+    notes: ""
+
+  - timestamp: "2025-10-30T15:10:00+00:00"
+    items:
+      - name: "Grenade Carb Killa White Oreo Bar"
+        food_bank_id: grenade_white_oreo_60g_v1
+        quantity: 1
+        unit: portion
+        nutrition:
+          energy_kcal: 250
+          protein_g: 21.0
+          fat_g: 10.0
+          sat_fat_g: 5.7
+          mufa_g: 2.0
+          pufa_g: 2.3
+          trans_fat_g: 0.0
+          cholesterol_mg: 10
+          carbs_g: 20.0
+          sugar_g: 1.3
+          fiber_total_g: 0.9
+          fiber_soluble_g: null
+          fiber_insoluble_g: null
+          sodium_mg: 180
+          potassium_mg: null
+          iodine_ug: null
+          magnesium_mg: null
+          calcium_mg: null
+          iron_mg: null
+          zinc_mg: null
+          vitamin_c_mg: null
+          manganese_mg: null
+
+      - name: "Amisa Buckwheat Crispbread"
+        food_bank_id: amisa_buckwheat_crispbread_8g_v1
+        quantity: 4
+        unit: piece
+        nutrition:
+          energy_kcal: 108
+          protein_g: 3.6
+          fat_g: 0.8
+          sat_fat_g: 0.4
+          mufa_g: 0.4
+          pufa_g: 0.4
+          trans_fat_g: 0.0
+          cholesterol_mg: 0
+          carbs_g: 22.0
+          sugar_g: 0.4
+          fiber_total_g: 2.8
+          fiber_soluble_g: null
+          fiber_insoluble_g: null
+          sodium_mg: 152
+          potassium_mg: null
+          iodine_ug: null
+          magnesium_mg: null
+          calcium_mg: null
+          iron_mg: null
+          zinc_mg: null
+          vitamin_c_mg: null
+          manganese_mg: null
+
+      - name: "Yarden Houmous"
+        food_bank_id: yarden_houmous_30g_v1
+        quantity: 1
+        unit: portion
+        nutrition:
+          energy_kcal: 106
+          protein_g: 2.0
+          fat_g: 9.6
+          sat_fat_g: 1.0
+          mufa_g: 4.5
+          pufa_g: 4.1
+          trans_fat_g: 0.0
+          cholesterol_mg: 0
+          carbs_g: 2.1
+          sugar_g: 0.2
+          fiber_total_g: 1.4
+          fiber_soluble_g: null
+          fiber_insoluble_g: null
+          sodium_mg: 120
+          potassium_mg: null
+          iodine_ug: null
+          magnesium_mg: null
+          calcium_mg: null
+          iron_mg: null
+          zinc_mg: null
+          vitamin_c_mg: null
+          manganese_mg: null
+
+    notes: "Afternoon snack"
