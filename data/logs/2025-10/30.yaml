@@ -209,24 +209,24 @@ entries:
           manganese_mg: null
 
       - name: "Amisa Buckwheat Crispbread"
-        food_bank_id: amisa_buckwheat_crispbread_8g_v1
+        food_bank_id: amisa_buckwheat_crispbread_5g_v1
         quantity: 4
         unit: piece
         nutrition:
-          energy_kcal: 108
-          protein_g: 3.6
-          fat_g: 0.8
-          sat_fat_g: 0.4
+          energy_kcal: 68
+          protein_g: 2.2
+          fat_g: 0.5
+          sat_fat_g: 0.1
           mufa_g: 0.4
-          pufa_g: 0.4
+          pufa_g: 0.1
           trans_fat_g: 0.0
           cholesterol_mg: 0
-          carbs_g: 22.0
-          sugar_g: 0.4
-          fiber_total_g: 2.8
+          carbs_g: 13.6
+          sugar_g: 0.3
+          fiber_total_g: 1.7
           fiber_soluble_g: null
           fiber_insoluble_g: null
-          sodium_mg: 152
+          sodium_mg: 96
           potassium_mg: null
           iodine_ug: null
           magnesium_mg: null

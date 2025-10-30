@@ -131,7 +131,7 @@ change_log: []
 - [Grilled Chicken Breast (L'ETO Soho)](#grilled-chicken-breast-leto-soho) {#grilled_chicken_breast_leto_soho_v1}
 - [Chilli Poached Eggs (L'ETO Soho)](#chilli-poached-eggs-leto-soho) {#chilli_poached_eggs_leto_soho_v1}
 - [Grenade Carb Killa White Oreo Bar (60g)](#grenade-carb-killa-white-oreo-bar-60g) {#grenade_white_oreo_60g_v1}
-- [Amisa Buckwheat Crispbread (per piece, ~8g)](#amisa-buckwheat-crispbread-per-piece-8g) {#amisa_buckwheat_crispbread_8g_v1}
+- [Amisa Buckwheat Crispbread (per piece, 5g)](#amisa-buckwheat-crispbread-per-piece-5g) {#amisa_buckwheat_crispbread_5g_v1}
 - [Yarden Houmous (30g serving)](#yarden-houmous-30g-serving) {#yarden_houmous_30g_v1}
 
 ---
@@ -2245,11 +2245,11 @@ change_log:
 
 ---
 
-## Amisa Buckwheat Crispbread (per piece, ~8g)
+## Amisa Buckwheat Crispbread (per piece, 5g)
 
 ```yaml
-id: amisa_buckwheat_crispbread_8g_v1
-version: 1
+id: amisa_buckwheat_crispbread_5g_v1
+version: 2
 last_verified: 2025-10-30
 source:
   venue: Amisa (Packaged Product)
@@ -2261,27 +2261,27 @@ aliases: ['Amisa Organic Gluten Free Buckwheat Crispbread']
 category: ingredient
 portion:
   description: "1 crispbread slice"
-  est_weight_g: 8
+  est_weight_g: 5
   notes: "Organic, gluten-free, only 2 ingredients: buckwheat flour (98.5%) + sea salt (1.5%)"
 assumptions:
   salt_scheme: "light"
   oil_type: ""
   prep: "baked crispbread"
 per_portion:
-  energy_kcal: 27
-  protein_g: 0.9
-  fat_g: 0.2
-  sat_fat_g: 0.1
+  energy_kcal: 17
+  protein_g: 0.5
+  fat_g: 0.1
+  sat_fat_g: 0.0
   mufa_g: 0.1
-  pufa_g: 0.1
+  pufa_g: 0.0
   trans_fat_g: 0.0
   cholesterol_mg: 0
-  carbs_g: 5.5
+  carbs_g: 3.4
   sugar_g: 0.1
-  fiber_total_g: 0.7
+  fiber_total_g: 0.4
   fiber_soluble_g: null
   fiber_insoluble_g: null
-  sodium_mg: 38
+  sodium_mg: 24
   potassium_mg: null
   iodine_ug: null
   magnesium_mg: null
@@ -2294,13 +2294,13 @@ per_portion:
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
-  confidence: medium
-  gaps: ['Weight per crispbread estimated (120g pack contains multiple pieces)', 'Fat split estimated from buckwheat composition', 'Micronutrients not labeled']
+  confidence: high
+  gaps: ['Fat split estimated from buckwheat composition', 'Micronutrients not labeled']
 notes:
-  - "Scaled from per 100g values: 340 kcal, 10.8g P, 2.7g F (0.63g sat), 68.2g C, 1.3g sugar, 8.4g fiber, 1.2g salt"
-  - "Weight per crispbread estimated at ~8g based on typical crispbread density"
-  - "120g package size; exact number of crispbreads not specified on packaging"
-  - "Atwater validation: 4×0.9 + 4×5.5 + 9×0.2 = 27.4 kcal (matches 27 kcal)"
+  - "Scaled from per 100g values: 340 kcal, 10.8g P, 2.7g F (0.63g sat), 68.2g C, 1.3g sugar, 8.4g fiber, 1.2g salt (480mg sodium)"
+  - "Weight per crispbread confirmed at 5g by user"
+  - "120g package contains 24 crispbreads"
+  - "Atwater validation: 4×0.5 + 4×3.4 + 9×0.1 = 16.5 kcal (matches 17 kcal)"
   - "Vegan, organic, gluten-free certified"
 change_log:
   - timestamp: 2025-10-30T00:00:00+0000
@@ -2310,6 +2310,13 @@ change_log:
     sources:
       - url: "https://amisa.co.uk/products/amisa-organic-gluten-free-buckwheat-crispbread/"
         note: "Amisa buckwheat crispbread nutrition (per 100g)"
+  - timestamp: 2025-10-30T00:00:00+0000
+    updated_by: "Claude Code"
+    reason: "Corrected weight from 8g to 5g per crispbread based on user confirmation; recalculated all nutrition values"
+    fields_changed: ['portion.est_weight_g', 'per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.carbs_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'id']
+    sources:
+      - url: "user_correction"
+        note: "User confirmed crispbread weight is 5g per piece"
 ```
 
 ---
