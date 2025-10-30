@@ -1,0 +1,64 @@
+# Nutrition log for 2025-10-30
+date: 2025-10-30
+day_type: rest
+
+entries:
+  - timestamp: "2025-10-30T13:15:00+00:00"
+    items:
+      - name: "Grilled Salmon Fillet"
+        food_bank_id: grilled_salmon_fillet_shk_v1
+        quantity: 1
+        unit: portion
+        nutrition:
+          energy_kcal: 273
+          protein_g: 28.0
+          fat_g: 16.0
+          sat_fat_g: 3.1
+          mufa_g: 6.2
+          pufa_g: 6.7
+          trans_fat_g: null
+          cholesterol_mg: 80
+          carbs_g: 1.0
+          sugar_g: null
+          fiber_total_g: null
+          fiber_soluble_g: null
+          fiber_insoluble_g: null
+          sodium_mg: 370
+          potassium_mg: 486
+          iodine_ug: 17
+          magnesium_mg: 38
+          calcium_mg: 19
+          iron_mg: 0
+          zinc_mg: 1
+          vitamin_c_mg: 5
+          manganese_mg: null
+
+      - name: "Sweet Potato Wedges"
+        food_bank_id: sweet_potato_wedges_shk_v1
+        quantity: 1
+        unit: portion
+        nutrition:
+          energy_kcal: 156
+          protein_g: 2.0
+          fat_g: 1.9
+          sat_fat_g: 1.0
+          mufa_g: 0.5
+          pufa_g: 0.4
+          trans_fat_g: 0.1
+          cholesterol_mg: null
+          carbs_g: 32.0
+          sugar_g: 10.1
+          fiber_total_g: 5.1
+          fiber_soluble_g: null
+          fiber_insoluble_g: null
+          sodium_mg: 350
+          potassium_mg: 734
+          iodine_ug: 2
+          magnesium_mg: 42
+          calcium_mg: 59
+          iron_mg: 1
+          zinc_mg: 0
+          vitamin_c_mg: 30
+          manganese_mg: null
+
+    notes: "lunch from SHK, ordered on Deliveroo"

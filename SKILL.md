@@ -3,7 +3,8 @@ name: nutrition-tracker
 description: >
   Personal nutrition tracking skill for Thomas. Use when analyzing meals, estimating
   nutrients from venue sources (menus, PDFs, photos), comparing to Thomas's targets,
-  and updating a versioned Data Bank with change logs.
+  logging what was eaten, querying nutrition history, and updating a versioned Data Bank
+  with change logs.
 license: Apache-2.0
 ---
 
@@ -16,12 +17,15 @@ No jargon, no mystery—just reproducible numbers and clear assumptions.
 
 ## When to use
 - Compute nutrition for a dish, meal, or day.
+- Log what was eaten (replaces manual entry in separate apps).
+- Query nutrition history: today's totals, weekly trends, rolling averages.
 - Add or update a dish in the Data Bank.
 - Validate the Data Bank for consistency before committing to GitHub.
 - Summarize progress vs rest‑day/training‑day targets and suggest next foods.
 
 ## Files in this skill
 - `data/food-data-bank.md` — Source of truth for dishes (append‑only, versioned).
+- `data/logs/` — Nutrition logs organized by date (`YYYY-MM/DD.yaml`). See `data/logs/SCHEMA.md` for format.
 - `references/health-profile.yaml` — Daily targets and monitored fields.
 - `scripts/validate_data_bank.py` — Consistency checks (energy math, fat split, sodium↔salt, missing fields).
 - `scripts/new_dish_from_template.py` — Append a new schema block (quick start for new dishes).
@@ -180,6 +184,64 @@ Step 4 - Validate Atwater:
 - Report kcal, protein, fat (sat/MUFA/PUFA/trans), carbs (sugar), fibre, sodium (plus salt), potassium,
   cholesterol, iodine, magnesium, calcium, iron, zinc, vitamin C.
 - Offer next‑food suggestions to close gaps without blowing limits (esp. sat fat and sodium).
+
+### D) Log a meal
+Use this to replace manual entry in external apps. Capture what was eaten with full nutrition snapshot.
+
+**Workflow:**
+1. User states what they ate (e.g., "I had the Chilli Poached Eggs from L'ETO")
+2. Look up item in food bank OR estimate nutrition if not found
+3. Show nutrition + comparison to targets
+4. Ask: "Would you like me to log this meal?"
+5. If yes:
+   - Create/open today's log file: `data/logs/YYYY-MM/DD.yaml`
+   - Add new entry with current timestamp (ISO 8601 with timezone)
+   - For each item:
+     - Copy full nutrition snapshot from food bank (or use estimated values)
+     - Store `food_bank_id` (or `null` if estimated)
+     - Include quantity and unit
+   - Add optional notes if user provided context
+   - Calculate and show updated daily totals vs targets
+
+**Log file location:** `data/logs/YYYY-MM/DD.yaml` organized by month subdirectories.
+
+**Day type:** Set to `rest` or `training` based on which targets to compare against (ask user if unclear).
+
+**Multiple items in one meal:** If user ate multiple things together, group them in one entry with one timestamp.
+
+**After logging:** Show updated daily totals and gaps: "Logged ✓. Today: X/Y kcal, X/Y protein. Still need Z."
+
+### E) Query nutrition logs
+Read historical logs to answer questions about what was eaten.
+
+**Today's totals:**
+1. Read `data/logs/YYYY-MM/DD.yaml` for today
+2. Sum nutrition across all items in all entries
+3. Compare to targets from `references/health-profile.yaml`
+4. Show summary table and remaining gaps
+
+**This week's totals:**
+1. Read last 7 daily log files
+2. For each day: sum nutrition, compare to targets
+3. Calculate daily averages across the week
+4. Show compliance: "Hit protein target 6/7 days"
+5. Show weekly averages vs targets
+
+**Rolling 7-day average:**
+1. Read last 7 log files
+2. Sum all nutrition across 7 days
+3. Divide by 7 for daily average
+4. Compare to daily targets
+
+**Queries supported:**
+- "What have I eaten today?"
+- "Show today's totals"
+- "How much protein have I had so far?"
+- "Show this week's nutrition"
+- "What's my average protein this week?"
+- "Have I been hitting my fiber target?"
+
+**Files:** Logs are in `data/logs/YYYY-MM/DD.yaml`. See `data/logs/SCHEMA.md` for format details.
 
 ## CLI helpers (scripts)
 
