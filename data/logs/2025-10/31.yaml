@@ -325,3 +325,67 @@ entries:
           manganese_mg: null
 
     notes: "Zima leftovers from Oct 30: consolidated container with 70g chicken meat + 259g contents (includes 0.5 portion chicken cutlet dish + ~154g extra buckwheat)"
+
+  - timestamp: "2025-10-31T17:20:00+00:00"
+    items:
+      - name: "Guinness Draught"
+        food_bank_id: guinness_pint_568ml_v1
+        quantity: 1
+        unit: portion
+        nutrition:
+          energy_kcal: 210
+          protein_g: 1.9
+          fat_g: 0.0
+          sat_fat_g: 0.0
+          mufa_g: 0.0
+          pufa_g: 0.0
+          trans_fat_g: 0
+          cholesterol_mg: 0
+          carbs_g: 18.0
+          sugar_g: 0.0
+          fiber_total_g: 0.0
+          fiber_soluble_g: 0.0
+          fiber_insoluble_g: 0.0
+          sodium_mg: 28
+          potassium_mg: 200
+          iodine_ug: 3
+          magnesium_mg: 28
+          calcium_mg: 34
+          iron_mg: 0.6
+          zinc_mg: 0.1
+          vitamin_c_mg: 0
+          manganese_mg: 0.2
+
+    notes: ""
+
+  - timestamp: "2025-10-31T17:50:00+00:00"
+    items:
+      - name: "Guinness Draught"
+        food_bank_id: guinness_pint_568ml_v1
+        quantity: 1
+        unit: portion
+        nutrition:
+          energy_kcal: 210
+          protein_g: 1.9
+          fat_g: 0.0
+          sat_fat_g: 0.0
+          mufa_g: 0.0
+          pufa_g: 0.0
+          trans_fat_g: 0
+          cholesterol_mg: 0
+          carbs_g: 18.0
+          sugar_g: 0.0
+          fiber_total_g: 0.0
+          fiber_soluble_g: 0.0
+          fiber_insoluble_g: 0.0
+          sodium_mg: 28
+          potassium_mg: 200
+          iodine_ug: 3
+          magnesium_mg: 28
+          calcium_mg: 34
+          iron_mg: 0.6
+          zinc_mg: 0.1
+          vitamin_c_mg: 0
+          manganese_mg: 0.2
+
+    notes: ""
