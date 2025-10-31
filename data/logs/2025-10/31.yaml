@@ -237,3 +237,91 @@ entries:
           manganese_mg: 0
 
     notes: "Post-workout shake"
+
+  - timestamp: "2025-10-31T13:00:00+00:00"
+    items:
+      - name: "Chicken Cutlet with Buckwheat - consolidated (70g meat + 259g contents)"
+        food_bank_id: chicken_cutlet_mushroom_sauce_zima_v1
+        quantity: 0.5
+        unit: portion
+        nutrition:
+          energy_kcal: 442.7
+          protein_g: 20.1
+          fat_g: 16.4
+          sat_fat_g: 4.3
+          mufa_g: 7.4
+          pufa_g: 4.0
+          trans_fat_g: 0.1
+          cholesterol_mg: 70
+          carbs_g: 52.7
+          sugar_g: 2.7
+          fiber_total_g: 6.8
+          fiber_soluble_g: 2.0
+          fiber_insoluble_g: 4.8
+          sodium_mg: 474
+          potassium_mg: 414
+          iodine_ug: null
+          magnesium_mg: null
+          calcium_mg: null
+          iron_mg: null
+          zinc_mg: null
+          vitamin_c_mg: null
+          manganese_mg: null
+
+      - name: "Pickled Cabbage / Sauerkraut"
+        food_bank_id: sauerkraut_zima_v1
+        quantity: 0.25
+        unit: portion
+        nutrition:
+          energy_kcal: 10
+          protein_g: 0.4
+          fat_g: 0.1
+          sat_fat_g: 0.0
+          mufa_g: 0.0
+          pufa_g: 0.0
+          trans_fat_g: 0.0
+          cholesterol_mg: 0
+          carbs_g: 1.9
+          sugar_g: 0.8
+          fiber_total_g: 1.1
+          fiber_soluble_g: 0.2
+          fiber_insoluble_g: 0.9
+          sodium_mg: 270
+          potassium_mg: 77
+          iodine_ug: null
+          magnesium_mg: null
+          calcium_mg: null
+          iron_mg: null
+          zinc_mg: null
+          vitamin_c_mg: null
+          manganese_mg: null
+
+      - name: "Vinegret salad (90g, no bread)"
+        food_bank_id: vinegret_with_rye_zima_v1
+        quantity: 90
+        unit: g
+        nutrition:
+          energy_kcal: 74
+          protein_g: 1.5
+          fat_g: 2.6
+          sat_fat_g: 0.5
+          mufa_g: 0.9
+          pufa_g: 1.7
+          trans_fat_g: 0.0
+          cholesterol_mg: 0
+          carbs_g: 10.0
+          sugar_g: 2.5
+          fiber_total_g: 2.4
+          fiber_soluble_g: 1.1
+          fiber_insoluble_g: 1.2
+          sodium_mg: 154
+          potassium_mg: 168
+          iodine_ug: null
+          magnesium_mg: null
+          calcium_mg: null
+          iron_mg: null
+          zinc_mg: null
+          vitamin_c_mg: null
+          manganese_mg: null
+
+    notes: "Zima leftovers from Oct 30: consolidated container with 70g chicken meat + 259g contents (includes 0.5 portion chicken cutlet dish + ~154g extra buckwheat)"
