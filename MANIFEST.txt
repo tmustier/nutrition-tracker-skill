@@ -1,7 +1,11 @@
 nutrition-tracker-skill/
   SKILL.md
+  ESTIMATE.md
   LICENSE
+  MANIFEST.txt
+  .gitignore
   data/food-data-bank.md
+  data/logs/SCHEMA.md
   references/health-profile.yaml
   references/research-notes.md
   scripts/validate_data_bank.py
