@@ -8,9 +8,9 @@ license: Apache-2.0
 
 ## Overview
 This guide covers general practices for:
-  A) Estimating precise nutrition: retrieve and/or estimate detailed nutrition values for dishes, specific to their type, venue, or brand.
-  B) Logging dishes consumed: recording nutrition data for each dish the user has eaten.
-  C) Daily Summary: querying logs for daily nutrition data against the user's targets.
+ - A) Estimating precise nutrition: retrieve and/or estimate detailed nutrition values for dishes, specific to their type, venue, or brand.
+ - B) Logging dishes consumed: recording nutrition data for each dish the user has eaten.
+ - C) Daily Summary: querying logs for daily nutrition data against the user's targets.
 
 This skill is different to other Claude Skills in that it lives in a public Github repository and contains regularly updated user data including a data bank of dishes, daily nutrition logs, and nutrition targets  (see **D) AD HOC ANALYSIS**).
 
