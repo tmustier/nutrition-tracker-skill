@@ -12,7 +12,7 @@ This guide covers general practices for:
  - B) Logging dishes consumed: recording nutrition data for each dish the user has eaten.
  - C) Daily Summary: querying logs for daily nutrition data against the user's targets.
 
-This skill is different to other Claude Skills in that it lives in a public Github repository and contains regularly updated user data including a data bank of dishes, daily nutrition logs, and nutrition targets  (see **D) AD HOC ANALYSIS**).
+This skill is different to other Claude Skills in that it lives in a public Github repository and contains regularly updated user data including a data bank of dishes, daily nutrition logs, and nutrition targets (see **D) AD HOC ANALYSIS**).
 
 ## A) ESTIMATING
 When the user asks you to estimate nutrition for a dish:
