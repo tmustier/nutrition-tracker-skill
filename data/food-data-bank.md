@@ -104,42 +104,10 @@ change_log: []
 ---
 
 # Dishes Index
-- [Sweet Potato Wedges (Simple Health Kitchen)](#sweet-potato-wedges-simple-health-kitchen) {#sweet_potato_wedges_shk_v1}
-- [Hummus Side Pot (Simple Health Kitchen)](#hummus-side-pot-simple-health-kitchen) {#hummus_side_pot_shk_v1}
-- [Carrot Juice (Simple Health Kitchen)](#carrot-juice-simple-health-kitchen) {#carrot_juice_shk_v1}
-- [Broccoli Stems (Simple Health Kitchen)](#broccoli-stems-simple-health-kitchen) {#broccoli_stems_shk_v1}
-- [Zesty Lemon Broccoli (Simple Health Kitchen)](#zesty-lemon-broccoli-simple-health-kitchen) {#zesty_lemon_broccoli_shk_v1}
-- [Lemon & Herb Chicken Breast (Simple Health Kitchen)](#lemon-and-herb-chicken-breast-simple-health-kitchen) {#lemon_herb_chicken_breast_shk_v1}
-- [Whole Wheat Pesto Pasta (Simple Health Kitchen)](#whole-wheat-pesto-pasta-simple-health-kitchen) {#whole_wheat_pesto_pasta_shk_v1}
-- [Grilled Salmon Fillet (Simple Health Kitchen)](#grilled-salmon-fillet-simple-health-kitchen) {#grilled_salmon_fillet_shk_v1}
-- [Pistachios, 30 g](#pistachios-30-g) {#pistachios_30g_v1}
-- [Sunflower Seeds, 30 g](#sunflower-seeds-30-g) {#sunflower_seeds_30g_v1}
-- [Hazelnuts, 30 g](#hazelnuts-30-g) {#hazelnuts_30g_v1}
-- [ON Gold Standard Whey – Double Rich Chocolate (1 scoop ≈30 g)](#on-gold-standard-whey---double-rich-chocolate-1-scoop-≈30-g) {#on_whey_drc_30g_v1}
-- [PACK'D Mixed Summer Berries (150 g)](#pack'd-mixed-summer-berries-150-g) {#packd_mixed_summer_berries_150g_v1}
-- [Blueberries - 150 g](#blueberries---150-g) {#blueberries_150g_v1}
-- [Clementine (Fresh Fruit)](#clementine-fresh-fruit) {#clementine_fresh_fruit_v1}
-- [Oats - dry (50 g)](#oats---dry-50-g) {#oats_dry_50g_v1}
-- [Skyr - plain (200 g)](#skyr---plain-200-g) {#skyr_plain_200g_v1}
-- [Mixed Pineapple/Mango/Passion Fruit (150 g)](#mixed-pineapple/mango/passion-fruit-150-g) {#pine_mango_passion_150g_v1}
-- [Joe & the Juice - Joe's Identity juice](#joe-and-the-juice---joes-identity-juice) {#joes_identity_juice_jtj_v1}
-- [Sakura Wagyu Beef Sandwich (Jean-Georges at The Connaught)](#sakura-wagyu-beef-sandwich-jean-georges-at-the-connaught) {#sakura_wagyu_beef_sandwich_connaught_v1}
-- [Home-made Chips (Jean-Georges at The Connaught)](#home-made-chips-jean-georges-at-the-connaught) {#homemade_chips_connaught_v1}
-- [Ketchup Pot, 25g (Jean-Georges at The Connaught)](#ketchup-pot-25g-jean-georges-at-the-connaught) {#ketchup_pot_connaught_v1}
-- [Thai Spiced Broccoli Soup (Jean-Georges at The Connaught)](#thai-spiced-broccoli-soup-jean-georges-at-the-connaught) {#thai_spiced_broccoli_soup_connaught_v1}
-- [Ham and Cheese Croissant (Generic Bakery)](#ham-and-cheese-croissant-generic-bakery) {#ham_cheese_croissant_generic_v1}
-- [Grilled Chicken Breast (L'ETO Soho)](#grilled-chicken-breast-leto-soho) {#grilled_chicken_breast_leto_soho_v1}
-- [Chilli Poached Eggs (L'ETO Soho)](#chilli-poached-eggs-leto-soho) {#chilli_poached_eggs_leto_soho_v1}
-- [Grenade Carb Killa White Oreo Bar (60g)](#grenade-carb-killa-white-oreo-bar-60g) {#grenade_white_oreo_60g_v1}
-- [Amisa Buckwheat Crispbread (per piece, 5g)](#amisa-buckwheat-crispbread-per-piece-5g) {#amisa_buckwheat_crispbread_5g_v1}
-- [Yarden Houmous (30g serving)](#yarden-houmous-30g-serving) {#yarden_houmous_30g_v1}
-- [Rot Front Glazed Peanut Halva (1 piece, ~25g)](#rot-front-glazed-peanut-halva-1-piece-25g) {#halva_glazed_peanut_rotfront_v1}
-- [Beef Stroganoff with Buckwheat (Zima Soho)](#beef-stroganoff-with-buckwheat-zima-soho) {#beef_stroganoff_buckwheat_zima_v1}
-- [Chicken Cutlet with Mushroom Sauce with Buckwheat (Zima Soho)](#chicken-cutlet-with-mushroom-sauce-with-buckwheat-zima-soho) {#chicken_cutlet_mushroom_sauce_zima_v1}
-- [Borscht Krasnodarsky with Beef (Zima Soho)](#borscht-krasnodarsky-with-beef-zima-soho) {#borscht_krasnodarsky_zima_v1}
-- [Vinegret with 1 slice rye (Zima)](#vinegret-with-1-slice-rye-zima) {#vinegret_with_rye_zima_v1}
-- [Pickled Cabbage / Sauerkraut (Zima)](#pickled-cabbage--sauerkraut-zima) {#sauerkraut_zima_v1}
-- [Cherry Vareniki - Full Tray (Zima, Soho)](#cherry-vareniki---full-tray-zima-soho) {#cherry_vareniki_zima_v1}
+
+> **Index moved**: See [food-data-bank-index.md](./food-data-bank-index.md) for a complete list of all dishes.
+>
+> The index is auto-generated. To update it, run: `python scripts/generate_index.py`
 
 ---
 
