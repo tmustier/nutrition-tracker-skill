@@ -133,6 +133,7 @@ change_log: []
 - [Grenade Carb Killa White Oreo Bar (60g)](#grenade-carb-killa-white-oreo-bar-60g) {#grenade_white_oreo_60g_v1}
 - [Amisa Buckwheat Crispbread (per piece, 5g)](#amisa-buckwheat-crispbread-per-piece-5g) {#amisa_buckwheat_crispbread_5g_v1}
 - [Yarden Houmous (30g serving)](#yarden-houmous-30g-serving) {#yarden_houmous_30g_v1}
+- [Rot Front Glazed Peanut Halva (1 piece, ~25g)](#rot-front-glazed-peanut-halva-1-piece-25g) {#halva_glazed_peanut_rotfront_v1}
 - [Beef Stroganoff with Buckwheat (Zima Soho)](#beef-stroganoff-with-buckwheat-zima-soho) {#beef_stroganoff_buckwheat_zima_v1}
 - [Chicken Cutlet with Mushroom Sauce with Buckwheat (Zima Soho)](#chicken-cutlet-with-mushroom-sauce-with-buckwheat-zima-soho) {#chicken_cutlet_mushroom_sauce_zima_v1}
 - [Borscht Krasnodarsky with Beef (Zima Soho)](#borscht-krasnodarsky-with-beef-zima-soho) {#borscht_krasnodarsky_zima_v1}
@@ -2787,3 +2788,80 @@ change_log:
       - url: ""
         note: "User-provided nutrition data for Cherry vareniki from Zima restaurant, Soho, London (full tray ~200g)"
 ```
+
+## Rot Front Glazed Peanut Halva (1 piece, ~25g)
+
+```yaml
+id: halva_glazed_peanut_rotfront_v1
+version: 1
+last_verified: 2025-10-30
+source:
+  venue: "Rot Front"
+  menu_page: ""
+  evidence:
+    - "FatSecret — Рот Фронт Халва глазированная, per-piece entry (25g)"
+    - "FatSecret — 100g entry shows 530 kcal; P14g; F32g; C44g; fibre 5.6g"
+    - "Parma.am product page: peanut base 44%, glaze 30%; 528 kcal/100g"
+    - "Generic halva datasets for mineral scaling (FitAudit, FoodStruct)"
+aliases: ["Халва глазированная", "Glazed Halva"]
+category: dessert
+portion:
+  description: "1 piece (~25g)"
+  est_weight_g: 25
+  notes: "Individual wrapped piece; actual weight varies 23-27g per ChatGPT analysis"
+assumptions:
+  salt_scheme: "normal"
+  oil_type: "peanut-based halva with confectioner's chocolate glaze"
+  prep: "Commercial halva; peanut mass ~44% + chocolate glaze ~30%"
+per_portion:
+  energy_kcal: 133
+  protein_g: 3.5
+  fat_g: 8.25
+  sat_fat_g: 1.4
+  mufa_g: 3.0
+  pufa_g: 3.85
+  trans_fat_g: 0.0
+  cholesterol_mg: 0
+  carbs_g: 11.0
+  sugar_g: 9.4
+  fiber_total_g: 1.4
+  fiber_soluble_g: 0.2
+  fiber_insoluble_g: 1.2
+  sodium_mg: 50
+  potassium_mg: 75
+  iodine_ug: null
+  magnesium_mg: 55
+  calcium_mg: 8
+  iron_mg: 1.1
+  zinc_mg: 1.1
+  vitamin_c_mg: null
+  manganese_mg: 0.22
+
+derived:
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: medium
+  gaps: ['MUFA/PUFA estimated from typical halva FA profile', 'Soluble/insoluble fiber split from peanut ratios (~94% insoluble)', 'Minerals scaled from generic halva datasets', 'Potassium range 50-100mg', 'Vitamin C not available']
+notes:
+  - "Branded per-piece nutrition from FatSecret: 133 kcal, 8.25g fat (1.4g sat), 11g carbs, 9.35g sugar, 3.5g protein"
+  - "100g macros cluster: 528-560 kcal, 32-33g fat, 44-48g carbs, 14g protein across multiple sources"
+  - "Fibre 5.6g/100g → 1.4g/25g; split using peanut profile (94% insoluble / 6% soluble)"
+  - "MUFA/PUFA split (3.0g / 3.85g) constrained so SFA+MUFA+PUFA = total fat; typical of peanut-based halva"
+  - "Minerals scaled from generic halva composition (FitAudit): K~187mg/100g, Mg~218mg/100g, Ca~33mg/100g"
+  - "Sodium ~195mg/100g in generic halva → ~49mg/25g, rounded to 50mg"
+  - "Atwater validation: 4×3.5 + 4×11.0 + 9×8.25 = 132.25 kcal (within 0.6% of 133 kcal)"
+  - "Ingredients: peanut mass 44%, confectioner's chocolate glaze 30% (varies by batch)"
+change_log:
+  - timestamp: 2025-10-30T19:35:00+0000
+    updated_by: "Claude Code (via ChatGPT estimation)"
+    reason: "Initial entry with ChatGPT nutrition analysis cross-checked against multiple databases"
+    fields_changed: ['all fields']
+    sources:
+      - url: "https://www.fatsecret.com/calories-nutrition/generic/halva"
+        note: "FatSecret branded and generic halva entries"
+      - url: "https://parma.am/en/product/rot-front-glazed-halva-2/"
+        note: "Parma.am product page with ingredient breakdown"
+      - url: "https://fitaudit.ru/food/halva"
+        note: "FitAudit generic halva mineral composition"
+```
+
