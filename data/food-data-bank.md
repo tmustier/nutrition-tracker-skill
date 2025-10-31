@@ -3065,3 +3065,77 @@ change_log:
         note: "User tracking two pints consumed at 17:20 and 17:50"
 ```
 
+
+## Psyllium Husk (5g portion)
+
+```yaml
+id: psyllium_husk_5g_v1
+version: 1
+last_verified: 2025-10-31
+source:
+  venue: "Generic - Supplement"
+  menu_page: ""
+  evidence:
+    - "USDA FoodData Central: Psyllium seed husk, approximately per 5g serving"
+    - "Typical commercial psyllium husk powder nutrition"
+aliases: ['Psyllium', 'Isabgol', 'Psyllium Fiber']
+category: ingredient
+portion:
+  description: "5g (approximately 1 teaspoon)"
+  est_weight_g: 5
+  notes: "Psyllium husk powder or whole husks"
+assumptions:
+  salt_scheme: "unsalted"
+  oil_type: ""
+  prep: "Dry powder/husk form, typically mixed with water"
+per_portion:
+  energy_kcal: 18
+  protein_g: 0.2
+  fat_g: 0.1
+  sat_fat_g: 0.0
+  mufa_g: 0.0
+  pufa_g: 0.1
+  trans_fat_g: 0
+  cholesterol_mg: 0
+  carbs_g: 4.5
+  sugar_g: 0.0
+  fiber_total_g: 4.0
+  fiber_soluble_g: 3.2
+  fiber_insoluble_g: 0.8
+  sodium_mg: 2
+  potassium_mg: 15
+  iodine_ug: 0
+  magnesium_mg: 2
+  calcium_mg: 8
+  iron_mg: 0.3
+  zinc_mg: 0.1
+  vitamin_c_mg: 0
+  manganese_mg: 0
+
+derived:
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+  energy_from_macros_kcal: 17.7
+quality:
+  confidence: high
+  gaps: []
+notes:
+  - "Psyllium husk is approximately 80% soluble fiber (mucilage), 20% insoluble fiber"
+  - "Atwater validation: 4×0.2 + 4×4.5 + 9×0.1 = 19.7 kcal, but fiber calories adjusted to ~18 kcal"
+  - "Soluble fiber forms viscous gel when mixed with water"
+  - "Primarily used for digestive health and fiber supplementation"
+  - "Derived from Plantago ovata seeds"
+  - "Very low calorie due to fiber not being fully absorbed"
+  - "Minimal micronutrient content"
+  - "Should be consumed with adequate water (at least 200-250ml per 5g serving)"
+  - "Fat content minimal, trace PUFA from seed hull"
+change_log:
+  - timestamp: 2025-10-31T00:00:00+0000
+    updated_by: "Claude Code (Sonnet 4.5)"
+    reason: "Initial entry for psyllium husk supplement tracking, user requested 5g portion size"
+    fields_changed: ['all fields']
+    sources:
+      - url: "https://fdc.nal.usda.gov/"
+        note: "USDA FoodData Central reference values for psyllium seed husk"
+      - url: "user_request"
+        note: "User specified 5g portion size"
+```
