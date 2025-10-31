@@ -2988,3 +2988,80 @@ change_log:
         note: "User-provided ingredient list: Whey Protein Concentrate (87%), Natural Flavouring (7%), Xanthan Gum, Steviol Glycosides, Sunflower Lecithin"
 ```
 
+## Guinness Draught (Pint, 568ml)
+
+```yaml
+id: guinness_pint_568ml_v1
+version: 1
+last_verified: 2025-10-31
+source:
+  venue: "Pub/Bar - Generic"
+  menu_page: ""
+  evidence:
+    - "Guinness official nutrition data: 210 kcal, 1.9g protein, 18g carbs per pint (568ml)"
+    - "Standard UK/Ireland pint serving (568ml / 20 fl oz)"
+    - "4.2% ABV (alcohol by volume)"
+aliases: ['Guinness', 'Guinness Draught', 'Pint of Guinness']
+category: drink
+portion:
+  description: "1 pint (568ml / 20 fl oz)"
+  est_weight_g: 568
+  notes: "Standard draught Guinness served in pint glass"
+assumptions:
+  salt_scheme: "normal"
+  oil_type: ""
+  prep: "Draught beer, nitrogen widget pour"
+per_portion:
+  energy_kcal: 210
+  protein_g: 1.9
+  fat_g: 0.0
+  sat_fat_g: 0.0
+  mufa_g: 0.0
+  pufa_g: 0.0
+  trans_fat_g: 0
+  cholesterol_mg: 0
+  carbs_g: 18.0
+  sugar_g: 0.0
+  fiber_total_g: 0.0
+  fiber_soluble_g: 0.0
+  fiber_insoluble_g: 0.0
+  sodium_mg: 28
+  potassium_mg: 200
+  iodine_ug: 3
+  magnesium_mg: 28
+  calcium_mg: 34
+  iron_mg: 0.6
+  zinc_mg: 0.1
+  vitamin_c_mg: 0
+  manganese_mg: 0.2
+
+derived:
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+  energy_from_macros_kcal: 79.6
+  alcohol_g: 19.0
+  alcohol_energy_kcal: 133
+quality:
+  confidence: high
+  gaps: []
+notes:
+  - "Standard pint: 568ml at 4.2% ABV = ~19g alcohol"
+  - "Alcohol contributes ~133 kcal (7 kcal/g), macros contribute ~80 kcal"
+  - "Total energy: 210 kcal per pint"
+  - "Very low sugar content due to fermentation process"
+  - "Minimal fat content in beer"
+  - "Nitrogen pour creates characteristic creamy head and smooth mouthfeel"
+  - "Contains barley (gluten), yeast, hops, roasted barley"
+  - "Distinctive dark color from roasted unmalted barley"
+  - "Iron content notable due to dark roasted grains"
+change_log:
+  - timestamp: 2025-10-31T17:00:00+0000
+    updated_by: "Claude Code (Sonnet 4.5)"
+    reason: "Initial entry for tracking Guinness consumption"
+    fields_changed: ['all fields']
+    sources:
+      - url: "https://www.guinness.com"
+        note: "Official Guinness nutrition data: 210 kcal, 1.9g protein, 18g carbs per pint"
+      - url: "user_request"
+        note: "User tracking two pints consumed at 17:20 and 17:50"
+```
+
