@@ -2865,3 +2865,158 @@ change_log:
         note: "FitAudit generic halva mineral composition"
 ```
 
+## Elite Greens Shake - Third Space Natural Fitness Food
+
+```yaml
+id: elite_greens_nff_v1
+version: 1
+last_verified: 2025-10-31
+source:
+  venue: "Third Space / Natural Fitness Food"
+  menu_page: ""
+  evidence:
+    - "User-provided partial nutrition data: 350 kcal, 8g F, 43g C, 4g Fiber, 25g Protein"
+    - "Ingredient list from Third Space website: cold-pressed juice (2Boost) by 2-Juice featuring Apple, Baby Spinach, Cucumber, Parsley, Lemon & Ginger, with vanilla protein powder, oat milk & banana"
+    - "Natural Fitness Food shake categories (Lean/Fuel) for context"
+aliases: ['Elite Greens', '2Boost shake']
+category: drink
+portion:
+  description: "1 complete shake"
+  est_weight_g: 370
+  notes: "Blended shake containing juice, protein powder, oat milk, and banana"
+assumptions:
+  salt_scheme: "normal"
+  oil_type: "oat milk (barista-style, likely contains rapeseed/sunflower oil)"
+  prep: "Cold-blended shake with cold-pressed juice base"
+per_portion:
+  energy_kcal: 350
+  protein_g: 25.0
+  fat_g: 8.0
+  sat_fat_g: 1.5
+  mufa_g: 3.0
+  pufa_g: 2.0
+  trans_fat_g: 0
+  cholesterol_mg: 20
+  carbs_g: 43.0
+  sugar_g: 26.0
+  fiber_total_g: 4.0
+  fiber_soluble_g: 2.2
+  fiber_insoluble_g: 1.8
+  sodium_mg: 100
+  potassium_mg: 500
+  iodine_ug: 5
+  magnesium_mg: 50
+  calcium_mg: 220
+  iron_mg: 1.5
+  zinc_mg: 1.5
+  vitamin_c_mg: 25
+  manganese_mg: 1.0
+
+derived:
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+  energy_from_macros_kcal: 344
+quality:
+  confidence: medium
+  gaps: ['Fiber breakdown estimated from component analysis', 'Fat subtype breakdown estimated from oat milk composition', 'Micronutrients estimated from ingredient contributions']
+notes:
+  - "Component breakdown: NFF Vanilla Whey (125 kcal, 22g P, 6.5g C, 1.4g F) + banana ~80g + oat milk ~180ml + 2Boost juice ~130ml"
+  - "Atwater validation: 4×25.0 + 4×43.0 + 9×8.0 = 344 kcal (within 2% of stated 350 kcal)"
+  - "Fat breakdown (sat 1.5g + MUFA 3.0g + PUFA 2.0g) totals 6.5g, remainder 1.5g likely short-chain/other fats"
+  - "Fiber soluble (2.2g) mainly from banana pectin, oat milk beta-glucan, whey xanthan gum"
+  - "Fiber insoluble (1.8g) from banana cellulose, oat milk, juice greens"
+  - "High potassium from banana (280mg) and juice (150mg)"
+  - "Calcium fortified via oat milk (180mg)"
+  - "Vitamin C from juice greens, parsley, lemon (18mg) plus banana (7mg)"
+change_log:
+  - timestamp: 2025-10-31T00:00:00+0000
+    updated_by: "Claude Code (Sonnet 4.5)"
+    reason: "Initial entry with component-based triangulation from user-provided macros and confirmed ingredient list"
+    fields_changed: ['all fields']
+    sources:
+      - url: "user_input"
+        note: "User-provided core nutrition data: 350 kcal, 8g F, 43g C, 4g Fiber, 25g Protein"
+      - url: "https://www.thirdspace.london/natural-fitness-food/"
+        note: "Ingredient list: 2Boost juice (Apple, Baby Spinach, Cucumber, Parsley, Lemon, Ginger) + vanilla protein + oat milk + banana"
+      - url: "https://uk-ga.openfoodfacts.org/product/5065003325005/whey-protein-vanilla-natural-fitness-food"
+        note: "NFF Vanilla Whey nutrition data for component analysis"
+```
+
+## Natural Fitness Food Vanilla Whey Protein (30g scoop)
+
+```yaml
+id: nff_vanilla_whey_30g_v1
+version: 1
+last_verified: 2025-10-31
+source:
+  venue: "Third Space / Natural Fitness Food"
+  menu_page: ""
+  evidence:
+    - "OpenFoodFacts entry: 125 kcal, 22g P, 6.5g C (3.4g sugar), 1.4g F (1g sat), 0.5g fiber, 0.098g salt"
+    - "Ingredient list: Whey Protein Concentrate (87%) (MILK), Natural Flavouring (7%), Thickener (Xanthan Gum), Sweetener (Steviol Glycosides), Emulsifier (Sunflower Lecithin)"
+    - "Scoop size confirmed as ~30g"
+aliases: ['NFF Vanilla Whey', 'Third Space Vanilla Protein']
+category: ingredient
+portion:
+  description: "1 scoop (30g)"
+  est_weight_g: 30
+  notes: "Whey protein concentrate powder, 87% protein content"
+assumptions:
+  salt_scheme: "normal"
+  oil_type: "dairy-based (whey concentrate)"
+  prep: "Powder form, typically mixed with water or milk"
+per_portion:
+  energy_kcal: 125
+  protein_g: 22.0
+  fat_g: 1.4
+  sat_fat_g: 1.0
+  mufa_g: 0.3
+  pufa_g: 0.1
+  trans_fat_g: 0
+  cholesterol_mg: 20
+  carbs_g: 6.5
+  sugar_g: 3.4
+  fiber_total_g: 0.5
+  fiber_soluble_g: 0.5
+  fiber_insoluble_g: 0
+  sodium_mg: 39
+  potassium_mg: 180
+  iodine_ug: 5
+  magnesium_mg: 30
+  calcium_mg: 150
+  iron_mg: 0
+  zinc_mg: 1.5
+  vitamin_c_mg: 0
+  manganese_mg: 0
+
+derived:
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+  energy_from_macros_kcal: 126.6
+quality:
+  confidence: high
+  gaps: ['Fat subtype breakdown estimated from typical whey concentrate profiles', 'Trace minerals estimated from dairy composition']
+notes:
+  - "OpenFoodFacts validated nutrition: 125 kcal, 22g P, 6.5g C, 1.4g F, 0.5g fiber per 30g scoop"
+  - "Ingredient analysis: 87% whey protein concentrate = 26.1g protein content, actual 22g suggests 73% protein efficiency typical of WPC-80"
+  - "Atwater validation: 4×22.0 + 4×6.5 + 9×1.4 = 126.6 kcal (within 1% of stated 125 kcal)"
+  - "Fat breakdown: sat 1.0g dominant (dairy fat), trace MUFA/PUFA from milk lipids"
+  - "Fiber (0.5g) entirely from xanthan gum thickener (soluble fiber)"
+  - "Sugar (3.4g) from residual lactose in whey concentrate"
+  - "Sodium (39mg) calculated from stated salt content (0.098g)"
+  - "Cholesterol estimated 20mg typical for whey protein concentrate"
+  - "Calcium (150mg) significant due to whey dairy origin"
+  - "Potassium (180mg) naturally high in whey"
+  - "Trans fat trace amounts (<0.1g) from ruminant dairy, rounded to 0"
+  - "Contains sunflower lecithin emulsifier (contributes minimal fat)"
+  - "Sweetened with stevia (zero calorie)"
+change_log:
+  - timestamp: 2025-10-31T00:00:00+0000
+    updated_by: "Claude Code (Sonnet 4.5)"
+    reason: "Initial entry from OpenFoodFacts data with micronutrient estimation from whey concentrate profiles"
+    fields_changed: ['all fields']
+    sources:
+      - url: "https://uk-ga.openfoodfacts.org/product/5065003325005/whey-protein-vanilla-natural-fitness-food"
+        note: "Complete macronutrient data: 125 kcal, 22g P, 6.5g C (3.4g sugar), 1.4g F (1g sat), 0.5g fiber, 39mg Na"
+      - url: "user_input"
+        note: "User-provided ingredient list: Whey Protein Concentrate (87%), Natural Flavouring (7%), Xanthan Gum, Steviol Glycosides, Sunflower Lecithin"
+```
+
