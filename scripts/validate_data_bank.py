@@ -4,10 +4,11 @@ Validate a nutrition Data Bank markdown file:
 - Parse YAML code fences
 - Check Atwater energy, fat split, sodium<->salt coherence
 - Flag missing keys and negative numbers
+- Auto-regenerates the index file after validation
 Outputs a human-readable summary and a JSON report to stdout.
 Requires: pyyaml
 """
-import sys, re, json, math
+import sys, re, json, math, subprocess
 from pathlib import Path
 try:
     import yaml
@@ -133,6 +134,26 @@ def main():
 
     print("\n# JSON")
     print(json.dumps(report, indent=2))
+
+    # Auto-regenerate index after successful validation
+    script_dir = Path(__file__).parent
+    generate_index_script = script_dir / "generate_index.py"
+
+    if generate_index_script.exists():
+        print("\n# Index Generation")
+        try:
+            result = subprocess.run(
+                [sys.executable, str(generate_index_script)],
+                capture_output=True,
+                text=True,
+                check=True
+            )
+            print(result.stdout.strip())
+        except subprocess.CalledProcessError as e:
+            print(f"Warning: Failed to regenerate index: {e}")
+            print(f"stderr: {e.stderr}")
+    else:
+        print("\nNote: Index generation script not found.")
 
 if __name__ == "__main__":
     main()

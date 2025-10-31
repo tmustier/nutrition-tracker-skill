@@ -16,8 +16,8 @@ This skill is different to other Claude Skills in that it lives in a public Gith
 
 ## A) ESTIMATING
 When the user asks you to estimate nutrition for a dish:
-- [ ] Step 1: Check if the dish exists in `data/food-data-bank.md`. 
-      - Search by `id` or name using the upfront index (large file).
+- [ ] Step 1: Check if the dish exists in `data/food-data-bank.md`.
+      - Browse `data/food-data-bank-index.md` to find dishes by name, or search by `id` in the main file.
       - If found and complete with no null values: proceed to **Step 3**.
       - Else: proceed to **Step 2**.
 - [ ] Step 2: Add / Update complete records for the dish if necessary using `ESTIMATE.md`. If there is more than one dish, parallelize with one subagent per dish.
@@ -46,6 +46,6 @@ When the user has eaten a dish and you have completed **A) Estimating**:
 
 ## D) AD HOC ANALYSIS
 The user may sometimes ask for custom analyses. The main data sources for these are:
-- `data/food-data-bank.md` — large source of truth for dishes, with upfront index.
+- `data/food-data-bank.md` — large source of truth for dishes (see `data/food-data-bank-index.md` for dish index).
 - `data/logs/` — Nutrition logs organized by date (`YYYY-MM/DD.yaml`). See `data/logs/SCHEMA.md` for format.
 - `references/health-profile.yaml` — Daily targets and monitored fields.
