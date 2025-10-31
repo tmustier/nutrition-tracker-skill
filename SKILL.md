@@ -16,16 +16,15 @@ This skill is different to other Claude Skills in that it lives in a public Gith
 
 ## A) ESTIMATING
 When the user asks you to estimate nutrition for a dish:
-[ ] Step 1: Check if the dish exists in `data/food-data-bank.md`.
+- [ ] Step 1: Check if the dish exists in `data/food-data-bank.md`.
       1. Search `data/food-data-bank.md` by `id` or name. Note: The file is too large to load into context, but it has an index upfront. Use the index to quickly locate the dish.
       2. If the dish exists:
         - read `per_portion` values. If any are `null`, trigger **Step 2** for the missing data. If there is more than one dish, parallelize with one subagent per dish.
         - ensure you scale `per_portion` values if necessary.
       3. If the dish doesn't exist, trigger **Step 2**.
-[ ] Step 2: Add / Update complete records for the dish if necessary using `ESTIMATE.md`.
-[ ] Step 3: Show a compact table and % of daily targets from `references/health-profile.yaml`.
-[ ] Step 4: If the user has eaten the dish, trigger **B) Logging**. This will not always be the case.
-If multiple dishes are logged, sum totals and re‑check vs targets.
+- [ ] Step 2: Add / Update complete records for the dish if necessary using `ESTIMATE.md`.
+- [ ] Step 3: Show a compact table and % of daily targets from `references/health-profile.yaml`. If multiple dishes are logged, sum totals and re‑check vs targets.
+- [ ] Step 4: If the user has eaten the dish, trigger **B) Logging**. This will not always be the case.
 
 ## B) LOGGING
 When the user has eaten a dish and you have completed **A) Estimating**:
