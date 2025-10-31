@@ -1,7 +1,7 @@
 ---
 title: Food Data Bank Index
 description: Auto-generated index of all dishes in the food data bank
-generated: 2025-10-31 19:00:06 UTC
+generated: 2025-10-31 19:12:30 UTC
 ---
 
 # Food Data Bank Index
@@ -11,7 +11,7 @@ generated: 2025-10-31 19:00:06 UTC
 
 <!-- #todo: Reorder dishes by category or venue for better organization -->
 
-## All Dishes (39 total)
+## All Dishes (40 total)
 
 - [Sweet Potato Wedges (Simple Health Kitchen)](#sweet-potato-wedges-simple-health-kitchen) {#sweet_potato_wedges_shk_v1}
 - [Grilled Salmon Fillet (Simple Health Kitchen)](#grilled-salmon-fillet-simple-health-kitchen) {#grilled_salmon_fillet_shk_v1}
@@ -52,6 +52,7 @@ generated: 2025-10-31 19:00:06 UTC
 - [Elite Greens Shake - Third Space Natural Fitness Food](#elite-greens-shake-third-space-natural-fitness-food) {#elite_greens_nff_v1}
 - [Natural Fitness Food Vanilla Whey Protein (30g scoop)](#natural-fitness-food-vanilla-whey-protein-30g-scoop) {#nff_vanilla_whey_30g_v1}
 - [Guinness Draught (Pint, 568ml)](#guinness-draught-pint-568ml) {#guinness_pint_568ml_v1}
+- [Psyllium Husk (5g portion)](#psyllium-husk-5g-portion) {#psyllium_husk_5g_v1}
 
 ---
 
