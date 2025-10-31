@@ -2391,6 +2391,398 @@ change_log:
         note: "Yarden Houmous 250g nutrition facts (per 100g)"
 ```
 
+
+## Beef Stroganoff with Buckwheat (Zima Soho)
+
+```yaml
+id: beef_stroganoff_buckwheat_zima_v1
+version: 1
+last_verified: 2025-10-30
+source:
+  venue: Zima, Soho, London
+  menu_page: ""
+  evidence:
+    - "User-provided nutrition data: 562 kcal, 37.2g protein, 36.7g carbs, 28.9g fat per full portion"
+    - "Dish includes 150g cooked buckwheat groats per main"
+    - "Pan-fried beef in creamy sauce with buckwheat and pickle garnish"
+    - "Russian/Eastern European style stroganoff with sour cream sauce"
+aliases: ["Beef Stroganoff"]
+category: main
+portion:
+  description: "restaurant main portion"
+  est_weight_g: null
+  notes: "Pan-fried beef strips in creamy sauce, served with 150g cooked buckwheat groats and pickle slices"
+assumptions:
+  salt_scheme: "normal"
+  oil_type: "butter or neutral oil"
+  prep: "Pan-fried beef strips in sour cream-based sauce, buckwheat groats cooked separately, garnished with pickles"
+per_portion:
+  energy_kcal: 562
+  protein_g: 37.2
+  fat_g: 28.9
+  sat_fat_g: 12.2
+  mufa_g: 10.2
+  pufa_g: 2.8
+  trans_fat_g: 0.4
+  cholesterol_mg: 115
+  carbs_g: 36.7
+  sugar_g: 2.7
+  fiber_total_g: 4.8
+  fiber_soluble_g: 1.5
+  fiber_insoluble_g: 3.3
+  sodium_mg: 806
+  potassium_mg: 557
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+  energy_from_macros_kcal: 555.7
+  fat_unassigned_g: 3.3
+quality:
+  confidence: high
+  gaps: ["micronutrients (iodine, magnesium, calcium, iron, zinc, vitamin_c, manganese) not provided"]
+notes: ["Atwater energy check: 555.7 kcal vs 562 kcal listed (1.1% difference, acceptable)", "Fat split: sat(12.2) + trans(0.4) + MUFA(10.2) + PUFA(2.8) = 25.6g; total fat 28.9g leaves 3.3g unassigned", "Includes 150g cooked buckwheat per portion", "High protein from beef, moderate fat from sour cream sauce", "Trans fat likely from dairy (natural ruminant TFAs)"]
+change_log:
+  - timestamp: 2025-10-30T00:00:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Initial entry from user-provided complete nutrition data for Zima Soho Beef Stroganoff"
+    fields_changed: ["per_portion.energy_kcal", "per_portion.protein_g", "per_portion.fat_g", "per_portion.sat_fat_g", "per_portion.mufa_g", "per_portion.pufa_g", "per_portion.trans_fat_g", "per_portion.cholesterol_mg", "per_portion.carbs_g", "per_portion.sugar_g", "per_portion.fiber_total_g", "per_portion.fiber_soluble_g", "per_portion.fiber_insoluble_g", "per_portion.sodium_mg", "per_portion.potassium_mg"]
+    sources:
+      - url: "user_input"
+        note: "User-provided nutrition data for Zima Soho Beef Stroganoff with buckwheat on 2025-10-30"
+```
+
+## Chicken Cutlet with Mushroom Sauce with Buckwheat (Zima Soho)
+
+```yaml
+id: chicken_cutlet_mushroom_sauce_zima_v1
+version: 1
+last_verified: 2025-10-30
+source:
+  venue: Zima, Soho, London
+  menu_page: ""
+  evidence:
+    - "User-provided nutrition data for full portion as served"
+    - "Dish includes 150g cooked buckwheat per main"
+    - "Pan-fried chicken cutlet with creamy mushroom sauce, buckwheat groats, and pickle garnish"
+aliases: ["Chicken Kotleta with Buckwheat", "Kotleta z Kurczaka"]
+category: main
+portion:
+  description: "restaurant main course with buckwheat"
+  est_weight_g: null
+  notes: "Pan-fried chicken cutlet, creamy mushroom sauce, 150g cooked buckwheat groats, pickle garnish"
+assumptions:
+  salt_scheme: "normal"
+  oil_type: "likely sunflower or vegetable oil (Russian/Polish cuisine standard)"
+  prep: "Pan-fried breaded chicken cutlet, cream-based mushroom sauce, boiled buckwheat (kasha), pickled vegetables"
+per_portion:
+  energy_kcal: 602
+  protein_g: 29.7
+  fat_g: 30.9
+  sat_fat_g: 8.2
+  mufa_g: 14.2
+  pufa_g: 7.3
+  trans_fat_g: 0.3
+  cholesterol_mg: 140
+  carbs_g: 43.7
+  sugar_g: 2.7
+  fiber_total_g: 5.3
+  fiber_soluble_g: 1.6
+  fiber_insoluble_g: 3.7
+  sodium_mg: 936
+  potassium_mg: 557
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+  energy_from_macros_kcal: 571.7
+  fat_unassigned_g: 0.9
+quality:
+  confidence: high
+  gaps: ["Micronutrients (iodine, magnesium, calcium, iron, zinc, vitamin_c, manganese) not provided"]
+notes: ["602 kcal from user-provided nutrition data", "Buckwheat portion: 150g cooked groats", "Atwater check: 571.7 kcal (5% under stated value, within tolerance)", "Fat breakdown: 8.2g sat + 14.2g MUFA + 7.3g PUFA + 0.3g trans = 30.0g (0.9g unassigned/rounding)", "PUFA-rich profile suggests vegetable oil used for frying", "Moderate sodium from sauce and seasoning", "High fiber from buckwheat and vegetables"]
+change_log:
+  - timestamp: 2025-10-30T00:00:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Initial population from user-provided nutrition data for Zima restaurant dish"
+    fields_changed: ["per_portion.energy_kcal", "per_portion.protein_g", "per_portion.fat_g", "per_portion.sat_fat_g", "per_portion.mufa_g", "per_portion.pufa_g", "per_portion.trans_fat_g", "per_portion.cholesterol_mg", "per_portion.carbs_g", "per_portion.sugar_g", "per_portion.fiber_total_g", "per_portion.fiber_soluble_g", "per_portion.fiber_insoluble_g", "per_portion.sodium_mg", "per_portion.potassium_mg"]
+    sources:
+      - url: "user_input"
+        note: "Complete nutrition data provided by user for Chicken Cutlet with Mushroom Sauce with buckwheat from Zima restaurant, Soho, London (2025-10-30)"
+```
+
+## Borscht Krasnodarsky with Beef (Zima Soho)
+
+```yaml
+id: borscht_krasnodarsky_zima_v1
+version: 1
+last_verified: 2025-10-30
+source:
+  venue: Zima, Soho, London
+  menu_page: "https://zimarestaurant.co.uk/"
+  evidence:
+    - "User-provided nutrition data for full portion including all sides"
+    - "Traditional beetroot soup with beef, served with sour cream (~30g), salo (~20g cured pork fat), and 1 slice Borodinsky rye bread (~32g)"
+    - "Complete dish nutrition from venue analysis"
+aliases: ["Borscht with Beef", "Krasnodarsky Borscht"]
+category: main
+portion:
+  description: "restaurant portion with traditional sides"
+  est_weight_g: 382
+  notes: "Bowl of borscht (~300ml) with beef, served with sour cream (~30g), salo (~20g), and 1 slice Borodinsky rye bread (~32g)"
+assumptions:
+  salt_scheme: "normal"
+  oil_type: "traditional preparation"
+  prep: "Traditional Russian beetroot soup with beef, served with sour cream, cured pork fat (salo), and Borodinsky rye bread on the side"
+per_portion:
+  energy_kcal: 447
+  protein_g: 8.1
+  fat_g: 32.5
+  sat_fat_g: 13.5
+  mufa_g: 14.3
+  pufa_g: 3.3
+  trans_fat_g: 0.4
+  cholesterol_mg: 87
+  carbs_g: 33.4
+  sugar_g: 9.3
+  fiber_total_g: 5.3
+  fiber_soluble_g: 2.3
+  fiber_insoluble_g: 3.0
+  sodium_mg: 931
+  potassium_mg: 595
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+  energy_from_macros_kcal: 458.5
+  fat_unassigned_g: 1.0
+quality:
+  confidence: high
+  gaps: ["micronutrients (iodine, magnesium, calcium, iron, zinc, vitamin_c, manganese) not provided"]
+notes: ["447 kcal total for complete dish with all sides", "Borscht bowl approximately 300ml", "Sides: sour cream ~30g, salo ~20g, Borodinsky rye bread ~32g (1 slice)", "Estimated total dish weight 382g (300g soup + 30g sour cream + 20g salo + 32g bread)", "Atwater check: 458.5 kcal (+2.5% variance, within acceptable tolerance)", "Traditional Russian preparation with beef and beetroot", "Salo is traditional Ukrainian/Russian cured pork fat", "Borodinsky rye is a dark rye bread with coriander and molasses"]
+change_log:
+  - timestamp: 2025-10-30T00:00:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Initial entry for Zima Soho borscht with complete nutrition data from venue analysis"
+    fields_changed: ["per_portion.energy_kcal", "per_portion.protein_g", "per_portion.fat_g", "per_portion.sat_fat_g", "per_portion.mufa_g", "per_portion.pufa_g", "per_portion.trans_fat_g", "per_portion.cholesterol_mg", "per_portion.carbs_g", "per_portion.sugar_g", "per_portion.fiber_total_g", "per_portion.fiber_soluble_g", "per_portion.fiber_insoluble_g", "per_portion.sodium_mg", "per_portion.potassium_mg", "portion.est_weight_g"]
+    sources:
+      - url: "https://zimarestaurant.co.uk/"
+        note: "Zima restaurant, Soho, London - traditional Russian cuisine"
+      - url: "user_input"
+        note: "Complete nutrition data provided for full portion including borscht, sour cream, salo, and Borodinsky rye bread"
+```
+
+## Vinegret with 1 slice rye (Zima)
+
+```yaml
+id: vinegret_with_rye_zima_v1
+version: 1
+last_verified: 2025-10-30
+source:
+  venue: Zima, Soho, London
+  menu_page: ""
+  evidence:
+    - "User-provided nutrition data for full portion as served"
+    - "Traditional Russian beetroot and vegetable salad with 1 slice rye bread (~32g)"
+aliases: []
+category: main
+portion:
+  description: "restaurant serving with 1 slice rye bread"
+  est_weight_g: null
+  notes: "Traditional Russian beetroot and vegetable salad dressed with oil; includes 1 slice rye bread (~32g)"
+assumptions:
+  salt_scheme: "normal"
+  oil_type: "vegetable oil for dressing"
+  prep: "vegetables dressed with oil"
+per_portion:
+  energy_kcal: 233
+  protein_g: 5.7
+  fat_g: 6.1
+  sat_fat_g: 1.2
+  mufa_g: 2.0
+  pufa_g: 3.8
+  trans_fat_g: 0.0
+  cholesterol_mg: 0
+  carbs_g: 35.5
+  sugar_g: 7.5
+  fiber_total_g: 6.9
+  fiber_soluble_g: 3.1
+  fiber_insoluble_g: 3.8
+  sodium_mg: 493
+  potassium_mg: 403
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: high
+  gaps: ["Fat breakdown (7.0g) slightly exceeds total fat (6.1g) - recorded as provided", "Micronutrients (iodine, magnesium, calcium, iron, zinc, vitamin C, manganese) not provided"]
+notes: ["Atwater validation: 4×5.7 + 4×35.5 + 9×6.1 = 219.7 kcal vs listed 233 kcal (5.7% variance, within acceptable tolerance)", "Includes beetroot, vegetables, and 1 slice rye bread as served", "Plant-based dish, cholesterol correctly 0mg"]
+change_log:
+  - timestamp: 2025-10-30T00:00:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Initial entry from user-provided nutrition data for Zima restaurant dish"
+    fields_changed: ["per_portion.energy_kcal", "per_portion.protein_g", "per_portion.fat_g", "per_portion.sat_fat_g", "per_portion.mufa_g", "per_portion.pufa_g", "per_portion.trans_fat_g", "per_portion.cholesterol_mg", "per_portion.carbs_g", "per_portion.sugar_g", "per_portion.fiber_total_g", "per_portion.fiber_soluble_g", "per_portion.fiber_insoluble_g", "per_portion.sodium_mg", "per_portion.potassium_mg"]
+    sources:
+      - url: "user_input"
+        note: "Complete nutrition data provided by Thomas on 2025-10-30 for Vinegret with 1 slice rye from Zima, Soho, London"
+```
+
+## Pickled Cabbage / Sauerkraut (Zima)
+
+```yaml
+id: sauerkraut_zima_v1
+version: 1
+last_verified: 2025-10-30
+source:
+  venue: Zima, Soho, London
+  menu_page: ""
+  evidence:
+    - "User-provided nutrition data for full portion (~180g)"
+    - "Traditional fermented cabbage dish, high sodium from brine"
+aliases: ["Pickled Cabbage", "Sauerkraut"]
+category: side
+portion:
+  description: "restaurant side portion"
+  est_weight_g: 180
+  notes: "fermented cabbage in brine; very high sodium content typical of pickled vegetables"
+assumptions:
+  salt_scheme: "heavy"
+  oil_type: "none"
+  prep: "traditional fermentation in salted brine"
+per_portion:
+  energy_kcal: 40
+  protein_g: 1.6
+  fat_g: 0.2
+  sat_fat_g: 0.1
+  mufa_g: 0.1
+  pufa_g: 0.1
+  trans_fat_g: 0.0
+  cholesterol_mg: 0
+  carbs_g: 7.8
+  sugar_g: 3.0
+  fiber_total_g: 4.5
+  fiber_soluble_g: 0.9
+  fiber_insoluble_g: 3.6
+  sodium_mg: 1080
+  potassium_mg: 306
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: medium
+  gaps: ['Fat breakdown (0.3g = 0.1 sat + 0.1 MUFA + 0.1 PUFA) exceeds stated total_fat (0.2g); using values as provided', 'Missing micronutrients: calcium, magnesium, iron, zinc, vitamin C (fermented vegetables typically contain these)']
+notes: ["High sodium (1080mg) typical of fermented/pickled vegetables in brine", "Good fiber content (4.5g) with 0.9g soluble, 3.6g insoluble", "Low calorie density (40 kcal per 180g portion)", "Atwater check: 4×1.6 + 4×7.8 + 9×0.2 = 39.4 kcal (≈40 kcal, ✓)"]
+change_log:
+  - timestamp: 2025-10-30T12:00:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Initial population from user-provided nutrition data for Zima restaurant dish"
+    fields_changed: ["per_portion.energy_kcal", "per_portion.protein_g", "per_portion.fat_g", "per_portion.sat_fat_g", "per_portion.mufa_g", "per_portion.pufa_g", "per_portion.trans_fat_g", "per_portion.cholesterol_mg", "per_portion.carbs_g", "per_portion.sugar_g", "per_portion.fiber_total_g", "per_portion.fiber_soluble_g", "per_portion.fiber_insoluble_g", "per_portion.sodium_mg", "per_portion.potassium_mg", "portion.est_weight_g"]
+    sources:
+      - url: "user_input"
+        note: "User-supplied nutrition data for Zima pickled cabbage on 2025-10-30"
+```
+
+## Cherry Vareniki - Full Tray (Zima, Soho)
+
+```yaml
+id: cherry_vareniki_zima_v1
+version: 1
+last_verified: 2025-10-30
+source:
+  venue: Zima, Soho, London
+  menu_page: ""
+  evidence:
+    - "User-provided nutrition data for full tray (~200g)"
+aliases: ["Cherry dumplings"]
+category: dessert
+portion:
+  description: "full tray"
+  est_weight_g: 200
+  notes: "Traditional Ukrainian dumplings filled with cherries; sweet dessert dish"
+assumptions:
+  salt_scheme: "light"
+  oil_type: ""
+  prep: "boiled dumplings with cherry filling"
+per_portion:
+  energy_kcal: 364
+  protein_g: 9.0
+  fat_g: 5.8
+  sat_fat_g: 1.0
+  mufa_g: 2.5
+  pufa_g: 2.3
+  trans_fat_g: 0.1
+  cholesterol_mg: 10
+  carbs_g: 73.0
+  sugar_g: 14.0
+  fiber_total_g: 4.0
+  fiber_soluble_g: 1.0
+  fiber_insoluble_g: 3.0
+  sodium_mg: 130
+  potassium_mg: 200
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+  energy_from_macros_kcal: 380.2
+  fat_breakdown_sum_g: 5.9
+  unsaturated_fat_g: 4.8
+quality:
+  confidence: medium
+  gaps: ["iodine_ug", "magnesium_mg", "calcium_mg", "iron_mg", "zinc_mg", "vitamin_c_mg", "manganese_mg"]
+notes:
+  - "Full tray approximately 200g"
+  - "Sweet dessert dish from Zima restaurant featuring traditional Ukrainian cherry-filled dumplings"
+  - "Atwater calculation: 4*9.0 + 4*73.0 + 9*5.8 = 380.2 kcal (4.4% above stated 364 kcal, within tolerance)"
+  - "Fat breakdown (sat 1.0g + MUFA 2.5g + PUFA 2.3g + trans 0.1g = 5.9g) matches total fat 5.8g within rounding"
+  - "Unsaturated total (MUFA + PUFA) = 4.8g as expected"
+change_log:
+  - timestamp: 2025-10-30T12:00:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Initial creation from user-provided nutrition data for Cherry vareniki from Zima restaurant"
+    fields_changed: ["per_portion.energy_kcal", "per_portion.protein_g", "per_portion.fat_g", "per_portion.sat_fat_g", "per_portion.mufa_g", "per_portion.pufa_g", "per_portion.trans_fat_g", "per_portion.cholesterol_mg", "per_portion.carbs_g", "per_portion.sugar_g", "per_portion.fiber_total_g", "per_portion.fiber_soluble_g", "per_portion.fiber_insoluble_g", "per_portion.sodium_mg", "per_portion.potassium_mg", "portion.est_weight_g"]
+    sources:
+      - url: ""
+        note: "User-provided nutrition data for Cherry vareniki from Zima restaurant, Soho, London (full tray ~200g)"
+```
+
 ## Rot Front Glazed Peanut Halva (1 piece, ~25g)
 
 ```yaml
