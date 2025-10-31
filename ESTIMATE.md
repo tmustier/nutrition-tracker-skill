@@ -132,7 +132,7 @@ Step 4 - Validate Atwater:
 
 **Edit protocol (append‑only):**
 1. Locate dish by `id` (or add a new block from the Schema TEMPLATE).
-2. Edit values → **bump `version`** → update **`last_verified: 2025-10-28`**.
+2. Edit values → **bump `version`** → update **`last_verified: YYYY-MM-DD`**.
 3. Append a `change_log` item: timestamp, reason, `fields_changed`, and **evidence links**.
 4. Never rewrite old change log entries.
 
