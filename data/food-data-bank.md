@@ -134,6 +134,12 @@ change_log: []
 - [Amisa Buckwheat Crispbread (per piece, 5g)](#amisa-buckwheat-crispbread-per-piece-5g) {#amisa_buckwheat_crispbread_5g_v1}
 - [Yarden Houmous (30g serving)](#yarden-houmous-30g-serving) {#yarden_houmous_30g_v1}
 - [Rot Front Glazed Peanut Halva (1 piece, ~25g)](#rot-front-glazed-peanut-halva-1-piece-25g) {#halva_glazed_peanut_rotfront_v1}
+- [Beef Stroganoff with Buckwheat (Zima Soho)](#beef-stroganoff-with-buckwheat-zima-soho) {#beef_stroganoff_buckwheat_zima_v1}
+- [Chicken Cutlet with Mushroom Sauce with Buckwheat (Zima Soho)](#chicken-cutlet-with-mushroom-sauce-with-buckwheat-zima-soho) {#chicken_cutlet_mushroom_sauce_zima_v1}
+- [Borscht Krasnodarsky with Beef (Zima Soho)](#borscht-krasnodarsky-with-beef-zima-soho) {#borscht_krasnodarsky_zima_v1}
+- [Vinegret with 1 slice rye (Zima)](#vinegret-with-1-slice-rye-zima) {#vinegret_with_rye_zima_v1}
+- [Pickled Cabbage / Sauerkraut (Zima)](#pickled-cabbage--sauerkraut-zima) {#sauerkraut_zima_v1}
+- [Cherry Vareniki - Full Tray (Zima, Soho)](#cherry-vareniki---full-tray-zima-soho) {#cherry_vareniki_zima_v1}
 
 ---
 
