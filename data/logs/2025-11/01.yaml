@@ -33,3 +33,179 @@ entries:
           manganese_mg: 0
 
     notes: ""
+
+  - timestamp: "2025-11-01T09:00:00+00:00"
+    items:
+      - name: "Banana (raw)"
+        food_bank_id: banana_raw_150g_v1
+        quantity: 1
+        unit: portion
+        nutrition:
+          energy_kcal: 134
+          protein_g: 1.6
+          fat_g: 0.5
+          sat_fat_g: 0.2
+          mufa_g: 0.1
+          pufa_g: 0.1
+          trans_fat_g: 0
+          cholesterol_mg: 0
+          carbs_g: 34.3
+          sugar_g: 18.3
+          fiber_total_g: 3.9
+          fiber_soluble_g: 0.9
+          fiber_insoluble_g: 3.0
+          sodium_mg: 2
+          potassium_mg: 537
+          iodine_ug: 5
+          magnesium_mg: 40
+          calcium_mg: 8
+          iron_mg: 0.4
+          zinc_mg: 0.2
+          vitamin_c_mg: 13
+          manganese_mg: 0.4
+
+      - name: "Oats (dry)"
+        food_bank_id: oats_dry_50g_v1
+        quantity: 1
+        unit: portion
+        nutrition:
+          energy_kcal: 195
+          protein_g: 8.5
+          fat_g: 3.5
+          sat_fat_g: 0.6
+          mufa_g: 1.1
+          pufa_g: 1.3
+          trans_fat_g: 0
+          cholesterol_mg: 0
+          carbs_g: 33.2
+          sugar_g: 0.5
+          fiber_total_g: 5.3
+          fiber_soluble_g: 2.0
+          fiber_insoluble_g: 3.3
+          sodium_mg: 1
+          potassium_mg: 215
+          iodine_ug: 1
+          magnesium_mg: 69
+          calcium_mg: 27
+          iron_mg: 2
+          zinc_mg: 2
+          vitamin_c_mg: 0
+          manganese_mg: 2
+
+      - name: "Pistachios"
+        food_bank_id: pistachios_30g_v1
+        quantity: 1
+        unit: portion
+        nutrition:
+          energy_kcal: 168
+          protein_g: 6.0
+          fat_g: 13.5
+          sat_fat_g: 1.7
+          mufa_g: 7.0
+          pufa_g: 4.3
+          trans_fat_g: null
+          cholesterol_mg: null
+          carbs_g: 8.4
+          sugar_g: 2.3
+          fiber_total_g: 3.2
+          fiber_soluble_g: null
+          fiber_insoluble_g: null
+          sodium_mg: 1
+          potassium_mg: 308
+          iodine_ug: null
+          magnesium_mg: 36
+          calcium_mg: 30
+          iron_mg: 1
+          zinc_mg: 1
+          vitamin_c_mg: null
+          manganese_mg: null
+
+      - name: "ON Double Rich Chocolate Whey"
+        food_bank_id: on_whey_drc_30g_v1
+        quantity: 1
+        unit: portion
+        nutrition:
+          energy_kcal: 120
+          protein_g: 24.0
+          fat_g: 1.4
+          sat_fat_g: 0.5
+          mufa_g: 0.5
+          pufa_g: 0.4
+          trans_fat_g: null
+          cholesterol_mg: null
+          carbs_g: 3.0
+          sugar_g: 1.3
+          fiber_total_g: 0.7
+          fiber_soluble_g: null
+          fiber_insoluble_g: null
+          sodium_mg: 86
+          potassium_mg: 177
+          iodine_ug: 18
+          magnesium_mg: 52
+          calcium_mg: 130
+          iron_mg: null
+          zinc_mg: 2
+          vitamin_c_mg: null
+          manganese_mg: null
+
+    notes: "Breakfast smoothie"
+
+  - timestamp: "2025-11-01T09:00:00+00:00"
+    items:
+      - name: "Daylesford Smoked Trout"
+        food_bank_id: daylesford_smoked_trout_80g_v1
+        quantity: 1
+        unit: portion
+        nutrition:
+          energy_kcal: 112
+          protein_g: 19.2
+          fat_g: 4.0
+          sat_fat_g: 0.9
+          mufa_g: 1.2
+          pufa_g: 1.6
+          trans_fat_g: 0
+          cholesterol_mg: 50
+          carbs_g: 0.8
+          sugar_g: 0.8
+          fiber_total_g: 0.0
+          fiber_soluble_g: null
+          fiber_insoluble_g: null
+          sodium_mg: 560
+          potassium_mg: 280
+          iodine_ug: null
+          magnesium_mg: 24
+          calcium_mg: 10
+          iron_mg: 0.3
+          zinc_mg: 0.4
+          vitamin_c_mg: 0
+          manganese_mg: null
+
+      - name: "Amisa Buckwheat Crispbread"
+        food_bank_id: amisa_buckwheat_crispbread_5g_v1
+        quantity: 2
+        unit: portion
+        nutrition:
+          energy_kcal: 34
+          protein_g: 1.0
+          fat_g: 0.2
+          sat_fat_g: 0.0
+          mufa_g: 0.2
+          pufa_g: 0.0
+          trans_fat_g: 0.0
+          cholesterol_mg: 0
+          carbs_g: 6.8
+          sugar_g: 0.2
+          fiber_total_g: 0.8
+          fiber_soluble_g: null
+          fiber_insoluble_g: null
+          sodium_mg: 48
+          potassium_mg: null
+          iodine_ug: null
+          magnesium_mg: null
+          calcium_mg: null
+          iron_mg: null
+          zinc_mg: null
+          vitamin_c_mg: null
+          manganese_mg: null
+
+    notes: "Smoked trout on crispbread"
