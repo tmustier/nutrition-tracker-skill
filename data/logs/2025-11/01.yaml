@@ -157,20 +157,20 @@ entries:
         quantity: 1
         unit: portion
         nutrition:
-          energy_kcal: 112
-          protein_g: 19.2
-          fat_g: 4.0
-          sat_fat_g: 0.9
-          mufa_g: 1.2
-          pufa_g: 1.6
+          energy_kcal: 162
+          protein_g: 17.4
+          fat_g: 10.2
+          sat_fat_g: 1.8
+          mufa_g: 2.5
+          pufa_g: 5.9
           trans_fat_g: 0
           cholesterol_mg: 50
-          carbs_g: 0.8
-          sugar_g: 0.8
+          carbs_g: 0.0
+          sugar_g: 0.0
           fiber_total_g: 0.0
           fiber_soluble_g: null
           fiber_insoluble_g: null
-          sodium_mg: 560
+          sodium_mg: 480
           potassium_mg: 280
           iodine_ug: null
           magnesium_mg: 24

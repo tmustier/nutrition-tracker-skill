@@ -3225,41 +3225,41 @@ change_log:
 
 ```yaml
 id: bife_ana_steak_sandwich_eagle_farringdon_v1
-version: 1
+version: 2
 last_verified: 2025-11-01
 source:
   venue: "The Eagle, Farringdon (London)"
   menu_page: "https://theeaglefarringdon.co.uk/"
   evidence:
-    - "Recipe published in various food blogs featuring The Eagle's signature dish"
-    - "Prego no Pão nutritional estimates used as baseline (~715 kcal for 300g rump steak sandwich)"
-    - "The Eagle recipe uses 250g rump steak per sandwich"
+    - "Guardian recipe (Eagle cookbook): 500g steak for 2 sandwiches = 250g raw per sandwich"
+    - "USDA cooking yields: 80% yield for grilled sirloin (250g raw → 200g cooked)"
+    - "GPT-5 Pro detailed component analysis with restaurant preparation factors"
 aliases: ['Bife Ana', 'Eagle Steak Sandwich', 'Portuguese Steak Sandwich', 'Rump Steak Sandwich']
 category: main
 portion:
   description: "1 signature steak sandwich"
-  est_weight_g: 350
-  notes: "Portuguese-style sandwich with rump steak in stone-baked carcacas roll"
+  est_weight_g: 360
+  notes: "Portuguese-style sandwich: 200g cooked rump/sirloin in 90g crusty roll with onions, lettuce, marinade reduction"
 assumptions:
   salt_scheme: "normal"
-  oil_type: "olive oil (used in marinade and cooking)"
-  prep: "Rump steak marinated in wine, garlic, chili, herbs; quickly seared; served in crusty Portuguese roll with cos lettuce and reduced marinade"
+  oil_type: "olive oil (marinade and pan juices soaking into bread)"
+  prep: "250g raw rump marinated in wine, garlic, chili, bay, parsley, oregano; seared; 2 Tbsp olive oil from marinade + pan reduction soaked into roll; ~60g onion, 10g lettuce; restaurant seasoning ~1.5% of meat weight"
 per_portion:
-  energy_kcal: 750
-  protein_g: 55.0
-  fat_g: 35.0
-  sat_fat_g: 10.0
-  mufa_g: 18.0
-  pufa_g: 3.0
-  trans_fat_g: 0.5
-  cholesterol_mg: 155
-  carbs_g: 40.0
-  sugar_g: 3.0
-  fiber_total_g: 2.5
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
-  sodium_mg: 650
-  potassium_mg: 650
+  energy_kcal: 866
+  protein_g: 69.4
+  fat_g: 39.5
+  sat_fat_g: 8.5
+  mufa_g: 24.3
+  pufa_g: 3.3
+  trans_fat_g: 0.0
+  cholesterol_mg: 164
+  carbs_g: 53.3
+  sugar_g: 4.8
+  fiber_total_g: 3.7
+  fiber_soluble_g: 1.1
+  fiber_insoluble_g: 2.6
+  sodium_mg: 1910
+  potassium_mg: 1070
   iodine_ug: null
   magnesium_mg: 65
   calcium_mg: 45
@@ -3271,20 +3271,23 @@ per_portion:
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
-  confidence: low
-  gaps: ['No official nutritional data from venue', 'Menu changes daily - availability not guaranteed', 'Estimates based on similar Portuguese steak sandwiches and recipe analysis', 'Micronutrient values estimated from ingredient composition', 'Actual portion may vary']
+  confidence: medium
+  gaps: ['No official nutritional data from venue', 'Menu changes daily - availability not guaranteed', 'Micronutrient estimates from component ingredients', 'Sodium varies by chef seasoning style: light 1,420mg, base 1,910mg, heavy 2,400mg', 'Actual portion may vary']
 notes:
   - "London's first gastropub (est. 1991) - legendary signature dish"
   - "Menu chalked daily, changes twice per day - call ahead to confirm availability: 020 7837 1353"
-  - "Recipe components per sandwich: ~250g rump steak, Portuguese carcacas roll, cos lettuce"
+  - "Component breakdown (base case): 200g cooked sirloin (366 kcal, 61g P, 11.6g F), 90g Portuguese roll (235 kcal, 47g C, 8g P), 2 Tbsp olive oil (238 kcal, 27g F), 60g onion + 10g lettuce (25 kcal, 6-7g C)"
   - "Marinade: onion, garlic, dried chili, bay leaf, parsley, oregano, red wine, olive oil"
-  - "Steak marinated several hours, seared in very hot pan, assembled with reduced marinade"
-  - "Nutritional estimates based on: 250g cooked rump steak (~440 kcal, 50g protein, 25g fat), Portuguese roll (~250 kcal, 45g carbs, 5g protein), olive oil & marinade (~60 kcal, 7g fat), lettuce (negligible)"
-  - "Higher protein and iron content from grass-fed rump steak"
-  - "MUFA primarily from olive oil used in cooking and marinade"
-  - "Portuguese-inspired preparation method (Bife Ana = beef version of traditional pork bifana)"
-  - "Zinc and iron content high due to red meat"
-  - "Similar dishes (Prego no Pão) range 715-800 kcal depending on steak size"
+  - "Cooking method: steak marinated several hours, seared in very hot pan, pan juices reduced and soaked into bread"
+  - "Fat profile: olive oil-forward with MUFA ~24.3g (62% of total fat), PUFA ~3.3g, saturated ~8.5g"
+  - "Sodium variability: Light seasoning (1.0% meat) = 1,420mg; Base (1.5%) = 1,910mg; Heavy (2.0%) = 2,400mg"
+  - "Bread contributes ~310mg sodium baseline; most sodium from chef's salt seasoning"
+  - "Fiber: ~2.4-2.9g insoluble from roll, ~0.8-1.3g soluble from onion"
+  - "High protein meal: 69.4g = 41% of 170g daily target"
+  - "Sodium warning: Base case at 83% of 2,300mg daily limit; heavy seasoning would exceed limit"
+  - "Potassium: 1,070mg = 27% of 4,000mg target (pair with K-rich sides to boost)"
+  - "Portuguese-inspired preparation (Bife Ana = beef version of traditional pork bifana)"
+  - "The sauce/reduction is where most extra oil and salt enter the sandwich"
 change_log:
   - timestamp: 2025-11-01T08:45:00+0000
     updated_by: "Claude Code (Sonnet 4.5)"
@@ -3299,6 +3302,17 @@ change_log:
         note: "USDA FoodData Central for rump steak, bread, olive oil component values"
       - url: "user_request"
         note: "User researching for upcoming visit on 2025-11-01"
+  - timestamp: 2025-11-01T09:35:00+0000
+    updated_by: "Claude Code (Sonnet 4.5)"
+    reason: "Updated with GPT-5 Pro detailed analysis - significantly more accurate than initial estimate"
+    fields_changed: ['version', 'per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.fiber_soluble_g', 'per_portion.fiber_insoluble_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.cholesterol_mg', 'per_portion.trans_fat_g', 'quality.confidence', 'quality.gaps', 'portion.est_weight_g', 'assumptions.prep']
+    sources:
+      - url: "https://www.theguardian.com/lifeandstyle/2010/sep/25/portuguese-steak-sandwich-recipe"
+        note: "Guardian published Eagle cookbook recipe: 500g steak for 2 sandwiches"
+      - url: "https://www.ars.usda.gov/ARSUserFiles/80400525/Data/retn/retn06.pdf"
+        note: "USDA cooking yields: 80% for grilled sirloin"
+      - url: "gpt5_pro_analysis"
+        note: "GPT-5 Pro component-based analysis: 200g cooked sirloin + 90g roll + 2 Tbsp oil + onion/lettuce + restaurant salt seasoning. Major corrections: calories 750→866, sodium 650→1,910mg, protein 55→69.4g"
 ```
 
 ---
@@ -3385,41 +3399,41 @@ change_log:
 
 ```yaml
 id: daylesford_smoked_trout_80g_v1
-version: 1
+version: 2
 last_verified: 2025-11-01
 source:
   venue: "Daylesford Organic"
   menu_page: "https://www.daylesford.com/"
   evidence:
-    - "Product: Daylesford Smoked Trout (200g pack)"
+    - "Product: Daylesford Smoked Trout (200g pack, Batch 6997, Use by 12.11.25)"
     - "Dry salted & cold smoked on West Coast of Scotland"
     - "Ingredients: Trout (96%), Salt, Sugar"
-    - "USDA FoodData Central smoked trout nutritional baseline"
+    - "Official product label nutrition facts"
 aliases: ['Daylesford Trout', 'Smoked Rainbow Trout', 'Cold Smoked Trout']
 category: main
 portion:
   description: "2 slices smoked trout"
   est_weight_g: 80
-  notes: "Cold smoked rainbow trout, thinly sliced"
+  notes: "Pond reared farmed rainbow trout, cold smoked, thinly sliced"
 assumptions:
   salt_scheme: "normal"
   oil_type: ""
   prep: "Dry salted and cold smoked - traditional Scottish method"
 per_portion:
-  energy_kcal: 112
-  protein_g: 19.2
-  fat_g: 4.0
-  sat_fat_g: 0.9
-  mufa_g: 1.2
-  pufa_g: 1.6
+  energy_kcal: 162
+  protein_g: 17.4
+  fat_g: 10.2
+  sat_fat_g: 1.8
+  mufa_g: 2.5
+  pufa_g: 5.9
   trans_fat_g: 0
   cholesterol_mg: 50
-  carbs_g: 0.8
-  sugar_g: 0.8
+  carbs_g: 0.0
+  sugar_g: 0.0
   fiber_total_g: 0.0
   fiber_soluble_g: null
   fiber_insoluble_g: null
-  sodium_mg: 560
+  sodium_mg: 480
   potassium_mg: 280
   iodine_ug: null
   magnesium_mg: 24
@@ -3431,27 +3445,29 @@ per_portion:
 
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
-  omega_3_total_g: 1.0
-  epa_g: 0.3
-  dha_g: 0.6
+  omega_3_total_g: 1.4
+  epa_g: 0.4
+  dha_g: 0.8
 quality:
-  confidence: medium
-  gaps: ['No official Daylesford nutritional label available publicly', 'Estimates based on USDA smoked trout data and typical cold-smoked fish values', 'Sodium content estimated from typical cold-smoked fish (700mg per 100g)', 'Omega-3 breakdown estimated from rainbow trout composition']
+  confidence: high
+  gaps: ['Fat breakdown (MUFA/PUFA) estimated from typical rainbow trout composition', 'Micronutrients estimated from USDA rainbow trout data', 'Omega-3 breakdown estimated from farmed rainbow trout composition']
 notes:
-  - "Rainbow trout (Oncorhynchus mykiss) - farmed, Scottish origin"
+  - "Rainbow trout (Oncorhynchus mykiss) - pond reared, farmed, Scottish origin"
+  - "Per 100g (from label): 202 kcal, 21.8g protein, 12.8g fat (2.3g sat), <0.1g carbs, 1.5g salt"
+  - "Higher fat content (12.8g/100g) than typical smoked trout - premium farmed product"
   - "Cold smoked process preserves omega-3 fatty acids better than hot smoking"
-  - "Excellent source of complete protein (19.2g per 80g portion)"
-  - "Rich in omega-3 fatty acids (~1g total, including EPA and DHA)"
-  - "Very high in vitamin B12 (~6µg per 80g, ~250% DV)"
-  - "Good source of vitamin D (~120 IU per 80g)"
-  - "High in selenium (~10µg per 80g)"
-  - "Phosphorus content ~200mg per 80g"
-  - "Sodium content relatively high due to smoking/curing process (560mg per 80g)"
-  - "Sugar (0.8g) from curing process - small amount used in traditional method"
+  - "Excellent source of complete protein (17.4g per 80g portion)"
+  - "Rich in omega-3 fatty acids (~1.4g total, including ~0.4g EPA and ~0.8g DHA)"
+  - "Very high in vitamin B12 (~6µg per 80g, ~250% DV) - estimated"
+  - "Good source of vitamin D (~120 IU per 80g) - estimated"
+  - "High in selenium (~10µg per 80g) - estimated"
+  - "Phosphorus content ~200mg per 80g - estimated"
+  - "Sodium: 480mg per 80g (from 1.2g salt)"
+  - "Sugar listed in ingredients but negligible in final product (<0.1g/100g)"
   - "PUFA includes omega-3 (EPA+DHA) and some omega-6"
-  - "Low carb, keto-friendly protein source"
-  - "Can be enjoyed similar to smoked salmon"
-  - "Store refrigerated, consume within use-by date"
+  - "Zero carb, keto-friendly protein source"
+  - "Store refrigerated 0-5°C, consume within 3 days once opened"
+  - "May contain bones - check before eating"
 change_log:
   - timestamp: 2025-11-01T09:00:00+0000
     updated_by: "Claude Code (Sonnet 4.5)"
@@ -3464,4 +3480,11 @@ change_log:
         note: "USDA FoodData Central smoked trout baseline values"
       - url: "user_request"
         note: "User consumed 80g (2 slices) Daylesford smoked trout on 2025-11-01 at 09:00"
+  - timestamp: 2025-11-01T09:30:00+0000
+    updated_by: "Claude Code (Sonnet 4.5)"
+    reason: "Updated with actual product label nutrition facts - corrected major underestimation of calories and fat"
+    fields_changed: ['version', 'per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.sodium_mg', 'derived.omega_3_total_g', 'derived.epa_g', 'derived.dha_g', 'quality.confidence', 'quality.gaps']
+    sources:
+      - url: "product_label"
+        note: "Daylesford Smoked Trout 200g pack label: 202 kcal, 21.8g protein, 12.8g fat (2.3g sat), <0.1g carbs per 100g. Batch 6997, use by 12.11.25"
 ```

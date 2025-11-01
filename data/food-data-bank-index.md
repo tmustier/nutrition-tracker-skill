@@ -1,7 +1,7 @@
 ---
 title: Food Data Bank Index
 description: Auto-generated index of all dishes in the food data bank
-generated: 2025-11-01 09:12:12 UTC
+generated: 2025-11-01 11:34:15 UTC
 ---
 
 # Food Data Bank Index
