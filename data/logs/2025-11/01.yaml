@@ -209,3 +209,35 @@ entries:
           manganese_mg: null
 
     notes: "Smoked trout on crispbread"
+
+  - timestamp: "2025-11-01T11:00:00+00:00"
+    items:
+      - name: "Oat Matcha Latte"
+        food_bank_id: null
+        quantity: 230
+        unit: g
+        nutrition:
+          energy_kcal: 130
+          protein_g: 3.5
+          fat_g: 4.5
+          sat_fat_g: 0.5
+          mufa_g: 1.5
+          pufa_g: 1.5
+          trans_fat_g: 0
+          cholesterol_mg: 0
+          carbs_g: 18.0
+          sugar_g: 7.0
+          fiber_total_g: 2.5
+          fiber_soluble_g: null
+          fiber_insoluble_g: null
+          sodium_mg: 90
+          potassium_mg: 180
+          iodine_ug: null
+          magnesium_mg: 25
+          calcium_mg: 270
+          iron_mg: 1.5
+          zinc_mg: 0.4
+          vitamin_c_mg: 0
+          manganese_mg: 0.5
+
+    notes: "Cup of oat matcha latte"
