@@ -3218,3 +3218,85 @@ change_log:
       - url: "user_request"
         note: "User consumed margarita on 2025-11-01"
 ```
+
+---
+
+## Bife Ana Steak Sandwich (The Eagle, Farringdon)
+
+```yaml
+id: bife_ana_steak_sandwich_eagle_farringdon_v1
+version: 1
+last_verified: 2025-11-01
+source:
+  venue: "The Eagle, Farringdon (London)"
+  menu_page: "https://theeaglefarringdon.co.uk/"
+  evidence:
+    - "Recipe published in various food blogs featuring The Eagle's signature dish"
+    - "Prego no Pão nutritional estimates used as baseline (~715 kcal for 300g rump steak sandwich)"
+    - "The Eagle recipe uses 250g rump steak per sandwich"
+aliases: ['Bife Ana', 'Eagle Steak Sandwich', 'Portuguese Steak Sandwich', 'Rump Steak Sandwich']
+category: main
+portion:
+  description: "1 signature steak sandwich"
+  est_weight_g: 350
+  notes: "Portuguese-style sandwich with rump steak in stone-baked carcacas roll"
+assumptions:
+  salt_scheme: "normal"
+  oil_type: "olive oil (used in marinade and cooking)"
+  prep: "Rump steak marinated in wine, garlic, chili, herbs; quickly seared; served in crusty Portuguese roll with cos lettuce and reduced marinade"
+per_portion:
+  energy_kcal: 750
+  protein_g: 55.0
+  fat_g: 35.0
+  sat_fat_g: 10.0
+  mufa_g: 18.0
+  pufa_g: 3.0
+  trans_fat_g: 0.5
+  cholesterol_mg: 155
+  carbs_g: 40.0
+  sugar_g: 3.0
+  fiber_total_g: 2.5
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: 650
+  potassium_mg: 650
+  iodine_ug: null
+  magnesium_mg: 65
+  calcium_mg: 45
+  iron_mg: 5.5
+  zinc_mg: 8.5
+  vitamin_c_mg: 3
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: low
+  gaps: ['No official nutritional data from venue', 'Menu changes daily - availability not guaranteed', 'Estimates based on similar Portuguese steak sandwiches and recipe analysis', 'Micronutrient values estimated from ingredient composition', 'Actual portion may vary']
+notes:
+  - "London's first gastropub (est. 1991) - legendary signature dish"
+  - "Menu chalked daily, changes twice per day - call ahead to confirm availability: 020 7837 1353"
+  - "Recipe components per sandwich: ~250g rump steak, Portuguese carcacas roll, cos lettuce"
+  - "Marinade: onion, garlic, dried chili, bay leaf, parsley, oregano, red wine, olive oil"
+  - "Steak marinated several hours, seared in very hot pan, assembled with reduced marinade"
+  - "Nutritional estimates based on: 250g cooked rump steak (~440 kcal, 50g protein, 25g fat), Portuguese roll (~250 kcal, 45g carbs, 5g protein), olive oil & marinade (~60 kcal, 7g fat), lettuce (negligible)"
+  - "Higher protein and iron content from grass-fed rump steak"
+  - "MUFA primarily from olive oil used in cooking and marinade"
+  - "Portuguese-inspired preparation method (Bife Ana = beef version of traditional pork bifana)"
+  - "Zinc and iron content high due to red meat"
+  - "Similar dishes (Prego no Pão) range 715-800 kcal depending on steak size"
+change_log:
+  - timestamp: 2025-11-01T08:45:00+0000
+    updated_by: "Claude Code (Sonnet 4.5)"
+    reason: "Initial entry for The Eagle's signature steak sandwich - user planning visit to venue"
+    fields_changed: ['all fields']
+    sources:
+      - url: "https://theeaglefarringdon.co.uk/"
+        note: "Official venue website"
+      - url: "https://gastroportugal.com/prego-no-pao/"
+        note: "Portuguese steak sandwich nutritional baseline (~715 kcal)"
+      - url: "https://fdc.nal.usda.gov/"
+        note: "USDA FoodData Central for rump steak, bread, olive oil component values"
+      - url: "user_request"
+        note: "User researching for upcoming visit on 2025-11-01"
+```
