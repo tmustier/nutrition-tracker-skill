@@ -1,0 +1,35 @@
+date: 2025-11-01
+day_type: rest
+
+entries:
+  - timestamp: "2025-11-01T00:09:00+00:00"
+    items:
+      - name: "Margarita"
+        food_bank_id: margarita_classic_v1
+        quantity: 1
+        unit: portion
+        nutrition:
+          energy_kcal: 220
+          protein_g: 0.1
+          fat_g: 0.0
+          sat_fat_g: 0.0
+          mufa_g: 0.0
+          pufa_g: 0.0
+          trans_fat_g: 0
+          cholesterol_mg: 0
+          carbs_g: 13.0
+          sugar_g: 11.0
+          fiber_total_g: 0.1
+          fiber_soluble_g: 0.0
+          fiber_insoluble_g: 0.1
+          sodium_mg: 5
+          potassium_mg: 40
+          iodine_ug: 0
+          magnesium_mg: 3
+          calcium_mg: 5
+          iron_mg: 0.1
+          zinc_mg: 0.0
+          vitamin_c_mg: 12
+          manganese_mg: 0
+
+    notes: ""
