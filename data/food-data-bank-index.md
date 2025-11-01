@@ -1,7 +1,7 @@
 ---
 title: Food Data Bank Index
 description: Auto-generated index of all dishes in the food data bank
-generated: 2025-10-31 19:12:30 UTC
+generated: 2025-11-01 09:12:12 UTC
 ---
 
 # Food Data Bank Index
@@ -11,7 +11,7 @@ generated: 2025-10-31 19:12:30 UTC
 
 <!-- #todo: Reorder dishes by category or venue for better organization -->
 
-## All Dishes (40 total)
+## All Dishes (44 total)
 
 - [Sweet Potato Wedges (Simple Health Kitchen)](#sweet-potato-wedges-simple-health-kitchen) {#sweet_potato_wedges_shk_v1}
 - [Grilled Salmon Fillet (Simple Health Kitchen)](#grilled-salmon-fillet-simple-health-kitchen) {#grilled_salmon_fillet_shk_v1}
@@ -53,6 +53,10 @@ generated: 2025-10-31 19:12:30 UTC
 - [Natural Fitness Food Vanilla Whey Protein (30g scoop)](#natural-fitness-food-vanilla-whey-protein-30g-scoop) {#nff_vanilla_whey_30g_v1}
 - [Guinness Draught (Pint, 568ml)](#guinness-draught-pint-568ml) {#guinness_pint_568ml_v1}
 - [Psyllium Husk (5g portion)](#psyllium-husk-5g-portion) {#psyllium_husk_5g_v1}
+- [Margarita (Classic)](#margarita-classic) {#margarita_classic_v1}
+- [Bife Ana Steak Sandwich (The Eagle, Farringdon)](#bife-ana-steak-sandwich-the-eagle-farringdon) {#bife_ana_steak_sandwich_eagle_farringdon_v1}
+- [Banana (Raw, 150g)](#banana-raw-150g) {#banana_raw_150g_v1}
+- [Smoked Trout (Daylesford, 80g)](#smoked-trout-daylesford-80g) {#daylesford_smoked_trout_80g_v1}
 
 ---
 

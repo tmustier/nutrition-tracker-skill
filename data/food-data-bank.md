@@ -3218,3 +3218,250 @@ change_log:
       - url: "user_request"
         note: "User consumed margarita on 2025-11-01"
 ```
+
+---
+
+## Bife Ana Steak Sandwich (The Eagle, Farringdon)
+
+```yaml
+id: bife_ana_steak_sandwich_eagle_farringdon_v1
+version: 1
+last_verified: 2025-11-01
+source:
+  venue: "The Eagle, Farringdon (London)"
+  menu_page: "https://theeaglefarringdon.co.uk/"
+  evidence:
+    - "Recipe published in various food blogs featuring The Eagle's signature dish"
+    - "Prego no Pão nutritional estimates used as baseline (~715 kcal for 300g rump steak sandwich)"
+    - "The Eagle recipe uses 250g rump steak per sandwich"
+aliases: ['Bife Ana', 'Eagle Steak Sandwich', 'Portuguese Steak Sandwich', 'Rump Steak Sandwich']
+category: main
+portion:
+  description: "1 signature steak sandwich"
+  est_weight_g: 350
+  notes: "Portuguese-style sandwich with rump steak in stone-baked carcacas roll"
+assumptions:
+  salt_scheme: "normal"
+  oil_type: "olive oil (used in marinade and cooking)"
+  prep: "Rump steak marinated in wine, garlic, chili, herbs; quickly seared; served in crusty Portuguese roll with cos lettuce and reduced marinade"
+per_portion:
+  energy_kcal: 750
+  protein_g: 55.0
+  fat_g: 35.0
+  sat_fat_g: 10.0
+  mufa_g: 18.0
+  pufa_g: 3.0
+  trans_fat_g: 0.5
+  cholesterol_mg: 155
+  carbs_g: 40.0
+  sugar_g: 3.0
+  fiber_total_g: 2.5
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: 650
+  potassium_mg: 650
+  iodine_ug: null
+  magnesium_mg: 65
+  calcium_mg: 45
+  iron_mg: 5.5
+  zinc_mg: 8.5
+  vitamin_c_mg: 3
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: low
+  gaps: ['No official nutritional data from venue', 'Menu changes daily - availability not guaranteed', 'Estimates based on similar Portuguese steak sandwiches and recipe analysis', 'Micronutrient values estimated from ingredient composition', 'Actual portion may vary']
+notes:
+  - "London's first gastropub (est. 1991) - legendary signature dish"
+  - "Menu chalked daily, changes twice per day - call ahead to confirm availability: 020 7837 1353"
+  - "Recipe components per sandwich: ~250g rump steak, Portuguese carcacas roll, cos lettuce"
+  - "Marinade: onion, garlic, dried chili, bay leaf, parsley, oregano, red wine, olive oil"
+  - "Steak marinated several hours, seared in very hot pan, assembled with reduced marinade"
+  - "Nutritional estimates based on: 250g cooked rump steak (~440 kcal, 50g protein, 25g fat), Portuguese roll (~250 kcal, 45g carbs, 5g protein), olive oil & marinade (~60 kcal, 7g fat), lettuce (negligible)"
+  - "Higher protein and iron content from grass-fed rump steak"
+  - "MUFA primarily from olive oil used in cooking and marinade"
+  - "Portuguese-inspired preparation method (Bife Ana = beef version of traditional pork bifana)"
+  - "Zinc and iron content high due to red meat"
+  - "Similar dishes (Prego no Pão) range 715-800 kcal depending on steak size"
+change_log:
+  - timestamp: 2025-11-01T08:45:00+0000
+    updated_by: "Claude Code (Sonnet 4.5)"
+    reason: "Initial entry for The Eagle's signature steak sandwich - user planning visit to venue"
+    fields_changed: ['all fields']
+    sources:
+      - url: "https://theeaglefarringdon.co.uk/"
+        note: "Official venue website"
+      - url: "https://gastroportugal.com/prego-no-pao/"
+        note: "Portuguese steak sandwich nutritional baseline (~715 kcal)"
+      - url: "https://fdc.nal.usda.gov/"
+        note: "USDA FoodData Central for rump steak, bread, olive oil component values"
+      - url: "user_request"
+        note: "User researching for upcoming visit on 2025-11-01"
+```
+
+---
+
+## Banana (Raw, 150g)
+
+```yaml
+id: banana_raw_150g_v1
+version: 1
+last_verified: 2025-11-01
+source:
+  venue: "Generic - Grocery/Supermarket"
+  menu_page: ""
+  evidence:
+    - "USDA FoodData Central #173944 - Bananas, raw"
+    - "Standard fresh banana, medium-large size"
+aliases: ['Banana', 'Fresh Banana', 'Raw Banana']
+category: ingredient
+portion:
+  description: "1 medium-large banana"
+  est_weight_g: 150
+  notes: "Raw, unpeeled weight approximately 180-200g; peeled edible portion 150g"
+assumptions:
+  salt_scheme: "unsalted"
+  oil_type: ""
+  prep: "Raw, fresh, unprocessed"
+per_portion:
+  energy_kcal: 134
+  protein_g: 1.6
+  fat_g: 0.5
+  sat_fat_g: 0.2
+  mufa_g: 0.1
+  pufa_g: 0.1
+  trans_fat_g: 0
+  cholesterol_mg: 0
+  carbs_g: 34.3
+  sugar_g: 18.3
+  fiber_total_g: 3.9
+  fiber_soluble_g: 0.9
+  fiber_insoluble_g: 3.0
+  sodium_mg: 2
+  potassium_mg: 537
+  iodine_ug: 5
+  magnesium_mg: 40
+  calcium_mg: 8
+  iron_mg: 0.4
+  zinc_mg: 0.2
+  vitamin_c_mg: 13
+  manganese_mg: 0.4
+
+derived:
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: high
+  gaps: []
+notes:
+  - "USDA standard reference for raw banana (173944)"
+  - "Excellent source of potassium (537mg, ~11% DV) and vitamin B6 (0.6mg, ~42% DV)"
+  - "Good source of dietary fiber, primarily resistant starch and pectin"
+  - "Contains prebiotic fiber that feeds beneficial gut bacteria"
+  - "Vitamin C: ~13mg per 150g serving"
+  - "Manganese: ~0.4mg per 150g serving"
+  - "Natural sugars include glucose, fructose, and sucrose"
+  - "Ripeness affects sugar content - riper bananas have more simple sugars"
+  - "Resistant starch content decreases as banana ripens"
+  - "Low glycemic index when green/unripe, moderate GI when fully ripe"
+  - "Minimal fat content, primarily PUFA and MUFA"
+  - "Soluble fiber (~0.9g) mainly pectin, insoluble fiber (~3g) mainly cellulose"
+change_log:
+  - timestamp: 2025-11-01T09:00:00+0000
+    updated_by: "Claude Code (Sonnet 4.5)"
+    reason: "Initial entry for banana tracking - user consumed in breakfast smoothie"
+    fields_changed: ['all fields']
+    sources:
+      - url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/173944/nutrients"
+        note: "USDA FoodData Central - Bananas, raw"
+      - url: "user_request"
+        note: "User consumed 150g banana in breakfast smoothie on 2025-11-01 at 09:00"
+```
+
+---
+
+## Smoked Trout (Daylesford, 80g)
+
+```yaml
+id: daylesford_smoked_trout_80g_v1
+version: 1
+last_verified: 2025-11-01
+source:
+  venue: "Daylesford Organic"
+  menu_page: "https://www.daylesford.com/"
+  evidence:
+    - "Product: Daylesford Smoked Trout (200g pack)"
+    - "Dry salted & cold smoked on West Coast of Scotland"
+    - "Ingredients: Trout (96%), Salt, Sugar"
+    - "USDA FoodData Central smoked trout nutritional baseline"
+aliases: ['Daylesford Trout', 'Smoked Rainbow Trout', 'Cold Smoked Trout']
+category: main
+portion:
+  description: "2 slices smoked trout"
+  est_weight_g: 80
+  notes: "Cold smoked rainbow trout, thinly sliced"
+assumptions:
+  salt_scheme: "normal"
+  oil_type: ""
+  prep: "Dry salted and cold smoked - traditional Scottish method"
+per_portion:
+  energy_kcal: 112
+  protein_g: 19.2
+  fat_g: 4.0
+  sat_fat_g: 0.9
+  mufa_g: 1.2
+  pufa_g: 1.6
+  trans_fat_g: 0
+  cholesterol_mg: 50
+  carbs_g: 0.8
+  sugar_g: 0.8
+  fiber_total_g: 0.0
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: 560
+  potassium_mg: 280
+  iodine_ug: null
+  magnesium_mg: 24
+  calcium_mg: 10
+  iron_mg: 0.3
+  zinc_mg: 0.4
+  vitamin_c_mg: 0
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+  omega_3_total_g: 1.0
+  epa_g: 0.3
+  dha_g: 0.6
+quality:
+  confidence: medium
+  gaps: ['No official Daylesford nutritional label available publicly', 'Estimates based on USDA smoked trout data and typical cold-smoked fish values', 'Sodium content estimated from typical cold-smoked fish (700mg per 100g)', 'Omega-3 breakdown estimated from rainbow trout composition']
+notes:
+  - "Rainbow trout (Oncorhynchus mykiss) - farmed, Scottish origin"
+  - "Cold smoked process preserves omega-3 fatty acids better than hot smoking"
+  - "Excellent source of complete protein (19.2g per 80g portion)"
+  - "Rich in omega-3 fatty acids (~1g total, including EPA and DHA)"
+  - "Very high in vitamin B12 (~6µg per 80g, ~250% DV)"
+  - "Good source of vitamin D (~120 IU per 80g)"
+  - "High in selenium (~10µg per 80g)"
+  - "Phosphorus content ~200mg per 80g"
+  - "Sodium content relatively high due to smoking/curing process (560mg per 80g)"
+  - "Sugar (0.8g) from curing process - small amount used in traditional method"
+  - "PUFA includes omega-3 (EPA+DHA) and some omega-6"
+  - "Low carb, keto-friendly protein source"
+  - "Can be enjoyed similar to smoked salmon"
+  - "Store refrigerated, consume within use-by date"
+change_log:
+  - timestamp: 2025-11-01T09:00:00+0000
+    updated_by: "Claude Code (Sonnet 4.5)"
+    reason: "Initial entry for Daylesford smoked trout - user consumed on crispbread for breakfast"
+    fields_changed: ['all fields']
+    sources:
+      - url: "https://www.ocado.com/products/daylesford-smoked-trout-619556011"
+        note: "Daylesford Smoked Trout product listing"
+      - url: "https://fdc.nal.usda.gov/"
+        note: "USDA FoodData Central smoked trout baseline values"
+      - url: "user_request"
+        note: "User consumed 80g (2 slices) Daylesford smoked trout on 2025-11-01 at 09:00"
+```
