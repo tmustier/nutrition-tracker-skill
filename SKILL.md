@@ -62,6 +62,7 @@ No jargon, no mystery—just reproducible numbers and clear assumptions.
    - Run `python scripts/validate_data_bank.py data/food-data-bank.md`
    - Fix any errors (energy math, fat splits, sodium/salt)
    - Re-run validation until ALL items pass
+   - Carbs: ensure `carbs_available_g` (net), `carbs_total_g`, and `polyols_g` are present; UK/EU sources already list available carbs—derive totals as `available + fibre (+ polyols)` (see `ESTIMATE.md`).
 
 5. **Document research findings** (if applicable):
    - Add learnings, tips, or venue-specific guidance to `references/research-notes.md`
