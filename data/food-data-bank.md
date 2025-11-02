@@ -277,7 +277,7 @@ per_portion:
   manganese_mg: null
   polyols_g: 0.0
   carbs_available_g: 1.0
-  carbs_total_g: 1.0
+  carbs_total_g: 1.4
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -5912,7 +5912,7 @@ change_log:
 
 ```yaml
 id: peking_duck_skin_sugar_imperial_treasure_st_james_v1
-version: 2
+version: 3
 last_verified: 2025-11-02
 source:
   venue: Imperial Treasure St. James (London)
@@ -5921,41 +5921,43 @@ source:
     - "Imperial Treasure preparation: dry rubbed with spices, air-dried 48hr, slow-roasted with lychee wood"
     - "Duck fat fatty acid composition from PMC9816803 (MUFA 49.4%, PUFA 12.9%, SFA 33.3%)"
     - "Roasted duck skin nutritional baseline from snapcalorie.com and USDA duck data"
-    - "Component-based estimation: 10g crispy duck skin + 2g sugar"
-    - "Portion weight estimated from visual observation of small square (3cm x 3cm, thin crispy skin)"
+    - "ChatGPT 5-Pro analysis: corrected portion to 1″×1″ squares ≈ 2.5g each (not 12g)"
+    - "Component-based estimation: 2.5g ultra-crispy duck skin with minimal sugar dabbing"
 aliases: ["Peking Duck Skin", "Duck Skin with Sugar"]
 category: main
 portion:
   description: "1 small square with sugar"
-  est_weight_g: 12
-  notes: "Approximately 3cm x 3cm crispy roasted duck skin (10g) dabbed in granulated sugar (2g). Traditional Imperial Treasure preparation: 48hr air-dried, slow-roasted until very crispy with much fat rendered out."
+  est_weight_g: 2.5
+  notes: "Approximately 1″ × 1″ (2.5cm × 2.5cm) ultra-crispy roasted duck skin with one edge lightly dabbed in sugar. Traditional Imperial Treasure preparation: 48hr air-dried, slow-roasted until very crispy with much fat rendered out."
 assumptions:
   salt_scheme: "light"
   oil_type: "duck fat (intrinsic)"
   prep: "Traditional Peking duck preparation: dry rubbed with spices, air-dried 48 hours, slow-roasted with lychee wood until very crispy. Much of the subcutaneous fat renders out during roasting."
 per_portion:
-  energy_kcal: 50
-  protein_g: 1.2
-  fat_g: 4.1
-  sat_fat_g: 1.4
-  mufa_g: 2.0
-  pufa_g: 0.5
+  energy_kcal: 20
+  protein_g: 0.2
+  fat_g: 2.0
+  sat_fat_g: 0.7
+  mufa_g: 1.0
+  pufa_g: 0.25
   trans_fat_g: 0.0
-  cholesterol_mg: 12
-  carbs_g: 2.0
-  sugar_g: 2.0
+  cholesterol_mg: 3
+  carbs_available_g: 0.1
+  sugar_g: 0.1
   fiber_total_g: 0.0
   fiber_soluble_g: 0.0
   fiber_insoluble_g: 0.0
-  sodium_mg: 60
-  potassium_mg: 5
+  sodium_mg: 10
+  potassium_mg: 1
   iodine_ug: null
-  magnesium_mg: 1
-  calcium_mg: 1
-  iron_mg: 0.3
-  zinc_mg: 0.2
+  magnesium_mg: 0
+  calcium_mg: 0
+  iron_mg: 0.1
+  zinc_mg: 0.05
   vitamin_c_mg: 0
   manganese_mg: 0.0
+  polyols_g: 0.0
+  carbs_total_g: 0.1
 
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
@@ -5997,6 +5999,13 @@ change_log:
         note: "USDA FoodData Central - duck meat and skin roasted composition, micronutrients"
       - url: "user_request"
         note: "User consumed 2 small squares (24g total) on 2025-11-02, Imperial Treasure St. James venue"
+  - timestamp: 2025-11-02T21:00:00+0000
+    updated_by: "Claude Code (Sonnet 4.5)"
+    reason: "v3: Corrected portion weight based on ChatGPT 5-Pro analysis and user feedback. Original estimate of 12g was too high; actual 1×1 inch squares are ≈2.5g. Added new carb schema (carbs_available_g, carbs_total_g, polyols_g) per ESTIMATE.md updates."
+    fields_changed: ['version', 'portion.est_weight_g', 'portion.notes', 'source.evidence', 'all per_portion nutrition values', 'per_portion.carbs_available_g', 'per_portion.polyols_g', 'per_portion.carbs_total_g']
+    sources:
+      - url: "user_feedback"
+        note: "ChatGPT 5-Pro analysis confirmed 1×1 inch squares with light sugar dabbing are ~20 kcal/2.5g each (not 50 kcal/12g)"
 ```
 ## Charcoal Custard Bun (Imperial Treasure St. James)
 
@@ -6036,7 +6045,7 @@ per_portion:
   pufa_g: 1.7
   trans_fat_g: 0.0
   cholesterol_mg: 76
-  carbs_g: 23.3
+  carbs_available_g: 23.3
   sugar_g: 7.4
   fiber_total_g: 0.6
   fiber_soluble_g: null
@@ -6050,6 +6059,8 @@ per_portion:
   zinc_mg: null
   vitamin_c_mg: null
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_total_g: 23.9
 
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
@@ -6107,7 +6118,7 @@ per_portion:
   pufa_g: 0.4
   trans_fat_g: 0.0
   cholesterol_mg: 15
-  carbs_g: 4.5
+  carbs_available_g: 4.5
   sugar_g: 0.2
   fiber_total_g: 0.3
   fiber_soluble_g: null
@@ -6121,6 +6132,8 @@ per_portion:
   zinc_mg: 0.1
   vitamin_c_mg: 0.2
   manganese_mg: 0.02
+  polyols_g: 0.0
+  carbs_total_g: 4.8
 
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
@@ -6146,7 +6159,7 @@ change_log:
 
 ```yaml
 id: crispy_shrimp_cheung_fun_imperial_treasure_st_james_v1
-version: 2
+version: 3
 last_verified: 2025-11-02
 source:
   venue: Imperial Treasure Fine Chinese Cuisine, St. James (London)
@@ -6164,35 +6177,37 @@ aliases: ["Crispy Golden Net Prawn Cheung Fun"]
 category: main
 portion:
   description: "1 piece"
-  est_weight_g: 75
+  est_weight_g: 12.5
   notes: "Full portion contains 6 pieces. This is a premium dim sum dish featuring rice noodle wrapped around crispy fried shrimp with golden net coating and fried dough stick inside. Served with sweet soy sauce. Estimated weight based on component analysis: 30g rice noodle + 20g shrimp (raw) + 13g coating/oil + 8g youtiao + 5g sauce."
 assumptions:
   salt_scheme: "normal"
   oil_type: "soybean oil (typical for Chinese dim sum frying)"
   prep: "Rice noodle steamed, then wrapped around large shrimp with tempura-style golden net coating and small piece of youtiao (fried dough stick). Entire roll is deep-fried until crispy, then served with sweet soy sauce drizzled on top."
 per_portion:
-  energy_kcal: 183
-  protein_g: 5.6
-  fat_g: 11.2
-  sat_fat_g: 1.5
-  mufa_g: 2.4
-  pufa_g: 5.8
+  energy_kcal: 31
+  protein_g: 0.9
+  fat_g: 1.9
+  sat_fat_g: 0.25
+  mufa_g: 0.4
+  pufa_g: 0.96
   trans_fat_g: 0.0
-  cholesterol_mg: 24
-  carbs_g: 15.6
+  cholesterol_mg: 4
+  carbs_available_g: 2.6
   sugar_g: 0.5
   fiber_total_g: 0.5
   fiber_soluble_g: null
   fiber_insoluble_g: null
-  sodium_mg: 479
-  potassium_mg: 56
-  iodine_ug: 3
-  magnesium_mg: 7
-  calcium_mg: 13
+  sodium_mg: 80
+  potassium_mg: 9
+  iodine_ug: 1
+  magnesium_mg: 1
+  calcium_mg: 2
   iron_mg: 1
   zinc_mg: 0
   vitamin_c_mg: 0
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_total_g: 3.1
 
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
@@ -6262,7 +6277,7 @@ per_portion:
   pufa_g: 1.1
   trans_fat_g: 0.1
   cholesterol_mg: 25
-  carbs_g: 30.8
+  carbs_available_g: 30.8
   sugar_g: 8.2
   fiber_total_g: 0.9
   fiber_soluble_g: null
@@ -6276,6 +6291,8 @@ per_portion:
   zinc_mg: 0.6
   vitamin_c_mg: 0
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_total_g: 31.7
 
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
@@ -6333,7 +6350,7 @@ per_portion:
   pufa_g: 0.4
   trans_fat_g: 0.0
   cholesterol_mg: 30
-  carbs_g: 5.6
+  carbs_available_g: 5.6
   sugar_g: 0.2
   fiber_total_g: 0.1
   fiber_soluble_g: null
@@ -6347,6 +6364,8 @@ per_portion:
   zinc_mg: 0.2
   vitamin_c_mg: 1
   manganese_mg: 0.1
+  polyols_g: 0.0
+  carbs_total_g: 5.6
 
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
@@ -6407,7 +6426,7 @@ per_portion:
   pufa_g: 1.3
   trans_fat_g: 0.0
   cholesterol_mg: 0
-  carbs_g: 10.5
+  carbs_available_g: 10.5
   sugar_g: 0.6
   fiber_total_g: 0.6
   fiber_soluble_g: null
@@ -6421,6 +6440,8 @@ per_portion:
   zinc_mg: 0.2
   vitamin_c_mg: 0.2
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_total_g: 11.1
 
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
@@ -6478,7 +6499,7 @@ per_portion:
   pufa_g: 2.6
   trans_fat_g: 0.0
   cholesterol_mg: null
-  carbs_g: 12.0
+  carbs_available_g: 12.0
   sugar_g: 2.0
   fiber_total_g: 0.1
   fiber_soluble_g: null
@@ -6492,6 +6513,8 @@ per_portion:
   zinc_mg: 0.7
   vitamin_c_mg: 1
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_total_g: 12.0
 
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
@@ -6540,7 +6563,7 @@ assumptions:
   oil_type: "duck fat"
   prep: "Component-based estimation: 120ml clear duck broth + 15g firm tofu cubes"
 per_portion:
-  energy_kcal: 50
+  energy_kcal: 45
   protein_g: 4.3
   fat_g: 2.6
   sat_fat_g: 0.6
@@ -6548,7 +6571,7 @@ per_portion:
   pufa_g: 0.9
   trans_fat_g: 0.0
   cholesterol_mg: 5
-  carbs_g: 1.0
+  carbs_available_g: 1.0
   sugar_g: 0.1
   fiber_total_g: 0.4
   fiber_soluble_g: null
@@ -6562,6 +6585,8 @@ per_portion:
   zinc_mg: 0
   vitamin_c_mg: 0
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_total_g: 1.4
 
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
