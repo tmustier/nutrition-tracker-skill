@@ -16,11 +16,12 @@ This skill is different to other Claude Skills in that it lives in a public Gith
 
 ## A) ESTIMATING
 When the user asks you to estimate nutrition for a dish, copy this checklist and track your progress:
-- [ ] Step 1: Check if the dish exists in `data/food-data-bank.md`.
-      - Browse `data/food-data-bank-index.md` to find dishes by name, or search by `id` in the main file.
+- [ ] Step 1: Check if the dish exists in the data bank.
+      - Browse `data/food-data-bank-index.md` to find dishes by name and location
+      - The index shows all dishes organized by venue/category folders
       - If found and complete with no null values: proceed to **Step 3**.
       - Else: proceed to **Step 2**.
-- [ ] Step 2: Check if you need to add / update complete data bank records for the dish (with no nulls). If so, spawn one subagent per dish, and have that agent ultrathink, following all the instructions in `ESTIMATE.md`. Once there are no more updates to be made, proceed to **Step 3**.
+- [ ] Step 2: Check if you need to add / update complete data bank records for the dish (with no nulls). If so, spawn one subagent per dish, and have that agent ultrathink, following all the instructions in `ESTIMATE.md`. The subagent will create individual dish files in the appropriate folder. Once there are no more updates to be made, proceed to **Step 3**.
 - [ ] Step 3: Show a compact table and % of daily targets from `references/health-profile.yaml`.
       - Ensure you scale `per_portion` values if necessary.
       - If multiple dishes are logged, sum totals and re‑check vs targets.
@@ -47,6 +48,8 @@ When the user has eaten a dish and you have completed **A) Estimating**:
 
 ## D) AD HOC ANALYSIS
 The user may sometimes ask for custom analyses. The main data sources for these are:
-- `data/food-data-bank.md` — large source of truth for dishes (see `data/food-data-bank-index.md` for dish index).
+- `data/food-data-bank/` — Individual dish files organized by venue/category in folders (see `data/food-data-bank-index.md` for complete index).
 - `data/logs/` — Nutrition logs organized by date (`YYYY-MM/DD.yaml`). See `data/logs/SCHEMA.md` for format.
 - `references/health-profile.yaml` — Daily targets and monitored fields.
+- `references/METHODOLOGY.md` — General research methodology and best practices.
+- Venue-specific research notes in `data/food-data-bank/venues/{venue-name}/RESEARCH.md`
