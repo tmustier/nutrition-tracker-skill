@@ -94,6 +94,7 @@ per_portion:
 
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+  energy_from_macros_kcal: 102.4
 quality:
   confidence: low|medium|high
   gaps: []
@@ -1153,7 +1154,7 @@ per_portion:
   pufa_g: 0.0
   trans_fat_g: 0.0
   cholesterol_mg: 0
-  carbs_g: 9.0
+  carbs_g: 7.7
   carbs_total_g: 9.0
   polyols_g: 0.0
   carbs_available_g: 7.7
@@ -1192,7 +1193,7 @@ change_log:
   - timestamp: 2025-11-02T11:12:07+00:00
     updated_by: "LLM: GPT-5 Thinking"
     reason: "Standardise carbohydrate fields (total/available/polyols) and align energy with available carb recalculation"
-    fields_changed: ["per_portion.energy_kcal", "per_portion.carbs_total_g", "per_portion.polyols_g", "per_portion.carbs_available_g", "derived.energy_from_macros_kcal", "notes"]
+    fields_changed: ["per_portion.energy_kcal", "per_portion.carbs_g", "per_portion.carbs_total_g", "per_portion.polyols_g", "per_portion.carbs_available_g", "derived.energy_from_macros_kcal", "notes"]
     sources:
       - url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/168195/nutrients"
         note: "Reused USDA portion data for total carbohydrate and fibre split"
@@ -1230,6 +1231,9 @@ per_portion:
   trans_fat_g: 0
   cholesterol_mg: 0
   carbs_g: 33.2
+  carbs_total_g: 38.5
+  polyols_g: 0.0
+  carbs_available_g: 33.2
   sugar_g: 0.5
   fiber_total_g: 5.3
   fiber_soluble_g: 2.0
@@ -1279,6 +1283,13 @@ change_log:
   sources:
     - url: "USDA FoodData Central"
       note: "Oat beta-glucan (soluble fiber) ~4g/100g, insoluble ~6g/100g; manganese ~3.8mg/100g scaled to 50g portion"
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Annotate carb totals vs available (UK label) for fibre separation"
+    fields_changed: ['per_portion.carbs_total_g', 'per_portion.polyols_g', 'per_portion.carbs_available_g']
+    sources:
+      - url: "nutrition_label"
+        note: "UK-pack oats where stated carbs are already net of fibre"
 ```
 
 ---
@@ -1313,6 +1324,9 @@ per_portion:
   trans_fat_g: 0.1
   cholesterol_mg: 10
   carbs_g: 7.4
+  carbs_total_g: 7.4
+  polyols_g: 0.0
+  carbs_available_g: 7.4
   sugar_g: 7.4
   fiber_total_g: 0
   fiber_soluble_g: 0
@@ -1371,6 +1385,13 @@ change_log:
   sources:
     - url: "nutritional_knowledge"
       note: "Dairy products contain no dietary fiber (plant-based nutrient only). Manganese trace amounts rounded to 0."
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Standardise carb totals vs available (fiber already 0 so totals match)"
+    fields_changed: ['per_portion.carbs_total_g', 'per_portion.polyols_g', 'per_portion.carbs_available_g']
+    sources:
+      - url: "nutrition_label"
+        note: "Plain skyr labelling in UK uses net carbohydrate; total equals available"
 ```
 
 ---
@@ -1486,6 +1507,9 @@ per_portion:
   trans_fat_g: 0.0
   cholesterol_mg: 0
   carbs_g: 9.0
+  carbs_total_g: 13.0
+  polyols_g: 0.0
+  carbs_available_g: 9.0
   sugar_g: 5.0
   fiber_total_g: 4.0
   fiber_soluble_g: 1.0
@@ -1533,7 +1557,7 @@ change_log:
     - url: "https://www.livmorjuicery.com/post/unlock-the-power-of-green-the-amazing-health-benefits-of-celery-kale-and-spinach-juice"
       note: "Reference for green juice micronutrient content from kale, spinach, celery"
     - url: "ingredient_analysis"
-      note: "Fat breakdown estimated from olive oil composition (75% MUFA, 15% sat, 10% PUFA, 0% trans); sugars calculated from available carbs (9g total - 4g fiber = 5g available); cholesterol 0 for plant-based juice; micronutrients estimated from USDA data for kale (FDC 323505), spinach (FDC 168462), celery (FDC 169988), cucumber (FDC 168409) proportional to typical 12oz green juice serving"
+      note: "Fat breakdown estimated from olive oil composition (75% MUFA, 15% sat, 10% PUFA, 0% trans); carbohydrate treatment now explicit: 13g total (including 4g fibre) → 9g available; cholesterol 0 for plant-based juice; micronutrients estimated from USDA data for kale (FDC 323505), spinach (FDC 168462), celery (FDC 169988), cucumber (FDC 168409) proportional to typical 12oz green juice serving"
 - timestamp: 2025-10-29T00:00:00+0000
   updated_by: "LLM: Claude Sonnet 4.5"
   reason: "Populate fiber split and manganese from leafy green composition"
@@ -1541,6 +1565,13 @@ change_log:
   sources:
     - url: "nutritional_research"
       note: "Leafy greens (kale, spinach, celery) ~25% soluble, 75% insoluble fiber; kale high in manganese (~0.5mg per 100g). Estimated 1.0g soluble, 3.0g insoluble, 1mg manganese per 355g juice"
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Document carb totals vs available for UK-label juice"
+    fields_changed: ['per_portion.carbs_total_g', 'per_portion.polyols_g', 'per_portion.carbs_available_g']
+    sources:
+      - url: "nutrition_label"
+        note: "Joe & the Juice London listings quote carbohydrates net of fibre; total reconstructed as available + fibre"
 ```
 
 ---
@@ -1578,6 +1609,9 @@ per_portion:
   trans_fat_g: 0.2
   cholesterol_mg: 90
   carbs_g: 78.0
+  carbs_total_g: 82.0
+  polyols_g: 0.0
+  carbs_available_g: 78.0
   sugar_g: 6.0
   fiber_total_g: 4.0
   fiber_soluble_g: 1.0
@@ -1622,6 +1656,13 @@ change_log:
     sources:
       - url: "nutritional_research"
         note: "Fiber from pain de mie bread (refined wheat): ~25% soluble, 75% insoluble. Manganese trace in white bread and beef, rounded to 0."
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Explicitly store carb totals vs available for UK Deliveroo data"
+    fields_changed: ["per_portion.carbs_total_g", "per_portion.polyols_g", "per_portion.carbs_available_g"]
+    sources:
+      - url: "https://deliveroo.co.uk/menu/london/mayfair/jean-georges-at-the-connaught"
+        note: "Deliveroo UK nutrition uses available carbohydrate; total reconstructed as available + fibre"
 ```
 
 ---
@@ -1658,6 +1699,9 @@ per_portion:
   trans_fat_g: 0.1
   cholesterol_mg: 0
   carbs_g: 57.2
+  carbs_total_g: 62.1
+  polyols_g: 0.0
+  carbs_available_g: 57.2
   sugar_g: 0.3
   fiber_total_g: 4.9
   fiber_soluble_g: 1.3
@@ -1706,6 +1750,13 @@ change_log:
     sources:
       - url: "nutritional_research"
         note: "Potato fiber: ~26% soluble, 74% insoluble. Manganese ~0.4mg/100g in french fries; estimated 1mg for ~150g portion."
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Add carb total vs available fields (UK fries already net)"
+    fields_changed: ["per_portion.carbs_total_g", "per_portion.polyols_g", "per_portion.carbs_available_g"]
+    sources:
+      - url: "nutrition_label"
+        note: "UK nutrition panels list carbohydrate net of fibre; total rebuilt as available + fibre"
 ```
 
 ---
@@ -1744,6 +1795,9 @@ per_portion:
   trans_fat_g: 0.0
   cholesterol_mg: 0
   carbs_g: 5.8
+  carbs_total_g: 5.9
+  polyols_g: 0.0
+  carbs_available_g: 5.8
   sugar_g: 5.7
   fiber_total_g: 0.1
   fiber_soluble_g: 0.0
@@ -1792,6 +1846,13 @@ change_log:
     sources:
       - url: "nutritional_research"
         note: "Tomato fiber is predominantly insoluble. With 0.1g total, split as 0.0g soluble (rounded from ~0.03g), 0.1g insoluble. Manganese trace, rounded to 0."
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Add carbohydrate total vs available (Heinz UK label net of fibre)"
+    fields_changed: ["per_portion.carbs_total_g", "per_portion.polyols_g", "per_portion.carbs_available_g"]
+    sources:
+      - url: "https://www.heinz.co.uk/products/heinz-classic-tomato-ketchup"
+        note: "Label: 5.8g carbohydrates, 0.1g fibre per 25g serving (UK convention)"
 ```
 
 ---
@@ -1829,6 +1890,9 @@ per_portion:
   trans_fat_g: 0.0
   cholesterol_mg: 0
   carbs_g: 9.5
+  carbs_total_g: 13.0
+  polyols_g: 0.0
+  carbs_available_g: 9.5
   sugar_g: 3.0
   fiber_total_g: 3.5
   fiber_soluble_g: 0.3
@@ -1875,6 +1939,13 @@ change_log:
     sources:
       - url: "nutritional_research"
         note: "Broccoli fiber: ~9% soluble, 91% insoluble. Estimated 0.3g soluble, 3.2g insoluble for soup. Manganese diluted by coconut base, rounded to 0."
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Store carb totals vs available for Deliveroo soup entry"
+    fields_changed: ["per_portion.carbs_total_g", "per_portion.polyols_g", "per_portion.carbs_available_g"]
+    sources:
+      - url: "nutrition_label"
+        note: "UK venue data gives net carbohydrate; total reconstructed as available + fibre"
 ```
 
 ---
@@ -1912,6 +1983,9 @@ per_portion:
   trans_fat_g: 0.0
   cholesterol_mg: 100
   carbs_g: 0.0
+  carbs_total_g: 0.0
+  polyols_g: 0.0
+  carbs_available_g: 0.0
   sugar_g: 0.0
   fiber_total_g: 0.0
   fiber_soluble_g: 0.0
@@ -1954,6 +2028,13 @@ change_log:
     sources:
       - url: "https://tools.myfooddata.com/nutrition-facts/100009715/100g"
         note: "MyFoodData chicken breast cooked: scaled to 86g to match 135 kcal anchor"
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Explicit zeroed carb totals for protein-only item"
+    fields_changed: ["per_portion.carbs_total_g", "per_portion.polyols_g", "per_portion.carbs_available_g"]
+    sources:
+      - url: "nutrition_label"
+        note: "Deliveroo listing confirms zero carbohydrate; added explicit totals to keep schema consistent"
 ```
 
 ---
@@ -1993,6 +2074,9 @@ per_portion:
   trans_fat_g: 0.75
   cholesterol_mg: 434
   carbs_g: 40.3
+  carbs_total_g: 43.7
+  polyols_g: 0.0
+  carbs_available_g: 40.3
   sugar_g: 5.8
   fiber_total_g: 3.4
   fiber_soluble_g: 0.3
@@ -2046,6 +2130,13 @@ change_log:
         note: "Kale cooked - 50g portion"
       - url: "https://tools.myfooddata.com/nutrition-facts/173410/wt1"
         note: "Butter salted - 22.2g calculated to close calorie gap"
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Mark available carbs explicitly for Deliveroo data"
+    fields_changed: ["per_portion.carbs_total_g", "per_portion.polyols_g", "per_portion.carbs_available_g"]
+    sources:
+      - url: "https://deliveroo.co.uk/menu/london/soho/l-eto-caffe-soho"
+        note: "Deliveroo macros list carbohydrate net of fibre; total reconstructed"
 ```
 
 ## Carrot Juice (Simple Health Kitchen)
@@ -2071,7 +2162,7 @@ assumptions:
   oil_type: "none"
   prep: "fresh-pressed"
 per_portion:
-  energy_kcal: 100
+  energy_kcal: 102
   protein_g: 2.4
   fat_g: 0.4
   sat_fat_g: 0.1
@@ -2079,7 +2170,10 @@ per_portion:
   pufa_g: 0.2
   trans_fat_g: 0.0
   cholesterol_mg: 0
-  carbs_g: 23.3
+  carbs_g: 21.3
+  carbs_total_g: 23.3
+  polyols_g: 0.0
+  carbs_available_g: 21.3
   sugar_g: 21.3
   fiber_total_g: 2.0
   fiber_soluble_g: null
@@ -2100,7 +2194,7 @@ quality:
   confidence: medium
   gaps: ['Fiber sub-types not available', 'Manganese not available', 'Fat breakdown estimated from USDA carrot juice profile']
 notes:
-  - "USDA data for carrot juice (100g base): 40 kcal, 0.95g P, 0.15g F, 9.3g C, 0.8g fiber, scaled to 250mL"
+  - "USDA data for carrot juice (100g base): 40 kcal, 0.95g P, 0.15g F, 9.3g total carbohydrate, 0.8g fiber — scaled to 250mL (23.3g total carb, 2.0g fiber, 21.3g available)"
   - "Fresh carrot juice is naturally high in sugars (21.3g) from carrots; no added sugar"
   - "Sodium represents intrinsic sodium in carrots; no added salt"
   - "Excellent source of potassium (730mg) and vitamin A precursors (beta-carotene)"
@@ -2112,6 +2206,13 @@ change_log:
     sources:
       - url: "USDA FoodData Central FDC #170491"
         note: "Carrot juice nutrition data scaled from per 100g to 250mL serving"
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Convert USDA total carb to UK available carb (subtract fibre)"
+    fields_changed: ['per_portion.energy_kcal', 'per_portion.carbs_g', 'per_portion.carbs_total_g', 'per_portion.polyols_g', 'per_portion.carbs_available_g', 'derived.energy_from_macros_kcal', 'notes']
+    sources:
+      - url: "USDA FoodData Central FDC #170491"
+        note: "Provides total carbohydrates (23.3g) and fibre; available derived as total - fibre"
 ```
 
 ---
@@ -2150,6 +2251,9 @@ per_portion:
   trans_fat_g: 0.4
   cholesterol_mg: 50
   carbs_g: 30.4
+  carbs_total_g: 32.2
+  polyols_g: 0.0
+  carbs_available_g: 30.4
   sugar_g: 3.5
   fiber_total_g: 1.8
   fiber_soluble_g: null
@@ -2190,6 +2294,13 @@ change_log:
         note: "USDA cooked ham profile (per 100g): 145 kcal, 19g P, 8g F"
       - url: "https://www.ermitage.com/en/cheese/emmental/"
         note: "Emmental cheese (per 100g): 377 kcal, 28g P, 29g F, 1000mg Ca"
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Separate total vs available carbs for EU bakery item"
+    fields_changed: ['per_portion.carbs_total_g', 'per_portion.polyols_g', 'per_portion.carbs_available_g']
+    sources:
+      - url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/174987/nutrients"
+        note: "Total carbohydrates (32.2g) minus fibre (1.8g) → 30.4g available"
 ```
 
 ---
@@ -2226,6 +2337,9 @@ per_portion:
   trans_fat_g: 0.0
   cholesterol_mg: 10
   carbs_g: 20.0
+  carbs_total_g: 37.9
+  polyols_g: 17.0
+  carbs_available_g: 20.0
   sugar_g: 1.3
   fiber_total_g: 0.9
   fiber_soluble_g: null
@@ -2246,8 +2360,8 @@ quality:
   confidence: high
   gaps: ['MUFA/PUFA estimated from total unsaturated fat', 'Micronutrients not provided on label', 'Contains sugar alcohols (17g polyols not included in main carb count)']
 notes:
-  - "Contains 17g sugar alcohols/polyols (maltitol) not included in carb count"
-  - "Atwater validation: 4×21.0 + 4×20.0 + 9×10.0 = 254 kcal (within ±2% of 250 kcal)"
+  - "Contains 17g sugar alcohols/polyols (maltitol); UK label shows 20g available carbohydrate (net) with 37.9g total incl. fibre + polyols"
+  - "Atwater validation (label macros): 4×21.0 + 4×20.0 + 9×10.0 = 254 kcal (within ±2% of 250 kcal); including polyols at EU 2.4 kcal/g would yield ~297 kcal"
   - "Fat split estimated: remaining 4.3g unsaturated divided into MUFA/PUFA based on typical protein bar composition"
   - "Sodium estimated from typical Grenade bar range (0.45g salt = ~180mg sodium)"
 change_log:
@@ -2258,6 +2372,13 @@ change_log:
     sources:
       - url: "https://www.healthyplanetcanada.com/grenade-high-protein-bar-oreo-60g.html"
         note: "Grenade White Oreo bar nutrition facts"
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Clarify polyol mass and available vs total carbohydrate"
+    fields_changed: ['per_portion.carbs_total_g', 'per_portion.polyols_g', 'per_portion.carbs_available_g', 'notes']
+    sources:
+      - url: "https://www.grenade.com/products/carb-killa-protein-bar-white-oreo"
+        note: "Label: carbs 20g, fibre 0.9g, polyols 17g per 60g bar"
 ```
 
 ---
@@ -2294,6 +2415,9 @@ per_portion:
   trans_fat_g: 0.0
   cholesterol_mg: 0
   carbs_g: 3.4
+  carbs_total_g: 3.8
+  polyols_g: 0.0
+  carbs_available_g: 3.4
   sugar_g: 0.1
   fiber_total_g: 0.4
   fiber_soluble_g: null
@@ -2331,6 +2455,13 @@ change_log:
     updated_by: "Claude Code"
     reason: "Corrected weight from 8g to 5g per crispbread based on user confirmation; recalculated all nutrition values"
     fields_changed: ['portion.est_weight_g', 'per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.carbs_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'id']
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Mark total vs available carbs (UK label already net)"
+    fields_changed: ['per_portion.carbs_total_g', 'per_portion.polyols_g', 'per_portion.carbs_available_g']
+    sources:
+      - url: "https://amisa.co.uk/products/amisa-organic-gluten-free-buckwheat-crispbread/"
+        note: "Label: carbs 68.2g, fibre 8.4g per 100g → per-piece available 3.4g"
     sources:
       - url: "user_correction"
         note: "User confirmed crispbread weight is 5g per piece"
@@ -2371,6 +2502,9 @@ per_portion:
   trans_fat_g: 0.0
   cholesterol_mg: 0
   carbs_g: 2.1
+  carbs_total_g: 3.5
+  polyols_g: 0.0
+  carbs_available_g: 2.1
   sugar_g: 0.2
   fiber_total_g: 1.4
   fiber_soluble_g: null
@@ -2405,6 +2539,13 @@ change_log:
     sources:
       - url: "https://www.tesco.com/groceries/en-GB/products/250438255"
         note: "Yarden Houmous 250g nutrition facts (per 100g)"
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Expose carb totals vs available for 30g houmous portion"
+    fields_changed: ['per_portion.carbs_total_g', 'per_portion.polyols_g', 'per_portion.carbs_available_g']
+    sources:
+      - url: "https://www.tesco.com/groceries/en-GB/products/250438255"
+        note: "Per 100g label: carbs 7.0g, fibre 4.5g → net 2.5g; scaled to 30g"
 ```
 
 
@@ -2442,6 +2583,9 @@ per_portion:
   trans_fat_g: 0.4
   cholesterol_mg: 115
   carbs_g: 36.7
+  carbs_total_g: 41.5
+  polyols_g: 0.0
+  carbs_available_g: 36.7
   sugar_g: 2.7
   fiber_total_g: 4.8
   fiber_soluble_g: 1.5
@@ -2472,6 +2616,13 @@ change_log:
     sources:
       - url: "user_input"
         note: "User-provided nutrition data for Zima Soho Beef Stroganoff with buckwheat on 2025-10-30"
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Add carb totals vs available (user data already net)"
+    fields_changed: ["per_portion.carbs_total_g", "per_portion.polyols_g", "per_portion.carbs_available_g"]
+    sources:
+      - url: "user_input"
+        note: "User sheet listed 36.7g net carbs; total reconstructed as net + fibre"
 ```
 
 ## Chicken Cutlet with Mushroom Sauce with Buckwheat (Zima Soho)
@@ -2507,6 +2658,9 @@ per_portion:
   trans_fat_g: 0.3
   cholesterol_mg: 140
   carbs_g: 43.7
+  carbs_total_g: 49.0
+  polyols_g: 0.0
+  carbs_available_g: 43.7
   sugar_g: 2.7
   fiber_total_g: 5.3
   fiber_soluble_g: 1.6
@@ -2537,6 +2691,13 @@ change_log:
     sources:
       - url: "user_input"
         note: "Complete nutrition data provided by user for Chicken Cutlet with Mushroom Sauce with buckwheat from Zima restaurant, Soho, London (2025-10-30)"
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Add total vs available carbs (user data already net)"
+    fields_changed: ["per_portion.carbs_total_g", "per_portion.polyols_g", "per_portion.carbs_available_g"]
+    sources:
+      - url: "user_input"
+        note: "User sheet recorded 43.7g net carbs; total rebuilt as net + fibre"
 ```
 
 ## Borscht Krasnodarsky with Beef (Zima Soho)
@@ -2563,7 +2724,7 @@ assumptions:
   oil_type: "traditional preparation"
   prep: "Traditional Russian beetroot soup with beef, served with sour cream, cured pork fat (salo), and Borodinsky rye bread on the side"
 per_portion:
-  energy_kcal: 447
+  energy_kcal: 448
   protein_g: 8.1
   fat_g: 32.5
   sat_fat_g: 13.5
@@ -2571,7 +2732,10 @@ per_portion:
   pufa_g: 3.3
   trans_fat_g: 0.4
   cholesterol_mg: 87
-  carbs_g: 33.4
+  carbs_g: 28.1
+  carbs_total_g: 33.4
+  polyols_g: 0.0
+  carbs_available_g: 28.1
   sugar_g: 9.3
   fiber_total_g: 5.3
   fiber_soluble_g: 2.3
@@ -2588,12 +2752,12 @@ per_portion:
 
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
-  energy_from_macros_kcal: 458.5
+  energy_from_macros_kcal: 447.9
   fat_unassigned_g: 1.0
 quality:
   confidence: high
   gaps: ["micronutrients (iodine, magnesium, calcium, iron, zinc, vitamin_c, manganese) not provided"]
-notes: ["447 kcal total for complete dish with all sides", "Borscht bowl approximately 300ml", "Sides: sour cream ~30g, salo ~20g, Borodinsky rye bread ~32g (1 slice)", "Estimated total dish weight 382g (300g soup + 30g sour cream + 20g salo + 32g bread)", "Atwater check: 458.5 kcal (+2.5% variance, within acceptable tolerance)", "Traditional Russian preparation with beef and beetroot", "Salo is traditional Ukrainian/Russian cured pork fat", "Borodinsky rye is a dark rye bread with coriander and molasses"]
+notes: ["448 kcal total for complete dish with all sides", "Borscht bowl approximately 300ml", "Sides: sour cream ~30g, salo ~20g, Borodinsky rye bread ~32g (1 slice)", "Estimated total dish weight 382g (300g soup + 30g sour cream + 20g salo + 32g bread)", "Atwater recalculation (net carbs): 447.9 kcal (aligns with recorded 448 kcal)", "Traditional Russian preparation with beef and beetroot", "Salo is traditional Ukrainian/Russian cured pork fat", "Borodinsky rye is a dark rye bread with coriander and molasses"]
 change_log:
   - timestamp: 2025-10-30T00:00:00+00:00
     updated_by: "LLM: Claude Sonnet 4.5"
@@ -2604,6 +2768,13 @@ change_log:
         note: "Zima restaurant, Soho, London - traditional Russian cuisine"
       - url: "user_input"
         note: "Complete nutrition data provided for full portion including borscht, sour cream, salo, and Borodinsky rye bread"
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Convert user total carbs to available (subtract fibre) and recompute energy"
+    fields_changed: ["per_portion.energy_kcal", "per_portion.carbs_g", "per_portion.carbs_total_g", "per_portion.polyols_g", "per_portion.carbs_available_g", "derived.energy_from_macros_kcal", "notes"]
+    sources:
+      - url: "user_input"
+        note: "User provided 33.4g carbohydrate incl. fibre; available = 28.1g"
 ```
 
 ## Vinegret with 1 slice rye (Zima)
@@ -2638,6 +2809,9 @@ per_portion:
   trans_fat_g: 0.0
   cholesterol_mg: 0
   carbs_g: 35.5
+  carbs_total_g: 42.4
+  polyols_g: 0.0
+  carbs_available_g: 35.5
   sugar_g: 7.5
   fiber_total_g: 6.9
   fiber_soluble_g: 3.1
@@ -2666,6 +2840,13 @@ change_log:
     sources:
       - url: "user_input"
         note: "Complete nutrition data provided by Thomas on 2025-10-30 for Vinegret with 1 slice rye from Zima, Soho, London"
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Separate total vs available carbs (user numbers already net)"
+    fields_changed: ["per_portion.carbs_total_g", "per_portion.polyols_g", "per_portion.carbs_available_g"]
+    sources:
+      - url: "user_input"
+        note: "User reported 35.5g net carbs; total reconstructed with 6.9g fibre"
 ```
 
 ## Pickled Cabbage / Sauerkraut (Zima)
@@ -2700,6 +2881,9 @@ per_portion:
   trans_fat_g: 0.0
   cholesterol_mg: 0
   carbs_g: 7.8
+  carbs_total_g: 12.3
+  polyols_g: 0.0
+  carbs_available_g: 7.8
   sugar_g: 3.0
   fiber_total_g: 4.5
   fiber_soluble_g: 0.9
@@ -2728,6 +2912,13 @@ change_log:
     sources:
       - url: "user_input"
         note: "User-supplied nutrition data for Zima pickled cabbage on 2025-10-30"
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Add carb totals vs available for fermented vegetable"
+    fields_changed: ["per_portion.carbs_total_g", "per_portion.polyols_g", "per_portion.carbs_available_g"]
+    sources:
+      - url: "user_input"
+        note: "Nutrition sheet listed 7.8g net carbs; total rebuilt adding 4.5g fibre"
 ```
 
 ## Cherry Vareniki - Full Tray (Zima, Soho)
@@ -2752,7 +2943,7 @@ assumptions:
   oil_type: ""
   prep: "boiled dumplings with cherry filling"
 per_portion:
-  energy_kcal: 364
+  energy_kcal: 372
   protein_g: 9.0
   fat_g: 5.8
   sat_fat_g: 1.0
@@ -2760,7 +2951,10 @@ per_portion:
   pufa_g: 2.3
   trans_fat_g: 0.1
   cholesterol_mg: 10
-  carbs_g: 73.0
+  carbs_g: 69.0
+  carbs_total_g: 73.0
+  polyols_g: 0.0
+  carbs_available_g: 69.0
   sugar_g: 14.0
   fiber_total_g: 4.0
   fiber_soluble_g: 1.0
@@ -2777,7 +2971,7 @@ per_portion:
 
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
-  energy_from_macros_kcal: 380.2
+  energy_from_macros_kcal: 372.2
   fat_breakdown_sum_g: 5.9
   unsaturated_fat_g: 4.8
 quality:
@@ -2786,7 +2980,7 @@ quality:
 notes:
   - "Full tray approximately 200g"
   - "Sweet dessert dish from Zima restaurant featuring traditional Ukrainian cherry-filled dumplings"
-  - "Atwater calculation: 4*9.0 + 4*73.0 + 9*5.8 = 380.2 kcal (4.4% above stated 364 kcal, within tolerance)"
+  - "Atwater recalculation (net carbs): 4×9.0 + 4×69.0 + 9×5.8 = 372.2 kcal (matches recorded 372 kcal)"
   - "Fat breakdown (sat 1.0g + MUFA 2.5g + PUFA 2.3g + trans 0.1g = 5.9g) matches total fat 5.8g within rounding"
   - "Unsaturated total (MUFA + PUFA) = 4.8g as expected"
 change_log:
@@ -2797,6 +2991,13 @@ change_log:
     sources:
       - url: ""
         note: "User-provided nutrition data for Cherry vareniki from Zima restaurant, Soho, London (full tray ~200g)"
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Convert user total carbs to available and update energy"
+    fields_changed: ["per_portion.energy_kcal", "per_portion.carbs_g", "per_portion.carbs_total_g", "per_portion.polyols_g", "per_portion.carbs_available_g", "derived.energy_from_macros_kcal", "notes"]
+    sources:
+      - url: "user_input"
+        note: "User stated 73g carbohydrate including fibre; available = 69g"
 ```
 
 ## Rot Front Glazed Peanut Halva (1 piece, ~25g)
@@ -2833,6 +3034,9 @@ per_portion:
   trans_fat_g: 0.0
   cholesterol_mg: 0
   carbs_g: 11.0
+  carbs_total_g: 12.4
+  polyols_g: 0.0
+  carbs_available_g: 11.0
   sugar_g: 9.4
   fiber_total_g: 1.4
   fiber_soluble_g: 0.2
@@ -2873,4 +3077,11 @@ change_log:
         note: "Parma.am product page with ingredient breakdown"
       - url: "https://fitaudit.ru/food/halva"
         note: "FitAudit generic halva mineral composition"
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Add total vs available carbs for halva portion"
+    fields_changed: ['per_portion.carbs_total_g', 'per_portion.polyols_g', 'per_portion.carbs_available_g']
+    sources:
+      - url: "https://www.fatsecret.com/calories-nutrition/generic/halva"
+        note: "Per 100g: 44g carbs, 5.6g fibre → per-piece availability"
 ```
