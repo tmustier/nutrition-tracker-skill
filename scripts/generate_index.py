@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 """
-Generate food-data-bank-index.md from food-data-bank.md
+Generate food-data-bank index from individual dish files.
 
-This script extracts all dish headers and IDs from the main data bank file
-and generates a separate index file with links to each dish.
+This script scans the food-data-bank directory structure and generates
+an index file organized by venue/category folders.
 
 The index is auto-generated and should not be manually edited.
 """
 
-import re
+import yaml
 from pathlib import Path
 from datetime import datetime, timezone
+from collections import defaultdict
 
 
 def slugify_anchor(text):
@@ -19,76 +20,132 @@ def slugify_anchor(text):
     Examples:
         "Sweet Potato Wedges (Simple Health Kitchen)" -> "sweet-potato-wedges-simple-health-kitchen"
         "Pistachios, 30 g" -> "pistachios-30-g"
-        "PACK'D Mixed Summer Berries (150 g)" -> "packd-mixed-summer-berries-150-g"
     """
-    # Convert to lowercase
+    import re
     anchor = text.lower()
-    # Replace special characters and spaces with hyphens
-    anchor = re.sub(r'[^\w\s-]', '', anchor)  # Remove non-word chars except spaces and hyphens
-    anchor = re.sub(r'[-\s]+', '-', anchor)   # Replace spaces and multiple hyphens with single hyphen
-    # Clean up
+    anchor = re.sub(r'[^\w\s-]', '', anchor)
+    anchor = re.sub(r'[-\s]+', '-', anchor)
     anchor = anchor.strip('-')
     return anchor
 
 
-def extract_dishes(data_bank_path):
-    """Extract dish information from food-data-bank.md.
+def parse_dish_file(filepath):
+    """Parse a dish file and extract metadata.
 
-    Returns:
-        List of dicts with keys: 'name', 'anchor', 'id'
+    Returns: dict with 'name', 'id', 'filepath', 'category_path'
     """
-    with open(data_bank_path, 'r', encoding='utf-8') as f:
-        content = f.read()
-
-    dishes = []
+    content = filepath.read_text(encoding='utf-8')
     lines = content.split('\n')
 
-    i = 0
-    while i < len(lines):
-        line = lines[i]
+    # Extract header (## Dish Name)
+    dish_name = None
+    for line in lines:
+        if line.startswith('## '):
+            dish_name = line[3:].strip()
+            break
 
-        # Look for dish headers (## Name)
-        # Skip the documentation headers like "## Edit Protocol" and "## Schema TEMPLATE"
-        if line.startswith('## ') and not line.startswith('## Edit') and not line.startswith('## Schema'):
-            dish_name = line[3:].strip()  # Remove "## " prefix
+    if not dish_name:
+        return None
 
-            # Skip if this is not a real dish (e.g., documentation sections)
-            if dish_name in ['Edit Protocol', 'Schema TEMPLATE (copy for new dishes)']:
-                i += 1
-                continue
+    # Extract YAML block
+    try:
+        yaml_start = content.index('```yaml') + 7
+        yaml_end = content.index('```', yaml_start)
+        yaml_content = content[yaml_start:yaml_end].strip()
+        data = yaml.safe_load(yaml_content)
 
-            # Find the YAML block and extract the ID
-            dish_id = None
-            j = i + 1
-            # Look for the YAML block (starts with ```yaml)
-            while j < len(lines) and j < i + 10:  # Search within next 10 lines
-                if lines[j].strip().startswith('```yaml'):
-                    # Found YAML block, now find the ID line
-                    k = j + 1
-                    while k < len(lines) and not lines[k].strip().startswith('```'):
-                        if lines[k].strip().startswith('id:'):
-                            dish_id = lines[k].split(':', 1)[1].strip()
-                            break
-                        k += 1
-                    break
-                j += 1
+        # Get category path (e.g., "venues/simple-health-kitchen")
+        rel_path = filepath.relative_to(filepath.parents[2])  # relative to food-data-bank/
+        category_path = str(rel_path.parent)
 
-            if dish_id:
-                anchor = slugify_anchor(dish_name)
-                dishes.append({
-                    'name': dish_name,
-                    'anchor': anchor,
-                    'id': dish_id
-                })
+        return {
+            'name': dish_name,
+            'id': data.get('id', 'unknown'),
+            'filepath': filepath,
+            'category_path': category_path,
+            'category': data.get('category', 'unknown')
+        }
+    except Exception as e:
+        print(f"Warning: Failed to parse {filepath.name}: {e}")
+        return None
 
-        i += 1
+
+def scan_data_bank(data_bank_dir):
+    """Scan the food-data-bank directory and extract all dishes.
+
+    Returns: list of dish metadata dicts
+    """
+    dishes = []
+
+    # Find all .md files recursively
+    for filepath in sorted(data_bank_dir.rglob('*.md')):
+        # Skip README and RESEARCH files
+        if filepath.name in ['README.md', 'RESEARCH.md', 'index.md']:
+            continue
+
+        dish_data = parse_dish_file(filepath)
+        if dish_data:
+            dishes.append(dish_data)
 
     return dishes
+
+
+def organize_by_category(dishes):
+    """Organize dishes by their category path.
+
+    Returns: dict mapping category_path -> list of dishes
+    """
+    organized = defaultdict(list)
+
+    for dish in dishes:
+        organized[dish['category_path']].append(dish)
+
+    return organized
+
+
+def format_category_name(category_path):
+    """Convert category path to readable name.
+
+    Examples:
+        'venues/simple-health-kitchen' -> 'Simple Health Kitchen'
+        'packaged/grenade' -> 'Grenade'
+        'generic/ingredients' -> 'Generic Ingredients'
+    """
+    parts = category_path.split('/')
+    if len(parts) == 2:
+        category_type, folder_name = parts
+
+        # Convert folder name to title case
+        name = folder_name.replace('-', ' ').title()
+
+        # Add category prefix for generic items
+        if category_type == 'generic':
+            return f"Generic: {name}"
+        elif category_type == 'packaged':
+            return f"Packaged: {name}"
+        else:
+            return name
+
+    return category_path
 
 
 def generate_index_file(dishes, output_path):
     """Generate the index markdown file."""
     timestamp = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')
+
+    # Organize by category
+    by_category = organize_by_category(dishes)
+
+    # Sort categories: venues first, then packaged, then generic
+    def category_sort_key(cat_path):
+        if cat_path.startswith('venues/'):
+            return (0, cat_path)
+        elif cat_path.startswith('packaged/'):
+            return (1, cat_path)
+        else:
+            return (2, cat_path)
+
+    sorted_categories = sorted(by_category.keys(), key=category_sort_key)
 
     content = f"""---
 title: Food Data Bank Index
@@ -98,23 +155,41 @@ generated: {timestamp}
 
 # Food Data Bank Index
 
-> **Note**: This file is auto-generated from `food-data-bank.md`. Do not edit manually.
+> **Note**: This file is auto-generated by scanning `data/food-data-bank/`. Do not edit manually.
 > Run `python scripts/generate_index.py` to regenerate.
 
-<!-- #todo: Reorder dishes by category or venue for better organization -->
+## Overview
 
-## All Dishes ({len(dishes)} total)
+Total dishes: {len(dishes)}
+
+- **Venues**: {sum(1 for c in sorted_categories if c.startswith('venues/'))} categories
+- **Packaged Products**: {sum(1 for c in sorted_categories if c.startswith('packaged/'))} categories
+- **Generic Items**: {sum(1 for c in sorted_categories if c.startswith('generic/'))} categories
+
+---
 
 """
 
-    for dish in dishes:
-        # Format: - [Dish Name](#anchor-link) {#dish_id}
-        content += f"- [{dish['name']}](#{dish['anchor']}) {{#{dish['id']}}}\n"
+    # Add each category section
+    for category_path in sorted_categories:
+        category_dishes = by_category[category_path]
+        category_name = format_category_name(category_path)
 
-    content += "\n---\n\n*Index generated automatically. See [food-data-bank.md](./food-data-bank.md) for full dish details.*\n"
+        content += f"## {category_name}\n\n"
+        content += f"*Location: `data/food-data-bank/{category_path}/`*\n\n"
+        content += f"**{len(category_dishes)} dishes:**\n\n"
 
-    with open(output_path, 'w', encoding='utf-8') as f:
-        f.write(content)
+        for dish in sorted(category_dishes, key=lambda d: d['name'].lower()):
+            # Format: - [Dish Name](path/to/file.md) {#dish_id}
+            rel_path = dish['filepath'].relative_to(output_path.parent)
+            content += f"- [{dish['name']}]({rel_path}) {{#{dish['id']}}}\n"
+
+        content += "\n"
+
+    content += "---\n\n"
+    content += "*Index generated automatically by scanning the food-data-bank directory structure.*\n"
+
+    output_path.write_text(content, encoding='utf-8')
 
     print(f"✓ Generated index with {len(dishes)} dishes")
     print(f"✓ Written to: {output_path}")
@@ -124,15 +199,15 @@ def main():
     # Determine paths relative to script location
     script_dir = Path(__file__).parent
     project_root = script_dir.parent
-    data_bank_path = project_root / 'data' / 'food-data-bank.md'
+    data_bank_dir = project_root / 'data' / 'food-data-bank'
     index_path = project_root / 'data' / 'food-data-bank-index.md'
 
-    if not data_bank_path.exists():
-        print(f"Error: Could not find {data_bank_path}")
+    if not data_bank_dir.exists():
+        print(f"Error: Could not find {data_bank_dir}")
         return 1
 
-    print(f"Reading from: {data_bank_path}")
-    dishes = extract_dishes(data_bank_path)
+    print(f"Scanning: {data_bank_dir}")
+    dishes = scan_data_bank(data_bank_dir)
 
     if not dishes:
         print("Warning: No dishes found in data bank!")
