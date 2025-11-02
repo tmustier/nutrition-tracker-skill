@@ -1145,7 +1145,7 @@ assumptions:
   oil_type: ""
   prep: "fresh, whole, peeled"
 per_portion:
-  energy_kcal: 35
+  energy_kcal: 37
   protein_g: 0.6
   fat_g: 0.1
   sat_fat_g: 0.0
@@ -1154,6 +1154,9 @@ per_portion:
   trans_fat_g: 0.0
   cholesterol_mg: 0
   carbs_g: 9.0
+  carbs_total_g: 9.0
+  polyols_g: 0.0
+  carbs_available_g: 7.7
   sugar_g: 6.8
   fiber_total_g: 1.3
   fiber_soluble_g: null
@@ -1170,12 +1173,12 @@ per_portion:
 
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
-  energy_from_macros_kcal: 35.0
+  energy_from_macros_kcal: 36.7
   fat_unassigned_g: 0.1
 quality:
   confidence: high
   gaps: ["fiber_soluble_g", "fiber_insoluble_g", "iodine_ug", "manganese_mg"]
-notes: ["35 kcal from USDA FoodData Central per medium 74g clementine", "Values scaled from USDA per-100g data: 47 kcal, 0.85g protein, 0.15g fat, 12g carbs, 1.7g fiber", "Fat content negligible (<0.15g) - primarily trace amounts of natural fruit oils", "Excellent source of vitamin C: 36mg provides ~60% daily value", "Naturally sodium-free and cholesterol-free", "Atwater validation: 4×0.6 + 4×9.0 + 9×0.1 = 39.3 kcal (within ±12% of USDA 35 kcal - acceptable for whole fruit variability)"]
+notes: ["35 kcal from USDA FoodData Central per medium 74g clementine", "Values scaled from USDA per-100g data: 47 kcal, 0.85g protein, 0.15g fat, 12g carbs, 1.7g fiber", "Available carbs recalculated: 9.0g total - 1.3g fiber = 7.7g", "Fat content negligible (<0.15g) - primarily trace amounts of natural fruit oils", "Excellent source of vitamin C: 36mg provides ~60% daily value", "Naturally sodium-free and cholesterol-free", "Atwater recalculation (available carbs + fiber energy): 36.7 kcal (+1.7 vs 35 kcal label)"]
 change_log:
   - timestamp: 2025-10-29T14:00:00+00:00
     updated_by: "LLM: Claude Sonnet 4.5"
@@ -1186,6 +1189,13 @@ change_log:
         note: "USDA FoodData Central primary source for clementines, raw"
       - url: "https://tools.myfooddata.com/nutrition-facts/168195/wt1"
         note: "USDA data aggregator showing per-clementine values (74g portion)"
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Standardise carbohydrate fields (total/available/polyols) and align energy with available carb recalculation"
+    fields_changed: ["per_portion.energy_kcal", "per_portion.carbs_total_g", "per_portion.polyols_g", "per_portion.carbs_available_g", "derived.energy_from_macros_kcal", "notes"]
+    sources:
+      - url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/168195/nutrients"
+        note: "Reused USDA portion data for total carbohydrate and fibre split"
 ```
 
 ---
@@ -2864,4 +2874,3 @@ change_log:
       - url: "https://fitaudit.ru/food/halva"
         note: "FitAudit generic halva mineral composition"
 ```
-
