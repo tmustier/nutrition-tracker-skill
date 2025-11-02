@@ -186,11 +186,17 @@ Every `per_portion` block must track carbohydrate data with three explicit field
 | Field | Meaning | Default precision |
 | --- | --- | --- |
 | `carbs_total_g` | Label-style total carbohydrate (includes fibre + polyols) | 0.1 g |
-| `carbs_available_g` | Digestible / “available” carbohydrate (a.k.a. net carbs) | 0.1 g |
+| `carbs_available_g` | Digestible / "available" carbohydrate (a.k.a. net carbs) | 0.1 g |
 | `polyols_g` | Sugar alcohol mass; 0.0 if none or unknown | 0.1 g |
 
 - `fiber_total_g` continues to represent total dietary fibre (soluble + insoluble).
 - Relationship check: `carbs_total_g = carbs_available_g + fiber_total_g + polyols_g` (within rounding).
+
+**Zero vs null conventions:**
+- Use `0.0` for confirmed zero values (e.g., zero-carb foods like plain chicken have `carbs_total_g: 0.0`).
+- Use `null` for unknown or unmeasured values.
+- For zero-carb animal protein sources (meat, poultry, fish), set all carb and fiber fields to `0.0` (scientifically accurate).
+- For processed foods without fiber data, use `null` unless you can confirm zero fiber from ingredients.
 
 ---
 
@@ -239,9 +245,15 @@ energy_kcal =
 
 - `polyol_factor` is 2.4 kcal/g unless evidence specifies another value.
 - Always recompute `per_portion.energy_kcal` after updating carbs.
-- If the recomputed energy falls within ±8% of the printed kcal, update the stored energy to the calculated value and note the variance. If the gap exceeds ±8%:
-  1. Confirm source classification.
-  2. Adjust the label energy with a comment in `change_log`.
+
+**Energy storage policy:**
+- **Store the calculated energy** (from the formula above) in `per_portion.energy_kcal`.
+- If the calculated value differs from the venue/label energy, **note the original label value** in the `notes` field.
+- Document the variance in the `change_log` when updating energy values.
+- If the gap exceeds ±8%:
+  1. Confirm source classification (UK/EU vs US/Canada).
+  2. Double-check macronutrient values for accuracy.
+  3. If values are correct, proceed with calculated energy and document the variance.
 
 ---
 

@@ -21,6 +21,12 @@ CARB_TOL_G = 0.2       # acceptable rounding error for carb totals
 FIBER_KCAL_PER_G = 2.0
 POLYOL_KCAL_PER_G = 2.4
 
+# Compile polyol detection regex once at module level (performance optimization)
+POLYOL_PATTERN = re.compile(
+    r'\b(\d+\.?\d*)\s*g\b.*?\b(polyol|maltitol|erythritol|xylitol|sorbitol|sugar\s+alcohol)',
+    re.IGNORECASE
+)
+
 def parse_yaml_blocks(text):
     blocks = []
     fence = re.compile(r"```yaml\s*(.*?)```", re.S | re.M)
@@ -63,8 +69,7 @@ def check_block(y):
     # Cross-check notes for polyol mentions
     notes = y.get("notes", [])
     notes_text = ' '.join(notes) if isinstance(notes, list) else str(notes) if notes else ""
-    polyol_pattern = r'\b(\d+\.?\d*)\s*g\b.*?\b(polyol|maltitol|erythritol|xylitol|sorbitol|sugar\s+alcohol)'
-    polyol_mentions = re.findall(polyol_pattern, notes_text, re.IGNORECASE)
+    polyol_mentions = POLYOL_PATTERN.findall(notes_text)
 
     # required trees
     for k in ["per_portion", "derived", "quality"]:
@@ -174,10 +179,13 @@ def check_block(y):
     return {"id": bid, "issues": issues, "warnings": warnings, "passes": passes}
 
 def main():
-    if len(sys.argv) < 2:
-        print("Usage: python scripts/validate_data_bank.py <path/to/data-bank.md>")
-        sys.exit(1)
-    path = Path(sys.argv[1])
+    import argparse
+    parser = argparse.ArgumentParser(description="Validate the nutrition Data Bank markdown file")
+    parser.add_argument("data_bank", help="Path to the data bank markdown file")
+    parser.add_argument("--no-index", action="store_true", help="Skip automatic index regeneration")
+    args = parser.parse_args()
+
+    path = Path(args.data_bank)
     text = path.read_text(encoding="utf-8")
     blocks = parse_yaml_blocks(text)
 
@@ -209,28 +217,31 @@ def main():
     has_issues = any(res['issues'] for res in report['results'])
     has_warnings = any(res['warnings'] for res in report['results'])
 
-    # Auto-regenerate index after successful validation
-    script_dir = Path(__file__).parent
-    generate_index_script = script_dir / "generate_index.py"
+    # Auto-regenerate index after successful validation (unless --no-index is specified)
+    if not args.no_index:
+        script_dir = Path(__file__).parent
+        generate_index_script = script_dir / "generate_index.py"
 
-    if generate_index_script.exists():
-        print("\n# Index Generation")
-        try:
-            result = subprocess.run(
-                [sys.executable, str(generate_index_script)],
-                capture_output=True,
-                text=True,
-                check=True
-            )
-            stdout = result.stdout.strip()
-            if stdout:
-                print(stdout)
-        except subprocess.CalledProcessError as e:
-            print(f"Warning: Failed to regenerate index: {e}")
-            if e.stderr:
-                print(f"stderr: {e.stderr}")
+        if generate_index_script.exists():
+            print("\n# Index Generation")
+            try:
+                result = subprocess.run(
+                    [sys.executable, str(generate_index_script)],
+                    capture_output=True,
+                    text=True,
+                    check=True
+                )
+                stdout = result.stdout.strip()
+                if stdout:
+                    print(stdout)
+            except subprocess.CalledProcessError as e:
+                print(f"Warning: Failed to regenerate index: {e}")
+                if e.stderr:
+                    print(f"stderr: {e.stderr}")
+        else:
+            print("\nNote: Index generation script not found.")
     else:
-        print("\nNote: Index generation script not found.")
+        print("\n# Index regeneration skipped (--no-index flag)")
 
     # Exit with non-zero status if critical issues found
     if has_issues:

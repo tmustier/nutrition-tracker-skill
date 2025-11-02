@@ -367,5 +367,136 @@ class TestEdgeCases:
         assert len(negative_issues) == 1
 
 
+class TestIntegration:
+    """Integration tests for full validation workflow."""
+
+    def test_validate_real_dish_zero_carb(self):
+        """Test validation of a zero-carb dish (chicken breast)."""
+        block = {
+            "id": "test_chicken",
+            "per_portion": {
+                "energy_kcal": 135.6,
+                "protein_g": 27.6,
+                "fat_g": 2.8,
+                "sat_fat_g": 0.9,
+                "mufa_g": 1.1,
+                "pufa_g": 0.7,
+                "fiber_total_g": 0.0,
+                "carbs_available_g": 0.0,
+                "carbs_total_g": 0.0,
+                "polyols_g": 0.0,
+                "sodium_mg": 212,
+            },
+            "derived": {},
+            "quality": {},
+        }
+        result = check_block(block)
+        assert len(result["issues"]) == 0
+        assert any("Energy within tolerance" in p for p in result["passes"])
+
+    def test_validate_real_dish_with_carbs(self):
+        """Test validation of a dish with carbs (oats)."""
+        block = {
+            "id": "test_oats",
+            "per_portion": {
+                "energy_kcal": 208.9,
+                "protein_g": 8.5,
+                "fat_g": 3.5,
+                "sat_fat_g": 0.6,
+                "fiber_total_g": 5.3,
+                "carbs_available_g": 33.2,
+                "carbs_total_g": 38.5,
+                "polyols_g": 0.0,
+                "sodium_mg": 4,
+            },
+            "derived": {},
+            "quality": {},
+        }
+        result = check_block(block)
+        assert len(result["issues"]) == 0
+        assert any("Energy within tolerance" in p for p in result["passes"])
+
+    def test_validate_real_dish_with_polyols(self):
+        """Test validation of a dish with polyols (Grenade bar)."""
+        block = {
+            "id": "test_grenade",
+            "per_portion": {
+                "energy_kcal": 296.6,
+                "protein_g": 21.0,
+                "fat_g": 10.0,
+                "sat_fat_g": 4.5,
+                "fiber_total_g": 0.9,
+                "carbs_available_g": 20.0,
+                "carbs_total_g": 37.9,
+                "polyols_g": 17.0,
+                "sodium_mg": 100,
+            },
+            "derived": {},
+            "quality": {},
+            "notes": ["Contains 17g maltitol polyols"]
+        }
+        result = check_block(block)
+        assert len(result["issues"]) == 0
+        assert any("Energy within tolerance" in p for p in result["passes"])
+        assert any("Polyol mentions in notes match" in p for p in result["passes"])
+
+    def test_validate_missing_carbs_available(self):
+        """Test that missing carbs_available_g is caught."""
+        block = {
+            "id": "test_missing_carbs",
+            "per_portion": {
+                "energy_kcal": 100.0,
+                "protein_g": 10.0,
+                "fat_g": 5.0,
+                "carbs_total_g": 10.0,
+                "fiber_total_g": 2.0,
+                "polyols_g": 0.0,
+            },
+            "derived": {},
+            "quality": {},
+        }
+        result = check_block(block)
+        assert any("Missing carbs_available_g" in i for i in result["issues"])
+
+    def test_validate_carb_relationship_mismatch(self):
+        """Test that carb relationship mismatches are detected."""
+        block = {
+            "id": "test_carb_mismatch",
+            "per_portion": {
+                "energy_kcal": 100.0,
+                "protein_g": 10.0,
+                "fat_g": 5.0,
+                "carbs_available_g": 10.0,
+                "carbs_total_g": 20.0,  # Should be ~12.0 (10 + 2 + 0)
+                "fiber_total_g": 2.0,
+                "polyols_g": 0.0,
+            },
+            "derived": {},
+            "quality": {},
+        }
+        result = check_block(block)
+        assert any("carbs_total_g mismatch" in w for w in result["warnings"])
+
+    def test_validate_polyol_note_without_field(self):
+        """Test that polyol mentions in notes without polyols_g field trigger warning."""
+        block = {
+            "id": "test_polyol_note",
+            "per_portion": {
+                "energy_kcal": 250.0,
+                "protein_g": 20.0,
+                "fat_g": 10.0,
+                "carbs_available_g": 15.0,
+                "carbs_total_g": 32.0,
+                "fiber_total_g": 1.0,
+                "polyols_g": 0.0,  # Should be 16.0
+            },
+            "derived": {},
+            "quality": {},
+            "notes": ["Contains 16g erythritol"]
+        }
+        result = check_block(block)
+        assert any("Notes mention polyols" in w for w in result["warnings"])
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])

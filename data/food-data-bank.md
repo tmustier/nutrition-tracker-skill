@@ -578,20 +578,12 @@ change_log:
   - last_verified
   - notes
   - per_portion.carbs_available_g
+  - per_portion.carbs_g
   - per_portion.carbs_total_g
   - per_portion.energy_kcal
   - per_portion.fiber_insoluble_g
   - per_portion.fiber_soluble_g
   - per_portion.fiber_total_g
-  - per_portion.polyols_g
-  - version
-  sources: []
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed:
-  - last_verified
-  - per_portion.carbs_g
   - per_portion.polyols_g
   - version
   sources: []
