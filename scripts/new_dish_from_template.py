@@ -4,9 +4,9 @@ Append a fresh dish block from the Schema TEMPLATE to the Data Bank.
 - Fills id from slugs: {dish_slug}_{venue_slug}_v1
 - Sets version: 1, last_verified: today
 - Fills source.venue and portion.description
-It does not try to fully update the Dishes Index (prints a suggested bullet).
+- Auto-regenerates the index file after adding the dish
 """
-import sys, re
+import sys, re, subprocess
 from pathlib import Path
 from datetime import datetime, timezone
 
@@ -54,11 +54,27 @@ def main():
     new_text = text.rstrip() + fenced + "\n"
     save_text(args.bank, new_text)
 
-    # Suggest index bullet
-    print("Appended new dish block.")
-    print("Suggested index bullet (add under '# Dishes Index'):\n")
-    anchor = f"{{#{stable_id}}}"
-    print(f"- [{args.display_name}]({anchor}) {anchor}")
+    print("✓ Appended new dish block.")
+
+    # Auto-regenerate index
+    script_dir = Path(__file__).parent
+    generate_index_script = script_dir / "generate_index.py"
+
+    if generate_index_script.exists():
+        print("✓ Regenerating index...")
+        try:
+            result = subprocess.run(
+                [sys.executable, str(generate_index_script)],
+                capture_output=True,
+                text=True,
+                check=True
+            )
+            print(result.stdout.strip())
+        except subprocess.CalledProcessError as e:
+            print(f"Warning: Failed to regenerate index: {e}")
+            print(f"  You can manually regenerate it by running: python scripts/generate_index.py")
+    else:
+        print(f"Note: Index generation script not found. Run manually: python scripts/generate_index.py")
 
 if __name__ == "__main__":
     main()

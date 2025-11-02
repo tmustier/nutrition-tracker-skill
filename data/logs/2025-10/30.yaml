@@ -16,9 +16,6 @@ entries:
       pufa_g: 0.0
       trans_fat_g: 0.1
       cholesterol_mg: 10
-      carbs_total_g: 7.4
-      polyols_g: 0.0
-      carbs_available_g: 7.4
       sugar_g: 7.4
       fiber_total_g: 0
       fiber_soluble_g: 0
@@ -32,6 +29,9 @@ entries:
       zinc_mg: 1
       vitamin_c_mg: 0
       manganese_mg: 0
+      polyols_g: 0.0
+      carbs_available_g: 7.4
+      carbs_total_g: 7.4
   - name: PACK'D Mixed Summer Berries
     food_bank_id: packd_mixed_summer_berries_150g_v1
     quantity: 1
@@ -45,9 +45,6 @@ entries:
       pufa_g: 0.18
       trans_fat_g: 0
       cholesterol_mg: 0
-      carbs_total_g: 14.2
-      polyols_g: 0.0
-      carbs_available_g: 9.8
       sugar_g: 9.8
       fiber_total_g: 4.4
       fiber_soluble_g: null
@@ -61,6 +58,9 @@ entries:
       zinc_mg: 1
       vitamin_c_mg: 29
       manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 9.8
+      carbs_total_g: 14.2
   - name: Oats - dry
     food_bank_id: oats_dry_50g_v1
     quantity: 1
@@ -74,9 +74,6 @@ entries:
       pufa_g: 1.3
       trans_fat_g: 0
       cholesterol_mg: 0
-      carbs_total_g: 38.5
-      polyols_g: 0.0
-      carbs_available_g: 33.2
       sugar_g: 0.5
       fiber_total_g: 5.3
       fiber_soluble_g: 2.0
@@ -90,6 +87,9 @@ entries:
       zinc_mg: 2
       vitamin_c_mg: 0
       manganese_mg: 2
+      polyols_g: 0.0
+      carbs_available_g: 33.2
+      carbs_total_g: 38.5
   - name: ON Gold Standard Whey
     food_bank_id: on_whey_drc_30g_v1
     quantity: 1
@@ -103,9 +103,6 @@ entries:
       pufa_g: 0.4
       trans_fat_g: null
       cholesterol_mg: null
-      carbs_total_g: 3.7
-      polyols_g: 0.0
-      carbs_available_g: 3.0
       sugar_g: 1.3
       fiber_total_g: 0.7
       fiber_soluble_g: null
@@ -119,6 +116,9 @@ entries:
       zinc_mg: 2
       vitamin_c_mg: null
       manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 3.0
+      carbs_total_g: 3.7
   - name: Pistachios, 30g
     food_bank_id: pistachios_30g_v1
     quantity: 1
@@ -132,9 +132,6 @@ entries:
       pufa_g: 4.3
       trans_fat_g: null
       cholesterol_mg: null
-      carbs_total_g: 11.6
-      polyols_g: 0.0
-      carbs_available_g: 8.4
       sugar_g: 2.3
       fiber_total_g: 3.2
       fiber_soluble_g: null
@@ -148,6 +145,9 @@ entries:
       zinc_mg: 1
       vitamin_c_mg: null
       manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 8.4
+      carbs_total_g: 11.6
   notes: Breakfast smoothie blended together
 - timestamp: '2025-10-30T10:51:00+00:00'
   items:
@@ -164,9 +164,6 @@ entries:
       pufa_g: 1.3
       trans_fat_g: 0.4
       cholesterol_mg: 50
-      carbs_total_g: 32.2
-      polyols_g: 0.0
-      carbs_available_g: 30.4
       sugar_g: 3.5
       fiber_total_g: 1.8
       fiber_soluble_g: null
@@ -180,6 +177,9 @@ entries:
       zinc_mg: 2.1
       vitamin_c_mg: 0
       manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 30.4
+      carbs_total_g: 32.2
   notes: ''
 - timestamp: '2025-10-30T15:10:00+00:00'
   items:
@@ -188,7 +188,7 @@ entries:
     quantity: 1
     unit: portion
     nutrition:
-      energy_kcal: 296.6
+      energy_kcal: 255.8
       protein_g: 21.0
       fat_g: 10.0
       sat_fat_g: 5.7
@@ -196,9 +196,6 @@ entries:
       pufa_g: 2.3
       trans_fat_g: 0.0
       cholesterol_mg: 10
-      carbs_total_g: 37.9
-      polyols_g: 17.0
-      carbs_available_g: 20.0
       sugar_g: 1.3
       fiber_total_g: 0.9
       fiber_soluble_g: null
@@ -212,6 +209,9 @@ entries:
       zinc_mg: null
       vitamin_c_mg: null
       manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 20.0
+      carbs_total_g: 20.9
   - name: Amisa Buckwheat Crispbread
     food_bank_id: amisa_buckwheat_crispbread_5g_v1
     quantity: 4
@@ -225,9 +225,6 @@ entries:
       pufa_g: 0.1
       trans_fat_g: 0.0
       cholesterol_mg: 0
-      carbs_total_g: 15.3
-      polyols_g: 0.0
-      carbs_available_g: 13.6
       sugar_g: 0.3
       fiber_total_g: 1.7
       fiber_soluble_g: null
@@ -241,6 +238,9 @@ entries:
       zinc_mg: null
       vitamin_c_mg: null
       manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 13.6
+      carbs_total_g: 15.3
   - name: Yarden Houmous
     food_bank_id: yarden_houmous_30g_v1
     quantity: 1
@@ -254,9 +254,6 @@ entries:
       pufa_g: 4.1
       trans_fat_g: 0.0
       cholesterol_mg: 0
-      carbs_total_g: 3.5
-      polyols_g: 0.0
-      carbs_available_g: 2.1
       sugar_g: 0.2
       fiber_total_g: 1.4
       fiber_soluble_g: null
@@ -270,4 +267,216 @@ entries:
       zinc_mg: null
       vitamin_c_mg: null
       manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 2.1
+      carbs_total_g: 3.5
   notes: Afternoon snack
+- timestamp: '2025-10-30T18:45:00+00:00'
+  items:
+  - name: Borscht Krasnodarsky with Beef
+    food_bank_id: borscht_krasnodarsky_zima_v1
+    quantity: 1
+    unit: portion
+    nutrition:
+      energy_kcal: 469.1
+      protein_g: 8.1
+      fat_g: 32.5
+      sat_fat_g: 13.5
+      mufa_g: 14.3
+      pufa_g: 3.3
+      trans_fat_g: 0.4
+      cholesterol_mg: 87
+      sugar_g: 9.3
+      fiber_total_g: 5.3
+      fiber_soluble_g: 2.3
+      fiber_insoluble_g: 3.0
+      sodium_mg: 931
+      potassium_mg: 595
+      iodine_ug: null
+      magnesium_mg: null
+      calcium_mg: null
+      iron_mg: null
+      zinc_mg: null
+      vitamin_c_mg: null
+      manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 33.4
+      carbs_total_g: 38.7
+  - name: Beef Stroganoff with Buckwheat
+    food_bank_id: beef_stroganoff_buckwheat_zima_v1
+    quantity: 0.5
+    unit: portion
+    nutrition:
+      energy_kcal: 283.3
+      protein_g: 18.6
+      fat_g: 14.5
+      sat_fat_g: 6.1
+      mufa_g: 5.1
+      pufa_g: 1.4
+      trans_fat_g: 0.2
+      cholesterol_mg: 58
+      sugar_g: 1.4
+      fiber_total_g: 2.4
+      fiber_soluble_g: 0.8
+      fiber_insoluble_g: 1.7
+      sodium_mg: 403
+      potassium_mg: 279
+      iodine_ug: null
+      magnesium_mg: null
+      calcium_mg: null
+      iron_mg: null
+      zinc_mg: null
+      vitamin_c_mg: null
+      manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 18.4
+      carbs_total_g: 20.8
+  - name: Chicken Cutlet with Mushroom Sauce with Buckwheat
+    food_bank_id: chicken_cutlet_mushroom_sauce_zima_v1
+    quantity: 0.5
+    unit: portion
+    nutrition:
+      energy_kcal: 292.1
+      protein_g: 14.9
+      fat_g: 15.5
+      sat_fat_g: 4.1
+      mufa_g: 7.1
+      pufa_g: 3.7
+      trans_fat_g: 0.2
+      cholesterol_mg: 70
+      sugar_g: 1.4
+      fiber_total_g: 2.7
+      fiber_soluble_g: 0.8
+      fiber_insoluble_g: 1.9
+      sodium_mg: 468
+      potassium_mg: 279
+      iodine_ug: null
+      magnesium_mg: null
+      calcium_mg: null
+      iron_mg: null
+      zinc_mg: null
+      vitamin_c_mg: null
+      manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 21.9
+      carbs_total_g: 24.6
+  - name: Vinegret with 1 slice rye
+    food_bank_id: vinegret_with_rye_zima_v1
+    quantity: 0.5
+    unit: portion
+    nutrition:
+      energy_kcal: 117.7
+      protein_g: 2.9
+      fat_g: 3.1
+      sat_fat_g: 0.6
+      mufa_g: 1.0
+      pufa_g: 1.9
+      trans_fat_g: 0.0
+      cholesterol_mg: 0
+      sugar_g: 3.8
+      fiber_total_g: 3.5
+      fiber_soluble_g: 1.6
+      fiber_insoluble_g: 1.9
+      sodium_mg: 247
+      potassium_mg: 202
+      iodine_ug: null
+      magnesium_mg: null
+      calcium_mg: null
+      iron_mg: null
+      zinc_mg: null
+      vitamin_c_mg: null
+      manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 17.8
+      carbs_total_g: 21.3
+  - name: Pickled Cabbage / Sauerkraut
+    food_bank_id: sauerkraut_zima_v1
+    quantity: 0.25
+    unit: portion
+    nutrition:
+      energy_kcal: 12.7
+      protein_g: 0.4
+      fat_g: 0.1
+      sat_fat_g: 0.0
+      mufa_g: 0.0
+      pufa_g: 0.0
+      trans_fat_g: 0.0
+      cholesterol_mg: 0
+      sugar_g: 0.8
+      fiber_total_g: 1.1
+      fiber_soluble_g: 0.2
+      fiber_insoluble_g: 0.9
+      sodium_mg: 270
+      potassium_mg: 77
+      iodine_ug: null
+      magnesium_mg: null
+      calcium_mg: null
+      iron_mg: null
+      zinc_mg: null
+      vitamin_c_mg: null
+      manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 2.0
+      carbs_total_g: 3.1
+  - name: Cherry Vareniki - Full Tray
+    food_bank_id: cherry_vareniki_zima_v1
+    quantity: 0.5
+    unit: portion
+    nutrition:
+      energy_kcal: 194.1
+      protein_g: 4.5
+      fat_g: 2.9
+      sat_fat_g: 0.5
+      mufa_g: 1.3
+      pufa_g: 1.2
+      trans_fat_g: 0.1
+      cholesterol_mg: 5
+      sugar_g: 7.0
+      fiber_total_g: 2.0
+      fiber_soluble_g: 0.5
+      fiber_insoluble_g: 1.5
+      sodium_mg: 65
+      potassium_mg: 100
+      iodine_ug: null
+      magnesium_mg: null
+      calcium_mg: null
+      iron_mg: null
+      zinc_mg: null
+      vitamin_c_mg: null
+      manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 36.5
+      carbs_total_g: 38.5
+  notes: Dinner from Zima Soho
+- timestamp: '2025-10-30T19:34:00+00:00'
+  items:
+  - name: Rot Front Glazed Peanut Halva (1 piece, ~25g)
+    food_bank_id: halva_glazed_peanut_rotfront_v1
+    quantity: 1
+    unit: piece
+    nutrition:
+      energy_kcal: 135.5
+      protein_g: 3.5
+      fat_g: 8.3
+      sat_fat_g: 1.4
+      mufa_g: 3.0
+      pufa_g: 3.9
+      trans_fat_g: 0.0
+      cholesterol_mg: 0
+      sugar_g: 9.4
+      fiber_total_g: 1.4
+      fiber_soluble_g: 0.2
+      fiber_insoluble_g: 1.2
+      sodium_mg: 50
+      potassium_mg: 75
+      iodine_ug: null
+      magnesium_mg: 55
+      calcium_mg: 8
+      iron_mg: 1
+      zinc_mg: 1
+      vitamin_c_mg: null
+      manganese_mg: 0
+      polyols_g: 0.0
+      carbs_available_g: 11.0
+      carbs_total_g: 12.4
+  notes: Chocolate glazed halva mini

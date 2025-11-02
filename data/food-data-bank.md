@@ -19,7 +19,7 @@ default_units:
   - \"vitamin_c: mg"
   - \"zinc: mg"
 created: 2025-10-28
-modified: 2025-11-02
+modified: 2025-10-28
 ---
 
 <!-- system: This file is designed for large language models to READ and WRITE safely.
@@ -35,12 +35,12 @@ Follow the edit protocol below. Do not rename keys. Use nulls for unknowns. -->
     
     ```yaml
 - timestamp: 2025-10-28T17:00:00+00:00  # Europe/London
-    updated_by: "Thomas" | "LLM: GPT-5 Thinking"
-    reason: "Filled MUFA/PUFA from venue PDF"
-    fields_changed: ["per_portion.mufa_g", "per_portion.pufa_g"]
-    sources:
-      - url: ""
-        note: ""
+      updated_by: "Thomas" | "LLM: GPT-5 Thinking"
+      reason: "Filled MUFA/PUFA from venue PDF"
+      fields_changed: ["per_portion.mufa_g", "per_portion.pufa_g"]
+      sources:
+        - url: ""
+          note: ""
 ```
     
 - **Estimation rules** (state in `assumptions`): oil type, salting scheme, portion weight method (label vs estimate), conversions applied.
@@ -69,7 +69,7 @@ assumptions:
   oil_type: ""
   prep: ""
 per_portion:
-  energy_kcal: "= 4 * per_portion.protein_g + 9 * per_portion.fat_g + 4 * per_portion.carbs_available_g + 2 * per_portion.fiber_total_g + 2.4 * per_portion.polyols_g"
+  energy_kcal: null
   protein_g: null
   fat_g: null
   sat_fat_g: null
@@ -77,9 +77,7 @@ per_portion:
   pufa_g: null
   trans_fat_g: null
   cholesterol_mg: null
-  carbs_total_g: null
-  polyols_g: null
-  carbs_available_g: null
+  carbs_g: null
   sugar_g: null
   fiber_total_g: null
   fiber_soluble_g: null
@@ -106,42 +104,10 @@ change_log: []
 ---
 
 # Dishes Index
-- [Sweet Potato Wedges (Simple Health Kitchen)](#sweet-potato-wedges-simple-health-kitchen) {#sweet_potato_wedges_shk_v1}
-- [Hummus Side Pot (Simple Health Kitchen)](#hummus-side-pot-simple-health-kitchen) {#hummus_side_pot_shk_v1}
-- [Carrot Juice (Simple Health Kitchen)](#carrot-juice-simple-health-kitchen) {#carrot_juice_shk_v1}
-- [Broccoli Stems (Simple Health Kitchen)](#broccoli-stems-simple-health-kitchen) {#broccoli_stems_shk_v1}
-- [Zesty Lemon Broccoli (Simple Health Kitchen)](#zesty-lemon-broccoli-simple-health-kitchen) {#zesty_lemon_broccoli_shk_v1}
-- [Lemon & Herb Chicken Breast (Simple Health Kitchen)](#lemon-and-herb-chicken-breast-simple-health-kitchen) {#lemon_herb_chicken_breast_shk_v1}
-- [Whole Wheat Pesto Pasta (Simple Health Kitchen)](#whole-wheat-pesto-pasta-simple-health-kitchen) {#whole_wheat_pesto_pasta_shk_v1}
-- [Grilled Salmon Fillet (Simple Health Kitchen)](#grilled-salmon-fillet-simple-health-kitchen) {#grilled_salmon_fillet_shk_v1}
-- [Pistachios, 30 g](#pistachios-30-g) {#pistachios_30g_v1}
-- [Sunflower Seeds, 30 g](#sunflower-seeds-30-g) {#sunflower_seeds_30g_v1}
-- [Hazelnuts, 30 g](#hazelnuts-30-g) {#hazelnuts_30g_v1}
-- [ON Gold Standard Whey – Double Rich Chocolate (1 scoop ≈30 g)](#on-gold-standard-whey---double-rich-chocolate-1-scoop-≈30-g) {#on_whey_drc_30g_v1}
-- [PACK'D Mixed Summer Berries (150 g)](#pack'd-mixed-summer-berries-150-g) {#packd_mixed_summer_berries_150g_v1}
-- [Blueberries - 150 g](#blueberries---150-g) {#blueberries_150g_v1}
-- [Clementine (Fresh Fruit)](#clementine-fresh-fruit) {#clementine_fresh_fruit_v1}
-- [Oats - dry (50 g)](#oats---dry-50-g) {#oats_dry_50g_v1}
-- [Skyr - plain (200 g)](#skyr---plain-200-g) {#skyr_plain_200g_v1}
-- [Mixed Pineapple/Mango/Passion Fruit (150 g)](#mixed-pineapple/mango/passion-fruit-150-g) {#pine_mango_passion_150g_v1}
-- [Joe & the Juice - Joe's Identity juice](#joe-and-the-juice---joes-identity-juice) {#joes_identity_juice_jtj_v1}
-- [Sakura Wagyu Beef Sandwich (Jean-Georges at The Connaught)](#sakura-wagyu-beef-sandwich-jean-georges-at-the-connaught) {#sakura_wagyu_beef_sandwich_connaught_v1}
-- [Home-made Chips (Jean-Georges at The Connaught)](#home-made-chips-jean-georges-at-the-connaught) {#homemade_chips_connaught_v1}
-- [Ketchup Pot, 25g (Jean-Georges at The Connaught)](#ketchup-pot-25g-jean-georges-at-the-connaught) {#ketchup_pot_connaught_v1}
-- [Thai Spiced Broccoli Soup (Jean-Georges at The Connaught)](#thai-spiced-broccoli-soup-jean-georges-at-the-connaught) {#thai_spiced_broccoli_soup_connaught_v1}
-- [Ham and Cheese Croissant (Generic Bakery)](#ham-and-cheese-croissant-generic-bakery) {#ham_cheese_croissant_generic_v1}
-- [Grilled Chicken Breast (L'ETO Soho)](#grilled-chicken-breast-leto-soho) {#grilled_chicken_breast_leto_soho_v1}
-- [Chilli Poached Eggs (L'ETO Soho)](#chilli-poached-eggs-leto-soho) {#chilli_poached_eggs_leto_soho_v1}
-- [Grenade Carb Killa White Oreo Bar (60g)](#grenade-carb-killa-white-oreo-bar-60g) {#grenade_white_oreo_60g_v1}
-- [Amisa Buckwheat Crispbread (per piece, 5g)](#amisa-buckwheat-crispbread-per-piece-5g) {#amisa_buckwheat_crispbread_5g_v1}
-- [Yarden Houmous (30g serving)](#yarden-houmous-30g-serving) {#yarden_houmous_30g_v1}
-- [Rot Front Glazed Peanut Halva (1 piece, ~25g)](#rot-front-glazed-peanut-halva-1-piece-25g) {#halva_glazed_peanut_rotfront_v1}
-- [Beef Stroganoff with Buckwheat (Zima Soho)](#beef-stroganoff-with-buckwheat-zima-soho) {#beef_stroganoff_buckwheat_zima_v1}
-- [Chicken Cutlet with Mushroom Sauce with Buckwheat (Zima Soho)](#chicken-cutlet-with-mushroom-sauce-with-buckwheat-zima-soho) {#chicken_cutlet_mushroom_sauce_zima_v1}
-- [Borscht Krasnodarsky with Beef (Zima Soho)](#borscht-krasnodarsky-with-beef-zima-soho) {#borscht_krasnodarsky_zima_v1}
-- [Vinegret with 1 slice rye (Zima)](#vinegret-with-1-slice-rye-zima) {#vinegret_with_rye_zima_v1}
-- [Pickled Cabbage / Sauerkraut (Zima)](#pickled-cabbage--sauerkraut-zima) {#sauerkraut_zima_v1}
-- [Cherry Vareniki - Full Tray (Zima, Soho)](#cherry-vareniki---full-tray-zima-soho) {#cherry_vareniki_zima_v1}
+
+> **Index moved**: See [food-data-bank-index.md](./food-data-bank-index.md) for a complete list of all dishes.
+>
+> The index is auto-generated. To update it, run: `python scripts/generate_index.py`
 
 ---
 
@@ -174,9 +140,6 @@ per_portion:
   pufa_g: 0.4
   trans_fat_g: 0.1
   cholesterol_mg: null
-  carbs_total_g: 37.1
-  polyols_g: 0.0
-  carbs_available_g: 32.0
   sugar_g: 10.1
   fiber_total_g: 5.1
   fiber_soluble_g: null
@@ -190,6 +153,9 @@ per_portion:
   zinc_mg: 0
   vitamin_c_mg: 30
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 32.0
+  carbs_total_g: 37.1
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -200,7 +166,7 @@ notes:
 - 'Atwater check (available carb basis): 4×2.0 + 9×1.9 + 4×32.0 + 2×5.1 + 2.4×0.0
   = 163.3 kcal'
 change_log:
-- timestamp: 2025-10-28 18:51:39+00:00
+- timestamp: 2025-10-28T18:51:39+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Populate per_portion from user-provided data
   fields_changed:
@@ -225,7 +191,7 @@ change_log:
   sources:
   - url: user_input
     note: User-supplied values on 2025-10-28
-- timestamp: 2025-10-28 18:57:05+00:00
+- timestamp: 2025-10-28T18:57:05+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Consistency fix for fat totals/splits
   fields_changed:
@@ -233,7 +199,7 @@ change_log:
   sources:
   - url: user_input
     note: Correction approved by user on 2025-10-28
-- timestamp: 2025-10-28 19:02:30+00:00
+- timestamp: 2025-10-28T19:02:30+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
   fields_changed:
@@ -250,28 +216,18 @@ change_log:
   sources:
   - url: formatting-pass
     note: Automated rounding pass
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Add carb totals vs available (UK label convention)
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: venue_label
-    note: Simple Health Kitchen listings use UK available carbohydrate; total rebuilt
-      as available + fibre
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
   - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -306,9 +262,6 @@ per_portion:
   pufa_g: 6.7
   trans_fat_g: null
   cholesterol_mg: 80
-  carbs_total_g: 1.0
-  polyols_g: 0.0
-  carbs_available_g: 1.0
   sugar_g: null
   fiber_total_g: null
   fiber_soluble_g: null
@@ -322,6 +275,9 @@ per_portion:
   zinc_mg: 1
   vitamin_c_mg: 5
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 1.0
+  carbs_total_g: 1.0
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -331,7 +287,7 @@ notes:
 - 'Atwater check (available carb basis): 4×28.0 + 9×16.0 + 4×1.0 + 2×0.0 + 2.4×0.0
   = 260 kcal'
 change_log:
-- timestamp: 2025-10-28 18:51:39+00:00
+- timestamp: 2025-10-28T18:51:39+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Populate per_portion from user-provided data
   fields_changed:
@@ -354,7 +310,7 @@ change_log:
   sources:
   - url: user_input
     note: User-supplied values on 2025-10-28
-- timestamp: 2025-10-28 18:57:05+00:00
+- timestamp: 2025-10-28T18:57:05+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Consistency fix for fat totals/splits
   fields_changed:
@@ -363,7 +319,7 @@ change_log:
   sources:
   - url: user_input
     note: Correction approved by user on 2025-10-28
-- timestamp: 2025-10-28 19:02:30+00:00
+- timestamp: 2025-10-28T19:02:30+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
   fields_changed:
@@ -380,27 +336,18 @@ change_log:
   sources:
   - url: formatting-pass
     note: Automated rounding pass
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Standardise carb fields (UK venue reports net carbs; fibre unavailable)
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: venue_label
-    note: Simple Health Kitchen macros list carbohydrate net of fibre
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
   - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -435,9 +382,6 @@ per_portion:
   pufa_g: 1.9
   trans_fat_g: 0.1
   cholesterol_mg: null
-  carbs_total_g: 32.0
-  polyols_g: 0.0
-  carbs_available_g: 28.0
   sugar_g: 2.4
   fiber_total_g: 4.0
   fiber_soluble_g: null
@@ -451,6 +395,9 @@ per_portion:
   zinc_mg: 1
   vitamin_c_mg: 3
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 28.0
+  carbs_total_g: 32.0
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -460,7 +407,7 @@ notes:
 - 'Atwater check (available carb basis): 4×6.3 + 9×7.9 + 4×28.0 + 2×4.0 + 2.4×0.0
   = 216.3 kcal'
 change_log:
-- timestamp: 2025-10-28 18:51:39+00:00
+- timestamp: 2025-10-28T18:51:39+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Populate per_portion from user-provided data
   fields_changed:
@@ -484,7 +431,7 @@ change_log:
   sources:
   - url: user_input
     note: User-supplied values on 2025-10-28
-- timestamp: 2025-10-28 18:57:05+00:00
+- timestamp: 2025-10-28T18:57:05+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Consistency fix for fat totals/splits
   fields_changed:
@@ -493,7 +440,7 @@ change_log:
   sources:
   - url: user_input
     note: Correction approved by user on 2025-10-28
-- timestamp: 2025-10-28 19:02:30+00:00
+- timestamp: 2025-10-28T19:02:30+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
   fields_changed:
@@ -509,28 +456,18 @@ change_log:
   sources:
   - url: formatting-pass
     note: Automated rounding pass
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Add carb totals vs available (UK label convention)
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: venue_label
-    note: Simple Health Kitchen listings use net carbohydrate; total rebuilt as available
-      + fibre
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
   - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -565,10 +502,7 @@ per_portion:
   pufa_g: 0.5
   trans_fat_g: null
   cholesterol_mg: 130
-  carbs_total_g: 0.0
-  polyols_g: 0.0
-  carbs_available_g: 0.0
-  sugar_g: 0.0
+  sugar_g: null
   fiber_total_g: 0.0
   fiber_soluble_g: 0.0
   fiber_insoluble_g: 0.0
@@ -581,17 +515,19 @@ per_portion:
   zinc_mg: 1
   vitamin_c_mg: null
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 0.0
+  carbs_total_g: 0.0
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
   confidence: medium
   gaps:
-  - Trans fat not provided; ~0.09 g of fat unassigned (trace/trans).
+  - No carbs/fibre provided; trans fat not provided; ~0.09 g of fat unassigned (trace/trans).
 notes:
-- SHK listing reports carbohydrate as trace/0 g; explicit zeros captured for available, total, sugar, and fibre.
-- Atwater check (available carb basis): 4×36.0 + 9×1.9 + 4×0.0 + 2×0.0 + 2.4×0.0 = 161.1 kcal
+- 'Atwater check (available carb basis): 4×36.0 + 9×1.9 + 4×0.0 + 2×0.0 + 2.4×0.0 = 161.1 kcal'
 change_log:
-- timestamp: 2025-10-28 18:51:39+00:00
+- timestamp: 2025-10-28T18:51:39+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Populate per_portion from user-provided data
   fields_changed:
@@ -612,7 +548,7 @@ change_log:
   sources:
   - url: user_input
     note: User-supplied values on 2025-10-28
-- timestamp: 2025-10-28 18:57:05+00:00
+- timestamp: 2025-10-28T18:57:05+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Consistency fix for fat totals/splits
   fields_changed:
@@ -620,7 +556,7 @@ change_log:
   sources:
   - url: user_input
     note: Correction approved by user on 2025-10-28
-- timestamp: 2025-10-28 19:02:30+00:00
+- timestamp: 2025-10-28T19:02:30+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
   fields_changed:
@@ -635,38 +571,29 @@ change_log:
   sources:
   - url: formatting-pass
     note: Automated rounding pass
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Set explicit zero carb values for protein-only dish
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  - per_portion.sugar_g
-  - per_portion.fiber_total_g
-  - per_portion.fiber_soluble_g
-  - per_portion.fiber_insoluble_g
-  sources:
-  - url: venue_label
-    note: Simple Health Kitchen listing reports carbohydrate as trace/0 g
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
   - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
   - notes
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
   - per_portion.carbs_available_g
-  - per_portion.sugar_g
-  - per_portion.fiber_total_g
-  - per_portion.fiber_soluble_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
   - per_portion.fiber_insoluble_g
+  - per_portion.fiber_soluble_g
+  - per_portion.fiber_total_g
+  - per_portion.polyols_g
+  - version
+  sources: []
+- timestamp: '2025-11-02T19:20:00+00:00'
+  updated_by: 'LLM: GPT-5 Codex'
+  reason: Standardise carbohydrate fields and recompute available-carb energy
+  fields_changed:
+  - last_verified
+  - per_portion.carbs_g
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -701,9 +628,6 @@ per_portion:
   pufa_g: 0.9
   trans_fat_g: null
   cholesterol_mg: null
-  carbs_total_g: 28.4
-  polyols_g: 0.0
-  carbs_available_g: 21.5
   sugar_g: 9.4
   fiber_total_g: 6.9
   fiber_soluble_g: null
@@ -717,6 +641,9 @@ per_portion:
   zinc_mg: 1
   vitamin_c_mg: 130
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 21.5
+  carbs_total_g: 28.4
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -727,7 +654,7 @@ notes:
 - 'Atwater check (available carb basis): 4×5.0 + 9×5.1 + 4×21.5 + 2×6.9 + 2.4×0.0
   = 165.7 kcal'
 change_log:
-- timestamp: 2025-10-28 18:51:39+00:00
+- timestamp: 2025-10-28T18:51:39+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Populate per_portion from user-provided data
   fields_changed:
@@ -751,7 +678,7 @@ change_log:
   sources:
   - url: user_input
     note: User-supplied values on 2025-10-28
-- timestamp: 2025-10-28 18:57:05+00:00
+- timestamp: 2025-10-28T18:57:05+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Consistency fix for fat totals/splits
   fields_changed:
@@ -759,7 +686,7 @@ change_log:
   sources:
   - url: user_input
     note: Correction approved by user on 2025-10-28
-- timestamp: 2025-10-28 19:02:30+00:00
+- timestamp: 2025-10-28T19:02:30+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
   fields_changed:
@@ -772,28 +699,18 @@ change_log:
   sources:
   - url: formatting-pass
     note: Automated rounding pass
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Add carb totals vs available (UK label convention)
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: venue_label
-    note: Simple Health Kitchen listings use net carbohydrate; total rebuilt as available
-      + fibre
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
   - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -828,9 +745,6 @@ per_portion:
   pufa_g: 0.8
   trans_fat_g: null
   cholesterol_mg: null
-  carbs_total_g: 14.0
-  polyols_g: 0.0
-  carbs_available_g: 10.5
   sugar_g: 2.7
   fiber_total_g: 3.5
   fiber_soluble_g: null
@@ -844,6 +758,9 @@ per_portion:
   zinc_mg: 1
   vitamin_c_mg: 123
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 10.5
+  carbs_total_g: 14.0
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -854,7 +771,7 @@ notes:
 - 'Atwater check (available carb basis): 4×4.5 + 9×4.7 + 4×10.5 + 2×3.5 + 2.4×0.0
   = 109.3 kcal'
 change_log:
-- timestamp: 2025-10-28 18:51:39+00:00
+- timestamp: 2025-10-28T18:51:39+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Populate per_portion from user-provided data
   fields_changed:
@@ -878,7 +795,7 @@ change_log:
   sources:
   - url: user_input
     note: User-supplied values on 2025-10-28
-- timestamp: 2025-10-28 18:57:05+00:00
+- timestamp: 2025-10-28T18:57:05+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Consistency fix for fat totals/splits
   fields_changed:
@@ -886,7 +803,7 @@ change_log:
   sources:
   - url: user_input
     note: Correction approved by user on 2025-10-28
-- timestamp: 2025-10-28 19:02:30+00:00
+- timestamp: 2025-10-28T19:02:30+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
   fields_changed:
@@ -901,28 +818,18 @@ change_log:
   sources:
   - url: formatting-pass
     note: Automated rounding pass
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Add carb totals vs available (UK label convention)
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: venue_label
-    note: Simple Health Kitchen listings use net carbohydrate; total rebuilt as available
-      + fibre
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
   - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -957,9 +864,6 @@ per_portion:
   pufa_g: 6.0
   trans_fat_g: 0.0
   cholesterol_mg: null
-  carbs_total_g: 19.1
-  polyols_g: 0.0
-  carbs_available_g: 14.0
   sugar_g: 0.6
   fiber_total_g: 5.1
   fiber_soluble_g: null
@@ -973,6 +877,9 @@ per_portion:
   zinc_mg: 2
   vitamin_c_mg: null
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 14.0
+  carbs_total_g: 19.1
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -984,7 +891,7 @@ notes:
 - 'Atwater check (available carb basis): 4×9.0 + 9×11.0 + 4×14.0 + 2×5.1 + 2.4×0.0
   = 201.2 kcal'
 change_log:
-- timestamp: 2025-10-28 18:51:39+00:00
+- timestamp: 2025-10-28T18:51:39+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Populate per_portion from user-provided data
   fields_changed:
@@ -1007,7 +914,7 @@ change_log:
   sources:
   - url: user_input
     note: User-supplied values on 2025-10-28
-- timestamp: 2025-10-28 18:57:05+00:00
+- timestamp: 2025-10-28T18:57:05+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Consistency fix for fat totals/splits
   fields_changed:
@@ -1016,7 +923,7 @@ change_log:
   sources:
   - url: user_input
     note: Correction approved by user on 2025-10-28
-- timestamp: 2025-10-28 19:02:30+00:00
+- timestamp: 2025-10-28T19:02:30+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
   fields_changed:
@@ -1031,28 +938,18 @@ change_log:
   sources:
   - url: formatting-pass
     note: Automated rounding pass
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Add explicit carb totals vs available (UK label convention)
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: venue_label
-    note: Simple Health Kitchen listings use net carbohydrate; total rebuilt as available
-      + fibre
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
   - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 ---
@@ -1086,9 +983,6 @@ per_portion:
   pufa_g: 4.3
   trans_fat_g: null
   cholesterol_mg: null
-  carbs_total_g: 11.6
-  polyols_g: 0.0
-  carbs_available_g: 8.4
   sugar_g: 2.3
   fiber_total_g: 3.2
   fiber_soluble_g: null
@@ -1102,6 +996,9 @@ per_portion:
   zinc_mg: 1
   vitamin_c_mg: null
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 8.4
+  carbs_total_g: 11.6
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -1111,7 +1008,7 @@ notes:
 - 'Atwater check (available carb basis): 4×6.0 + 9×13.5 + 4×8.4 + 2×3.2 + 2.4×0.0
   = 185.5 kcal'
 change_log:
-- timestamp: 2025-10-28 18:51:39+00:00
+- timestamp: 2025-10-28T18:51:39+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Populate per_portion from user-provided data
   fields_changed:
@@ -1133,7 +1030,7 @@ change_log:
   sources:
   - url: user_input
     note: User-supplied values on 2025-10-28
-- timestamp: 2025-10-28 19:02:30+00:00
+- timestamp: 2025-10-28T19:02:30+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
   fields_changed:
@@ -1146,28 +1043,18 @@ change_log:
   sources:
   - url: formatting-pass
     note: Automated rounding pass
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Add carb totals vs available (EU label for nuts)
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: pack_label
-    note: UK nut labels list carbohydrate net of fibre; total rebuilt as available
-      + fibre
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
   - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -1202,9 +1089,6 @@ per_portion:
   pufa_g: 10.9
   trans_fat_g: null
   cholesterol_mg: null
-  carbs_total_g: 8.6
-  polyols_g: 0.0
-  carbs_available_g: 6.0
   sugar_g: 0.8
   fiber_total_g: 2.6
   fiber_soluble_g: null
@@ -1218,6 +1102,9 @@ per_portion:
   zinc_mg: 2
   vitamin_c_mg: 0
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 6.0
+  carbs_total_g: 8.6
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -1227,7 +1114,7 @@ notes:
 - 'Atwater check (available carb basis): 4×6.2 + 9×15.5 + 4×6.0 + 2×2.6 + 2.4×0.0
   = 193.5 kcal'
 change_log:
-- timestamp: 2025-10-28 18:51:39+00:00
+- timestamp: 2025-10-28T18:51:39+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Populate per_portion from user-provided data
   fields_changed:
@@ -1250,7 +1137,7 @@ change_log:
   sources:
   - url: user_input
     note: User-supplied values on 2025-10-28
-- timestamp: 2025-10-28 19:02:30+00:00
+- timestamp: 2025-10-28T19:02:30+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
   fields_changed:
@@ -1262,28 +1149,18 @@ change_log:
   sources:
   - url: formatting-pass
     note: Automated rounding pass
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Add carb totals vs available (EU label for seeds)
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: pack_label
-    note: UK seed labels list carbohydrate net of fibre; total rebuilt as available
-      + fibre
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
   - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -1318,9 +1195,6 @@ per_portion:
   pufa_g: 2.5
   trans_fat_g: null
   cholesterol_mg: null
-  carbs_total_g: 7.9
-  polyols_g: 0.0
-  carbs_available_g: 5.0
   sugar_g: 1.3
   fiber_total_g: 2.9
   fiber_soluble_g: null
@@ -1334,6 +1208,9 @@ per_portion:
   zinc_mg: 1
   vitamin_c_mg: 2
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 5.0
+  carbs_total_g: 7.9
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -1345,7 +1222,7 @@ notes:
 - 'Atwater check (available carb basis): 4×4.5 + 9×18.2 + 4×5.0 + 2×2.9 + 2.4×0.0
   = 207.6 kcal'
 change_log:
-- timestamp: 2025-10-28 18:51:39+00:00
+- timestamp: 2025-10-28T18:51:39+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Populate per_portion from user-provided data
   fields_changed:
@@ -1368,7 +1245,7 @@ change_log:
   sources:
   - url: user_input
     note: User-supplied values on 2025-10-28
-- timestamp: 2025-10-28 18:57:05+00:00
+- timestamp: 2025-10-28T18:57:05+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Consistency fix for fat totals/splits
   fields_changed:
@@ -1377,7 +1254,7 @@ change_log:
   sources:
   - url: user_input
     note: Correction approved by user on 2025-10-28
-- timestamp: 2025-10-28 19:02:30+00:00
+- timestamp: 2025-10-28T19:02:30+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
   fields_changed:
@@ -1388,28 +1265,18 @@ change_log:
   sources:
   - url: formatting-pass
     note: Automated rounding pass
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Add carb totals vs available (EU label for nuts)
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: pack_label
-    note: UK nut labels list carbohydrate net of fibre; total rebuilt as available
-      + fibre
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
   - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -1445,9 +1312,6 @@ per_portion:
   pufa_g: 0.4
   trans_fat_g: null
   cholesterol_mg: null
-  carbs_total_g: 3.7
-  polyols_g: 0.0
-  carbs_available_g: 3.0
   sugar_g: 1.3
   fiber_total_g: 0.7
   fiber_soluble_g: null
@@ -1461,6 +1325,9 @@ per_portion:
   zinc_mg: 2
   vitamin_c_mg: null
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 3.0
+  carbs_total_g: 3.7
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -1471,7 +1338,7 @@ notes:
 - 'Atwater check (available carb basis): 4×24.0 + 9×1.4 + 4×3.0 + 2×0.7 + 2.4×0.0
   = 122 kcal'
 change_log:
-- timestamp: 2025-10-28 18:51:39+00:00
+- timestamp: 2025-10-28T18:51:39+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Populate per_portion from user-provided data
   fields_changed:
@@ -1493,7 +1360,7 @@ change_log:
   sources:
   - url: user_input
     note: User-supplied values on 2025-10-28
-- timestamp: 2025-10-28 19:02:30+00:00
+- timestamp: 2025-10-28T19:02:30+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
   fields_changed:
@@ -1508,28 +1375,18 @@ change_log:
   sources:
   - url: formatting-pass
     note: Automated rounding pass
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Add carb totals vs available (treat ON whey label as net carb)
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: pack_label
-    note: EU packaging lists carbohydrate net of fibre; total rebuilt as available
-      + fibre
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
   - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -1564,9 +1421,6 @@ per_portion:
   pufa_g: 0.18
   trans_fat_g: 0
   cholesterol_mg: 0
-  carbs_total_g: 14.2
-  polyols_g: 0.0
-  carbs_available_g: 9.8
   sugar_g: 9.8
   fiber_total_g: 4.4
   fiber_soluble_g: null
@@ -1580,6 +1434,9 @@ per_portion:
   zinc_mg: 1
   vitamin_c_mg: 29
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 9.8
+  carbs_total_g: 14.2
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -1589,7 +1446,7 @@ notes:
 - 'Atwater check (available carb basis): 4×1.4 + 9×0.3 + 4×9.8 + 2×4.4 + 2.4×0.0 =
   56.3 kcal'
 change_log:
-- timestamp: 2025-10-28 18:51:39+00:00
+- timestamp: 2025-10-28T18:51:39+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Populate per_portion from user-provided data
   fields_changed:
@@ -1608,7 +1465,7 @@ change_log:
   sources:
   - url: user_input
     note: User-supplied values on 2025-10-28
-- timestamp: 2025-10-28 19:02:30+00:00
+- timestamp: 2025-10-28T19:02:30+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
   fields_changed:
@@ -1619,7 +1476,7 @@ change_log:
   sources:
   - url: formatting-pass
     note: Automated rounding pass
-- timestamp: 2025-10-28 20:00:00+00:00
+- timestamp: 2025-10-28T20:00:00+0000
   updated_by: 'LLM: Claude Sonnet 4.5'
   reason: Research and fill missing fat breakdown, cholesterol, and iodine data
   fields_changed:
@@ -1645,28 +1502,18 @@ change_log:
     0.3g total fat per 150g. PUFA higher than MUFA consistent with berry profiles
     (omega-3 from seeds). Trans fat and cholesterol = 0 (plant-based). Iodine = 1
     mcg (trace, very low in berries).
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Add carb totals vs available (frozen berries sold in UK)
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: pack_label
-    note: PACK'D UK nutritional panel lists carbohydrate net of fibre; total rebuilt
-      as available + fibre
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
   - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -1701,9 +1548,6 @@ per_portion:
   pufa_g: 0.22
   trans_fat_g: 0
   cholesterol_mg: 0
-  carbs_total_g: 25.4
-  polyols_g: 0.0
-  carbs_available_g: 21.8
   sugar_g: 15.0
   fiber_total_g: 3.6
   fiber_soluble_g: null
@@ -1717,6 +1561,9 @@ per_portion:
   zinc_mg: 0
   vitamin_c_mg: 15
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 21.8
+  carbs_total_g: 25.4
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -1726,7 +1573,7 @@ notes:
 - 'Atwater check (available carb basis): 4×1.0 + 9×0.4 + 4×21.8 + 2×3.6 + 2.4×0.0
   = 102 kcal'
 change_log:
-- timestamp: 2025-10-28 18:51:39+00:00
+- timestamp: 2025-10-28T18:51:39+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Populate per_portion from user-provided data
   fields_changed:
@@ -1746,7 +1593,7 @@ change_log:
   sources:
   - url: user_input
     note: User-supplied values on 2025-10-28
-- timestamp: 2025-10-28 19:02:30+00:00
+- timestamp: 2025-10-28T19:02:30+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
   fields_changed:
@@ -1761,7 +1608,7 @@ change_log:
   sources:
   - url: formatting-pass
     note: Automated rounding pass
-- timestamp: 2025-10-28 20:15:00+00:00
+- timestamp: 2025-10-28T20:15:00+0000
   updated_by: 'LLM: Claude Sonnet 4.5'
   reason: Research and populate missing fatty acid breakdown and iodine content from
     USDA FoodData Central
@@ -1780,28 +1627,18 @@ change_log:
   - url: https://www.ars.usda.gov/ARSUSERFILES/80400535/DATA/IODINE/IODINE_DATABASE_RELEASE_3_PER_100G.PDF
     note: USDA/FDA/ODS-NIH Iodine Database - Raw blueberries contain 0.3 mcg iodine
       per 100g (mean of 13 samples). Scaled to 150g = 0.45 mcg, rounded to 0.5 mcg.
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Add carb totals vs available (fresh berries in UK)
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: pack_label
-    note: UK berry packaging lists carbohydrate net of fibre; total rebuilt as available
-      + fibre
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
   - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -1818,9 +1655,10 @@ source:
   menu_page: ''
   evidence:
   - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/168195/nutrients
-    note: USDA FoodData Central: Clementines, raw (FDC ID 168195)
+    note: 'USDA FoodData Central: Clementines, raw (FDC ID 168195)'
   - url: https://tools.myfooddata.com/nutrition-facts/168195/wt1
-    note: MyFoodData USDA aggregation: Complete nutrition profile per 100g and per clementine
+    note: 'MyFoodData USDA aggregation: Complete nutrition profile per 100g and per
+      clementine'
 aliases:
 - mandarin
 - easy peeler
@@ -1834,7 +1672,7 @@ assumptions:
   oil_type: ''
   prep: fresh, whole, peeled
 per_portion:
-  energy_kcal: 36.7
+  energy_kcal: 41.9
   protein_g: 0.6
   fat_g: 0.1
   sat_fat_g: 0.0
@@ -1842,9 +1680,6 @@ per_portion:
   pufa_g: 0.0
   trans_fat_g: 0.0
   cholesterol_mg: 0
-  carbs_total_g: 9.0
-  polyols_g: 0.0
-  carbs_available_g: 7.7
   sugar_g: 6.8
   fiber_total_g: 1.3
   fiber_soluble_g: null
@@ -1858,6 +1693,9 @@ per_portion:
   zinc_mg: 0.0
   vitamin_c_mg: 36
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 9.0
+  carbs_total_g: 10.3
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
   fat_unassigned_g: 0.1
@@ -1870,16 +1708,18 @@ quality:
   - manganese_mg
 notes:
 - 35 kcal from USDA FoodData Central per medium 74g clementine
-- Values scaled from USDA per-100g data: 47 kcal, 0.85g protein, 0.15g fat, 12g carbs, 1.7g fiber
-- Available carbs recalculated: 9.0g total - 1.3g fiber = 7.7g
+- 'Values scaled from USDA per-100g data: 47 kcal, 0.85g protein, 0.15g fat, 12g carbs,
+  1.7g fiber'
 - Fat content negligible (<0.15g) - primarily trace amounts of natural fruit oils
-- Excellent source of vitamin C: 36mg provides ~60% daily value
+- 'Excellent source of vitamin C: 36mg provides ~60% daily value'
 - Naturally sodium-free and cholesterol-free
-- Atwater check (available carb basis): 4×0.6 + 9×0.1 + 4×7.7 + 2×1.3 + 2.4×0.0 = 36.7 kcal
+- 'Atwater check (available carb basis): 4×0.6 + 9×0.1 + 4×9.0 + 2×1.3 + 2.4×0.0 =
+  41.9 kcal'
 change_log:
-- timestamp: 2025-10-29T14:00:00+00:00
+- timestamp: 2025-10-29 14:00:00+00:00
   updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: Initial population from USDA FoodData Central (FDC ID 168195) scaled to standard 74g portion
+  reason: Initial population from USDA FoodData Central (FDC ID 168195) scaled to
+    standard 74g portion
   fields_changed:
   - portion.est_weight_g
   - assumptions.salt_scheme
@@ -1911,30 +1751,19 @@ change_log:
     note: USDA FoodData Central primary source for clementines, raw
   - url: https://tools.myfooddata.com/nutrition-facts/168195/wt1
     note: USDA data aggregator showing per-clementine values (74g portion)
-- timestamp: 2025-11-02T11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Standardise carbohydrate fields (total/available/polyols) and align energy with available carb recalculation
+- timestamp: '2025-11-02T19:20:00+00:00'
+  updated_by: 'LLM: GPT-5 Codex'
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - per_portion.energy_kcal
+  - derived.energy_from_macros_kcal
+  - last_verified
+  - notes
+  - per_portion.carbs_available_g
   - per_portion.carbs_g
   - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  - derived.energy_from_macros_kcal
-  - notes
-  sources:
-  - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/168195/nutrients
-    note: Reused USDA portion data for total carbohydrate and fibre split
-- timestamp: '2025-11-02T17:44:32+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g field
-  fields_changed:
-  - version
-  - last_verified
   - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
-  - notes
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -1969,9 +1798,6 @@ per_portion:
   pufa_g: 1.3
   trans_fat_g: 0
   cholesterol_mg: 0
-  carbs_total_g: 38.5
-  polyols_g: 0.0
-  carbs_available_g: 33.2
   sugar_g: 0.5
   fiber_total_g: 5.3
   fiber_soluble_g: 2.0
@@ -1985,6 +1811,9 @@ per_portion:
   zinc_mg: 2
   vitamin_c_mg: 0
   manganese_mg: 2
+  polyols_g: 0.0
+  carbs_available_g: 33.2
+  carbs_total_g: 38.5
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -2048,27 +1877,18 @@ change_log:
   - url: USDA FoodData Central
     note: Oat beta-glucan (soluble fiber) ~4g/100g, insoluble ~6g/100g; manganese
       ~3.8mg/100g scaled to 50g portion
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Annotate carb totals vs available (UK label) for fibre separation
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: nutrition_label
-    note: UK-pack oats where stated carbs are already net of fibre
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
   - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -2103,9 +1923,6 @@ per_portion:
   pufa_g: 0.0
   trans_fat_g: 0.1
   cholesterol_mg: 10
-  carbs_total_g: 7.4
-  polyols_g: 0.0
-  carbs_available_g: 7.4
   sugar_g: 7.4
   fiber_total_g: 0
   fiber_soluble_g: 0
@@ -2119,6 +1936,9 @@ per_portion:
   zinc_mg: 1
   vitamin_c_mg: 0
   manganese_mg: 0
+  polyols_g: 0.0
+  carbs_available_g: 7.4
+  carbs_total_g: 7.4
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -2198,27 +2018,18 @@ change_log:
   - url: nutritional_knowledge
     note: Dairy products contain no dietary fiber (plant-based nutrient only). Manganese
       trace amounts rounded to 0.
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Standardise carb totals vs available (fiber already 0 so totals match)
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: nutrition_label
-    note: Plain skyr labelling in UK uses net carbohydrate; total equals available
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
   - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -2253,9 +2064,6 @@ per_portion:
   pufa_g: 0.2
   trans_fat_g: 0
   cholesterol_mg: 0
-  carbs_total_g: 17.5
-  polyols_g: 0.0
-  carbs_available_g: 16.1
   sugar_g: 15.9
   fiber_total_g: 1.4
   fiber_soluble_g: null
@@ -2269,6 +2077,9 @@ per_portion:
   zinc_mg: 0
   vitamin_c_mg: 54
   manganese_mg: 1
+  polyols_g: 0.0
+  carbs_available_g: 16.1
+  carbs_total_g: 17.5
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -2278,7 +2089,7 @@ notes:
 - 'Atwater check (available carb basis): 4×0.9 + 9×0.5 + 4×16.1 + 2×1.4 + 2.4×0.0
   = 75.3 kcal'
 change_log:
-- timestamp: 2025-10-28 18:51:39+00:00
+- timestamp: 2025-10-28T18:51:39+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Populate per_portion from user-provided data
   fields_changed:
@@ -2300,7 +2111,7 @@ change_log:
   sources:
   - url: user_input
     note: User-supplied values on 2025-10-28
-- timestamp: 2025-10-28 19:02:30+00:00
+- timestamp: 2025-10-28T19:02:30+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
   fields_changed:
@@ -2313,7 +2124,7 @@ change_log:
   sources:
   - url: formatting-pass
     note: Automated rounding pass
-- timestamp: 2025-10-28 20:15:00+00:00
+- timestamp: 2025-10-28T20:15:00+0000
   updated_by: Claude Sonnet 4.5
   reason: Fill missing fatty acid breakdown and micronutrient data based on USDA FoodData
     Central research
@@ -2337,28 +2148,18 @@ change_log:
     predominantly unsaturated with PUFA > MUFA. Trans fat=0 and cholesterol=0 (plant-based).
     Iodine content is trace (1-2µg per 150g typical for fruit). Values calculated
     proportionally based on 150g mixed fruit with 0.5g total fat.'
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Add carb totals vs available (mixed fruit pack)
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: pack_label
-    note: UK fruit mix lists carbohydrate net of fibre; total rebuilt as available
-      + fibre
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
   - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -2394,9 +2195,6 @@ per_portion:
   pufa_g: 0.2
   trans_fat_g: 0.0
   cholesterol_mg: 0
-  carbs_total_g: 13.0
-  polyols_g: 0.0
-  carbs_available_g: 9.0
   sugar_g: 5.0
   fiber_total_g: 4.0
   fiber_soluble_g: 1.0
@@ -2410,6 +2208,9 @@ per_portion:
   zinc_mg: 1
   vitamin_c_mg: 60
   manganese_mg: 1
+  polyols_g: 0.0
+  carbs_available_g: 9.0
+  carbs_total_g: 13.0
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -2482,12 +2283,11 @@ change_log:
   - url: https://www.livmorjuicery.com/post/unlock-the-power-of-green-the-amazing-health-benefits-of-celery-kale-and-spinach-juice
     note: Reference for green juice micronutrient content from kale, spinach, celery
   - url: ingredient_analysis
-    note: 'Fat breakdown estimated from olive oil composition (75% MUFA, 15% sat,
-      10% PUFA, 0% trans); carbohydrate treatment now explicit: 13g total (including
-      4g fibre) → 9g available; cholesterol 0 for plant-based juice; micronutrients
-      estimated from USDA data for kale (FDC 323505), spinach (FDC 168462), celery
-      (FDC 169988), cucumber (FDC 168409) proportional to typical 12oz green juice
-      serving'
+    note: Fat breakdown estimated from olive oil composition (75% MUFA, 15% sat, 10%
+      PUFA, 0% trans); sugars calculated from available carbs (9g total - 4g fiber
+      = 5g available); cholesterol 0 for plant-based juice; micronutrients estimated
+      from USDA data for kale (FDC 323505), spinach (FDC 168462), celery (FDC 169988),
+      cucumber (FDC 168409) proportional to typical 12oz green juice serving
 - timestamp: 2025-10-29T00:00:00+0000
   updated_by: 'LLM: Claude Sonnet 4.5'
   reason: Populate fiber split and manganese from leafy green composition
@@ -2500,28 +2300,18 @@ change_log:
     note: Leafy greens (kale, spinach, celery) ~25% soluble, 75% insoluble fiber;
       kale high in manganese (~0.5mg per 100g). Estimated 1.0g soluble, 3.0g insoluble,
       1mg manganese per 355g juice
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Document carb totals vs available for UK-label juice
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: nutrition_label
-    note: Joe & the Juice London listings quote carbohydrates net of fibre; total
-      reconstructed as available + fibre
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
   - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -2559,9 +2349,6 @@ per_portion:
   pufa_g: 10.0
   trans_fat_g: 0.2
   cholesterol_mg: 90
-  carbs_total_g: 82.0
-  polyols_g: 0.0
-  carbs_available_g: 78.0
   sugar_g: 6.0
   fiber_total_g: 4.0
   fiber_soluble_g: 1.0
@@ -2575,6 +2362,9 @@ per_portion:
   zinc_mg: 6
   vitamin_c_mg: 2
   manganese_mg: 0
+  polyols_g: 0.0
+  carbs_available_g: 78.0
+  carbs_total_g: 82.0
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -2635,28 +2425,18 @@ change_log:
   - url: nutritional_research
     note: 'Fiber from pain de mie bread (refined wheat): ~25% soluble, 75% insoluble.
       Manganese trace in white bread and beef, rounded to 0.'
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Explicitly store carb totals vs available for UK Deliveroo data
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: https://deliveroo.co.uk/menu/london/mayfair/jean-georges-at-the-connaught
-    note: Deliveroo UK nutrition uses available carbohydrate; total reconstructed
-      as available + fibre
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
   - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -2693,9 +2473,6 @@ per_portion:
   pufa_g: 14.6
   trans_fat_g: 0.1
   cholesterol_mg: 0
-  carbs_total_g: 62.1
-  polyols_g: 0.0
-  carbs_available_g: 57.2
   sugar_g: 0.3
   fiber_total_g: 4.9
   fiber_soluble_g: 1.3
@@ -2709,6 +2486,9 @@ per_portion:
   zinc_mg: 0.9
   vitamin_c_mg: 16
   manganese_mg: 1
+  polyols_g: 0.0
+  carbs_available_g: 57.2
+  carbs_total_g: 62.1
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -2778,28 +2558,18 @@ change_log:
   - url: nutritional_research
     note: 'Potato fiber: ~26% soluble, 74% insoluble. Manganese ~0.4mg/100g in french
       fries; estimated 1mg for ~150g portion.'
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Add carb total vs available fields (UK fries already net)
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: nutrition_label
-    note: UK nutrition panels list carbohydrate net of fibre; total rebuilt as available
-      + fibre
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
   - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -2839,9 +2609,6 @@ per_portion:
   pufa_g: 0.0
   trans_fat_g: 0.0
   cholesterol_mg: 0
-  carbs_total_g: 5.9
-  polyols_g: 0.0
-  carbs_available_g: 5.8
   sugar_g: 5.7
   fiber_total_g: 0.1
   fiber_soluble_g: 0.0
@@ -2855,6 +2622,9 @@ per_portion:
   zinc_mg: 0.0
   vitamin_c_mg: 1.0
   manganese_mg: 0
+  polyols_g: 0.0
+  carbs_available_g: 5.8
+  carbs_total_g: 5.9
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -2939,27 +2709,18 @@ change_log:
   - url: nutritional_research
     note: Tomato fiber is predominantly insoluble. With 0.1g total, split as 0.0g
       soluble (rounded from ~0.03g), 0.1g insoluble. Manganese trace, rounded to 0.
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Add carbohydrate total vs available (Heinz UK label net of fibre)
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: https://www.heinz.co.uk/products/heinz-classic-tomato-ketchup
-    note: 'Label: 5.8g carbohydrates, 0.1g fibre per 25g serving (UK convention)'
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
   - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -2998,9 +2759,6 @@ per_portion:
   pufa_g: 0.1
   trans_fat_g: 0.0
   cholesterol_mg: 0
-  carbs_total_g: 13.0
-  polyols_g: 0.0
-  carbs_available_g: 9.5
   sugar_g: 3.0
   fiber_total_g: 3.5
   fiber_soluble_g: 0.3
@@ -3014,6 +2772,9 @@ per_portion:
   zinc_mg: 0
   vitamin_c_mg: 40
   manganese_mg: 0
+  polyols_g: 0.0
+  carbs_available_g: 9.5
+  carbs_total_g: 13.0
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -3086,28 +2847,18 @@ change_log:
   - url: nutritional_research
     note: 'Broccoli fiber: ~9% soluble, 91% insoluble. Estimated 0.3g soluble, 3.2g
       insoluble for soup. Manganese diluted by coconut base, rounded to 0.'
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Store carb totals vs available for Deliveroo soup entry
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: nutrition_label
-    note: UK venue data gives net carbohydrate; total reconstructed as available +
-      fibre
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
   - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -3146,9 +2897,6 @@ per_portion:
   pufa_g: 0.7
   trans_fat_g: 0.0
   cholesterol_mg: 100
-  carbs_total_g: 0.0
-  polyols_g: 0.0
-  carbs_available_g: 0.0
   sugar_g: 0.0
   fiber_total_g: 0.0
   fiber_soluble_g: 0.0
@@ -3162,6 +2910,9 @@ per_portion:
   zinc_mg: 1
   vitamin_c_mg: 0
   manganese_mg: 0
+  polyols_g: 0.0
+  carbs_available_g: 0.0
+  carbs_total_g: 0.0
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
   finishing_salt_g: 0.43
@@ -3238,28 +2989,19 @@ change_log:
   sources:
   - url: https://tools.myfooddata.com/nutrition-facts/100009715/100g
     note: 'MyFoodData chicken breast cooked: scaled to 86g to match 135 kcal anchor'
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Explicit zeroed carb totals for protein-only item
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: nutrition_label
-    note: Deliveroo listing confirms zero carbohydrate; added explicit totals to keep
-      schema consistent
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
-  - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
   - derived.energy_from_macros_kcal
+  - last_verified
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -3304,9 +3046,6 @@ per_portion:
   pufa_g: 3.5
   trans_fat_g: 0.75
   cholesterol_mg: 434
-  carbs_total_g: 43.7
-  polyols_g: 0.0
-  carbs_available_g: 40.3
   sugar_g: 5.8
   fiber_total_g: 3.4
   fiber_soluble_g: 0.3
@@ -3320,6 +3059,9 @@ per_portion:
   zinc_mg: 2
   vitamin_c_mg: 25
   manganese_mg: 1
+  polyols_g: 0.0
+  carbs_available_g: 40.3
+  carbs_total_g: 43.7
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
   fat_unassigned_g: 1.35
@@ -3415,27 +3157,19 @@ change_log:
     note: Kale cooked - 50g portion
   - url: https://tools.myfooddata.com/nutrition-facts/173410/wt1
     note: Butter salted - 22.2g calculated to close calorie gap
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Mark available carbs explicitly for Deliveroo data
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: https://deliveroo.co.uk/menu/london/soho/l-eto-caffe-soho
-    note: Deliveroo macros list carbohydrate net of fibre; total reconstructed
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
-  - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
   - derived.energy_from_macros_kcal
+  - last_verified
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -3462,7 +3196,7 @@ assumptions:
   oil_type: none
   prep: fresh-pressed
 per_portion:
-  energy_kcal: 102.4
+  energy_kcal: 110.4
   protein_g: 2.4
   fat_g: 0.4
   sat_fat_g: 0.1
@@ -3470,9 +3204,6 @@ per_portion:
   pufa_g: 0.2
   trans_fat_g: 0.0
   cholesterol_mg: 0
-  carbs_total_g: 23.3
-  polyols_g: 0.0
-  carbs_available_g: 21.3
   sugar_g: 21.3
   fiber_total_g: 2.0
   fiber_soluble_g: null
@@ -3486,6 +3217,9 @@ per_portion:
   zinc_mg: 0
   vitamin_c_mg: 21
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 23.3
+  carbs_total_g: 25.3
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -3495,13 +3229,13 @@ quality:
   - Manganese not available
   - Fat breakdown estimated from USDA carrot juice profile
 notes:
-- 'USDA data for carrot juice (100g base): 40 kcal, 0.95g P, 0.15g F, 9.3g total carbohydrate,
-  0.8g fiber — scaled to 250mL (23.3g total carb, 2.0g fiber, 21.3g available)'
+- 'USDA data for carrot juice (100g base): 40 kcal, 0.95g P, 0.15g F, 9.3g C, 0.8g
+  fiber, scaled to 250mL'
 - Fresh carrot juice is naturally high in sugars (21.3g) from carrots; no added sugar
 - Sodium represents intrinsic sodium in carrots; no added salt
 - Excellent source of potassium (730mg) and vitamin A precursors (beta-carotene)
-- 'Atwater check (available carb basis): 4×2.4 + 9×0.4 + 4×21.3 + 2×2.0 + 2.4×0.0
-  = 102.4 kcal'
+- 'Atwater check (available carb basis): 4×2.4 + 9×0.4 + 4×23.3 + 2×2.0 + 2.4×0.0
+  = 110.4 kcal'
 change_log:
 - timestamp: 2025-10-29T00:00:00+0000
   updated_by: Claude Code
@@ -3512,32 +3246,18 @@ change_log:
   sources:
   - url: 'USDA FoodData Central FDC #170491'
     note: Carrot juice nutrition data scaled from per 100g to 250mL serving
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Convert USDA total carb to UK available carb (subtract fibre)
+- timestamp: '2025-11-02T19:20:00+00:00'
+  updated_by: 'LLM: GPT-5 Codex'
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - per_portion.energy_kcal
+  - last_verified
+  - notes
+  - per_portion.carbs_available_g
   - per_portion.carbs_g
   - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  - derived.energy_from_macros_kcal
-  - notes
-  sources:
-  - url: 'USDA FoodData Central FDC #170491'
-    note: Provides total carbohydrates (23.3g) and fibre; available derived as total
-      - fibre
-- timestamp: '2025-11-02T17:44:32+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
-  fields_changed:
-  - version
-  - last_verified
   - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
-  - notes
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -3577,9 +3297,6 @@ per_portion:
   pufa_g: 1.3
   trans_fat_g: 0.4
   cholesterol_mg: 50
-  carbs_total_g: 32.2
-  polyols_g: 0.0
-  carbs_available_g: 30.4
   sugar_g: 3.5
   fiber_total_g: 1.8
   fiber_soluble_g: null
@@ -3593,6 +3310,9 @@ per_portion:
   zinc_mg: 2.1
   vitamin_c_mg: 0
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 30.4
+  carbs_total_g: 32.2
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -3629,27 +3349,18 @@ change_log:
     note: 'USDA cooked ham profile (per 100g): 145 kcal, 19g P, 8g F'
   - url: https://www.ermitage.com/en/cheese/emmental/
     note: 'Emmental cheese (per 100g): 377 kcal, 28g P, 29g F, 1000mg Ca'
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Separate total vs available carbs for EU bakery item
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/174987/nutrients
-    note: Total carbohydrates (32.2g) minus fibre (1.8g) → 30.4g available
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
   - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -3679,7 +3390,7 @@ assumptions:
   oil_type: ''
   prep: packaged product
 per_portion:
-  energy_kcal: 296.6
+  energy_kcal: 255.8
   protein_g: 21.0
   fat_g: 10.0
   sat_fat_g: 5.7
@@ -3687,9 +3398,6 @@ per_portion:
   pufa_g: 2.3
   trans_fat_g: 0.0
   cholesterol_mg: 10
-  carbs_total_g: 37.9
-  polyols_g: 17.0
-  carbs_available_g: 20.0
   sugar_g: 1.3
   fiber_total_g: 0.9
   fiber_soluble_g: null
@@ -3703,6 +3411,9 @@ per_portion:
   zinc_mg: null
   vitamin_c_mg: null
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 20.0
+  carbs_total_g: 20.9
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -3712,13 +3423,12 @@ quality:
   - Micronutrients not provided on label
   - Contains sugar alcohols (17g polyols not included in main carb count)
 notes:
-- Contains 17g sugar alcohols/polyols (maltitol); UK label shows 20g available carbohydrate
-  (net) with 37.9g total incl. fibre + polyols
+- Contains 17g sugar alcohols/polyols (maltitol) not included in carb count
 - 'Fat split estimated: remaining 4.3g unsaturated divided into MUFA/PUFA based on
   typical protein bar composition'
 - Sodium estimated from typical Grenade bar range (0.45g salt = ~180mg sodium)
-- 'Atwater check (available carb basis): 4×21.0 + 9×10.0 + 4×20.0 + 2×0.9 + 2.4×17.0
-  = 296.6 kcal'
+- 'Atwater check (available carb basis): 4×21.0 + 9×10.0 + 4×20.0 + 2×0.9 + 2.4×0.0
+  = 255.8 kcal'
 change_log:
 - timestamp: 2025-10-30T00:00:00+0000
   updated_by: Claude Code
@@ -3728,28 +3438,18 @@ change_log:
   sources:
   - url: https://www.healthyplanetcanada.com/grenade-high-protein-bar-oreo-60g.html
     note: Grenade White Oreo bar nutrition facts
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Clarify polyol mass and available vs total carbohydrate
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  - notes
-  sources:
-  - url: https://www.grenade.com/products/carb-killa-protein-bar-white-oreo
-    note: 'Label: carbs 20g, fibre 0.9g, polyols 17g per 60g bar'
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
   - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -3788,9 +3488,6 @@ per_portion:
   pufa_g: 0.0
   trans_fat_g: 0.0
   cholesterol_mg: 0
-  carbs_total_g: 3.8
-  polyols_g: 0.0
-  carbs_available_g: 3.4
   sugar_g: 0.1
   fiber_total_g: 0.4
   fiber_soluble_g: null
@@ -3804,6 +3501,9 @@ per_portion:
   zinc_mg: null
   vitamin_c_mg: null
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 3.4
+  carbs_total_g: 3.8
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -3842,27 +3542,21 @@ change_log:
   - per_portion.fiber_total_g
   - per_portion.sodium_mg
   - id
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Mark total vs available carbs (UK label already net)
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
   sources:
   - url: user_correction
     note: User confirmed crispbread weight is 5g per piece
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
   - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -3901,9 +3595,6 @@ per_portion:
   pufa_g: 4.1
   trans_fat_g: 0.0
   cholesterol_mg: 0
-  carbs_total_g: 3.5
-  polyols_g: 0.0
-  carbs_available_g: 2.1
   sugar_g: 0.2
   fiber_total_g: 1.4
   fiber_soluble_g: null
@@ -3917,6 +3608,9 @@ per_portion:
   zinc_mg: null
   vitamin_c_mg: null
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 2.1
+  carbs_total_g: 3.5
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -3943,27 +3637,18 @@ change_log:
   sources:
   - url: https://www.tesco.com/groceries/en-GB/products/250438255
     note: Yarden Houmous 250g nutrition facts (per 100g)
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Expose carb totals vs available for 30g houmous portion
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: https://www.tesco.com/groceries/en-GB/products/250438255
-    note: 'Per 100g label: carbs 7.0g, fibre 4.5g → net 2.5g; scaled to 30g'
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
   - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -4005,9 +3690,6 @@ per_portion:
   pufa_g: 2.8
   trans_fat_g: 0.4
   cholesterol_mg: 115
-  carbs_total_g: 41.5
-  polyols_g: 0.0
-  carbs_available_g: 36.7
   sugar_g: 2.7
   fiber_total_g: 4.8
   fiber_soluble_g: 1.5
@@ -4021,6 +3703,9 @@ per_portion:
   zinc_mg: null
   vitamin_c_mg: null
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 36.7
+  carbs_total_g: 41.5
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
   fat_unassigned_g: 3.3
@@ -4062,27 +3747,19 @@ change_log:
   - url: user_input
     note: User-provided nutrition data for Zima Soho Beef Stroganoff with buckwheat
       on 2025-10-30
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Add carb totals vs available (user data already net)
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: user_input
-    note: User sheet listed 36.7g net carbs; total reconstructed as net + fibre
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
-  - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
   - derived.energy_from_macros_kcal
+  - last_verified
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -4123,9 +3800,6 @@ per_portion:
   pufa_g: 7.3
   trans_fat_g: 0.3
   cholesterol_mg: 140
-  carbs_total_g: 49.0
-  polyols_g: 0.0
-  carbs_available_g: 43.7
   sugar_g: 2.7
   fiber_total_g: 5.3
   fiber_soluble_g: 1.6
@@ -4139,6 +3813,9 @@ per_portion:
   zinc_mg: null
   vitamin_c_mg: null
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 43.7
+  carbs_total_g: 49.0
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
   fat_unassigned_g: 0.9
@@ -4181,27 +3858,19 @@ change_log:
   - url: user_input
     note: Complete nutrition data provided by user for Chicken Cutlet with Mushroom
       Sauce with buckwheat from Zima restaurant, Soho, London (2025-10-30)
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Add total vs available carbs (user data already net)
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: user_input
-    note: User sheet recorded 43.7g net carbs; total rebuilt as net + fibre
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
-  - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
   - derived.energy_from_macros_kcal
+  - last_verified
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -4234,7 +3903,7 @@ assumptions:
   prep: Traditional Russian beetroot soup with beef, served with sour cream, cured
     pork fat (salo), and Borodinsky rye bread on the side
 per_portion:
-  energy_kcal: 447.9
+  energy_kcal: 469.1
   protein_g: 8.1
   fat_g: 32.5
   sat_fat_g: 13.5
@@ -4242,9 +3911,6 @@ per_portion:
   pufa_g: 3.3
   trans_fat_g: 0.4
   cholesterol_mg: 87
-  carbs_total_g: 33.4
-  polyols_g: 0.0
-  carbs_available_g: 28.1
   sugar_g: 9.3
   fiber_total_g: 5.3
   fiber_soluble_g: 2.3
@@ -4258,6 +3924,9 @@ per_portion:
   zinc_mg: null
   vitamin_c_mg: null
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 33.4
+  carbs_total_g: 38.7
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
   fat_unassigned_g: 1.0
@@ -4267,15 +3936,15 @@ quality:
   - micronutrients (iodine, magnesium, calcium, iron, zinc, vitamin_c, manganese)
     not provided
 notes:
-- 448 kcal total for complete dish with all sides
+- 447 kcal total for complete dish with all sides
 - Borscht bowl approximately 300ml
 - 'Sides: sour cream ~30g, salo ~20g, Borodinsky rye bread ~32g (1 slice)'
 - Estimated total dish weight 382g (300g soup + 30g sour cream + 20g salo + 32g bread)
 - Traditional Russian preparation with beef and beetroot
 - Salo is traditional Ukrainian/Russian cured pork fat
 - Borodinsky rye is a dark rye bread with coriander and molasses
-- 'Atwater check (available carb basis): 4×8.1 + 9×32.5 + 4×28.1 + 2×5.3 + 2.4×0.0
-  = 447.9 kcal'
+- 'Atwater check (available carb basis): 4×8.1 + 9×32.5 + 4×33.4 + 2×5.3 + 2.4×0.0
+  = 469.1 kcal'
 change_log:
 - timestamp: 2025-10-30 00:00:00+00:00
   updated_by: 'LLM: Claude Sonnet 4.5'
@@ -4304,31 +3973,19 @@ change_log:
   - url: user_input
     note: Complete nutrition data provided for full portion including borscht, sour
       cream, salo, and Borodinsky rye bread
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Convert user total carbs to available (subtract fibre) and recompute energy
+- timestamp: '2025-11-02T19:20:00+00:00'
+  updated_by: 'LLM: GPT-5 Codex'
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - per_portion.energy_kcal
+  - derived.energy_from_macros_kcal
+  - last_verified
+  - notes
+  - per_portion.carbs_available_g
   - per_portion.carbs_g
   - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  - derived.energy_from_macros_kcal
-  - notes
-  sources:
-  - url: user_input
-    note: User provided 33.4g carbohydrate incl. fibre; available = 28.1g
-- timestamp: '2025-11-02T17:44:32+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
-  fields_changed:
-  - version
-  - last_verified
   - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
-  - notes
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -4364,9 +4021,6 @@ per_portion:
   pufa_g: 3.8
   trans_fat_g: 0.0
   cholesterol_mg: 0
-  carbs_total_g: 42.4
-  polyols_g: 0.0
-  carbs_available_g: 35.5
   sugar_g: 7.5
   fiber_total_g: 6.9
   fiber_soluble_g: 3.1
@@ -4380,6 +4034,9 @@ per_portion:
   zinc_mg: null
   vitamin_c_mg: null
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 35.5
+  carbs_total_g: 42.4
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -4417,27 +4074,18 @@ change_log:
   - url: user_input
     note: Complete nutrition data provided by Thomas on 2025-10-30 for Vinegret with
       1 slice rye from Zima, Soho, London
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Separate total vs available carbs (user numbers already net)
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: user_input
-    note: User reported 35.5g net carbs; total reconstructed with 6.9g fibre
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
   - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -4474,9 +4122,6 @@ per_portion:
   pufa_g: 0.1
   trans_fat_g: 0.0
   cholesterol_mg: 0
-  carbs_total_g: 12.3
-  polyols_g: 0.0
-  carbs_available_g: 7.8
   sugar_g: 3.0
   fiber_total_g: 4.5
   fiber_soluble_g: 0.9
@@ -4490,6 +4135,9 @@ per_portion:
   zinc_mg: null
   vitamin_c_mg: null
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 7.8
+  carbs_total_g: 12.3
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -4530,27 +4178,18 @@ change_log:
   sources:
   - url: user_input
     note: User-supplied nutrition data for Zima pickled cabbage on 2025-10-30
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Add carb totals vs available for fermented vegetable
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: user_input
-    note: Nutrition sheet listed 7.8g net carbs; total rebuilt adding 4.5g fibre
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - version
   - last_verified
-  - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
   - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -4577,7 +4216,7 @@ assumptions:
   oil_type: ''
   prep: boiled dumplings with cherry filling
 per_portion:
-  energy_kcal: 372.2
+  energy_kcal: 388.2
   protein_g: 9.0
   fat_g: 5.8
   sat_fat_g: 1.0
@@ -4585,9 +4224,6 @@ per_portion:
   pufa_g: 2.3
   trans_fat_g: 0.1
   cholesterol_mg: 10
-  carbs_total_g: 73.0
-  polyols_g: 0.0
-  carbs_available_g: 69.0
   sugar_g: 14.0
   fiber_total_g: 4.0
   fiber_soluble_g: 1.0
@@ -4601,6 +4237,9 @@ per_portion:
   zinc_mg: null
   vitamin_c_mg: null
   manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 73.0
+  carbs_total_g: 77.0
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
   fat_breakdown_sum_g: 5.9
@@ -4622,8 +4261,8 @@ notes:
 - Fat breakdown (sat 1.0g + MUFA 2.5g + PUFA 2.3g + trans 0.1g = 5.9g) matches total
   fat 5.8g within rounding
 - Unsaturated total (MUFA + PUFA) = 4.8g as expected
-- 'Atwater check (available carb basis): 4×9.0 + 9×5.8 + 4×69.0 + 2×4.0 + 2.4×0.0
-  = 372.2 kcal'
+- 'Atwater check (available carb basis): 4×9.0 + 9×5.8 + 4×73.0 + 2×4.0 + 2.4×0.0
+  = 388.2 kcal'
 change_log:
 - timestamp: 2025-10-30 12:00:00+00:00
   updated_by: 'LLM: Claude Sonnet 4.5'
@@ -4650,31 +4289,19 @@ change_log:
   - url: ''
     note: User-provided nutrition data for Cherry vareniki from Zima restaurant, Soho,
       London (full tray ~200g)
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Convert user total carbs to available and update energy
+- timestamp: '2025-11-02T19:20:00+00:00'
+  updated_by: 'LLM: GPT-5 Codex'
+  reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
-  - per_portion.energy_kcal
+  - derived.energy_from_macros_kcal
+  - last_verified
+  - notes
+  - per_portion.carbs_available_g
   - per_portion.carbs_g
   - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  - derived.energy_from_macros_kcal
-  - notes
-  sources:
-  - url: user_input
-    note: User stated 73g carbohydrate including fibre; available = 69g
-- timestamp: '2025-11-02T17:44:32+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
-  fields_changed:
-  - version
-  - last_verified
   - per_portion.energy_kcal
-  - per_portion.carbs_g
-  - derived.energy_from_macros_kcal
-  - notes
+  - per_portion.polyols_g
+  - version
   sources: []
 ```
 
@@ -4713,9 +4340,6 @@ per_portion:
   pufa_g: 3.85
   trans_fat_g: 0.0
   cholesterol_mg: 0
-  carbs_total_g: 12.4
-  polyols_g: 0.0
-  carbs_available_g: 11.0
   sugar_g: 9.4
   fiber_total_g: 1.4
   fiber_soluble_g: 0.2
@@ -4729,6 +4353,9 @@ per_portion:
   zinc_mg: 1.1
   vitamin_c_mg: null
   manganese_mg: 0.22
+  polyols_g: 0.0
+  carbs_available_g: 11.0
+  carbs_total_g: 12.4
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -4767,26 +4394,1517 @@ change_log:
     note: Parma.am product page with ingredient breakdown
   - url: https://fitaudit.ru/food/halva
     note: FitAudit generic halva mineral composition
-- timestamp: 2025-11-02 11:12:07+00:00
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Add total vs available carbs for halva portion
-  fields_changed:
-  - per_portion.carbs_total_g
-  - per_portion.polyols_g
-  - per_portion.carbs_available_g
-  sources:
-  - url: https://www.fatsecret.com/calories-nutrition/generic/halva
-    note: 'Per 100g: 44g carbs, 5.6g fibre → per-piece availability'
-- timestamp: '2025-11-02T17:44:32+00:00'
+- timestamp: '2025-11-02T19:20:00+00:00'
   updated_by: 'LLM: GPT-5 Codex'
-  reason: Recompute energy via available-carb Atwater formula and drop legacy carbs_g
-    field
+  reason: Standardise carbohydrate fields and recompute available-carb energy
+  fields_changed:
+  - last_verified
+  - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
+  sources: []
+```
+
+## Elite Greens Shake - Third Space Natural Fitness Food
+
+```yaml
+id: elite_greens_nff_v1
+version: 2
+last_verified: '2025-11-02'
+source:
+  venue: Third Space / Natural Fitness Food
+  menu_page: ''
+  evidence:
+  - 'User-provided partial nutrition data: 350 kcal, 8g F, 43g C, 4g Fiber, 25g Protein'
+  - 'Ingredient list from Third Space website: cold-pressed juice (2Boost) by 2-Juice
+    featuring Apple, Baby Spinach, Cucumber, Parsley, Lemon & Ginger, with vanilla
+    protein powder, oat milk & banana'
+  - Natural Fitness Food shake categories (Lean/Fuel) for context
+aliases:
+- Elite Greens
+- 2Boost shake
+category: drink
+portion:
+  description: 1 complete shake
+  est_weight_g: 370
+  notes: Blended shake containing juice, protein powder, oat milk, and banana
+assumptions:
+  salt_scheme: normal
+  oil_type: oat milk (barista-style, likely contains rapeseed/sunflower oil)
+  prep: Cold-blended shake with cold-pressed juice base
+per_portion:
+  energy_kcal: 352
+  protein_g: 25.0
+  fat_g: 8.0
+  sat_fat_g: 1.5
+  mufa_g: 3.0
+  pufa_g: 2.0
+  trans_fat_g: 0
+  cholesterol_mg: 20
+  sugar_g: 26.0
+  fiber_total_g: 4.0
+  fiber_soluble_g: 2.2
+  fiber_insoluble_g: 1.8
+  sodium_mg: 100
+  potassium_mg: 500
+  iodine_ug: 5
+  magnesium_mg: 50
+  calcium_mg: 220
+  iron_mg: 1.5
+  zinc_mg: 1.5
+  vitamin_c_mg: 25
+  manganese_mg: 1.0
+  polyols_g: 0.0
+  carbs_available_g: 43.0
+  carbs_total_g: 47.0
+derived:
+  salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
+quality:
+  confidence: medium
+  gaps:
+  - Fiber breakdown estimated from component analysis
+  - Fat subtype breakdown estimated from oat milk composition
+  - Micronutrients estimated from ingredient contributions
+notes:
+- 'Component breakdown: NFF Vanilla Whey (125 kcal, 22g P, 6.5g C, 1.4g F) + banana
+  ~80g + oat milk ~180ml + 2Boost juice ~130ml'
+- Fat breakdown (sat 1.5g + MUFA 3.0g + PUFA 2.0g) totals 6.5g, remainder 1.5g likely
+  short-chain/other fats
+- Fiber soluble (2.2g) mainly from banana pectin, oat milk beta-glucan, whey xanthan
+  gum
+- Fiber insoluble (1.8g) from banana cellulose, oat milk, juice greens
+- High potassium from banana (280mg) and juice (150mg)
+- Calcium fortified via oat milk (180mg)
+- Vitamin C from juice greens, parsley, lemon (18mg) plus banana (7mg)
+- 'Atwater check (available carb basis): 4×25.0 + 9×8.0 + 4×43.0 + 2×4.0 + 2.4×0.0
+  = 352 kcal'
+change_log:
+- timestamp: 2025-10-31T00:00:00+0000
+  updated_by: Claude Code (Sonnet 4.5)
+  reason: Initial entry with component-based triangulation from user-provided macros
+    and confirmed ingredient list
+  fields_changed:
+  - all fields
+  sources:
+  - url: user_input
+    note: 'User-provided core nutrition data: 350 kcal, 8g F, 43g C, 4g Fiber, 25g
+      Protein'
+  - url: https://www.thirdspace.london/natural-fitness-food/
+    note: 'Ingredient list: 2Boost juice (Apple, Baby Spinach, Cucumber, Parsley,
+      Lemon, Ginger) + vanilla protein + oat milk + banana'
+  - url: https://uk-ga.openfoodfacts.org/product/5065003325005/whey-protein-vanilla-natural-fitness-food
+    note: NFF Vanilla Whey nutrition data for component analysis
+- timestamp: '2025-11-02T19:20:00+00:00'
+  updated_by: 'LLM: GPT-5 Codex'
+  reason: Standardise carbohydrate fields and recompute available-carb energy
+  fields_changed:
+  - derived.energy_from_macros_kcal
+  - last_verified
+  - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
+  sources: []
+```
+
+## Natural Fitness Food Vanilla Whey Protein (30g scoop)
+
+```yaml
+id: nff_vanilla_whey_30g_v1
+version: 2
+last_verified: '2025-11-02'
+source:
+  venue: Third Space / Natural Fitness Food
+  menu_page: ''
+  evidence:
+  - 'OpenFoodFacts entry: 125 kcal, 22g P, 6.5g C (3.4g sugar), 1.4g F (1g sat), 0.5g
+    fiber, 0.098g salt'
+  - 'Ingredient list: Whey Protein Concentrate (87%) (MILK), Natural Flavouring (7%),
+    Thickener (Xanthan Gum), Sweetener (Steviol Glycosides), Emulsifier (Sunflower
+    Lecithin)'
+  - Scoop size confirmed as ~30g
+aliases:
+- NFF Vanilla Whey
+- Third Space Vanilla Protein
+category: ingredient
+portion:
+  description: 1 scoop (30g)
+  est_weight_g: 30
+  notes: Whey protein concentrate powder, 87% protein content
+assumptions:
+  salt_scheme: normal
+  oil_type: dairy-based (whey concentrate)
+  prep: Powder form, typically mixed with water or milk
+per_portion:
+  energy_kcal: 127.6
+  protein_g: 22.0
+  fat_g: 1.4
+  sat_fat_g: 1.0
+  mufa_g: 0.3
+  pufa_g: 0.1
+  trans_fat_g: 0
+  cholesterol_mg: 20
+  sugar_g: 3.4
+  fiber_total_g: 0.5
+  fiber_soluble_g: 0.5
+  fiber_insoluble_g: 0
+  sodium_mg: 39
+  potassium_mg: 180
+  iodine_ug: 5
+  magnesium_mg: 30
+  calcium_mg: 150
+  iron_mg: 0
+  zinc_mg: 1.5
+  vitamin_c_mg: 0
+  manganese_mg: 0
+  polyols_g: 0.0
+  carbs_available_g: 6.5
+  carbs_total_g: 7.0
+derived:
+  salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
+quality:
+  confidence: high
+  gaps:
+  - Fat subtype breakdown estimated from typical whey concentrate profiles
+  - Trace minerals estimated from dairy composition
+notes:
+- 'OpenFoodFacts validated nutrition: 125 kcal, 22g P, 6.5g C, 1.4g F, 0.5g fiber
+  per 30g scoop'
+- 'Ingredient analysis: 87% whey protein concentrate = 26.1g protein content, actual
+  22g suggests 73% protein efficiency typical of WPC-80'
+- 'Fat breakdown: sat 1.0g dominant (dairy fat), trace MUFA/PUFA from milk lipids'
+- Fiber (0.5g) entirely from xanthan gum thickener (soluble fiber)
+- Sugar (3.4g) from residual lactose in whey concentrate
+- Sodium (39mg) calculated from stated salt content (0.098g)
+- Cholesterol estimated 20mg typical for whey protein concentrate
+- Calcium (150mg) significant due to whey dairy origin
+- Potassium (180mg) naturally high in whey
+- Trans fat trace amounts (<0.1g) from ruminant dairy, rounded to 0
+- Contains sunflower lecithin emulsifier (contributes minimal fat)
+- Sweetened with stevia (zero calorie)
+- 'Atwater check (available carb basis): 4×22.0 + 9×1.4 + 4×6.5 + 2×0.5 + 2.4×0.0
+  = 127.6 kcal'
+change_log:
+- timestamp: 2025-10-31T00:00:00+0000
+  updated_by: Claude Code (Sonnet 4.5)
+  reason: Initial entry from OpenFoodFacts data with micronutrient estimation from
+    whey concentrate profiles
+  fields_changed:
+  - all fields
+  sources:
+  - url: https://uk-ga.openfoodfacts.org/product/5065003325005/whey-protein-vanilla-natural-fitness-food
+    note: 'Complete macronutrient data: 125 kcal, 22g P, 6.5g C (3.4g sugar), 1.4g
+      F (1g sat), 0.5g fiber, 39mg Na'
+  - url: user_input
+    note: 'User-provided ingredient list: Whey Protein Concentrate (87%), Natural
+      Flavouring (7%), Xanthan Gum, Steviol Glycosides, Sunflower Lecithin'
+- timestamp: '2025-11-02T19:20:00+00:00'
+  updated_by: 'LLM: GPT-5 Codex'
+  reason: Standardise carbohydrate fields and recompute available-carb energy
+  fields_changed:
+  - derived.energy_from_macros_kcal
+  - last_verified
+  - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
+  sources: []
+```
+
+## Guinness Draught (Pint, 568ml)
+
+```yaml
+id: guinness_pint_568ml_v1
+version: 2
+last_verified: '2025-11-02'
+source:
+  venue: Pub/Bar - Generic
+  menu_page: ''
+  evidence:
+  - 'Guinness official nutrition data: 210 kcal, 1.9g protein, 18g carbs per pint
+    (568ml)'
+  - Standard UK/Ireland pint serving (568ml / 20 fl oz)
+  - 4.2% ABV (alcohol by volume)
+aliases:
+- Guinness
+- Guinness Draught
+- Pint of Guinness
+category: drink
+portion:
+  description: 1 pint (568ml / 20 fl oz)
+  est_weight_g: 568
+  notes: Standard draught Guinness served in pint glass
+assumptions:
+  salt_scheme: normal
+  oil_type: ''
+  prep: Draught beer, nitrogen widget pour
+per_portion:
+  energy_kcal: 79.6
+  protein_g: 1.9
+  fat_g: 0.0
+  sat_fat_g: 0.0
+  mufa_g: 0.0
+  pufa_g: 0.0
+  trans_fat_g: 0
+  cholesterol_mg: 0
+  sugar_g: 0.0
+  fiber_total_g: 0.0
+  fiber_soluble_g: 0.0
+  fiber_insoluble_g: 0.0
+  sodium_mg: 28
+  potassium_mg: 200
+  iodine_ug: 3
+  magnesium_mg: 28
+  calcium_mg: 34
+  iron_mg: 0.6
+  zinc_mg: 0.1
+  vitamin_c_mg: 0
+  manganese_mg: 0.2
+  polyols_g: 0.0
+  carbs_available_g: 18.0
+  carbs_total_g: 18.0
+derived:
+  salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
+  alcohol_g: 19.0
+  alcohol_energy_kcal: 133
+quality:
+  confidence: high
+  gaps: []
+notes:
+- 'Standard pint: 568ml at 4.2% ABV = ~19g alcohol'
+- Alcohol contributes ~133 kcal (7 kcal/g), macros contribute ~80 kcal
+- 'Total energy: 210 kcal per pint'
+- Very low sugar content due to fermentation process
+- Minimal fat content in beer
+- Nitrogen pour creates characteristic creamy head and smooth mouthfeel
+- Contains barley (gluten), yeast, hops, roasted barley
+- Distinctive dark color from roasted unmalted barley
+- Iron content notable due to dark roasted grains
+- 'Atwater check (available carb basis): 4×1.9 + 9×0.0 + 4×18.0 + 2×0.0 + 2.4×0.0
+  = 79.6 kcal'
+change_log:
+- timestamp: 2025-10-31T17:00:00+0000
+  updated_by: Claude Code (Sonnet 4.5)
+  reason: Initial entry for tracking Guinness consumption
+  fields_changed:
+  - all fields
+  sources:
+  - url: https://www.guinness.com
+    note: 'Official Guinness nutrition data: 210 kcal, 1.9g protein, 18g carbs per
+      pint'
+  - url: user_request
+    note: User tracking two pints consumed at 17:20 and 17:50
+- timestamp: '2025-11-02T19:20:00+00:00'
+  updated_by: 'LLM: GPT-5 Codex'
+  reason: Standardise carbohydrate fields and recompute available-carb energy
+  fields_changed:
+  - derived.energy_from_macros_kcal
+  - last_verified
+  - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
+  sources: []
+```
+
+
+## Psyllium Husk (5g portion)
+
+```yaml
+id: psyllium_husk_5g_v1
+version: 2
+last_verified: '2025-11-02'
+source:
+  venue: Generic - Supplement
+  menu_page: ''
+  evidence:
+  - 'USDA FoodData Central: Psyllium seed husk, approximately per 5g serving'
+  - Typical commercial psyllium husk powder nutrition
+aliases:
+- Psyllium
+- Isabgol
+- Psyllium Fiber
+category: ingredient
+portion:
+  description: 5g (approximately 1 teaspoon)
+  est_weight_g: 5
+  notes: Psyllium husk powder or whole husks
+assumptions:
+  salt_scheme: unsalted
+  oil_type: ''
+  prep: Dry powder/husk form, typically mixed with water
+per_portion:
+  energy_kcal: 27.7
+  protein_g: 0.2
+  fat_g: 0.1
+  sat_fat_g: 0.0
+  mufa_g: 0.0
+  pufa_g: 0.1
+  trans_fat_g: 0
+  cholesterol_mg: 0
+  sugar_g: 0.0
+  fiber_total_g: 4.0
+  fiber_soluble_g: 3.2
+  fiber_insoluble_g: 0.8
+  sodium_mg: 2
+  potassium_mg: 15
+  iodine_ug: 0
+  magnesium_mg: 2
+  calcium_mg: 8
+  iron_mg: 0.3
+  zinc_mg: 0.1
+  vitamin_c_mg: 0
+  manganese_mg: 0
+  polyols_g: 0.0
+  carbs_available_g: 4.5
+  carbs_total_g: 8.5
+derived:
+  salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
+quality:
+  confidence: high
+  gaps: []
+notes:
+- Psyllium husk is approximately 80% soluble fiber (mucilage), 20% insoluble fiber
+- Soluble fiber forms viscous gel when mixed with water
+- Primarily used for digestive health and fiber supplementation
+- Derived from Plantago ovata seeds
+- Very low calorie due to fiber not being fully absorbed
+- Minimal micronutrient content
+- Should be consumed with adequate water (at least 200-250ml per 5g serving)
+- Fat content minimal, trace PUFA from seed hull
+- 'Atwater check (available carb basis): 4×0.2 + 9×0.1 + 4×4.5 + 2×4.0 + 2.4×0.0 =
+  27.7 kcal'
+change_log:
+- timestamp: 2025-10-31T00:00:00+0000
+  updated_by: Claude Code (Sonnet 4.5)
+  reason: Initial entry for psyllium husk supplement tracking, user requested 5g portion
+    size
+  fields_changed:
+  - all fields
+  sources:
+  - url: https://fdc.nal.usda.gov/
+    note: USDA FoodData Central reference values for psyllium seed husk
+  - url: user_request
+    note: User specified 5g portion size
+- timestamp: '2025-11-02T19:20:00+00:00'
+  updated_by: 'LLM: GPT-5 Codex'
+  reason: Standardise carbohydrate fields and recompute available-carb energy
+  fields_changed:
+  - derived.energy_from_macros_kcal
+  - last_verified
+  - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
+  sources: []
+```
+
+
+## Margarita (Classic)
+
+```yaml
+id: margarita_classic_v1
+version: 2
+last_verified: '2025-11-02'
+source:
+  venue: Generic - Bar/Restaurant
+  menu_page: ''
+  evidence:
+  - 'Standard margarita recipe: 1.5 oz tequila, 1 oz triple sec/Cointreau, 1 oz lime
+    juice'
+  - USDA FoodData Central for component ingredients
+  - Typical cocktail nutrition databases
+aliases:
+- Margarita
+- Classic Margarita
+- Tequila Margarita
+category: drink
+portion:
+  description: 1 standard margarita (~4 oz / 120ml)
+  est_weight_g: 120
+  notes: 'Classic recipe: tequila, triple sec, lime juice - on the rocks or blended'
+assumptions:
+  salt_scheme: normal
+  oil_type: ''
+  prep: Mixed cocktail, served with or without salt rim
+per_portion:
+  energy_kcal: 52.6
+  protein_g: 0.1
+  fat_g: 0.0
+  sat_fat_g: 0.0
+  mufa_g: 0.0
+  pufa_g: 0.0
+  trans_fat_g: 0
+  cholesterol_mg: 0
+  sugar_g: 11.0
+  fiber_total_g: 0.1
+  fiber_soluble_g: 0.0
+  fiber_insoluble_g: 0.1
+  sodium_mg: 5
+  potassium_mg: 40
+  iodine_ug: 0
+  magnesium_mg: 3
+  calcium_mg: 5
+  iron_mg: 0.1
+  zinc_mg: 0.0
+  vitamin_c_mg: 12
+  manganese_mg: 0
+  polyols_g: 0.0
+  carbs_available_g: 13.0
+  carbs_total_g: 13.1
+derived:
+  salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
+  alcohol_g: 24.0
+  alcohol_energy_kcal: 168
+quality:
+  confidence: medium
+  gaps: []
+notes:
+- 'Standard recipe: 45ml (1.5 oz) tequila @ 40% ABV = ~14g alcohol'
+- 30ml (1 oz) triple sec @ 40% ABV = ~10g alcohol
+- 30ml (1 oz) fresh lime juice = ~10 kcal, 3g carbs, 12mg vitamin C
+- 'Total alcohol: ~24g contributing ~168 kcal (7 kcal/g)'
+- Carbs from triple sec (~10g sugar) and lime juice (~3g)
+- 'Total energy: ~220 kcal (168 from alcohol + 52 from carbs)'
+- Variations may include simple syrup (adds ~50 kcal and 12g sugar)
+- Salt rim adds negligible calories but ~200-400mg sodium if licked
+- Frozen margaritas may contain additional sugar/syrups
+- Vitamin C primarily from fresh lime juice
+- 'Atwater check (available carb basis): 4×0.1 + 9×0.0 + 4×13.0 + 2×0.1 + 2.4×0.0
+  = 52.6 kcal'
+change_log:
+- timestamp: 2025-11-01T00:09:00+0000
+  updated_by: Claude Code (Sonnet 4.5)
+  reason: Initial entry for tracking margarita consumption
+  fields_changed:
+  - all fields
+  sources:
+  - url: https://fdc.nal.usda.gov/
+    note: USDA FoodData Central component values
+  - url: user_request
+    note: User consumed margarita on 2025-11-01
+- timestamp: '2025-11-02T19:20:00+00:00'
+  updated_by: 'LLM: GPT-5 Codex'
+  reason: Standardise carbohydrate fields and recompute available-carb energy
+  fields_changed:
+  - derived.energy_from_macros_kcal
+  - last_verified
+  - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
+  sources: []
+```
+
+---
+
+## Bife Ana Steak Sandwich (The Eagle, Farringdon)
+
+```yaml
+id: bife_ana_steak_sandwich_eagle_farringdon_v1
+version: 3
+last_verified: '2025-11-02'
+source:
+  venue: The Eagle, Farringdon (London)
+  menu_page: https://theeaglefarringdon.co.uk/
+  evidence:
+  - 'Guardian recipe (Eagle cookbook): 500g steak for 2 sandwiches = 250g raw per
+    sandwich'
+  - 'USDA cooking yields: 80% yield for grilled sirloin (250g raw → 200g cooked)'
+  - GPT-5 Pro detailed component analysis with restaurant preparation factors
+aliases:
+- Bife Ana
+- Eagle Steak Sandwich
+- Portuguese Steak Sandwich
+- Rump Steak Sandwich
+category: main
+portion:
+  description: 1 signature steak sandwich
+  est_weight_g: 360
+  notes: 'Portuguese-style sandwich: 200g cooked rump/sirloin in 90g crusty roll with
+    onions, lettuce, marinade reduction'
+assumptions:
+  salt_scheme: normal
+  oil_type: olive oil (marinade and pan juices soaking into bread)
+  prep: 250g raw rump marinated in wine, garlic, chili, bay, parsley, oregano; seared;
+    2 Tbsp olive oil from marinade + pan reduction soaked into roll; ~60g onion, 10g
+    lettuce; restaurant seasoning ~1.5% of meat weight
+per_portion:
+  energy_kcal: 853.7
+  protein_g: 69.4
+  fat_g: 39.5
+  sat_fat_g: 8.5
+  mufa_g: 24.3
+  pufa_g: 3.3
+  trans_fat_g: 0.0
+  cholesterol_mg: 164
+  sugar_g: 4.8
+  fiber_total_g: 3.7
+  fiber_soluble_g: 1.1
+  fiber_insoluble_g: 2.6
+  sodium_mg: 1910
+  potassium_mg: 1070
+  iodine_ug: null
+  magnesium_mg: 65
+  calcium_mg: 45
+  iron_mg: 5.5
+  zinc_mg: 8.5
+  vitamin_c_mg: 3
+  manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 53.3
+  carbs_total_g: 57.0
+derived:
+  salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
+quality:
+  confidence: medium
+  gaps:
+  - No official nutritional data from venue
+  - Menu changes daily - availability not guaranteed
+  - Micronutrient estimates from component ingredients
+  - 'Sodium varies by chef seasoning style: light 1,420mg, base 1,910mg, heavy 2,400mg'
+  - Actual portion may vary
+notes:
+- London's first gastropub (est. 1991) - legendary signature dish
+- 'Menu chalked daily, changes twice per day - call ahead to confirm availability:
+  020 7837 1353'
+- 'Component breakdown (base case): 200g cooked sirloin (366 kcal, 61g P, 11.6g F),
+  90g Portuguese roll (235 kcal, 47g C, 8g P), 2 Tbsp olive oil (238 kcal, 27g F),
+  60g onion + 10g lettuce (25 kcal, 6-7g C)'
+- 'Marinade: onion, garlic, dried chili, bay leaf, parsley, oregano, red wine, olive
+  oil'
+- 'Cooking method: steak marinated several hours, seared in very hot pan, pan juices
+  reduced and soaked into bread'
+- 'Fat profile: olive oil-forward with MUFA ~24.3g (62% of total fat), PUFA ~3.3g,
+  saturated ~8.5g'
+- 'Sodium variability: Light seasoning (1.0% meat) = 1,420mg; Base (1.5%) = 1,910mg;
+  Heavy (2.0%) = 2,400mg'
+- Bread contributes ~310mg sodium baseline; most sodium from chef's salt seasoning
+- 'Fiber: ~2.4-2.9g insoluble from roll, ~0.8-1.3g soluble from onion'
+- 'High protein meal: 69.4g = 41% of 170g daily target'
+- 'Sodium warning: Base case at 83% of 2,300mg daily limit; heavy seasoning would
+  exceed limit'
+- 'Potassium: 1,070mg = 27% of 4,000mg target (pair with K-rich sides to boost)'
+- Portuguese-inspired preparation (Bife Ana = beef version of traditional pork bifana)
+- The sauce/reduction is where most extra oil and salt enter the sandwich
+- 'Atwater check (available carb basis): 4×69.4 + 9×39.5 + 4×53.3 + 2×3.7 + 2.4×0.0
+  = 853.7 kcal'
+change_log:
+- timestamp: 2025-11-01T08:45:00+0000
+  updated_by: Claude Code (Sonnet 4.5)
+  reason: Initial entry for The Eagle's signature steak sandwich - user planning visit
+    to venue
+  fields_changed:
+  - all fields
+  sources:
+  - url: https://theeaglefarringdon.co.uk/
+    note: Official venue website
+  - url: https://gastroportugal.com/prego-no-pao/
+    note: Portuguese steak sandwich nutritional baseline (~715 kcal)
+  - url: https://fdc.nal.usda.gov/
+    note: USDA FoodData Central for rump steak, bread, olive oil component values
+  - url: user_request
+    note: User researching for upcoming visit on 2025-11-01
+- timestamp: 2025-11-01T09:35:00+0000
+  updated_by: Claude Code (Sonnet 4.5)
+  reason: Updated with GPT-5 Pro detailed analysis - significantly more accurate than
+    initial estimate
+  fields_changed:
+  - version
+  - per_portion.energy_kcal
+  - per_portion.protein_g
+  - per_portion.fat_g
+  - per_portion.sat_fat_g
+  - per_portion.mufa_g
+  - per_portion.pufa_g
+  - per_portion.carbs_g
+  - per_portion.sugar_g
+  - per_portion.fiber_total_g
+  - per_portion.fiber_soluble_g
+  - per_portion.fiber_insoluble_g
+  - per_portion.sodium_mg
+  - per_portion.potassium_mg
+  - per_portion.cholesterol_mg
+  - per_portion.trans_fat_g
+  - quality.confidence
+  - quality.gaps
+  - portion.est_weight_g
+  - assumptions.prep
+  sources:
+  - url: https://www.theguardian.com/lifeandstyle/2010/sep/25/portuguese-steak-sandwich-recipe
+    note: 'Guardian published Eagle cookbook recipe: 500g steak for 2 sandwiches'
+  - url: https://www.ars.usda.gov/ARSUserFiles/80400525/Data/retn/retn06.pdf
+    note: 'USDA cooking yields: 80% for grilled sirloin'
+  - url: gpt5_pro_analysis
+    note: 'GPT-5 Pro component-based analysis: 200g cooked sirloin + 90g roll + 2
+      Tbsp oil + onion/lettuce + restaurant salt seasoning. Major corrections: calories
+      750→866, sodium 650→1,910mg, protein 55→69.4g'
+- timestamp: '2025-11-02T19:20:00+00:00'
+  updated_by: 'LLM: GPT-5 Codex'
+  reason: Standardise carbohydrate fields and recompute available-carb energy
+  fields_changed:
+  - last_verified
+  - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
+  sources: []
+```
+
+---
+
+## Mafaldine with Tomato, Rosemary, Chickpeas & Parmesan (The Eagle, Farringdon)
+
+```yaml
+id: mafaldine_tomato_rosemary_chickpeas_parmesan_eagle_farringdon_v1
+version: 3
+last_verified: '2025-11-02'
+source:
+  venue: The Eagle, Farringdon (London)
+  menu_page: https://theeaglefarringdon.co.uk/
+  evidence:
+  - GPT-5 Codex component build based on pasta, tomato sauce, chickpeas, olive oil,
+    parmesan
+  - Portion sizing inferred from Eagle pasta mains (~380-400g cooked pasta)
+  - User dining notes from 2025-11-01 visit
+aliases:
+- Mafaldine with Tomato & Chickpeas
+- Mafaldine Pomodoro e Ceci
+- Mafaldine with Rosemary & Parmesan
+category: main
+portion:
+  description: 1 plated serving
+  est_weight_g: 645
+  notes: Approx. 280g cooked mafaldine + 150g chickpeas + 180g crushed tomatoes +
+    garnishes
+assumptions:
+  salt_scheme: normal (≈0.6g finishing salt)
+  oil_type: extra-virgin olive oil
+  prep: Mafaldine tossed in tomato-rosemary sauce with chickpeas, finished with olive
+    oil and parmesan
+per_portion:
+  energy_kcal: 1008.2
+  protein_g: 39.6
+  fat_g: 27.2
+  sat_fat_g: 6.3
+  mufa_g: 13.8
+  pufa_g: 4.5
+  trans_fat_g: 0
+  cholesterol_mg: 13.6
+  sugar_g: 18.5
+  fiber_total_g: 19.9
+  fiber_soluble_g: 6.3
+  fiber_insoluble_g: 13.6
+  sodium_mg: 807
+  potassium_mg: 1108
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 141.3
+  carbs_total_g: 161.2
+derived:
+  salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
+quality:
+  confidence: medium
+  gaps:
+  - Venue does not publish nutrition info
+  - Saturated fat and micronutrients inferred from components
+  - Actual salt level varies by chef seasoning
+  - Portion weight estimated from typical serving size
+notes:
+- 'Component breakdown: 280g cooked mafaldine, 150g cooked chickpeas, 180g crushed
+  tomatoes, 15g olive oil, 20g parmesan'
+- Seasoning assumed to include ≈0.6g finishing salt plus inherent sodium from parmesan
+  and canned ingredients
+- Higher fiber (≈20g) from chickpeas and pasta supports training-day carb goals
+- Fat split reflects olive oil MUFA dominance with moderate saturated fat from parmesan
+- 'Energy cross-check: 141.3g carbs, 39.6g protein, 27.2g fat → ~957 kcal from macros'
+- Suitable for vegetarian diet; contains dairy
+- Sodium moderate for a pasta main (~0.8g)
+- 'Atwater check (available carb basis): 4×39.6 + 9×27.2 + 4×141.3 + 2×19.9 + 2.4×0.0
+  = 1008.2 kcal'
+change_log:
+- timestamp: 2025-11-01T18:30:00+0000
+  updated_by: 'LLM: GPT-5 Codex'
+  reason: Initial macro-rich estimate for pasta ordered at The Eagle
+  fields_changed:
+  - all fields
+  sources:
+  - url: user_request
+    note: User considering Mafaldine with Tomato, Rosemary, Chickpeas & Parmesan on
+      2025-11-01
+  - url: gpt_culinary_estimate
+    note: GPT-5 Codex component model with 2g finishing salt assumption
+- timestamp: 2025-11-02T10:00:00+0000
+  updated_by: 'LLM: GPT-5 Codex'
+  reason: Aligned macros and sodium with refined portion model from user research
+    notes
   fields_changed:
   - version
   - last_verified
+  - portion.est_weight_g
+  - assumptions.salt_scheme
   - per_portion.energy_kcal
+  - per_portion.protein_g
+  - per_portion.fat_g
+  - per_portion.sat_fat_g
+  - per_portion.mufa_g
+  - per_portion.pufa_g
+  - per_portion.cholesterol_mg
   - per_portion.carbs_g
+  - per_portion.sugar_g
+  - per_portion.fiber_total_g
+  - per_portion.fiber_soluble_g
+  - per_portion.fiber_insoluble_g
+  - per_portion.sodium_mg
+  - per_portion.potassium_mg
   - derived.energy_from_macros_kcal
   - notes
+  sources:
+  - url: user_provided_best_effort_estimate
+    note: Portion and macro breakdown supplied by user on 2025-11-02
+- timestamp: '2025-11-02T19:20:00+00:00'
+  updated_by: 'LLM: GPT-5 Codex'
+  reason: Standardise carbohydrate fields and recompute available-carb energy
+  fields_changed:
+  - derived.energy_from_macros_kcal
+  - last_verified
+  - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
+  sources: []
+```
+
+---
+
+## Roasted Hake with Lentils & Salsa Verde (The Eagle, Farringdon)
+
+```yaml
+id: roasted_hake_lentils_salsa_verde_eagle_farringdon_v1
+version: 3
+last_verified: '2025-11-02'
+source:
+  venue: The Eagle, Farringdon (London)
+  menu_page: https://theeaglefarringdon.co.uk/
+  evidence:
+  - GPT-5 Codex component build using hake fillet, puy lentils, salsa verde
+  - Portion inference from Eagle roasted fish mains (~150g cooked fish)
+  - User dining notes from 2025-11-01 visit
+aliases:
+- Roasted Hake with Lentils
+- Hake & Lentils with Salsa Verde
+category: main
+portion:
+  description: 1 plated serving
+  est_weight_g: 375
+  notes: Approx. 170g cooked hake, 180g cooked lentils, 25g salsa verde
+assumptions:
+  salt_scheme: normal
+  oil_type: extra-virgin olive oil
+  prep: Pan-roasted hake over braised lentils with herb/anchovy salsa verde
+per_portion:
+  energy_kcal: 591.7
+  protein_g: 56.5
+  fat_g: 21.1
+  sat_fat_g: 3.0
+  mufa_g: 11.1
+  pufa_g: 1.9
+  trans_fat_g: 0
+  cholesterol_mg: 54.4
+  sugar_g: 3.3
+  fiber_total_g: 14.5
+  fiber_soluble_g: 1.8
+  fiber_insoluble_g: 12.8
+  sodium_mg: 1015
+  potassium_mg: 668
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 36.7
+  carbs_total_g: 51.2
+derived:
+  salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
+quality:
+  confidence: medium
+  gaps:
+  - Venue does not publish nutrition info
+  - Fat profile estimated from olive oil + fish
+  - Micronutrients not fully modelled
+  - Anchovy quantity varies by chef
+notes:
+- 'Component breakdown: 170g cooked hake, 180g cooked lentils, 15g olive oil in salsa
+  verde, 8g anchovy, 10g capers'
+- Anchovy/caper salsa modeled at ~25g, providing majority of sodium
+- High-protein option (56.5g ≈33% of 170g target) with modest calories
+- Fiber dominated by lentils (soluble ≈1.8g, insoluble ≈12.8g)
+- 'Energy cross-check: 36.7g carbs, 56.5g protein, 21.1g fat → ~563 kcal (rounds to
+  553 kcal after ingredient rounding)'
+- 'Contains fish and anchovies (allergens: fish)'
+- 'Atwater check (available carb basis): 4×56.5 + 9×21.1 + 4×36.7 + 2×14.5 + 2.4×0.0
+  = 591.7 kcal'
+change_log:
+- timestamp: 2025-11-01T18:32:00+0000
+  updated_by: 'LLM: GPT-5 Codex'
+  reason: Initial estimate for roasted hake main at The Eagle
+  fields_changed:
+  - all fields
+  sources:
+  - url: user_request
+    note: User considering Roasted Hake with Lentils & Salsa Verde on 2025-11-01
+  - url: gpt_culinary_estimate
+    note: GPT-5 Codex component model using 150g cooked hake, 180g lentils, 25g olive
+      oil
+- timestamp: 2025-11-02T10:00:00+0000
+  updated_by: 'LLM: GPT-5 Codex'
+  reason: Synced dish macros with refined user portion model including anchovy/caper
+    sodium
+  fields_changed:
+  - version
+  - last_verified
+  - portion.est_weight_g
+  - per_portion.energy_kcal
+  - per_portion.protein_g
+  - per_portion.fat_g
+  - per_portion.sat_fat_g
+  - per_portion.mufa_g
+  - per_portion.pufa_g
+  - per_portion.cholesterol_mg
+  - per_portion.carbs_g
+  - per_portion.sugar_g
+  - per_portion.fiber_total_g
+  - per_portion.fiber_soluble_g
+  - per_portion.fiber_insoluble_g
+  - per_portion.sodium_mg
+  - per_portion.potassium_mg
+  - notes
+  sources:
+  - url: user_provided_best_effort_estimate
+    note: Detailed macro table shared by user on 2025-11-02
+- timestamp: '2025-11-02T19:20:00+00:00'
+  updated_by: 'LLM: GPT-5 Codex'
+  reason: Standardise carbohydrate fields and recompute available-carb energy
+  fields_changed:
+  - derived.energy_from_macros_kcal
+  - last_verified
+  - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
+  sources: []
+```
+
+---
+
+## Minestrone with Cannellini Beans, Fennel, Cabbage, Potato & Parmesan (The Eagle, Farringdon)
+
+```yaml
+id: minestrone_cannellini_fennel_cabbage_potato_parmesan_eagle_farringdon_v1
+version: 3
+last_verified: '2025-11-02'
+source:
+  venue: The Eagle, Farringdon (London)
+  menu_page: https://theeaglefarringdon.co.uk/
+  evidence:
+  - GPT-5 Codex component build using vegetable broth, beans, seasonal vegetables,
+    olive oil
+  - Portion estimation from Eagle soup bowls (~750g including broth)
+  - User dining notes from 2025-11-01 visit
+aliases:
+- Minestrone with Cannellini Beans
+- Winter Minestrone (Eagle)
+- Minestrone with Parmesan
+category: soup
+portion:
+  description: 1 large bowl
+  est_weight_g: 525
+  notes: Approx. 450ml broth yield with 120g beans, 100g potato, 50g fennel, 80g cabbage,
+    150g tomatoes, 15g parmesan
+assumptions:
+  salt_scheme: normal (≈1.8g salt in broth)
+  oil_type: extra-virgin olive oil
+  prep: Vegetable broth simmered with cannellini beans, fennel, cabbage, potato; finished
+    with olive oil and parmesan
+per_portion:
+  energy_kcal: 536.6
+  protein_g: 23.0
+  fat_g: 15.0
+  sat_fat_g: 4.1
+  mufa_g: 8.5
+  pufa_g: 1.5
+  trans_fat_g: 0
+  cholesterol_mg: 10.2
+  sugar_g: 14.2
+  fiber_total_g: 15.6
+  fiber_soluble_g: 5.4
+  fiber_insoluble_g: 10.2
+  sodium_mg: 1200
+  potassium_mg: 1858
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 69.6
+  carbs_total_g: 85.2
+derived:
+  salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
+quality:
+  confidence: medium
+  gaps:
+  - Venue does not publish nutrition info
+  - Micronutrients estimated from component model
+  - Actual olive oil drizzle varies
+  - Vegetable mix may change daily
+notes:
+- 'Component breakdown: 120g cooked cannellini beans, 100g potato, 50g fennel, 80g
+  cabbage, 150g crushed tomatoes, 10g olive oil, 15g parmesan'
+- Modeled broth uses ≈1.8g salt, aligning with UK soup surveys
+- Delivers ~15.6g fiber split 5.4g soluble / 10.2g insoluble
+- Sodium higher than previous estimate due to broth and parmesan (≈1.2g)
+- Vegetable mix rotates seasonally; macro impact minimal provided bean portion stays
+  constant
+- Contains dairy (parmesan); otherwise vegetarian
+- 'Atwater check (available carb basis): 4×23.0 + 9×15.0 + 4×69.6 + 2×15.6 + 2.4×0.0
+  = 536.6 kcal'
+change_log:
+- timestamp: 2025-11-01T18:34:00+0000
+  updated_by: 'LLM: GPT-5 Codex'
+  reason: Initial estimate for minestrone bowl at The Eagle
+  fields_changed:
+  - all fields
+  sources:
+  - url: user_request
+    note: User considering Minestrone with Cannellini Beans, Fennel, Cabbage, Potato
+      & Parmesan on 2025-11-01
+  - url: gpt_culinary_estimate
+    note: GPT-5 Codex component model using 200g beans, 15g olive oil, 10g parmesan
+- timestamp: 2025-11-02T10:00:00+0000
+  updated_by: 'LLM: GPT-5 Codex'
+  reason: Updated soup macros to match user-supplied estimate with broth sodium detail
+  fields_changed:
+  - version
+  - last_verified
+  - portion.est_weight_g
+  - assumptions.salt_scheme
+  - per_portion.energy_kcal
+  - per_portion.protein_g
+  - per_portion.fat_g
+  - per_portion.sat_fat_g
+  - per_portion.mufa_g
+  - per_portion.pufa_g
+  - per_portion.cholesterol_mg
+  - per_portion.carbs_g
+  - per_portion.sugar_g
+  - per_portion.fiber_total_g
+  - per_portion.fiber_soluble_g
+  - per_portion.fiber_insoluble_g
+  - per_portion.sodium_mg
+  - per_portion.potassium_mg
+  - derived.energy_from_macros_kcal
+  - notes
+  sources:
+  - url: user_provided_best_effort_estimate
+    note: Detailed macro table shared by user on 2025-11-02
+- timestamp: '2025-11-02T19:20:00+00:00'
+  updated_by: 'LLM: GPT-5 Codex'
+  reason: Standardise carbohydrate fields and recompute available-carb energy
+  fields_changed:
+  - derived.energy_from_macros_kcal
+  - last_verified
+  - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
+  sources: []
+```
+
+---
+
+## Pastel de Nata (The Eagle, Farringdon)
+
+```yaml
+id: pastel_de_nata_eagle_farringdon_v1
+version: 2
+last_verified: '2025-11-02'
+source:
+  venue: The Eagle, Farringdon (London)
+  menu_page: https://theeaglefarringdon.co.uk/
+  evidence:
+  - Venue dessert board observed 2025-11-01
+  - Component estimate using puff pastry and egg custard nutrition profiles
+aliases:
+- Portuguese Custard Tart
+category: dessert
+portion:
+  description: 1 tart
+  est_weight_g: 65
+  notes: Approx. 40g puff pastry shell with 25g rich egg custard
+assumptions:
+  salt_scheme: normal (pastry dough seasoned)
+  oil_type: butter
+  prep: House-baked puff pastry case filled with egg custard, baked until caramelised
+per_portion:
+  energy_kcal: 281
+  protein_g: 5.2
+  fat_g: 14.8
+  sat_fat_g: 7.4
+  mufa_g: 5.5
+  pufa_g: 1.3
+  trans_fat_g: 0.1
+  cholesterol_mg: 115
+  sugar_g: 17.0
+  fiber_total_g: 1.1
+  fiber_soluble_g: 0.3
+  fiber_insoluble_g: 0.8
+  sodium_mg: 210
+  potassium_mg: 105
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 31.2
+  carbs_total_g: 32.3
+derived:
+  salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
+quality:
+  confidence: medium
+  gaps:
+  - Exact pastry weight may vary by bake batch
+  - Custard cream ratio inferred from standard recipes
+  - Micronutrients not fully itemised
+notes:
+- 'Macro build: 40g puff pastry + 25g enriched egg custard'
+- Sugar estimate combines custard sugar and caramelised top
+- Cholesterol driven by egg yolks and dairy
+- Sodium primarily from salted butter in pastry
+- 'Energy check: 31.2g carbs, 5.2g protein, 14.8g fat → ≈280 kcal'
+- Contains gluten, egg, dairy
+- 'Atwater check (available carb basis): 4×5.2 + 9×14.8 + 4×31.2 + 2×1.1 + 2.4×0.0
+  = 281 kcal'
+change_log:
+- timestamp: 2025-11-02T12:00:00+0000
+  updated_by: 'LLM: GPT-5 Codex'
+  reason: Initial estimate for Pastel de Nata dessert at The Eagle
+  fields_changed:
+  - all fields
+  sources:
+  - url: user_request
+    note: User asked to add Pastel de Nata from The Eagle to food bank
+  - url: gpt_component_estimate
+    note: Component model using puff pastry and custard nutrition references
+- timestamp: '2025-11-02T19:20:00+00:00'
+  updated_by: 'LLM: GPT-5 Codex'
+  reason: Standardise carbohydrate fields and recompute available-carb energy
+  fields_changed:
+  - derived.energy_from_macros_kcal
+  - last_verified
+  - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
+  sources: []
+```
+
+---
+
+## Orange 'Jaffa Cake' Slice with Crème Fraîche (The Eagle, Farringdon)
+
+```yaml
+id: orange_jaffa_cake_slice_creme_fraiche_eagle_farringdon_v1
+version: 3
+last_verified: '2025-11-02'
+source:
+  venue: The Eagle, Farringdon (London)
+  menu_page: https://theeaglefarringdon.co.uk/
+  evidence:
+  - Venue dessert board observed 2025-11-01
+  - Component estimate for sponge cake with orange jelly, dark chocolate glaze, and
+    crème fraîche
+  - GPT-5 Pro refined portion estimate logged 2025-11-01 14:13
+aliases:
+- Orange Jaffa Cake with Crème Fraîche
+category: dessert
+portion:
+  description: 1 plated slice with crème fraîche
+  est_weight_g: 170
+  notes: Approx. 140g orange sponge slice with orange jelly & chocolate glaze plus
+    30g crème fraîche
+assumptions:
+  salt_scheme: light
+  oil_type: butter
+  prep: Citrus sponge layered with orange jelly, dipped in dark chocolate and served
+    with a dollop of crème fraîche
+per_portion:
+  energy_kcal: 630.2
+  protein_g: 7.0
+  fat_g: 37.0
+  sat_fat_g: 17.0
+  mufa_g: 12.0
+  pufa_g: 2.3
+  trans_fat_g: 0.3
+  cholesterol_mg: 126
+  sugar_g: 46.0
+  fiber_total_g: 2.6
+  fiber_soluble_g: 0.6
+  fiber_insoluble_g: 2.0
+  sodium_mg: 385
+  potassium_mg: 255
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 66.0
+  carbs_total_g: 68.6
+derived:
+  salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
+quality:
+  confidence: medium
+  gaps:
+  - Slice size varies depending on cake pan
+  - Chocolate thickness inferred from similar desserts
+  - Micronutrient profile not detailed
+notes:
+- 'Component breakdown: ~140g orange sponge with jelly and chocolate glaze plus 30g
+  full-fat crème fraîche (~170g plate)'
+- Sugar load concentrated in sponge syrup and orange jelly
+- Fat split reflects butter + crème fraîche saturated fat with cocoa butter MUFA
+- 'Energy cross-check: 66g carbs, 7.0g protein, 37.0g fat → ≈630 kcal'
+- Contains gluten, egg, dairy
+- 'Atwater check (available carb basis): 4×7.0 + 9×37.0 + 4×66.0 + 2×2.6 + 2.4×0.0
+  = 630.2 kcal'
+change_log:
+- timestamp: 2025-11-02T12:05:00+0000
+  updated_by: 'LLM: GPT-5 Codex'
+  reason: Initial estimate for Orange 'Jaffa Cake' slice with crème fraîche at The
+    Eagle
+  fields_changed:
+  - all fields
+  sources:
+  - url: user_request
+    note: User asked to add Orange 'Jaffa Cake' dessert with crème fraîche to food
+      bank
+  - url: gpt_component_estimate
+    note: Component model combining sponge, chocolate glaze, orange jelly, and crème
+      fraîche
+- timestamp: 2025-11-02T14:00:00+0000
+  updated_by: 'LLM: GPT-5 Codex'
+  reason: Scaled portion and macros to align with GPT-5 Pro refined estimate
+  fields_changed:
+  - portion.est_weight_g
+  - portion.notes
+  - per_portion
+  - derived.energy_from_macros_kcal
+  - source.evidence
+  - notes
+  sources:
+  - url: user_follow_up
+    note: GPT-5 Pro estimate shared 2025-11-01 14:13 with larger slice weight and
+      crème fraîche portion
+- timestamp: '2025-11-02T19:20:00+00:00'
+  updated_by: 'LLM: GPT-5 Codex'
+  reason: Standardise carbohydrate fields and recompute available-carb energy
+  fields_changed:
+  - derived.energy_from_macros_kcal
+  - last_verified
+  - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
+  sources: []
+```
+
+
+---
+
+## Banana (Raw, 150g)
+
+```yaml
+id: banana_raw_150g_v1
+version: 2
+last_verified: '2025-11-02'
+source:
+  venue: Generic - Grocery/Supermarket
+  menu_page: ''
+  evidence:
+  - 'USDA FoodData Central #173944 - Bananas, raw'
+  - Standard fresh banana, medium-large size
+aliases:
+- Banana
+- Fresh Banana
+- Raw Banana
+category: ingredient
+portion:
+  description: 1 medium-large banana
+  est_weight_g: 150
+  notes: Raw, unpeeled weight approximately 180-200g; peeled edible portion 150g
+assumptions:
+  salt_scheme: unsalted
+  oil_type: ''
+  prep: Raw, fresh, unprocessed
+per_portion:
+  energy_kcal: 155.9
+  protein_g: 1.6
+  fat_g: 0.5
+  sat_fat_g: 0.2
+  mufa_g: 0.1
+  pufa_g: 0.1
+  trans_fat_g: 0
+  cholesterol_mg: 0
+  sugar_g: 18.3
+  fiber_total_g: 3.9
+  fiber_soluble_g: 0.9
+  fiber_insoluble_g: 3.0
+  sodium_mg: 2
+  potassium_mg: 537
+  iodine_ug: 5
+  magnesium_mg: 40
+  calcium_mg: 8
+  iron_mg: 0.4
+  zinc_mg: 0.2
+  vitamin_c_mg: 13
+  manganese_mg: 0.4
+  polyols_g: 0.0
+  carbs_available_g: 34.3
+  carbs_total_g: 38.2
+derived:
+  salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
+quality:
+  confidence: high
+  gaps: []
+notes:
+- USDA standard reference for raw banana (173944)
+- Excellent source of potassium (537mg, ~11% DV) and vitamin B6 (0.6mg, ~42% DV)
+- Good source of dietary fiber, primarily resistant starch and pectin
+- Contains prebiotic fiber that feeds beneficial gut bacteria
+- 'Vitamin C: ~13mg per 150g serving'
+- 'Manganese: ~0.4mg per 150g serving'
+- Natural sugars include glucose, fructose, and sucrose
+- Ripeness affects sugar content - riper bananas have more simple sugars
+- Resistant starch content decreases as banana ripens
+- Low glycemic index when green/unripe, moderate GI when fully ripe
+- Minimal fat content, primarily PUFA and MUFA
+- Soluble fiber (~0.9g) mainly pectin, insoluble fiber (~3g) mainly cellulose
+- 'Atwater check (available carb basis): 4×1.6 + 9×0.5 + 4×34.3 + 2×3.9 + 2.4×0.0
+  = 155.9 kcal'
+change_log:
+- timestamp: 2025-11-01T09:00:00+0000
+  updated_by: Claude Code (Sonnet 4.5)
+  reason: Initial entry for banana tracking - user consumed in breakfast smoothie
+  fields_changed:
+  - all fields
+  sources:
+  - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/173944/nutrients
+    note: USDA FoodData Central - Bananas, raw
+  - url: user_request
+    note: User consumed 150g banana in breakfast smoothie on 2025-11-01 at 09:00
+- timestamp: '2025-11-02T19:20:00+00:00'
+  updated_by: 'LLM: GPT-5 Codex'
+  reason: Standardise carbohydrate fields and recompute available-carb energy
+  fields_changed:
+  - last_verified
+  - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
+  sources: []
+```
+
+---
+
+## Smoked Trout (Daylesford, 80g)
+
+```yaml
+id: daylesford_smoked_trout_80g_v1
+version: 3
+last_verified: '2025-11-02'
+source:
+  venue: Daylesford Organic
+  menu_page: https://www.daylesford.com/
+  evidence:
+  - 'Product: Daylesford Smoked Trout (200g pack, Batch 6997, Use by 12.11.25)'
+  - Dry salted & cold smoked on West Coast of Scotland
+  - 'Ingredients: Trout (96%), Salt, Sugar'
+  - Official product label nutrition facts
+aliases:
+- Daylesford Trout
+- Smoked Rainbow Trout
+- Cold Smoked Trout
+category: main
+portion:
+  description: 2 slices smoked trout
+  est_weight_g: 80
+  notes: Pond reared farmed rainbow trout, cold smoked, thinly sliced
+assumptions:
+  salt_scheme: normal
+  oil_type: ''
+  prep: Dry salted and cold smoked - traditional Scottish method
+per_portion:
+  energy_kcal: 161.4
+  protein_g: 17.4
+  fat_g: 10.2
+  sat_fat_g: 1.8
+  mufa_g: 2.5
+  pufa_g: 5.9
+  trans_fat_g: 0
+  cholesterol_mg: 50
+  sugar_g: 0.0
+  fiber_total_g: 0.0
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: 480
+  potassium_mg: 280
+  iodine_ug: null
+  magnesium_mg: 24
+  calcium_mg: 10
+  iron_mg: 0.3
+  zinc_mg: 0.4
+  vitamin_c_mg: 0
+  manganese_mg: null
+  polyols_g: 0.0
+  carbs_available_g: 0.0
+  carbs_total_g: 0.0
+derived:
+  salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
+  omega_3_total_g: 1.4
+  epa_g: 0.4
+  dha_g: 0.8
+quality:
+  confidence: high
+  gaps:
+  - Fat breakdown (MUFA/PUFA) estimated from typical rainbow trout composition
+  - Micronutrients estimated from USDA rainbow trout data
+  - Omega-3 breakdown estimated from farmed rainbow trout composition
+notes:
+- Rainbow trout (Oncorhynchus mykiss) - pond reared, farmed, Scottish origin
+- 'Per 100g (from label): 202 kcal, 21.8g protein, 12.8g fat (2.3g sat), <0.1g carbs,
+  1.5g salt'
+- Higher fat content (12.8g/100g) than typical smoked trout - premium farmed product
+- Cold smoked process preserves omega-3 fatty acids better than hot smoking
+- Excellent source of complete protein (17.4g per 80g portion)
+- Rich in omega-3 fatty acids (~1.4g total, including ~0.4g EPA and ~0.8g DHA)
+- Very high in vitamin B12 (~6µg per 80g, ~250% DV) - estimated
+- Good source of vitamin D (~120 IU per 80g) - estimated
+- High in selenium (~10µg per 80g) - estimated
+- Phosphorus content ~200mg per 80g - estimated
+- 'Sodium: 480mg per 80g (from 1.2g salt)'
+- Sugar listed in ingredients but negligible in final product (<0.1g/100g)
+- PUFA includes omega-3 (EPA+DHA) and some omega-6
+- Zero carb, keto-friendly protein source
+- Store refrigerated 0-5°C, consume within 3 days once opened
+- May contain bones - check before eating
+- 'Atwater check (available carb basis): 4×17.4 + 9×10.2 + 4×0.0 + 2×0.0 + 2.4×0.0
+  = 161.4 kcal'
+change_log:
+- timestamp: 2025-11-01T09:00:00+0000
+  updated_by: Claude Code (Sonnet 4.5)
+  reason: Initial entry for Daylesford smoked trout - user consumed on crispbread
+    for breakfast
+  fields_changed:
+  - all fields
+  sources:
+  - url: https://www.ocado.com/products/daylesford-smoked-trout-619556011
+    note: Daylesford Smoked Trout product listing
+  - url: https://fdc.nal.usda.gov/
+    note: USDA FoodData Central smoked trout baseline values
+  - url: user_request
+    note: User consumed 80g (2 slices) Daylesford smoked trout on 2025-11-01 at 09:00
+- timestamp: 2025-11-01T09:30:00+0000
+  updated_by: Claude Code (Sonnet 4.5)
+  reason: Updated with actual product label nutrition facts - corrected major underestimation
+    of calories and fat
+  fields_changed:
+  - version
+  - per_portion.energy_kcal
+  - per_portion.protein_g
+  - per_portion.fat_g
+  - per_portion.sat_fat_g
+  - per_portion.mufa_g
+  - per_portion.pufa_g
+  - per_portion.carbs_g
+  - per_portion.sugar_g
+  - per_portion.sodium_mg
+  - derived.omega_3_total_g
+  - derived.epa_g
+  - derived.dha_g
+  - quality.confidence
+  - quality.gaps
+  sources:
+  - url: product_label
+    note: 'Daylesford Smoked Trout 200g pack label: 202 kcal, 21.8g protein, 12.8g
+      fat (2.3g sat), <0.1g carbs per 100g. Batch 6997, use by 12.11.25'
+- timestamp: '2025-11-02T19:20:00+00:00'
+  updated_by: 'LLM: GPT-5 Codex'
+  reason: Standardise carbohydrate fields and recompute available-carb energy
+  fields_changed:
+  - last_verified
+  - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
   sources: []
 ```

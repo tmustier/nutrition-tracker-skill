@@ -1,0 +1,180 @@
+date: 2025-11-02
+day_type: rest
+entries:
+- timestamp: '2025-11-02T09:00:00+00:00'
+  items:
+  - name: Greek Yogurt 0% Fat
+    food_bank_id: null
+    quantity: 200
+    unit: g
+    nutrition:
+      energy_kcal: 117.6
+      protein_g: 20.4
+      fat_g: 0.8
+      sat_fat_g: 0.2
+      mufa_g: 0.2
+      pufa_g: 0.04
+      trans_fat_g: 0
+      cholesterol_mg: 10
+      sugar_g: 6.4
+      fiber_total_g: 0
+      fiber_soluble_g: null
+      fiber_insoluble_g: null
+      sodium_mg: 72
+      potassium_mg: 282
+      iodine_ug: 36
+      magnesium_mg: 22
+      calcium_mg: 200
+      iron_mg: 0
+      zinc_mg: 1
+      vitamin_c_mg: 0
+      manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 7.2
+      carbs_total_g: 7.2
+  - name: Strawberries
+    food_bank_id: null
+    quantity: 85
+    unit: g
+    nutrition:
+      energy_kcal: 34.5
+      protein_g: 0.6
+      fat_g: 0.3
+      sat_fat_g: 0.02
+      mufa_g: 0.03
+      pufa_g: 0.14
+      trans_fat_g: 0
+      cholesterol_mg: 0
+      sugar_g: 4.2
+      fiber_total_g: 1.7
+      fiber_soluble_g: null
+      fiber_insoluble_g: null
+      sodium_mg: 1
+      potassium_mg: 130
+      iodine_ug: null
+      magnesium_mg: 11
+      calcium_mg: 14
+      iron_mg: 0
+      zinc_mg: 0
+      vitamin_c_mg: 50
+      manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 6.5
+      carbs_total_g: 8.2
+  - name: Blueberries
+    food_bank_id: blueberries_150g_v1
+    quantity: 85
+    unit: g
+    nutrition:
+      energy_kcal: 57.8
+      protein_g: 0.6
+      fat_g: 0.2
+      sat_fat_g: 0.02
+      mufa_g: 0.04
+      pufa_g: 0.12
+      trans_fat_g: 0
+      cholesterol_mg: 0
+      sugar_g: 8.5
+      fiber_total_g: 2.0
+      fiber_soluble_g: null
+      fiber_insoluble_g: null
+      sodium_mg: 1
+      potassium_mg: 66
+      iodine_ug: 0
+      magnesium_mg: 5
+      calcium_mg: 5
+      iron_mg: 0
+      zinc_mg: 0
+      vitamin_c_mg: 9
+      manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 12.4
+      carbs_total_g: 14.4
+  - name: "ON Gold Standard Whey \u2013 Double Rich Chocolate"
+    food_bank_id: on_whey_drc_30g_v1
+    quantity: 1
+    unit: scoop
+    nutrition:
+      energy_kcal: 122
+      protein_g: 24.0
+      fat_g: 1.4
+      sat_fat_g: 0.5
+      mufa_g: 0.5
+      pufa_g: 0.4
+      trans_fat_g: null
+      cholesterol_mg: null
+      sugar_g: 1.3
+      fiber_total_g: 0.7
+      fiber_soluble_g: null
+      fiber_insoluble_g: null
+      sodium_mg: 86
+      potassium_mg: 177
+      iodine_ug: 18
+      magnesium_mg: 52
+      calcium_mg: 130
+      iron_mg: null
+      zinc_mg: 2
+      vitamin_c_mg: null
+      manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 3.0
+      carbs_total_g: 3.7
+  - name: Oats - dry
+    food_bank_id: oats_dry_50g_v1
+    quantity: 1
+    unit: portion
+    nutrition:
+      energy_kcal: 208.9
+      protein_g: 8.5
+      fat_g: 3.5
+      sat_fat_g: 0.6
+      mufa_g: 1.1
+      pufa_g: 1.3
+      trans_fat_g: 0
+      cholesterol_mg: 0
+      sugar_g: 0.5
+      fiber_total_g: 5.3
+      fiber_soluble_g: 2.0
+      fiber_insoluble_g: 3.3
+      sodium_mg: 1
+      potassium_mg: 215
+      iodine_ug: 1
+      magnesium_mg: 69
+      calcium_mg: 27
+      iron_mg: 2
+      zinc_mg: 2
+      vitamin_c_mg: 0
+      manganese_mg: 2
+      polyols_g: 0.0
+      carbs_available_g: 33.2
+      carbs_total_g: 38.5
+  - name: Pistachios, 30 g
+    food_bank_id: pistachios_30g_v1
+    quantity: 1
+    unit: portion
+    nutrition:
+      energy_kcal: 185.5
+      protein_g: 6.0
+      fat_g: 13.5
+      sat_fat_g: 1.7
+      mufa_g: 7.0
+      pufa_g: 4.3
+      trans_fat_g: null
+      cholesterol_mg: null
+      sugar_g: 2.3
+      fiber_total_g: 3.2
+      fiber_soluble_g: null
+      fiber_insoluble_g: null
+      sodium_mg: 1
+      potassium_mg: 308
+      iodine_ug: null
+      magnesium_mg: 36
+      calcium_mg: 30
+      iron_mg: 1
+      zinc_mg: 1
+      vitamin_c_mg: null
+      manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 8.4
+      carbs_total_g: 11.6
+  notes: Breakfast smoothie

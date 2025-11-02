@@ -83,13 +83,10 @@ entries:
 2. **Reference food bank**: Store `food_bank_id` to track source. Set to `null` for estimated/manual entries.
 
 3. **Flexible items**: Each entry (meal) can have multiple items. Track quantity and unit for each.
-4. **Energy derived from nutrients**: Store `energy_kcal` as the Atwater result using available carbs (`4P + 9F + 4*carbs_available + 2*fibre + 2.4*polyols`) to stay aligned with the food bank.
-
-4. **Timestamping**: One timestamp per entry (meal level), not per item.
-
-5. **Day type**: Track rest vs training day for proper target comparison.
-
-6. **Notes**: Optional context at entry level (location, how you felt, etc.).
+4. **Energy derived from nutrients**: Store `energy_kcal` as the available-carb Atwater result (`4P + 9F + 4*carbs_available + 2*fibre + 2.4*polyols`) to stay aligned with the food bank.
+5. **Timestamping**: One timestamp per entry (meal level), not per item.
+6. **Day type**: Track rest vs training day for proper target comparison.
+7. **Notes**: Optional context at entry level (location, how you felt, etc.).
 
 ## Querying
 
