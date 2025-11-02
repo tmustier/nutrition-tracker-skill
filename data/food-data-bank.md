@@ -35,12 +35,12 @@ Follow the edit protocol below. Do not rename keys. Use nulls for unknowns. -->
     
     ```yaml
     - timestamp: 2025-10-28T17:00:00+00:00  # Europe/London
-      updated_by: "Thomas" | "LLM: GPT-5 Thinking"
-      reason: "Filled MUFA/PUFA from venue PDF"
-      fields_changed: ["per_portion.mufa_g", "per_portion.pufa_g"]
-      sources:
-        - url: ""
-          note: ""
+    updated_by: "Thomas" | "LLM: GPT-5 Thinking"
+    reason: "Filled MUFA/PUFA from venue PDF"
+    fields_changed: ["per_portion.mufa_g", "per_portion.pufa_g"]
+    sources:
+      - url: ""
+        note: ""
     ```
     
 - **Estimation rules** (state in `assumptions`): oil type, salting scheme, portion weight method (label vs estimate), conversions applied.
@@ -78,6 +78,9 @@ per_portion:
   trans_fat_g: null
   cholesterol_mg: null
   carbs_g: null
+  carbs_total_g: null
+  polyols_g: null
+  carbs_available_g: null
   sugar_g: null
   fiber_total_g: null
   fiber_soluble_g: null
@@ -94,7 +97,7 @@ per_portion:
 
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
-  energy_from_macros_kcal: 102.4
+  energy_from_macros_kcal: null
 quality:
   confidence: low|medium|high
   gaps: []
@@ -174,6 +177,9 @@ per_portion:
   trans_fat_g: 0.1
   cholesterol_mg: null
   carbs_g: 32.0
+  carbs_total_g: 37.1
+  polyols_g: 0.0
+  carbs_available_g: 32.0
   sugar_g: 10.1
   fiber_total_g: 5.1
   fiber_soluble_g: null
@@ -195,27 +201,34 @@ quality:
   gaps: ['Fat breakdown (1.94 g) exceeds total_fat (1.0 g); keep as provided and flag inconsistency.']
 notes: []
 change_log:
-- timestamp: 2025-10-28T18:51:39+0000
-  updated_by: "LLM: GPT-5 Thinking"
-  reason: "Populate per_portion from user-provided data"
-  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.trans_fat_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
-  sources:
-    - url: "user_input"
-      note: "User-supplied values on 2025-10-28"
-  - timestamp: 2025-10-28T18:57:05+0000
+  - timestamp: 2025-10-28T18:51:39+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Populate per_portion from user-provided data"
+    fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.trans_fat_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
+    sources:
+      - url: "user_input"
+        note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T18:57:05+00:00
     updated_by: "LLM: GPT-5 Thinking"
     reason: "Consistency fix for fat totals/splits"
     fields_changed: ['per_portion.fat_g']
     sources:
       - url: "user_input"
         note: "Correction approved by user on 2025-10-28"
-  - timestamp: 2025-10-28T19:02:30+0000
+  - timestamp: 2025-10-28T19:02:30+00:00
     updated_by: "LLM: GPT-5 Thinking"
     reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
     fields_changed: ['per_portion.protein_g', 'per_portion.sat_fat_g', 'per_portion.pufa_g', 'per_portion.trans_fat_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.iodine_ug', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
     sources:
       - url: "formatting-pass"
         note: "Automated rounding pass"
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Add carb totals vs available (UK label convention)"
+    fields_changed: ['per_portion.carbs_total_g', 'per_portion.polyols_g', 'per_portion.carbs_available_g']
+    sources:
+      - url: "venue_label"
+        note: "Simple Health Kitchen listings use UK available carbohydrate; total rebuilt as available + fibre"
 ```
 
 ---
@@ -250,6 +263,9 @@ per_portion:
   trans_fat_g: null
   cholesterol_mg: 80
   carbs_g: 1.0
+  carbs_total_g: 1.0
+  polyols_g: 0.0
+  carbs_available_g: 1.0
   sugar_g: null
   fiber_total_g: null
   fiber_soluble_g: null
@@ -271,27 +287,34 @@ quality:
   gaps: []
 notes: []
 change_log:
-- timestamp: 2025-10-28T18:51:39+0000
-  updated_by: "LLM: GPT-5 Thinking"
-  reason: "Populate per_portion from user-provided data"
-  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.cholesterol_mg', 'per_portion.carbs_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
-  sources:
-    - url: "user_input"
-      note: "User-supplied values on 2025-10-28"
-  - timestamp: 2025-10-28T18:57:05+0000
+  - timestamp: 2025-10-28T18:51:39+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Populate per_portion from user-provided data"
+    fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.cholesterol_mg', 'per_portion.carbs_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
+    sources:
+      - url: "user_input"
+        note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T18:57:05+00:00
     updated_by: "LLM: GPT-5 Thinking"
     reason: "Consistency fix for fat totals/splits"
     fields_changed: ['per_portion.mufa_g', 'per_portion.pufa_g']
     sources:
       - url: "user_input"
         note: "Correction approved by user on 2025-10-28"
-  - timestamp: 2025-10-28T19:02:30+0000
+  - timestamp: 2025-10-28T19:02:30+00:00
     updated_by: "LLM: GPT-5 Thinking"
     reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
     fields_changed: ['per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.carbs_g', 'per_portion.iodine_ug', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
     sources:
       - url: "formatting-pass"
         note: "Automated rounding pass"
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Standardise carb fields (UK venue reports net carbs; fibre unavailable)"
+    fields_changed: ['per_portion.carbs_total_g', 'per_portion.polyols_g', 'per_portion.carbs_available_g']
+    sources:
+      - url: "venue_label"
+        note: "Simple Health Kitchen macros list carbohydrate net of fibre"
 ```
 
 ---
@@ -326,6 +349,9 @@ per_portion:
   trans_fat_g: 0.1
   cholesterol_mg: null
   carbs_g: 28.0
+  carbs_total_g: 32.0
+  polyols_g: 0.0
+  carbs_available_g: 28.0
   sugar_g: 2.4
   fiber_total_g: 4.0
   fiber_soluble_g: null
@@ -347,27 +373,34 @@ quality:
   gaps: []
 notes: []
 change_log:
-- timestamp: 2025-10-28T18:51:39+0000
-  updated_by: "LLM: GPT-5 Thinking"
-  reason: "Populate per_portion from user-provided data"
-  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.trans_fat_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
-  sources:
-    - url: "user_input"
-      note: "User-supplied values on 2025-10-28"
-  - timestamp: 2025-10-28T18:57:05+0000
+  - timestamp: 2025-10-28T18:51:39+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Populate per_portion from user-provided data"
+    fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.trans_fat_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
+    sources:
+      - url: "user_input"
+        note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T18:57:05+00:00
     updated_by: "LLM: GPT-5 Thinking"
     reason: "Consistency fix for fat totals/splits"
     fields_changed: ['per_portion.mufa_g', 'per_portion.pufa_g']
     sources:
       - url: "user_input"
         note: "Correction approved by user on 2025-10-28"
-  - timestamp: 2025-10-28T19:02:30+0000
+  - timestamp: 2025-10-28T19:02:30+00:00
     updated_by: "LLM: GPT-5 Thinking"
     reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
     fields_changed: ['per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.trans_fat_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
     sources:
       - url: "formatting-pass"
         note: "Automated rounding pass"
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Add carb totals vs available (UK label convention)"
+    fields_changed: ['per_portion.carbs_total_g', 'per_portion.polyols_g', 'per_portion.carbs_available_g']
+    sources:
+      - url: "venue_label"
+        note: "Simple Health Kitchen listings use net carbohydrate; total rebuilt as available + fibre"
 ```
 
 ---
@@ -402,6 +435,9 @@ per_portion:
   trans_fat_g: null
   cholesterol_mg: 130
   carbs_g: null
+  carbs_total_g: null
+  polyols_g: null
+  carbs_available_g: null
   sugar_g: null
   fiber_total_g: null
   fiber_soluble_g: null
@@ -423,27 +459,34 @@ quality:
   gaps: ['No carbs/fibre provided; trans fat not provided; ~0.09 g of fat unassigned (trace/trans).']
 notes: []
 change_log:
-- timestamp: 2025-10-28T18:51:39+0000
-  updated_by: "LLM: GPT-5 Thinking"
-  reason: "Populate per_portion from user-provided data"
-  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.cholesterol_mg', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg']
-  sources:
-    - url: "user_input"
-      note: "User-supplied values on 2025-10-28"
-  - timestamp: 2025-10-28T18:57:05+0000
+  - timestamp: 2025-10-28T18:51:39+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Populate per_portion from user-provided data"
+    fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.cholesterol_mg', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg']
+    sources:
+      - url: "user_input"
+        note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T18:57:05+00:00
     updated_by: "LLM: GPT-5 Thinking"
     reason: "Consistency fix for fat totals/splits"
     fields_changed: ['per_portion.fat_g']
     sources:
       - url: "user_input"
         note: "Correction approved by user on 2025-10-28"
-  - timestamp: 2025-10-28T19:02:30+0000
+  - timestamp: 2025-10-28T19:02:30+00:00
     updated_by: "LLM: GPT-5 Thinking"
     reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
     fields_changed: ['per_portion.protein_g', 'per_portion.sat_fat_g', 'per_portion.pufa_g', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg']
     sources:
       - url: "formatting-pass"
         note: "Automated rounding pass"
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Add carb placeholders (protein-only dish; carbs remain null)"
+    fields_changed: ['per_portion.carbs_total_g', 'per_portion.polyols_g', 'per_portion.carbs_available_g']
+    sources:
+      - url: "venue_label"
+        note: "Simple Health Kitchen listing reports carbohydrate as trace; leaving values null"
 ```
 
 ---
@@ -478,6 +521,9 @@ per_portion:
   trans_fat_g: null
   cholesterol_mg: null
   carbs_g: 21.5
+  carbs_total_g: 28.4
+  polyols_g: 0.0
+  carbs_available_g: 21.5
   sugar_g: 9.4
   fiber_total_g: 6.9
   fiber_soluble_g: null
@@ -499,27 +545,34 @@ quality:
   gaps: ['No trans fat provided; ~0.52 g of fat unassigned (likely trace/trans/rounding).']
 notes: []
 change_log:
-- timestamp: 2025-10-28T18:51:39+0000
-  updated_by: "LLM: GPT-5 Thinking"
-  reason: "Populate per_portion from user-provided data"
-  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
-  sources:
-    - url: "user_input"
-      note: "User-supplied values on 2025-10-28"
-  - timestamp: 2025-10-28T18:57:05+0000
+  - timestamp: 2025-10-28T18:51:39+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Populate per_portion from user-provided data"
+    fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
+    sources:
+      - url: "user_input"
+        note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T18:57:05+00:00
     updated_by: "LLM: GPT-5 Thinking"
     reason: "Consistency fix for fat totals/splits"
     fields_changed: ['per_portion.fat_g']
     sources:
       - url: "user_input"
         note: "Correction approved by user on 2025-10-28"
-  - timestamp: 2025-10-28T19:02:30+0000
+  - timestamp: 2025-10-28T19:02:30+00:00
     updated_by: "LLM: GPT-5 Thinking"
     reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
     fields_changed: ['per_portion.protein_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.iron_mg', 'per_portion.zinc_mg']
     sources:
       - url: "formatting-pass"
         note: "Automated rounding pass"
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Add carb totals vs available (UK label convention)"
+    fields_changed: ['per_portion.carbs_total_g', 'per_portion.polyols_g', 'per_portion.carbs_available_g']
+    sources:
+      - url: "venue_label"
+        note: "Simple Health Kitchen listings use net carbohydrate; total rebuilt as available + fibre"
 ```
 
 ---
@@ -554,6 +607,9 @@ per_portion:
   trans_fat_g: null
   cholesterol_mg: null
   carbs_g: 10.5
+  carbs_total_g: 14.0
+  polyols_g: 0.0
+  carbs_available_g: 10.5
   sugar_g: 2.7
   fiber_total_g: 3.5
   fiber_soluble_g: null
@@ -575,27 +631,34 @@ quality:
   gaps: ['No trans fat provided; ~0.49 g of fat unassigned (trace/trans/rounding).']
 notes: []
 change_log:
-- timestamp: 2025-10-28T18:51:39+0000
-  updated_by: "LLM: GPT-5 Thinking"
-  reason: "Populate per_portion from user-provided data"
-  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
-  sources:
-    - url: "user_input"
-      note: "User-supplied values on 2025-10-28"
-  - timestamp: 2025-10-28T18:57:05+0000
+  - timestamp: 2025-10-28T18:51:39+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Populate per_portion from user-provided data"
+    fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
+    sources:
+      - url: "user_input"
+        note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T18:57:05+00:00
     updated_by: "LLM: GPT-5 Thinking"
     reason: "Consistency fix for fat totals/splits"
     fields_changed: ['per_portion.fat_g']
     sources:
       - url: "user_input"
         note: "Correction approved by user on 2025-10-28"
-  - timestamp: 2025-10-28T19:02:30+0000
+  - timestamp: 2025-10-28T19:02:30+00:00
     updated_by: "LLM: GPT-5 Thinking"
     reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
     fields_changed: ['per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg']
     sources:
       - url: "formatting-pass"
         note: "Automated rounding pass"
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Add carb totals vs available (UK label convention)"
+    fields_changed: ['per_portion.carbs_total_g', 'per_portion.polyols_g', 'per_portion.carbs_available_g']
+    sources:
+      - url: "venue_label"
+        note: "Simple Health Kitchen listings use net carbohydrate; total rebuilt as available + fibre"
 ```
 
 ---
@@ -630,6 +693,9 @@ per_portion:
   trans_fat_g: 0.0
   cholesterol_mg: null
   carbs_g: 14.0
+  carbs_total_g: 19.1
+  polyols_g: 0.0
+  carbs_available_g: 14.0
   sugar_g: 0.6
   fiber_total_g: 5.1
   fiber_soluble_g: null
@@ -651,27 +717,34 @@ quality:
   gaps: ['Unsaturated total (8.75 g) + saturated + trans ≈ 10.07 g < total_fat (11 g); ~0.9 g unaccounted (rounding/other fats).']
 notes: []
 change_log:
-- timestamp: 2025-10-28T18:51:39+0000
-  updated_by: "LLM: GPT-5 Thinking"
-  reason: "Populate per_portion from user-provided data"
-  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.trans_fat_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg']
-  sources:
-    - url: "user_input"
-      note: "User-supplied values on 2025-10-28"
-  - timestamp: 2025-10-28T18:57:05+0000
+  - timestamp: 2025-10-28T18:51:39+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Populate per_portion from user-provided data"
+    fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.trans_fat_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg']
+    sources:
+      - url: "user_input"
+        note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T18:57:05+00:00
     updated_by: "LLM: GPT-5 Thinking"
     reason: "Consistency fix for fat totals/splits"
     fields_changed: ['per_portion.mufa_g', 'per_portion.pufa_g']
     sources:
       - url: "user_input"
         note: "Correction approved by user on 2025-10-28"
-  - timestamp: 2025-10-28T19:02:30+0000
+  - timestamp: 2025-10-28T19:02:30+00:00
     updated_by: "LLM: GPT-5 Thinking"
     reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
     fields_changed: ['per_portion.protein_g', 'per_portion.fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.trans_fat_g', 'per_portion.carbs_g', 'per_portion.iron_mg', 'per_portion.zinc_mg']
     sources:
       - url: "formatting-pass"
         note: "Automated rounding pass"
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Add explicit carb totals vs available (UK label convention)"
+    fields_changed: ['per_portion.carbs_total_g', 'per_portion.polyols_g', 'per_portion.carbs_available_g']
+    sources:
+      - url: "venue_label"
+        note: "Simple Health Kitchen listings use net carbohydrate; total rebuilt as available + fibre"
 ```
 ---
 
@@ -705,6 +778,9 @@ per_portion:
   trans_fat_g: null
   cholesterol_mg: null
   carbs_g: 8.4
+  carbs_total_g: 11.6
+  polyols_g: 0.0
+  carbs_available_g: 8.4
   sugar_g: 2.3
   fiber_total_g: 3.2
   fiber_soluble_g: null
@@ -726,20 +802,27 @@ quality:
   gaps: []
 notes: []
 change_log:
-- timestamp: 2025-10-28T18:51:39+0000
-  updated_by: "LLM: GPT-5 Thinking"
-  reason: "Populate per_portion from user-provided data"
-  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg']
-  sources:
-    - url: "user_input"
-      note: "User-supplied values on 2025-10-28"
-  - timestamp: 2025-10-28T19:02:30+0000
+  - timestamp: 2025-10-28T18:51:39+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Populate per_portion from user-provided data"
+    fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg']
+    sources:
+      - url: "user_input"
+        note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T19:02:30+00:00
     updated_by: "LLM: GPT-5 Thinking"
     reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
     fields_changed: ['per_portion.protein_g', 'per_portion.mufa_g', 'per_portion.potassium_mg', 'per_portion.magnesium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg']
     sources:
       - url: "formatting-pass"
         note: "Automated rounding pass"
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Add carb totals vs available (EU label for nuts)"
+    fields_changed: ['per_portion.carbs_total_g', 'per_portion.polyols_g', 'per_portion.carbs_available_g']
+    sources:
+      - url: "pack_label"
+        note: "UK nut labels list carbohydrate net of fibre; total rebuilt as available + fibre"
 ```
 
 ---
@@ -774,6 +857,9 @@ per_portion:
   trans_fat_g: null
   cholesterol_mg: null
   carbs_g: 6.0
+  carbs_total_g: 8.6
+  polyols_g: 0.0
+  carbs_available_g: 6.0
   sugar_g: 0.8
   fiber_total_g: 2.6
   fiber_soluble_g: null
@@ -795,20 +881,27 @@ quality:
   gaps: []
 notes: []
 change_log:
-- timestamp: 2025-10-28T18:51:39+0000
-  updated_by: "LLM: GPT-5 Thinking"
-  reason: "Populate per_portion from user-provided data"
-  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
-  sources:
-    - url: "user_input"
-      note: "User-supplied values on 2025-10-28"
-  - timestamp: 2025-10-28T19:02:30+0000
+  - timestamp: 2025-10-28T18:51:39+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Populate per_portion from user-provided data"
+    fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
+    sources:
+      - url: "user_input"
+        note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T19:02:30+00:00
     updated_by: "LLM: GPT-5 Thinking"
     reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
     fields_changed: ['per_portion.mufa_g', 'per_portion.carbs_g', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
     sources:
       - url: "formatting-pass"
         note: "Automated rounding pass"
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Add carb totals vs available (EU label for seeds)"
+    fields_changed: ['per_portion.carbs_total_g', 'per_portion.polyols_g', 'per_portion.carbs_available_g']
+    sources:
+      - url: "pack_label"
+        note: "UK seed labels list carbohydrate net of fibre; total rebuilt as available + fibre"
 ```
 
 ---
@@ -843,6 +936,9 @@ per_portion:
   trans_fat_g: null
   cholesterol_mg: null
   carbs_g: 5.0
+  carbs_total_g: 7.9
+  polyols_g: 0.0
+  carbs_available_g: 5.0
   sugar_g: 1.3
   fiber_total_g: 2.9
   fiber_soluble_g: null
@@ -864,27 +960,34 @@ quality:
   gaps: ['MUFA/PUFA profile appears atypical for hazelnuts (expected MUFA >> PUFA); values recorded as provided.']
 notes: []
 change_log:
-- timestamp: 2025-10-28T18:51:39+0000
-  updated_by: "LLM: GPT-5 Thinking"
-  reason: "Populate per_portion from user-provided data"
-  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
-  sources:
-    - url: "user_input"
-      note: "User-supplied values on 2025-10-28"
-  - timestamp: 2025-10-28T18:57:05+0000
+  - timestamp: 2025-10-28T18:51:39+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Populate per_portion from user-provided data"
+    fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
+    sources:
+      - url: "user_input"
+        note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T18:57:05+00:00
     updated_by: "LLM: GPT-5 Thinking"
     reason: "Consistency fix for fat totals/splits"
     fields_changed: ['per_portion.mufa_g', 'per_portion.pufa_g']
     sources:
       - url: "user_input"
         note: "Correction approved by user on 2025-10-28"
-  - timestamp: 2025-10-28T19:02:30+0000
+  - timestamp: 2025-10-28T19:02:30+00:00
     updated_by: "LLM: GPT-5 Thinking"
     reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
     fields_changed: ['per_portion.carbs_g', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
     sources:
       - url: "formatting-pass"
         note: "Automated rounding pass"
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Add carb totals vs available (EU label for nuts)"
+    fields_changed: ['per_portion.carbs_total_g', 'per_portion.polyols_g', 'per_portion.carbs_available_g']
+    sources:
+      - url: "pack_label"
+        note: "UK nut labels list carbohydrate net of fibre; total rebuilt as available + fibre"
 ```
 
 ---
@@ -919,6 +1022,9 @@ per_portion:
   trans_fat_g: null
   cholesterol_mg: null
   carbs_g: 3.0
+  carbs_total_g: 3.7
+  polyols_g: 0.0
+  carbs_available_g: 3.0
   sugar_g: 1.3
   fiber_total_g: 0.7
   fiber_soluble_g: null
@@ -940,20 +1046,27 @@ quality:
   gaps: ['Original data were ranges; iron value inconsistent (0.6–126 mg).']
 notes: []
 change_log:
-- timestamp: 2025-10-28T18:51:39+0000
-  updated_by: "LLM: GPT-5 Thinking"
-  reason: "Populate per_portion from user-provided data"
-  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.zinc_mg']
-  sources:
-    - url: "user_input"
-      note: "User-supplied values on 2025-10-28"
-  - timestamp: 2025-10-28T19:02:30+0000
+  - timestamp: 2025-10-28T18:51:39+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Populate per_portion from user-provided data"
+    fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.zinc_mg']
+    sources:
+      - url: "user_input"
+        note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T19:02:30+00:00
     updated_by: "LLM: GPT-5 Thinking"
     reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
     fields_changed: ['per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.pufa_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.zinc_mg']
     sources:
       - url: "formatting-pass"
         note: "Automated rounding pass"
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Add carb totals vs available (treat ON whey label as net carb)"
+    fields_changed: ['per_portion.carbs_total_g', 'per_portion.polyols_g', 'per_portion.carbs_available_g']
+    sources:
+      - url: "pack_label"
+        note: "EU packaging lists carbohydrate net of fibre; total rebuilt as available + fibre"
 ```
 
 ---
@@ -988,6 +1101,9 @@ per_portion:
   trans_fat_g: 0
   cholesterol_mg: 0
   carbs_g: 9.8
+  carbs_total_g: 14.2
+  polyols_g: 0.0
+  carbs_available_g: 9.8
   sugar_g: 9.8
   fiber_total_g: 4.4
   fiber_soluble_g: null
@@ -1009,21 +1125,21 @@ quality:
   gaps: []
 notes: []
 change_log:
-- timestamp: 2025-10-28T18:51:39+0000
-  updated_by: "LLM: GPT-5 Thinking"
-  reason: "Populate per_portion from user-provided data"
-  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.potassium_mg', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
-  sources:
-    - url: "user_input"
-      note: "User-supplied values on 2025-10-28"
-  - timestamp: 2025-10-28T19:02:30+0000
+  - timestamp: 2025-10-28T18:51:39+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Populate per_portion from user-provided data"
+    fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.potassium_mg', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
+    sources:
+      - url: "user_input"
+        note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T19:02:30+00:00
     updated_by: "LLM: GPT-5 Thinking"
     reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
     fields_changed: ['per_portion.protein_g', 'per_portion.fiber_total_g', 'per_portion.iron_mg', 'per_portion.zinc_mg']
     sources:
       - url: "formatting-pass"
         note: "Automated rounding pass"
-  - timestamp: 2025-10-28T20:00:00+0000
+  - timestamp: 2025-10-28T20:00:00+00:00
     updated_by: "LLM: Claude Sonnet 4.5"
     reason: "Research and fill missing fat breakdown, cholesterol, and iodine data"
     fields_changed: ['per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.trans_fat_g', 'per_portion.cholesterol_mg', 'per_portion.iodine_ug']
@@ -1039,6 +1155,13 @@ change_log:
       - url: "https://kitchenscity.com/iodine-rich-fruits/"
         note: "Strawberries ~13mcg per cup (150g); berries generally low in iodine"
     methodology: "Calculated weighted average based on PACK'D mix (36% raspberries, 34% blueberries, 30% blackberries) from USDA berry data, scaled to match product's 0.3g total fat per 150g. PUFA higher than MUFA consistent with berry profiles (omega-3 from seeds). Trans fat and cholesterol = 0 (plant-based). Iodine = 1 mcg (trace, very low in berries)."
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Add carb totals vs available (frozen berries sold in UK)"
+    fields_changed: ['per_portion.carbs_total_g', 'per_portion.polyols_g', 'per_portion.carbs_available_g']
+    sources:
+      - url: "pack_label"
+        note: "PACK'D UK nutritional panel lists carbohydrate net of fibre; total rebuilt as available + fibre"
 ```
 
 ---
@@ -1073,6 +1196,9 @@ per_portion:
   trans_fat_g: 0
   cholesterol_mg: 0
   carbs_g: 21.8
+  carbs_total_g: 25.4
+  polyols_g: 0.0
+  carbs_available_g: 21.8
   sugar_g: 15.0
   fiber_total_g: 3.6
   fiber_soluble_g: null
@@ -1094,21 +1220,21 @@ quality:
   gaps: []
 notes: []
 change_log:
-- timestamp: 2025-10-28T18:51:39+0000
-  updated_by: "LLM: GPT-5 Thinking"
-  reason: "Populate per_portion from user-provided data"
-  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
-  sources:
-    - url: "user_input"
-      note: "User-supplied values on 2025-10-28"
-  - timestamp: 2025-10-28T19:02:30+0000
+  - timestamp: 2025-10-28T18:51:39+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Populate per_portion from user-provided data"
+    fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
+    sources:
+      - url: "user_input"
+        note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T19:02:30+00:00
     updated_by: "LLM: GPT-5 Thinking"
     reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
     fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.sugar_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg']
     sources:
       - url: "formatting-pass"
         note: "Automated rounding pass"
-  - timestamp: 2025-10-28T20:15:00+0000
+  - timestamp: 2025-10-28T20:15:00+00:00
     updated_by: "LLM: Claude Sonnet 4.5"
     reason: "Research and populate missing fatty acid breakdown and iodine content from USDA FoodData Central"
     fields_changed: ['per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.trans_fat_g', 'per_portion.cholesterol_mg', 'per_portion.iodine_ug']
@@ -1117,6 +1243,13 @@ change_log:
         note: "USDA FoodData Central - Raw blueberries (NDB 09050 / FDC 171711). Per 100g: sat 0.028g, MUFA 0.047g, PUFA 0.146g, trans 0g, cholesterol 0mg. Scaled to 150g portion."
       - url: "https://www.ars.usda.gov/ARSUSERFILES/80400535/DATA/IODINE/IODINE_DATABASE_RELEASE_3_PER_100G.PDF"
         note: "USDA/FDA/ODS-NIH Iodine Database - Raw blueberries contain 0.3 mcg iodine per 100g (mean of 13 samples). Scaled to 150g = 0.45 mcg, rounded to 0.5 mcg."
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Add carb totals vs available (fresh berries in UK)"
+    fields_changed: ['per_portion.carbs_total_g', 'per_portion.polyols_g', 'per_portion.carbs_available_g']
+    sources:
+      - url: "pack_label"
+        note: "UK berry packaging lists carbohydrate net of fibre; total rebuilt as available + fibre"
 ```
 
 ---
@@ -1132,9 +1265,9 @@ source:
   menu_page: ""
   evidence:
     - url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/168195/nutrients"
-      note: "USDA FoodData Central: Clementines, raw (FDC ID 168195)"
+    note: "USDA FoodData Central: Clementines, raw (FDC ID 168195)"
     - url: "https://tools.myfooddata.com/nutrition-facts/168195/wt1"
-      note: "MyFoodData USDA aggregation: Complete nutrition profile per 100g and per clementine"
+    note: "MyFoodData USDA aggregation: Complete nutrition profile per 100g and per clementine"
 aliases: ["mandarin", "easy peeler"]
 category: ingredient
 portion:
@@ -1255,34 +1388,34 @@ quality:
   gaps: []
 notes: []
 change_log:
-- timestamp: 2025-10-28T18:51:39+0000
-  updated_by: "LLM: GPT-5 Thinking"
-  reason: "Populate per_portion from user-provided data"
-  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg']
-  sources:
-    - url: "user_input"
-      note: "User-supplied values on 2025-10-28"
-- timestamp: 2025-10-28T19:02:30+0000
-  updated_by: "LLM: GPT-5 Thinking"
-  reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
-  fields_changed: ['per_portion.potassium_mg', 'per_portion.iron_mg']
-  sources:
-    - url: "formatting-pass"
-      note: "Automated rounding pass"
-- timestamp: 2025-10-28T21:30:00+0000
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: "Fill in missing fat breakdown and micronutrients from USDA FoodData Central"
-  fields_changed: ['per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.trans_fat_g', 'per_portion.cholesterol_mg', 'per_portion.vitamin_c_mg']
-  sources:
-    - url: "USDA FoodData Central"
-      note: "USDA data for rolled oats: MUFA 2.178g/100g, PUFA 2.535g/100g scaled to 50g portion. Trans fat 0g, cholesterol 0mg (plant-based), vitamin C 0mg (trace)"
-- timestamp: 2025-10-29T00:00:00+0000
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: "Populate missing fiber split and manganese from USDA nutritional database"
-  fields_changed: ['per_portion.fiber_soluble_g', 'per_portion.fiber_insoluble_g', 'per_portion.manganese_mg']
-  sources:
-    - url: "USDA FoodData Central"
-      note: "Oat beta-glucan (soluble fiber) ~4g/100g, insoluble ~6g/100g; manganese ~3.8mg/100g scaled to 50g portion"
+  - timestamp: 2025-10-28T18:51:39+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Populate per_portion from user-provided data"
+    fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg']
+    sources:
+      - url: "user_input"
+        note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T19:02:30+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
+    fields_changed: ['per_portion.potassium_mg', 'per_portion.iron_mg']
+    sources:
+      - url: "formatting-pass"
+        note: "Automated rounding pass"
+  - timestamp: 2025-10-28T21:30:00+0000
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Fill in missing fat breakdown and micronutrients from USDA FoodData Central"
+    fields_changed: ['per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.trans_fat_g', 'per_portion.cholesterol_mg', 'per_portion.vitamin_c_mg']
+    sources:
+      - url: "USDA FoodData Central"
+        note: "USDA data for rolled oats: MUFA 2.178g/100g, PUFA 2.535g/100g scaled to 50g portion. Trans fat 0g, cholesterol 0mg (plant-based), vitamin C 0mg (trace)"
+  - timestamp: 2025-10-29T00:00:00+0000
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Populate missing fiber split and manganese from USDA nutritional database"
+    fields_changed: ['per_portion.fiber_soluble_g', 'per_portion.fiber_insoluble_g', 'per_portion.manganese_mg']
+    sources:
+      - url: "USDA FoodData Central"
+        note: "Oat beta-glucan (soluble fiber) ~4g/100g, insoluble ~6g/100g; manganese ~3.8mg/100g scaled to 50g portion"
   - timestamp: 2025-11-02T11:12:07+00:00
     updated_by: "LLM: GPT-5 Thinking"
     reason: "Annotate carb totals vs available (UK label) for fibre separation"
@@ -1348,43 +1481,43 @@ quality:
   gaps: []
 notes: []
 change_log:
-- timestamp: 2025-10-28T18:51:39+0000
-  updated_by: "LLM: GPT-5 Thinking"
-  reason: "Populate per_portion from user-provided data"
-  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.cholesterol_mg', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.zinc_mg']
-  sources:
-    - url: "user_input"
-      note: "User-supplied values on 2025-10-28"
-- timestamp: 2025-10-28T19:02:30+0000
-  updated_by: "LLM: GPT-5 Thinking"
-  reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
-  fields_changed: ['per_portion.protein_g', 'per_portion.zinc_mg']
-  sources:
-    - url: "formatting-pass"
-      note: "Automated rounding pass"
-- timestamp: 2025-10-28T20:15:00+0000
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: "Complete dairy fat profile and trace nutrients based on research"
-  fields_changed: ['per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.trans_fat_g', 'per_portion.vitamin_c_mg', 'per_portion.iron_mg', 'version']
-  sources:
-    - url: "https://fdc.nal.usda.gov/"
-      note: "USDA FoodData Central - Low-fat yogurt reference (MUFA 0.426g, PUFA 0.044g, Iron 0.08mg per 100g)"
-    - url: "https://www.sciencedirect.com/science/article/abs/pii/S0308814612005857"
-      note: "Chemical characteristics and fatty acid composition of Greek yogurts"
-    - url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749727/"
-      note: "Fatty Acid Profile and CLA Content in yogurts - natural trans-fat (CLA) 0.34-1.07% of total fat"
-    - url: "https://www.healthline.com/nutrition/skyr"
-      note: "Skyr nutrition information - confirms trace iron and no vitamin C in plain dairy"
-    - url: "https://www.nutritionvalue.org/Yogurt,_low_fat,_plain_nutritional_value.html"
-      note: "Dairy fat composition: ~62-70% saturated, ~25-30% MUFA, ~3-5% PUFA"
-  calculation_notes: "With 0.4g total fat (0.2g saturated) per 200g: MUFA estimated at 0.1g (~27% of total fat), PUFA trace at 0.0g (~3% of total fat), trans-fat 0.1g representing natural CLA from dairy (~4% of total fat). Vitamin C is 0mg (not naturally present in plain dairy). Iron is 0mg rounded from trace amounts typical in low-fat dairy products."
-- timestamp: 2025-10-29T00:00:00+0000
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: "Populate fiber and manganese values for dairy product (all 0)"
-  fields_changed: ['per_portion.fiber_total_g', 'per_portion.fiber_soluble_g', 'per_portion.fiber_insoluble_g', 'per_portion.manganese_mg']
-  sources:
-    - url: "nutritional_knowledge"
-      note: "Dairy products contain no dietary fiber (plant-based nutrient only). Manganese trace amounts rounded to 0."
+  - timestamp: 2025-10-28T18:51:39+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Populate per_portion from user-provided data"
+    fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.cholesterol_mg', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.zinc_mg']
+    sources:
+      - url: "user_input"
+        note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T19:02:30+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
+    fields_changed: ['per_portion.protein_g', 'per_portion.zinc_mg']
+    sources:
+      - url: "formatting-pass"
+        note: "Automated rounding pass"
+  - timestamp: 2025-10-28T20:15:00+0000
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Complete dairy fat profile and trace nutrients based on research"
+    fields_changed: ['per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.trans_fat_g', 'per_portion.vitamin_c_mg', 'per_portion.iron_mg', 'version']
+    sources:
+      - url: "https://fdc.nal.usda.gov/"
+        note: "USDA FoodData Central - Low-fat yogurt reference (MUFA 0.426g, PUFA 0.044g, Iron 0.08mg per 100g)"
+      - url: "https://www.sciencedirect.com/science/article/abs/pii/S0308814612005857"
+        note: "Chemical characteristics and fatty acid composition of Greek yogurts"
+      - url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC8749727/"
+        note: "Fatty Acid Profile and CLA Content in yogurts - natural trans-fat (CLA) 0.34-1.07% of total fat"
+      - url: "https://www.healthline.com/nutrition/skyr"
+        note: "Skyr nutrition information - confirms trace iron and no vitamin C in plain dairy"
+      - url: "https://www.nutritionvalue.org/Yogurt,_low_fat,_plain_nutritional_value.html"
+        note: "Dairy fat composition: ~62-70% saturated, ~25-30% MUFA, ~3-5% PUFA"
+    calculation_notes: "With 0.4g total fat (0.2g saturated) per 200g: MUFA estimated at 0.1g (~27% of total fat), PUFA trace at 0.0g (~3% of total fat), trans-fat 0.1g representing natural CLA from dairy (~4% of total fat). Vitamin C is 0mg (not naturally present in plain dairy). Iron is 0mg rounded from trace amounts typical in low-fat dairy products."
+  - timestamp: 2025-10-29T00:00:00+0000
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Populate fiber and manganese values for dairy product (all 0)"
+    fields_changed: ['per_portion.fiber_total_g', 'per_portion.fiber_soluble_g', 'per_portion.fiber_insoluble_g', 'per_portion.manganese_mg']
+    sources:
+      - url: "nutritional_knowledge"
+        note: "Dairy products contain no dietary fiber (plant-based nutrient only). Manganese trace amounts rounded to 0."
   - timestamp: 2025-11-02T11:12:07+00:00
     updated_by: "LLM: GPT-5 Thinking"
     reason: "Standardise carb totals vs available (fiber already 0 so totals match)"
@@ -1426,6 +1559,9 @@ per_portion:
   trans_fat_g: 0
   cholesterol_mg: 0
   carbs_g: 16.1
+  carbs_total_g: 17.5
+  polyols_g: 0.0
+  carbs_available_g: 16.1
   sugar_g: 15.9
   fiber_total_g: 1.4
   fiber_soluble_g: null
@@ -1447,32 +1583,39 @@ quality:
   gaps: []
 notes: []
 change_log:
-- timestamp: 2025-10-28T18:51:39+0000
-  updated_by: "LLM: GPT-5 Thinking"
-  reason: "Populate per_portion from user-provided data"
-  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg', 'per_portion.manganese_mg']
-  sources:
-    - url: "user_input"
-      note: "User-supplied values on 2025-10-28"
-  - timestamp: 2025-10-28T19:02:30+0000
+  - timestamp: 2025-10-28T18:51:39+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Populate per_portion from user-provided data"
+    fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg', 'per_portion.manganese_mg']
+    sources:
+      - url: "user_input"
+        note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T19:02:30+00:00
     updated_by: "LLM: GPT-5 Thinking"
     reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
     fields_changed: ['per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.magnesium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.manganese_mg']
     sources:
       - url: "formatting-pass"
         note: "Automated rounding pass"
-- timestamp: 2025-10-28T20:15:00+0000
-  updated_by: "Claude Sonnet 4.5"
-  reason: "Fill missing fatty acid breakdown and micronutrient data based on USDA FoodData Central research"
-  fields_changed: ['per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.trans_fat_g', 'per_portion.cholesterol_mg', 'per_portion.iodine_ug']
-  sources:
-    - url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/169124/nutrients"
-      note: "USDA FDC ID 169124: Pineapple, raw, all varieties - Fat breakdown per 100g: 0.12g total (0.009g sat, 0.013g MUFA, 0.04g PUFA)"
-    - url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/169910/nutrients"
-      note: "USDA FDC ID 169910: Mangos, raw - Fat breakdown per 100g: 0.6g total (0.08g sat, 0.14g MUFA, 0.07g PUFA)"
-    - url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/169108/nutrients"
-      note: "USDA FDC ID 169108: Passion fruit, raw, purple - Fat breakdown per 100g: 0.7g total (0.059g sat, 0.086g MUFA, 0.411g PUFA)"
-  notes: "Tropical fruits contain minimal fat (0.12-0.7g per 100g). Fat composition: predominantly unsaturated with PUFA > MUFA. Trans fat=0 and cholesterol=0 (plant-based). Iodine content is trace (1-2µg per 150g typical for fruit). Values calculated proportionally based on 150g mixed fruit with 0.5g total fat."
+  - timestamp: 2025-10-28T20:15:00+00:00
+    updated_by: "Claude Sonnet 4.5"
+    reason: "Fill missing fatty acid breakdown and micronutrient data based on USDA FoodData Central research"
+    fields_changed: ['per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.trans_fat_g', 'per_portion.cholesterol_mg', 'per_portion.iodine_ug']
+    sources:
+      - url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/169124/nutrients"
+        note: "USDA FDC ID 169124: Pineapple, raw, all varieties - Fat breakdown per 100g: 0.12g total (0.009g sat, 0.013g MUFA, 0.04g PUFA)"
+      - url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/169910/nutrients"
+        note: "USDA FDC ID 169910: Mangos, raw - Fat breakdown per 100g: 0.6g total (0.08g sat, 0.14g MUFA, 0.07g PUFA)"
+      - url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/169108/nutrients"
+        note: "USDA FDC ID 169108: Passion fruit, raw, purple - Fat breakdown per 100g: 0.7g total (0.059g sat, 0.086g MUFA, 0.411g PUFA)"
+    notes: "Tropical fruits contain minimal fat (0.12-0.7g per 100g). Fat composition: predominantly unsaturated with PUFA > MUFA. Trans fat=0 and cholesterol=0 (plant-based). Iodine content is trace (1-2µg per 150g typical for fruit). Values calculated proportionally based on 150g mixed fruit with 0.5g total fat."
+  - timestamp: 2025-11-02T11:12:07+00:00
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Add carb totals vs available (mixed fruit pack)"
+    fields_changed: ['per_portion.carbs_total_g', 'per_portion.polyols_g', 'per_portion.carbs_available_g']
+    sources:
+      - url: "pack_label"
+        note: "UK fruit mix lists carbohydrate net of fibre; total rebuilt as available + fibre"
 ```
 
 ---
@@ -1531,40 +1674,40 @@ quality:
   gaps: ['Micronutrients estimated from ingredient composition; venue formulations may vary by location.']
 notes: ["Ingredients confirmed: kale, celery, spinach, lemon, cucumber, olive oil", "Standard serving size is 12 oz (~355ml)"]
 change_log:
-- timestamp: 2025-10-28T18:51:39+0000
-  updated_by: "LLM: GPT-5 Thinking"
-  reason: "Populate per_portion from user-provided data"
-  fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.carbs_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg']
-  sources:
-    - url: "user_input"
-      note: "User-supplied values on 2025-10-28"
-- timestamp: 2025-10-28T19:02:30+0000
-  updated_by: "LLM: GPT-5 Thinking"
-  reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
-  fields_changed: ['per_portion.protein_g', 'per_portion.fat_g', 'per_portion.carbs_g', 'per_portion.fiber_total_g']
-  sources:
-    - url: "formatting-pass"
-      note: "Automated rounding pass"
-- timestamp: 2025-10-28T20:30:00+0000
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: "Research-based population of missing nutrition fields"
-  fields_changed: ['version', 'portion.est_weight_g', 'portion.notes', 'assumptions.oil_type', 'assumptions.prep', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.trans_fat_g', 'per_portion.cholesterol_mg', 'per_portion.sugar_g', 'per_portion.potassium_mg', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg', 'quality.confidence', 'quality.gaps', 'notes']
-  sources:
-    - url: "https://www.joejuice.com/signature-product/identity-juice"
-      note: "Official Joe & the Juice product page - confirmed ingredients: kale, celery, spinach, lemon, cucumber, olive oil"
-    - url: "web_search"
-      note: "Multiple third-party nutrition databases showing 85-90 cal, 8g sugar for similar serving; standard serving sizes 12 oz (355ml) or 16 oz (473ml)"
-    - url: "https://www.livmorjuicery.com/post/unlock-the-power-of-green-the-amazing-health-benefits-of-celery-kale-and-spinach-juice"
-      note: "Reference for green juice micronutrient content from kale, spinach, celery"
-    - url: "ingredient_analysis"
-      note: "Fat breakdown estimated from olive oil composition (75% MUFA, 15% sat, 10% PUFA, 0% trans); carbohydrate treatment now explicit: 13g total (including 4g fibre) → 9g available; cholesterol 0 for plant-based juice; micronutrients estimated from USDA data for kale (FDC 323505), spinach (FDC 168462), celery (FDC 169988), cucumber (FDC 168409) proportional to typical 12oz green juice serving"
-- timestamp: 2025-10-29T00:00:00+0000
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: "Populate fiber split and manganese from leafy green composition"
-  fields_changed: ['per_portion.fiber_soluble_g', 'per_portion.fiber_insoluble_g', 'per_portion.manganese_mg']
-  sources:
-    - url: "nutritional_research"
-      note: "Leafy greens (kale, spinach, celery) ~25% soluble, 75% insoluble fiber; kale high in manganese (~0.5mg per 100g). Estimated 1.0g soluble, 3.0g insoluble, 1mg manganese per 355g juice"
+  - timestamp: 2025-10-28T18:51:39+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Populate per_portion from user-provided data"
+    fields_changed: ['per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.carbs_g', 'per_portion.fiber_total_g', 'per_portion.sodium_mg']
+    sources:
+      - url: "user_input"
+        note: "User-supplied values on 2025-10-28"
+  - timestamp: 2025-10-28T19:02:30+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: "Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence"
+    fields_changed: ['per_portion.protein_g', 'per_portion.fat_g', 'per_portion.carbs_g', 'per_portion.fiber_total_g']
+    sources:
+      - url: "formatting-pass"
+        note: "Automated rounding pass"
+  - timestamp: 2025-10-28T20:30:00+0000
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Research-based population of missing nutrition fields"
+    fields_changed: ['version', 'portion.est_weight_g', 'portion.notes', 'assumptions.oil_type', 'assumptions.prep', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.trans_fat_g', 'per_portion.cholesterol_mg', 'per_portion.sugar_g', 'per_portion.potassium_mg', 'per_portion.iodine_ug', 'per_portion.magnesium_mg', 'per_portion.calcium_mg', 'per_portion.iron_mg', 'per_portion.zinc_mg', 'per_portion.vitamin_c_mg', 'quality.confidence', 'quality.gaps', 'notes']
+    sources:
+      - url: "https://www.joejuice.com/signature-product/identity-juice"
+        note: "Official Joe & the Juice product page - confirmed ingredients: kale, celery, spinach, lemon, cucumber, olive oil"
+      - url: "web_search"
+        note: "Multiple third-party nutrition databases showing 85-90 cal, 8g sugar for similar serving; standard serving sizes 12 oz (355ml) or 16 oz (473ml)"
+      - url: "https://www.livmorjuicery.com/post/unlock-the-power-of-green-the-amazing-health-benefits-of-celery-kale-and-spinach-juice"
+        note: "Reference for green juice micronutrient content from kale, spinach, celery"
+      - url: "ingredient_analysis"
+        note: "Fat breakdown estimated from olive oil composition (75% MUFA, 15% sat, 10% PUFA, 0% trans); carbohydrate treatment now explicit: 13g total (including 4g fibre) → 9g available; cholesterol 0 for plant-based juice; micronutrients estimated from USDA data for kale (FDC 323505), spinach (FDC 168462), celery (FDC 169988), cucumber (FDC 168409) proportional to typical 12oz green juice serving"
+  - timestamp: 2025-10-29T00:00:00+0000
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Populate fiber split and manganese from leafy green composition"
+    fields_changed: ['per_portion.fiber_soluble_g', 'per_portion.fiber_insoluble_g', 'per_portion.manganese_mg']
+    sources:
+      - url: "nutritional_research"
+        note: "Leafy greens (kale, spinach, celery) ~25% soluble, 75% insoluble fiber; kale high in manganese (~0.5mg per 100g). Estimated 1.0g soluble, 3.0g insoluble, 1mg manganese per 355g juice"
   - timestamp: 2025-11-02T11:12:07+00:00
     updated_by: "LLM: GPT-5 Thinking"
     reason: "Document carb totals vs available for UK-label juice"
