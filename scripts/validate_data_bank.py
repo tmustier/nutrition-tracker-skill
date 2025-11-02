@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-Validate a nutrition Data Bank markdown file:
+Validate the nutrition Data Bank markdown file:
 - Parse YAML code fences
-- Check Atwater energy, fat split, sodium<->salt coherence
+- Check available-carb Atwater energy, fat split, sodium<->salt coherence
 - Flag missing keys and negative numbers
 Outputs a human-readable summary and a JSON report to stdout.
 Requires: pyyaml
 """
-import sys, re, json, math
+import sys, re, json
 from pathlib import Path
 try:
     import yaml
@@ -31,14 +31,6 @@ def parse_yaml_blocks(text):
             y = None
         blocks.append((raw, y))
     return blocks
-
-def atwater_kcal(p, c, f):
-    if p is None or c is None or f is None:
-        return None
-    try:
-        return 4*p + 4*c + 9*f
-    except Exception:
-        return None
 
 def available_energy_kcal(protein, fat, carbs_available, fibre, polyols):
     """Compute energy using UK/EU convention (available carbs + fibre/polyol factors)."""
@@ -84,7 +76,6 @@ def check_block(y):
     polyols = pp.get("polyols_g")
     carbs_avail = pp.get("carbs_available_g")
     carbs_total = pp.get("carbs_total_g")
-    carbs_label = pp.get("carbs_g")
 
     # Relationship check for carb fields
     if carbs_total is not None and carbs_avail is not None and fibre is not None:
@@ -102,35 +93,24 @@ def check_block(y):
             missing_bits.append("fiber_total_g")
         warnings.append(f"carbs_total_g present but missing {', '.join(missing_bits)} to reconcile totals.")
 
-    if carbs_avail is None and carbs_label is not None:
-        carbs_avail = carbs_label
-        warnings.append("carbs_available_g missing; falling back to carbs_g for energy calculation.")
+    if carbs_avail is None:
+        issues.append("Missing carbs_available_g; cannot compute available-carb energy.")
 
     kcal_est = available_energy_kcal(p, f, carbs_avail, fibre, polyols)
-    if kcal_est is None and carbs_avail is None:
-        # Fall back to legacy calculation if necessary
-        legacy = atwater_kcal(p, carbs_label, f)
-        if legacy is not None and kcal is not None:
-            diff = abs(legacy - kcal)
-            if diff > TOL_ENERGY_PCT * max(kcal, 1):
-                warnings.append(
-                    f"Atwater (legacy) mismatch: label {kcal} vs est {legacy:.1f} "
-                    f"(diff {diff:.1f}, {100*diff/max(kcal,1):.1f}%)."
-                )
-            else:
-                passes.append("Atwater within tolerance (legacy carbs_g).")
-    elif kcal_est is not None and kcal is not None:
+    if kcal_est is not None and kcal is not None:
         if kcal == 0:
             issues.append("energy_kcal is 0 (unexpected).")
         else:
             diff = abs(kcal_est - kcal)
             if diff > TOL_ENERGY_PCT * max(kcal, 1):
-                warnings.append(
-                    f"Available-carb energy mismatch: label {kcal} vs est {kcal_est:.1f} "
+                issues.append(
+                    f"Available-carb energy mismatch: stored {kcal} vs est {kcal_est:.1f} "
                     f"(diff {diff:.1f}, {100*diff/max(kcal,1):.1f}%)."
                 )
             else:
                 passes.append("Energy within tolerance (available carb formula).")
+    elif kcal is not None and carbs_avail is not None:
+        issues.append("Unable to compute energy: missing protein, fat, or fibre/polyol inputs.")
 
     # Fat split
     sat = pp.get("sat_fat_g")

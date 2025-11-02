@@ -21,7 +21,7 @@ entries:
         nutrition:
           # Snapshot of nutrition at time of logging
           # Copy all non-null fields from food bank entry
-          energy_kcal: 592
+          energy_kcal: 597.4
           protein_g: 30.4
           fat_g: 34.2
           sat_fat_g: 10.5
@@ -29,7 +29,9 @@ entries:
           pufa_g: 4.3
           trans_fat_g: 0.1
           cholesterol_mg: 398
-          carbs_g: 40.3
+          carbs_total_g: 43.7
+          polyols_g: 0.0
+          carbs_available_g: 40.3
           sugar_g: 5.2
           fiber_total_g: 6.8
           fiber_soluble_g: null
@@ -49,10 +51,14 @@ entries:
         quantity: 250
         unit: ml
         nutrition:
-          energy_kcal: 112
+          energy_kcal: 102.8
           protein_g: 1.7
-          carbs_g: 25.8
+          fat_g: 0.2
+          carbs_total_g: 25.8
+          polyols_g: 0.0
+          carbs_available_g: 23.4
           sugar_g: 21.0
+          fiber_total_g: 2.4
           # ... (include all available fields)
 
     notes: "breakfast at home"  # optional context
@@ -77,6 +83,7 @@ entries:
 2. **Reference food bank**: Store `food_bank_id` to track source. Set to `null` for estimated/manual entries.
 
 3. **Flexible items**: Each entry (meal) can have multiple items. Track quantity and unit for each.
+4. **Energy derived from nutrients**: Store `energy_kcal` as the Atwater result using available carbs (`4P + 9F + 4*carbs_available + 2*fibre + 2.4*polyols`) to stay aligned with the food bank.
 
 4. **Timestamping**: One timestamp per entry (meal level), not per item.
 

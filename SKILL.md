@@ -135,7 +135,7 @@ When a dish has multiple identifiable components (e.g., eggs + yogurt + bread + 
    - Finishing salt = 352g × 0.005 = 1.76g salt = ~704mg additional sodium
    - Add this to intrinsic sodium from ingredients (bread, salted butter, etc.)
 
-7. **Validate** using Atwater formula: Should be within ±5% of venue kcal
+7. **Validate** using the available-carb Atwater formula (`4P + 9F + 4*carbs_available + 2*fibre + 2.4*polyols`): stay within ±5% of venue kcal or document why.
 
 **Example worked calculation:**
 ```
@@ -159,7 +159,7 @@ Add intrinsic sodium from bread + butter
 TOTAL SODIUM: ~1,543mg
 
 Step 4 - Validate Atwater:
-4×30.4 + 4×40.3 + 9×34.2 = 590.6 kcal (±0.2% of 592)
+4×30.4 + 9×34.2 + 4×40.3 + 2×3.4 + 2.4×0.0 = 597.4 kcal (≈592 kcal label; note variance)
 ```
 
 **Standard assumptions (write them in `assumptions`):**
@@ -168,7 +168,7 @@ Step 4 - Validate Atwater:
 - Portion weight → labeled value if present; otherwise an estimate with a one‑line rationale.
 
 **Consistency checks (before saving):**
-- **Energy (Atwater)**: `kcal ≈ 4*protein + 4*carbs + 9*fat` (tolerance ±5–8%). Explain any gap.
+- **Energy (Atwater)**: `kcal ≈ 4*protein + 9*fat + 4*carbs_available + 2*fibre + 2.4*polyols` (tolerance ±5–8%). Explain any gap.
 - **Fat split**: `sat + MUFA + PUFA + trans ≤ total fat` (difference = unassigned/rounding).
 - **Sodium↔salt**: compute `salt_g_from_sodium = sodium_mg * 2.5 / 1000` in `derived`.
 - **No negatives**; keep unknowns as `null`.

@@ -15,7 +15,6 @@ Every per-portions block now tracks carbohydrate data with three explicit fields
 | `carbs_available_g` | Digestible / “available” carbohydrate (a.k.a. net carbs) | 0.1 g |
 | `polyols_g` | Sugar alcohol mass; 0.0 if none or unknown | 0.1 g |
 
-- `per_portion.carbs_g` remains for backward compatibility but should mirror `carbs_available_g`.
 - `fiber_total_g` continues to represent total dietary fibre (soluble + insoluble).
 - Relationship check: `carbs_total_g = carbs_available_g + fiber_total_g + polyols_g` (within rounding).
 
@@ -25,14 +24,13 @@ Every per-portions block now tracks carbohydrate data with three explicit fields
 
 1. **UK / EU labels & venue data (Deliveroo, Tesco, SHK, etc.)**
    - Labels already report *available* carbohydrate.
-   - Record the printed value in both `carbs_available_g` and `carbs_g`.
+   - Record the printed value in `carbs_available_g`.
    - Derive `carbs_total_g = carbs_available_g + fiber_total_g + polyols_g`.
 
 2. **US / Canada sources (USDA FDC, MyFitnessPal US, Nutritionix, etc.)**
    - Labels list *total* carbohydrate.
    - Copy the label into `carbs_total_g`.
    - Subtract fibre and any polyols to obtain `carbs_available_g`.
-   - Update `carbs_g` to match `carbs_available_g`.
    - Flag the change in the dish `change_log` with source notes.
 
 3. **Ambiguous / mixed sources**
@@ -54,10 +52,10 @@ Every per-portions block now tracks carbohydrate data with three explicit fields
 
 ## 4. Energy Recalculation Checklist
 
-Use the UK/EU convention:
+Use the UK/EU convention and store the result directly in `per_portion.energy_kcal`:
 
 ```
-energy_from_macros_kcal =
+energy_kcal =
     4 * protein_g
   + 9 * fat_g
   + 4 * carbs_available_g
@@ -66,8 +64,8 @@ energy_from_macros_kcal =
 ```
 
 - `polyol_factor` is 2.4 kcal/g unless the note specifies another value.
-- Always recompute `derived.energy_from_macros_kcal` after updating carbs.
-- If the recomputed energy falls within ±8% of the recorded kcal, keep the original label energy. Otherwise:
+- Always recompute `per_portion.energy_kcal` after updating carbs.
+- If the recomputed energy falls within ±8% of the printed kcal, update the stored energy to the calculated value and note the variance. If the gap exceeds ±8%:
   1. Confirm source classification.
   2. Adjust the label energy with a comment in `change_log`.
 
@@ -82,7 +80,7 @@ Whenever carbohydrate fields change:
    - ISO timestamp (Europe/London)
    - `updated_by`
    - `reason` (e.g., “Converted USDA total carbs to UK available convention”)
-   - `fields_changed` including the new carb fields and any energy updates
+   - `fields_changed` including the carb fields and energy
    - `sources` referencing the label, USDA record, or calculation note
 
 ---
@@ -101,6 +99,6 @@ The validator (`scripts/validate_data_bank.py`) assumes:
 
 - `carbs_available_g` is present when `carbs_total_g` is present.
 - `carbs_total_g ≈ carbs_available_g + fiber_total_g + polyols_g`.
-- Energy checks leverage the available-carb formula above.
+- `per_portion.energy_kcal` matches the available-carb formula above (±8% tolerance).
 
 Any violations emit warnings to catch regressions before committing.
