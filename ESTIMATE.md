@@ -90,7 +90,7 @@ When a dish has multiple identifiable components (e.g., eggs + yogurt + bread + 
    - Finishing salt = 352g × 0.005 = 1.76g salt = ~704mg additional sodium
    - Add this to intrinsic sodium from ingredients (bread, salted butter, etc.)
 
-7. **Validate** using Atwater formula: Should be within ±5% of venue kcal
+7. **Validate** using the available-carb Atwater formula (`4P + 9F + 4*carbs_available + 2*fibre + 2.4*polyols`): keep results within ±5% of venue kcal or document why.
 
 **Example worked calculation:**
 ```
@@ -114,7 +114,7 @@ Add intrinsic sodium from bread + butter
 TOTAL SODIUM: ~1,543mg
 
 Step 4 - Validate Atwater:
-4×30.4 + 4×40.3 + 9×34.2 = 590.6 kcal (±0.2% of 592)
+4×30.4 + 9×34.2 + 4×40.3 + 2×3.4 + 2.4×0.0 = 597.4 kcal (≈592 kcal label; note variance)
 ```
 
 **Standard assumptions (write them in `assumptions`):**
@@ -123,7 +123,7 @@ Step 4 - Validate Atwater:
 - Portion weight → labeled value if present; otherwise an estimate with a one‑line rationale.
 
 **Consistency checks (before saving):**
-- **Energy (Atwater)**: `kcal ≈ 4*protein + 4*carbs + 9*fat` (tolerance ±5–8%). Explain any gap.
+- **Energy (Atwater)**: `kcal ≈ 4*protein + 9*fat + 4*carbs_available + 2*fibre + 2.4*polyols` (tolerance ±5–8%). Explain any gap.
 - **Fat split**: `sat + MUFA + PUFA + trans ≤ total fat` (difference = unassigned/rounding).
 - **Sodium↔salt**: compute `salt_g_from_sodium = sodium_mg * 2.5 / 1000` in `derived`.
 - **No negatives**; keep unknowns as `null`.
@@ -139,7 +139,7 @@ Step 4 - Validate Atwater:
 
 ### `scripts/validate_data_bank.py`
 Validate `data/food-data-bank.md`. Checks:
-- Energy math (Atwater), fat‑split coherence, sodium↔salt, missing required keys, negative values.
+- Available-carb energy math, fat‑split coherence, sodium↔salt, missing required keys, negative values.
 - Emits a human summary and a JSON report (to stdout).
 
 Usage:
@@ -171,3 +171,120 @@ The script adds a new YAML block at the end and auto-regenerates the index file;
 
 ## Research notes
 For accumulated research findings, methodology lessons, and venue-specific guidance, see `references/research-notes.md`.
+
+## Carbohydrate Estimation Protocol
+
+**Updated:** 2025-11-02  
+**Scope:** Applies to every dish, ingredient, and log entry in this skill.
+
+---
+
+### 1. Terminology & Required Fields
+
+Every `per_portion` block must track carbohydrate data with three explicit fields:
+
+| Field | Meaning | Default precision |
+| --- | --- | --- |
+| `carbs_total_g` | Label-style total carbohydrate (includes fibre + polyols) | 0.1 g |
+| `carbs_available_g` | Digestible / "available" carbohydrate (a.k.a. net carbs) | 0.1 g |
+| `polyols_g` | Sugar alcohol mass; 0.0 if none or unknown | 0.1 g |
+
+- `fiber_total_g` continues to represent total dietary fibre (soluble + insoluble).
+- Relationship check: `carbs_total_g = carbs_available_g + fiber_total_g + polyols_g` (within rounding).
+
+**Zero vs null conventions:**
+- Use `0.0` for confirmed zero values (e.g., zero-carb foods like plain chicken have `carbs_total_g: 0.0`).
+- Use `null` for unknown or unmeasured values.
+- For zero-carb animal protein sources (meat, poultry, fish), set all carb and fiber fields to `0.0` (scientifically accurate).
+- For processed foods without fiber data, use `null` unless you can confirm zero fiber from ingredients.
+
+---
+
+### 2. Source Classification
+
+1. **UK / EU labels & venue data (Deliveroo, Tesco, SHK, etc.)**
+   - Labels already report *available* carbohydrate.
+   - Record the printed value in `carbs_available_g`.
+   - Derive `carbs_total_g = carbs_available_g + fiber_total_g + polyols_g`.
+
+2. **US / Canada sources (USDA FDC, MyFitnessPal US, Nutritionix, etc.)**
+   - Labels list *total* carbohydrate.
+   - Copy the label into `carbs_total_g`.
+   - Subtract fibre and any polyols to obtain `carbs_available_g`.
+   - Flag the change in the dish `change_log` with source notes.
+
+3. **Ambiguous / mixed sources**
+   - Check the change log and notes—if “net carbs” or “available carbs” is mentioned, treat as UK/EU style.
+   - Otherwise default to US handling and document assumptions.
+
+---
+
+### 3. Polyol Treatment
+
+- When a label lists specific sugar alcohols, record them in `polyols_g`.
+- If multiple polyols are present and their masses differ, add a note describing the breakdown.
+- Energy factors (default unless more precise data are available):
+  - Maltitol, sorbitol, xylitol: **2.4 kcal/g**
+  - Erythritol: **0.2 kcal/g**
+  - Other polyols: reference EU guideline tables; if unknown, fall back to 2.4 kcal/g and document.
+
+---
+
+### 4. Energy Recalculation Checklist
+
+Use the UK/EU convention and store the result directly in `per_portion.energy_kcal`:
+
+```
+energy_kcal =
+    4 * protein_g
+  + 9 * fat_g
+  + 4 * carbs_available_g
+  + 2 * fiber_total_g
+  + polyol_factor * polyols_g
+```
+
+- `polyol_factor` is 2.4 kcal/g unless evidence specifies another value.
+- Always recompute `per_portion.energy_kcal` after updating carbs.
+
+**Energy storage policy:**
+- **Store the calculated energy** (from the formula above) in `per_portion.energy_kcal`.
+- If the calculated value differs from the venue/label energy, **note the original label value** in the `notes` field.
+- Document the variance in the `change_log` when updating energy values.
+- If the gap exceeds ±8%:
+  1. Confirm source classification (UK/EU vs US/Canada).
+  2. Double-check macronutrient values for accuracy.
+  3. If values are correct, proceed with calculated energy and document the variance.
+
+---
+
+### 5. Change Log Requirements
+
+Whenever carbohydrate fields change:
+
+1. Bump `version` (if editing a dish) and update `last_verified`.
+2. Add a `change_log` entry with:
+   - ISO timestamp (Europe/London)
+   - `updated_by`
+   - `reason` (e.g., “Converted USDA total carbs to UK available convention”)
+   - `fields_changed` covering the carb fields and energy
+   - `sources` referencing the label, USDA record, or calculation note
+
+---
+
+### 6. Daily Log Alignment
+
+- Logs should mirror the dish data: include `carbs_total_g`, `carbs_available_g`, and `polyols_g` for each entry.
+- When scaling a dish (e.g., half-portion), scale all carbohydrate fields proportionally.
+- Custom log-only items follow the same rules as dishes—classify the source first, then populate the three fields and recompute energy.
+
+---
+
+### 7. Validation Script Expectations
+
+The validator (`scripts/validate_data_bank.py`) assumes:
+
+- `carbs_available_g` is present when `carbs_total_g` is present.
+- `carbs_total_g ≈ carbs_available_g + fiber_total_g + polyols_g`.
+- `per_portion.energy_kcal` matches the available-carb formula above (±8% tolerance).
+
+Any violations emit warnings to catch regressions before committing.

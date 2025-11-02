@@ -24,6 +24,7 @@ When the user asks you to estimate nutrition for a dish, copy this checklist and
 - [ ] Step 3: Show a compact table and % of daily targets from `references/health-profile.yaml`.
       - Ensure you scale `per_portion` values if necessary.
       - If multiple dishes are logged, sum totals and re‑check vs targets.
+      - Recompute energy with the available-carb Atwater formula (`4P + 9F + 4*carbs_available + 2*fibre + 2.4*polyols`) and make sure `carbs_total_g`, `carbs_available_g`, and `polyols_g` are populated.
 - [ ] Step 4: If the user has eaten the dish, proceed to **B) Logging** without asking the user. This will not always be the case.
 
 ## B) LOGGING
