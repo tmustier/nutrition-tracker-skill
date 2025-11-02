@@ -11,7 +11,7 @@ generated: 2025-11-02 20:22:31 UTC
 
 <!-- #todo: Reorder dishes by category or venue for better organization -->
 
-## All Dishes (49 total)
+## All Dishes (58 total)
 
 - [Sweet Potato Wedges (Simple Health Kitchen)](#sweet-potato-wedges-simple-health-kitchen) {#sweet_potato_wedges_shk_v1}
 - [Grilled Salmon Fillet (Simple Health Kitchen)](#grilled-salmon-fillet-simple-health-kitchen) {#grilled_salmon_fillet_shk_v1}
@@ -62,6 +62,15 @@ generated: 2025-11-02 20:22:31 UTC
 - [Orange 'Jaffa Cake' Slice with Crème Fraîche (The Eagle, Farringdon)](#orange-jaffa-cake-slice-with-crème-fraîche-the-eagle-farringdon) {#orange_jaffa_cake_slice_creme_fraiche_eagle_farringdon_v1}
 - [Banana (Raw, 150g)](#banana-raw-150g) {#banana_raw_150g_v1}
 - [Smoked Trout (Daylesford, 80g)](#smoked-trout-daylesford-80g) {#daylesford_smoked_trout_80g_v1}
+- [Peking Duck Skin with Sugar (Imperial Treasure St. James)](#peking-duck-skin-with-sugar-imperial-treasure-st-james) {#peking_duck_skin_sugar_imperial_treasure_st_james_v1}
+- [Charcoal Custard Bun (Imperial Treasure St. James)](#charcoal-custard-bun-imperial-treasure-st-james) {#charcoal_custard_bun_imperial_treasure_st_james_v1}
+- [Shrimp Shu Mai (Imperial Treasure St. James)](#shrimp-shu-mai-imperial-treasure-st-james) {#shrimp_shu_mai_imperial_treasure_st_james_v1}
+- [Crispy Shrimp Cheung Fun (Imperial Treasure St. James)](#crispy-shrimp-cheung-fun-imperial-treasure-st-james) {#crispy_shrimp_cheung_fun_imperial_treasure_st_james_v1}
+- [Snow Mountain Bun (Imperial Treasure St. James)](#snow-mountain-bun-imperial-treasure-st-james) {#snow_mountain_bun_imperial_treasure_st_james_v1}
+- [Prawn & Chive Dumpling (Imperial Treasure St. James)](#prawn-chive-dumpling-imperial-treasure-st-james) {#prawn_chive_dumpling_imperial_treasure_st_james_v1}
+- [Mushroom Dumpling (Imperial Treasure St. James)](#mushroom-dumpling-imperial-treasure-st-james) {#mushroom_dumpling_imperial_treasure_st_james_v1}
+- [Peking Duck Pancake (Imperial Treasure St. James)](#peking-duck-pancake-imperial-treasure-st-james) {#peking_duck_pancake_imperial_treasure_st_james_v1}
+- [Duck Broth with Tofu (Imperial Treasure St. James)](#duck-broth-with-tofu-imperial-treasure-st-james) {#duck_broth_tofu_imperial_treasure_st_james_v1}
 
 ---
 
