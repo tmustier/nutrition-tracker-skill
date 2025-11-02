@@ -15,16 +15,16 @@ This guide covers general practices for:
 This skill is different to other Claude Skills in that it lives in a public Github repository and contains regularly updated user data including a data bank of dishes, daily nutrition logs, and nutrition targets (see **D) AD HOC ANALYSIS**).
 
 ## A) ESTIMATING
-When the user asks you to estimate nutrition for a dish:
+When the user asks you to estimate nutrition for a dish, copy this checklist and track your progress:
 - [ ] Step 1: Check if the dish exists in `data/food-data-bank.md`.
       - Browse `data/food-data-bank-index.md` to find dishes by name, or search by `id` in the main file.
       - If found and complete with no null values: proceed to **Step 3**.
       - Else: proceed to **Step 2**.
-- [ ] Step 2: Add / Update complete records for the dish if necessary using `ESTIMATE.md`. If there is more than one dish, parallelize with one subagent per dish.
+- [ ] Step 2: Check if you need to add / update complete data bank records for the dish (with no nulls). If so, spawn one subagent per dish, and have that agent ultrathink, following all the instructions in `ESTIMATE.md`. Once there are no more updates to be made, proceed to **Step 3**.
 - [ ] Step 3: Show a compact table and % of daily targets from `references/health-profile.yaml`.
       - Ensure you scale `per_portion` values if necessary.
       - If multiple dishes are logged, sum totals and re‑check vs targets.
-- [ ] Step 4: If the user has eaten the dish, trigger **B) Logging**. This will not always be the case.
+- [ ] Step 4: If the user has eaten the dish, proceed to **B) Logging** without asking the user. This will not always be the case.
 
 ## B) LOGGING
 When the user has eaten a dish and you have completed **A) Estimating**:
@@ -35,7 +35,7 @@ When the user has eaten a dish and you have completed **A) Estimating**:
      - Store `food_bank_id`.
      - Include quantity and unit.
      - Add optional notes if user provided context.
-   - Trigger **C) Daily Analysis**.
+   - Proceed to **C) Daily Analysis** without asking the user.
 
 **After logging:** Show updated daily totals and gaps: "Logged ✓. Today: X/Y kcal, X/Y protein. Still need Z."
 
