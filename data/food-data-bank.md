@@ -3382,7 +3382,7 @@ assumptions:
   oil_type: ''
   prep: packaged product
 per_portion:
-  energy_kcal: 255.8
+  energy_kcal: 296.6
   protein_g: 21.0
   fat_g: 10.0
   sat_fat_g: 5.7
@@ -3403,9 +3403,9 @@ per_portion:
   zinc_mg: null
   vitamin_c_mg: null
   manganese_mg: null
-  polyols_g: 0.0
+  polyols_g: 17.0
   carbs_available_g: 20.0
-  carbs_total_g: 20.9
+  carbs_total_g: 37.9
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
@@ -3419,8 +3419,8 @@ notes:
 - 'Fat split estimated: remaining 4.3g unsaturated divided into MUFA/PUFA based on
   typical protein bar composition'
 - Sodium estimated from typical Grenade bar range (0.45g salt = ~180mg sodium)
-- 'Atwater check (available carb basis): 4×21.0 + 9×10.0 + 4×20.0 + 2×0.9 + 2.4×0.0
-  = 255.8 kcal'
+- 'Atwater check (available carb basis): 4×21.0 + 9×10.0 + 4×20.0 + 2×0.9 + 2.4×17.0
+  = 296.6 kcal'
 change_log:
 - timestamp: 2025-10-30T00:00:00+0000
   updated_by: Claude Code
@@ -3442,6 +3442,15 @@ change_log:
   - per_portion.energy_kcal
   - per_portion.polyols_g
   - version
+  sources: []
+- timestamp: '2025-11-02T22:00:00+00:00'
+  updated_by: 'LLM: Claude Sonnet 4.5'
+  reason: Correct polyol data to match notes - was incorrectly set to 0.0 instead of 17.0g
+  fields_changed:
+  - per_portion.polyols_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - notes
   sources: []
 ```
 
