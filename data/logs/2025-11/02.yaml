@@ -1,5 +1,5 @@
 date: 2025-11-02
-day_type: rest
+day_type: training
 entries:
 - timestamp: '2025-11-02T09:00:00+00:00'
   items:
@@ -178,3 +178,363 @@ entries:
       carbs_available_g: 8.4
       carbs_total_g: 11.6
   notes: Breakfast smoothie
+
+- timestamp: '2025-11-02T14:30:00+00:00'
+  items:
+  - name: Snow Mountain Bun
+    food_bank_id: snow_mountain_bun_imperial_treasure_st_james_v1
+    quantity: 1
+    unit: portion
+    nutrition:
+      energy_kcal: 250
+      protein_g: 9.3
+      fat_g: 10.0
+      sat_fat_g: 4.4
+      mufa_g: 3.9
+      pufa_g: 1.1
+      trans_fat_g: 0.1
+      cholesterol_mg: 25
+      sugar_g: 8.2
+      fiber_total_g: 0.9
+      fiber_soluble_g: null
+      fiber_insoluble_g: null
+      sodium_mg: 318
+      potassium_mg: 90
+      iodine_ug: null
+      magnesium_mg: 12
+      calcium_mg: 45
+      iron_mg: 1.2
+      zinc_mg: 0.6
+      vitamin_c_mg: 0
+      manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 30.8
+      carbs_total_g: 31.7
+  - name: Shrimp Shu Mai
+    food_bank_id: shrimp_shu_mai_imperial_treasure_st_james_v1
+    quantity: 1
+    unit: portion
+    nutrition:
+      energy_kcal: 43
+      protein_g: 3.1
+      fat_g: 1.5
+      sat_fat_g: 0.3
+      mufa_g: 0.6
+      pufa_g: 0.4
+      trans_fat_g: 0.0
+      cholesterol_mg: 15
+      sugar_g: 0.2
+      fiber_total_g: 0.3
+      fiber_soluble_g: null
+      fiber_insoluble_g: null
+      sodium_mg: 140
+      potassium_mg: 25
+      iodine_ug: null
+      magnesium_mg: 6
+      calcium_mg: 8
+      iron_mg: 0.3
+      zinc_mg: 0.1
+      vitamin_c_mg: 0.2
+      manganese_mg: 0.02
+      polyols_g: 0.0
+      carbs_available_g: 4.5
+      carbs_total_g: 4.8
+  - name: Prawn & Chive Dumpling
+    food_bank_id: prawn_chive_dumpling_imperial_treasure_st_james_v1
+    quantity: 1
+    unit: portion
+    nutrition:
+      energy_kcal: 45
+      protein_g: 2.0
+      fat_g: 1.6
+      sat_fat_g: 0.2
+      mufa_g: 0.9
+      pufa_g: 0.4
+      trans_fat_g: 0.0
+      cholesterol_mg: 30
+      sugar_g: 0.2
+      fiber_total_g: 0.1
+      fiber_soluble_g: null
+      fiber_insoluble_g: null
+      sodium_mg: 310
+      potassium_mg: 20
+      iodine_ug: 2
+      magnesium_mg: 5
+      calcium_mg: 10
+      iron_mg: 0.2
+      zinc_mg: 0.2
+      vitamin_c_mg: 1
+      manganese_mg: 0.1
+      polyols_g: 0.0
+      carbs_available_g: 5.6
+      carbs_total_g: 5.7
+  - name: Mushroom Dumpling
+    food_bank_id: mushroom_dumpling_imperial_treasure_st_james_v1
+    quantity: 1
+    unit: portion
+    nutrition:
+      energy_kcal: 75
+      protein_g: 1.5
+      fat_g: 3.1
+      sat_fat_g: 0.5
+      mufa_g: 1.2
+      pufa_g: 1.3
+      trans_fat_g: 0.0
+      cholesterol_mg: 0
+      sugar_g: 0.6
+      fiber_total_g: 0.6
+      fiber_soluble_g: null
+      fiber_insoluble_g: null
+      sodium_mg: 93
+      potassium_mg: 24
+      iodine_ug: null
+      magnesium_mg: 5
+      calcium_mg: 3
+      iron_mg: 0.6
+      zinc_mg: 0.2
+      vitamin_c_mg: 0.2
+      manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 10.5
+      carbs_total_g: 11.1
+  - name: Crispy Shrimp Cheung Fun
+    food_bank_id: crispy_shrimp_cheung_fun_imperial_treasure_st_james_v1
+    quantity: 2
+    unit: portion
+    nutrition:
+      energy_kcal: 62
+      protein_g: 1.8
+      fat_g: 3.8
+      sat_fat_g: 0.5
+      mufa_g: 0.8
+      pufa_g: 1.9
+      trans_fat_g: 0.0
+      cholesterol_mg: 8
+      sugar_g: 0.2
+      fiber_total_g: 0.2
+      fiber_soluble_g: null
+      fiber_insoluble_g: null
+      sodium_mg: 160
+      potassium_mg: 19
+      iodine_ug: 1
+      magnesium_mg: 2
+      calcium_mg: 4
+      iron_mg: 0.3
+      zinc_mg: 0.1
+      vitamin_c_mg: 0
+      manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 5.2
+      carbs_total_g: 5.4
+  - name: Peking Duck Skin with Sugar
+    food_bank_id: peking_duck_skin_sugar_imperial_treasure_st_james_v1
+    quantity: 2
+    unit: portion
+    nutrition:
+      energy_kcal: 40
+      protein_g: 0.4
+      fat_g: 4.0
+      sat_fat_g: 1.4
+      mufa_g: 1.9
+      pufa_g: 0.5
+      trans_fat_g: 0.0
+      cholesterol_mg: 12
+      sugar_g: 0.2
+      fiber_total_g: 0.0
+      fiber_soluble_g: null
+      fiber_insoluble_g: null
+      sodium_mg: 20
+      potassium_mg: 5
+      iodine_ug: null
+      magnesium_mg: 1
+      calcium_mg: 1
+      iron_mg: 0.2
+      zinc_mg: 0.2
+      vitamin_c_mg: 0
+      manganese_mg: 0.0
+      polyols_g: 0.0
+      carbs_available_g: 0.2
+      carbs_total_g: 0.2
+  - name: Peking Duck Pancake
+    food_bank_id: peking_duck_pancake_imperial_treasure_st_james_v1
+    quantity: 3
+    unit: portion
+    nutrition:
+      energy_kcal: 630
+      protein_g: 22.8
+      fat_g: 40.8
+      sat_fat_g: 12.6
+      mufa_g: 18.0
+      pufa_g: 7.8
+      trans_fat_g: 0.0
+      cholesterol_mg: null
+      sugar_g: 6.0
+      fiber_total_g: 0.3
+      fiber_soluble_g: null
+      fiber_insoluble_g: null
+      sodium_mg: 537
+      potassium_mg: null
+      iodine_ug: null
+      magnesium_mg: null
+      calcium_mg: 6
+      iron_mg: 2.7
+      zinc_mg: 2.1
+      vitamin_c_mg: 3
+      manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 36.0
+      carbs_total_g: 36.3
+  - name: Duck Broth with Tofu
+    food_bank_id: duck_broth_tofu_imperial_treasure_st_james_v1
+    quantity: 1
+    unit: portion
+    nutrition:
+      energy_kcal: 50
+      protein_g: 4.3
+      fat_g: 2.6
+      sat_fat_g: 0.6
+      mufa_g: 0.9
+      pufa_g: 0.9
+      trans_fat_g: 0.0
+      cholesterol_mg: 5
+      sugar_g: 0.1
+      fiber_total_g: 0.4
+      fiber_soluble_g: null
+      fiber_insoluble_g: null
+      sodium_mg: 302
+      potassium_mg: 148
+      iodine_ug: null
+      magnesium_mg: 14
+      calcium_mg: 112
+      iron_mg: 1
+      zinc_mg: 0
+      vitamin_c_mg: 0
+      manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 1.0
+      carbs_total_g: 1.4
+  - name: Charcoal Custard Bun
+    food_bank_id: charcoal_custard_bun_imperial_treasure_st_james_v1
+    quantity: 1
+    unit: portion
+    nutrition:
+      energy_kcal: 186
+      protein_g: 3.8
+      fat_g: 8.8
+      sat_fat_g: 4.0
+      mufa_g: 2.4
+      pufa_g: 1.7
+      trans_fat_g: 0.0
+      cholesterol_mg: 76
+      sugar_g: 7.4
+      fiber_total_g: 0.6
+      fiber_soluble_g: null
+      fiber_insoluble_g: null
+      sodium_mg: 38
+      potassium_mg: null
+      iodine_ug: null
+      magnesium_mg: null
+      calcium_mg: 29
+      iron_mg: 1.0
+      zinc_mg: null
+      vitamin_c_mg: null
+      manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 23.3
+      carbs_total_g: 23.9
+  notes: Lunch at Imperial Treasure St. James (ended 14:30pm) with corrected duck skin and cheung fun portions
+
+- timestamp: '2025-11-02T17:00:00+00:00'
+  items:
+  - name: Homemade Bolognese with Rummo Red Lentil & Riso Integrale Pasta
+    food_bank_id: null
+    quantity: 415
+    unit: g
+    nutrition:
+      energy_kcal: 581
+      protein_g: 36.9
+      fat_g: 20.7
+      sat_fat_g: 6.9
+      mufa_g: 8.3
+      pufa_g: 2.8
+      trans_fat_g: 0
+      cholesterol_mg: 39
+      sugar_g: 5.5
+      fiber_total_g: 8.3
+      fiber_soluble_g: null
+      fiber_insoluble_g: null
+      sodium_mg: 369
+      potassium_mg: 438
+      iodine_ug: null
+      magnesium_mg: 55
+      calcium_mg: 37
+      iron_mg: 3.0
+      zinc_mg: 2.5
+      vitamin_c_mg: 7
+      manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 68.2
+      carbs_total_g: 76.5
+  notes: Post-workout snack - leftovers from dinner logged yesterday (415g out of original 900g)
+
+- timestamp: '2025-11-02T19:30:00+00:00'
+  items:
+  - name: Homemade Bolognese with Rummo Red Lentil & Riso Integrale Pasta
+    food_bank_id: null
+    quantity: 180
+    unit: g
+    nutrition:
+      energy_kcal: 252
+      protein_g: 16.0
+      fat_g: 9.0
+      sat_fat_g: 3.0
+      mufa_g: 3.6
+      pufa_g: 1.2
+      trans_fat_g: 0
+      cholesterol_mg: 17
+      sugar_g: 2.4
+      fiber_total_g: 3.6
+      fiber_soluble_g: null
+      fiber_insoluble_g: null
+      sodium_mg: 160
+      potassium_mg: 190
+      iodine_ug: null
+      magnesium_mg: 24
+      calcium_mg: 16
+      iron_mg: 1.3
+      zinc_mg: 1.1
+      vitamin_c_mg: 3
+      manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 29.6
+      carbs_total_g: 33.2
+  - name: Kiwi (small)
+    food_bank_id: null
+    quantity: 1.5
+    unit: portion
+    nutrition:
+      energy_kcal: 55
+      protein_g: 1.0
+      fat_g: 0.4
+      sat_fat_g: 0.02
+      mufa_g: 0.03
+      pufa_g: 0.2
+      trans_fat_g: 0
+      cholesterol_mg: 0
+      sugar_g: 6.8
+      fiber_total_g: 2.3
+      fiber_soluble_g: null
+      fiber_insoluble_g: null
+      sodium_mg: 2
+      potassium_mg: 230
+      iodine_ug: null
+      magnesium_mg: 13
+      calcium_mg: 26
+      iron_mg: 0.2
+      zinc_mg: 0.1
+      vitamin_c_mg: 70
+      manganese_mg: 0.1
+      polyols_g: 0.0
+      carbs_available_g: 10.5
+      carbs_total_g: 12.8
+  notes: Dinner - remaining bolognese with kiwis
