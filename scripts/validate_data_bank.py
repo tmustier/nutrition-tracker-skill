@@ -60,6 +60,12 @@ def check_block(y):
 
     bid = y.get("id")
 
+    # Cross-check notes for polyol mentions
+    notes = y.get("notes", [])
+    notes_text = ' '.join(notes) if isinstance(notes, list) else str(notes) if notes else ""
+    polyol_pattern = r'\b(\d+\.?\d*)\s*g\b.*?\b(polyol|maltitol|erythritol|xylitol|sorbitol|sugar\s+alcohol)'
+    polyol_mentions = re.findall(polyol_pattern, notes_text, re.IGNORECASE)
+
     # required trees
     for k in ["per_portion", "derived", "quality"]:
         if k not in y:
@@ -76,6 +82,23 @@ def check_block(y):
     polyols = pp.get("polyols_g")
     carbs_avail = pp.get("carbs_available_g")
     carbs_total = pp.get("carbs_total_g")
+
+    # Cross-check polyol mentions in notes against polyols_g field
+    if polyol_mentions:
+        if polyols is None or polyols == 0.0:
+            polyol_amounts = [float(m[0]) for m in polyol_mentions]
+            warnings.append(
+                f"Notes mention polyols ({', '.join(f'{a}g {t}' for a, t in polyol_mentions)}) "
+                f"but polyols_g is {polyols}. Consider updating polyols_g field."
+            )
+        else:
+            passes.append(f"Polyol mentions in notes match polyols_g field ({polyols}g).")
+
+    # Zero vs unknown validation for key carb fields
+    if carbs_total == 0.0 and carbs_avail is None:
+        warnings.append("carbs_total_g is 0.0 but carbs_available_g is null. If confirmed zero-carb, set to 0.0.")
+    if polyols == 0.0 and polyol_mentions:
+        warnings.append("polyols_g is 0.0 but notes mention polyols. Verify if 0.0 is correct or should be null/actual value.")
 
     # Relationship check for carb fields
     if carbs_total is not None and carbs_avail is not None and fibre is not None:
@@ -129,6 +152,9 @@ def check_block(y):
         parts_sum = sum(fat_parts)
         if parts_sum > fat_total + 0.2:
             warnings.append(f"Fat split ({parts_sum:.2f} g) exceeds total fat ({fat_total:.2f} g) by {parts_sum - fat_total:.2f} g.")
+        elif parts_sum < fat_total - 0.5:
+            # Fat split is significantly incomplete
+            warnings.append(f"Fat split incomplete: {parts_sum:.2f}g accounted for out of {fat_total:.2f}g total (missing {fat_total - parts_sum:.2f}g).")
         elif parts_sum <= fat_total + 0.2:
             passes.append("Fat split coherent (<= total fat).")
 
@@ -179,6 +205,10 @@ def main():
     print("\n# JSON")
     print(json.dumps(report, indent=2))
 
+    # Check for critical issues (exit code for CI/CD)
+    has_issues = any(res['issues'] for res in report['results'])
+    has_warnings = any(res['warnings'] for res in report['results'])
+
     # Auto-regenerate index after successful validation
     script_dir = Path(__file__).parent
     generate_index_script = script_dir / "generate_index.py"
@@ -201,6 +231,17 @@ def main():
                 print(f"stderr: {e.stderr}")
     else:
         print("\nNote: Index generation script not found.")
+
+    # Exit with non-zero status if critical issues found
+    if has_issues:
+        print("\n# Validation Result: FAILED (critical issues found)")
+        sys.exit(1)
+    elif has_warnings:
+        print("\n# Validation Result: PASSED with warnings")
+        sys.exit(0)
+    else:
+        print("\n# Validation Result: PASSED")
+        sys.exit(0)
 
 if __name__ == "__main__":
     main()
