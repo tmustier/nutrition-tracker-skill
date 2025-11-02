@@ -241,3 +241,91 @@ entries:
           manganese_mg: 0.5
 
     notes: "Cup of oat matcha latte"
+
+  - timestamp: "2025-11-01T14:30:00+00:00"
+    items:
+      - name: "Bife Ana Steak Sandwich"
+        food_bank_id: bife_ana_steak_sandwich_eagle_farringdon_v1
+        quantity: 0.67
+        unit: portion
+        nutrition:
+          energy_kcal: 577
+          protein_g: 46.3
+          fat_g: 26.3
+          sat_fat_g: 5.7
+          mufa_g: 16.2
+          pufa_g: 2.2
+          trans_fat_g: 0.0
+          cholesterol_mg: 109
+          carbs_g: 35.5
+          sugar_g: 3.2
+          fiber_total_g: 2.5
+          fiber_soluble_g: 0.7
+          fiber_insoluble_g: 1.7
+          sodium_mg: 1273
+          potassium_mg: 713
+
+      - name: "Minestrone with Cannellini Beans, Fennel, Cabbage, Potato & Parmesan"
+        food_bank_id: minestrone_cannellini_fennel_cabbage_potato_parmesan_eagle_farringdon_v1
+        quantity: 1
+        unit: portion
+        nutrition:
+          energy_kcal: 483
+          protein_g: 23.0
+          fat_g: 15.0
+          sat_fat_g: 4.1
+          mufa_g: 8.5
+          pufa_g: 1.5
+          trans_fat_g: 0
+          cholesterol_mg: 10.2
+          carbs_g: 69.6
+          sugar_g: 14.2
+          fiber_total_g: 15.6
+          fiber_soluble_g: 5.4
+          fiber_insoluble_g: 10.2
+          sodium_mg: 1200
+          potassium_mg: 1858
+
+      - name: "Pastel de Nata"
+        food_bank_id: pastel_de_nata_eagle_farringdon_v1
+        quantity: 0.5
+        unit: portion
+        nutrition:
+          energy_kcal: 140
+          protein_g: 2.6
+          fat_g: 7.4
+          sat_fat_g: 3.7
+          mufa_g: 2.8
+          pufa_g: 0.7
+          trans_fat_g: 0.1
+          cholesterol_mg: 58
+          carbs_g: 15.6
+          sugar_g: 8.5
+          fiber_total_g: 0.6
+          fiber_soluble_g: 0.2
+          fiber_insoluble_g: 0.4
+          sodium_mg: 105
+          potassium_mg: 53
+
+      - name: "Orange 'Jaffa Cake' Slice with Crème Fraîche"
+        food_bank_id: orange_jaffa_cake_slice_creme_fraiche_eagle_farringdon_v1
+        quantity: 0.5
+        unit: portion
+        nutrition:
+          energy_kcal: 315
+          protein_g: 3.5
+          fat_g: 18.5
+          sat_fat_g: 8.5
+          mufa_g: 6.0
+          pufa_g: 1.2
+          trans_fat_g: 0.2
+          cholesterol_mg: 63
+          carbs_g: 33.0
+          sugar_g: 23.0
+          fiber_total_g: 1.3
+          fiber_soluble_g: 0.3
+          fiber_insoluble_g: 1.0
+          sodium_mg: 193
+          potassium_mg: 128
+
+    notes: "Lunch at The Eagle Farringdon (finished 14:30 UK) – 2/3 steak sandwich, half pastel de nata, half orange 'jaffa cake'"
