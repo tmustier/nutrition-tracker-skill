@@ -1,67 +1,172 @@
 #!/usr/bin/env python3
 """
-Append a fresh dish block from the Schema TEMPLATE to the Data Bank.
-- Fills id from slugs: {dish_slug}_{venue_slug}_v1
-- Sets version: 1, last_verified: today
-- Fills source.venue and portion.description
+Create a new dish file in the appropriate folder based on venue.
+
+- Determines the correct folder from venue categorization
+- Creates individual dish file with header and YAML template
+- Sets id, version, last_verified, venue, category, and portion description
 - Auto-regenerates the index file after adding the dish
 """
-import sys, re, subprocess
+import sys, re
 from pathlib import Path
 from datetime import datetime, timezone
 
-def load_text(p):
-    return Path(p).read_text(encoding="utf-8")
 
-def save_text(p, txt):
-    Path(p).write_text(txt, encoding="utf-8")
+SCHEMA_TEMPLATE = """id: {stable_id}_v1
+version: 1
+last_verified: {today}
+source:
+  venue: {venue_name}
+  menu_page: ""
+  evidence: []   # list of URLs or short notes
+aliases: []
+category: {category}
+portion:
+  description: "{portion_desc}"
+  est_weight_g: null
+  notes: ""
+assumptions:
+  salt_scheme: "normal"  # light|normal|heavy|unsalted
+  oil_type: ""
+  prep: ""
+per_portion:
+  energy_kcal: null
+  protein_g: null
+  fat_g: null
+  sat_fat_g: null
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_total_g: null
+  carbs_available_g: null
+  sugar_g: null
+  fiber_total_g: null
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  polyols_g: 0.0
+  sodium_mg: null
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+derived:
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: low  # low|medium|high
+  gaps: []
+notes: []
+change_log: []
+"""
 
-def get_template(text):
-    m = re.search(r"## Schema TEMPLATE.*?```yaml(.*?)```", text, re.S | re.M)
-    if not m:
-        raise RuntimeError("Schema TEMPLATE not found.")
-    return m.group(1)
 
-def main():
-    import argparse
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--bank", required=True, help="Path to references/data-bank.md")
-    ap.add_argument("--dish_slug", required=True)
-    ap.add_argument("--venue_slug", required=True)
-    ap.add_argument("--display_name", required=True, help='e.g. "Grilled Salmon Fillet (Venue)"')
-    ap.add_argument("--category", required=True, choices=["main","side","ingredient","drink","dessert"])
-    ap.add_argument("--portion_desc", default="restaurant portion")
-    args = ap.parse_args()
+def slugify(text):
+    """Convert text to a filesystem-safe slug."""
+    slug = text.lower()
+    slug = re.sub(r'[^\w\s-]', '', slug)
+    slug = re.sub(r'[-\s]+', '-', slug)
+    slug = slug.strip('-')
+    return slug
 
-    text = load_text(args.bank)
-    templ = get_template(text)
 
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    stable_id = f"{args.dish_slug}_{args.venue_slug}_v1"
+def categorize_venue(venue_display_name):
+    """Determine the category and folder for a venue.
 
-    block = templ
-    block = re.sub(r"id:\s*\{stable_id\}_v1", f"id: {stable_id}", block)
-    block = re.sub(r"version:\s*\d+", "version: 1", block, count=1)
-    block = re.sub(r"last_verified:\s*YYYY-MM-DD", f"last_verified: {today}", block, count=1)
-    block = re.sub(r"\{Venue\}", args.display_name, block)
-    block = re.sub(r"category:\s*.*", f"category: {args.category}", block)
-    block = re.sub(r'description:\s*""', f'description: "{args.portion_desc}"', block)
+    Returns: (category, folder_name) tuple
+    """
+    venue_lower = venue_display_name.lower()
 
-    # Wrap block in a code fence
-    fenced = "\n\n```yaml\n" + block.strip() + "\n```\n"
+    # Restaurant venues
+    if 'simple health kitchen' in venue_lower:
+        return ('venues', 'simple-health-kitchen')
+    elif 'connaught' in venue_lower or 'jean-georges' in venue_lower:
+        return ('venues', 'jean-georges-connaught')
+    elif 'leto' in venue_lower or "l'eto" in venue_lower:
+        return ('venues', 'leto-caffe-soho')
+    elif 'zima' in venue_lower:
+        return ('venues', 'zima-soho')
+    elif 'eagle' in venue_lower and 'farringdon' in venue_lower:
+        return ('venues', 'the-eagle-farringdon')
+    elif 'imperial treasure' in venue_lower:
+        return ('venues', 'imperial-treasure-st-james')
+    elif 'joe' in venue_lower and 'juice' in venue_lower:
+        return ('venues', 'joe-and-the-juice')
+    elif 'third space' in venue_lower or 'natural fitness food' in venue_lower or 'nff' in venue_lower:
+        return ('venues', 'third-space-nff')
 
-    # Append to end of file
-    new_text = text.rstrip() + fenced + "\n"
-    save_text(args.bank, new_text)
+    # Packaged products
+    elif 'grenade' in venue_lower:
+        return ('packaged', 'grenade')
+    elif 'amisa' in venue_lower:
+        return ('packaged', 'amisa')
+    elif 'yarden' in venue_lower:
+        return ('packaged', 'yarden')
+    elif 'optimum nutrition' in venue_lower:
+        return ('packaged', 'optimum-nutrition')
+    elif "pack'd" in venue_lower or 'packd' in venue_lower:
+        return ('packaged', 'packd')
+    elif 'rot front' in venue_lower or 'rotfront' in venue_lower:
+        return ('packaged', 'rot-front')
+    elif 'daylesford' in venue_lower:
+        return ('packaged', 'daylesford-organic')
 
-    print("✓ Appended new dish block.")
+    # Generic categories
+    elif 'ingredient' in venue_lower or venue_lower == 'generic':
+        return ('generic', 'ingredients')
+    elif 'bakery' in venue_lower:
+        return ('generic', 'bakery')
+    elif 'bar' in venue_lower or 'restaurant' in venue_lower:
+        return ('generic', 'bar-restaurant')
+    elif 'grocery' in venue_lower or 'supermarket' in venue_lower:
+        return ('generic', 'grocery')
+    elif 'supplement' in venue_lower:
+        return ('generic', 'supplements')
+    elif 'pub' in venue_lower:
+        return ('generic', 'pub-bar')
+    elif 'fresh' in venue_lower or 'fruit' in venue_lower or 'produce' in venue_lower:
+        return ('generic', 'fresh-produce')
 
-    # Auto-regenerate index
+    # Default: create a new folder based on slugified venue name
+    print(f"Warning: Unknown venue category for '{venue_display_name}', using generic categorization")
+    return ('generic', slugify(venue_display_name))
+
+
+def create_dish_file(dish_id, venue_name, display_name, category, portion_desc, output_dir):
+    """Create an individual dish file."""
+    today = datetime.now(timezone.utc).strftime('%Y-%m-%d')
+
+    # Fill in template
+    yaml_content = SCHEMA_TEMPLATE.format(
+        stable_id=dish_id,
+        today=today,
+        venue_name=venue_name,
+        category=category,
+        portion_desc=portion_desc
+    )
+
+    # Create file content with header and YAML
+    content = f"## {display_name}\n\n```yaml\n{yaml_content.strip()}\n```\n"
+
+    # Write file
+    filename = f"{dish_id}.md"
+    filepath = output_dir / filename
+    filepath.write_text(content, encoding='utf-8')
+
+    return filepath
+
+
+def regenerate_index():
+    """Auto-regenerate the index after adding a dish."""
     script_dir = Path(__file__).parent
     generate_index_script = script_dir / "generate_index.py"
 
     if generate_index_script.exists():
-        print("✓ Regenerating index...")
+        print("\n✓ Regenerating index...")
+        import subprocess
         try:
             result = subprocess.run(
                 [sys.executable, str(generate_index_script)],
@@ -74,7 +179,55 @@ def main():
             print(f"Warning: Failed to regenerate index: {e}")
             print(f"  You can manually regenerate it by running: python scripts/generate_index.py")
     else:
-        print(f"Note: Index generation script not found. Run manually: python scripts/generate_index.py")
+        print(f"\nNote: Index generation script not found. Run manually: python scripts/generate_index.py")
+
+
+def main():
+    import argparse
+    ap = argparse.ArgumentParser(
+        description="Create a new dish file in the appropriate venue/category folder"
+    )
+    ap.add_argument("--dish_slug", required=True, help="Dish slug (e.g., 'grilled_salmon_fillet')")
+    ap.add_argument("--venue_slug", required=True, help="Venue slug (e.g., 'shk')")
+    ap.add_argument("--venue_name", required=True, help="Full venue name (e.g., 'Simple Health Kitchen, Baker Street (London)')")
+    ap.add_argument("--display_name", required=True, help="Display name for header (e.g., 'Grilled Salmon Fillet (SHK)')")
+    ap.add_argument("--category", required=True, choices=["main","side","ingredient","drink","dessert"])
+    ap.add_argument("--portion_desc", default="restaurant portion", help="Portion description")
+    args = ap.parse_args()
+
+    # Determine output directory
+    script_dir = Path(__file__).parent
+    project_root = script_dir.parent
+    data_bank_base = project_root / 'data' / 'food-data-bank'
+
+    # Categorize venue and get folder
+    category_type, folder_name = categorize_venue(args.venue_name)
+    output_dir = data_bank_base / category_type / folder_name
+
+    # Create directory if it doesn't exist
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    # Create dish ID
+    dish_id = f"{args.dish_slug}_{args.venue_slug}_v1"
+
+    # Create dish file
+    filepath = create_dish_file(
+        dish_id,
+        args.venue_name,
+        args.display_name,
+        args.category,
+        args.portion_desc,
+        output_dir
+    )
+
+    print(f"✓ Created new dish file:")
+    print(f"  Location: {filepath}")
+    print(f"  Category: {category_type}/{folder_name}")
+    print(f"  Dish ID: {dish_id}")
+
+    # Regenerate index
+    regenerate_index()
+
 
 if __name__ == "__main__":
     main()
