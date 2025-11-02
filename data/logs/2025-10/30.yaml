@@ -188,7 +188,7 @@ entries:
     quantity: 1
     unit: portion
     nutrition:
-      energy_kcal: 255.8
+      energy_kcal: 296.6
       protein_g: 21.0
       fat_g: 10.0
       sat_fat_g: 5.7
@@ -209,9 +209,9 @@ entries:
       zinc_mg: null
       vitamin_c_mg: null
       manganese_mg: null
-      polyols_g: 0.0
+      polyols_g: 17.0
       carbs_available_g: 20.0
-      carbs_total_g: 20.9
+      carbs_total_g: 37.9
   - name: Amisa Buckwheat Crispbread
     food_bank_id: amisa_buckwheat_crispbread_5g_v1
     quantity: 4
