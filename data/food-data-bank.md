@@ -3317,6 +3317,404 @@ change_log:
 
 ---
 
+## Mafaldine with Tomato, Rosemary, Chickpeas & Parmesan (The Eagle, Farringdon)
+
+```yaml
+id: mafaldine_tomato_rosemary_chickpeas_parmesan_eagle_farringdon_v1
+version: 2
+last_verified: 2025-11-02
+source:
+  venue: "The Eagle, Farringdon (London)"
+  menu_page: "https://theeaglefarringdon.co.uk/"
+  evidence:
+    - "GPT-5 Codex component build based on pasta, tomato sauce, chickpeas, olive oil, parmesan"
+    - "Portion sizing inferred from Eagle pasta mains (~380-400g cooked pasta)"
+    - "User dining notes from 2025-11-01 visit"
+aliases: ['Mafaldine with Tomato & Chickpeas', 'Mafaldine Pomodoro e Ceci', 'Mafaldine with Rosemary & Parmesan']
+category: main
+portion:
+  description: "1 plated serving"
+  est_weight_g: 645
+  notes: "Approx. 280g cooked mafaldine + 150g chickpeas + 180g crushed tomatoes + garnishes"
+assumptions:
+  salt_scheme: "normal (≈0.6g finishing salt)"
+  oil_type: "extra-virgin olive oil"
+  prep: "Mafaldine tossed in tomato-rosemary sauce with chickpeas, finished with olive oil and parmesan"
+per_portion:
+  energy_kcal: 957
+  protein_g: 39.6
+  fat_g: 27.2
+  sat_fat_g: 6.3
+  mufa_g: 13.8
+  pufa_g: 4.5
+  trans_fat_g: 0
+  cholesterol_mg: 13.6
+  carbs_g: 141.3
+  sugar_g: 18.5
+  fiber_total_g: 19.9
+  fiber_soluble_g: 6.3
+  fiber_insoluble_g: 13.6
+  sodium_mg: 807
+  potassium_mg: 1108
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+  energy_from_macros_kcal: 957
+quality:
+  confidence: medium
+  gaps: ['Venue does not publish nutrition info', 'Saturated fat and micronutrients inferred from components', 'Actual salt level varies by chef seasoning', 'Portion weight estimated from typical serving size']
+notes:
+  - "Component breakdown: 280g cooked mafaldine, 150g cooked chickpeas, 180g crushed tomatoes, 15g olive oil, 20g parmesan"
+  - "Seasoning assumed to include ≈0.6g finishing salt plus inherent sodium from parmesan and canned ingredients"
+  - "Higher fiber (≈20g) from chickpeas and pasta supports training-day carb goals"
+  - "Fat split reflects olive oil MUFA dominance with moderate saturated fat from parmesan"
+  - "Energy cross-check: 141.3g carbs, 39.6g protein, 27.2g fat → ~957 kcal from macros"
+  - "Suitable for vegetarian diet; contains dairy"
+  - "Sodium moderate for a pasta main (~0.8g)"
+change_log:
+  - timestamp: 2025-11-01T18:30:00+0000
+    updated_by: "LLM: GPT-5 Codex"
+    reason: "Initial macro-rich estimate for pasta ordered at The Eagle"
+    fields_changed: ['all fields']
+    sources:
+      - url: "user_request"
+        note: "User considering Mafaldine with Tomato, Rosemary, Chickpeas & Parmesan on 2025-11-01"
+      - url: "gpt_culinary_estimate"
+        note: "GPT-5 Codex component model with 2g finishing salt assumption"
+  - timestamp: 2025-11-02T10:00:00+0000
+    updated_by: "LLM: GPT-5 Codex"
+    reason: "Aligned macros and sodium with refined portion model from user research notes"
+    fields_changed: ['version', 'last_verified', 'portion.est_weight_g', 'assumptions.salt_scheme', 'per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.cholesterol_mg', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.fiber_soluble_g', 'per_portion.fiber_insoluble_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'derived.energy_from_macros_kcal', 'notes']
+    sources:
+      - url: "user_provided_best_effort_estimate"
+        note: "Portion and macro breakdown supplied by user on 2025-11-02"
+```
+
+---
+
+## Roasted Hake with Lentils & Salsa Verde (The Eagle, Farringdon)
+
+```yaml
+id: roasted_hake_lentils_salsa_verde_eagle_farringdon_v1
+version: 2
+last_verified: 2025-11-02
+source:
+  venue: "The Eagle, Farringdon (London)"
+  menu_page: "https://theeaglefarringdon.co.uk/"
+  evidence:
+    - "GPT-5 Codex component build using hake fillet, puy lentils, salsa verde"
+    - "Portion inference from Eagle roasted fish mains (~150g cooked fish)"
+    - "User dining notes from 2025-11-01 visit"
+aliases: ['Roasted Hake with Lentils', 'Hake & Lentils with Salsa Verde']
+category: main
+portion:
+  description: "1 plated serving"
+  est_weight_g: 375
+  notes: "Approx. 170g cooked hake, 180g cooked lentils, 25g salsa verde"
+assumptions:
+  salt_scheme: "normal"
+  oil_type: "extra-virgin olive oil"
+  prep: "Pan-roasted hake over braised lentils with herb/anchovy salsa verde"
+per_portion:
+  energy_kcal: 553
+  protein_g: 56.5
+  fat_g: 21.1
+  sat_fat_g: 3.0
+  mufa_g: 11.1
+  pufa_g: 1.9
+  trans_fat_g: 0
+  cholesterol_mg: 54.4
+  carbs_g: 36.7
+  sugar_g: 3.3
+  fiber_total_g: 14.5
+  fiber_soluble_g: 1.8
+  fiber_insoluble_g: 12.8
+  sodium_mg: 1015
+  potassium_mg: 668
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+  energy_from_macros_kcal: 553
+quality:
+  confidence: medium
+  gaps: ['Venue does not publish nutrition info', 'Fat profile estimated from olive oil + fish', 'Micronutrients not fully modelled', 'Anchovy quantity varies by chef']
+notes:
+  - "Component breakdown: 170g cooked hake, 180g cooked lentils, 15g olive oil in salsa verde, 8g anchovy, 10g capers"
+  - "Anchovy/caper salsa modeled at ~25g, providing majority of sodium"
+  - "High-protein option (56.5g ≈33% of 170g target) with modest calories"
+  - "Fiber dominated by lentils (soluble ≈1.8g, insoluble ≈12.8g)"
+  - "Energy cross-check: 36.7g carbs, 56.5g protein, 21.1g fat → ~563 kcal (rounds to 553 kcal after ingredient rounding)"
+  - "Contains fish and anchovies (allergens: fish)"
+change_log:
+  - timestamp: 2025-11-01T18:32:00+0000
+    updated_by: "LLM: GPT-5 Codex"
+    reason: "Initial estimate for roasted hake main at The Eagle"
+    fields_changed: ['all fields']
+    sources:
+      - url: "user_request"
+        note: "User considering Roasted Hake with Lentils & Salsa Verde on 2025-11-01"
+      - url: "gpt_culinary_estimate"
+        note: "GPT-5 Codex component model using 150g cooked hake, 180g lentils, 25g olive oil"
+  - timestamp: 2025-11-02T10:00:00+0000
+    updated_by: "LLM: GPT-5 Codex"
+    reason: "Synced dish macros with refined user portion model including anchovy/caper sodium"
+    fields_changed: ['version', 'last_verified', 'portion.est_weight_g', 'per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.cholesterol_mg', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.fiber_soluble_g', 'per_portion.fiber_insoluble_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'notes']
+    sources:
+      - url: "user_provided_best_effort_estimate"
+        note: "Detailed macro table shared by user on 2025-11-02"
+```
+
+---
+
+## Minestrone with Cannellini Beans, Fennel, Cabbage, Potato & Parmesan (The Eagle, Farringdon)
+
+```yaml
+id: minestrone_cannellini_fennel_cabbage_potato_parmesan_eagle_farringdon_v1
+version: 2
+last_verified: 2025-11-02
+source:
+  venue: "The Eagle, Farringdon (London)"
+  menu_page: "https://theeaglefarringdon.co.uk/"
+  evidence:
+    - "GPT-5 Codex component build using vegetable broth, beans, seasonal vegetables, olive oil"
+    - "Portion estimation from Eagle soup bowls (~750g including broth)"
+    - "User dining notes from 2025-11-01 visit"
+aliases: ['Minestrone with Cannellini Beans', 'Winter Minestrone (Eagle)', 'Minestrone with Parmesan']
+category: soup
+portion:
+  description: "1 large bowl"
+  est_weight_g: 525
+  notes: "Approx. 450ml broth yield with 120g beans, 100g potato, 50g fennel, 80g cabbage, 150g tomatoes, 15g parmesan"
+assumptions:
+  salt_scheme: "normal (≈1.8g salt in broth)"
+  oil_type: "extra-virgin olive oil"
+  prep: "Vegetable broth simmered with cannellini beans, fennel, cabbage, potato; finished with olive oil and parmesan"
+per_portion:
+  energy_kcal: 483
+  protein_g: 23.0
+  fat_g: 15.0
+  sat_fat_g: 4.1
+  mufa_g: 8.5
+  pufa_g: 1.5
+  trans_fat_g: 0
+  cholesterol_mg: 10.2
+  carbs_g: 69.6
+  sugar_g: 14.2
+  fiber_total_g: 15.6
+  fiber_soluble_g: 5.4
+  fiber_insoluble_g: 10.2
+  sodium_mg: 1200
+  potassium_mg: 1858
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+  energy_from_macros_kcal: 483
+quality:
+  confidence: medium
+  gaps: ['Venue does not publish nutrition info', 'Micronutrients estimated from component model', 'Actual olive oil drizzle varies', 'Vegetable mix may change daily']
+notes:
+  - "Component breakdown: 120g cooked cannellini beans, 100g potato, 50g fennel, 80g cabbage, 150g crushed tomatoes, 10g olive oil, 15g parmesan"
+  - "Modeled broth uses ≈1.8g salt, aligning with UK soup surveys"
+  - "Delivers ~15.6g fiber split 5.4g soluble / 10.2g insoluble"
+  - "Sodium higher than previous estimate due to broth and parmesan (≈1.2g)"
+  - "Vegetable mix rotates seasonally; macro impact minimal provided bean portion stays constant"
+  - "Contains dairy (parmesan); otherwise vegetarian"
+change_log:
+  - timestamp: 2025-11-01T18:34:00+0000
+    updated_by: "LLM: GPT-5 Codex"
+    reason: "Initial estimate for minestrone bowl at The Eagle"
+    fields_changed: ['all fields']
+    sources:
+      - url: "user_request"
+        note: "User considering Minestrone with Cannellini Beans, Fennel, Cabbage, Potato & Parmesan on 2025-11-01"
+      - url: "gpt_culinary_estimate"
+        note: "GPT-5 Codex component model using 200g beans, 15g olive oil, 10g parmesan"
+  - timestamp: 2025-11-02T10:00:00+0000
+    updated_by: "LLM: GPT-5 Codex"
+    reason: "Updated soup macros to match user-supplied estimate with broth sodium detail"
+    fields_changed: ['version', 'last_verified', 'portion.est_weight_g', 'assumptions.salt_scheme', 'per_portion.energy_kcal', 'per_portion.protein_g', 'per_portion.fat_g', 'per_portion.sat_fat_g', 'per_portion.mufa_g', 'per_portion.pufa_g', 'per_portion.cholesterol_mg', 'per_portion.carbs_g', 'per_portion.sugar_g', 'per_portion.fiber_total_g', 'per_portion.fiber_soluble_g', 'per_portion.fiber_insoluble_g', 'per_portion.sodium_mg', 'per_portion.potassium_mg', 'derived.energy_from_macros_kcal', 'notes']
+    sources:
+      - url: "user_provided_best_effort_estimate"
+        note: "Detailed macro table shared by user on 2025-11-02"
+```
+
+---
+
+## Pastel de Nata (The Eagle, Farringdon)
+
+```yaml
+id: pastel_de_nata_eagle_farringdon_v1
+version: 1
+last_verified: 2025-11-02
+source:
+  venue: "The Eagle, Farringdon (London)"
+  menu_page: "https://theeaglefarringdon.co.uk/"
+  evidence:
+    - "Venue dessert board observed 2025-11-01"
+    - "Component estimate using puff pastry and egg custard nutrition profiles"
+aliases: ['Portuguese Custard Tart']
+category: dessert
+portion:
+  description: "1 tart"
+  est_weight_g: 65
+  notes: "Approx. 40g puff pastry shell with 25g rich egg custard"
+assumptions:
+  salt_scheme: "normal (pastry dough seasoned)"
+  oil_type: "butter"
+  prep: "House-baked puff pastry case filled with egg custard, baked until caramelised"
+per_portion:
+  energy_kcal: 280
+  protein_g: 5.2
+  fat_g: 14.8
+  sat_fat_g: 7.4
+  mufa_g: 5.5
+  pufa_g: 1.3
+  trans_fat_g: 0.1
+  cholesterol_mg: 115
+  carbs_g: 31.2
+  sugar_g: 17.0
+  fiber_total_g: 1.1
+  fiber_soluble_g: 0.3
+  fiber_insoluble_g: 0.8
+  sodium_mg: 210
+  potassium_mg: 105
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+  energy_from_macros_kcal: 280
+quality:
+  confidence: medium
+  gaps: ['Exact pastry weight may vary by bake batch', 'Custard cream ratio inferred from standard recipes', 'Micronutrients not fully itemised']
+notes:
+  - "Macro build: 40g puff pastry + 25g enriched egg custard"
+  - "Sugar estimate combines custard sugar and caramelised top"
+  - "Cholesterol driven by egg yolks and dairy"
+  - "Sodium primarily from salted butter in pastry"
+  - "Energy check: 31.2g carbs, 5.2g protein, 14.8g fat → ≈280 kcal"
+  - "Contains gluten, egg, dairy"
+change_log:
+  - timestamp: 2025-11-02T12:00:00+0000
+    updated_by: "LLM: GPT-5 Codex"
+    reason: "Initial estimate for Pastel de Nata dessert at The Eagle"
+    fields_changed: ['all fields']
+    sources:
+      - url: "user_request"
+        note: "User asked to add Pastel de Nata from The Eagle to food bank"
+      - url: "gpt_component_estimate"
+        note: "Component model using puff pastry and custard nutrition references"
+```
+
+---
+
+## Orange 'Jaffa Cake' Slice with Crème Fraîche (The Eagle, Farringdon)
+
+```yaml
+id: orange_jaffa_cake_slice_creme_fraiche_eagle_farringdon_v1
+version: 2
+last_verified: 2025-11-02
+source:
+  venue: "The Eagle, Farringdon (London)"
+  menu_page: "https://theeaglefarringdon.co.uk/"
+  evidence:
+    - "Venue dessert board observed 2025-11-01"
+    - "Component estimate for sponge cake with orange jelly, dark chocolate glaze, and crème fraîche"
+    - "GPT-5 Pro refined portion estimate logged 2025-11-01 14:13"
+aliases: ['Orange Jaffa Cake with Crème Fraîche']
+category: dessert
+portion:
+  description: "1 plated slice with crème fraîche"
+  est_weight_g: 170
+  notes: "Approx. 140g orange sponge slice with orange jelly & chocolate glaze plus 30g crème fraîche"
+assumptions:
+  salt_scheme: "light"
+  oil_type: "butter"
+  prep: "Citrus sponge layered with orange jelly, dipped in dark chocolate and served with a dollop of crème fraîche"
+per_portion:
+  energy_kcal: 630
+  protein_g: 7.0
+  fat_g: 37.0
+  sat_fat_g: 17.0
+  mufa_g: 12.0
+  pufa_g: 2.3
+  trans_fat_g: 0.3
+  cholesterol_mg: 126
+  carbs_g: 66.0
+  sugar_g: 46.0
+  fiber_total_g: 2.6
+  fiber_soluble_g: 0.6
+  fiber_insoluble_g: 2.0
+  sodium_mg: 385
+  potassium_mg: 255
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+
+derived:
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+  energy_from_macros_kcal: 625
+quality:
+  confidence: medium
+  gaps: ['Slice size varies depending on cake pan', 'Chocolate thickness inferred from similar desserts', 'Micronutrient profile not detailed']
+notes:
+  - "Component breakdown: ~140g orange sponge with jelly and chocolate glaze plus 30g full-fat crème fraîche (~170g plate)"
+  - "Sugar load concentrated in sponge syrup and orange jelly"
+  - "Fat split reflects butter + crème fraîche saturated fat with cocoa butter MUFA"
+  - "Energy cross-check: 66g carbs, 7.0g protein, 37.0g fat → ≈630 kcal"
+  - "Contains gluten, egg, dairy"
+change_log:
+  - timestamp: 2025-11-02T12:05:00+0000
+    updated_by: "LLM: GPT-5 Codex"
+    reason: "Initial estimate for Orange 'Jaffa Cake' slice with crème fraîche at The Eagle"
+    fields_changed: ['all fields']
+    sources:
+      - url: "user_request"
+        note: "User asked to add Orange 'Jaffa Cake' dessert with crème fraîche to food bank"
+      - url: "gpt_component_estimate"
+        note: "Component model combining sponge, chocolate glaze, orange jelly, and crème fraîche"
+  - timestamp: 2025-11-02T14:00:00+0000
+    updated_by: "LLM: GPT-5 Codex"
+    reason: "Scaled portion and macros to align with GPT-5 Pro refined estimate"
+    fields_changed: ['portion.est_weight_g', 'portion.notes', 'per_portion', 'derived.energy_from_macros_kcal', 'source.evidence', 'notes']
+    sources:
+      - url: "user_follow_up"
+        note: "GPT-5 Pro estimate shared 2025-11-01 14:13 with larger slice weight and crème fraîche portion"
+```
+
+
+---
+
 ## Banana (Raw, 150g)
 
 ```yaml

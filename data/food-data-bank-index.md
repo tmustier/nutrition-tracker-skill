@@ -1,7 +1,7 @@
 ---
 title: Food Data Bank Index
 description: Auto-generated index of all dishes in the food data bank
-generated: 2025-11-01 11:34:15 UTC
+generated: 2025-11-02 10:20:23 UTC
 ---
 
 # Food Data Bank Index
@@ -11,7 +11,7 @@ generated: 2025-11-01 11:34:15 UTC
 
 <!-- #todo: Reorder dishes by category or venue for better organization -->
 
-## All Dishes (44 total)
+## All Dishes (49 total)
 
 - [Sweet Potato Wedges (Simple Health Kitchen)](#sweet-potato-wedges-simple-health-kitchen) {#sweet_potato_wedges_shk_v1}
 - [Grilled Salmon Fillet (Simple Health Kitchen)](#grilled-salmon-fillet-simple-health-kitchen) {#grilled_salmon_fillet_shk_v1}
@@ -55,6 +55,11 @@ generated: 2025-11-01 11:34:15 UTC
 - [Psyllium Husk (5g portion)](#psyllium-husk-5g-portion) {#psyllium_husk_5g_v1}
 - [Margarita (Classic)](#margarita-classic) {#margarita_classic_v1}
 - [Bife Ana Steak Sandwich (The Eagle, Farringdon)](#bife-ana-steak-sandwich-the-eagle-farringdon) {#bife_ana_steak_sandwich_eagle_farringdon_v1}
+- [Mafaldine with Tomato, Rosemary, Chickpeas & Parmesan (The Eagle, Farringdon)](#mafaldine-with-tomato-rosemary-chickpeas-parmesan-the-eagle-farringdon) {#mafaldine_tomato_rosemary_chickpeas_parmesan_eagle_farringdon_v1}
+- [Roasted Hake with Lentils & Salsa Verde (The Eagle, Farringdon)](#roasted-hake-with-lentils-salsa-verde-the-eagle-farringdon) {#roasted_hake_lentils_salsa_verde_eagle_farringdon_v1}
+- [Minestrone with Cannellini Beans, Fennel, Cabbage, Potato & Parmesan (The Eagle, Farringdon)](#minestrone-with-cannellini-beans-fennel-cabbage-potato-parmesan-the-eagle-farringdon) {#minestrone_cannellini_fennel_cabbage_potato_parmesan_eagle_farringdon_v1}
+- [Pastel de Nata (The Eagle, Farringdon)](#pastel-de-nata-the-eagle-farringdon) {#pastel_de_nata_eagle_farringdon_v1}
+- [Orange 'Jaffa Cake' Slice with Crème Fraîche (The Eagle, Farringdon)](#orange-jaffa-cake-slice-with-crème-fraîche-the-eagle-farringdon) {#orange_jaffa_cake_slice_creme_fraiche_eagle_farringdon_v1}
 - [Banana (Raw, 150g)](#banana-raw-150g) {#banana_raw_150g_v1}
 - [Smoked Trout (Daylesford, 80g)](#smoked-trout-daylesford-80g) {#daylesford_smoked_trout_80g_v1}
 
