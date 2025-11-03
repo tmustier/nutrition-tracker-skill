@@ -4,7 +4,7 @@ entries:
 - timestamp: '2025-11-02T09:00:00+00:00'
   items:
   - name: Greek Yogurt 0% Fat
-    food_bank_id: null
+    food_bank_id: greek_yogurt_0pct_200g_v1
     quantity: 200
     unit: g
     nutrition:
@@ -18,8 +18,8 @@ entries:
       cholesterol_mg: 10
       sugar_g: 6.4
       fiber_total_g: 0
-      fiber_soluble_g: null
-      fiber_insoluble_g: null
+      fiber_soluble_g: 0
+      fiber_insoluble_g: 0
       sodium_mg: 72
       potassium_mg: 282
       iodine_ug: 36
@@ -28,7 +28,7 @@ entries:
       iron_mg: 0
       zinc_mg: 1
       vitamin_c_mg: 0
-      manganese_mg: null
+      manganese_mg: 0
       polyols_g: 0.0
       carbs_available_g: 7.2
       carbs_total_g: 7.2
