@@ -12,14 +12,53 @@ from pathlib import Path
 from collections import defaultdict
 from datetime import datetime, timedelta
 
+
+def load_health_profile_targets():
+    """Load target values from health-profile.yaml."""
+    health_profile_path = Path("references/health-profile.yaml")
+
+    if not health_profile_path.exists():
+        print(f"Error: Health profile not found at {health_profile_path}", file=sys.stderr)
+        sys.exit(1)
+
+    try:
+        with open(health_profile_path, 'r') as f:
+            profile = yaml.safe_load(f)
+
+        # Validate structure
+        if not isinstance(profile, dict):
+            print(f"Error: Health profile has invalid structure in {health_profile_path}", file=sys.stderr)
+            sys.exit(1)
+
+        if 'targets' not in profile:
+            print(f"Error: 'targets' section missing in {health_profile_path}", file=sys.stderr)
+            sys.exit(1)
+
+        return profile['targets']
+
+    except yaml.YAMLError as e:
+        print(f"Error: Failed to parse {health_profile_path}: {e}", file=sys.stderr)
+        sys.exit(1)
+    except Exception as e:
+        print(f"Error: Failed to read health profile from {health_profile_path}: {e}", file=sys.stderr)
+        sys.exit(1)
+
+
 # Get number of days from command line argument (default: 7)
 num_days_to_analyze = 7
 if len(sys.argv) > 1:
     try:
         num_days_to_analyze = int(sys.argv[1])
+        # Validate range (1-365 days)
+        if num_days_to_analyze < 1 or num_days_to_analyze > 365:
+            print(f"Error: Number of days must be between 1 and 365. Got: {num_days_to_analyze}", file=sys.stderr)
+            sys.exit(1)
     except ValueError:
-        print(f"Error: Invalid number of days '{sys.argv[1]}'. Using default of 7.")
-        num_days_to_analyze = 7
+        print(f"Error: Invalid number of days '{sys.argv[1]}'. Must be an integer.", file=sys.stderr)
+        sys.exit(1)
+
+# Load health profile targets
+targets = load_health_profile_targets()
 
 # Get today's date (excluding today from analysis)
 today = datetime.now().date()
@@ -64,27 +103,66 @@ dates_processed = []
 
 # Process each log file
 for file_date, log_file in log_files_to_process:
-    with open(log_file, 'r') as f:
-        data = yaml.safe_load(f)
+    try:
+        with open(log_file, 'r') as f:
+            data = yaml.safe_load(f)
 
-    # Track day type and date
-    day_types.append(data.get('day_type', 'rest'))
-    dates_processed.append(file_date)
+        # Validate YAML structure
+        if not isinstance(data, dict):
+            print(f"Warning: Skipping {log_file}: Invalid YAML structure (expected dict, got {type(data).__name__})", file=sys.stderr)
+            continue
 
-    # Process each entry
-    for entry in data.get('entries', []):
-        # Process each item in the entry
-        for item in entry.get('items', []):
-            nutrition = item.get('nutrition', {})
+        # Track day type and date
+        day_types.append(data.get('day_type', 'rest'))
+        dates_processed.append(file_date)
 
-            # Sum up all nutrition values
-            for key, value in nutrition.items():
-                if value is not None:
-                    totals[key] += value
-                    counts[key] += 1
+        # Process each entry
+        entries = data.get('entries', [])
+        if not isinstance(entries, list):
+            print(f"Warning: Skipping entries in {log_file}: 'entries' must be a list (got {type(entries).__name__})", file=sys.stderr)
+            continue
+
+        for entry in entries:
+            if not isinstance(entry, dict):
+                print(f"Warning: Skipping invalid entry in {log_file}: expected dict, got {type(entry).__name__}", file=sys.stderr)
+                continue
+
+            # Process each item in the entry
+            items = entry.get('items', [])
+            if not isinstance(items, list):
+                print(f"Warning: Skipping items in entry from {log_file}: 'items' must be a list", file=sys.stderr)
+                continue
+
+            for item in items:
+                if not isinstance(item, dict):
+                    print(f"Warning: Skipping invalid item in {log_file}: expected dict, got {type(item).__name__}", file=sys.stderr)
+                    continue
+
+                nutrition = item.get('nutrition', {})
+                if not isinstance(nutrition, dict):
+                    print(f"Warning: Skipping invalid nutrition data in {log_file}: expected dict, got {type(nutrition).__name__}", file=sys.stderr)
+                    continue
+
+                # Sum up all nutrition values
+                for key, value in nutrition.items():
+                    if value is not None:
+                        totals[key] += value
+                        counts[key] += 1
+
+    except yaml.YAMLError as e:
+        print(f"Warning: Failed to parse {log_file}: {e}", file=sys.stderr)
+        continue
+    except Exception as e:
+        print(f"Warning: Error processing {log_file}: {e}", file=sys.stderr)
+        continue
+
+# Check if any valid data was processed
+if not dates_processed:
+    print("Error: No valid log data found to process after validation.", file=sys.stderr)
+    sys.exit(1)
 
 # Calculate averages (divide by number of days actually processed)
-num_days = len(log_files_to_process)
+num_days = len(dates_processed)
 averages = {}
 for key, total in totals.items():
     averages[key] = total / num_days
@@ -211,18 +289,11 @@ num_training_days = day_types.count('training')
 print(f"Day types: {num_training_days} training, {num_rest_days} rest")
 print()
 
-targets = {
-    'energy_kcal': {'rest_day_max': 2500, 'training_day_max': 2900},
-    'protein_g_min': 170,
-    'fat_g_min': 70,
-    'carbs_g_min': 250,
-    'fiber_g_min': 40,
-    'sat_fat_g_max': 20,
-    'sodium_mg_max': 2300,
-}
-
 # Calculate average energy target based on actual day types
-avg_target_kcal = (num_rest_days * 2500 + num_training_days * 2900) / num_days
+energy_targets = targets.get('energy_kcal', {})
+rest_day_kcal = energy_targets.get('rest_day_max', 2500)
+training_day_kcal = energy_targets.get('training_day_max', 2900)
+avg_target_kcal = (num_rest_days * rest_day_kcal + num_training_days * training_day_kcal) / num_days
 print(f"Energy: {averages.get('energy_kcal', 0):.0f} kcal / {avg_target_kcal:.0f} kcal avg target ({averages.get('energy_kcal', 0) / avg_target_kcal * 100:.0f}%)")
 
 # Protein
