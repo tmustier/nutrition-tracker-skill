@@ -32,7 +32,7 @@ def slugify_anchor(text):
 def parse_dish_file(filepath):
     """Parse a dish file and extract metadata.
 
-    Returns: dict with 'name', 'id', 'filepath', 'category_path'
+    Returns: dict with 'name', 'id', 'filepath', 'category_path' or None on error
     """
     content = filepath.read_text(encoding='utf-8')
     lines = content.split('\n')
@@ -55,8 +55,13 @@ def parse_dish_file(filepath):
         data = yaml.safe_load(yaml_content)
 
         # Get category path (e.g., "venues/simple-health-kitchen")
-        rel_path = filepath.relative_to(filepath.parents[2])  # relative to food-data-bank/
-        category_path = str(rel_path.parent)
+        try:
+            rel_path = filepath.relative_to(filepath.parents[2])  # relative to food-data-bank/
+            category_path = str(rel_path.parent)
+        except (ValueError, IndexError):
+            # File is at unexpected depth - skip it
+            print(f"Warning: Skipping {filepath.name} (unexpected file depth)")
+            return None
 
         return {
             'name': dish_name,
@@ -66,16 +71,17 @@ def parse_dish_file(filepath):
             'category': data.get('category', 'unknown')
         }
     except Exception as e:
-        print(f"Warning: Failed to parse {filepath.name}: {e}")
+        # Return None but let caller track the error
         return None
 
 
 def scan_data_bank(data_bank_dir):
     """Scan the food-data-bank directory and extract all dishes.
 
-    Returns: list of dish metadata dicts
+    Returns: tuple of (list of dish metadata dicts, list of failed file paths)
     """
     dishes = []
+    failed_files = []
 
     # Find all .md files recursively
     for filepath in sorted(data_bank_dir.rglob('*.md')):
@@ -86,8 +92,11 @@ def scan_data_bank(data_bank_dir):
         dish_data = parse_dish_file(filepath)
         if dish_data:
             dishes.append(dish_data)
+        else:
+            # Track files that failed to parse
+            failed_files.append(filepath)
 
-    return dishes
+    return dishes, failed_files
 
 
 def organize_by_category(dishes):
@@ -207,13 +216,21 @@ def main():
         return 1
 
     print(f"Scanning: {data_bank_dir}")
-    dishes = scan_data_bank(data_bank_dir)
+    dishes, failed_files = scan_data_bank(data_bank_dir)
 
     if not dishes:
         print("Warning: No dishes found in data bank!")
         return 1
 
     generate_index_file(dishes, index_path)
+
+    # Report any files that failed to parse
+    if failed_files:
+        print("\n⚠ Files with parsing errors:")
+        for filepath in failed_files:
+            print(f"  - {filepath.relative_to(project_root)}")
+        print(f"\nTotal parsing failures: {len(failed_files)}")
+
     return 0
 
 

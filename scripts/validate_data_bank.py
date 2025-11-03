@@ -22,6 +22,24 @@ FIBER_KCAL_PER_G = 2.0
 POLYOL_KCAL_PER_G = 2.4
 
 # Compile polyol detection regex once at module level (performance optimization)
+# This pattern matches polyol mentions in notes like:
+#   - "Contains 2.5 g of maltitol"
+#   - "15g polyols"
+#   - "Sugar alcohol: 3.2 g"
+#
+# Pattern breakdown:
+#   - \b(\d+\.?\d*)\s*g\b  : Captures amount with 'g' unit (e.g., "2.5 g", "15g")
+#   - .*?                  : Non-greedy match of any text between amount and polyol term
+#   - \b(polyol|...)       : Captures polyol type keyword
+#
+# Known limitations (edge cases this pattern may miss):
+#   - Amounts without explicit 'g' unit: "contains 5 polyols"
+#   - Alternative formats: "polyol content: 2.5" or "2.5% polyols"
+#   - Spelled-out numbers: "two grams of maltitol"
+#   - Multiple polyol types in one phrase: "1.5g maltitol and 1g erythritol"
+#   - Reversed order: "erythritol 2.5g" (pattern expects amount before polyol term)
+#
+# Future improvements: Consider adding reversed pattern or unit-optional matching
 POLYOL_PATTERN = re.compile(
     r'\b(\d+\.?\d*)\s*g\b.*?\b(polyol|maltitol|erythritol|xylitol|sorbitol|sugar\s+alcohol)',
     re.IGNORECASE

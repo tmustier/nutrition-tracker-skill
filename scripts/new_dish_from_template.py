@@ -154,6 +154,17 @@ def create_dish_file(dish_id, venue_name, display_name, category, portion_desc, 
     # Write file
     filename = f"{dish_id}.md"
     filepath = output_dir / filename
+
+    # Check if file already exists to prevent accidental overwrites
+    if filepath.exists():
+        raise FileExistsError(
+            f"Dish file already exists: {filepath}\n"
+            f"Refusing to overwrite existing dish data. If you want to update this dish:\n"
+            f"  1. Delete the existing file manually if you're sure, or\n"
+            f"  2. Edit it directly instead of recreating it, or\n"
+            f"  3. Use a different dish_id (e.g., increment version number)"
+        )
+
     filepath.write_text(content, encoding='utf-8')
 
     return filepath
