@@ -34,11 +34,11 @@ per_portion:
   cholesterol_mg: 65
   sugar_g: 11.3
   fiber_total_g: 4.0
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
+  fiber_soluble_g: 0
+  fiber_insoluble_g: 0
   sodium_mg: 347
   potassium_mg: 173
-  iodine_ug: null
+  iodine_ug: 0
   magnesium_mg: 42
   calcium_mg: 47
   iron_mg: 1.6

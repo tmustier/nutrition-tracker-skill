@@ -37,8 +37,8 @@ per_portion:
   carbs_available_g: 5.6
   sugar_g: 0.2
   fiber_total_g: 0.1
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
+  fiber_soluble_g: 0
+  fiber_insoluble_g: 0
   sodium_mg: 310
   potassium_mg: 20
   iodine_ug: 2
@@ -68,5 +68,4 @@ change_log:
     reason: "Initial entry - component-based estimation for dim sum dish"
     fields_changed: ["all fields"]
     evidence: "Comprehensive research using Ping Pong London benchmark, USDA component data, recipe analysis, and upscale venue adjustment"
-
 ```

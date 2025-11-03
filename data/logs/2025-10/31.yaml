@@ -18,17 +18,17 @@ entries:
       cholesterol_mg: 35
       sugar_g: 3.0
       fiber_total_g: 1.5
-      fiber_soluble_g: null
-      fiber_insoluble_g: null
+      fiber_soluble_g: 0
+      fiber_insoluble_g: 0
       sodium_mg: 327
       potassium_mg: 80
-      iodine_ug: null
+      iodine_ug: 0
       magnesium_mg: 10
       calcium_mg: 40
       iron_mg: 1.5
       zinc_mg: 0.5
       vitamin_c_mg: 0
-      manganese_mg: null
+      manganese_mg: 0
       polyols_g: 0.0
       carbs_available_g: 30.2
       carbs_total_g: 31.7
@@ -50,8 +50,8 @@ entries:
       cholesterol_mg: 0
       sugar_g: 15.0
       fiber_total_g: 3.6
-      fiber_soluble_g: null
-      fiber_insoluble_g: null
+      fiber_soluble_g: 0
+      fiber_insoluble_g: 0
       sodium_mg: 2
       potassium_mg: 116
       iodine_ug: 0.5
@@ -60,7 +60,7 @@ entries:
       iron_mg: 0
       zinc_mg: 0
       vitamin_c_mg: 15
-      manganese_mg: null
+      manganese_mg: 0
       polyols_g: 0.0
       carbs_available_g: 21.8
       carbs_total_g: 25.4
@@ -75,21 +75,21 @@ entries:
       sat_fat_g: 0.5
       mufa_g: 0.5
       pufa_g: 0.4
-      trans_fat_g: null
-      cholesterol_mg: null
+      trans_fat_g: 0
+      cholesterol_mg: 0
       sugar_g: 1.3
       fiber_total_g: 0.7
-      fiber_soluble_g: null
-      fiber_insoluble_g: null
+      fiber_soluble_g: 0
+      fiber_insoluble_g: 0
       sodium_mg: 86
       potassium_mg: 177
       iodine_ug: 18
       magnesium_mg: 52
       calcium_mg: 130
-      iron_mg: null
+      iron_mg: 0
       zinc_mg: 2
-      vitamin_c_mg: null
-      manganese_mg: null
+      vitamin_c_mg: 0
+      manganese_mg: 0
       polyols_g: 0.0
       carbs_available_g: 3.0
       carbs_total_g: 3.7
@@ -104,21 +104,21 @@ entries:
       sat_fat_g: 1.7
       mufa_g: 7.0
       pufa_g: 4.3
-      trans_fat_g: null
-      cholesterol_mg: null
+      trans_fat_g: 0
+      cholesterol_mg: 0
       sugar_g: 2.3
       fiber_total_g: 3.2
-      fiber_soluble_g: null
-      fiber_insoluble_g: null
+      fiber_soluble_g: 0
+      fiber_insoluble_g: 0
       sodium_mg: 1
       potassium_mg: 308
-      iodine_ug: null
+      iodine_ug: 0
       magnesium_mg: 36
       calcium_mg: 30
       iron_mg: 1
       zinc_mg: 1
-      vitamin_c_mg: null
-      manganese_mg: null
+      vitamin_c_mg: 0
+      manganese_mg: 0
       polyols_g: 0.0
       carbs_available_g: 8.4
       carbs_total_g: 11.6
@@ -263,13 +263,13 @@ entries:
       fiber_insoluble_g: 4.8
       sodium_mg: 474
       potassium_mg: 414
-      iodine_ug: null
-      magnesium_mg: null
-      calcium_mg: null
-      iron_mg: null
-      zinc_mg: null
-      vitamin_c_mg: null
-      manganese_mg: null
+      iodine_ug: 0
+      magnesium_mg: 0
+      calcium_mg: 0
+      iron_mg: 0
+      zinc_mg: 0
+      vitamin_c_mg: 0
+      manganese_mg: 0
       polyols_g: 0.0
       carbs_available_g: 52.7
       carbs_total_g: 59.5
@@ -292,13 +292,13 @@ entries:
       fiber_insoluble_g: 0.9
       sodium_mg: 270
       potassium_mg: 77
-      iodine_ug: null
-      magnesium_mg: null
-      calcium_mg: null
-      iron_mg: null
-      zinc_mg: null
-      vitamin_c_mg: null
-      manganese_mg: null
+      iodine_ug: 0
+      magnesium_mg: 0
+      calcium_mg: 0
+      iron_mg: 0
+      zinc_mg: 0
+      vitamin_c_mg: 0
+      manganese_mg: 0
       polyols_g: 0.0
       carbs_available_g: 1.9
       carbs_total_g: 3.0
@@ -321,13 +321,13 @@ entries:
       fiber_insoluble_g: 1.2
       sodium_mg: 154
       potassium_mg: 168
-      iodine_ug: null
-      magnesium_mg: null
-      calcium_mg: null
-      iron_mg: null
-      zinc_mg: null
-      vitamin_c_mg: null
-      manganese_mg: null
+      iodine_ug: 0
+      magnesium_mg: 0
+      calcium_mg: 0
+      iron_mg: 0
+      zinc_mg: 0
+      vitamin_c_mg: 0
+      manganese_mg: 0
       polyols_g: 0.0
       carbs_available_g: 10.0
       carbs_total_g: 12.4
@@ -410,21 +410,21 @@ entries:
       sat_fat_g: 0.5
       mufa_g: 0.5
       pufa_g: 0.4
-      trans_fat_g: null
-      cholesterol_mg: null
+      trans_fat_g: 0
+      cholesterol_mg: 0
       sugar_g: 1.3
       fiber_total_g: 0.7
-      fiber_soluble_g: null
-      fiber_insoluble_g: null
+      fiber_soluble_g: 0
+      fiber_insoluble_g: 0
       sodium_mg: 86
       potassium_mg: 177
       iodine_ug: 18
       magnesium_mg: 52
       calcium_mg: 130
-      iron_mg: null
+      iron_mg: 0
       zinc_mg: 2
-      vitamin_c_mg: null
-      manganese_mg: null
+      vitamin_c_mg: 0
+      manganese_mg: 0
       polyols_g: 0.0
       carbs_available_g: 3.0
       carbs_total_g: 3.7

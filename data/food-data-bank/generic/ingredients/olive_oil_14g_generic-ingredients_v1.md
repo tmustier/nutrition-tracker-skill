@@ -35,18 +35,18 @@ per_portion:
   carbs_available_g: 0.0
   sugar_g: 0.0
   fiber_total_g: 0.0
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
+  fiber_soluble_g: 0
+  fiber_insoluble_g: 0
   polyols_g: 0.0
   sodium_mg: 0
   potassium_mg: 0
-  iodine_ug: null
+  iodine_ug: 0
   magnesium_mg: 0
   calcium_mg: 0
   iron_mg: 0
   zinc_mg: 0
   vitamin_c_mg: 0
-  manganese_mg: null
+  manganese_mg: 0
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
   vitamin_e_mg: 2.0

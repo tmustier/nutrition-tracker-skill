@@ -237,6 +237,11 @@ def check_block(y, filepath):
         if isinstance(val, (int, float)) and val < 0:
             issues.append(f"Negative per_portion value: {key} = {val}")
 
+    # Null checks - NO nulls allowed in per_portion (all values must be 0 or positive)
+    for key, val in pp.items():
+        if val is None:
+            issues.append(f"NULL value not allowed in per_portion: {key} must be 0 or a positive number")
+
     return {
         "id": bid,
         "filepath": str(filepath),

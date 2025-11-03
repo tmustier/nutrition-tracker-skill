@@ -22,16 +22,16 @@ per_portion:
   energy_kcal: 56.3
   protein_g: 1.4
   fat_g: 0.3
-  sat_fat_g: null
+  sat_fat_g: 0
   mufa_g: 0.03
   pufa_g: 0.18
   trans_fat_g: 0
   cholesterol_mg: 0
   sugar_g: 9.8
   fiber_total_g: 4.4
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
-  sodium_mg: null
+  fiber_soluble_g: 0
+  fiber_insoluble_g: 0
+  sodium_mg: 0
   potassium_mg: 194
   iodine_ug: 1
   magnesium_mg: 24
@@ -39,7 +39,7 @@ per_portion:
   iron_mg: 1
   zinc_mg: 1
   vitamin_c_mg: 29
-  manganese_mg: null
+  manganese_mg: 0
   polyols_g: 0.0
   carbs_available_g: 9.8
   carbs_total_g: 14.2

@@ -44,13 +44,13 @@ per_portion:
   fiber_insoluble_g: 2.6
   sodium_mg: 1910
   potassium_mg: 1070
-  iodine_ug: null
+  iodine_ug: 0
   magnesium_mg: 65
   calcium_mg: 45
   iron_mg: 5.5
   zinc_mg: 8.5
   vitamin_c_mg: 3
-  manganese_mg: null
+  manganese_mg: 0
   polyols_g: 0.0
   carbs_available_g: 53.3
   carbs_total_g: 57.0

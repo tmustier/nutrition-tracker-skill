@@ -25,9 +25,9 @@ per_portion:
   sat_fat_g: 0.6
   mufa_g: 0.8
   pufa_g: 0.5
-  trans_fat_g: null
+  trans_fat_g: 0
   cholesterol_mg: 130
-  sugar_g: null
+  sugar_g: 0
   fiber_total_g: 0.0
   fiber_soluble_g: 0.0
   fiber_insoluble_g: 0.0
@@ -38,8 +38,8 @@ per_portion:
   calcium_mg: 7
   iron_mg: 1
   zinc_mg: 1
-  vitamin_c_mg: null
-  manganese_mg: null
+  vitamin_c_mg: 0
+  manganese_mg: 0
   polyols_g: 0.0
   carbs_available_g: 0.0
   carbs_total_g: 0.0

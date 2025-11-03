@@ -39,7 +39,7 @@ per_portion:
   fiber_insoluble_g: 0.0
   sodium_mg: 10
   potassium_mg: 1
-  iodine_ug: null
+  iodine_ug: 0
   magnesium_mg: 0
   calcium_mg: 0
   iron_mg: 0.1
