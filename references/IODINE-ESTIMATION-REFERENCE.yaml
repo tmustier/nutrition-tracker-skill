@@ -1,0 +1,1118 @@
+# Iodine Estimation Reference
+# Purpose: Comprehensive guide for estimating iodine content in foods with UK context
+# Date: 2025-11-03
+# Units: All values in micrograms (μg) per 100g unless otherwise specified
+
+meta:
+  version: "1.0.0"
+  last_updated: "2025-11-03"
+  region: "United Kingdom"
+  sources:
+    - "British Nutrition Foundation - Iodine nutrition status 2018"
+    - "UK McCance & Widdowson Composition of Foods"
+    - "USDA FoodData Central"
+    - "Bath et al. (2013) - Iodine in UK dairy products"
+    - "Vanderpump et al. (2011) - UK iodine status survey"
+    - "WHO/UNICEF/ICCIDD (2007) - Assessment of iodine deficiency"
+
+# =============================================================================
+# UK-SPECIFIC CONTEXT
+# =============================================================================
+
+uk_context:
+  summary: "UK is classified as iodine-deficient with dairy products as primary dietary source"
+
+  dairy_fortification:
+    status: "indirect"
+    mechanism: "Cattle feed supplementation with iodine compounds"
+    compounds_used:
+      - "Calcium iodate"
+      - "Potassium iodide"
+    effect: "UK dairy products have 2-3x higher iodine than European counterparts"
+    seasonality: "Winter milk ~50% higher iodine (more indoor feeding, iodine-supplemented feed)"
+    reliability: "HIGH - well-documented and consistent"
+
+  soil_status:
+    deficiency: "Severe"
+    cause: "Glaciation removed iodine-rich topsoil; high rainfall leaching"
+    impact: "Plant foods grown in UK have very low iodine content"
+    comparison: "UK soil contains ~1/10th iodine of coastal regions"
+
+  salt_iodization:
+    mandatory: false
+    status: "Voluntary only"
+    bread_industry: "Some bakeries use iodized salt but not mandatory since 1980s"
+    household_use: "~5% of UK households purchase iodized salt"
+    sea_salt_trend: "Increasing use of non-iodized sea salt/Himalayan salt"
+
+  population_status:
+    classification: "Mildly deficient (WHO criteria)"
+    at_risk_groups:
+      - "Pregnant women (67% below WHO threshold)"
+      - "Women of childbearing age"
+      - "Vegans (avoid dairy)"
+      - "Those avoiding dairy/fish"
+    rni_achievement: "~40% of UK adults fail to meet RNI"
+
+# =============================================================================
+# DIETARY REFERENCE VALUES
+# =============================================================================
+
+reference_values:
+  rni_uk:
+    adults: 140  # μg/day (Reference Nutrient Intake)
+    pregnant: 200  # μg/day
+    breastfeeding: 280  # μg/day
+    children_1_3y: 70  # μg/day
+    children_4_6y: 100  # μg/day
+    children_7_10y: 110  # μg/day
+    children_11_14y: 130  # μg/day
+
+  who_recommendations:
+    adults: 150  # μg/day
+    pregnant: 250  # μg/day
+    breastfeeding: 250  # μg/day
+
+  eu_recommendations:
+    adults: 150  # μg/day
+
+  tolerable_upper_intake:
+    adults: 600  # μg/day (UK SACN)
+    note: "Chronic intake >600 μg/day may cause thyroid dysfunction"
+    acute_toxicity: ">1100 μg/day"
+
+  context:
+    daily_requirement: "Adults need ~140 μg/day"
+    deficiency_effects:
+      - "Thyroid dysfunction (goiter, hypothyroidism)"
+      - "Impaired cognitive development in children"
+      - "Increased risk of miscarriage"
+      - "Impaired fetal brain development"
+    excess_effects:
+      - "Thyroid dysfunction (hyperthyroidism or hypothyroidism)"
+      - "Autoimmune thyroid disease"
+
+# =============================================================================
+# FOOD CATEGORY RANGES
+# =============================================================================
+
+food_categories:
+
+  # ---------------------------------------------------------------------------
+  # SEAFOOD - Highest and most variable iodine source
+  # ---------------------------------------------------------------------------
+
+  seafood:
+    summary: "Richest dietary source but highly variable by species and origin"
+
+    white_fish:
+      ranges:
+        cod_fresh: {min: 99, typical: 130, max: 170, per: "100g"}
+        haddock: {min: 80, typical: 150, max: 220, per: "100g"}
+        pollock: {min: 90, typical: 103, max: 116, per: "100g"}
+        plaice: {min: 25, typical: 35, max: 45, per: "100g"}
+        sea_bass: {min: 40, typical: 60, max: 80, per: "100g"}
+      confidence: "MEDIUM"
+      notes: "Atlantic fish higher than Pacific; wild higher than farmed"
+
+    fatty_fish:
+      ranges:
+        salmon_farmed: {min: 30, typical: 40, max: 50, per: "100g"}
+        salmon_wild: {min: 50, typical: 60, max: 80, per: "100g"}
+        mackerel: {min: 50, typical: 100, max: 140, per: "100g"}
+        sardines: {min: 20, typical: 30, max: 40, per: "100g"}
+        tuna_fresh: {min: 10, typical: 17, max: 25, per: "100g"}
+        tuna_canned: {min: 5, typical: 10, max: 17, per: "100g"}
+      confidence: "MEDIUM"
+      notes: "Canned fish lower due to processing; oil vs brine makes no difference"
+
+    shellfish:
+      ranges:
+        prawns_shrimp: {min: 25, typical: 35, max: 45, per: "100g"}
+        mussels: {min: 90, typical: 115, max: 140, per: "100g"}
+        oysters: {min: 60, typical: 80, max: 100, per: "100g"}
+        crab: {min: 40, typical: 50, max: 60, per: "100g"}
+        scallops: {min: 30, typical: 45, max: 60, per: "100g"}
+      confidence: "MEDIUM"
+      notes: "Filter feeders (mussels, oysters) highest; varies by water source"
+
+    seaweed:
+      ranges:
+        nori: {min: 16, typical: 42, max: 60, per: "1g dried"}
+        wakame: {min: 40, typical: 80, max: 140, per: "1g dried"}
+        kombu_kelp: {min: 1500, typical: 2500, max: 2984, per: "1g dried"}
+      confidence: "LOW"
+      notes: "EXTREME VARIATION - can exceed daily limit in 1g; kombu should be limited"
+      warning: "Kombu/kelp can provide toxic levels - use with caution"
+
+    estimation_rules:
+      use_high_range: "Wild-caught, Atlantic/North Sea origin, white fish species"
+      use_mid_range: "Most farmed fish, shellfish, canned fish"
+      use_low_range: "Pacific origin, processed products, tuna species"
+      caution: "Seaweed products require specific data - DO NOT estimate"
+
+  # ---------------------------------------------------------------------------
+  # DAIRY - Most reliable UK source due to cattle feed fortification
+  # ---------------------------------------------------------------------------
+
+  dairy:
+    summary: "Most reliable and consistent UK iodine source - ALWAYS estimate for dairy"
+    uk_advantage: "2-3x higher than European dairy due to feed fortification"
+
+    milk:
+      ranges:
+        whole_milk: {min: 30, typical: 40, max: 60, per: "100ml", per_250ml: "75-150"}
+        semi_skimmed: {min: 30, typical: 45, max: 65, per: "100ml", per_250ml: "75-160"}
+        skimmed: {min: 30, typical: 50, max: 70, per: "100ml", per_250ml: "75-175"}
+        organic_milk: {min: 25, typical: 35, max: 45, per: "100ml"}
+      confidence: "HIGH"
+      notes: "Winter milk ~50% higher; organic slightly lower (less supplemented feed)"
+      seasonal_variation: "Summer 30-40 μg/100ml, Winter 50-70 μg/100ml"
+
+    yogurt:
+      ranges:
+        natural_yogurt: {min: 50, typical: 70, max: 90, per: "100g"}
+        greek_yogurt: {min: 60, typical: 80, max: 100, per: "100g"}
+        flavored_yogurt: {min: 40, typical: 60, max: 80, per: "100g"}
+        drinking_yogurt: {min: 35, typical: 50, max: 70, per: "100ml"}
+      confidence: "HIGH"
+      notes: "Greek yogurt higher due to concentration; flavored diluted with fruit/sugar"
+
+    cheese:
+      ranges:
+        cheddar: {min: 20, typical: 30, max: 40, per: "100g", per_30g: "6-12"}
+        soft_cheese: {min: 15, typical: 23, max: 30, per: "100g"}
+        cottage_cheese: {min: 25, typical: 35, max: 45, per: "100g"}
+        cream_cheese: {min: 10, typical: 15, max: 20, per: "100g"}
+        feta: {min: 20, typical: 30, max: 40, per: "100g"}
+        parmesan: {min: 15, typical: 25, max: 35, per: "100g"}
+      confidence: "HIGH"
+      notes: "Hard cheese lower per 100g but concentrated; soft cheese higher moisture"
+
+    other_dairy:
+      ranges:
+        butter: {min: 5, typical: 10, max: 15, per: "100g"}
+        cream_single: {min: 15, typical: 25, max: 35, per: "100ml"}
+        cream_double: {min: 10, typical: 20, max: 30, per: "100ml"}
+        ice_cream: {min: 20, typical: 35, max: 50, per: "100g"}
+      confidence: "MEDIUM-HIGH"
+      notes: "Lower values due to fat content dilution"
+
+    estimation_rules:
+      use_high_range: "Winter months, conventional dairy, skimmed milk, Greek yogurt"
+      use_mid_range: "Year-round estimates, standard products"
+      use_low_range: "Summer months, organic dairy, cream cheese, butter"
+      always_estimate: "NEVER set dairy iodine to 0 - it's the primary UK source"
+      portion_guide: "250ml milk = ~100 μg (70% of RNI)"
+
+  # ---------------------------------------------------------------------------
+  # EGGS - Moderate and reasonably consistent source
+  # ---------------------------------------------------------------------------
+
+  eggs:
+    summary: "Moderate iodine source; depends on chicken feed"
+
+    ranges:
+      whole_egg_100g: {min: 20, typical: 26, max: 35, per: "100g"}
+      medium_egg_58g: {min: 12, typical: 15, max: 20, per: "58g egg"}
+      large_egg_68g: {min: 14, typical: 18, max: 24, per: "68g egg"}
+      egg_white: {min: 2, typical: 4, max: 6, per: "100g"}
+      egg_yolk: {min: 35, typical: 50, max: 65, per: "100g"}
+
+    confidence: "MEDIUM"
+
+    notes: "Iodine concentrated in yolk; feed supplementation varies by producer"
+
+    estimation_rules:
+      use_high_range: "Free-range/organic (better feed), yolk-only dishes"
+      use_mid_range: "Standard eggs, whole egg dishes"
+      use_low_range: "Egg white only, processed egg products"
+
+    context:
+      typical_serving: "2 medium eggs = ~30 μg (21% of RNI)"
+
+  # ---------------------------------------------------------------------------
+  # MEAT - Low but measurable amounts
+  # ---------------------------------------------------------------------------
+
+  meat:
+    summary: "Minor iodine source; feed and processing dependent"
+
+    beef:
+      ranges:
+        beef_mince: {min: 2, typical: 5, max: 8, per: "100g"}
+        beef_steak: {min: 2, typical: 4, max: 7, per: "100g"}
+        beef_roast: {min: 3, typical: 5, max: 8, per: "100g"}
+      confidence: "LOW-MEDIUM"
+      notes: "Grass-fed may be lower than grain-fed"
+
+    pork:
+      ranges:
+        pork_chop: {min: 3, typical: 5, max: 8, per: "100g"}
+        pork_mince: {min: 2, typical: 5, max: 7, per: "100g"}
+        bacon: {min: 2, typical: 4, max: 6, per: "100g"}
+        ham: {min: 3, typical: 5, max: 8, per: "100g"}
+      confidence: "LOW-MEDIUM"
+
+    chicken:
+      ranges:
+        chicken_breast: {min: 2, typical: 4, max: 7, per: "100g"}
+        chicken_thigh: {min: 2, typical: 5, max: 8, per: "100g"}
+        chicken_mince: {min: 2, typical: 4, max: 6, per: "100g"}
+      confidence: "LOW-MEDIUM"
+      notes: "Feed supplementation varies widely"
+
+    lamb:
+      ranges:
+        lamb_chop: {min: 2, typical: 3, max: 5, per: "100g"}
+        lamb_mince: {min: 2, typical: 4, max: 6, per: "100g"}
+      confidence: "LOW"
+      notes: "Grass-fed lamb typically lowest"
+
+    processed_meat:
+      ranges:
+        sausages: {min: 3, typical: 6, max: 10, per: "100g"}
+        burgers: {min: 2, typical: 5, max: 8, per: "100g"}
+      confidence: "LOW"
+      notes: "May contain milk powder or iodized salt - check ingredients"
+
+    estimation_rules:
+      use_high_range: "Grain-fed, processed products with dairy, sausages"
+      use_mid_range: "Standard meat products"
+      use_low_range: "Grass-fed, organic, lamb"
+      default_approach: "Use 5 μg/100g for mixed meat dishes unless known otherwise"
+
+  # ---------------------------------------------------------------------------
+  # GRAINS & BREAD - Variable depending on salt type used
+  # ---------------------------------------------------------------------------
+
+  grains:
+    summary: "Variable iodine content depending on salt used in processing"
+    uk_note: "Some UK bakeries use iodized salt but not mandatory since 1980s"
+
+    bread:
+      ranges:
+        white_bread_iodized: {min: 30, typical: 45, max: 60, per: "100g", per_slice: "12-24"}
+        white_bread_plain: {min: 5, typical: 10, max: 15, per: "100g"}
+        wholemeal_bread_iodized: {min: 25, typical: 40, max: 55, per: "100g"}
+        wholemeal_bread_plain: {min: 3, typical: 8, max: 12, per: "100g"}
+        sourdough: {min: 2, typical: 5, max: 10, per: "100g"}
+      confidence: "LOW"
+      notes: "HIGHLY VARIABLE - depends on bakery salt choice; homemade usually lower"
+
+    pasta_rice:
+      ranges:
+        pasta_plain: {min: 1, typical: 2, max: 5, per: "100g cooked"}
+        rice_white: {min: 1, typical: 1.5, max: 3, per: "100g cooked"}
+        rice_brown: {min: 1, typical: 2, max: 4, per: "100g cooked"}
+        noodles: {min: 1, typical: 3, max: 6, per: "100g cooked"}
+      confidence: "LOW"
+      notes: "Plain grains very low; may increase if cooked with iodized salt"
+
+    breakfast_cereals:
+      ranges:
+        oats: {min: 2, typical: 4, max: 6, per: "100g"}
+        cornflakes: {min: 2, typical: 5, max: 10, per: "100g"}
+        wheat_biscuits: {min: 2, typical: 4, max: 8, per: "100g"}
+        fortified_cereals: {min: 5, typical: 15, max: 30, per: "100g"}
+      confidence: "LOW-MEDIUM"
+      notes: "Check labels for fortification; served with milk adds significant iodine"
+
+    estimation_rules:
+      use_high_range: "Commercial bread from major bakeries, fortified cereals"
+      use_mid_range: "When salt type unknown, standard products"
+      use_low_range: "Homemade bread, plain grains, sea salt/no salt products"
+      default_approach: "Use 10 μg/100g for commercial bread, 2 μg/100g for plain grains"
+      important: "ALWAYS check for 'iodized salt' in ingredients - changes estimate 3-5x"
+
+  # ---------------------------------------------------------------------------
+  # LEGUMES - Generally low but consistent
+  # ---------------------------------------------------------------------------
+
+  legumes:
+    summary: "Low iodine content; soil-dependent"
+
+    ranges:
+      beans_cooked:
+        kidney_beans: {min: 1, typical: 2, max: 4, per: "100g"}
+        black_beans: {min: 1, typical: 2, max: 3, per: "100g"}
+        butter_beans: {min: 1, typical: 2, max: 4, per: "100g"}
+        baked_beans: {min: 2, typical: 4, max: 8, per: "100g"}
+      lentils_cooked: {min: 1, typical: 2, max: 3, per: "100g"}
+      chickpeas_cooked: {min: 1, typical: 2, max: 4, per: "100g"}
+      peas_cooked: {min: 1, typical: 2, max: 3, per: "100g"}
+      tofu: {min: 5, typical: 15, max: 30, per: "100g"}
+
+    confidence: "LOW"
+
+    notes: "Baked beans higher due to added salt; tofu varies by coagulant used"
+
+    estimation_rules:
+      use_high_range: "Baked beans (added salt), tofu with calcium sulfate coagulant"
+      use_mid_range: "Standard cooked legumes"
+      use_low_range: "Plain dried legumes cooked without salt"
+      default_approach: "Use 2 μg/100g for plain legumes, 5 μg/100g for baked beans"
+
+  # ---------------------------------------------------------------------------
+  # VEGETABLES - Very low; soil-dependent
+  # ---------------------------------------------------------------------------
+
+  vegetables:
+    summary: "Very low iodine content in UK due to soil deficiency"
+
+    leafy_greens:
+      ranges:
+        spinach: {min: 1, typical: 2, max: 5, per: "100g"}
+        kale: {min: 1, typical: 2, max: 4, per: "100g"}
+        lettuce: {min: 1, typical: 1.5, max: 3, per: "100g"}
+        cabbage: {min: 1, typical: 2, max: 3, per: "100g"}
+      confidence: "LOW"
+
+    root_vegetables:
+      ranges:
+        potatoes: {min: 1, typical: 2, max: 4, per: "100g"}
+        sweet_potatoes: {min: 1, typical: 2, max: 3, per: "100g"}
+        carrots: {min: 1, typical: 2, max: 3, per: "100g"}
+        parsnips: {min: 1, typical: 2, max: 4, per: "100g"}
+        beetroot: {min: 1, typical: 2, max: 3, per: "100g"}
+      confidence: "LOW"
+
+    cruciferous:
+      ranges:
+        broccoli: {min: 1, typical: 2, max: 3, per: "100g"}
+        cauliflower: {min: 1, typical: 2, max: 3, per: "100g"}
+        brussels_sprouts: {min: 1, typical: 2, max: 4, per: "100g"}
+      confidence: "LOW"
+      notes: "Goitrogenic compounds may interfere with iodine utilization"
+
+    other_vegetables:
+      ranges:
+        tomatoes: {min: 1, typical: 2, max: 3, per: "100g"}
+        peppers: {min: 1, typical: 1.5, max: 3, per: "100g"}
+        courgette: {min: 1, typical: 1.5, max: 3, per: "100g"}
+        aubergine: {min: 1, typical: 2, max: 3, per: "100g"}
+        mushrooms: {min: 1, typical: 3, max: 8, per: "100g"}
+      confidence: "LOW"
+
+    estimation_rules:
+      use_high_range: "Coastal-grown, mushrooms, potatoes"
+      use_mid_range: "Most vegetables"
+      use_low_range: "Organic, known low-iodine soil regions"
+      default_approach: "Use 2 μg/100g for all vegetables as safe estimate"
+      pragmatic: "Given low values and low confidence, 0 is acceptable if documented"
+
+  # ---------------------------------------------------------------------------
+  # FRUITS - Very low; negligible contribution
+  # ---------------------------------------------------------------------------
+
+  fruits:
+    summary: "Negligible iodine content; minimal dietary contribution"
+
+    citrus:
+      ranges:
+        oranges: {min: 1, typical: 1.5, max: 2, per: "100g"}
+        lemons: {min: 1, typical: 1.5, max: 2, per: "100g"}
+        grapefruit: {min: 1, typical: 1.5, max: 2, per: "100g"}
+      confidence: "LOW"
+
+    berries:
+      ranges:
+        strawberries: {min: 1, typical: 1.5, max: 2, per: "100g"}
+        blueberries: {min: 1, typical: 1.5, max: 2, per: "100g"}
+        raspberries: {min: 1, typical: 1.5, max: 2, per: "100g"}
+        blackberries: {min: 1, typical: 2, max: 3, per: "100g"}
+      confidence: "LOW"
+
+    tropical:
+      ranges:
+        bananas: {min: 1, typical: 2, max: 3, per: "100g"}
+        mango: {min: 1, typical: 2, max: 3, per: "100g"}
+        pineapple: {min: 1, typical: 1.5, max: 2, per: "100g"}
+      confidence: "LOW"
+
+    other_fruits:
+      ranges:
+        apples: {min: 1, typical: 1.5, max: 2, per: "100g"}
+        pears: {min: 1, typical: 1.5, max: 2, per: "100g"}
+        grapes: {min: 1, typical: 1.5, max: 2, per: "100g"}
+      confidence: "LOW"
+
+    estimation_rules:
+      default_approach: "Use 1-2 μg/100g if estimating, or 0 if documented as unknown"
+      pragmatic: "Given negligible values, setting to 0 is acceptable"
+      context: "Even 400g fruit (~5 portions) contributes only 4-8 μg (~3-6% RNI)"
+
+  # ---------------------------------------------------------------------------
+  # NUTS & SEEDS - Low but some variation
+  # ---------------------------------------------------------------------------
+
+  nuts_seeds:
+    summary: "Generally low iodine content"
+
+    ranges:
+      almonds: {min: 1, typical: 2, max: 4, per: "100g"}
+      walnuts: {min: 1, typical: 2, max: 3, per: "100g"}
+      cashews: {min: 1, typical: 2, max: 4, per: "100g"}
+      peanuts: {min: 1, typical: 2, max: 5, per: "100g"}
+      brazil_nuts: {min: 1, typical: 2, max: 4, per: "100g"}
+      pumpkin_seeds: {min: 1, typical: 3, max: 5, per: "100g"}
+      sunflower_seeds: {min: 1, typical: 3, max: 6, per: "100g"}
+      chia_seeds: {min: 1, typical: 2, max: 4, per: "100g"}
+
+    confidence: "LOW"
+
+    notes: "Soil-dependent; roasted/salted may be higher if iodized salt used"
+
+    estimation_rules:
+      use_high_range: "Seeds (higher than nuts), salted products"
+      use_mid_range: "Standard unsalted nuts/seeds"
+      use_low_range: "Organic, known low-iodine regions"
+      default_approach: "Use 2-3 μg/100g, or 0 if documented as unknown"
+
+# =============================================================================
+# CONFIDENCE LEVELS & COEFFICIENT OF VARIATION
+# =============================================================================
+
+confidence_levels:
+  summary: "Confidence based on data availability, consistency, and analytical variation"
+
+  HIGH:
+    description: "CV <30% - Reliable, consistent data available"
+    categories:
+      - "UK dairy products (milk, yogurt, cheese)"
+    characteristics:
+      - "Well-documented in peer-reviewed research"
+      - "Multiple studies show consistent ranges"
+      - "Feed supplementation makes UK dairy predictable"
+      - "Seasonal variation understood and quantifiable"
+    when_to_use: "ALWAYS estimate for dairy - never set to 0"
+    documentation: "Cite range used; note season if known"
+
+  MEDIUM:
+    description: "CV 30-50% - Moderate data with some variation"
+    categories:
+      - "Eggs"
+      - "White fish (cod, haddock)"
+      - "Shellfish"
+      - "Commercial bread (if iodized salt used)"
+    characteristics:
+      - "Some research data available"
+      - "Variation due to feed/processing"
+      - "Ranges known but wider than dairy"
+    when_to_use: "Estimate when these are significant portion of dish"
+    documentation: "Cite range and note variation factors"
+
+  LOW:
+    description: "CV >50% - High variability or limited data"
+    categories:
+      - "Meat (all types)"
+      - "Grains (salt type unknown)"
+      - "Vegetables (all types)"
+      - "Fruits (all types)"
+      - "Legumes"
+      - "Nuts and seeds"
+    characteristics:
+      - "Limited research data"
+      - "High soil/feed/processing variation"
+      - "May vary 2-10x depending on source"
+    when_to_use: "Consider estimating if major component; otherwise 0 acceptable"
+    documentation: "MUST document as 'low confidence estimate' or 'unknown (set to 0)'"
+
+  VERY_LOW:
+    description: "Insufficient data for reliable estimation"
+    categories:
+      - "Processed foods (unknown salt source)"
+      - "Imported produce (unknown soil)"
+      - "Restaurant dishes (unknown ingredients)"
+    characteristics:
+      - "Multiple unknown variables"
+      - "No basis for estimation"
+    when_to_use: "Set to 0 and document as unknown"
+    documentation: "MUST note 'iodine unknown - set to 0'"
+
+# =============================================================================
+# ESTIMATION RULES & METHODOLOGY
+# =============================================================================
+
+estimation_rules:
+
+  general_principles:
+    priority_order:
+      1: "Use specific product data if available (database, label, manufacturer)"
+      2: "Calculate from ingredients if recipe known"
+      3: "Estimate using food category ranges (this guide)"
+      4: "Set to 0 if insufficient data (document reason)"
+
+    always_estimate:
+      - "Dairy products (milk, yogurt, cheese) - HIGH confidence"
+      - "Seafood dishes - MEDIUM confidence"
+      - "Eggs when significant component - MEDIUM confidence"
+
+    conditional_estimate:
+      - "Meat if major component and feed data available"
+      - "Bread if iodized salt confirmed in ingredients"
+      - "Processed foods if dairy/seafood/egg content significant"
+
+    acceptable_zero:
+      - "Vegetables (document as 'low iodine content')"
+      - "Fruits (document as 'negligible iodine')"
+      - "Plain grains (document as 'no iodized salt')"
+      - "When confidence is very low (document as 'unknown')"
+
+  range_selection:
+    when_to_use_high_end:
+      - "UK dairy products (winter months if known)"
+      - "Wild-caught North Sea fish"
+      - "Commercial bread with iodized salt confirmed"
+      - "Products with multiple iodine sources"
+
+    when_to_use_midpoint:
+      - "Most estimation scenarios (DEFAULT)"
+      - "When specific details unknown"
+      - "Mixed dishes with various ingredients"
+      - "Year-round dairy estimates"
+
+    when_to_use_low_end:
+      - "Organic dairy (less supplemented feed)"
+      - "Summer dairy (if season known)"
+      - "Pacific fish vs Atlantic"
+      - "Homemade bread (usually no iodized salt)"
+      - "When intentionally conservative"
+
+  calculation_methods:
+
+    simple_dish:
+      description: "Single ingredient or simple mix"
+      method: "Look up food category range → apply portion"
+      example:
+        dish: "Scrambled eggs (2 medium eggs, 116g total)"
+        calculation: "116g × 26 μg/100g = 30 μg"
+        confidence: "MEDIUM"
+
+    recipe_based:
+      description: "Known recipe with multiple ingredients"
+      method: "Calculate each ingredient → sum → adjust for portion"
+      example:
+        dish: "Cheese omelette"
+        ingredients:
+          - component: "2 eggs (116g)"
+            iodine_ug: 30
+          - component: "30g cheddar cheese"
+            iodine_ug: 9
+          - component: "10g butter"
+            iodine_ug: 1
+        total_iodine: 40
+        confidence: "MEDIUM-HIGH (dairy + eggs)"
+
+    component_estimation:
+      description: "Identify main iodine-contributing components"
+      method: "Focus on dairy/seafood/eggs; ignore vegetables/grains if low confidence"
+      example:
+        dish: "Fish and chips (restaurant)"
+        components:
+          - component: "Cod fillet 180g"
+            iodine_ug: 234
+            confidence: "MEDIUM"
+          - component: "Chips 200g"
+            iodine_ug: 4
+            confidence: "LOW - ignore"
+          - component: "Peas 80g"
+            iodine_ug: 2
+            confidence: "LOW - ignore"
+        estimated_total: 235
+        documented_as: "Estimated from cod only; chips/peas set to 0 (low confidence)"
+
+    proportional_scaling:
+      description: "Use similar dish with known data"
+      method: "Find comparable dish → adjust for portion/main ingredient"
+      example:
+        target: "Homemade lasagne 400g"
+        reference: "Similar lasagne with known beef:cheese ratio"
+        estimation:
+          - "150g beef mince: 7 μg"
+          - "200g cheese sauce (assume 40g cheese): 12 μg"
+          - "50g pasta: 1 μg"
+        total: 20
+        confidence: "MEDIUM (dairy-based)"
+
+  documentation_requirements:
+    always_document:
+      - "Method used (lookup/calculation/estimation/set to 0)"
+      - "Confidence level (HIGH/MEDIUM/LOW)"
+      - "Range values if estimated (e.g., 'used midpoint 40 μg/100ml for milk')"
+      - "Why set to 0 if applicable (e.g., 'vegetables - negligible content')"
+
+    example_good_documentation:
+      dish: "Greek yogurt with berries"
+      iodine_calculation: "150g Greek yogurt × 80 μg/100g = 120 μg; berries 100g = 0 μg (negligible)"
+      confidence: "HIGH (dairy)"
+      assumptions: "Used typical range for UK Greek yogurt; berries omitted as negligible contribution"
+
+    example_poor_documentation:
+      dish: "Greek yogurt with berries"
+      iodine_ug: 120
+      notes: "estimated"  # ← Not enough detail!
+
+# =============================================================================
+# WORKED EXAMPLES
+# =============================================================================
+
+examples:
+
+  example_1_dairy_dominant:
+    dish: "Cappuccino (medium)"
+    description: "Coffee shop cappuccino with whole milk"
+    approach: "Simple lookup - dairy is reliable source"
+    calculation:
+      - step: "Identify milk volume: ~180ml whole milk"
+      - step: "Look up UK whole milk range: 30-60 μg/100ml"
+      - step: "Use midpoint for year-round estimate: 40 μg/100ml"
+      - step: "Calculate: 180ml × 40 μg/100ml = 72 μg"
+    result:
+      iodine_ug: 72
+      confidence: "HIGH"
+      percentage_rni: "51% of adult RNI (140 μg)"
+    documentation: "UK whole milk 180ml @ 40 μg/100ml midpoint range"
+
+  example_2_seafood:
+    dish: "Grilled salmon fillet"
+    description: "Farmed salmon, 150g cooked portion"
+    approach: "Lookup with range consideration"
+    calculation:
+      - step: "Identify type: farmed salmon (lower than wild)"
+      - step: "Look up range: 30-50 μg/100g"
+      - step: "Use midpoint (most farmed): 40 μg/100g"
+      - step: "Calculate: 150g × 40 μg/100g = 60 μg"
+    result:
+      iodine_ug: 60
+      confidence: "MEDIUM"
+      percentage_rni: "43% of adult RNI"
+    documentation: "Farmed salmon 150g @ 40 μg/100g (typical range for farmed)"
+    note: "Wild salmon would be 60-80 μg/100g → 90-120 μg total"
+
+  example_3_mixed_dish:
+    dish: "Tuna pasta bake"
+    description: "Restaurant portion, estimated 350g"
+    approach: "Component-based with focus on iodine sources"
+    ingredients:
+      tuna_canned:
+        weight_g: 100
+        iodine_per_100g: 10
+        total_iodine: 10
+        confidence: "MEDIUM"
+      cheese_sauce:
+        assume_cheese_g: 40
+        iodine_per_100g: 30
+        total_iodine: 12
+        confidence: "HIGH"
+      pasta:
+        weight_g: 180
+        iodine_per_100g: 2
+        total_iodine: 4
+        confidence: "LOW - could omit"
+      vegetables:
+        weight_g: 30
+        iodine_per_100g: 0
+        total_iodine: 0
+        confidence: "Set to 0 (negligible)"
+    calculation:
+      - step: "Tuna: 100g × 10 μg/100g = 10 μg"
+      - step: "Cheese (estimated 40g in sauce): 40g × 30 μg/100g = 12 μg"
+      - step: "Pasta: 180g × 2 μg/100g = 4 μg (or omit as low confidence)"
+      - step: "Vegetables: 0 μg (negligible)"
+    result:
+      iodine_ug: 26  # or 22 if pasta omitted
+      confidence: "MEDIUM (fish + dairy components)"
+      percentage_rni: "19% of adult RNI"
+    documentation: "Estimated from tuna (10 μg) + cheese sauce (12 μg) + pasta (4 μg); vegetables set to 0"
+
+  example_4_breakfast:
+    dish: "Porridge with milk and berries"
+    description: "45g oats, 200ml semi-skimmed milk, 80g blueberries"
+    approach: "Recipe calculation focusing on dairy"
+    ingredients:
+      oats:
+        weight_g: 45
+        iodine_per_100g: 4
+        total_iodine: 2
+        confidence: "LOW"
+      milk:
+        volume_ml: 200
+        iodine_per_100ml: 45
+        total_iodine: 90
+        confidence: "HIGH"
+      blueberries:
+        weight_g: 80
+        iodine_per_100g: 0
+        total_iodine: 0
+        confidence: "Negligible"
+    calculation:
+      - step: "Oats: 45g × 4 μg/100g = 2 μg (could omit)"
+      - step: "Milk: 200ml × 45 μg/100ml = 90 μg"
+      - step: "Blueberries: 0 μg (negligible)"
+      - step: "Total: ~90 μg (milk dominates)"
+    result:
+      iodine_ug: 92  # or 90 if oats omitted
+      confidence: "HIGH (dairy-based)"
+      percentage_rni: "66% of adult RNI"
+    documentation: "UK semi-skimmed milk 200ml @ 45 μg/100ml; oats 2 μg; berries 0"
+    insight: "Milk provides 98% of iodine - could simplify to milk only"
+
+  example_5_restaurant_unknown:
+    dish: "Chicken curry (Deliveroo)"
+    description: "Restaurant curry, ingredients unknown"
+    approach: "Conservative component estimation"
+    assessment:
+      - "Chicken breast ~180g: 180g × 4 μg/100g = 7 μg (LOW confidence)"
+      - "Sauce (cream/yogurt?): UNKNOWN - could be 0-50 μg depending on dairy"
+      - "Rice ~200g: 200g × 1.5 μg/100g = 3 μg (LOW confidence)"
+      - "Vegetables: 0 μg (negligible)"
+    decision: "Insufficient data for reliable estimate"
+    result:
+      iodine_ug: 0
+      confidence: "UNKNOWN - set to 0"
+      documentation: "Iodine set to 0 - restaurant dish with unknown dairy content in sauce; chicken (7 μg) and rice (3 μg) would contribute ~10 μg but LOW confidence; dairy content unknown"
+    alternative: "If sauce appears creamy, could estimate 30-50 μg total assuming yogurt/cream base"
+
+# =============================================================================
+# SPECIAL CONSIDERATIONS
+# =============================================================================
+
+special_considerations:
+
+  salt_and_iodization:
+    uk_status: "No mandatory salt iodization"
+
+    iodized_salt:
+      iodine_content: "20-40 μg per 1g salt (varies by brand)"
+      availability: "Available but only ~5% market share in UK"
+      when_assumed: "Only if explicitly stated on label/ingredients"
+      calculation: "1g iodized salt ≈ 30 μg iodine (midpoint)"
+
+    sea_salt_himalayan:
+      iodine_content: "Negligible (<1 μg/g) - NEVER assume iodine content"
+      uk_trend: "Increasing popularity reduces iodine intake"
+
+    bread_industry:
+      historical: "Iodized salt commonly used 1960s-1980s"
+      current: "Voluntary; some large bakeries still use it, small/artisan usually don't"
+      estimation: "Assume 10 μg/100g unless 'iodized salt' listed"
+
+  cooking_and_processing:
+
+    heat_stability:
+      effect: "Iodine stable up to 100°C"
+      loss: "Minimal loss in baking, boiling, frying"
+      exception: "High heat + prolonged (>1 hour) may reduce 10-20%"
+      recommendation: "Ignore cooking losses for most dishes"
+
+    water_cooking:
+      pasta_rice: "Cooked in water - iodine not significantly added from water"
+      vegetables: "Boiled vegetables - minimal iodine loss to water"
+
+    processing_effects:
+      canning: "Tuna/salmon - 20-40% loss during canning"
+      freezing: "No effect on iodine content"
+      drying: "Concentrates iodine per gram (e.g., milk → milk powder)"
+
+  bioavailability:
+    factors_reducing_absorption:
+      - "Goitrogens in cruciferous vegetables (broccoli, cabbage, kale)"
+      - "Soy isoflavones (tofu, soy milk)"
+      - "High selenium intake (interferes with thyroid)"
+      - "Thiocyanate from smoking"
+
+    note: "This guide provides dietary iodine content, not absorbed iodine"
+
+    practical: "Don't adjust estimates for bioavailability - beyond scope of food tracking"
+
+  vegan_vegetarian:
+
+    vegan_challenge:
+      - "No dairy (removes PRIMARY UK source)"
+      - "Soil-based foods very low iodine"
+      - "Risk of deficiency very high without supplementation"
+
+    vegan_sources:
+      limited:
+        - "Seaweed (but highly variable - difficult to dose safely)"
+        - "Iodized salt (if used)"
+        - "Fortified plant milks (check labels - uncommon in UK)"
+      recommendation: "Vegans should use iodine supplement (150 μg) or fortified foods"
+
+    lacto_ovo_vegetarian:
+      - "Dairy + eggs can meet RNI"
+      - "250ml milk + 1 egg ≈ 115 μg (82% of RNI)"
+      - "More achievable than vegan"
+
+  pregnancy_breastfeeding:
+    increased_needs:
+      pregnancy: "200 μg/day (43% above standard RNI)"
+      breastfeeding: "280 μg/day (100% above standard RNI)"
+
+    challenges:
+      - "Many UK pregnant women inadequate (67% below WHO threshold)"
+      - "Nausea may reduce dairy intake"
+      - "Often advised to avoid certain fish (reduces iodine source)"
+
+    recommendations:
+      - "150 μg supplement commonly recommended in UK pregnancy"
+      - "Focus on dairy + eggs + safe fish"
+      - "Avoid excess kelp/seaweed (can exceed upper limit)"
+
+  supplement_considerations:
+    when_recommended:
+      - "Vegan diet"
+      - "Pregnancy/breastfeeding"
+      - "Avoiding dairy and fish"
+
+    typical_dose: "150 μg/day (as potassium iodide)"
+
+    upper_limit: "600 μg/day (UK SACN)"
+
+    caution: "Seaweed supplements highly variable - prefer standardized iodine supplements"
+
+    tracking: "If supplementing, add to daily total when calculating intake"
+
+# =============================================================================
+# QUALITY ASSURANCE & VALIDATION
+# =============================================================================
+
+quality_assurance:
+
+  validation_checks:
+
+    plausibility:
+      - name: "Daily total check"
+        rule: "Daily iodine total 20-400 μg for typical UK diet"
+        action: "Investigate if <20 μg (likely missing dairy) or >400 μg (check fish/seaweed)"
+
+      - name: "Dairy contribution"
+        rule: "Dairy should provide 50-70% of total iodine in typical UK diet"
+        action: "If <30%, check dairy estimates; if >90%, check other sources"
+
+      - name: "Zero check"
+        rule: "Iodine = 0 should be documented"
+        action: "Review any 0 values to ensure appropriately set (not missing data)"
+
+    consistency:
+      - name: "Similar dishes"
+        rule: "Compare similar dishes for consistency"
+        example: "All cappuccinos ~60-90 μg; all salmon dishes ~40-80 μg per 100g"
+
+      - name: "Portion scaling"
+        rule: "Iodine should scale linearly with portion"
+        example: "200ml milk = 2× iodine of 100ml milk"
+
+    common_errors:
+      - error: "Setting dairy to 0"
+        fix: "NEVER set dairy iodine to 0 - always estimate"
+
+      - error: "Using non-UK dairy values"
+        fix: "UK dairy 2-3x higher than EU - use UK-specific ranges"
+
+      - error: "Overestimating from bread"
+        fix: "Only use high bread values if 'iodized salt' confirmed"
+
+      - error: "Including kelp without specific data"
+        fix: "Never estimate kelp - too variable; use 0 and note as unknown"
+
+      - error: "Not documenting low confidence"
+        fix: "Always note 'LOW confidence' or 'unknown' when setting to 0"
+
+  audit_trail:
+    required_fields:
+      - "iodine_ug: [value]"
+      - "confidence: [HIGH/MEDIUM/LOW/UNKNOWN]"
+      - "assumptions: [description of how estimated]"
+      - "gaps: [note if set to 0 and why]"
+
+    example_complete:
+      dish: "Salmon pasta salad"
+      iodine_ug: 68
+      confidence: "MEDIUM"
+      assumptions: "Salmon 120g @ 40 μg/100g (48 μg); cream cheese 50g @ 15 μg/100g (7.5 μg); pasta/veg @ 2 μg/100g (13 μg total)"
+      gaps: "Pasta and vegetables LOW confidence but minor contribution"
+
+    example_documented_zero:
+      dish: "Vegetable stir-fry"
+      iodine_ug: 0
+      confidence: "LOW"
+      assumptions: "No dairy, fish, or eggs; all vegetables"
+      gaps: "Iodine content unknown - vegetables in UK have very low iodine (1-3 μg/100g); set to 0 given low confidence and negligible contribution"
+
+# =============================================================================
+# SUMMARY REFERENCE TABLE
+# =============================================================================
+
+quick_reference:
+  high_sources:
+    - food: "Seaweed (kombu)"
+      iodine: "1500-3000 μg/g"
+      caution: "Can exceed daily limit - use sparingly"
+    - food: "White fish (cod, haddock)"
+      iodine: "80-220 μg/100g"
+      note: "Reliable MEDIUM confidence"
+    - food: "UK milk"
+      iodine: "30-70 μg/100ml"
+      note: "PRIMARY UK SOURCE - always estimate"
+    - food: "UK yogurt"
+      iodine: "50-100 μg/100g"
+      note: "High confidence"
+
+  moderate_sources:
+    - food: "Eggs"
+      iodine: "20-35 μg/100g"
+      serving: "~15 μg per egg"
+    - food: "UK cheese (cheddar)"
+      iodine: "20-40 μg/100g"
+      serving: "~9 μg per 30g"
+    - food: "Prawns/shellfish"
+      iodine: "25-140 μg/100g"
+      note: "Variable by species"
+    - food: "Commercial bread (iodized)"
+      iodine: "30-60 μg/100g"
+      note: "IF iodized salt used"
+
+  low_sources:
+    - food: "Meat (beef, chicken, pork)"
+      iodine: "2-8 μg/100g"
+      note: "Minor source"
+    - food: "Vegetables"
+      iodine: "1-5 μg/100g"
+      note: "Can set to 0"
+    - food: "Fruits"
+      iodine: "1-2 μg/100g"
+      note: "Negligible - set to 0"
+    - food: "Plain grains (no iodized salt)"
+      iodine: "1-5 μg/100g"
+      note: "Minimal contribution"
+
+  typical_daily_totals:
+    - diet: "Typical UK diet (with dairy)"
+      iodine_ug: "120-180"
+      note: "Meets RNI (140 μg)"
+    - diet: "Low dairy diet"
+      iodine_ug: "40-80"
+      note: "At risk of deficiency"
+    - diet: "Vegan diet (unsupplemented)"
+      iodine_ug: "20-50"
+      note: "Deficient - supplement needed"
+    - diet: "High fish + dairy diet"
+      iodine_ug: "200-350"
+      note: "Optimal intake"
+
+# =============================================================================
+# RECOMMENDED WORKFLOW
+# =============================================================================
+
+workflow:
+  for_new_dish:
+    steps:
+      1:
+        action: "Identify iodine-rich components"
+        check: "Does dish contain dairy, seafood, or eggs?"
+
+      2:
+        action: "Estimate high-confidence components"
+        priority: "Dairy (HIGH) > Seafood/Eggs (MEDIUM) > Others (LOW)"
+
+      3:
+        action: "Decide on low-confidence components"
+        options:
+          - "Estimate if major component (>50g) and data available"
+          - "Set to 0 if minor or very low confidence"
+          - "ALWAYS document decision"
+
+      4:
+        action: "Calculate total"
+        method: "Sum component estimates"
+
+      5:
+        action: "Document"
+        required:
+          - "Confidence level"
+          - "Ranges/values used"
+          - "Why set to 0 if applicable"
+
+      6:
+        action: "Validate"
+        checks:
+          - "Plausibility (20-400 μg range for meal)"
+          - "Dairy not set to 0"
+          - "Documentation complete"
+
+  time_estimates:
+    simple_dish_dairy_based: "2-3 minutes"
+    mixed_dish_with_fish: "5-7 minutes"
+    complex_restaurant_dish: "10-15 minutes (more unknowns)"
+
+  when_to_skip:
+    reasons:
+      - "One-off dish unlikely to repeat"
+      - "Only vegetables/fruits (negligible iodine)"
+      - "Time pressure + low confidence components only"
+    note: "Setting to 0 with documentation is acceptable - don't waste effort on poor estimates"
+
+# =============================================================================
+# REFERENCES & SOURCES
+# =============================================================================
+
+references:
+  peer_reviewed:
+    - citation: "Bath SC, Steer CD, Golding J, Emmett P, Rayman MP. Effect of inadequate iodine status in UK pregnant women on cognitive outcomes in their children: results from the Avon Longitudinal Study of Parents and Children (ALSPAC). Lancet. 2013;382(9889):331-337."
+      key_finding: "67% of UK pregnant women below WHO threshold"
+
+    - citation: "Bath SC, Button S, Rayman MP. Iodine concentration of organic and conventional milk: implications for iodine intake. Br J Nutr. 2012;107(7):935-940."
+      key_finding: "Organic milk ~40% lower iodine than conventional"
+
+    - citation: "Bath SC, Rayman MP. A review of the iodine status of UK pregnant women and its implications for the offspring. Environ Geochem Health. 2015;37(4):619-629."
+      key_finding: "UK pregnant women mildly-to-moderately iodine deficient"
+
+    - citation: "Vanderpump MP, Lazarus JH, Smyth PP, et al. Iodine status of UK schoolgirls: a cross-sectional survey. Lancet. 2011;377(9782):2007-2012."
+      key_finding: "UK now iodine deficient; milk major contributor"
+
+    - citation: "Bath SC, Walter A, Taylor A, Wright J, Rayman MP. Iodine deficiency in pregnant women living in the South East of the UK: the influence of diet and nutritional supplements on iodine status. Br J Nutr. 2014;111(9):1622-1631."
+      key_finding: "Milk contributes ~40% of iodine intake in UK"
+
+  databases_and_standards:
+    - source: "UK SACN (Scientific Advisory Committee on Nutrition)"
+      url: "https://www.gov.uk/government/organisations/scientific-advisory-committee-on-nutrition"
+      relevance: "UK RNI values and upper limits"
+
+    - source: "McCance and Widdowson's Composition of Foods"
+      relevance: "UK-specific food composition data"
+      note: "Limited iodine data - mainly dairy/fish"
+
+    - source: "USDA FoodData Central"
+      url: "https://fdc.nal.usda.gov/"
+      relevance: "US food data - adjust dairy down for UK"
+      note: "US dairy typically lower iodine than UK"
+
+    - source: "British Nutrition Foundation"
+      url: "https://www.nutrition.org.uk/"
+      relevance: "UK nutrition guidance and iodine status"
+
+  practitioner_guides:
+    - source: "British Dietetic Association - Iodine Food Fact Sheet"
+      relevance: "Practical guidance for UK population"
+
+    - source: "NHS - Vitamins and minerals - Iodine"
+      url: "https://www.nhs.uk/conditions/vitamins-and-minerals/iodine/"
+      relevance: "Public health guidance"
+
+# =============================================================================
+# VERSION HISTORY
+# =============================================================================
+
+version_history:
+  v1_0_0:
+    date: "2025-11-03"
+    changes:
+      - "Initial comprehensive reference created"
+      - "Food category ranges compiled from multiple sources"
+      - "UK-specific context integrated"
+      - "Confidence levels defined"
+      - "Estimation rules and workflows documented"
+      - "Worked examples provided"
+    author: "Nutrition tracking system"
