@@ -7,60 +7,60 @@ MACRONUTRIENTS
 --------------------------------------------------------------------------------
 Nutrient                           4-Day Total   Daily Average
 --------------------------------------------------------------------------------
-Energy (kcal)                          12428.9          3107.2
-Protein (g)                              702.5           175.6
-Fat (g)                                  475.0           118.8
-Carbohydrates - Total (g)               1432.1           358.0
-Carbohydrates - Available (g)           1254.5           313.6
-Fiber - Total (g)                        160.6            40.1
+Energy (kcal)                          12427.1          3106.8
+Protein (g)                              702.7           175.7
+Fat (g)                                  475.2           118.8
+Carbohydrates - Total (g)               1432.7           358.2
+Carbohydrates - Available (g)           1254.7           313.7
+Fiber - Total (g)                        161.4            40.4
 
 FAT BREAKDOWN
 --------------------------------------------------------------------------------
 Nutrient                           4-Day Total   Daily Average
 --------------------------------------------------------------------------------
 Saturated Fat (g)                        148.0            37.0
-MUFA (g)                                 194.2            48.5
+MUFA (g)                                 194.4            48.6
 PUFA (g)                                  96.4            24.1
 Trans Fat (g)                              2.3             0.6
-Cholesterol (mg)                        1057.2           264.3
+Cholesterol (mg)                        1052.2           263.1
 
 CARBOHYDRATE BREAKDOWN
 --------------------------------------------------------------------------------
 Nutrient                           4-Day Total   Daily Average
 --------------------------------------------------------------------------------
-Sugar (g)                                291.4            72.8
-Fiber - Soluble (g)                       34.3             8.6
-Fiber - Insoluble (g)                     52.0            13.0
+Sugar (g)                                292.2            73.0
+Fiber - Soluble (g)                       44.4            11.1
+Fiber - Insoluble (g)                     78.9            19.7
 Polyols (g)                               17.0             4.2
 
 MINERALS
 --------------------------------------------------------------------------------
 Nutrient                           4-Day Total   Daily Average
 --------------------------------------------------------------------------------
-Sodium (mg)                            12355.0          3088.8
+Sodium (mg)                            12362.0          3090.5
 Potassium (mg)                         14041.0          3510.2
-Calcium (mg)                            3150.0           787.5
-Magnesium (mg)                          1368.0           342.0
-Iron (mg)                                 41.7            10.4
-Zinc (mg)                                 46.7            11.7
-Iodine (μg)                              275.5            68.9
-Manganese (mg)                            10.5             2.6
+Calcium (mg)                            3179.0           794.8
+Magnesium (mg)                          1411.0           352.8
+Iron (mg)                                 47.1            11.8
+Zinc (mg)                                 52.2            13.1
+Iodine (μg)                              429.8           107.5
+Manganese (mg)                            19.4             4.8
 
 VITAMINS
 --------------------------------------------------------------------------------
 Nutrient                           4-Day Total   Daily Average
 --------------------------------------------------------------------------------
-Vitamin C (mg)                           252.4            63.1
+Vitamin C (mg)                           254.4            63.6
 
 ================================================================================
 
 DAILY AVERAGE vs TARGETS
 --------------------------------------------------------------------------------
 Energy: 3107 kcal / 2700 kcal avg target (115%)
-Protein: 175.6g / 170g min (103%)
+Protein: 175.7g / 170g min (103%)
 Fat: 118.8g / 70g min (170%)
-Carbs: 358.0g / 250g min (143%)
-Fiber: 40.1g / 40g min (100%)
+Carbs: 358.2g / 250g min (143%)
+Fiber: 40.4g / 40g min (101%)
 Saturated Fat: 37.0g / 20g max (185%)
-Sodium: 3089mg / 2300mg max (134%)
+Sodium: 3090mg / 2300mg max (134%)
 ================================================================================
