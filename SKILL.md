@@ -39,7 +39,7 @@ When the user has eaten a dish and you have completed **A) Estimating**:
      - Add optional notes if user provided context.
    - Proceed to **C) Daily Analysis** without asking the user.
 
-**After logging:** Show updated daily totals and gaps: "Logged ✓. Today: X/Y kcal, X/Y protein. Still need Z."
+**After logging:** Show updated daily totals and gaps: "Logged ✓. Today: X/Y kcal, X/Y protein. Still need Z." Remember that if the user asks you for lunch recommendations, they likely also want to have dinner later, so don't try to meet all targets with that single meal.
 
 ## C) DAILY SUMMARY
 - Aggregate logged dishes; compute totals vs **rest** or **training** day targets in `references/health-profile.yaml`.
@@ -53,3 +53,4 @@ The user may sometimes ask for custom analyses. The main data sources for these 
 - `references/health-profile.yaml` — Daily targets and monitored fields.
 - `references/METHODOLOGY.md` — General research methodology and best practices.
 - Venue-specific research notes in `data/food-data-bank/venues/{venue-name}/RESEARCH.md`
+- `scripts/calculate_nutrition_summary.py` — Multi-day nutrition summary script (default: last 7 days). Usage: `python3 scripts/calculate_nutrition_summary.py [days]`
