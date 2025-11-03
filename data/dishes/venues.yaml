@@ -1,0 +1,27 @@
+venues:
+  imperial-treasure-st-james:
+    display_name: "Imperial Treasure St. James"
+    id_slug: imperial_treasure_st_james
+  jean-georges-at-the-connaught:
+    display_name: "Jean-Georges at The Connaught"
+    id_slug: connaught
+  joe-and-the-juice:
+    display_name: "Joe & The Juice"
+    id_slug: jtj
+  leto-caffe:
+    display_name: "L'ETO Caffe"
+    id_slug: leto_soho
+  natural-fitness-food:
+    display_name: "Natural Fitness Food"
+    id_slug: nff
+  simple-health-kitchen:
+    display_name: "Simple Health Kitchen"
+    id_slug: shk
+  the-eagle-farringdon:
+    display_name: "The Eagle (Farringdon)"
+    id_slug: eagle_farringdon
+  zima-soho:
+    display_name: "Zima (Soho)"
+    id_slug: zima
+generic:
+  display_name: "Generic Items"

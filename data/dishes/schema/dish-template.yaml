@@ -1,0 +1,50 @@
+name: "{{NAME}}"
+id: {{ID}}
+version: {{VERSION}}
+last_verified: '{{DATE}}'
+source:
+  venue: "{{SOURCE_VENUE}}"
+  menu_page: ""
+  evidence: []
+aliases: []
+category: {{CATEGORY}}
+portion:
+  description: "{{PORTION_DESC}}"
+  est_weight_g: null
+  notes: ""
+assumptions:
+  salt_scheme: "normal"
+  oil_type: ""
+  prep: ""
+per_portion:
+  energy_kcal: null
+  protein_g: null
+  fat_g: null
+  sat_fat_g: null
+  mufa_g: null
+  pufa_g: null
+  trans_fat_g: null
+  cholesterol_mg: null
+  carbs_available_g: null
+  sugar_g: null
+  fiber_total_g: null
+  fiber_soluble_g: null
+  fiber_insoluble_g: null
+  sodium_mg: null
+  potassium_mg: null
+  iodine_ug: null
+  magnesium_mg: null
+  calcium_mg: null
+  iron_mg: null
+  zinc_mg: null
+  vitamin_c_mg: null
+  manganese_mg: null
+  polyols_g: null
+  carbs_total_g: null
+derived:
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+quality:
+  confidence: low
+  gaps: []
+notes: []
+change_log: []

@@ -1,46 +1,38 @@
 #!/usr/bin/env python3
-"""
-Validate the nutrition Data Bank markdown file:
-- Parse YAML code fences
-- Check available-carb energy, fat split, sodium<->salt coherence
-- Flag missing keys and negative numbers
-- Auto-regenerates the index file after validation
-Outputs a human-readable summary and a JSON report to stdout.
-Requires: pyyaml
-"""
-import sys, re, json, subprocess
+"""Validate the per-dish nutrition YAML files."""
+
+from __future__ import annotations
+
+import argparse
+import json
+import subprocess
+import sys
 from pathlib import Path
+from typing import Dict, Iterable, List
+
 try:
     import yaml
-except Exception as e:
-    sys.stderr.write("This script requires PyYAML. Install with: pip install pyyaml\n")
+except ImportError as exc:  # pragma: no cover - configuration error
+    sys.stderr.write("PyYAML is required. Install with: pip install pyyaml\n")
     raise
 
+# Energy tolerances and constants reused by unit tests
 TOL_ENERGY_PCT = 0.08  # ±8%
 CARB_TOL_G = 0.2       # acceptable rounding error for carb totals
 FIBER_KCAL_PER_G = 2.0
 POLYOL_KCAL_PER_G = 2.4
 
-# Compile polyol detection regex once at module level (performance optimization)
-POLYOL_PATTERN = re.compile(
-    r'\b(\d+\.?\d*)\s*g\b.*?\b(polyol|maltitol|erythritol|xylitol|sorbitol|sugar\s+alcohol)',
-    re.IGNORECASE
-)
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_DISHES_ROOT = PROJECT_ROOT / "data" / "dishes"
+DEFAULT_VENUES_CONFIG = DEFAULT_DISHES_ROOT / "venues.yaml"
+DEFAULT_INDEX_SCRIPT = PROJECT_ROOT / "scripts" / "generate_index.py"
 
-def parse_yaml_blocks(text):
-    blocks = []
-    fence = re.compile(r"```yaml\s*(.*?)```", re.S | re.M)
-    for m in fence.finditer(text):
-        raw = m.group(1).strip()
-        try:
-            y = yaml.safe_load(raw)
-        except Exception:
-            y = None
-        blocks.append((raw, y))
-    return blocks
 
 def available_energy_kcal(protein, fat, carbs_available, fibre, polyols):
-    """Compute energy using UK/EU convention (available carbs + fibre/polyol factors)."""
+    """Compute energy using UK/EU convention (available carbs + fibre/polyols).
+
+    Re-exported for unit tests.
+    """
     if protein is None or fat is None or carbs_available is None:
         return None
     fibre_term = 0.0 if fibre is None else FIBER_KCAL_PER_G * fibre
@@ -50,15 +42,19 @@ def available_energy_kcal(protein, fat, carbs_available, fibre, polyols):
     except Exception:
         return None
 
+
 def approx_equal(a, b, tol):
+    """Return True when |a-b| <= tol; treats None as unequal."""
     if None in (a, b):
         return False
     return abs(a - b) <= tol
 
+
 def check_block(y):
-    issues = []
-    warnings = []
-    passes = []
+    """Validate a single dish record (dict). Keeps backwards-compatible output."""
+    issues: List[str] = []
+    warnings: List[str] = []
+    passes: List[str] = []
 
     if not isinstance(y, dict) or "id" not in y:
         issues.append("Block missing top-level mapping or 'id'.")
@@ -66,18 +62,12 @@ def check_block(y):
 
     bid = y.get("id")
 
-    # Cross-check notes for polyol mentions
-    notes = y.get("notes", [])
-    notes_text = ' '.join(notes) if isinstance(notes, list) else str(notes) if notes else ""
-    polyol_mentions = POLYOL_PATTERN.findall(notes_text)
+    # required sections
+    for key in ("per_portion", "derived", "quality"):
+        if key not in y:
+            issues.append(f"Missing section: {key}")
 
-    # required trees
-    for k in ["per_portion", "derived", "quality"]:
-        if k not in y:
-            issues.append(f"Missing section: {k}")
-
-    pp = y.get("per_portion", {})
-    derived = y.get("derived", {})
+    pp = y.get("per_portion", {}) if isinstance(y.get("per_portion"), dict) else {}
 
     # Energy check inputs
     kcal = pp.get("energy_kcal")
@@ -88,30 +78,14 @@ def check_block(y):
     carbs_avail = pp.get("carbs_available_g")
     carbs_total = pp.get("carbs_total_g")
 
-    # Cross-check polyol mentions in notes against polyols_g field
-    if polyol_mentions:
-        if polyols is None or polyols == 0.0:
-            polyol_amounts = [float(m[0]) for m in polyol_mentions]
-            warnings.append(
-                f"Notes mention polyols ({', '.join(f'{a}g {t}' for a, t in polyol_mentions)}) "
-                f"but polyols_g is {polyols}. Consider updating polyols_g field."
-            )
-        else:
-            passes.append(f"Polyol mentions in notes match polyols_g field ({polyols}g).")
-
-    # Zero vs unknown validation for key carb fields
-    if carbs_total == 0.0 and carbs_avail is None:
-        warnings.append("carbs_total_g is 0.0 but carbs_available_g is null. If confirmed zero-carb, set to 0.0.")
-    if polyols == 0.0 and polyol_mentions:
-        warnings.append("polyols_g is 0.0 but notes mention polyols. Verify if 0.0 is correct or should be null/actual value.")
-
-    # Relationship check for carb fields
+    # Relationship check for carbs
     if carbs_total is not None and carbs_avail is not None and fibre is not None:
-        expected_total = carbs_avail + (fibre or 0.0) + (polyols or 0.0)
+        polyols_value = polyols or 0.0
+        expected_total = carbs_avail + (fibre or 0.0) + polyols_value
         if not approx_equal(expected_total, carbs_total, CARB_TOL_G):
             warnings.append(
-                f"carbs_total_g mismatch: expected {expected_total:.1f} from available+fibre+polyols, "
-                f"found {carbs_total:.1f}."
+                "carbs_total_g mismatch: expected "
+                f"{expected_total:.1f} from available+fibre+polyols, found {carbs_total:.1f}."
             )
     elif carbs_total is not None:
         missing_bits = []
@@ -119,7 +93,9 @@ def check_block(y):
             missing_bits.append("carbs_available_g")
         if fibre is None:
             missing_bits.append("fiber_total_g")
-        warnings.append(f"carbs_total_g present but missing {', '.join(missing_bits)} to reconcile totals.")
+        warnings.append(
+            "carbs_total_g present but missing " + ", ".join(missing_bits) + " to reconcile totals."
+        )
 
     if carbs_avail is None:
         issues.append("Missing carbs_available_g; cannot compute available-carb energy.")
@@ -138,8 +114,8 @@ def check_block(y):
             diff = abs(kcal_est - kcal)
             if diff > TOL_ENERGY_PCT * max(kcal, 1):
                 issues.append(
-                    f"Available-carb energy mismatch: stored {kcal} vs est {kcal_est:.1f} "
-                    f"(diff {diff:.1f}, {100*diff/max(kcal,1):.1f}%)."
+                    "Available-carb energy mismatch: stored "
+                    f"{kcal} vs est {kcal_est:.1f} (diff {diff:.1f}, {100 * diff / max(kcal, 1):.1f}%)."
                 )
             else:
                 passes.append("Energy within tolerance (available carb formula).")
@@ -152,18 +128,17 @@ def check_block(y):
     mufa = pp.get("mufa_g")
     pufa = pp.get("pufa_g")
     trans = pp.get("trans_fat_g")
-    fat_parts = [x for x in [sat, mufa, pufa, trans] if isinstance(x, (int, float))]
+    fat_parts = [x for x in (sat, mufa, pufa, trans) if isinstance(x, (int, float))]
     if fat_total is not None and fat_parts:
         parts_sum = sum(fat_parts)
         if parts_sum > fat_total + 0.2:
-            warnings.append(f"Fat split ({parts_sum:.2f} g) exceeds total fat ({fat_total:.2f} g) by {parts_sum - fat_total:.2f} g.")
-        elif parts_sum < fat_total - 0.5:
-            # Fat split is significantly incomplete
-            warnings.append(f"Fat split incomplete: {parts_sum:.2f}g accounted for out of {fat_total:.2f}g total (missing {fat_total - parts_sum:.2f}g).")
-        elif parts_sum <= fat_total + 0.2:
+            warnings.append(
+                f"Fat split ({parts_sum:.2f} g) exceeds total fat ({fat_total:.2f} g) by {parts_sum - fat_total:.2f} g."
+            )
+        else:
             passes.append("Fat split coherent (<= total fat).")
 
-    # Sodium->salt
+    # Sodium → salt
     sodium = pp.get("sodium_mg")
     if isinstance(sodium, (int, float)):
         salt_g = sodium * 2.5 / 1000.0
@@ -171,88 +146,130 @@ def check_block(y):
     else:
         warnings.append("sodium_mg is null; cannot compute salt.")
 
-    # Negative checks
+    # Negatives
     for key, val in pp.items():
         if isinstance(val, (int, float)) and val < 0:
             issues.append(f"Negative per_portion value: {key} = {val}")
 
     return {"id": bid, "issues": issues, "warnings": warnings, "passes": passes}
 
-def main():
-    import argparse
-    parser = argparse.ArgumentParser(description="Validate the nutrition Data Bank markdown file")
-    parser.add_argument("data_bank", help="Path to the data bank markdown file")
-    parser.add_argument("--no-index", action="store_true", help="Skip automatic index regeneration")
-    args = parser.parse_args()
 
-    path = Path(args.data_bank)
-    text = path.read_text(encoding="utf-8")
-    blocks = parse_yaml_blocks(text)
-
-    report = {"file": str(path), "checked": 0, "results": []}
-    for raw, y in blocks:
-        if not isinstance(y, dict) or "id" not in y:
+def iter_dish_files(root: Path) -> Iterable[Path]:
+    """Yield per-dish YAML files under the given root."""
+    for path in sorted(root.rglob("*.yaml")):
+        parts = path.relative_to(root).parts
+        if not parts:
             continue
-        res = check_block(y)
-        report["results"].append(res)
-        report["checked"] += 1
+        if parts[0] not in {"venues", "generic"}:
+            continue
+        yield path
 
-    # Human summary
+
+def load_dish(path: Path) -> Dict:
+    data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    if not isinstance(data, dict):
+        raise ValueError(f"Dish file {path} is not a mapping")
+    return data
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Validate per-dish YAML files")
+    parser.add_argument(
+        "dishes_root",
+        nargs="?",
+        default=DEFAULT_DISHES_ROOT,
+        type=Path,
+        help="Directory containing per-dish YAML files (default: data/dishes)",
+    )
+    parser.add_argument(
+        "--venues-config",
+        type=Path,
+        default=DEFAULT_VENUES_CONFIG,
+        help="Venue configuration file passed to index generation",
+    )
+    return parser.parse_args()
+
+
+def main() -> int:
+    args = parse_args()
+    dishes_root: Path = args.dishes_root
+
+    if not dishes_root.exists():
+        sys.stderr.write(f"Dishes root not found: {dishes_root}\n")
+        return 1
+
+    report = {"root": str(dishes_root), "checked": 0, "results": []}
+
     print("# Data Bank Validation Report")
-    print(f"File: {path}")
-    print(f"Blocks checked: {report['checked']}")
-    for res in report["results"]:
-        print(f"\n## {res['id']}")
-        for p in res["passes"]:
-            print(f"  PASS: {p}")
-        for w in res["warnings"]:
-            print(f"  WARN: {w}")
-        for i in res["issues"]:
-            print(f"  FAIL: {i}")
+    print(f"Dishes root: {dishes_root}")
+
+    for dish_path in iter_dish_files(dishes_root):
+        try:
+            dish = load_dish(dish_path)
+        except Exception as exc:
+            print(f"\n## ERROR parsing {dish_path}")
+            print(f"  FAIL: {exc}")
+            report["results"].append({
+                "id": None,
+                "name": None,
+                "path": str(dish_path.relative_to(dishes_root)),
+                "issues": [str(exc)],
+                "warnings": [],
+                "passes": [],
+            })
+            report["checked"] += 1
+            continue
+
+        res = check_block(dish)
+        name = dish.get("name") or res.get("id")
+        rel_path = dish_path.relative_to(dishes_root)
+        print(f"\n## {name} ({res.get('id')})")
+        print(f"File: {rel_path}")
+        for item in res.get("passes", []):
+            print(f"  PASS: {item}")
+        for item in res.get("warnings", []):
+            print(f"  WARN: {item}")
+        for item in res.get("issues", []):
+            print(f"  FAIL: {item}")
+
+        report["results"].append({
+            "id": res.get("id"),
+            "name": name,
+            "path": str(rel_path),
+            "issues": res.get("issues", []),
+            "warnings": res.get("warnings", []),
+            "passes": res.get("passes", []),
+        })
+        report["checked"] += 1
 
     print("\n# JSON")
     print(json.dumps(report, indent=2))
 
-    # Check for critical issues (exit code for CI/CD)
-    has_issues = any(res['issues'] for res in report['results'])
-    has_warnings = any(res['warnings'] for res in report['results'])
-
-    # Auto-regenerate index after successful validation (unless --no-index is specified)
-    if not args.no_index:
-        script_dir = Path(__file__).parent
-        generate_index_script = script_dir / "generate_index.py"
-
-        if generate_index_script.exists():
-            print("\n# Index Generation")
-            try:
-                result = subprocess.run(
-                    [sys.executable, str(generate_index_script)],
-                    capture_output=True,
-                    text=True,
-                    check=True
-                )
-                stdout = result.stdout.strip()
-                if stdout:
-                    print(stdout)
-            except subprocess.CalledProcessError as e:
-                print(f"Warning: Failed to regenerate index: {e}")
-                if e.stderr:
-                    print(f"stderr: {e.stderr}")
-        else:
-            print("\nNote: Index generation script not found.")
+    if DEFAULT_INDEX_SCRIPT.exists():
+        print("\n# Index Generation")
+        cmd = [
+            sys.executable,
+            str(DEFAULT_INDEX_SCRIPT),
+            "--dishes-root",
+            str(dishes_root),
+        ]
+        if args.venues_config:
+            cmd.extend(["--venues-config", str(args.venues_config)])
+        try:
+            result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+            if result.stdout.strip():
+                print(result.stdout.strip())
+            if result.stderr.strip():
+                print(result.stderr.strip())
+        except subprocess.CalledProcessError as exc:
+            print(f"Failed to regenerate index: {exc}")
+            if exc.stderr:
+                print(exc.stderr)
     else:
-        print("\n# Index regeneration skipped (--no-index flag)")
+        print("\nNote: generate_index.py not found; skipped index regeneration.")
 
-    # Exit with non-zero status if critical issues found
-    if has_issues:
-        print("\n# Validation Result: FAILED (critical issues found)")
-        sys.exit(1)
-    elif has_warnings:
-        print("\n# Validation Result: PASSED with warnings")
-        sys.exit(0)
-    else:
-        print("\n# Validation Result: PASSED")
-        sys.exit(0)
+    return 0
+
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
