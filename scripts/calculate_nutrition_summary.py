@@ -1,30 +1,75 @@
 #!/usr/bin/env python3
-"""Calculate nutrition totals and averages from daily logs."""
+"""Calculate nutrition totals and averages from daily logs.
 
+By default, analyzes the last 7 days (excluding today).
+Usage: python3 calculate_nutrition_summary.py [days]
+Example: python3 calculate_nutrition_summary.py 14  # Last 14 days
+"""
+
+import sys
 import yaml
 from pathlib import Path
 from collections import defaultdict
+from datetime import datetime, timedelta
 
-# Files to process (excluding today - Nov 3)
-log_files = [
-    "data/logs/2025-10/30.yaml",
-    "data/logs/2025-10/31.yaml",
-    "data/logs/2025-11/01.yaml",
-    "data/logs/2025-11/02.yaml",
-]
+# Get number of days from command line argument (default: 7)
+num_days_to_analyze = 7
+if len(sys.argv) > 1:
+    try:
+        num_days_to_analyze = int(sys.argv[1])
+    except ValueError:
+        print(f"Error: Invalid number of days '{sys.argv[1]}'. Using default of 7.")
+        num_days_to_analyze = 7
+
+# Get today's date (excluding today from analysis)
+today = datetime.now().date()
+
+# Find all log files
+log_dir = Path("data/logs")
+log_files_with_dates = []
+
+for year_month_dir in sorted(log_dir.iterdir()):
+    if not year_month_dir.is_dir():
+        continue
+
+    for log_file in year_month_dir.glob("*.yaml"):
+        # Parse date from file structure: data/logs/YYYY-MM/DD.yaml
+        try:
+            year_month = year_month_dir.name  # e.g., "2025-10"
+            day = log_file.stem  # e.g., "30"
+            file_date = datetime.strptime(f"{year_month}-{day}", "%Y-%m-%d").date()
+
+            # Exclude today
+            if file_date < today:
+                log_files_with_dates.append((file_date, log_file))
+        except ValueError:
+            continue  # Skip files that don't match expected format
+
+# Sort by date (most recent first) and take last X days
+log_files_with_dates.sort(reverse=True)
+log_files_to_process = log_files_with_dates[:num_days_to_analyze]
+
+# Sort chronologically for processing
+log_files_to_process.sort()
+
+if not log_files_to_process:
+    print("No log files found to process.")
+    sys.exit(1)
 
 # Initialize totals dictionary
 totals = defaultdict(float)
 counts = defaultdict(int)  # Track non-null counts for averaging
 day_types = []  # Track day types for accurate target calculation
+dates_processed = []
 
 # Process each log file
-for log_file in log_files:
+for file_date, log_file in log_files_to_process:
     with open(log_file, 'r') as f:
         data = yaml.safe_load(f)
 
-    # Track day type
+    # Track day type and date
     day_types.append(data.get('day_type', 'rest'))
+    dates_processed.append(file_date)
 
     # Process each entry
     for entry in data.get('entries', []):
@@ -38,22 +83,26 @@ for log_file in log_files:
                     totals[key] += value
                     counts[key] += 1
 
-# Calculate averages (divide by number of days)
-num_days = len(log_files)
+# Calculate averages (divide by number of days actually processed)
+num_days = len(log_files_to_process)
 averages = {}
 for key, total in totals.items():
     averages[key] = total / num_days
 
+# Format date range for display
+date_range = f"{dates_processed[0].strftime('%b %d')} - {dates_processed[-1].strftime('%b %d, %Y')}"
+period_label = f"{num_days}-Day"
+
 # Format and print the table
 print("\n" + "="*80)
-print("NUTRITION SUMMARY - 4 DAYS (Oct 30 - Nov 2, 2025)")
+print(f"NUTRITION SUMMARY - {num_days} DAYS ({date_range})")
 print("="*80)
 print()
 
 # Energy and macros
 print("MACRONUTRIENTS")
 print("-" * 80)
-print(f"{'Nutrient':<30} {'4-Day Total':>15} {'Daily Average':>15}")
+print(f"{'Nutrient':<30} {f'{period_label} Total':>15} {'Daily Average':>15}")
 print("-" * 80)
 
 macro_fields = [
@@ -74,7 +123,7 @@ print()
 # Fat breakdown
 print("FAT BREAKDOWN")
 print("-" * 80)
-print(f"{'Nutrient':<30} {'4-Day Total':>15} {'Daily Average':>15}")
+print(f"{'Nutrient':<30} {f'{period_label} Total':>15} {'Daily Average':>15}")
 print("-" * 80)
 
 fat_fields = [
@@ -95,7 +144,7 @@ print()
 # Carb breakdown
 print("CARBOHYDRATE BREAKDOWN")
 print("-" * 80)
-print(f"{'Nutrient':<30} {'4-Day Total':>15} {'Daily Average':>15}")
+print(f"{'Nutrient':<30} {f'{period_label} Total':>15} {'Daily Average':>15}")
 print("-" * 80)
 
 carb_fields = [
@@ -114,7 +163,7 @@ print()
 # Minerals
 print("MINERALS")
 print("-" * 80)
-print(f"{'Nutrient':<30} {'4-Day Total':>15} {'Daily Average':>15}")
+print(f"{'Nutrient':<30} {f'{period_label} Total':>15} {'Daily Average':>15}")
 print("-" * 80)
 
 mineral_fields = [
@@ -137,7 +186,7 @@ print()
 # Vitamins
 print("VITAMINS")
 print("-" * 80)
-print(f"{'Nutrient':<30} {'4-Day Total':>15} {'Daily Average':>15}")
+print(f"{'Nutrient':<30} {f'{period_label} Total':>15} {'Daily Average':>15}")
 print("-" * 80)
 
 vitamin_fields = [
