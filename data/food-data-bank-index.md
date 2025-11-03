@@ -1,7 +1,7 @@
 ---
 title: Food Data Bank Index
 description: Auto-generated index of all dishes in the food data bank
-generated: 2025-11-03 05:07:13 UTC
+generated: 2025-11-03 08:22:16 UTC
 ---
 
 # Food Data Bank Index
@@ -11,7 +11,7 @@ generated: 2025-11-03 05:07:13 UTC
 
 ## Overview
 
-Total dishes: 58
+Total dishes: 60
 
 - **Venues**: 8 categories
 - **Packaged Products**: 7 categories
@@ -205,13 +205,15 @@ Total dishes: 58
 
 *Location: `data/food-data-bank/generic/ingredients/`*
 
-**7 dishes:**
+**9 dishes:**
 
 - [Blueberries - 150 g](food-data-bank/generic/ingredients/blueberries_150g_v1.md) {#blueberries_150g_v1}
+- [Greek Yogurt 0% Fat - 200 g](food-data-bank/generic/ingredients/greek_yogurt_0pct_200g_v1.md) {#greek_yogurt_0pct_200g_v1}
 - [Hazelnuts, 30 g](food-data-bank/generic/ingredients/hazelnuts_30g_v1.md) {#hazelnuts_30g_v1}
 - [Mixed Pineapple/Mango/Passion Fruit (150 g)](food-data-bank/generic/ingredients/pine_mango_passion_150g_v1.md) {#pine_mango_passion_150g_v1}
 - [Oats - dry (50 g)](food-data-bank/generic/ingredients/oats_dry_50g_v1.md) {#oats_dry_50g_v1}
 - [Pistachios, 30 g](food-data-bank/generic/ingredients/pistachios_30g_v1.md) {#pistachios_30g_v1}
+- [Raspberries - 150 g](food-data-bank/generic/ingredients/raspberries_150g_v1.md) {#raspberries_150g_v1}
 - [Skyr - plain (200 g)](food-data-bank/generic/ingredients/skyr_plain_200g_v1.md) {#skyr_plain_200g_v1}
 - [Sunflower Seeds, 30 g](food-data-bank/generic/ingredients/sunflower_seeds_30g_v1.md) {#sunflower_seeds_30g_v1}
 
