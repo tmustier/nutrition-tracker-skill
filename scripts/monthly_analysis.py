@@ -79,7 +79,9 @@ def parse_daily_log(log_file: Path) -> Dict:
 
         entry_items = []
         for item in entry.get('items', []):
-            item_name = item.get('name')
+            item_name = item.get('name', '')
+            if not item_name:  # Skip items without names
+                continue
             items_consumed.append(item_name)
             entry_items.append(item_name)
 
@@ -248,8 +250,13 @@ def analyze_month(year: int, month: int) -> Dict:
     rest_days = [d for d in daily_data if d.get('day_type') == 'rest']
     training_days = [d for d in daily_data if d.get('day_type') == 'training']
 
-    compliance['energy_rest'] = sum(1 for d in rest_days if d['totals'].get('energy_kcal', 0) <= targets['energy_kcal']['rest_day_max'])
-    compliance['energy_training'] = sum(1 for d in training_days if d['totals'].get('energy_kcal', 0) <= targets['energy_kcal']['training_day_max'])
+    # Safe access to energy targets with fallback
+    energy_targets = targets.get('energy_kcal', {})
+    rest_day_max = energy_targets.get('rest_day_max', float('inf'))
+    training_day_max = energy_targets.get('training_day_max', float('inf'))
+
+    compliance['energy_rest'] = sum(1 for d in rest_days if d['totals'].get('energy_kcal', 0) <= rest_day_max)
+    compliance['energy_training'] = sum(1 for d in training_days if d['totals'].get('energy_kcal', 0) <= training_day_max)
 
     analysis['summary'] = summary
     analysis['compliance'] = compliance
@@ -342,52 +349,40 @@ def analyze_month(year: int, month: int) -> Dict:
     return analysis
 
 
-def generate_markdown_report(analysis: Dict) -> str:
-    """Generate comprehensive markdown report."""
-    if not analysis:
-        return "# No data available\n"
+def _generate_executive_summary(analysis: Dict) -> List[str]:
+    """Generate the executive summary section."""
+    lines = []
+    lines.append("## 📈 EXECUTIVE SUMMARY")
+    lines.append("")
+    lines.append(f"```")
+    lines.append(f"📅 Days Logged:        {analysis['days_logged']} days")
+    lines.append(f"🏋️  Training Days:      {analysis['training_days']} days")
+    lines.append(f"😴 Rest Days:          {analysis['rest_days']} days")
 
-    year = analysis['year']
-    month = analysis['month']
-    month_name = analysis['month_name']
-    days_logged = analysis['days_logged']
-    profile = analysis['profile']
-    targets = profile.get('targets', {})
-    summary = analysis['summary']
+    # Calculate compliance percentage (exclude energy checks as they're context-dependent)
     compliance = analysis['compliance']
-    meal_freq = analysis['meal_frequency']
-
-    # Calculate overall compliance rate
-    total_checks = sum(compliance.values())
-    max_checks = days_logged * 6  # 6 main targets
+    nutrient_checks = ['protein_min', 'fat_min', 'carbs_min', 'fiber_min', 'sat_fat_max', 'sodium_max']
+    total_checks = sum(compliance[key] for key in nutrient_checks)
+    max_checks = analysis['days_logged'] * 6
     compliance_pct = (total_checks / max_checks * 100) if max_checks > 0 else 0
 
-    report = []
+    lines.append(f"🎯 Overall Compliance: {compliance_pct:.1f}%")
+    lines.append(f"🍽️  Unique Foods:       {analysis['unique_foods']} items")
+    lines.append(f"```")
+    lines.append("")
+    return lines
 
-    # Header
-    report.append(f"# 📊 MONTHLY NUTRITION ANALYSIS")
-    report.append(f"## {month_name} {year}")
-    report.append("")
-    report.append("━" * 80)
-    report.append("")
 
-    # Executive Summary
-    report.append("## 📈 EXECUTIVE SUMMARY")
-    report.append("")
-    report.append(f"```")
-    report.append(f"📅 Days Logged:        {days_logged} days")
-    report.append(f"🏋️  Training Days:      {analysis['training_days']} days")
-    report.append(f"😴 Rest Days:          {analysis['rest_days']} days")
-    report.append(f"🎯 Overall Compliance: {compliance_pct:.1f}%")
-    report.append(f"🍽️  Unique Foods:       {analysis['unique_foods']} items")
-    report.append(f"```")
-    report.append("")
+def _generate_meal_frequency_section(analysis: Dict) -> List[str]:
+    """Generate meal frequency analysis section."""
+    lines = []
+    meal_freq = analysis['meal_frequency']
+    days_logged = analysis['days_logged']
 
-    # Meal Frequency Dashboard
-    report.append("## 🍽️ MEAL FREQUENCY ANALYSIS")
-    report.append("")
-    report.append("| Meal Type | Days Logged | % of Days | Status |")
-    report.append("|-----------|-------------|-----------|--------|")
+    lines.append("## 🍽️ MEAL FREQUENCY ANALYSIS")
+    lines.append("")
+    lines.append("| Meal Type | Days Logged | % of Days | Status |")
+    lines.append("|-----------|-------------|-----------|--------|")
 
     for meal_type in ['breakfast', 'lunch', 'dinner', 'late_night']:
         count = meal_freq.get(meal_type, 0)
@@ -399,9 +394,9 @@ def generate_markdown_report(analysis: Dict) -> str:
         else:
             status = "⚠️ Missing meals" if pct < 90 and meal_type != 'late_night' else "✅"
 
-        report.append(f"| {meal_type.title()} | {count}/{days_logged} | {pct:.1f}% | {status} |")
+        lines.append(f"| {meal_type.title()} | {count}/{days_logged} | {pct:.1f}% | {status} |")
 
-    report.append("")
+    lines.append("")
 
     # Key insights
     missing_meals = []
@@ -413,52 +408,63 @@ def generate_markdown_report(analysis: Dict) -> str:
         missing_meals.append(f"**Dinner** missing on {days_logged - meal_freq.get('dinner', 0)} days")
 
     if missing_meals:
-        report.append("### ⚠️ Missing Meals Detected")
-        report.append("")
+        lines.append("### ⚠️ Missing Meals Detected")
+        lines.append("")
         for msg in missing_meals:
-            report.append(f"- {msg}")
-        report.append("")
+            lines.append(f"- {msg}")
+        lines.append("")
 
-    # Meal Timing Analysis
-    report.append("## ⏰ MEAL TIMING & EATING PATTERNS")
-    report.append("")
+    return lines
 
+
+def _generate_meal_timing_section(analysis: Dict) -> List[str]:
+    """Generate meal timing and eating patterns section."""
+    lines = []
     timing = analysis.get('timing', {})
     avg_window = timing.get('avg_eating_window', 0)
     first_meals = timing.get('first_meals', [])
     last_meals = timing.get('last_meals', [])
 
-    report.append(f"```")
+    lines.append("## ⏰ MEAL TIMING & EATING PATTERNS")
+    lines.append("")
+    lines.append(f"```")
     if avg_window > 0:
-        report.append(f"Average Eating Window:  {avg_window:.1f} hours")
+        lines.append(f"Average Eating Window:  {avg_window:.1f} hours")
     if first_meals:
         earliest = min(first_meals)
         latest_first = max(first_meals)
-        report.append(f"First Meal Range:       {earliest} - {latest_first}")
+        lines.append(f"First Meal Range:       {earliest} - {latest_first}")
     if last_meals:
         earliest_last = min(last_meals)
         latest = max(last_meals)
-        report.append(f"Last Meal Range:        {earliest_last} - {latest}")
-    report.append(f"```")
-    report.append("")
+        lines.append(f"Last Meal Range:        {earliest_last} - {latest}")
+    lines.append(f"```")
+    lines.append("")
 
     # Interpretation
     if avg_window > 0:
         if avg_window < 10:
-            report.append(f"✅ **Tight eating window** (~{avg_window:.1f}h): This time-restricted pattern may support metabolic health and circadian rhythms.")
+            lines.append(f"✅ **Tight eating window** (~{avg_window:.1f}h): This time-restricted pattern may support metabolic health and circadian rhythms.")
         elif avg_window < 12:
-            report.append(f"✅ **Moderate eating window** (~{avg_window:.1f}h): Balanced approach with adequate fasting period.")
+            lines.append(f"✅ **Moderate eating window** (~{avg_window:.1f}h): Balanced approach with adequate fasting period.")
         else:
-            report.append(f"ℹ️ **Extended eating window** (~{avg_window:.1f}h): Consider consolidating meals for better metabolic benefits.")
-    report.append("")
+            lines.append(f"ℹ️ **Extended eating window** (~{avg_window:.1f}h): Consider consolidating meals for better metabolic benefits.")
+    lines.append("")
 
-    # Target Achievement Dashboard
-    report.append("## 🎯 TARGET ACHIEVEMENT")
-    report.append("")
+    return lines
+
+
+def _generate_target_achievement_section(analysis: Dict, targets: Dict) -> List[str]:
+    """Generate target achievement section with macros, energy, and limits."""
+    lines = []
+    summary = analysis['summary']
+
+    lines.append("## 🎯 TARGET ACHIEVEMENT")
+    lines.append("")
 
     # Macronutrients
-    report.append("### Macronutrients")
-    report.append("")
+    lines.append("### Macronutrients")
+    lines.append("")
 
     macro_targets = [
         ('Protein', 'protein_g', targets.get('protein_g_min'), 'min'),
@@ -477,32 +483,34 @@ def generate_markdown_report(analysis: Dict) -> str:
 
         bar = generate_bar_chart(avg, target_val * 1.5 if target_type == 'min' else target_val * 2, target=target_val)
 
-        report.append(f"**{label}** (target: {target_val}{key.split('_')[-1]})")
-        report.append(f"```")
-        report.append(f"Average:  {bar}")
-        report.append(f"Range:    {summary[key]['min']:.1f} - {summary[key]['max']:.1f}")
-        report.append(f"Status:   {status}")
-        report.append(f"```")
-        report.append("")
+        lines.append(f"**{label}** (target: {target_val}{key.split('_')[-1]})")
+        lines.append(f"```")
+        lines.append(f"Average:  {bar}")
+        lines.append(f"Range:    {summary[key]['min']:.1f} - {summary[key]['max']:.1f}")
+        lines.append(f"Status:   {status}")
+        lines.append(f"```")
+        lines.append("")
 
     # Energy
-    report.append("### Energy")
-    report.append("")
+    lines.append("### Energy")
+    lines.append("")
     avg_energy = summary['energy_kcal']['mean']
-    rest_target = targets['energy_kcal']['rest_day_max']
-    training_target = targets['energy_kcal']['training_day_max']
+    # Safe access to energy targets
+    energy_targets = targets.get('energy_kcal', {})
+    rest_target = energy_targets.get('rest_day_max', 2000)
+    training_target = energy_targets.get('training_day_max', 2500)
 
-    report.append(f"**Daily Energy** (Rest: {rest_target} kcal | Training: {training_target} kcal)")
-    report.append(f"```")
+    lines.append(f"**Daily Energy** (Rest: {rest_target} kcal | Training: {training_target} kcal)")
+    lines.append(f"```")
     bar = generate_bar_chart(avg_energy, training_target * 1.2)
-    report.append(f"Average:  {bar}")
-    report.append(f"Range:    {summary['energy_kcal']['min']:.0f} - {summary['energy_kcal']['max']:.0f} kcal")
-    report.append(f"```")
-    report.append("")
+    lines.append(f"Average:  {bar}")
+    lines.append(f"Range:    {summary['energy_kcal']['min']:.0f} - {summary['energy_kcal']['max']:.0f} kcal")
+    lines.append(f"```")
+    lines.append("")
 
     # Limits (things to stay under)
-    report.append("### Limits (Stay Under)")
-    report.append("")
+    lines.append("### Limits (Stay Under)")
+    lines.append("")
 
     limit_targets = [
         ('Saturated Fat', 'sat_fat_g', targets.get('sat_fat_g_max'), 'max'),
@@ -514,13 +522,270 @@ def generate_markdown_report(analysis: Dict) -> str:
         status = generate_compliance_indicator(avg, target_max=target_val)
         bar = generate_bar_chart(avg, target_val * 1.5, target=target_val)
 
-        report.append(f"**{label}** (max: {target_val}{key.split('_')[-1]})")
-        report.append(f"```")
-        report.append(f"Average:  {bar}")
-        report.append(f"Range:    {summary[key]['min']:.1f} - {summary[key]['max']:.1f}")
-        report.append(f"Status:   {status}")
-        report.append(f"```")
-        report.append("")
+        lines.append(f"**{label}** (max: {target_val}{key.split('_')[-1]})")
+        lines.append(f"```")
+        lines.append(f"Average:  {bar}")
+        lines.append(f"Range:    {summary[key]['min']:.1f} - {summary[key]['max']:.1f}")
+        lines.append(f"Status:   {status}")
+        lines.append(f"```")
+        lines.append("")
+
+    return lines
+
+
+def _generate_diet_quality_section(analysis: Dict, targets: Dict) -> List[str]:
+    """Generate diet quality score and comprehensive assessment."""
+    lines = []
+    summary = analysis['summary']
+    days_logged = analysis['days_logged']
+    meal_freq = analysis['meal_frequency']
+
+    # Calculate average values for analysis
+    avg_sat = summary['sat_fat_g']['mean']
+    avg_mufa = summary['mufa_g']['mean']
+    avg_pufa = summary['pufa_g']['mean']
+    avg_total_fat = summary['fat_g']['mean']
+    avg_sodium = summary['sodium_mg']['mean']
+    avg_potassium = summary['potassium_mg']['mean']
+    na_k_ratio = avg_sodium / avg_potassium if avg_potassium > 0 else 999
+    sat_pct = (avg_sat / avg_total_fat * 100) if avg_total_fat > 0 else 0
+
+    sugar_data = analysis.get('sugar_analysis', {})
+    avg_sugar = sugar_data.get('avg_sugar_g', 0)
+
+    alcohol_data = analysis.get('alcohol', {})
+    days_with_alcohol = alcohol_data.get('days_with_alcohol', 0)
+    total_drinks = alcohol_data.get('estimated_drinks', 0)
+
+    timing = analysis.get('timing', {})
+    avg_window = timing.get('avg_eating_window', 0)
+
+    lines.append("## 📝 OVERALL DIET COMMENTARY")
+    lines.append("")
+
+    # Calculate diet quality score (0-100)
+    score_components = []
+
+    # Protein compliance (0-15 points)
+    protein_avg = summary['protein_g']['mean']
+    protein_target = targets.get('protein_g_min', 170)
+    protein_score = min(15, (protein_avg / protein_target) * 15)
+    score_components.append(protein_score)
+
+    # Fiber adequacy (0-15 points)
+    fiber_avg = summary['fiber_total_g']['mean']
+    fiber_target = targets.get('fiber_g_min', 40)
+    fiber_score = min(15, (fiber_avg / fiber_target) * 15)
+    score_components.append(fiber_score)
+
+    # Fat quality (0-15 points) - higher unsaturated fat ratio is better
+    unsat_to_sat_ratio = (avg_mufa + avg_pufa) / avg_sat if avg_sat > 0 else 1
+    fat_quality_score = min(15, unsat_to_sat_ratio * 5)
+    score_components.append(fat_quality_score)
+
+    # Sodium control (0-15 points)
+    sodium_target = targets.get('sodium_mg_max', 2300)
+    sodium_score = 15 if avg_sodium <= sodium_target else max(0, 15 - ((avg_sodium - sodium_target) / 100))
+    score_components.append(sodium_score)
+
+    # Sugar control (0-10 points)
+    sugar_score = 10 if avg_sugar < 25 else (5 if avg_sugar < 50 else max(0, 10 - ((avg_sugar - 50) / 5)))
+    score_components.append(sugar_score)
+
+    # Meal consistency (0-10 points)
+    meal_consistency_score = (meal_freq.get('breakfast', 0) + meal_freq.get('lunch', 0) + meal_freq.get('dinner', 0)) / (days_logged * 3) * 10
+    score_components.append(meal_consistency_score)
+
+    # Food diversity (0-10 points)
+    diversity_score = min(10, (analysis['unique_foods'] / days_logged) * 2)
+    score_components.append(diversity_score)
+
+    # Micronutrient adequacy (0-10 points) - based on potassium, calcium, magnesium
+    potassium_adequacy = min(1, summary['potassium_mg']['mean'] / 3500)  # RDA ~3500mg
+    calcium_adequacy = min(1, summary['calcium_mg']['mean'] / 1000)  # RDA ~1000mg
+    magnesium_adequacy = min(1, summary['magnesium_mg']['mean'] / 400)  # RDA ~400mg
+    micronutrient_score = (potassium_adequacy + calcium_adequacy + magnesium_adequacy) / 3 * 10
+    score_components.append(micronutrient_score)
+
+    total_score = sum(score_components)
+
+    # Generate commentary
+    lines.append("### Diet Quality Score")
+    lines.append("")
+
+    score_bar = generate_bar_chart(total_score, 100, width=50)
+    lines.append(f"```")
+    lines.append(f"Overall Score: {score_bar}")
+    lines.append(f"```")
+    lines.append("")
+
+    if total_score >= 85:
+        quality_rating = "⭐⭐⭐⭐⭐ EXCELLENT"
+        quality_desc = "Your diet demonstrates outstanding nutritional quality with strong compliance across all key metrics."
+    elif total_score >= 70:
+        quality_rating = "⭐⭐⭐⭐ VERY GOOD"
+        quality_desc = "Your diet shows very good nutritional quality with room for minor improvements."
+    elif total_score >= 55:
+        quality_rating = "⭐⭐⭐ GOOD"
+        quality_desc = "Your diet has a solid foundation but would benefit from addressing several areas."
+    elif total_score >= 40:
+        quality_rating = "⭐⭐ NEEDS IMPROVEMENT"
+        quality_desc = "Your diet requires attention in multiple areas to support your health and fitness goals."
+    else:
+        quality_rating = "⭐ SIGNIFICANT CHANGES NEEDED"
+        quality_desc = "Your current dietary pattern needs substantial improvement across most nutritional areas."
+
+    lines.append(f"**{quality_rating}** ({total_score:.0f}/100)")
+    lines.append("")
+    lines.append(quality_desc)
+    lines.append("")
+
+    # Detailed commentary
+    lines.append("### Comprehensive Assessment")
+    lines.append("")
+
+    # Macronutrient balance
+    protein_pct = (summary['protein_g']['mean'] * 4 / summary['energy_kcal']['mean'] * 100) if summary['energy_kcal']['mean'] > 0 else 0
+    fat_pct = (summary['fat_g']['mean'] * 9 / summary['energy_kcal']['mean'] * 100) if summary['energy_kcal']['mean'] > 0 else 0
+    carb_pct = (summary['carbs_total_g']['mean'] * 4 / summary['energy_kcal']['mean'] * 100) if summary['energy_kcal']['mean'] > 0 else 0
+
+    lines.append("**Macronutrient Distribution:**")
+    lines.append(f"- Protein: {protein_pct:.0f}% of calories ({summary['protein_g']['mean']:.1f}g/day)")
+    lines.append(f"- Fat: {fat_pct:.0f}% of calories ({summary['fat_g']['mean']:.1f}g/day)")
+    lines.append(f"- Carbohydrates: {carb_pct:.0f}% of calories ({summary['carbs_total_g']['mean']:.1f}g/day)")
+    lines.append("")
+
+    # Macro balance assessment
+    if 25 <= protein_pct <= 35:
+        lines.append(f"✅ Protein intake is well-optimized for muscle maintenance and body composition goals.")
+    elif protein_pct < 25:
+        lines.append(f"📈 Protein could be increased to better support training and recovery.")
+    else:
+        lines.append(f"ℹ️ Very high protein intake - ensure adequate hydration and kidney function monitoring.")
+    lines.append("")
+
+    # Diet pattern analysis
+    lines.append("**Dietary Pattern Analysis:**")
+
+    strengths = []
+    concerns = []
+
+    # Identify strengths
+    if meal_consistency_score >= 9:
+        strengths.append("Excellent meal timing consistency")
+    if fiber_score >= 13:
+        strengths.append("Outstanding fiber intake")
+    if protein_score >= 13:
+        strengths.append("Excellent protein intake")
+    if na_k_ratio < 1:
+        strengths.append("Optimal sodium:potassium ratio")
+    if fat_quality_score >= 12:
+        strengths.append("High-quality fat sources")
+    if sugar_score >= 8:
+        strengths.append("Well-controlled sugar intake")
+    if diversity_score >= 8:
+        strengths.append("Excellent dietary variety")
+
+    # Identify concerns
+    if fiber_score < 10:
+        concerns.append("Insufficient fiber intake")
+    if protein_score < 12:
+        concerns.append("Suboptimal protein for goals")
+    if sodium_score < 10:
+        concerns.append("Elevated sodium levels")
+    if sat_pct > 33:
+        concerns.append("High saturated fat percentage")
+    if sugar_score < 5:
+        concerns.append("Excessive sugar consumption")
+    if meal_consistency_score < 7:
+        concerns.append("Inconsistent meal timing")
+    if days_with_alcohol > days_logged * 0.5:
+        concerns.append("Frequent alcohol consumption")
+
+    if strengths:
+        lines.append("")
+        lines.append("**Strengths:**")
+        for strength in strengths:
+            lines.append(f"- ✅ {strength}")
+
+    if concerns:
+        lines.append("")
+        lines.append("**Areas for Improvement:**")
+        for concern in concerns:
+            lines.append(f"- ⚠️ {concern}")
+
+    lines.append("")
+
+    # Health implications
+    lines.append("**Health & Performance Implications:**")
+    lines.append("")
+
+    # Provide contextualized insights
+    implications = []
+
+    protein_target = targets.get('protein_g_min', 170)
+    if protein_avg >= protein_target * 0.95:
+        implications.append("✅ **Muscle preservation:** Protein intake supports lean mass maintenance during body recomposition.")
+    else:
+        implications.append("⚠️ **Muscle risk:** Suboptimal protein may compromise muscle retention, especially in caloric deficit or intense training.")
+
+    if fiber_avg >= 35:
+        implications.append("✅ **Gut health:** High fiber intake supports beneficial gut bacteria, digestive health, and stable blood sugar.")
+    else:
+        implications.append("ℹ️ **Digestive health:** Increasing fiber would benefit gut microbiome, satiety, and metabolic health.")
+
+    if na_k_ratio < 1:
+        implications.append("✅ **Cardiovascular health:** Excellent sodium:potassium balance supports healthy blood pressure.")
+    else:
+        implications.append("⚠️ **Blood pressure:** Elevated sodium:potassium ratio may increase cardiovascular strain. Add more fruits and vegetables.")
+
+    if sat_pct > 33:
+        implications.append("⚠️ **Heart health:** High saturated fat intake may negatively impact cholesterol profiles. Emphasize unsaturated fats from nuts, avocados, fatty fish, and olive oil.")
+
+    if avg_window > 0 and avg_window < 12:
+        implications.append("✅ **Metabolic health:** Time-restricted eating pattern may enhance insulin sensitivity and fat oxidation.")
+
+    if days_with_alcohol > 0:
+        drinks_per_week = (total_drinks / days_logged) * 7
+        if drinks_per_week > 14:
+            implications.append("⚠️ **Recovery impact:** High alcohol consumption can impair muscle recovery, sleep quality, and fat metabolism.")
+        elif drinks_per_week > 7:
+            implications.append("ℹ️ **Training optimization:** Moderate alcohol intake may affect training performance and recovery. Consider timing around workout days.")
+
+    for implication in implications:
+        lines.append(implication)
+
+    lines.append("")
+
+    return lines
+
+
+def generate_markdown_report(analysis: Dict) -> str:
+    """Generate comprehensive markdown report using modular helper functions."""
+    if not analysis:
+        return "# No data available\n"
+
+    year = analysis['year']
+    month = analysis['month']
+    month_name = analysis['month_name']
+    profile = analysis['profile']
+    targets = profile.get('targets', {})
+    summary = analysis['summary']
+
+    report = []
+
+    # Header
+    report.append(f"# 📊 MONTHLY NUTRITION ANALYSIS")
+    report.append(f"## {month_name} {year}")
+    report.append("")
+    report.append("━" * 80)
+    report.append("")
+
+    # Use helper functions for major sections
+    report.extend(_generate_executive_summary(analysis))
+    report.extend(_generate_meal_frequency_section(analysis))
+    report.extend(_generate_meal_timing_section(analysis))
+    report.extend(_generate_target_achievement_section(analysis, targets))
 
     # Micronutrients
     report.append("## 🔬 MICRONUTRIENT AVERAGES")
@@ -695,10 +960,12 @@ def generate_markdown_report(analysis: Dict) -> str:
         protein_ok = protein >= targets.get('protein_g_min', 0)
         fiber_ok = fiber >= targets.get('fiber_g_min', 0)
 
+        # Safe access to energy targets
+        energy_targets = targets.get('energy_kcal', {})
         if day_type == 'rest':
-            energy_ok = energy <= targets['energy_kcal']['rest_day_max']
+            energy_ok = energy <= energy_targets.get('rest_day_max', float('inf'))
         else:
-            energy_ok = energy <= targets['energy_kcal']['training_day_max']
+            energy_ok = energy <= energy_targets.get('training_day_max', float('inf'))
 
         status = "✅" if (protein_ok and fiber_ok and energy_ok and meal_count == 3) else "⚠️"
 
@@ -947,7 +1214,7 @@ def generate_markdown_report(analysis: Dict) -> str:
     report.append("")
     report.append("━" * 80)
     report.append("")
-    report.append(f"*Report generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}*")
+    report.append(f"*Report generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} UTC*")
 
     return "\n".join(report)
 
@@ -965,6 +1232,14 @@ def main():
         year, month = map(int, year_month.split('-'))
     except ValueError:
         print("Error: Invalid date format. Use YYYY-MM")
+        sys.exit(1)
+
+    # Validate date ranges to prevent path traversal and invalid dates
+    if not (1900 <= year <= 2100):
+        print(f"Error: Year {year} out of valid range (1900-2100)")
+        sys.exit(1)
+    if not (1 <= month <= 12):
+        print(f"Error: Month {month} out of valid range (1-12)")
         sys.exit(1)
 
     # Analyze month
