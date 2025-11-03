@@ -116,4 +116,15 @@ change_log:
   - per_portion.polyols_g
   - version
   sources: []
+- timestamp: '2025-11-03T15:44:11+00:00'
+  updated_by: 'LLM: Claude Code'
+  reason: Add selenium and vitamin D estimates for salmon (MEDIUM/LOW priority nutrient completion)
+  fields_changed:
+  - last_verified
+  - per_portion.selenium_ug
+  - per_portion.vitamin_d_ug
+  - version
+  sources:
+  - url: https://fdc.nal.usda.gov/
+    note: 'USDA FoodData Central: Salmon selenium ~50 µg/100g, vitamin D ~13 µg/100g. Estimated 100g portion. Confidence: MEDIUM (selenium), HIGH (vitamin D - fatty fish is one of best natural sources)'
 ```

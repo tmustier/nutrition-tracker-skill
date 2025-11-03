@@ -18,8 +18,6 @@ assumptions:
   salt_scheme: normal
   oil_type: ''
   prep: ''
-    from FIBER-SPLIT-ESTIMATION-REFERENCE.yaml; mixed pineapple/mango/passion fruit.
-    Confidence MEDIUM.
 per_portion:
   energy_kcal: 75.3
   protein_g: 0.9

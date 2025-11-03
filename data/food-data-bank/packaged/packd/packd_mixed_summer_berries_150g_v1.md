@@ -130,7 +130,7 @@ change_log:
   - last_verified
   - version
   sources:
-  - url: references/FIBER-SPLIT-ESTIMATION-REFERENCE.yaml
+  - url: fiber_split_estimation
     note: Used fruits.berries category (35% soluble, 65% insoluble, HIGH confidence)
   methodology: 'Applied berries fiber split ratio to total fiber 4.4g: soluble = 4.4 × 0.35 = 1.5g, insoluble = 4.4 × 0.65 = 2.9g. Mixed berry composition (36% raspberries, 34% blueberries, 30% blackberries) confirmed from previous research. High confidence estimation based on well-documented berry fiber profiles.'
 ```

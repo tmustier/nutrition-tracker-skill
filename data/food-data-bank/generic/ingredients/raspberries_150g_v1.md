@@ -18,8 +18,6 @@ assumptions:
   salt_scheme: normal
   oil_type: ''
   prep: ''
-    from FIBER-SPLIT-ESTIMATION-REFERENCE.yaml; raspberries contain pectin and significant
-    lignin in seeds. Confidence HIGH.
 per_portion:
   energy_kcal: 65.4
   protein_g: 1.8

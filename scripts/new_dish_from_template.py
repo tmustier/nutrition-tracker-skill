@@ -54,6 +54,10 @@ per_portion:
   zinc_mg: 0
   vitamin_c_mg: 0
   manganese_mg: 0
+  copper_mg: 0
+  selenium_ug: 0
+  vitamin_d_ug: 0
+  vitamin_e_mg: 0
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:

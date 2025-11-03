@@ -18,8 +18,6 @@ assumptions:
   salt_scheme: normal
   oil_type: ''
   prep: ''
-    from FIBER-SPLIT-ESTIMATION-REFERENCE.yaml; berries contain pectin and lignin in
-    seeds. Confidence HIGH.
 per_portion:
   energy_kcal: 102
   protein_g: 1.0

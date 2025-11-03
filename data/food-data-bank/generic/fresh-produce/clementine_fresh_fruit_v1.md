@@ -25,8 +25,6 @@ assumptions:
   salt_scheme: unsalted
   oil_type: ''
   prep: fresh, whole, peeled
-    FIBER-SPLIT-ESTIMATION-REFERENCE.yaml; citrus fruits are rich in pectin. Confidence
-    HIGH.
 per_portion:
   energy_kcal: 41.9
   protein_g: 0.6

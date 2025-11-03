@@ -95,7 +95,7 @@ change_log:
   - last_verified
   - version
   sources:
-  - url: references/FIBER-SPLIT-ESTIMATION-REFERENCE.yaml
+  - url: fiber_split_estimation
     note: Used legumes.chickpeas category (32% soluble, 68% insoluble, HIGH confidence)
   methodology: 'Applied chickpea fiber split ratio to total fiber 1.4g: soluble = 1.4 × 0.32 = 0.4g, insoluble = 1.4 × 0.68 = 1.0g. Houmous is chickpea-based, making this category highly appropriate. High confidence estimation based on well-documented chickpea fiber composition (30-35% soluble per USDA data, consistent with Marlett et al. 2002).'
 ```

@@ -23,7 +23,7 @@ assumptions:
   salt_scheme: "normal"
   oil_type: "butter"
   prep: "baked with snow mountain topping (butter-flour-sugar crust)"
-  iodine_estimation: 'Estimated from dairy components: dough contains ~15g milk (47g × 32% = 6 μg @ 40 μg/100g), topping contains ~3.5g butter (0.4 μg @ 10 μg/100g), filling contains 24g pork (1.2 μg @ 5 μg/100g). Total: 7.6 μg rounded to 8 μg. Confidence: MEDIUM (dairy-based estimate from IODINE-ESTIMATION-REFERENCE.yaml).'
+  iodine_estimation: 'Estimated from dairy components: dough contains ~15g milk (47g × 32% = 6 μg @ 40 μg/100g), topping contains ~3.5g butter (0.4 μg @ 10 μg/100g), filling contains 24g pork (1.2 μg @ 5 μg/100g). Total: 7.6 μg rounded to 8 μg. Confidence: MEDIUM (dairy-based estimate).'
 per_portion:
   energy_kcal: 250
   protein_g: 9.3

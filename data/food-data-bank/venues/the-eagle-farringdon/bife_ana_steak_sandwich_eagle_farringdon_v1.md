@@ -152,4 +152,14 @@ change_log:
   - per_portion.polyols_g
   - version
   sources: []
+- timestamp: '2025-11-03T15:44:11+00:00'
+  updated_by: 'LLM: Claude Code'
+  reason: Add iodine estimate from beef (LOW priority nutrient completion)
+  fields_changed:
+  - last_verified
+  - per_portion.iodine_ug
+  - version
+  sources:
+  - url: https://fdc.nal.usda.gov/
+    note: 'USDA FoodData Central: Beef typically ~5 µg/100g. Estimated 360g sandwich with 200g cooked rump = 18µg. Confidence: LOW-MEDIUM (meat is minor iodine source)'
 ```

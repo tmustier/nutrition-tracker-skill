@@ -113,7 +113,7 @@ change_log:
   - last_verified
   - version
   sources:
-  - url: references/FIBER-SPLIT-ESTIMATION-REFERENCE.yaml
+  - url: fiber_split_estimation
     note: Used general_plant_foods default ratio (30% soluble, 70% insoluble, LOW confidence)
   methodology: 'Applied general plant foods fiber split ratio to total fiber 0.7g: soluble = 0.7 × 0.30 = 0.2g, insoluble = 0.7 × 0.70 = 0.5g. Low confidence estimate appropriate for processed protein powder where fiber source (likely cocoa powder or added fiber) composition is unknown. Conservative general ratio used due to lack of specific ingredient data.'
 ```

@@ -90,4 +90,16 @@ change_log:
   - per_portion.polyols_g
   - version
   sources: []
+- timestamp: '2025-11-03T15:44:11+00:00'
+  updated_by: 'LLM: Claude Code'
+  reason: Add iodine, selenium and vitamin D estimates from egg custard (MEDIUM priority nutrient completion)
+  fields_changed:
+  - last_verified
+  - per_portion.iodine_ug
+  - per_portion.selenium_ug
+  - per_portion.vitamin_d_ug
+  - version
+  sources:
+  - url: https://fdc.nal.usda.gov/
+    note: 'USDA FoodData Central: Eggs ~26 µg/100g iodine, ~31 µg/100g selenium, ~1.8 µg/100g vitamin D. 25g custard estimated at 65% eggs. Confidence: MEDIUM (egg-based estimates well-documented)'
 ```

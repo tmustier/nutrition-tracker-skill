@@ -110,7 +110,7 @@ change_log:
   - last_verified
   - version
   sources:
-  - url: references/FIBER-SPLIT-ESTIMATION-REFERENCE.yaml
+  - url: fiber_split_estimation
     note: Used grains.quinoa category for ancient grains (25% soluble, 75% insoluble, LOW confidence)
   methodology: 'Applied ancient grains (quinoa/buckwheat) fiber split ratio to total fiber 0.4g: soluble = 0.4 × 0.25 = 0.1g, insoluble = 0.4 × 0.75 = 0.3g. Buckwheat is a pseudo-cereal similar to quinoa. Product is 98.5% buckwheat flour. Low confidence estimate due to limited specific data on buckwheat fiber composition, but more specific than general plant foods category.'
 ```

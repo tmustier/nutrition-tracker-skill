@@ -20,8 +20,6 @@ assumptions:
   salt_scheme: "unsalted"
   oil_type: ""
   prep: "raw"
-    from FIBER-SPLIT-ESTIMATION-REFERENCE.yaml; avocados have unique fiber composition
-    with predominantly insoluble cellulose and hemicellulose. Confidence MEDIUM.
 per_portion:
   energy_kcal: 120.0
   protein_g: 1.5
