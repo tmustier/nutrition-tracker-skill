@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Validate the nutrition Data Bank markdown file:
-- Parse YAML code fences
+Validate all nutrition dish files in the Data Bank:
+- Parse YAML from individual dish files
 - Check available-carb energy, fat split, sodium<->salt coherence
 - Flag missing keys and negative numbers
 - Auto-regenerates the index file after validation
@@ -22,22 +22,71 @@ FIBER_KCAL_PER_G = 2.0
 POLYOL_KCAL_PER_G = 2.4
 
 # Compile polyol detection regex once at module level (performance optimization)
+# This pattern matches polyol mentions in notes like:
+#   - "Contains 2.5 g of maltitol"
+#   - "15g polyols"
+#   - "Sugar alcohol: 3.2 g"
+#
+# Pattern breakdown:
+#   - \b(\d+\.?\d*)\s*g\b  : Captures amount with 'g' unit (e.g., "2.5 g", "15g")
+#   - .*?                  : Non-greedy match of any text between amount and polyol term
+#   - \b(polyol|...)       : Captures polyol type keyword
+#
+# Known limitations (edge cases this pattern may miss):
+#   - Amounts without explicit 'g' unit: "contains 5 polyols"
+#   - Alternative formats: "polyol content: 2.5" or "2.5% polyols"
+#   - Spelled-out numbers: "two grams of maltitol"
+#   - Multiple polyol types in one phrase: "1.5g maltitol and 1g erythritol"
+#   - Reversed order: "erythritol 2.5g" (pattern expects amount before polyol term)
+#
+# Future improvements: Consider adding reversed pattern or unit-optional matching
 POLYOL_PATTERN = re.compile(
     r'\b(\d+\.?\d*)\s*g\b.*?\b(polyol|maltitol|erythritol|xylitol|sorbitol|sugar\s+alcohol)',
     re.IGNORECASE
 )
 
-def parse_yaml_blocks(text):
+
+def parse_yaml_from_file(filepath):
+    """Parse YAML block from a dish markdown file.
+
+    Returns: (raw_yaml_text, parsed_dict) or (None, None) if parsing fails
+    """
+    try:
+        content = filepath.read_text(encoding='utf-8')
+
+        # Find YAML block
+        yaml_start = content.index('```yaml') + 7
+        yaml_end = content.index('```', yaml_start)
+        yaml_text = content[yaml_start:yaml_end].strip()
+
+        # Parse YAML
+        data = yaml.safe_load(yaml_text)
+
+        return (yaml_text, data)
+    except Exception as e:
+        print(f"Warning: Failed to parse {filepath.name}: {e}", file=sys.stderr)
+        return (None, None)
+
+
+def scan_data_bank(data_bank_dir):
+    """Scan data bank directory and return all dish files.
+
+    Returns: list of (filepath, raw_yaml, parsed_dict) tuples
+    """
     blocks = []
-    fence = re.compile(r"```yaml\s*(.*?)```", re.S | re.M)
-    for m in fence.finditer(text):
-        raw = m.group(1).strip()
-        try:
-            y = yaml.safe_load(raw)
-        except Exception:
-            y = None
-        blocks.append((raw, y))
+
+    # Find all .md files recursively
+    for filepath in sorted(data_bank_dir.rglob('*.md')):
+        # Skip README and RESEARCH files
+        if filepath.name in ['README.md', 'RESEARCH.md', 'index.md']:
+            continue
+
+        raw, data = parse_yaml_from_file(filepath)
+        if data and isinstance(data, dict) and 'id' in data:
+            blocks.append((filepath, raw, data))
+
     return blocks
+
 
 def available_energy_kcal(protein, fat, carbs_available, fibre, polyols):
     """Compute energy using UK/EU convention (available carbs + fibre/polyol factors)."""
@@ -50,19 +99,31 @@ def available_energy_kcal(protein, fat, carbs_available, fibre, polyols):
     except Exception:
         return None
 
+
 def approx_equal(a, b, tol):
     if None in (a, b):
         return False
     return abs(a - b) <= tol
 
-def check_block(y):
+
+def check_block(y, filepath):
+    """Validate a single dish block.
+
+    Returns: dict with 'id', 'filepath', 'issues', 'warnings', 'passes'
+    """
     issues = []
     warnings = []
     passes = []
 
     if not isinstance(y, dict) or "id" not in y:
         issues.append("Block missing top-level mapping or 'id'.")
-        return {"id": None, "issues": issues, "warnings": warnings, "passes": passes}
+        return {
+            "id": None,
+            "filepath": str(filepath),
+            "issues": issues,
+            "warnings": warnings,
+            "passes": passes
+        }
 
     bid = y.get("id")
 
@@ -176,41 +237,65 @@ def check_block(y):
         if isinstance(val, (int, float)) and val < 0:
             issues.append(f"Negative per_portion value: {key} = {val}")
 
-    return {"id": bid, "issues": issues, "warnings": warnings, "passes": passes}
+    return {
+        "id": bid,
+        "filepath": str(filepath),
+        "issues": issues,
+        "warnings": warnings,
+        "passes": passes
+    }
+
 
 def main():
     import argparse
-    parser = argparse.ArgumentParser(description="Validate the nutrition Data Bank markdown file")
-    parser.add_argument("data_bank", help="Path to the data bank markdown file")
+    parser = argparse.ArgumentParser(description="Validate all nutrition dish files in the Data Bank")
+    parser.add_argument("data_bank_dir", nargs='?', default=None, help="Path to the data bank directory (default: data/food-data-bank)")
     parser.add_argument("--no-index", action="store_true", help="Skip automatic index regeneration")
     args = parser.parse_args()
 
-    path = Path(args.data_bank)
-    text = path.read_text(encoding="utf-8")
-    blocks = parse_yaml_blocks(text)
+    # Determine path
+    if args.data_bank_dir:
+        path = Path(args.data_bank_dir)
+    else:
+        script_dir = Path(__file__).parent
+        path = script_dir.parent / 'data' / 'food-data-bank'
 
-    report = {"file": str(path), "checked": 0, "results": []}
-    for raw, y in blocks:
-        if not isinstance(y, dict) or "id" not in y:
-            continue
-        res = check_block(y)
+    if not path.exists():
+        print(f"Error: Data bank directory not found: {path}", file=sys.stderr)
+        return 1
+
+    print(f"Scanning: {path}")
+    blocks = scan_data_bank(path)
+
+    report = {"directory": str(path), "checked": 0, "results": []}
+
+    for filepath, raw, y in blocks:
+        res = check_block(y, filepath)
         report["results"].append(res)
         report["checked"] += 1
 
     # Human summary
-    print("# Data Bank Validation Report")
-    print(f"File: {path}")
-    print(f"Blocks checked: {report['checked']}")
-    for res in report["results"]:
-        print(f"\n## {res['id']}")
-        for p in res["passes"]:
-            print(f"  PASS: {p}")
-        for w in res["warnings"]:
-            print(f"  WARN: {w}")
-        for i in res["issues"]:
-            print(f"  FAIL: {i}")
+    print("\n" + "=" * 80)
+    print("DATA BANK VALIDATION REPORT")
+    print("=" * 80)
+    print(f"Directory: {path}")
+    print(f"Dishes checked: {report['checked']}")
+    print()
 
-    print("\n# JSON")
+    for res in report["results"]:
+        print(f"## {res['id']}")
+        print(f"   File: {res['filepath']}")
+        for p in res["passes"]:
+            print(f"  ✓ PASS: {p}")
+        for w in res["warnings"]:
+            print(f"  ⚠ WARN: {w}")
+        for i in res["issues"]:
+            print(f"  ✗ FAIL: {i}")
+        print()
+
+    print("=" * 80)
+    print("JSON REPORT")
+    print("=" * 80)
     print(json.dumps(report, indent=2))
 
     # Check for critical issues (exit code for CI/CD)
@@ -223,7 +308,9 @@ def main():
         generate_index_script = script_dir / "generate_index.py"
 
         if generate_index_script.exists():
-            print("\n# Index Generation")
+            print("\n" + "=" * 80)
+            print("INDEX GENERATION")
+            print("=" * 80)
             try:
                 result = subprocess.run(
                     [sys.executable, str(generate_index_script)],
@@ -244,15 +331,20 @@ def main():
         print("\n# Index regeneration skipped (--no-index flag)")
 
     # Exit with non-zero status if critical issues found
+    print("\n" + "=" * 80)
     if has_issues:
-        print("\n# Validation Result: FAILED (critical issues found)")
+        print("VALIDATION RESULT: FAILED (critical issues found)")
+        print("=" * 80)
         sys.exit(1)
     elif has_warnings:
-        print("\n# Validation Result: PASSED with warnings")
+        print("VALIDATION RESULT: PASSED with warnings")
+        print("=" * 80)
         sys.exit(0)
     else:
-        print("\n# Validation Result: PASSED")
+        print("VALIDATION RESULT: PASSED")
+        print("=" * 80)
         sys.exit(0)
+
 
 if __name__ == "__main__":
     main()

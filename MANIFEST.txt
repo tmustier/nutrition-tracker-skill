@@ -4,9 +4,43 @@ nutrition-tracker-skill/
   LICENSE
   MANIFEST.txt
   .gitignore
-  data/food-data-bank.md
+  data/food-data-bank/
+    venues/
+      simple-health-kitchen/
+      jean-georges-connaught/
+        RESEARCH.md
+      leto-caffe-soho/
+        RESEARCH.md
+      zima-soho/
+      the-eagle-farringdon/
+      imperial-treasure-st-james/
+      joe-and-the-juice/
+      third-space-nff/
+    packaged/
+      grenade/
+      amisa/
+      yarden/
+      optimum-nutrition/
+      packd/
+      rot-front/
+      daylesford-organic/
+    generic/
+      ingredients/
+      bakery/
+      bar-restaurant/
+      grocery/
+      supplements/
+      pub-bar/
+      fresh-produce/
+  data/food-data-bank-index.md
   data/logs/SCHEMA.md
   references/health-profile.yaml
-  references/research-notes.md
+  references/METHODOLOGY.md
   scripts/validate_data_bank.py
   scripts/new_dish_from_template.py
+  scripts/generate_index.py
+  scripts/analyze_data_bank.py
+  scripts/migrate_to_individual_files.py
+  .github/workflows/validate.yml
+  .github/workflows/claude.yml
+  .github/workflows/claude-code-review.yml

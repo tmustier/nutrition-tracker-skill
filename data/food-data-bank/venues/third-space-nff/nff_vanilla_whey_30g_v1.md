@@ -1,0 +1,106 @@
+## Natural Fitness Food Vanilla Whey Protein (30g scoop)
+
+```yaml
+id: nff_vanilla_whey_30g_v1
+version: 2
+last_verified: '2025-11-02'
+source:
+  venue: Third Space / Natural Fitness Food
+  menu_page: ''
+  evidence:
+  - 'OpenFoodFacts entry: 125 kcal, 22g P, 6.5g C (3.4g sugar), 1.4g F (1g sat), 0.5g
+    fiber, 0.098g salt'
+  - 'Ingredient list: Whey Protein Concentrate (87%) (MILK), Natural Flavouring (7%),
+    Thickener (Xanthan Gum), Sweetener (Steviol Glycosides), Emulsifier (Sunflower
+    Lecithin)'
+  - Scoop size confirmed as ~30g
+aliases:
+- NFF Vanilla Whey
+- Third Space Vanilla Protein
+category: ingredient
+portion:
+  description: 1 scoop (30g)
+  est_weight_g: 30
+  notes: Whey protein concentrate powder, 87% protein content
+assumptions:
+  salt_scheme: normal
+  oil_type: dairy-based (whey concentrate)
+  prep: Powder form, typically mixed with water or milk
+per_portion:
+  energy_kcal: 127.6
+  protein_g: 22.0
+  fat_g: 1.4
+  sat_fat_g: 1.0
+  mufa_g: 0.3
+  pufa_g: 0.1
+  trans_fat_g: 0
+  cholesterol_mg: 20
+  sugar_g: 3.4
+  fiber_total_g: 0.5
+  fiber_soluble_g: 0.5
+  fiber_insoluble_g: 0
+  sodium_mg: 39
+  potassium_mg: 180
+  iodine_ug: 5
+  magnesium_mg: 30
+  calcium_mg: 150
+  iron_mg: 0
+  zinc_mg: 1.5
+  vitamin_c_mg: 0
+  manganese_mg: 0
+  polyols_g: 0.0
+  carbs_available_g: 6.5
+  carbs_total_g: 7.0
+derived:
+  salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
+quality:
+  confidence: high
+  gaps:
+  - Fat subtype breakdown estimated from typical whey concentrate profiles
+  - Trace minerals estimated from dairy composition
+notes:
+- 'OpenFoodFacts validated nutrition: 125 kcal, 22g P, 6.5g C, 1.4g F, 0.5g fiber
+  per 30g scoop'
+- 'Ingredient analysis: 87% whey protein concentrate = 26.1g protein content, actual
+  22g suggests 73% protein efficiency typical of WPC-80'
+- 'Fat breakdown: sat 1.0g dominant (dairy fat), trace MUFA/PUFA from milk lipids'
+- Fiber (0.5g) entirely from xanthan gum thickener (soluble fiber)
+- Sugar (3.4g) from residual lactose in whey concentrate
+- Sodium (39mg) calculated from stated salt content (0.098g)
+- Cholesterol estimated 20mg typical for whey protein concentrate
+- Calcium (150mg) significant due to whey dairy origin
+- Potassium (180mg) naturally high in whey
+- Trans fat trace amounts (<0.1g) from ruminant dairy, rounded to 0
+- Contains sunflower lecithin emulsifier (contributes minimal fat)
+- Sweetened with stevia (zero calorie)
+- 'Atwater check (available carb basis): 4×22.0 + 9×1.4 + 4×6.5 + 2×0.5 + 2.4×0.0
+  = 127.6 kcal'
+change_log:
+- timestamp: 2025-10-31T00:00:00+0000
+  updated_by: Claude Code (Sonnet 4.5)
+  reason: Initial entry from OpenFoodFacts data with micronutrient estimation from
+    whey concentrate profiles
+  fields_changed:
+  - all fields
+  sources:
+  - url: https://uk-ga.openfoodfacts.org/product/5065003325005/whey-protein-vanilla-natural-fitness-food
+    note: 'Complete macronutrient data: 125 kcal, 22g P, 6.5g C (3.4g sugar), 1.4g
+      F (1g sat), 0.5g fiber, 39mg Na'
+  - url: user_input
+    note: 'User-provided ingredient list: Whey Protein Concentrate (87%), Natural
+      Flavouring (7%), Xanthan Gum, Steviol Glycosides, Sunflower Lecithin'
+- timestamp: '2025-11-02T19:20:00+00:00'
+  updated_by: 'LLM: GPT-5 Codex'
+  reason: Standardise carbohydrate fields and recompute available-carb energy
+  fields_changed:
+  - derived.energy_from_macros_kcal
+  - last_verified
+  - notes
+  - per_portion.carbs_available_g
+  - per_portion.carbs_g
+  - per_portion.carbs_total_g
+  - per_portion.energy_kcal
+  - per_portion.polyols_g
+  - version
+  sources: []
+```
