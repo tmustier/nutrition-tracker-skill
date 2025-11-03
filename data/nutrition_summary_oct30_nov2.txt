@@ -56,7 +56,9 @@ Vitamin C (mg)                           254.4            63.6
 
 DAILY AVERAGE vs TARGETS
 --------------------------------------------------------------------------------
-Energy: 3107 kcal / 2700 kcal avg target (115%)
+Day types: 3 training, 1 rest
+
+Energy: 3107 kcal / 2800 kcal avg target (111%)
 Protein: 175.7g / 170g min (103%)
 Fat: 118.8g / 70g min (170%)
 Carbs: 358.2g / 250g min (143%)

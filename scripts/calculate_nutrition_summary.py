@@ -16,11 +16,15 @@ log_files = [
 # Initialize totals dictionary
 totals = defaultdict(float)
 counts = defaultdict(int)  # Track non-null counts for averaging
+day_types = []  # Track day types for accurate target calculation
 
 # Process each log file
 for log_file in log_files:
     with open(log_file, 'r') as f:
         data = yaml.safe_load(f)
+
+    # Track day type
+    day_types.append(data.get('day_type', 'rest'))
 
     # Process each entry
     for entry in data.get('entries', []):
@@ -152,6 +156,12 @@ print()
 print("DAILY AVERAGE vs TARGETS")
 print("-" * 80)
 
+# Count day types
+num_rest_days = day_types.count('rest')
+num_training_days = day_types.count('training')
+print(f"Day types: {num_training_days} training, {num_rest_days} rest")
+print()
+
 targets = {
     'energy_kcal': {'rest_day_max': 2500, 'training_day_max': 2900},
     'protein_g_min': 170,
@@ -162,8 +172,8 @@ targets = {
     'sodium_mg_max': 2300,
 }
 
-# Calculate average energy against mixed days (2 rest, 2 training)
-avg_target_kcal = (2 * 2500 + 2 * 2900) / 4
+# Calculate average energy target based on actual day types
+avg_target_kcal = (num_rest_days * 2500 + num_training_days * 2900) / num_days
 print(f"Energy: {averages.get('energy_kcal', 0):.0f} kcal / {avg_target_kcal:.0f} kcal avg target ({averages.get('energy_kcal', 0) / avg_target_kcal * 100:.0f}%)")
 
 # Protein
