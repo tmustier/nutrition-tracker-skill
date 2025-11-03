@@ -1,0 +1,122 @@
+date: 2025-11-03
+day_type: rest
+entries:
+- timestamp: '2025-11-03T12:00:00+00:00'
+  items:
+  - name: Amisa Buckwheat Crispbread
+    food_bank_id: amisa_buckwheat_crispbread_5g_v1
+    quantity: 4
+    unit: pieces
+    nutrition:
+      energy_kcal: 69.2
+      protein_g: 2.0
+      fat_g: 0.4
+      sat_fat_g: 0.0
+      mufa_g: 0.4
+      pufa_g: 0.0
+      trans_fat_g: 0
+      cholesterol_mg: 0
+      sugar_g: 0.4
+      fiber_total_g: 1.6
+      fiber_soluble_g: null
+      fiber_insoluble_g: null
+      sodium_mg: 96
+      potassium_mg: null
+      iodine_ug: null
+      magnesium_mg: null
+      calcium_mg: null
+      iron_mg: null
+      zinc_mg: null
+      vitamin_c_mg: null
+      manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 13.6
+      carbs_total_g: 15.2
+  - name: Smoked Trout (Daylesford)
+    food_bank_id: daylesford_smoked_trout_80g_v1
+    quantity: 40
+    unit: g
+    nutrition:
+      energy_kcal: 80.7
+      protein_g: 8.7
+      fat_g: 5.1
+      sat_fat_g: 0.9
+      mufa_g: 1.3
+      pufa_g: 3.0
+      trans_fat_g: 0
+      cholesterol_mg: 25
+      sugar_g: 0.0
+      fiber_total_g: 0.0
+      fiber_soluble_g: null
+      fiber_insoluble_g: null
+      sodium_mg: 240
+      potassium_mg: 140
+      iodine_ug: null
+      magnesium_mg: 12
+      calcium_mg: 5
+      iron_mg: 0
+      zinc_mg: 0
+      vitamin_c_mg: 0
+      manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 0.0
+      carbs_total_g: 0.0
+  - name: Avocado (Fresh)
+    food_bank_id: avocado_fresh_75g_generic-ingredients_v1
+    quantity: 1
+    unit: portion
+    nutrition:
+      energy_kcal: 120.0
+      protein_g: 1.5
+      fat_g: 11.0
+      sat_fat_g: 1.6
+      mufa_g: 7.3
+      pufa_g: 1.4
+      trans_fat_g: 0
+      cholesterol_mg: 0
+      sugar_g: 0.5
+      fiber_total_g: 5.0
+      fiber_soluble_g: null
+      fiber_insoluble_g: null
+      sodium_mg: 5
+      potassium_mg: 364
+      iodine_ug: null
+      magnesium_mg: 21
+      calcium_mg: 9
+      iron_mg: 0
+      zinc_mg: 0
+      vitamin_c_mg: 8
+      manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 1.4
+      carbs_total_g: 6.4
+  - name: Olive Oil
+    food_bank_id: olive_oil_14g_generic-ingredients_v1
+    quantity: 1
+    unit: portion
+    nutrition:
+      energy_kcal: 123.8
+      protein_g: 0.0
+      fat_g: 14.0
+      sat_fat_g: 1.9
+      mufa_g: 10.4
+      pufa_g: 1.5
+      trans_fat_g: 0
+      cholesterol_mg: 0
+      sugar_g: 0.0
+      fiber_total_g: 0.0
+      fiber_soluble_g: null
+      fiber_insoluble_g: null
+      sodium_mg: 0
+      potassium_mg: 0
+      iodine_ug: null
+      magnesium_mg: 0
+      calcium_mg: 0
+      iron_mg: 0
+      zinc_mg: 0
+      vitamin_c_mg: 0
+      manganese_mg: null
+      polyols_g: 0.0
+      carbs_available_g: 0.0
+      carbs_total_g: 0.0
+  notes: 'Crispbreads with avocado, smoked trout, olive oil, and seasonings (salt, pepper, chilli flakes - minimal calories)'
