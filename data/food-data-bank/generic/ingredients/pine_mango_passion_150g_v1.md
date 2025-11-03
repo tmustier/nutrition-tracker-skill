@@ -18,6 +18,9 @@ assumptions:
   salt_scheme: normal
   oil_type: ''
   prep: ''
+  fiber_split: Estimated using tropical fruits category ratios (30% soluble, 70% insoluble)
+    from FIBER-SPLIT-ESTIMATION-REFERENCE.yaml; mixed pineapple/mango/passion fruit.
+    Confidence MEDIUM.
 per_portion:
   energy_kcal: 75.3
   protein_g: 0.9
@@ -29,8 +32,8 @@ per_portion:
   cholesterol_mg: 0
   sugar_g: 15.9
   fiber_total_g: 1.4
-  fiber_soluble_g: 0
-  fiber_insoluble_g: 0
+  fiber_soluble_g: 0.4
+  fiber_insoluble_g: 1.0
   sodium_mg: 6
   potassium_mg: 277
   iodine_ug: 1

@@ -26,6 +26,10 @@ assumptions:
   salt_scheme: "unsalted"
   oil_type: "soybean oil"
   prep: "Steamed bun with lava-style flowing custard center made from salted egg yolk, butter, sugar, and milk. Charcoal powder added to dough for black color."
+  fiber_split: "Estimated using general_plant_foods category ratio (30% soluble, 70% insoluble) from total fiber 0.6g. Confidence: LOW due to refined flour and small fiber amount"
+  iodine: "Estimated from egg yolk (6.5g) and dairy content (milk 11.5g, butter 5.5g). Using eggs ~26 μg/100g concentration. For 52g portion: ~14 μg. Confidence: MEDIUM - egg yolk is concentrated iodine source"
+  selenium: "Estimated from egg content. Eggs ~31 μg/100g (USDA). For 52g portion: 52g × 31 μg/100g = 16 μg. Confidence: MEDIUM - egg-based custard filling"
+  vitamin_d: "Estimated from egg yolk content. Eggs ~1.8 μg/100g (USDA, concentrated in yolk). For 52g portion: 52g × 1.8 μg/100g = 0.9 μg. Confidence: MEDIUM-HIGH"
 per_portion:
   energy_kcal: 186
   protein_g: 3.8
@@ -38,17 +42,19 @@ per_portion:
   carbs_available_g: 23.3
   sugar_g: 7.4
   fiber_total_g: 0.6
-  fiber_soluble_g: 0
-  fiber_insoluble_g: 0
+  fiber_soluble_g: 0.2
+  fiber_insoluble_g: 0.4
   sodium_mg: 38
   potassium_mg: 0
-  iodine_ug: 0
+  iodine_ug: 14
   magnesium_mg: 0
   calcium_mg: 29
   iron_mg: 1.0
   zinc_mg: 0
   vitamin_c_mg: 0
   manganese_mg: 0
+  selenium_ug: 16
+  vitamin_d_ug: 0.9
   polyols_g: 0.0
   carbs_total_g: 23.9
 
@@ -56,7 +62,7 @@ derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: medium
-  gaps: ["potassium", "iodine", "magnesium", "zinc", "vitamin_c", "manganese", "fiber_split"]
+  gaps: ["potassium", "magnesium", "zinc", "vitamin_c", "manganese"]
 notes:
   - "Charcoal custard buns are a signature dim sum dessert featuring activated charcoal in the dough (for aesthetic black color) and a molten sweet custard filling."
   - "The custard filling is made primarily from salted egg yolk, butter, and sugar, creating a rich, flowing 'lava' center when steamed."

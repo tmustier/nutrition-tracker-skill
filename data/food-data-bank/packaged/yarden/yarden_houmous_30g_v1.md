@@ -2,8 +2,8 @@
 
 ```yaml
 id: yarden_houmous_30g_v1
-version: 2
-last_verified: '2025-11-02'
+version: 3
+last_verified: '2025-11-03'
 source:
   venue: Yarden (Packaged Product)
   menu_page: ''
@@ -33,8 +33,8 @@ per_portion:
   cholesterol_mg: 0
   sugar_g: 0.2
   fiber_total_g: 1.4
-  fiber_soluble_g: 0
-  fiber_insoluble_g: 0
+  fiber_soluble_g: 0.4
+  fiber_insoluble_g: 1.0
   sodium_mg: 120
   potassium_mg: 0
   iodine_ug: 0
@@ -86,4 +86,16 @@ change_log:
   - per_portion.polyols_g
   - version
   sources: []
+- timestamp: '2025-11-03T00:00:00+00:00'
+  updated_by: 'LLM: Claude Sonnet 4.5'
+  reason: Phase 2 nutrient estimation - fiber split for chickpea-based houmous
+  fields_changed:
+  - per_portion.fiber_soluble_g
+  - per_portion.fiber_insoluble_g
+  - last_verified
+  - version
+  sources:
+  - url: references/FIBER-SPLIT-ESTIMATION-REFERENCE.yaml
+    note: Used legumes.chickpeas category (32% soluble, 68% insoluble, HIGH confidence)
+  methodology: 'Applied chickpea fiber split ratio to total fiber 1.4g: soluble = 1.4 × 0.32 = 0.4g, insoluble = 1.4 × 0.68 = 1.0g. Houmous is chickpea-based, making this category highly appropriate. High confidence estimation based on well-documented chickpea fiber composition (30-35% soluble per USDA data, consistent with Marlett et al. 2002).'
 ```

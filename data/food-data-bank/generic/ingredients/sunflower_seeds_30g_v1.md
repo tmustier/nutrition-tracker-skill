@@ -18,6 +18,8 @@ assumptions:
   salt_scheme: normal
   oil_type: ''
   prep: ''
+  fiber_split: 'Estimated using nuts_and_seeds.pumpkin_sunflower_seeds category ratio (18% soluble, 82% insoluble) from FIBER-SPLIT-ESTIMATION-REFERENCE.yaml. Confidence: LOW (limited data for this seed category).'
+  trace_minerals: 'Copper (0.5mg) estimated using USDA value ~1.8mg/100g for sunflower seeds. Vitamin E (10.5mg) estimated using USDA value ~35.0mg/100g for sunflower seeds from MICRONUTRIENT-ESTIMATION-REFERENCE.yaml. Confidence: HIGH (sunflower seeds are exceptionally high in vitamin E).'
 per_portion:
   energy_kcal: 193.5
   protein_g: 6.2
@@ -29,8 +31,8 @@ per_portion:
   cholesterol_mg: 0
   sugar_g: 0.8
   fiber_total_g: 2.6
-  fiber_soluble_g: 0
-  fiber_insoluble_g: 0
+  fiber_soluble_g: 0.5
+  fiber_insoluble_g: 2.1
   sodium_mg: 3
   potassium_mg: 194
   iodine_ug: 0
@@ -38,7 +40,9 @@ per_portion:
   calcium_mg: 23
   iron_mg: 2
   zinc_mg: 2
+  copper_mg: 0.5
   vitamin_c_mg: 0
+  vitamin_e_mg: 10.5
   manganese_mg: 0
   polyols_g: 0.0
   carbs_available_g: 6.0

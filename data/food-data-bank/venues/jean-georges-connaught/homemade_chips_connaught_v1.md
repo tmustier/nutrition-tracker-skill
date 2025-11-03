@@ -20,6 +20,8 @@ assumptions:
   salt_scheme: normal
   oil_type: neutral frying oil
   prep: deep-fried
+  copper_estimation: Potatoes contain ~0.1mg copper per 100g (USDA data). Estimated
+    ~150g potato portion = 0.15mg copper total. Medium confidence (±20-40%).
 per_portion:
   energy_kcal: 465.4
   protein_g: 4.5
@@ -42,6 +44,7 @@ per_portion:
   zinc_mg: 0.9
   vitamin_c_mg: 16
   manganese_mg: 1
+  copper_mg: 0.15
   polyols_g: 0.0
   carbs_available_g: 57.2
   carbs_total_g: 62.1

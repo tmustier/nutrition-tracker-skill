@@ -26,6 +26,8 @@ assumptions:
   salt_scheme: "normal"
   oil_type: "soybean oil (typical for Chinese dim sum frying)"
   prep: "Rice noodle steamed, then wrapped around large shrimp with tempura-style golden net coating and small piece of youtiao (fried dough stick). Entire roll is deep-fried until crispy, then served with sweet soy sauce drizzled on top."
+  fiber_split: 'Estimated using general_plant_foods category ratio (30% soluble, 70% insoluble) from FIBER-SPLIT-ESTIMATION-REFERENCE.yaml for mixed refined grains (rice noodles + wheat flour coating + youtiao). Confidence: LOW (mixed dish with refined grains).'
+  trace_minerals: 'Manganese (0.1mg) estimated for refined grains using ~0.3mg/100g from MICRONUTRIENT-ESTIMATION-REFERENCE.yaml. This small portion (12.5g) contains mostly refined rice and wheat, yielding trace but measurable manganese. Confidence: MEDIUM.'
 per_portion:
   energy_kcal: 31
   protein_g: 0.9
@@ -38,8 +40,8 @@ per_portion:
   carbs_available_g: 2.6
   sugar_g: 0.5
   fiber_total_g: 0.5
-  fiber_soluble_g: 0
-  fiber_insoluble_g: 0
+  fiber_soluble_g: 0.2
+  fiber_insoluble_g: 0.3
   sodium_mg: 80
   potassium_mg: 9
   iodine_ug: 1
@@ -48,7 +50,7 @@ per_portion:
   iron_mg: 1
   zinc_mg: 0
   vitamin_c_mg: 0
-  manganese_mg: 0
+  manganese_mg: 0.1
   polyols_g: 0.0
   carbs_total_g: 3.1
 

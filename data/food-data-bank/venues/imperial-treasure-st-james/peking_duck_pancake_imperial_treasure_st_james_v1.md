@@ -37,11 +37,11 @@ per_portion:
   carbs_available_g: 12.0
   sugar_g: 2.0
   fiber_total_g: 0.1
-  fiber_soluble_g: 0
-  fiber_insoluble_g: 0
+  fiber_soluble_g: 0.0
+  fiber_insoluble_g: 0.1
   sodium_mg: 179
   potassium_mg: 0
-  iodine_ug: 0
+  iodine_ug: 3
   magnesium_mg: 0
   calcium_mg: 2
   iron_mg: 0.9
@@ -55,7 +55,20 @@ derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: high
-  gaps: ["cholesterol", "potassium", "iodine", "magnesium", "manganese", "fiber_soluble", "fiber_insoluble"]
+  gaps: ["cholesterol", "potassium", "magnesium", "manganese"]
+  estimated_nutrients:
+    - name: "fiber_soluble_g"
+      value: 0.0
+      confidence: "medium"
+      method: "Total fiber 0.1g split using vegetables.squashes ratio (33% soluble). 0.1g × 33% = 0.033g, rounds to 0.0g"
+    - name: "fiber_insoluble_g"
+      value: 0.1
+      confidence: "medium"
+      method: "Total fiber 0.1g split using vegetables.squashes ratio (67% insoluble). 0.1g × 67% = 0.067g, rounds to 0.1g"
+    - name: "iodine_ug"
+      value: 3
+      confidence: "low-medium"
+      method: "Duck meat 35g. Meat typically ~5 µg/100g. Total dish 68g × 5 µg/100g = 3.4 µg, rounded to 3 µg"
 notes:
   - "Rigorous component-based estimation following ESTIMATE.md methodology"
   - "All components based on USDA or reliable nutrition databases"

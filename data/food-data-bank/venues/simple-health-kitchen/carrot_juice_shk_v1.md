@@ -20,6 +20,7 @@ assumptions:
   salt_scheme: unsalted
   oil_type: none
   prep: fresh-pressed
+  fiber_split: 'Estimated using root vegetables category ratio (35% soluble / 65% insoluble) from FIBER-SPLIT-ESTIMATION-REFERENCE.yaml. Carrots category: HIGH confidence. Calculation: 2.0g total × 35% = 0.7g soluble, × 65% = 1.3g insoluble.'
 per_portion:
   energy_kcal: 110.4
   protein_g: 2.4
@@ -31,8 +32,8 @@ per_portion:
   cholesterol_mg: 0
   sugar_g: 21.3
   fiber_total_g: 2.0
-  fiber_soluble_g: 0
-  fiber_insoluble_g: 0
+  fiber_soluble_g: 0.7
+  fiber_insoluble_g: 1.3
   sodium_mg: 70
   potassium_mg: 730
   iodine_ug: 1
@@ -50,7 +51,6 @@ derived:
 quality:
   confidence: medium
   gaps:
-  - Fiber sub-types not available
   - Manganese not available
   - Fat breakdown estimated from USDA carrot juice profile
 notes:

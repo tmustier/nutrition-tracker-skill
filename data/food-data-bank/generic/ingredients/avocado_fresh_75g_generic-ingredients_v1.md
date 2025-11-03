@@ -20,6 +20,9 @@ assumptions:
   salt_scheme: "unsalted"
   oil_type: ""
   prep: "raw"
+  fiber_split: Estimated using avocado-specific ratios (25% soluble, 75% insoluble)
+    from FIBER-SPLIT-ESTIMATION-REFERENCE.yaml; avocados have unique fiber composition
+    with predominantly insoluble cellulose and hemicellulose. Confidence MEDIUM.
 per_portion:
   energy_kcal: 120.0
   protein_g: 1.5
@@ -33,8 +36,8 @@ per_portion:
   carbs_available_g: 1.4
   sugar_g: 0.5
   fiber_total_g: 5.0
-  fiber_soluble_g: 0
-  fiber_insoluble_g: 0
+  fiber_soluble_g: 1.2
+  fiber_insoluble_g: 3.8
   polyols_g: 0.0
   sodium_mg: 5
   potassium_mg: 364
@@ -49,8 +52,7 @@ derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: high
-  gaps:
-    - "Fiber split (soluble/insoluble) not available in USDA data"
+  gaps: []
 notes:
   - "Scaled from USDA per 100g values: 160 kcal, 2.0g P, 14.7g F (2.1g sat, 9.8g MUFA, 1.8g PUFA), 8.5g C, 6.7g fiber, 0.7g sugar"
   - "Average medium Hass avocado: ~150g edible flesh, so 75g = 1/2 portion"

@@ -1,0 +1,174 @@
+{
+  "metadata": {
+    "generated_at": "2025-11-03",
+    "base_path": "/home/user/nutrition-tracker-skill",
+    "references_loaded": {
+      "fiber_split": true,
+      "iodine": true,
+      "micronutrient": true
+    }
+  },
+  "summary": {
+    "total_files_scanned": 65,
+    "files_needing_estimation": 4,
+    "total_opportunities": 7,
+    "opportunities_by_priority": {
+      "high": 0,
+      "medium": 5,
+      "low": 2
+    },
+    "opportunities_by_nutrient": {
+      "iodine_ug": 3,
+      "selenium_ug": 2,
+      "vitamin_d_ug": 2
+    }
+  },
+  "files": [
+    {
+      "path": "data/food-data-bank/venues/the-eagle-farringdon/pastel_de_nata_eagle_farringdon_v1.md",
+      "file_id": "pastel_de_nata_eagle_farringdon_v1",
+      "food_category": "venue",
+      "food_description": "1 tart",
+      "portion_weight_g": 65,
+      "primary_ingredients": [
+        "Approx. 40g puff pastry shell with 25g rich egg custard",
+        "Macro build: 40g puff pastry + 25g enriched egg custard",
+        "Sugar estimate combines custard sugar and caramelised top"
+      ],
+      "priority_counts": {
+        "high": 0,
+        "medium": 2,
+        "low": 1
+      },
+      "opportunities": [
+        {
+          "nutrient": "iodine_ug",
+          "current_value": 0,
+          "suggested_value": 17,
+          "confidence": "medium",
+          "reason": "Eggs typically ~26 \u00b5g/100g (concentrated in yolk)",
+          "priority": "medium",
+          "source_reference": "IODINE-ESTIMATION-REFERENCE.yaml",
+          "usda_available": true
+        },
+        {
+          "nutrient": "selenium_ug",
+          "current_value": 0,
+          "suggested_value": 20,
+          "confidence": "medium",
+          "reason": "Eggs ~31 \u00b5g/100g (USDA data available)",
+          "priority": "low",
+          "source_reference": "MICRONUTRIENT-ESTIMATION-REFERENCE.yaml",
+          "usda_available": true
+        },
+        {
+          "nutrient": "vitamin_d_ug",
+          "current_value": 0,
+          "suggested_value": 1.2,
+          "confidence": "medium-high",
+          "reason": "Eggs ~1.8 \u00b5g/100g (in yolk, USDA data)",
+          "priority": "medium",
+          "source_reference": "MICRONUTRIENT-ESTIMATION-REFERENCE.yaml",
+          "usda_available": true
+        }
+      ]
+    },
+    {
+      "path": "data/food-data-bank/venues/simple-health-kitchen/grilled_salmon_fillet_shk_v1.md",
+      "file_id": "grilled_salmon_fillet_shk_v1",
+      "food_category": "venue",
+      "food_description": "grilled salmon fillet",
+      "portion_weight_g": null,
+      "primary_ingredients": [
+        "assume skin-on unless specified; lightly oiled; normal salt",
+        "Atwater check (available carb basis): 4\u00d728.0 + 9\u00d716.0 + 4\u00d71.0 + 2\u00d70.0 + 2.4\u00d70.0 = 260 kcal",
+        "grilled salmon fillet"
+      ],
+      "priority_counts": {
+        "high": 0,
+        "medium": 1,
+        "low": 1
+      },
+      "opportunities": [
+        {
+          "nutrient": "selenium_ug",
+          "current_value": 0,
+          "suggested_value": 50,
+          "confidence": "medium",
+          "reason": "Fish ~50 \u00b5g/100g average (USDA data available)",
+          "priority": "low",
+          "source_reference": "MICRONUTRIENT-ESTIMATION-REFERENCE.yaml",
+          "usda_available": true
+        },
+        {
+          "nutrient": "vitamin_d_ug",
+          "current_value": 0,
+          "suggested_value": 13.0,
+          "confidence": "high",
+          "reason": "Fatty fish ~13 \u00b5g/100g (HIGHEST natural source, USDA data)",
+          "priority": "medium",
+          "source_reference": "MICRONUTRIENT-ESTIMATION-REFERENCE.yaml",
+          "usda_available": true
+        }
+      ]
+    },
+    {
+      "path": "data/food-data-bank/venues/zima-soho/borscht_krasnodarsky_zima_v1.md",
+      "file_id": "borscht_krasnodarsky_zima_v1",
+      "food_category": "venue",
+      "food_description": "restaurant portion with traditional sides",
+      "portion_weight_g": 382,
+      "primary_ingredients": [
+        "Bowl of borscht (~300ml) with beef, served with sour cream (~30g), salo (~20g), and 1 slice Borodinsky rye bread (~32g)",
+        "447 kcal total for complete dish with all sides",
+        "Borscht bowl approximately 300ml"
+      ],
+      "priority_counts": {
+        "high": 0,
+        "medium": 1,
+        "low": 0
+      },
+      "opportunities": [
+        {
+          "nutrient": "iodine_ug",
+          "current_value": 0,
+          "suggested_value": 19,
+          "confidence": "low-medium",
+          "reason": "Meat typically ~5 \u00b5g/100g (minor source)",
+          "priority": "medium",
+          "source_reference": "IODINE-ESTIMATION-REFERENCE.yaml",
+          "usda_available": true
+        }
+      ]
+    },
+    {
+      "path": "data/food-data-bank/venues/the-eagle-farringdon/bife_ana_steak_sandwich_eagle_farringdon_v1.md",
+      "file_id": "bife_ana_steak_sandwich_eagle_farringdon_v1",
+      "food_category": "venue",
+      "food_description": "1 signature steak sandwich",
+      "portion_weight_g": 360,
+      "primary_ingredients": [
+        "Portuguese-style sandwich: 200g cooked rump/sirloin in 90g crusty roll with onions, lettuce, marinade reduction",
+        "London's first gastropub (est. 1991) - legendary signature dish",
+        "Menu chalked daily, changes twice per day - call ahead to confirm availability: 020 7837 1353"
+      ],
+      "priority_counts": {
+        "high": 0,
+        "medium": 1,
+        "low": 0
+      },
+      "opportunities": [
+        {
+          "nutrient": "iodine_ug",
+          "current_value": 0,
+          "suggested_value": 18,
+          "confidence": "low-medium",
+          "reason": "Meat typically ~5 \u00b5g/100g (minor source)",
+          "priority": "medium",
+          "source_reference": "IODINE-ESTIMATION-REFERENCE.yaml",
+          "usda_available": true
+        }
+      ]
+    }
+  ]
+}

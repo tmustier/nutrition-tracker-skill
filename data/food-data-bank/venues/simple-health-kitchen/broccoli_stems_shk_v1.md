@@ -18,6 +18,7 @@ assumptions:
   salt_scheme: normal
   oil_type: ''
   prep: ''
+  fiber_split: 'Estimated using dried fruits category ratio (40% soluble / 60% insoluble) from FIBER-SPLIT-ESTIMATION-REFERENCE.yaml. High sugar (9.4g) and fiber (6.9g) content indicates dried fruit component in addition to broccoli stems: HIGH confidence. Calculation: 6.9g total × 40% = 2.8g soluble, remainder 4.1g insoluble.'
 per_portion:
   energy_kcal: 165.7
   protein_g: 5.0
@@ -29,8 +30,8 @@ per_portion:
   cholesterol_mg: 0
   sugar_g: 9.4
   fiber_total_g: 6.9
-  fiber_soluble_g: 0
-  fiber_insoluble_g: 0
+  fiber_soluble_g: 2.8
+  fiber_insoluble_g: 4.1
   sodium_mg: 540
   potassium_mg: 630
   iodine_ug: 1

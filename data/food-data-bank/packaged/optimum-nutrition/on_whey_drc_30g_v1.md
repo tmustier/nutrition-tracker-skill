@@ -2,8 +2,8 @@
 
 ```yaml
 id: on_whey_drc_30g_v1
-version: 3
-last_verified: '2025-11-02'
+version: 4
+last_verified: '2025-11-03'
 source:
   venue: Optimum Nutrition (pack/ingredient)
   menu_page: ''
@@ -30,8 +30,8 @@ per_portion:
   cholesterol_mg: 0
   sugar_g: 1.3
   fiber_total_g: 0.7
-  fiber_soluble_g: 0
-  fiber_insoluble_g: 0
+  fiber_soluble_g: 0.2
+  fiber_insoluble_g: 0.5
   sodium_mg: 86
   potassium_mg: 177
   iodine_ug: 18
@@ -104,4 +104,16 @@ change_log:
   - per_portion.polyols_g
   - version
   sources: []
+- timestamp: '2025-11-03T00:00:00+00:00'
+  updated_by: 'LLM: Claude Sonnet 4.5'
+  reason: Phase 2 nutrient estimation - fiber split for protein powder
+  fields_changed:
+  - per_portion.fiber_soluble_g
+  - per_portion.fiber_insoluble_g
+  - last_verified
+  - version
+  sources:
+  - url: references/FIBER-SPLIT-ESTIMATION-REFERENCE.yaml
+    note: Used general_plant_foods default ratio (30% soluble, 70% insoluble, LOW confidence)
+  methodology: 'Applied general plant foods fiber split ratio to total fiber 0.7g: soluble = 0.7 × 0.30 = 0.2g, insoluble = 0.7 × 0.70 = 0.5g. Low confidence estimate appropriate for processed protein powder where fiber source (likely cocoa powder or added fiber) composition is unknown. Conservative general ratio used due to lack of specific ingredient data.'
 ```

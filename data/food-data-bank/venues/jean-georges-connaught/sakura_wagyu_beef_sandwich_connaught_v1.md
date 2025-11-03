@@ -21,6 +21,9 @@ assumptions:
   salt_scheme: normal
   oil_type: likely neutral oil for wagyu searing
   prep: seared wagyu beef on pain de mie with dressing
+  copper_estimation: Beef muscle ~0.09mg/100g, refined bread ~0.1mg/100g (USDA data).
+    360g sandwich with mixed composition estimated at 0.36mg copper (0.1mg/100g average).
+    Medium confidence (±20-40%).
 per_portion:
   energy_kcal: 884
   protein_g: 42.0
@@ -43,6 +46,7 @@ per_portion:
   zinc_mg: 6
   vitamin_c_mg: 2
   manganese_mg: 0
+  copper_mg: 0.36
   polyols_g: 0.0
   carbs_available_g: 78.0
   carbs_total_g: 82.0

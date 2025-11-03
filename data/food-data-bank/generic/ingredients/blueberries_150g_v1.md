@@ -18,6 +18,9 @@ assumptions:
   salt_scheme: normal
   oil_type: ''
   prep: ''
+  fiber_split: Estimated using berries category ratios (35% soluble, 65% insoluble)
+    from FIBER-SPLIT-ESTIMATION-REFERENCE.yaml; berries contain pectin and lignin in
+    seeds. Confidence HIGH.
 per_portion:
   energy_kcal: 102
   protein_g: 1.0
@@ -29,8 +32,8 @@ per_portion:
   cholesterol_mg: 0
   sugar_g: 15.0
   fiber_total_g: 3.6
-  fiber_soluble_g: 0
-  fiber_insoluble_g: 0
+  fiber_soluble_g: 1.3
+  fiber_insoluble_g: 2.3
   sodium_mg: 2
   potassium_mg: 116
   iodine_ug: 0.5

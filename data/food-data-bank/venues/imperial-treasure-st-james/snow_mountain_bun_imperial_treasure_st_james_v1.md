@@ -23,6 +23,8 @@ assumptions:
   salt_scheme: "normal"
   oil_type: "butter"
   prep: "baked with snow mountain topping (butter-flour-sugar crust)"
+  fiber_split: 'Estimated using general_plant_foods category ratio (30% soluble, 70% insoluble) from FIBER-SPLIT-ESTIMATION-REFERENCE.yaml for mixed baked goods with refined flour. Confidence: LOW (mixed ingredients, processed flour).'
+  iodine_estimation: 'Estimated from dairy components: dough contains ~15g milk (47g × 32% = 6 μg @ 40 μg/100g), topping contains ~3.5g butter (0.4 μg @ 10 μg/100g), filling contains 24g pork (1.2 μg @ 5 μg/100g). Total: 7.6 μg rounded to 8 μg. Confidence: MEDIUM (dairy-based estimate from IODINE-ESTIMATION-REFERENCE.yaml).'
 per_portion:
   energy_kcal: 250
   protein_g: 9.3
@@ -35,11 +37,11 @@ per_portion:
   carbs_available_g: 30.8
   sugar_g: 8.2
   fiber_total_g: 0.9
-  fiber_soluble_g: 0
-  fiber_insoluble_g: 0
+  fiber_soluble_g: 0.3
+  fiber_insoluble_g: 0.6
   sodium_mg: 318
   potassium_mg: 90
-  iodine_ug: 0
+  iodine_ug: 8
   magnesium_mg: 12
   calcium_mg: 45
   iron_mg: 1.2

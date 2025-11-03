@@ -29,8 +29,8 @@ per_portion:
   cholesterol_mg: 0
   sugar_g: 2.4
   fiber_total_g: 4.0
-  fiber_soluble_g: 0
-  fiber_insoluble_g: 0
+  fiber_soluble_g: 0.6
+  fiber_insoluble_g: 3.4
   sodium_mg: 600
   potassium_mg: 235
   iodine_ug: 0
@@ -39,7 +39,7 @@ per_portion:
   iron_mg: 2
   zinc_mg: 1
   vitamin_c_mg: 3
-  manganese_mg: 0
+  manganese_mg: 3.0
   polyols_g: 0.0
   carbs_available_g: 28.0
   carbs_total_g: 32.0
@@ -48,6 +48,19 @@ derived:
 quality:
   confidence: medium
   gaps: []
+  estimated_nutrients:
+    - name: "fiber_soluble_g"
+      value: 0.6
+      confidence: "high"
+      method: "Total fiber 4.0g from whole wheat pasta. Split using grains.wheat_bran ratio (15% soluble). 4.0g × 15% = 0.6g"
+    - name: "fiber_insoluble_g"
+      value: 3.4
+      confidence: "high"
+      method: "Total fiber 4.0g from whole wheat pasta. Split using grains.wheat_bran ratio (85% insoluble). 4.0g × 85% = 3.4g"
+    - name: "manganese_mg"
+      value: 3.0
+      confidence: "medium"
+      method: "Whole grains ~3.0-4.0 mg/100g. Estimated 100g whole wheat pasta equivalent contributes ~3.0 mg total. USDA data for whole wheat products."
 notes:
 - 'Atwater check (available carb basis): 4×6.3 + 9×7.9 + 4×28.0 + 2×4.0 + 2.4×0.0
   = 216.3 kcal'

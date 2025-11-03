@@ -25,6 +25,9 @@ assumptions:
   salt_scheme: unsalted
   oil_type: ''
   prep: fresh, whole, peeled
+  fiber_split: Estimated using citrus fruit ratios (45% soluble, 55% insoluble) from
+    FIBER-SPLIT-ESTIMATION-REFERENCE.yaml; citrus fruits are rich in pectin. Confidence
+    HIGH.
 per_portion:
   energy_kcal: 41.9
   protein_g: 0.6
@@ -36,8 +39,8 @@ per_portion:
   cholesterol_mg: 0
   sugar_g: 6.8
   fiber_total_g: 1.3
-  fiber_soluble_g: 0
-  fiber_insoluble_g: 0
+  fiber_soluble_g: 0.6
+  fiber_insoluble_g: 0.7
   sodium_mg: 1
   potassium_mg: 131
   iodine_ug: 0
@@ -56,8 +59,6 @@ derived:
 quality:
   confidence: high
   gaps:
-  - fiber_soluble_g
-  - fiber_insoluble_g
   - iodine_ug
   - manganese_mg
 notes:

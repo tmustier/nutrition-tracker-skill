@@ -18,6 +18,8 @@ assumptions:
   salt_scheme: normal
   oil_type: ''
   prep: ''
+  fiber_split: "Estimated using nuts_and_seeds.tree_nuts category ratio (20% soluble, 80% insoluble) from total fiber 3.2g. Confidence: HIGH - well-documented tree nut fiber composition"
+  manganese: "Estimated from USDA data for tree nuts (~2.3 mg/100g). 30g × 2.3 mg/100g = 0.69 mg. Confidence: HIGH - nuts are excellent manganese source"
 per_portion:
   energy_kcal: 185.5
   protein_g: 6.0
@@ -29,8 +31,8 @@ per_portion:
   cholesterol_mg: 0
   sugar_g: 2.3
   fiber_total_g: 3.2
-  fiber_soluble_g: 0
-  fiber_insoluble_g: 0
+  fiber_soluble_g: 0.6
+  fiber_insoluble_g: 2.6
   sodium_mg: 1
   potassium_mg: 308
   iodine_ug: 0
@@ -39,7 +41,7 @@ per_portion:
   iron_mg: 1
   zinc_mg: 1
   vitamin_c_mg: 0
-  manganese_mg: 0
+  manganese_mg: 0.69
   polyols_g: 0.0
   carbs_available_g: 8.4
   carbs_total_g: 11.6

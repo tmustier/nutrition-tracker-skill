@@ -22,6 +22,7 @@ assumptions:
   salt_scheme: normal
   oil_type: minimal or none
   prep: grilled, no skin, finishing salt 0.5% of weight (0.43g salt)
+  micronutrients: Copper (0.04mg) from 86g chicken breast at 0.05mg/100g USDA reference
 per_portion:
   energy_kcal: 135.6
   protein_g: 27.6
@@ -44,6 +45,7 @@ per_portion:
   zinc_mg: 1
   vitamin_c_mg: 0
   manganese_mg: 0
+  copper_mg: 0.04
   polyols_g: 0.0
   carbs_available_g: 0.0
   carbs_total_g: 0.0
@@ -53,7 +55,8 @@ derived:
   fat_unassigned_g: 0.1
 quality:
   confidence: high
-  gaps: []
+  gaps:
+  - Copper estimated from USDA chicken breast values (HIGH confidence)
 notes:
 - 135 kcal from Deliveroo
 - 86g portion calculated from USDA 157 kcal/100g profile

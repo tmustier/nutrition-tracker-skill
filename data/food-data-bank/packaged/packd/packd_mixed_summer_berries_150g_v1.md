@@ -2,8 +2,8 @@
 
 ```yaml
 id: packd_mixed_summer_berries_150g_v1
-version: 4
-last_verified: '2025-11-02'
+version: 5
+last_verified: '2025-11-03'
 source:
   venue: PACK'D (pack/ingredient)
   menu_page: ''
@@ -29,8 +29,8 @@ per_portion:
   cholesterol_mg: 0
   sugar_g: 9.8
   fiber_total_g: 4.4
-  fiber_soluble_g: 0
-  fiber_insoluble_g: 0
+  fiber_soluble_g: 1.5
+  fiber_insoluble_g: 2.9
   sodium_mg: 0
   potassium_mg: 194
   iodine_ug: 1
@@ -121,4 +121,16 @@ change_log:
   - per_portion.polyols_g
   - version
   sources: []
+- timestamp: '2025-11-03T00:00:00+00:00'
+  updated_by: 'LLM: Claude Sonnet 4.5'
+  reason: Phase 2 nutrient estimation - fiber split for mixed berries
+  fields_changed:
+  - per_portion.fiber_soluble_g
+  - per_portion.fiber_insoluble_g
+  - last_verified
+  - version
+  sources:
+  - url: references/FIBER-SPLIT-ESTIMATION-REFERENCE.yaml
+    note: Used fruits.berries category (35% soluble, 65% insoluble, HIGH confidence)
+  methodology: 'Applied berries fiber split ratio to total fiber 4.4g: soluble = 4.4 × 0.35 = 1.5g, insoluble = 4.4 × 0.65 = 2.9g. Mixed berry composition (36% raspberries, 34% blueberries, 30% blackberries) confirmed from previous research. High confidence estimation based on well-documented berry fiber profiles.'
 ```

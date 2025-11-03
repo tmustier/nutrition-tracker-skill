@@ -18,6 +18,7 @@ assumptions:
   salt_scheme: normal
   oil_type: ''
   prep: ''
+  fiber_split: 'Estimated using chickpeas category ratio (32% soluble / 68% insoluble) from FIBER-SPLIT-ESTIMATION-REFERENCE.yaml. Hummus primary ingredient is chickpeas: HIGH confidence. Calculation: 5.1g total × 32% = 1.6g soluble, × 68% = 3.5g insoluble.'
 per_portion:
   energy_kcal: 201.2
   protein_g: 9.0
@@ -29,8 +30,8 @@ per_portion:
   cholesterol_mg: 0
   sugar_g: 0.6
   fiber_total_g: 5.1
-  fiber_soluble_g: 0
-  fiber_insoluble_g: 0
+  fiber_soluble_g: 1.6
+  fiber_insoluble_g: 3.5
   sodium_mg: 379
   potassium_mg: 360
   iodine_ug: 0

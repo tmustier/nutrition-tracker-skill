@@ -37,8 +37,8 @@ per_portion:
   carbs_available_g: 5.6
   sugar_g: 0.2
   fiber_total_g: 0.1
-  fiber_soluble_g: 0
-  fiber_insoluble_g: 0
+  fiber_soluble_g: 0.0
+  fiber_insoluble_g: 0.1
   sodium_mg: 310
   potassium_mg: 20
   iodine_ug: 2
@@ -55,7 +55,16 @@ derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: medium
-  gaps: ["No direct Imperial Treasure nutrition data available", "Fiber subfractions unknown", "Some micronutrients estimated from component averages"]
+  gaps: ["No direct Imperial Treasure nutrition data available", "Some micronutrients estimated from component averages"]
+  estimated_nutrients:
+    - name: "fiber_soluble_g"
+      value: 0.0
+      confidence: "low"
+      method: "Total fiber 0.1g from chives. Split using general_plant_foods ratio (30% soluble). 0.1g × 30% = 0.03g, rounds to 0.0g"
+    - name: "fiber_insoluble_g"
+      value: 0.1
+      confidence: "low"
+      method: "Total fiber 0.1g from chives. Split using general_plant_foods ratio (70% insoluble). 0.1g × 70% = 0.07g, rounds to 0.1g"
 notes:
   - "Component breakdown (26g total): Prawns 11g (9.4 kcal, 2.2g P, 0.1g F), wheat starch wrapper 6g (21 kcal, 5.1g C), Chinese chives 2g (0.4 kcal, 0.08g C), vegetable/sesame oil 1.3g (11.7 kcal, 1.3g F), soy sauce & seasonings 1.7g (1.4 kcal, 0.15g P, 180mg Na), finishing salt 0.13g (52mg Na)"
   - "Atwater validation: 4×2.0 + 4×5.6 + 9×1.6 = 8.0 + 22.4 + 14.4 = 44.8 kcal (within 0.4% of stated 45 kcal)"

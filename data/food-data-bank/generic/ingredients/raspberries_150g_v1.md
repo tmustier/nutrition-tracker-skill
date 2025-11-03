@@ -18,6 +18,9 @@ assumptions:
   salt_scheme: normal
   oil_type: ''
   prep: ''
+  fiber_split: Estimated using berries category ratios (35% soluble, 65% insoluble)
+    from FIBER-SPLIT-ESTIMATION-REFERENCE.yaml; raspberries contain pectin and significant
+    lignin in seeds. Confidence HIGH.
 per_portion:
   energy_kcal: 65.4
   protein_g: 1.8
@@ -29,8 +32,8 @@ per_portion:
   cholesterol_mg: 0
   sugar_g: 6.6
   fiber_total_g: 9.8
-  fiber_soluble_g: 0
-  fiber_insoluble_g: 0
+  fiber_soluble_g: 3.4
+  fiber_insoluble_g: 6.4
   sodium_mg: 2
   potassium_mg: 227
   iodine_ug: 0

@@ -23,6 +23,8 @@ assumptions:
   salt_scheme: light
   oil_type: butter
   prep: butter croissant filled with almond frangipane paste and topped with sliced almonds
+  fiber_split: 'Estimated using nuts_seeds.tree_nuts category ratio (20% soluble, 80% insoluble) from FIBER-SPLIT-ESTIMATION-REFERENCE.yaml. Fiber primarily from 20g almond content. Confidence: HIGH.'
+  trace_minerals: 'Copper (0.2mg) and Vitamin E (5.1mg) estimated based on 20g almond content (10g in frangipane + 10g sliced on top) using USDA values: almonds contain ~1.0mg copper/100g and ~25.6mg vitamin E/100g from MICRONUTRIENT-ESTIMATION-REFERENCE.yaml. Confidence: HIGH.'
 per_portion:
   energy_kcal: 506
   protein_g: 10.2
@@ -34,8 +36,8 @@ per_portion:
   cholesterol_mg: 65
   sugar_g: 11.3
   fiber_total_g: 4.0
-  fiber_soluble_g: 0
-  fiber_insoluble_g: 0
+  fiber_soluble_g: 0.8
+  fiber_insoluble_g: 3.2
   sodium_mg: 347
   potassium_mg: 173
   iodine_ug: 0
@@ -43,7 +45,9 @@ per_portion:
   calcium_mg: 47
   iron_mg: 1.6
   zinc_mg: 0.8
+  copper_mg: 0.2
   vitamin_c_mg: 0
+  vitamin_e_mg: 5.1
   manganese_mg: 0.4
   polyols_g: 0.0
   carbs_available_g: 38.6

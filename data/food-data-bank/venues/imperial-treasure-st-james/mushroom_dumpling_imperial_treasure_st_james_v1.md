@@ -40,8 +40,8 @@ per_portion:
   carbs_available_g: 10.5
   sugar_g: 0.6
   fiber_total_g: 0.6
-  fiber_soluble_g: 0
-  fiber_insoluble_g: 0
+  fiber_soluble_g: 0.2
+  fiber_insoluble_g: 0.4
   sodium_mg: 93
   potassium_mg: 24
   iodine_ug: 0
@@ -58,7 +58,16 @@ derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: medium
-  gaps: ["fiber_soluble_g", "fiber_insoluble_g", "iodine_ug", "manganese_mg"]
+  gaps: ["iodine_ug", "manganese_mg"]
+  estimated_nutrients:
+    - name: "fiber_soluble_g"
+      value: 0.2
+      confidence: "low"
+      method: "Total fiber 0.6g from mushrooms, cabbage, and wheat wrapper. Split using general_plant_foods ratio (30% soluble). 0.6g × 30% = 0.18g, rounded to 0.2g"
+    - name: "fiber_insoluble_g"
+      value: 0.4
+      confidence: "low"
+      method: "Total fiber 0.6g from mushrooms, cabbage, and wheat wrapper. Split using general_plant_foods ratio (70% insoluble). 0.6g × 70% = 0.42g, rounded to 0.4g"
 notes:
   - "Component-based estimation for 1 piece (35g) vegetarian mushroom dumpling"
   - "Wrapper (13g cooked from ~11g raw wheat flour): 40 kcal, 1.1g P, 0.1g F, 8.4g C"
