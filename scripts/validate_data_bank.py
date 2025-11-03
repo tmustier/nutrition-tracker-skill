@@ -18,8 +18,15 @@ except Exception as e:
     sys.stderr.write("This script requires PyYAML. Install with: pip install pyyaml\n")
     raise
 
-TOL_ENERGY_PCT = 0.08  # ±8%
-CARB_TOL_G = 0.2       # acceptable rounding error for carb totals
+# Validation constants with rationale:
+# - TOL_ENERGY_PCT: ±8% tolerance for energy calculations to account for rounding in
+#   macronutrient values and natural variation in Atwater factors (4-4-9 rule)
+# - CARB_TOL_G: 0.2g tolerance for carbohydrate totals to allow for rounding errors
+#   when summing available carbs, fiber, and polyols
+# - FIBER_KCAL_PER_G: UK/EU convention for fiber energy content (2 kcal/g)
+# - POLYOL_KCAL_PER_G: Standard energy value for sugar alcohols/polyols (2.4 kcal/g)
+TOL_ENERGY_PCT = 0.08
+CARB_TOL_G = 0.2
 FIBER_KCAL_PER_G = 2.0
 POLYOL_KCAL_PER_G = 2.4
 
@@ -258,6 +265,11 @@ def check_block(y, filepath):
     for key, val in pp.items():
         if val is None:
             issues.append(f"NULL value not allowed in per_portion: {key} must be 0 or a positive number")
+
+    # Type validation - nutrient fields must be numeric (int or float)
+    for key, val in pp.items():
+        if val is not None and not isinstance(val, (int, float)):
+            issues.append(f"Invalid type for {key}: expected number, got {type(val).__name__} (value: {val})")
 
     return {
         "id": bid,

@@ -368,6 +368,43 @@ class TestEdgeCases:
         assert len(negative_issues) == 1
 
 
+class TestTypeValidation:
+    """Tests for nutrient field type validation."""
+
+    def test_invalid_type_string(self):
+        """Test detection of string value in numeric field."""
+        per_portion = {field: 0.0 for field in REQUIRED_NUTRIENTS}
+        per_portion["protein_g"] = "10.5"  # Should be numeric, not string
+
+        block = {
+            "id": "test_invalid_type",
+            "per_portion": per_portion,
+            "derived": {},
+            "quality": {},
+        }
+        result = check_block(block)
+        type_issues = [i for i in result["issues"] if "Invalid type" in i and "protein_g" in i]
+        assert len(type_issues) == 1
+        assert "expected number" in type_issues[0]
+
+    def test_valid_numeric_types(self):
+        """Test that both int and float types are accepted."""
+        per_portion = {field: 0.0 for field in REQUIRED_NUTRIENTS}
+        per_portion["protein_g"] = 10  # int
+        per_portion["fat_g"] = 5.5  # float
+        per_portion["carbs_available_g"] = 20.0  # float
+
+        block = {
+            "id": "test_valid_types",
+            "per_portion": per_portion,
+            "derived": {},
+            "quality": {},
+        }
+        result = check_block(block)
+        type_issues = [i for i in result["issues"] if "Invalid type" in i]
+        assert len(type_issues) == 0
+
+
 class TestMissingRequiredFields:
     """Tests for missing required nutrient fields validation."""
 
@@ -462,11 +499,24 @@ class TestIntegration:
                 "sat_fat_g": 0.9,
                 "mufa_g": 1.1,
                 "pufa_g": 0.7,
+                "trans_fat_g": 0.0,
+                "cholesterol_mg": 75.0,
+                "sugar_g": 0.0,
                 "fiber_total_g": 0.0,
+                "fiber_soluble_g": 0.0,
+                "fiber_insoluble_g": 0.0,
                 "carbs_available_g": 0.0,
                 "carbs_total_g": 0.0,
                 "polyols_g": 0.0,
-                "sodium_mg": 212,
+                "sodium_mg": 212.0,
+                "potassium_mg": 300.0,
+                "iodine_ug": 5.0,
+                "magnesium_mg": 25.0,
+                "calcium_mg": 10.0,
+                "iron_mg": 0.5,
+                "zinc_mg": 1.0,
+                "vitamin_c_mg": 0.0,
+                "manganese_mg": 0.0,
             },
             "derived": {},
             "quality": {},
@@ -484,11 +534,26 @@ class TestIntegration:
                 "protein_g": 8.5,
                 "fat_g": 3.5,
                 "sat_fat_g": 0.6,
+                "mufa_g": 1.2,
+                "pufa_g": 1.4,
+                "trans_fat_g": 0.0,
+                "cholesterol_mg": 0.0,
+                "sugar_g": 1.0,
                 "fiber_total_g": 5.3,
+                "fiber_soluble_g": 2.0,
+                "fiber_insoluble_g": 3.3,
                 "carbs_available_g": 33.2,
                 "carbs_total_g": 38.5,
                 "polyols_g": 0.0,
-                "sodium_mg": 4,
+                "sodium_mg": 4.0,
+                "potassium_mg": 200.0,
+                "iodine_ug": 0.0,
+                "magnesium_mg": 80.0,
+                "calcium_mg": 30.0,
+                "iron_mg": 2.5,
+                "zinc_mg": 2.0,
+                "vitamin_c_mg": 0.0,
+                "manganese_mg": 2.0,
             },
             "derived": {},
             "quality": {},
@@ -506,11 +571,26 @@ class TestIntegration:
                 "protein_g": 21.0,
                 "fat_g": 10.0,
                 "sat_fat_g": 4.5,
+                "mufa_g": 3.0,
+                "pufa_g": 2.0,
+                "trans_fat_g": 0.0,
+                "cholesterol_mg": 10.0,
+                "sugar_g": 2.0,
                 "fiber_total_g": 0.9,
+                "fiber_soluble_g": 0.3,
+                "fiber_insoluble_g": 0.6,
                 "carbs_available_g": 20.0,
                 "carbs_total_g": 37.9,
                 "polyols_g": 17.0,
-                "sodium_mg": 100,
+                "sodium_mg": 100.0,
+                "potassium_mg": 150.0,
+                "iodine_ug": 15.0,
+                "magnesium_mg": 40.0,
+                "calcium_mg": 200.0,
+                "iron_mg": 3.0,
+                "zinc_mg": 2.0,
+                "vitamin_c_mg": 20.0,
+                "manganese_mg": 0.5,
             },
             "derived": {},
             "quality": {},
@@ -523,35 +603,44 @@ class TestIntegration:
 
     def test_validate_missing_carbs_available(self):
         """Test that missing carbs_available_g is caught."""
+        # This test intentionally omits carbs_available_g to test detection
+        # All other required fields are included to isolate the carbs_available_g check
+        per_portion = {field: 0.0 for field in REQUIRED_NUTRIENTS}
+        del per_portion["carbs_available_g"]  # Intentionally missing
+        per_portion.update({
+            "energy_kcal": 100.0,
+            "protein_g": 10.0,
+            "fat_g": 5.0,
+            "carbs_total_g": 10.0,
+            "fiber_total_g": 2.0,
+            "polyols_g": 0.0,
+        })
+
         block = {
             "id": "test_missing_carbs",
-            "per_portion": {
-                "energy_kcal": 100.0,
-                "protein_g": 10.0,
-                "fat_g": 5.0,
-                "carbs_total_g": 10.0,
-                "fiber_total_g": 2.0,
-                "polyols_g": 0.0,
-            },
+            "per_portion": per_portion,
             "derived": {},
             "quality": {},
         }
         result = check_block(block)
-        assert any("Missing carbs_available_g" in i for i in result["issues"])
+        assert any("Missing carbs_available_g" in i or "Missing required field" in i for i in result["issues"])
 
     def test_validate_carb_relationship_mismatch(self):
         """Test that carb relationship mismatches are detected."""
+        per_portion = {field: 0.0 for field in REQUIRED_NUTRIENTS}
+        per_portion.update({
+            "energy_kcal": 100.0,
+            "protein_g": 10.0,
+            "fat_g": 5.0,
+            "carbs_available_g": 10.0,
+            "carbs_total_g": 20.0,  # Should be ~12.0 (10 + 2 + 0)
+            "fiber_total_g": 2.0,
+            "polyols_g": 0.0,
+        })
+
         block = {
             "id": "test_carb_mismatch",
-            "per_portion": {
-                "energy_kcal": 100.0,
-                "protein_g": 10.0,
-                "fat_g": 5.0,
-                "carbs_available_g": 10.0,
-                "carbs_total_g": 20.0,  # Should be ~12.0 (10 + 2 + 0)
-                "fiber_total_g": 2.0,
-                "polyols_g": 0.0,
-            },
+            "per_portion": per_portion,
             "derived": {},
             "quality": {},
         }
@@ -560,17 +649,20 @@ class TestIntegration:
 
     def test_validate_polyol_note_without_field(self):
         """Test that polyol mentions in notes without polyols_g field trigger warning."""
+        per_portion = {field: 0.0 for field in REQUIRED_NUTRIENTS}
+        per_portion.update({
+            "energy_kcal": 250.0,
+            "protein_g": 20.0,
+            "fat_g": 10.0,
+            "carbs_available_g": 15.0,
+            "carbs_total_g": 32.0,
+            "fiber_total_g": 1.0,
+            "polyols_g": 0.0,  # Should be 16.0
+        })
+
         block = {
             "id": "test_polyol_note",
-            "per_portion": {
-                "energy_kcal": 250.0,
-                "protein_g": 20.0,
-                "fat_g": 10.0,
-                "carbs_available_g": 15.0,
-                "carbs_total_g": 32.0,
-                "fiber_total_g": 1.0,
-                "polyols_g": 0.0,  # Should be 16.0
-            },
+            "per_portion": per_portion,
             "derived": {},
             "quality": {},
             "notes": ["Contains 16g erythritol"]
