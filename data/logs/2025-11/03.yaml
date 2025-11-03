@@ -301,3 +301,93 @@ entries:
       carbs_total_g: 0.0
   notes: Crispbreads with avocado, smoked trout, olive oil, and seasonings (salt,
     pepper, chilli flakes - minimal calories)
+- timestamp: '2025-11-03T12:45:00+00:00'
+  items:
+  - name: Sea Bass Fillet with Salsa Verde (Simple Health Kitchen)
+    food_bank_id: sea_bass_fillet_salsa_verde_shk_v1
+    quantity: 1
+    unit: portion
+    nutrition:
+      energy_kcal: 184
+      protein_g: 25.3
+      fat_g: 7.4
+      sat_fat_g: 1.8
+      mufa_g: 3.9
+      pufa_g: 1.5
+      trans_fat_g: 0.0
+      cholesterol_mg: 62
+      sugar_g: 1.2
+      fiber_total_g: 0.0
+      fiber_soluble_g: 0.0
+      fiber_insoluble_g: 0.0
+      sodium_mg: 320
+      potassium_mg: 380
+      iodine_ug: 8
+      magnesium_mg: 57
+      calcium_mg: 15
+      iron_mg: 1
+      zinc_mg: 1
+      vitamin_c_mg: 8
+      manganese_mg: 0
+      polyols_g: 0.0
+      carbs_available_g: 4.0
+      carbs_total_g: 4.0
+  - name: Zesty Lemon Broccoli (Simple Health Kitchen)
+    food_bank_id: zesty_lemon_broccoli_shk_v1
+    quantity: 1
+    unit: portion
+    nutrition:
+      energy_kcal: 109.3
+      protein_g: 4.5
+      fat_g: 4.7
+      sat_fat_g: 0.8
+      mufa_g: 3.2
+      pufa_g: 0.8
+      trans_fat_g: 0
+      cholesterol_mg: 0
+      sugar_g: 2.7
+      fiber_total_g: 3.5
+      fiber_soluble_g: 1.1
+      fiber_insoluble_g: 2.4
+      sodium_mg: 150
+      potassium_mg: 556
+      iodine_ug: 1
+      magnesium_mg: 40
+      calcium_mg: 76
+      iron_mg: 1
+      zinc_mg: 1
+      vitamin_c_mg: 123
+      manganese_mg: 0
+      polyols_g: 0.0
+      carbs_available_g: 10.5
+      carbs_total_g: 14.0
+  - name: Sweet Potato Wedges (Simple Health Kitchen)
+    food_bank_id: sweet_potato_wedges_shk_v1
+    quantity: 1
+    unit: portion
+    nutrition:
+      energy_kcal: 163.3
+      protein_g: 2.0
+      fat_g: 1.9
+      sat_fat_g: 1.0
+      mufa_g: 0.5
+      pufa_g: 0.4
+      trans_fat_g: 0.1
+      cholesterol_mg: 0
+      sugar_g: 10.1
+      fiber_total_g: 5.1
+      fiber_soluble_g: 1.4
+      fiber_insoluble_g: 3.7
+      sodium_mg: 350
+      potassium_mg: 734
+      iodine_ug: 2
+      magnesium_mg: 42
+      calcium_mg: 59
+      iron_mg: 1
+      zinc_mg: 0
+      vitamin_c_mg: 30
+      manganese_mg: 0
+      polyols_g: 0.0
+      carbs_available_g: 32.0
+      carbs_total_g: 37.1
+  notes: Simple Health Kitchen lunch - sea bass fillet (skin on) with lemon dressing, zesty broccoli, and sweet potato wedges
