@@ -19,6 +19,7 @@ from validate_data_bank import (
     POLYOL_KCAL_PER_G,
     TOL_ENERGY_PCT,
     CARB_TOL_G,
+    REQUIRED_NUTRIENTS,
 )
 
 
@@ -365,6 +366,86 @@ class TestEdgeCases:
         result = check_block(block)
         negative_issues = [i for i in result["issues"] if "Negative" in i]
         assert len(negative_issues) == 1
+
+
+class TestMissingRequiredFields:
+    """Tests for missing required nutrient fields validation."""
+
+    def test_missing_single_field(self):
+        """Test detection of a single missing required field."""
+        # Create a block with all required fields except one
+        per_portion = {field: 0.0 for field in REQUIRED_NUTRIENTS}
+        del per_portion["iodine_ug"]  # Remove one field
+
+        block = {
+            "id": "test_missing_iodine",
+            "per_portion": per_portion,
+            "derived": {},
+            "quality": {},
+        }
+        result = check_block(block)
+        missing_issues = [i for i in result["issues"] if "Missing required field" in i and "iodine_ug" in i]
+        assert len(missing_issues) == 1
+        assert "iodine_ug" in missing_issues[0]
+
+    def test_missing_multiple_fields(self):
+        """Test detection of multiple missing required fields."""
+        block = {
+            "id": "test_missing_multiple",
+            "per_portion": {
+                "energy_kcal": 100.0,
+                "protein_g": 10.0,
+                "fat_g": 5.0,
+                # Missing most other fields
+            },
+            "derived": {},
+            "quality": {},
+        }
+        result = check_block(block)
+        missing_issues = [i for i in result["issues"] if "Missing required field" in i]
+        # Should have multiple missing field issues
+        assert len(missing_issues) > 5
+
+    def test_all_required_fields_present(self):
+        """Test that no missing field issues occur when all fields are present."""
+        # Create a complete block with all required fields
+        per_portion = {field: 0.0 for field in REQUIRED_NUTRIENTS}
+        per_portion["energy_kcal"] = 100.0
+        per_portion["protein_g"] = 10.0
+        per_portion["fat_g"] = 5.0
+        per_portion["carbs_available_g"] = 10.0
+
+        block = {
+            "id": "test_all_fields",
+            "per_portion": per_portion,
+            "derived": {},
+            "quality": {},
+        }
+        result = check_block(block)
+        missing_issues = [i for i in result["issues"] if "Missing required field" in i]
+        assert len(missing_issues) == 0
+
+    def test_missing_vs_null_field(self):
+        """Test that missing fields are caught separately from null fields."""
+        per_portion = {field: 0.0 for field in REQUIRED_NUTRIENTS}
+        del per_portion["iodine_ug"]  # Remove field (missing)
+        per_portion["vitamin_c_mg"] = None  # Set to null
+
+        block = {
+            "id": "test_missing_vs_null",
+            "per_portion": per_portion,
+            "derived": {},
+            "quality": {},
+        }
+        result = check_block(block)
+
+        # Should have one issue for missing field
+        missing_issues = [i for i in result["issues"] if "Missing required field" in i and "iodine_ug" in i]
+        assert len(missing_issues) == 1
+
+        # Should have one issue for null field
+        null_issues = [i for i in result["issues"] if "NULL value not allowed" in i and "vitamin_c_mg" in i]
+        assert len(null_issues) == 1
 
 
 class TestIntegration:
