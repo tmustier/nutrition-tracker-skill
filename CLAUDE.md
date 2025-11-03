@@ -1,0 +1,2 @@
+- Read [SKILL.md](SKILL.md) for instructions.
+- For all estimation & research tasks, ultrathink. Parallelize wherever sensible with as many agents as necessary. Have these agents ultrathink.
