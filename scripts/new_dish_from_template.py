@@ -12,7 +12,7 @@ from pathlib import Path
 from datetime import datetime, timezone
 
 
-SCHEMA_TEMPLATE = """id: {stable_id}_v1
+SCHEMA_TEMPLATE = """id: {stable_id}
 version: 1
 last_verified: {today}
 source:

@@ -192,7 +192,11 @@ This is typically called automatically by the validation script, but can be run 
 - Keep language neutral and terse—future‑you will thank current‑you.
 
 ## Research notes
-For accumulated research findings, methodology lessons, and venue-specific guidance, see `references/research-notes.md`.
+For accumulated research findings, methodology lessons, and venue-specific guidance:
+- General methodology and best practices: `references/METHODOLOGY.md`
+- Venue-specific research notes: `data/food-data-bank/venues/{venue-name}/RESEARCH.md` (where available)
+  - Example: Jean-Georges at The Connaught → `data/food-data-bank/venues/jean-georges-connaught/RESEARCH.md`
+  - Example: L'ETO Caffe Soho → `data/food-data-bank/venues/leto-caffe-soho/RESEARCH.md`
 
 ## Carbohydrate Estimation Protocol
 

@@ -28,4 +28,4 @@ jobs:
 
       - name: Run validator
         run: |
-          python scripts/validate_data_bank.py data/food-data-bank.md
+          python scripts/validate_data_bank.py
