@@ -39,7 +39,7 @@ When the user has eaten a dish and you have completed **A) Estimating**:
      - Add optional notes if user provided context.
    - Proceed to **C) Daily Analysis** without asking the user.
 
-**After logging:** Show updated daily totals and gaps: "Logged ✓. Today: X/Y kcal, X/Y protein. Still need Z."
+**After logging:** Show updated daily totals and gaps: "Logged ✓. Today: X/Y kcal, X/Y protein. Still need Z." Remember that if the user asks you for lunch recommendations, they likely also want to have dinner later, so don't try to meet all targets with that single meal.
 
 ## C) DAILY SUMMARY
 - Aggregate logged dishes; compute totals vs **rest** or **training** day targets in `references/health-profile.yaml`.
