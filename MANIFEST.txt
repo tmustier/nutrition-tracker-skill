@@ -4,9 +4,13 @@ nutrition-tracker-skill/
   LICENSE
   MANIFEST.txt
   .gitignore
-  data/food-data-bank.md
+  data/dishes/
+  data/dishes/venues.yaml
+  data/dishes/schema/dish-template.yaml
+  data/food-data-bank-index.md
   data/logs/SCHEMA.md
   references/health-profile.yaml
-  references/research-notes.md
+  scripts/generate_index.py
   scripts/validate_data_bank.py
   scripts/new_dish_from_template.py
+  tests/test_validate_data_bank.py
