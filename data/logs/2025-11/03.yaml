@@ -62,45 +62,45 @@ entries:
       carbs_available_g: 0.0
       carbs_total_g: 0.0
   - name: Avocado (Fresh)
-    food_bank_id: avocado_fresh_56g_generic-ingredients_v1
+    food_bank_id: avocado_fresh_75g_generic-ingredients_v1
     quantity: 1
     unit: portion
     nutrition:
-      energy_kcal: 89.6
-      protein_g: 1.1
-      fat_g: 8.2
-      sat_fat_g: 1.2
-      mufa_g: 5.5
-      pufa_g: 1.0
+      energy_kcal: 120.0
+      protein_g: 1.5
+      fat_g: 11.0
+      sat_fat_g: 1.6
+      mufa_g: 7.3
+      pufa_g: 1.4
       trans_fat_g: 0
       cholesterol_mg: 0
-      sugar_g: 0.4
-      fiber_total_g: 3.8
+      sugar_g: 0.5
+      fiber_total_g: 5.0
       fiber_soluble_g: null
       fiber_insoluble_g: null
-      sodium_mg: 4
-      potassium_mg: 272
+      sodium_mg: 5
+      potassium_mg: 364
       iodine_ug: null
-      magnesium_mg: 16
-      calcium_mg: 7
+      magnesium_mg: 21
+      calcium_mg: 9
       iron_mg: 0
       zinc_mg: 0
-      vitamin_c_mg: 6
+      vitamin_c_mg: 8
       manganese_mg: null
       polyols_g: 0.0
-      carbs_available_g: 1.0
-      carbs_total_g: 4.8
+      carbs_available_g: 1.4
+      carbs_total_g: 6.4
   - name: Olive Oil
-    food_bank_id: olive_oil_7g_generic-ingredients_v1
+    food_bank_id: olive_oil_14g_generic-ingredients_v1
     quantity: 1
     unit: portion
     nutrition:
-      energy_kcal: 61.9
+      energy_kcal: 123.8
       protein_g: 0.0
-      fat_g: 7.0
-      sat_fat_g: 1.0
-      mufa_g: 5.2
-      pufa_g: 0.7
+      fat_g: 14.0
+      sat_fat_g: 1.9
+      mufa_g: 10.4
+      pufa_g: 1.5
       trans_fat_g: 0
       cholesterol_mg: 0
       sugar_g: 0.0
