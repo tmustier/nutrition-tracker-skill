@@ -46,8 +46,23 @@ def classify_meal_time(timestamp_str: str) -> str:
         return "late_night"
 
 
+def is_alcoholic(item_name: str) -> bool:
+    """Check if an item is likely alcoholic."""
+    alcoholic_keywords = [
+        'beer', 'lager', 'ale', 'ipa', 'stout', 'porter', 'guinness',
+        'wine', 'champagne', 'prosecco', 'cava',
+        'vodka', 'gin', 'rum', 'whisky', 'whiskey', 'tequila', 'brandy',
+        'cocktail', 'martini', 'margarita', 'mojito',
+        'cider', 'perry',
+        'sake', 'soju',
+        'liqueur', 'aperitif'
+    ]
+    item_lower = item_name.lower()
+    return any(keyword in item_lower for keyword in alcoholic_keywords)
+
+
 def parse_daily_log(log_file: Path) -> Dict:
-    """Parse a single daily log file."""
+    """Parse a single daily log file with detailed timing and item analysis."""
     with open(log_file, 'r') as f:
         data = yaml.safe_load(f)
 
@@ -55,13 +70,27 @@ def parse_daily_log(log_file: Path) -> Dict:
     daily_totals = defaultdict(float)
     meal_times = []
     items_consumed = []
+    alcoholic_items = []
+    entry_details = []
 
     for entry in data.get('entries', []):
         timestamp = entry.get('timestamp', '')
         meal_times.append(timestamp)
 
+        entry_items = []
         for item in entry.get('items', []):
-            items_consumed.append(item.get('name'))
+            item_name = item.get('name')
+            items_consumed.append(item_name)
+            entry_items.append(item_name)
+
+            # Track alcoholic items
+            if is_alcoholic(item_name):
+                alcoholic_items.append({
+                    'name': item_name,
+                    'timestamp': timestamp,
+                    'energy_kcal': item.get('nutrition', {}).get('energy_kcal', 0)
+                })
+
             nutrition = item.get('nutrition', {})
 
             # Sum up all nutrients
@@ -69,11 +98,31 @@ def parse_daily_log(log_file: Path) -> Dict:
                 if value is not None and isinstance(value, (int, float)):
                     daily_totals[nutrient] += value
 
+        entry_details.append({
+            'timestamp': timestamp,
+            'items': entry_items
+        })
+
     # Classify meals
     meal_classification = defaultdict(int)
     for ts in meal_times:
         meal_type = classify_meal_time(ts)
         meal_classification[meal_type] += 1
+
+    # Calculate eating window if we have timestamps
+    eating_window_hours = None
+    first_meal_time = None
+    last_meal_time = None
+
+    if meal_times:
+        timestamps = [datetime.fromisoformat(ts.replace('Z', '+00:00')) for ts in meal_times]
+        timestamps.sort()
+        first_meal_time = timestamps[0].strftime('%H:%M')
+        last_meal_time = timestamps[-1].strftime('%H:%M')
+
+        if len(timestamps) > 1:
+            time_diff = timestamps[-1] - timestamps[0]
+            eating_window_hours = time_diff.total_seconds() / 3600
 
     return {
         'date': data.get('date'),
@@ -81,7 +130,12 @@ def parse_daily_log(log_file: Path) -> Dict:
         'totals': dict(daily_totals),
         'meals': dict(meal_classification),
         'num_entries': len(data.get('entries', [])),
-        'items': items_consumed
+        'items': items_consumed,
+        'alcoholic_items': alcoholic_items,
+        'entry_details': entry_details,
+        'eating_window_hours': eating_window_hours,
+        'first_meal_time': first_meal_time,
+        'last_meal_time': last_meal_time
     }
 
 
@@ -221,6 +275,70 @@ def analyze_month(year: int, month: int) -> Dict:
     analysis['unique_foods'] = len(item_counts)
     analysis['top_foods'] = item_counts.most_common(10)
 
+    # Meal timing analysis
+    eating_windows = [d['eating_window_hours'] for d in daily_data if d.get('eating_window_hours') is not None]
+    first_meals = [d['first_meal_time'] for d in daily_data if d.get('first_meal_time')]
+    last_meals = [d['last_meal_time'] for d in daily_data if d.get('last_meal_time')]
+
+    analysis['timing'] = {
+        'avg_eating_window': statistics.mean(eating_windows) if eating_windows else 0,
+        'eating_windows': eating_windows,
+        'first_meals': first_meals,
+        'last_meals': last_meals
+    }
+
+    # Alcohol analysis
+    all_alcoholic_items = []
+    alcohol_days = 0
+    for day in daily_data:
+        alcoholic = day.get('alcoholic_items', [])
+        if alcoholic:
+            alcohol_days += 1
+            all_alcoholic_items.extend(alcoholic)
+
+    # Estimate alcohol content (rough: 1 pint beer ~150 kcal = ~12-14g alcohol, ~1 standard drink)
+    # For beverages around 80-150 kcal, assume ~1 drink
+    alcohol_drinks_estimated = []
+    for item in all_alcoholic_items:
+        kcal = item.get('energy_kcal', 0)
+        # Rough estimation: 80-180 kcal per drink
+        if kcal > 0:
+            drinks = max(1, kcal / 120)  # Assume ~120 kcal per drink average
+        else:
+            drinks = 1
+        alcohol_drinks_estimated.append(drinks)
+
+    analysis['alcohol'] = {
+        'total_items': len(all_alcoholic_items),
+        'days_with_alcohol': alcohol_days,
+        'days_without_alcohol': len(daily_data) - alcohol_days,
+        'estimated_drinks': sum(alcohol_drinks_estimated),
+        'alcoholic_items': all_alcoholic_items
+    }
+
+    # Sugar analysis
+    sugar_values = [day['totals'].get('sugar_g', 0) for day in daily_data]
+    carb_values = [day['totals'].get('carbs_total_g', 0) for day in daily_data]
+    energy_values = [day['totals'].get('energy_kcal', 0) for day in daily_data]
+
+    sugar_pct_of_carbs = []
+    sugar_per_1000kcal = []
+
+    for i, sugar in enumerate(sugar_values):
+        if carb_values[i] > 0:
+            sugar_pct_of_carbs.append((sugar / carb_values[i]) * 100)
+        if energy_values[i] > 0:
+            sugar_per_1000kcal.append((sugar / energy_values[i]) * 1000)
+
+    analysis['sugar_analysis'] = {
+        'avg_sugar_g': statistics.mean(sugar_values) if sugar_values else 0,
+        'avg_sugar_pct_of_carbs': statistics.mean(sugar_pct_of_carbs) if sugar_pct_of_carbs else 0,
+        'avg_sugar_per_1000kcal': statistics.mean(sugar_per_1000kcal) if sugar_per_1000kcal else 0,
+        'max_sugar_day': max(sugar_values) if sugar_values else 0,
+        'days_over_50g': sum(1 for s in sugar_values if s > 50),
+        'days_over_25g': sum(1 for s in sugar_values if s > 25)
+    }
+
     return analysis
 
 
@@ -300,6 +418,39 @@ def generate_markdown_report(analysis: Dict) -> str:
         for msg in missing_meals:
             report.append(f"- {msg}")
         report.append("")
+
+    # Meal Timing Analysis
+    report.append("## ⏰ MEAL TIMING & EATING PATTERNS")
+    report.append("")
+
+    timing = analysis.get('timing', {})
+    avg_window = timing.get('avg_eating_window', 0)
+    first_meals = timing.get('first_meals', [])
+    last_meals = timing.get('last_meals', [])
+
+    report.append(f"```")
+    if avg_window > 0:
+        report.append(f"Average Eating Window:  {avg_window:.1f} hours")
+    if first_meals:
+        earliest = min(first_meals)
+        latest_first = max(first_meals)
+        report.append(f"First Meal Range:       {earliest} - {latest_first}")
+    if last_meals:
+        earliest_last = min(last_meals)
+        latest = max(last_meals)
+        report.append(f"Last Meal Range:        {earliest_last} - {latest}")
+    report.append(f"```")
+    report.append("")
+
+    # Interpretation
+    if avg_window > 0:
+        if avg_window < 10:
+            report.append(f"✅ **Tight eating window** (~{avg_window:.1f}h): This time-restricted pattern may support metabolic health and circadian rhythms.")
+        elif avg_window < 12:
+            report.append(f"✅ **Moderate eating window** (~{avg_window:.1f}h): Balanced approach with adequate fasting period.")
+        else:
+            report.append(f"ℹ️ **Extended eating window** (~{avg_window:.1f}h): Consider consolidating meals for better metabolic benefits.")
+    report.append("")
 
     # Target Achievement Dashboard
     report.append("## 🎯 TARGET ACHIEVEMENT")
@@ -426,6 +577,89 @@ def generate_markdown_report(analysis: Dict) -> str:
     report.append(f"```")
     report.append("")
 
+    # Sugar Analysis
+    report.append("## 🍬 SUGAR ANALYSIS")
+    report.append("")
+
+    sugar_data = analysis.get('sugar_analysis', {})
+    avg_sugar = sugar_data.get('avg_sugar_g', 0)
+    sugar_pct_carbs = sugar_data.get('avg_sugar_pct_of_carbs', 0)
+    sugar_density = sugar_data.get('avg_sugar_per_1000kcal', 0)
+    max_sugar = sugar_data.get('max_sugar_day', 0)
+    days_over_50g = sugar_data.get('days_over_50g', 0)
+    days_over_25g = sugar_data.get('days_over_25g', 0)
+
+    report.append(f"```")
+    report.append(f"Daily Average:        {avg_sugar:.1f}g")
+    report.append(f"% of Total Carbs:     {sugar_pct_carbs:.1f}%")
+    report.append(f"Sugar Density:        {sugar_density:.1f}g per 1000 kcal")
+    report.append(f"Highest Day:          {max_sugar:.1f}g")
+    report.append(f"Days >50g (WHO max):  {days_over_50g}/{days_logged}")
+    report.append(f"Days >25g (WHO ideal): {days_over_25g}/{days_logged}")
+    report.append(f"```")
+    report.append("")
+
+    # Sugar guidelines interpretation
+    if avg_sugar < 25:
+        report.append(f"✅ **Excellent sugar control:** Averaging {avg_sugar:.1f}g/day, well under WHO recommended limit of 25g for optimal health.")
+    elif avg_sugar < 50:
+        report.append(f"✅ **Good sugar intake:** Averaging {avg_sugar:.1f}g/day, within WHO's upper limit of 50g but above the 25g ideal. Room for improvement.")
+    else:
+        report.append(f"⚠️ **High sugar intake:** Averaging {avg_sugar:.1f}g/day exceeds WHO recommendations (25-50g). Consider reducing added sugars from beverages, sweets, and processed foods.")
+
+    report.append("")
+
+    # Alcohol Analysis
+    report.append("## 🍺 ALCOHOL CONSUMPTION")
+    report.append("")
+
+    alcohol_data = analysis.get('alcohol', {})
+    days_with_alcohol = alcohol_data.get('days_with_alcohol', 0)
+    days_without_alcohol = alcohol_data.get('days_without_alcohol', 0)
+    total_drinks = alcohol_data.get('estimated_drinks', 0)
+    alcoholic_items = alcohol_data.get('alcoholic_items', [])
+
+    if days_with_alcohol > 0:
+        avg_drinks_per_week = (total_drinks / days_logged) * 7
+        drinks_per_drinking_day = total_drinks / days_with_alcohol if days_with_alcohol > 0 else 0
+
+        report.append(f"```")
+        report.append(f"Days with Alcohol:     {days_with_alcohol}/{days_logged}")
+        report.append(f"Days Alcohol-Free:     {days_without_alcohol}/{days_logged}")
+        report.append(f"Estimated Total:       {total_drinks:.1f} drinks")
+        report.append(f"Drinks per Week:       {avg_drinks_per_week:.1f} drinks")
+        report.append(f"Per Drinking Day:      {drinks_per_drinking_day:.1f} drinks")
+        report.append(f"```")
+        report.append("")
+
+        # Health guidelines (CDC: moderate = up to 1/day women, 2/day men)
+        if avg_drinks_per_week <= 7:
+            report.append(f"✅ **Low consumption:** {avg_drinks_per_week:.1f} drinks/week is within low-risk guidelines.")
+        elif avg_drinks_per_week <= 14:
+            report.append(f"ℹ️ **Moderate consumption:** {avg_drinks_per_week:.1f} drinks/week. Consider having more alcohol-free days.")
+        else:
+            report.append(f"⚠️ **High consumption:** {avg_drinks_per_week:.1f} drinks/week exceeds moderate guidelines (7-14 drinks/week). Reducing intake would benefit health.")
+
+        report.append("")
+
+        # List alcoholic items
+        if alcoholic_items:
+            report.append("### Alcoholic Items Consumed")
+            report.append("")
+            from collections import Counter
+            alcohol_names = [item['name'] for item in alcoholic_items]
+            alcohol_counts = Counter(alcohol_names)
+            for item, count in alcohol_counts.most_common(5):
+                report.append(f"- {item}: {count}x")
+            report.append("")
+    else:
+        report.append(f"```")
+        report.append(f"No alcohol consumption detected this month.")
+        report.append(f"```")
+        report.append("")
+        report.append("✅ **Alcohol-free month:** Excellent for health, sleep quality, and body composition goals.")
+        report.append("")
+
     # Food Diversity
     report.append("## 🌈 FOOD DIVERSITY")
     report.append("")
@@ -469,6 +703,204 @@ def generate_markdown_report(analysis: Dict) -> str:
         status = "✅" if (protein_ok and fiber_ok and energy_ok and meal_count == 3) else "⚠️"
 
         report.append(f"| {date} | {day_type.title()[:4]} | {energy:.0f} | {protein:.0f}g | {fiber:.1f}g | {meal_count}/3 | {status} |")
+
+    report.append("")
+
+    # Overall Diet Commentary
+    report.append("## 📝 OVERALL DIET COMMENTARY")
+    report.append("")
+
+    # Calculate diet quality score (0-100)
+    score_components = []
+
+    # Protein compliance (0-15 points)
+    protein_avg = summary['protein_g']['mean']
+    protein_target = targets.get('protein_g_min', 170)
+    protein_score = min(15, (protein_avg / protein_target) * 15)
+    score_components.append(protein_score)
+
+    # Fiber adequacy (0-15 points)
+    fiber_avg = summary['fiber_total_g']['mean']
+    fiber_target = targets.get('fiber_g_min', 40)
+    fiber_score = min(15, (fiber_avg / fiber_target) * 15)
+    score_components.append(fiber_score)
+
+    # Fat quality (0-15 points) - higher unsaturated fat ratio is better
+    unsat_to_sat_ratio = (avg_mufa + avg_pufa) / avg_sat if avg_sat > 0 else 1
+    fat_quality_score = min(15, unsat_to_sat_ratio * 5)
+    score_components.append(fat_quality_score)
+
+    # Sodium control (0-15 points)
+    sodium_avg = summary['sodium_mg']['mean']
+    sodium_target = targets.get('sodium_mg_max', 2300)
+    sodium_score = 15 if sodium_avg <= sodium_target else max(0, 15 - ((sodium_avg - sodium_target) / 100))
+    score_components.append(sodium_score)
+
+    # Sugar control (0-10 points)
+    sugar_score = 10 if avg_sugar < 25 else (5 if avg_sugar < 50 else max(0, 10 - ((avg_sugar - 50) / 5)))
+    score_components.append(sugar_score)
+
+    # Meal consistency (0-10 points)
+    meal_consistency_score = (meal_freq.get('breakfast', 0) + meal_freq.get('lunch', 0) + meal_freq.get('dinner', 0)) / (days_logged * 3) * 10
+    score_components.append(meal_consistency_score)
+
+    # Food diversity (0-10 points)
+    diversity_score = min(10, (analysis['unique_foods'] / days_logged) * 2)
+    score_components.append(diversity_score)
+
+    # Micronutrient adequacy (0-10 points) - based on potassium, calcium, magnesium
+    potassium_adequacy = min(1, summary['potassium_mg']['mean'] / 3500)  # RDA ~3500mg
+    calcium_adequacy = min(1, summary['calcium_mg']['mean'] / 1000)  # RDA ~1000mg
+    magnesium_adequacy = min(1, summary['magnesium_mg']['mean'] / 400)  # RDA ~400mg
+    micronutrient_score = (potassium_adequacy + calcium_adequacy + magnesium_adequacy) / 3 * 10
+    score_components.append(micronutrient_score)
+
+    total_score = sum(score_components)
+
+    # Generate commentary
+    report.append("### Diet Quality Score")
+    report.append("")
+
+    score_bar = generate_bar_chart(total_score, 100, width=50)
+    report.append(f"```")
+    report.append(f"Overall Score: {score_bar}")
+    report.append(f"```")
+    report.append("")
+
+    if total_score >= 85:
+        quality_rating = "⭐⭐⭐⭐⭐ EXCELLENT"
+        quality_desc = "Your diet demonstrates outstanding nutritional quality with strong compliance across all key metrics."
+    elif total_score >= 70:
+        quality_rating = "⭐⭐⭐⭐ VERY GOOD"
+        quality_desc = "Your diet shows very good nutritional quality with room for minor improvements."
+    elif total_score >= 55:
+        quality_rating = "⭐⭐⭐ GOOD"
+        quality_desc = "Your diet has a solid foundation but would benefit from addressing several areas."
+    elif total_score >= 40:
+        quality_rating = "⭐⭐ NEEDS IMPROVEMENT"
+        quality_desc = "Your diet requires attention in multiple areas to support your health and fitness goals."
+    else:
+        quality_rating = "⭐ SIGNIFICANT CHANGES NEEDED"
+        quality_desc = "Your current dietary pattern needs substantial improvement across most nutritional areas."
+
+    report.append(f"**{quality_rating}** ({total_score:.0f}/100)")
+    report.append("")
+    report.append(quality_desc)
+    report.append("")
+
+    # Detailed commentary
+    report.append("### Comprehensive Assessment")
+    report.append("")
+
+    # Macronutrient balance
+    protein_pct = (summary['protein_g']['mean'] * 4 / summary['energy_kcal']['mean'] * 100) if summary['energy_kcal']['mean'] > 0 else 0
+    fat_pct = (summary['fat_g']['mean'] * 9 / summary['energy_kcal']['mean'] * 100) if summary['energy_kcal']['mean'] > 0 else 0
+    carb_pct = (summary['carbs_total_g']['mean'] * 4 / summary['energy_kcal']['mean'] * 100) if summary['energy_kcal']['mean'] > 0 else 0
+
+    report.append("**Macronutrient Distribution:**")
+    report.append(f"- Protein: {protein_pct:.0f}% of calories ({summary['protein_g']['mean']:.1f}g/day)")
+    report.append(f"- Fat: {fat_pct:.0f}% of calories ({summary['fat_g']['mean']:.1f}g/day)")
+    report.append(f"- Carbohydrates: {carb_pct:.0f}% of calories ({summary['carbs_total_g']['mean']:.1f}g/day)")
+    report.append("")
+
+    # Macro balance assessment
+    if 25 <= protein_pct <= 35:
+        report.append(f"✅ Protein intake is well-optimized for muscle maintenance and body composition goals.")
+    elif protein_pct < 25:
+        report.append(f"📈 Protein could be increased to better support training and recovery.")
+    else:
+        report.append(f"ℹ️ Very high protein intake - ensure adequate hydration and kidney function monitoring.")
+    report.append("")
+
+    # Diet pattern analysis
+    report.append("**Dietary Pattern Analysis:**")
+
+    strengths = []
+    concerns = []
+
+    # Identify strengths
+    if meal_consistency_score >= 9:
+        strengths.append("Excellent meal timing consistency")
+    if fiber_score >= 13:
+        strengths.append("Outstanding fiber intake")
+    if protein_score >= 13:
+        strengths.append("Excellent protein intake")
+    if na_k_ratio < 1:
+        strengths.append("Optimal sodium:potassium ratio")
+    if fat_quality_score >= 12:
+        strengths.append("High-quality fat sources")
+    if sugar_score >= 8:
+        strengths.append("Well-controlled sugar intake")
+    if diversity_score >= 8:
+        strengths.append("Excellent dietary variety")
+
+    # Identify concerns
+    if fiber_score < 10:
+        concerns.append("Insufficient fiber intake")
+    if protein_score < 12:
+        concerns.append("Suboptimal protein for goals")
+    if sodium_score < 10:
+        concerns.append("Elevated sodium levels")
+    if sat_pct > 33:
+        concerns.append("High saturated fat percentage")
+    if sugar_score < 5:
+        concerns.append("Excessive sugar consumption")
+    if meal_consistency_score < 7:
+        concerns.append("Inconsistent meal timing")
+    if days_with_alcohol > days_logged * 0.5:
+        concerns.append("Frequent alcohol consumption")
+
+    if strengths:
+        report.append("")
+        report.append("**Strengths:**")
+        for strength in strengths:
+            report.append(f"- ✅ {strength}")
+
+    if concerns:
+        report.append("")
+        report.append("**Areas for Improvement:**")
+        for concern in concerns:
+            report.append(f"- ⚠️ {concern}")
+
+    report.append("")
+
+    # Health implications
+    report.append("**Health & Performance Implications:**")
+    report.append("")
+
+    # Provide contextualized insights
+    implications = []
+
+    if protein_avg >= protein_target * 0.95:
+        implications.append("✅ **Muscle preservation:** Protein intake supports lean mass maintenance during body recomposition.")
+    else:
+        implications.append("⚠️ **Muscle risk:** Suboptimal protein may compromise muscle retention, especially in caloric deficit or intense training.")
+
+    if fiber_avg >= 35:
+        implications.append("✅ **Gut health:** High fiber intake supports beneficial gut bacteria, digestive health, and stable blood sugar.")
+    else:
+        implications.append("ℹ️ **Digestive health:** Increasing fiber would benefit gut microbiome, satiety, and metabolic health.")
+
+    if na_k_ratio < 1:
+        implications.append("✅ **Cardiovascular health:** Excellent sodium:potassium balance supports healthy blood pressure.")
+    else:
+        implications.append("⚠️ **Blood pressure:** Elevated sodium:potassium ratio may increase cardiovascular strain. Add more fruits and vegetables.")
+
+    if sat_pct > 33:
+        implications.append("⚠️ **Heart health:** High saturated fat intake may negatively impact cholesterol profiles. Emphasize unsaturated fats from nuts, avocados, fatty fish, and olive oil.")
+
+    if avg_window > 0 and avg_window < 12:
+        implications.append("✅ **Metabolic health:** Time-restricted eating pattern may enhance insulin sensitivity and fat oxidation.")
+
+    if days_with_alcohol > 0:
+        drinks_per_week = (total_drinks / days_logged) * 7
+        if drinks_per_week > 14:
+            implications.append("⚠️ **Recovery impact:** High alcohol consumption can impair muscle recovery, sleep quality, and fat metabolism.")
+        elif drinks_per_week > 7:
+            implications.append("ℹ️ **Training optimization:** Moderate alcohol intake may affect training performance and recovery. Consider timing around workout days.")
+
+    for implication in implications:
+        report.append(implication)
 
     report.append("")
 
