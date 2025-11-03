@@ -2,8 +2,8 @@
 
 ```yaml
 id: pastel_de_nata_eagle_farringdon_v1
-version: 2
-last_verified: '2025-11-02'
+version: 3
+last_verified: '2025-11-03'
 source:
   venue: The Eagle, Farringdon (London)
   menu_page: https://theeaglefarringdon.co.uk/
@@ -36,13 +36,15 @@ per_portion:
   fiber_insoluble_g: 0.8
   sodium_mg: 210
   potassium_mg: 105
-  iodine_ug: null
-  magnesium_mg: null
-  calcium_mg: null
-  iron_mg: null
-  zinc_mg: null
-  vitamin_c_mg: null
-  manganese_mg: null
+  iodine_ug: 17
+  magnesium_mg: 0
+  calcium_mg: 0
+  iron_mg: 0
+  zinc_mg: 0
+  selenium_ug: 20
+  vitamin_c_mg: 0
+  vitamin_d_ug: 1.2
+  manganese_mg: 0
   polyols_g: 0.0
   carbs_available_g: 31.2
   carbs_total_g: 32.3
@@ -88,4 +90,16 @@ change_log:
   - per_portion.polyols_g
   - version
   sources: []
+- timestamp: '2025-11-03T15:44:11+00:00'
+  updated_by: 'LLM: Claude Code'
+  reason: Add iodine, selenium and vitamin D estimates from egg custard (MEDIUM priority nutrient completion)
+  fields_changed:
+  - last_verified
+  - per_portion.iodine_ug
+  - per_portion.selenium_ug
+  - per_portion.vitamin_d_ug
+  - version
+  sources:
+  - url: https://fdc.nal.usda.gov/
+    note: 'USDA FoodData Central: Eggs ~26 µg/100g iodine, ~31 µg/100g selenium, ~1.8 µg/100g vitamin D. 25g custard estimated at 65% eggs. Confidence: MEDIUM (egg-based estimates well-documented)'
 ```

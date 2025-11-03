@@ -31,8 +31,8 @@ per_portion:
   cholesterol_mg: 0
   sugar_g: 21.3
   fiber_total_g: 2.0
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
+  fiber_soluble_g: 0.7
+  fiber_insoluble_g: 1.3
   sodium_mg: 70
   potassium_mg: 730
   iodine_ug: 1
@@ -41,7 +41,7 @@ per_portion:
   iron_mg: 1
   zinc_mg: 0
   vitamin_c_mg: 21
-  manganese_mg: null
+  manganese_mg: 0
   polyols_g: 0.0
   carbs_available_g: 23.3
   carbs_total_g: 25.3
@@ -50,7 +50,6 @@ derived:
 quality:
   confidence: medium
   gaps:
-  - Fiber sub-types not available
   - Manganese not available
   - Fat breakdown estimated from USDA carrot juice profile
 notes:

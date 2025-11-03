@@ -26,6 +26,7 @@ assumptions:
   salt_scheme: "normal"
   oil_type: "sesame oil in filling"
   prep: "Steamed, filling contains shrimp, pork, shiitake mushroom, water chestnuts, sesame oil, soy sauce, ginger, scallion"
+  iodine: "Estimated from shrimp content (~10g). Using shellfish range (prawns 25-45 μg/100g, typical 35 μg/100g). Confidence: MEDIUM. Shrimp provides primary iodine contribution"
 per_portion:
   energy_kcal: 43
   protein_g: 3.1
@@ -38,11 +39,11 @@ per_portion:
   carbs_available_g: 4.5
   sugar_g: 0.2
   fiber_total_g: 0.3
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
+  fiber_soluble_g: 0.1
+  fiber_insoluble_g: 0.2
   sodium_mg: 140
   potassium_mg: 25
-  iodine_ug: null
+  iodine_ug: 9
   magnesium_mg: 6
   calcium_mg: 8
   iron_mg: 0.3
@@ -56,7 +57,7 @@ derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: medium
-  gaps: ["No official menu nutrition data available", "Portion weight estimated from reviews and fine dining standards", "Some micronutrients (iodine, soluble/insoluble fiber) not calculated"]
+  gaps: ["No official menu nutrition data available", "Portion weight estimated from reviews and fine dining standards"]
 notes:
   - "Component breakdown: Primary filling is shrimp (10g) with pork (3g) for texture and fat, wrapped in wheat wrapper (5g). Includes shiitake mushroom (2g), water chestnuts (1.5g), and seasonings (1.5g including sesame oil and soy sauce)."
   - "Calorie density: 1.87 kcal/g, which is higher than commercial frozen products (1.67 kcal/g) but appropriate for fine dining with premium ingredients and more protein."

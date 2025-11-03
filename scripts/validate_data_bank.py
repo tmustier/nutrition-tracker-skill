@@ -10,16 +10,35 @@ Requires: pyyaml
 """
 import sys, re, json, subprocess
 from pathlib import Path
+from concurrent.futures import ProcessPoolExecutor, as_completed
+from multiprocessing import cpu_count
 try:
     import yaml
 except Exception as e:
     sys.stderr.write("This script requires PyYAML. Install with: pip install pyyaml\n")
     raise
 
-TOL_ENERGY_PCT = 0.08  # ±8%
-CARB_TOL_G = 0.2       # acceptable rounding error for carb totals
+# Validation constants with rationale:
+# - TOL_ENERGY_PCT: ±8% tolerance for energy calculations to account for rounding in
+#   macronutrient values and natural variation in Atwater factors (4-4-9 rule)
+# - CARB_TOL_G: 0.2g tolerance for carbohydrate totals to allow for rounding errors
+#   when summing available carbs, fiber, and polyols
+# - FIBER_KCAL_PER_G: UK/EU convention for fiber energy content (2 kcal/g)
+# - POLYOL_KCAL_PER_G: Standard energy value for sugar alcohols/polyols (2.4 kcal/g)
+TOL_ENERGY_PCT = 0.08
+CARB_TOL_G = 0.2
 FIBER_KCAL_PER_G = 2.0
 POLYOL_KCAL_PER_G = 2.4
+
+# Required nutrient fields in per_portion - ALL dishes must have these fields
+# (0 means TRUE ZERO, not placeholder)
+REQUIRED_NUTRIENTS = [
+    'energy_kcal', 'protein_g', 'fat_g', 'sat_fat_g', 'mufa_g', 'pufa_g',
+    'trans_fat_g', 'cholesterol_mg', 'sugar_g', 'fiber_total_g',
+    'fiber_soluble_g', 'fiber_insoluble_g', 'sodium_mg', 'potassium_mg',
+    'iodine_ug', 'magnesium_mg', 'calcium_mg', 'iron_mg', 'zinc_mg',
+    'vitamin_c_mg', 'manganese_mg', 'polyols_g', 'carbs_available_g', 'carbs_total_g'
+]
 
 # Compile polyol detection regex once at module level (performance optimization)
 # This pattern matches polyol mentions in notes like:
@@ -232,10 +251,25 @@ def check_block(y, filepath):
     else:
         warnings.append("sodium_mg is null; cannot compute salt.")
 
+    # Completeness check - ensure all required fields are present
+    for required_field in REQUIRED_NUTRIENTS:
+        if required_field not in pp:
+            issues.append(f"Missing required field in per_portion: {required_field}")
+
     # Negative checks
     for key, val in pp.items():
         if isinstance(val, (int, float)) and val < 0:
             issues.append(f"Negative per_portion value: {key} = {val}")
+
+    # Null checks - NO nulls allowed in per_portion (all values must be 0 or positive)
+    for key, val in pp.items():
+        if val is None:
+            issues.append(f"NULL value not allowed in per_portion: {key} must be 0 or a positive number")
+
+    # Type validation - nutrient fields must be numeric (int or float)
+    for key, val in pp.items():
+        if val is not None and not isinstance(val, (int, float)):
+            issues.append(f"Invalid type for {key}: expected number, got {type(val).__name__} (value: {val})")
 
     return {
         "id": bid,
@@ -246,11 +280,24 @@ def check_block(y, filepath):
     }
 
 
+def process_single_file(filepath):
+    """Process a single file for parallel execution.
+
+    Returns: validation result dict or None if parsing fails
+    """
+    raw, data = parse_yaml_from_file(filepath)
+    if data and isinstance(data, dict) and 'id' in data:
+        return check_block(data, filepath)
+    return None
+
+
 def main():
     import argparse
     parser = argparse.ArgumentParser(description="Validate all nutrition dish files in the Data Bank")
     parser.add_argument("data_bank_dir", nargs='?', default=None, help="Path to the data bank directory (default: data/food-data-bank)")
     parser.add_argument("--no-index", action="store_true", help="Skip automatic index regeneration")
+    parser.add_argument("--parallel", action="store_true", help="Use parallel processing for validation (faster for large food banks)")
+    parser.add_argument("--jobs", type=int, default=None, help="Number of parallel jobs (default: CPU count)")
     args = parser.parse_args()
 
     # Determine path
@@ -265,14 +312,38 @@ def main():
         return 1
 
     print(f"Scanning: {path}")
-    blocks = scan_data_bank(path)
+
+    # Find all dish files
+    dish_files = []
+    for filepath in sorted(path.rglob('*.md')):
+        if filepath.name not in ['README.md', 'RESEARCH.md', 'index.md']:
+            dish_files.append(filepath)
 
     report = {"directory": str(path), "checked": 0, "results": []}
 
-    for filepath, raw, y in blocks:
-        res = check_block(y, filepath)
-        report["results"].append(res)
-        report["checked"] += 1
+    # Process files (parallel or sequential)
+    if args.parallel:
+        # Parallel processing
+        max_workers = args.jobs if args.jobs else cpu_count()
+        print(f"Using parallel processing with {max_workers} workers...")
+
+        with ProcessPoolExecutor(max_workers=max_workers) as executor:
+            # Submit all files for processing
+            future_to_file = {executor.submit(process_single_file, fp): fp for fp in dish_files}
+
+            # Collect results as they complete
+            for future in as_completed(future_to_file):
+                result = future.result()
+                if result:
+                    report["results"].append(result)
+                    report["checked"] += 1
+    else:
+        # Sequential processing (original behavior)
+        blocks = scan_data_bank(path)
+        for filepath, raw, y in blocks:
+            res = check_block(y, filepath)
+            report["results"].append(res)
+            report["checked"] += 1
 
     # Human summary
     print("\n" + "=" * 80)

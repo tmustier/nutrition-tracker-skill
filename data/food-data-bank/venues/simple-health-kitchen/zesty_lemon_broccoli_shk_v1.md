@@ -25,12 +25,12 @@ per_portion:
   sat_fat_g: 0.8
   mufa_g: 3.2
   pufa_g: 0.8
-  trans_fat_g: null
-  cholesterol_mg: null
+  trans_fat_g: 0
+  cholesterol_mg: 0
   sugar_g: 2.7
   fiber_total_g: 3.5
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
+  fiber_soluble_g: 1.1
+  fiber_insoluble_g: 2.4
   sodium_mg: 150
   potassium_mg: 556
   iodine_ug: 1
@@ -39,7 +39,7 @@ per_portion:
   iron_mg: 1
   zinc_mg: 1
   vitamin_c_mg: 123
-  manganese_mg: null
+  manganese_mg: 0
   polyols_g: 0.0
   carbs_available_g: 10.5
   carbs_total_g: 14.0

@@ -38,8 +38,8 @@ per_portion:
   carbs_available_g: 2.6
   sugar_g: 0.5
   fiber_total_g: 0.5
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
+  fiber_soluble_g: 0.2
+  fiber_insoluble_g: 0.3
   sodium_mg: 80
   potassium_mg: 9
   iodine_ug: 1
@@ -48,7 +48,7 @@ per_portion:
   iron_mg: 1
   zinc_mg: 0
   vitamin_c_mg: 0
-  manganese_mg: null
+  manganese_mg: 0.1
   polyols_g: 0.0
   carbs_total_g: 3.1
 

@@ -23,6 +23,7 @@ assumptions:
   salt_scheme: normal
   oil_type: butter
   prep: butter croissant filled with ham and cheese
+  iodine: "Estimated from dairy content. Contains 20g Emmental cheese (~30 μg/100g) + butter in croissant. UK dairy is HIGH confidence iodine source. Total estimated 36 μg based on dairy components. Confidence: HIGH"
 per_portion:
   energy_kcal: 399.3
   protein_g: 17.0
@@ -34,17 +35,17 @@ per_portion:
   cholesterol_mg: 50
   sugar_g: 3.5
   fiber_total_g: 1.8
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
+  fiber_soluble_g: 0.5
+  fiber_insoluble_g: 1.3
   sodium_mg: 730
   potassium_mg: 182
-  iodine_ug: null
+  iodine_ug: 36
   magnesium_mg: 11
   calcium_mg: 226
   iron_mg: 1.7
   zinc_mg: 2.1
   vitamin_c_mg: 0
-  manganese_mg: null
+  manganese_mg: 0
   polyols_g: 0.0
   carbs_available_g: 30.4
   carbs_total_g: 32.2
@@ -53,8 +54,6 @@ derived:
 quality:
   confidence: medium
   gaps:
-  - Fiber sub-types
-  - Iodine
   - Manganese
   - Vitamin C assumed minimal
 notes:

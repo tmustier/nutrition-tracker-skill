@@ -28,6 +28,8 @@ assumptions:
   oil_type: butter
   prep: poached eggs, toasted sourdough, sautéed kale, chilli butter (22.2g salted
     butter), finishing salt 1.76g (0.5% of dish weight)
+    kale (0.05mg). Selenium (41µg) from eggs (31µg), yogurt (6µg), bread (3.6µg). Vitamin
+    D (2.0µg) from eggs (1.8µg) and butter (0.2µg)
 per_portion:
   energy_kcal: 597.4
   protein_g: 30.4
@@ -50,6 +52,9 @@ per_portion:
   zinc_mg: 2
   vitamin_c_mg: 25
   manganese_mg: 1
+  copper_mg: 0.2
+  selenium_ug: 41
+  vitamin_d_ug: 2.0
   polyols_g: 0.0
   carbs_available_g: 40.3
   carbs_total_g: 43.7
@@ -60,7 +65,9 @@ derived:
   dish_weight_g: 352
 quality:
   confidence: high
-  gaps: []
+  gaps:
+  - Copper, selenium, vitamin D estimated from component analysis using USDA reference
+    ranges (MEDIUM confidence)
 notes:
 - 592 kcal from Deliveroo
 - 'Component model: 2 eggs (100g) + Greek yogurt 120g + sourdough 60g + kale 50g +

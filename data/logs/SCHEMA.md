@@ -20,7 +20,8 @@ entries:
         unit: portion  # portion|g|ml|etc
         nutrition:
           # Snapshot of nutrition at time of logging
-          # Copy all non-null fields from food bank entry
+          # ALL nutrition fields must be 0 or positive numbers - NO nulls allowed
+          # Use 0 for unmeasured values; qualify estimates in assumptions/notes
           energy_kcal: 597.4
           protein_g: 30.4
           fat_g: 34.2
@@ -34,17 +35,17 @@ entries:
           carbs_available_g: 40.3
           sugar_g: 5.2
           fiber_total_g: 6.8
-          fiber_soluble_g: null
-          fiber_insoluble_g: null
+          fiber_soluble_g: 0
+          fiber_insoluble_g: 0
           sodium_mg: 1543
           potassium_mg: 730
-          iodine_ug: null
+          iodine_ug: 0
           magnesium_mg: 85
           calcium_mg: 180
           iron_mg: 3.2
           zinc_mg: 2.1
           vitamin_c_mg: 12
-          manganese_mg: null
+          manganese_mg: 0
 
       - name: "Orange juice"
         food_bank_id: null  # estimated, not in food bank
@@ -82,11 +83,17 @@ entries:
 
 2. **Reference food bank**: Store `food_bank_id` to track source. Set to `null` for estimated/manual entries.
 
-3. **Flexible items**: Each entry (meal) can have multiple items. Track quantity and unit for each.
-4. **Energy derived from nutrients**: Store `energy_kcal` as the available-carb Atwater result (`4P + 9F + 4*carbs_available + 2*fibre + 2.4*polyols`) to stay aligned with the food bank.
-5. **Timestamping**: One timestamp per entry (meal level), not per item.
-6. **Day type**: Track rest vs training day for proper target comparison.
-7. **Notes**: Optional context at entry level (location, how you felt, etc.).
+3. **NO null nutrition values**: All nutrition fields must have numeric values (0 or positive). Use 0 for unmeasured/unknown values and document assumptions in notes. This maintains the philosophy that all entries are estimates - nulls defeat the purpose of precise estimation.
+
+4. **Flexible items**: Each entry (meal) can have multiple items. Track quantity and unit for each.
+
+5. **Energy derived from nutrients**: Store `energy_kcal` as the available-carb Atwater result (`4P + 9F + 4*carbs_available + 2*fibre + 2.4*polyols`) to stay aligned with the food bank.
+
+6. **Timestamping**: One timestamp per entry (meal level), not per item.
+
+7. **Day type**: Track rest vs training day for proper target comparison.
+
+8. **Notes**: Optional context at entry level (location, how you felt, etc.).
 
 ## Querying
 

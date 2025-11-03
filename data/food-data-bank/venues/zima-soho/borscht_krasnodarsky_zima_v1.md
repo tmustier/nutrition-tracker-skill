@@ -2,8 +2,8 @@
 
 ```yaml
 id: borscht_krasnodarsky_zima_v1
-version: 2
-last_verified: '2025-11-02'
+version: 3
+last_verified: '2025-11-03'
 source:
   venue: Zima, Soho, London
   menu_page: https://zimarestaurant.co.uk/
@@ -41,13 +41,13 @@ per_portion:
   fiber_insoluble_g: 3.0
   sodium_mg: 931
   potassium_mg: 595
-  iodine_ug: null
-  magnesium_mg: null
-  calcium_mg: null
-  iron_mg: null
-  zinc_mg: null
-  vitamin_c_mg: null
-  manganese_mg: null
+  iodine_ug: 19
+  magnesium_mg: 0
+  calcium_mg: 0
+  iron_mg: 0
+  zinc_mg: 0
+  vitamin_c_mg: 0
+  manganese_mg: 0
   polyols_g: 0.0
   carbs_available_g: 33.4
   carbs_total_g: 38.7
@@ -111,4 +111,14 @@ change_log:
   - per_portion.polyols_g
   - version
   sources: []
+- timestamp: '2025-11-03T15:44:11+00:00'
+  updated_by: 'LLM: Claude Code'
+  reason: Add iodine estimate from beef and salo (LOW priority nutrient completion)
+  fields_changed:
+  - last_verified
+  - per_portion.iodine_ug
+  - version
+  sources:
+  - url: https://fdc.nal.usda.gov/
+    note: 'USDA FoodData Central: Meat typically ~5 µg/100g. 382g dish with beef in soup + 20g salo, estimated meat content = 19µg. Confidence: LOW-MEDIUM (meat is minor iodine source, portion estimate has uncertainty)'
 ```

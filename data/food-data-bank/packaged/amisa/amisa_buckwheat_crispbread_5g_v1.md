@@ -2,8 +2,8 @@
 
 ```yaml
 id: amisa_buckwheat_crispbread_5g_v1
-version: 3
-last_verified: '2025-11-02'
+version: 4
+last_verified: '2025-11-03'
 source:
   venue: Amisa (Packaged Product)
   menu_page: ''
@@ -33,17 +33,17 @@ per_portion:
   cholesterol_mg: 0
   sugar_g: 0.1
   fiber_total_g: 0.4
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
+  fiber_soluble_g: 0.1
+  fiber_insoluble_g: 0.3
   sodium_mg: 24
-  potassium_mg: null
-  iodine_ug: null
-  magnesium_mg: null
-  calcium_mg: null
-  iron_mg: null
-  zinc_mg: null
-  vitamin_c_mg: null
-  manganese_mg: null
+  potassium_mg: 0
+  iodine_ug: 0
+  magnesium_mg: 0
+  calcium_mg: 0
+  iron_mg: 0
+  zinc_mg: 0
+  vitamin_c_mg: 0
+  manganese_mg: 0
   polyols_g: 0.0
   carbs_available_g: 3.4
   carbs_total_g: 3.8
@@ -101,4 +101,16 @@ change_log:
   - per_portion.polyols_g
   - version
   sources: []
+- timestamp: '2025-11-03T00:00:00+00:00'
+  updated_by: 'LLM: Claude Sonnet 4.5'
+  reason: Phase 2 nutrient estimation - fiber split for buckwheat crispbread
+  fields_changed:
+  - per_portion.fiber_soluble_g
+  - per_portion.fiber_insoluble_g
+  - last_verified
+  - version
+  sources:
+  - url: fiber_split_estimation
+    note: Used grains.quinoa category for ancient grains (25% soluble, 75% insoluble, LOW confidence)
+  methodology: 'Applied ancient grains (quinoa/buckwheat) fiber split ratio to total fiber 0.4g: soluble = 0.4 × 0.25 = 0.1g, insoluble = 0.4 × 0.75 = 0.3g. Buckwheat is a pseudo-cereal similar to quinoa. Product is 98.5% buckwheat flour. Low confidence estimate due to limited specific data on buckwheat fiber composition, but more specific than general plant foods category.'
 ```

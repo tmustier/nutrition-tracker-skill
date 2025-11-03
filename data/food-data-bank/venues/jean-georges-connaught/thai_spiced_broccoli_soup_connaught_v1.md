@@ -22,6 +22,8 @@ assumptions:
   salt_scheme: normal
   oil_type: coconut oil/milk
   prep: blended soup with coconut, Thai spices, lime
+  copper_estimation: Broccoli contains ~0.1mg copper per 100g (USDA vegetables range).
+    300g soup portion estimated at 0.3mg copper total. Medium confidence (±20-40%).
 per_portion:
   energy_kcal: 117.5
   protein_g: 3.5
@@ -44,6 +46,7 @@ per_portion:
   zinc_mg: 0
   vitamin_c_mg: 40
   manganese_mg: 0
+  copper_mg: 0.3
   polyols_g: 0.0
   carbs_available_g: 9.5
   carbs_total_g: 13.0

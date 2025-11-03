@@ -33,17 +33,17 @@ per_portion:
   carbs_available_g: 1.0
   sugar_g: 0.1
   fiber_total_g: 0.4
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
+  fiber_soluble_g: 0.1
+  fiber_insoluble_g: 0.3
   sodium_mg: 302
   potassium_mg: 148
-  iodine_ug: null
+  iodine_ug: 7
   magnesium_mg: 14
   calcium_mg: 112
   iron_mg: 1
   zinc_mg: 0
   vitamin_c_mg: 0
-  manganese_mg: null
+  manganese_mg: 0
   polyols_g: 0.0
   carbs_total_g: 1.4
 
@@ -51,7 +51,20 @@ derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: medium
-  gaps: ["Iodine, manganese, and fiber splits unavailable; duck broth composition estimated from homemade recipes and chicken broth baseline"]
+  gaps: ["manganese"]
+  estimated_nutrients:
+    - name: "fiber_soluble_g"
+      value: 0.1
+      confidence: "low"
+      method: "Total fiber 0.4g from tofu. Split using general_plant_foods ratio (30% soluble). 0.4g × 30% = 0.12g, rounded to 0.1g"
+    - name: "fiber_insoluble_g"
+      value: 0.3
+      confidence: "low"
+      method: "Total fiber 0.4g from tofu. Split using general_plant_foods ratio (70% insoluble). 0.4g × 70% = 0.28g, rounded to 0.3g"
+    - name: "iodine_ug"
+      value: 7
+      confidence: "low-medium"
+      method: "Duck broth. Meat typically ~5 µg/100g. Total dish 135g × 5 µg/100g = 6.75 µg, rounded to 7 µg. Minor source."
 notes:
   - "Component 1 - Duck broth (120ml): Estimated at 28 kcal based on clear restaurant duck broth (~23 kcal/100ml). Duck fattier than chicken (16 kcal/100ml). Fat profile uses duck fat composition (33% sat, 49% MUFA, 13% PUFA). Sodium assumes normal restaurant seasoning."
   - "Component 2 - Tofu (15g): USDA FDC 172475 (firm tofu with calcium sulfate) scaled to 15g. High calcium content (102mg) from tofu provides most of dish calcium."

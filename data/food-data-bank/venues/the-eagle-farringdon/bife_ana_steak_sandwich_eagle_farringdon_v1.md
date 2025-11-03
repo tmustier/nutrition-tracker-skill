@@ -2,8 +2,8 @@
 
 ```yaml
 id: bife_ana_steak_sandwich_eagle_farringdon_v1
-version: 3
-last_verified: '2025-11-02'
+version: 4
+last_verified: '2025-11-03'
 source:
   venue: The Eagle, Farringdon (London)
   menu_page: https://theeaglefarringdon.co.uk/
@@ -44,13 +44,13 @@ per_portion:
   fiber_insoluble_g: 2.6
   sodium_mg: 1910
   potassium_mg: 1070
-  iodine_ug: null
+  iodine_ug: 18
   magnesium_mg: 65
   calcium_mg: 45
   iron_mg: 5.5
   zinc_mg: 8.5
   vitamin_c_mg: 3
-  manganese_mg: null
+  manganese_mg: 0
   polyols_g: 0.0
   carbs_available_g: 53.3
   carbs_total_g: 57.0
@@ -152,4 +152,14 @@ change_log:
   - per_portion.polyols_g
   - version
   sources: []
+- timestamp: '2025-11-03T15:44:11+00:00'
+  updated_by: 'LLM: Claude Code'
+  reason: Add iodine estimate from beef (LOW priority nutrient completion)
+  fields_changed:
+  - last_verified
+  - per_portion.iodine_ug
+  - version
+  sources:
+  - url: https://fdc.nal.usda.gov/
+    note: 'USDA FoodData Central: Beef typically ~5 µg/100g. Estimated 360g sandwich with 200g cooked rump = 18µg. Confidence: LOW-MEDIUM (meat is minor iodine source)'
 ```

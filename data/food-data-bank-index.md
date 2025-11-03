@@ -1,7 +1,7 @@
 ---
 title: Food Data Bank Index
 description: Auto-generated index of all dishes in the food data bank
-generated: 2025-11-03 09:16:58 UTC
+generated: 2025-11-03 16:08:11 UTC
 ---
 
 # Food Data Bank Index
@@ -11,7 +11,7 @@ generated: 2025-11-03 09:16:58 UTC
 
 ## Overview
 
-Total dishes: 62
+Total dishes: 59
 
 - **Venues**: 8 categories
 - **Packaged Products**: 7 categories
@@ -206,17 +206,13 @@ Total dishes: 62
 
 *Location: `data/food-data-bank/generic/ingredients/`*
 
-**11 dishes:**
+**7 dishes:**
 
-- [Avocado (Fresh, 75g)](food-data-bank/generic/ingredients/avocado_fresh_75g_generic-ingredients_v1.md) {#avocado_fresh_75g_generic-ingredients_v1}
-- [Blueberries - 150 g](food-data-bank/generic/ingredients/blueberries_150g_v1.md) {#blueberries_150g_v1}
 - [Greek Yogurt 0% Fat - 200 g](food-data-bank/generic/ingredients/greek_yogurt_0pct_200g_v1.md) {#greek_yogurt_0pct_200g_v1}
 - [Hazelnuts, 30 g](food-data-bank/generic/ingredients/hazelnuts_30g_v1.md) {#hazelnuts_30g_v1}
-- [Mixed Pineapple/Mango/Passion Fruit (150 g)](food-data-bank/generic/ingredients/pine_mango_passion_150g_v1.md) {#pine_mango_passion_150g_v1}
 - [Oats - dry (50 g)](food-data-bank/generic/ingredients/oats_dry_50g_v1.md) {#oats_dry_50g_v1}
 - [Olive Oil (14g)](food-data-bank/generic/ingredients/olive_oil_14g_generic-ingredients_v1.md) {#olive_oil_14g_generic-ingredients_v1}
 - [Pistachios, 30 g](food-data-bank/generic/ingredients/pistachios_30g_v1.md) {#pistachios_30g_v1}
-- [Raspberries - 150 g](food-data-bank/generic/ingredients/raspberries_150g_v1.md) {#raspberries_150g_v1}
 - [Skyr - plain (200 g)](food-data-bank/generic/ingredients/skyr_plain_200g_v1.md) {#skyr_plain_200g_v1}
 - [Sunflower Seeds, 30 g](food-data-bank/generic/ingredients/sunflower_seeds_30g_v1.md) {#sunflower_seeds_30g_v1}
 

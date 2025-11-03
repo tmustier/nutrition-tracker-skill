@@ -2,8 +2,8 @@
 
 ```yaml
 id: grilled_salmon_fillet_shk_v1
-version: 5
-last_verified: '2025-11-02'
+version: 6
+last_verified: '2025-11-03'
 source:
   venue: Simple Health Kitchen, Baker Street (London)
   menu_page: ''
@@ -25,12 +25,12 @@ per_portion:
   sat_fat_g: 3.1
   mufa_g: 6.2
   pufa_g: 6.7
-  trans_fat_g: null
+  trans_fat_g: 0
   cholesterol_mg: 80
-  sugar_g: null
-  fiber_total_g: null
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
+  sugar_g: 0
+  fiber_total_g: 0
+  fiber_soluble_g: 0
+  fiber_insoluble_g: 0
   sodium_mg: 370
   potassium_mg: 486
   iodine_ug: 17
@@ -38,8 +38,10 @@ per_portion:
   calcium_mg: 19
   iron_mg: 0
   zinc_mg: 1
+  selenium_ug: 50
   vitamin_c_mg: 5
-  manganese_mg: null
+  vitamin_d_ug: 13.0
+  manganese_mg: 0
   polyols_g: 0.0
   carbs_available_g: 1.0
   carbs_total_g: 1.4
@@ -114,4 +116,15 @@ change_log:
   - per_portion.polyols_g
   - version
   sources: []
+- timestamp: '2025-11-03T15:44:11+00:00'
+  updated_by: 'LLM: Claude Code'
+  reason: Add selenium and vitamin D estimates for salmon (MEDIUM/LOW priority nutrient completion)
+  fields_changed:
+  - last_verified
+  - per_portion.selenium_ug
+  - per_portion.vitamin_d_ug
+  - version
+  sources:
+  - url: https://fdc.nal.usda.gov/
+    note: 'USDA FoodData Central: Salmon selenium ~50 µg/100g, vitamin D ~13 µg/100g. Estimated 100g portion. Confidence: MEDIUM (selenium), HIGH (vitamin D - fatty fish is one of best natural sources)'
 ```

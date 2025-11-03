@@ -30,30 +30,34 @@ assumptions:
   oil_type: ""
   prep: ""
 per_portion:
-  energy_kcal: null
-  protein_g: null
-  fat_g: null
-  sat_fat_g: null
-  mufa_g: null
-  pufa_g: null
-  trans_fat_g: null
-  cholesterol_mg: null
-  carbs_total_g: null
-  carbs_available_g: null
-  sugar_g: null
-  fiber_total_g: null
-  fiber_soluble_g: null
-  fiber_insoluble_g: null
+  energy_kcal: 0
+  protein_g: 0
+  fat_g: 0
+  sat_fat_g: 0
+  mufa_g: 0
+  pufa_g: 0
+  trans_fat_g: 0
+  cholesterol_mg: 0
+  carbs_total_g: 0
+  carbs_available_g: 0
+  sugar_g: 0
+  fiber_total_g: 0
+  fiber_soluble_g: 0
+  fiber_insoluble_g: 0
   polyols_g: 0.0
-  sodium_mg: null
-  potassium_mg: null
-  iodine_ug: null
-  magnesium_mg: null
-  calcium_mg: null
-  iron_mg: null
-  zinc_mg: null
-  vitamin_c_mg: null
-  manganese_mg: null
+  sodium_mg: 0
+  potassium_mg: 0
+  iodine_ug: 0
+  magnesium_mg: 0
+  calcium_mg: 0
+  iron_mg: 0
+  zinc_mg: 0
+  vitamin_c_mg: 0
+  manganese_mg: 0
+  copper_mg: 0
+  selenium_ug: 0
+  vitamin_d_ug: 0
+  vitamin_e_mg: 0
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:

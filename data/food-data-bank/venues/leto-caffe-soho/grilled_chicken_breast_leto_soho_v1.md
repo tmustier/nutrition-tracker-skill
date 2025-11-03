@@ -44,6 +44,7 @@ per_portion:
   zinc_mg: 1
   vitamin_c_mg: 0
   manganese_mg: 0
+  copper_mg: 0.04
   polyols_g: 0.0
   carbs_available_g: 0.0
   carbs_total_g: 0.0
@@ -53,7 +54,8 @@ derived:
   fat_unassigned_g: 0.1
 quality:
   confidence: high
-  gaps: []
+  gaps:
+  - Copper estimated from USDA chicken breast values (HIGH confidence)
 notes:
 - 135 kcal from Deliveroo
 - 86g portion calculated from USDA 157 kcal/100g profile

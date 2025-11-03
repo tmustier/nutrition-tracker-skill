@@ -26,6 +26,7 @@ assumptions:
   oil_type: butter or neutral oil
   prep: Pan-fried beef strips in sour cream-based sauce, buckwheat groats cooked separately,
     garnished with pickles
+    Manganese (1.9mg) from 150g cooked buckwheat (≈50g dry at 3.7mg/100g)
 per_portion:
   energy_kcal: 565.3
   protein_g: 37.2
@@ -41,13 +42,13 @@ per_portion:
   fiber_insoluble_g: 3.3
   sodium_mg: 806
   potassium_mg: 557
-  iodine_ug: null
-  magnesium_mg: null
-  calcium_mg: null
-  iron_mg: null
-  zinc_mg: null
-  vitamin_c_mg: null
-  manganese_mg: null
+  iodine_ug: 28
+  magnesium_mg: 0
+  calcium_mg: 0
+  iron_mg: 0
+  zinc_mg: 0
+  vitamin_c_mg: 0
+  manganese_mg: 1.9
   polyols_g: 0.0
   carbs_available_g: 36.7
   carbs_total_g: 41.5
@@ -57,8 +58,9 @@ derived:
 quality:
   confidence: high
   gaps:
-  - micronutrients (iodine, magnesium, calcium, iron, zinc, vitamin_c, manganese)
-    not provided
+  - Micronutrients (magnesium, calcium, iron, zinc, vitamin_c) not provided
+  - Iodine estimated from beef and sour cream in sauce (MEDIUM confidence)
+  - Manganese estimated from buckwheat groats (HIGH confidence)
 notes:
 - 'Fat split: sat(12.2) + trans(0.4) + MUFA(10.2) + PUFA(2.8) = 25.6g; total fat 28.9g
   leaves 3.3g unassigned'

@@ -26,6 +26,7 @@ assumptions:
   oil_type: likely sunflower or vegetable oil (Russian/Polish cuisine standard)
   prep: Pan-fried breaded chicken cutlet, cream-based mushroom sauce, boiled buckwheat
     (kasha), pickled vegetables
+    (1.9mg) from 150g cooked buckwheat (≈50g dry at 3.7mg/100g)
 per_portion:
   energy_kcal: 582.3
   protein_g: 29.7
@@ -41,13 +42,13 @@ per_portion:
   fiber_insoluble_g: 3.7
   sodium_mg: 936
   potassium_mg: 557
-  iodine_ug: null
-  magnesium_mg: null
-  calcium_mg: null
-  iron_mg: null
-  zinc_mg: null
-  vitamin_c_mg: null
-  manganese_mg: null
+  iodine_ug: 15
+  magnesium_mg: 0
+  calcium_mg: 0
+  iron_mg: 0
+  zinc_mg: 0
+  vitamin_c_mg: 0
+  manganese_mg: 1.9
   polyols_g: 0.0
   carbs_available_g: 43.7
   carbs_total_g: 49.0
@@ -57,8 +58,9 @@ derived:
 quality:
   confidence: high
   gaps:
-  - Micronutrients (iodine, magnesium, calcium, iron, zinc, vitamin_c, manganese)
-    not provided
+  - Micronutrients (magnesium, calcium, iron, zinc, vitamin_c) not provided
+  - Iodine estimated from chicken and dairy in sauce (MEDIUM confidence)
+  - Manganese estimated from buckwheat groats (HIGH confidence)
 notes:
 - 602 kcal from user-provided nutrition data
 - 'Buckwheat portion: 150g cooked groats'
