@@ -3,13 +3,13 @@
 ```yaml
 id: sakura_wagyu_beef_sandwich_connaught_v1
 version: 3
-last_verified: '2025-11-02'
+last_verified: "2025-11-02"
 source:
   venue: Jean-Georges at The Connaught, London
   menu_page: https://deliveroo.co.uk/menu/london/mayfair/jean-georges-at-the-connaught
   evidence:
-  - 'Deliveroo listing: 879 kcal (sandwich only, excludes chips)'
-  - 'ChatGPT analysis: sandwich weight ~360g, energy density ~2.4 kcal/g'
+  - "Deliveroo listing: 879 kcal (sandwich only, excludes chips)"
+  - "ChatGPT analysis: sandwich weight ~360g, energy density ~2.4 kcal/g"
   - Macros estimated from pain de mie + seared wagyu + dressing composition
 aliases: []
 category: main
@@ -58,13 +58,13 @@ quality:
   - ±15-25% variance expected for estimated values
 notes:
 - Deliveroo shows 879 kcal for sandwich; chips listed separately at 459 kcal
-- 'Energy density check: 879 kcal / 360g = 2.44 kcal/g (realistic for rich beef sandwich)'
+- "Energy density check: 879 kcal / 360g = 2.44 kcal/g (realistic for rich beef sandwich)"
 - MUFA/PUFA/micronutrients estimated from wagyu beef + pain de mie composition
 - 'Atwater check (available carb basis): 4×42.0 + 9×44.0 + 4×78.0 + 2×4.0 + 2.4×0.0
   = 884 kcal'
 change_log:
 - timestamp: 2025-10-28 20:00:00+00:00
-  updated_by: 'LLM: Claude Sonnet 4.5'
+  updated_by: "LLM: Claude Sonnet 4.5"
   reason: Initial population from Deliveroo + ChatGPT nutritional analysis
   fields_changed:
   - per_portion.energy_kcal
@@ -77,11 +77,11 @@ change_log:
   - portion.est_weight_g
   sources:
   - url: https://deliveroo.co.uk/menu/london/mayfair/jean-georges-at-the-connaught
-    note: 'Deliveroo calorie listing: 879 kcal'
+    note: "Deliveroo calorie listing: 879 kcal"
   - url: user_input
     note: ChatGPT nutritional breakdown provided by Thomas on 2025-10-28
 - timestamp: 2025-10-28 20:20:00+00:00
-  updated_by: 'LLM: Claude Sonnet 4.5'
+  updated_by: "LLM: Claude Sonnet 4.5"
   reason: Added estimated MUFA/PUFA and micronutrients from ingredient composition
   fields_changed:
   - per_portion.mufa_g
@@ -100,7 +100,7 @@ change_log:
   - url: ingredient_analysis
     note: Estimated from typical wagyu beef + pain de mie bread composition
 - timestamp: 2025-10-29 00:00:00+00:00
-  updated_by: 'LLM: Claude Sonnet 4.5'
+  updated_by: "LLM: Claude Sonnet 4.5"
   reason: Populate fiber split and manganese from bread composition
   fields_changed:
   - per_portion.fiber_soluble_g
@@ -110,8 +110,8 @@ change_log:
   - url: nutritional_research
     note: 'Fiber from pain de mie bread (refined wheat): ~25% soluble, 75% insoluble.
       Manganese trace in white bread and beef, rounded to 0.'
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - last_verified

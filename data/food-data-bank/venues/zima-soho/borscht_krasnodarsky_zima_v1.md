@@ -3,7 +3,7 @@
 ```yaml
 id: borscht_krasnodarsky_zima_v1
 version: 3
-last_verified: '2025-11-03'
+last_verified: "2025-11-03"
 source:
   venue: Zima, Soho, London
   menu_page: https://zimarestaurant.co.uk/
@@ -62,7 +62,7 @@ quality:
 notes:
 - 447 kcal total for complete dish with all sides
 - Borscht bowl approximately 300ml
-- 'Sides: sour cream ~30g, salo ~20g, Borodinsky rye bread ~32g (1 slice)'
+- "Sides: sour cream ~30g, salo ~20g, Borodinsky rye bread ~32g (1 slice)"
 - Estimated total dish weight 382g (300g soup + 30g sour cream + 20g salo + 32g bread)
 - Traditional Russian preparation with beef and beetroot
 - Salo is traditional Ukrainian/Russian cured pork fat
@@ -71,7 +71,7 @@ notes:
   = 469.1 kcal'
 change_log:
 - timestamp: 2025-10-30 00:00:00+00:00
-  updated_by: 'LLM: Claude Sonnet 4.5'
+  updated_by: "LLM: Claude Sonnet 4.5"
   reason: Initial entry for Zima Soho borscht with complete nutrition data from venue
     analysis
   fields_changed:
@@ -97,8 +97,8 @@ change_log:
   - url: user_input
     note: Complete nutrition data provided for full portion including borscht, sour
       cream, salo, and Borodinsky rye bread
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - derived.energy_from_macros_kcal
@@ -111,8 +111,8 @@ change_log:
   - per_portion.polyols_g
   - version
   sources: []
-- timestamp: '2025-11-03T15:44:11+00:00'
-  updated_by: 'LLM: Claude Code'
+- timestamp: "2025-11-03T15:44:11+00:00"
+  updated_by: "LLM: Claude Code"
   reason: Add iodine estimate from beef and salo (LOW priority nutrient completion)
   fields_changed:
   - last_verified
@@ -120,5 +120,5 @@ change_log:
   - version
   sources:
   - url: https://fdc.nal.usda.gov/
-    note: 'USDA FoodData Central: Meat typically ~5 µg/100g. 382g dish with beef in soup + 20g salo, estimated meat content = 19µg. Confidence: LOW-MEDIUM (meat is minor iodine source, portion estimate has uncertainty)'
+    note: "USDA FoodData Central: Meat typically ~5 µg/100g. 382g dish with beef in soup + 20g salo, estimated meat content = 19µg. Confidence: LOW-MEDIUM (meat is minor iodine source, portion estimate has uncertainty)"
 ```

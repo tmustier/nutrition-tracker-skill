@@ -10,7 +10,7 @@ source:
   evidence:
     - "Component-based estimation using Ping Pong prawn & chive dumpling as benchmark (43 kcal/piece, 25g)"
     - "Ping Pong data: https://shop.pingpongdimsum.com/products/prawn-and-chive-dumpling (257.5 kcal for 6 pieces)"
-    - "Imperial Treasure review mentions 'juicy prawns wrapped in delicate, translucent skins': https://www.london-unattached.com/imperial-treasure-london-review/"
+    - "Imperial Treasure review mentions juicy prawns wrapped in delicate, translucent skins: https://www.london-unattached.com/imperial-treasure-london-review/"
     - "Typical prawn/chive dumpling weight 20-25g per piece from commercial products (Royal Gourmet: 300g for 12 pieces = 25g/piece)"
     - "USDA data for raw shrimp (FDC 175179): ~85 kcal/100g, 20g protein, 1g fat"
     - "USDA data for chives (Allium tuberosum): ~21 kcal/100g, 1.6g protein, 3.8g carbs"
@@ -55,7 +55,9 @@ derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: medium
-  gaps: ["No direct Imperial Treasure nutrition data available", "Some micronutrients estimated from component averages"]
+  gaps:
+    - "No direct Imperial Treasure nutrition data available"
+    - "Some micronutrients estimated from component averages"
   estimated_nutrients:
     - name: "fiber_soluble_g"
       value: 0.0
@@ -70,11 +72,12 @@ notes:
   - "Atwater validation: 4×2.0 + 4×5.6 + 9×1.6 = 8.0 + 22.4 + 14.4 = 44.8 kcal (within 0.4% of stated 45 kcal)"
   - "Fat split based on typical vegetable oil (70% MUFA, 25% PUFA) and sesame oil (40% MUFA/PUFA) blend plus trace shrimp fat"
   - "Sodium: 110mg intrinsic (prawns), 180mg from soy sauce, 52mg finishing salt per 0.5% salt_scheme = 342mg, rounded to 310mg accounting for dilution during steaming"
-  - "Imperial Treasure is Michelin Guide listed, upscale Cantonese restaurant at 9 Waterloo Place, St James's, London"
+  - "Imperial Treasure is Michelin Guide listed, upscale Cantonese restaurant at 9 Waterloo Place, St Jamess, London"
   - "Portion consumed: 1 piece out of a typical serving of 3 pieces per order"
 change_log:
   - timestamp: "2025-11-02"
     reason: "Initial entry - component-based estimation for dim sum dish"
-    fields_changed: ["all fields"]
+    fields_changed:
+      - "all fields"
     evidence: "Comprehensive research using Ping Pong London benchmark, USDA component data, recipe analysis, and upscale venue adjustment"
 ```

@@ -3,10 +3,10 @@
 ```yaml
 id: pine_mango_passion_150g_v1
 version: 4
-last_verified: '2025-11-02'
+last_verified: "2025-11-02"
 source:
   venue: pack/ingredient
-  menu_page: ''
+  menu_page: ""
   evidence: []
 aliases: []
 category: ingredient
@@ -16,8 +16,8 @@ portion:
   notes: Fresh fruit mix.
 assumptions:
   salt_scheme: normal
-  oil_type: ''
-  prep: ''
+  oil_type: ""
+  prep: ""
 per_portion:
   energy_kcal: 75.3
   protein_g: 0.9
@@ -53,7 +53,7 @@ notes:
   = 75.3 kcal'
 change_log:
 - timestamp: 2025-10-28T18:51:39+0000
-  updated_by: 'LLM: GPT-5 Thinking'
+  updated_by: "LLM: GPT-5 Thinking"
   reason: Populate per_portion from user-provided data
   fields_changed:
   - per_portion.energy_kcal
@@ -75,7 +75,7 @@ change_log:
   - url: user_input
     note: User-supplied values on 2025-10-28
 - timestamp: 2025-10-28T19:02:30+0000
-  updated_by: 'LLM: GPT-5 Thinking'
+  updated_by: "LLM: GPT-5 Thinking"
   reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
   fields_changed:
   - per_portion.fat_g
@@ -111,8 +111,8 @@ change_log:
     predominantly unsaturated with PUFA > MUFA. Trans fat=0 and cholesterol=0 (plant-based).
     Iodine content is trace (1-2µg per 150g typical for fruit). Values calculated
     proportionally based on 150g mixed fruit with 0.5g total fat.'
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - last_verified

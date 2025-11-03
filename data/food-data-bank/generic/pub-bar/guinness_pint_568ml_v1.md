@@ -3,10 +3,10 @@
 ```yaml
 id: guinness_pint_568ml_v1
 version: 2
-last_verified: '2025-11-02'
+last_verified: "2025-11-02"
 source:
   venue: Pub/Bar - Generic
-  menu_page: ''
+  menu_page: ""
   evidence:
   - 'Guinness official nutrition data: 210 kcal, 1.9g protein, 18g carbs per pint
     (568ml)'
@@ -23,7 +23,7 @@ portion:
   notes: Standard draught Guinness served in pint glass
 assumptions:
   salt_scheme: normal
-  oil_type: ''
+  oil_type: ""
   prep: Draught beer, nitrogen widget pour
 per_portion:
   energy_kcal: 79.6
@@ -58,9 +58,9 @@ quality:
   confidence: high
   gaps: []
 notes:
-- 'Standard pint: 568ml at 4.2% ABV = ~19g alcohol'
+- "Standard pint: 568ml at 4.2% ABV = ~19g alcohol"
 - Alcohol contributes ~133 kcal (7 kcal/g), macros contribute ~80 kcal
-- 'Total energy: 210 kcal per pint'
+- "Total energy: 210 kcal per pint"
 - Very low sugar content due to fermentation process
 - Minimal fat content in beer
 - Nitrogen pour creates characteristic creamy head and smooth mouthfeel
@@ -81,8 +81,8 @@ change_log:
       pint'
   - url: user_request
     note: User tracking two pints consumed at 17:20 and 17:50
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - derived.energy_from_macros_kcal

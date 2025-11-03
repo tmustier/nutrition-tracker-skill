@@ -3,7 +3,7 @@
 ```yaml
 id: minestrone_cannellini_fennel_cabbage_potato_parmesan_eagle_farringdon_v1
 version: 3
-last_verified: '2025-11-02'
+last_verified: "2025-11-02"
 source:
   venue: The Eagle, Farringdon (London)
   menu_page: https://theeaglefarringdon.co.uk/
@@ -74,7 +74,7 @@ notes:
   = 536.6 kcal'
 change_log:
 - timestamp: 2025-11-01T18:34:00+0000
-  updated_by: 'LLM: GPT-5 Codex'
+  updated_by: "LLM: GPT-5 Codex"
   reason: Initial estimate for minestrone bowl at The Eagle
   fields_changed:
   - all fields
@@ -85,7 +85,7 @@ change_log:
   - url: gpt_culinary_estimate
     note: GPT-5 Codex component model using 200g beans, 15g olive oil, 10g parmesan
 - timestamp: 2025-11-02T10:00:00+0000
-  updated_by: 'LLM: GPT-5 Codex'
+  updated_by: "LLM: GPT-5 Codex"
   reason: Updated soup macros to match user-supplied estimate with broth sodium detail
   fields_changed:
   - version
@@ -111,8 +111,8 @@ change_log:
   sources:
   - url: user_provided_best_effort_estimate
     note: Detailed macro table shared by user on 2025-11-02
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - derived.energy_from_macros_kcal

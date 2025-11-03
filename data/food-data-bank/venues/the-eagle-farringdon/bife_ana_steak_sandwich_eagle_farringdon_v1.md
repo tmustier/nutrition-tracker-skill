@@ -3,14 +3,14 @@
 ```yaml
 id: bife_ana_steak_sandwich_eagle_farringdon_v1
 version: 4
-last_verified: '2025-11-03'
+last_verified: "2025-11-03"
 source:
   venue: The Eagle, Farringdon (London)
   menu_page: https://theeaglefarringdon.co.uk/
   evidence:
   - 'Guardian recipe (Eagle cookbook): 500g steak for 2 sandwiches = 250g raw per
     sandwich'
-  - 'USDA cooking yields: 80% yield for grilled sirloin (250g raw → 200g cooked)'
+  - "USDA cooking yields: 80% yield for grilled sirloin (250g raw → 200g cooked)"
   - GPT-5 Pro detailed component analysis with restaurant preparation factors
 aliases:
 - Bife Ana
@@ -62,7 +62,7 @@ quality:
   - No official nutritional data from venue
   - Menu changes daily - availability not guaranteed
   - Micronutrient estimates from component ingredients
-  - 'Sodium varies by chef seasoning style: light 1,420mg, base 1,910mg, heavy 2,400mg'
+  - "Sodium varies by chef seasoning style: light 1,420mg, base 1,910mg, heavy 2,400mg"
   - Actual portion may vary
 notes:
 - London's first gastropub (est. 1991) - legendary signature dish
@@ -80,11 +80,11 @@ notes:
 - 'Sodium variability: Light seasoning (1.0% meat) = 1,420mg; Base (1.5%) = 1,910mg;
   Heavy (2.0%) = 2,400mg'
 - Bread contributes ~310mg sodium baseline; most sodium from chef's salt seasoning
-- 'Fiber: ~2.4-2.9g insoluble from roll, ~0.8-1.3g soluble from onion'
-- 'High protein meal: 69.4g = 41% of 170g daily target'
+- "Fiber: ~2.4-2.9g insoluble from roll, ~0.8-1.3g soluble from onion"
+- "High protein meal: 69.4g = 41% of 170g daily target"
 - 'Sodium warning: Base case at 83% of 2,300mg daily limit; heavy seasoning would
   exceed limit'
-- 'Potassium: 1,070mg = 27% of 4,000mg target (pair with K-rich sides to boost)'
+- "Potassium: 1,070mg = 27% of 4,000mg target (pair with K-rich sides to boost)"
 - Portuguese-inspired preparation (Bife Ana = beef version of traditional pork bifana)
 - The sauce/reduction is where most extra oil and salt enter the sandwich
 - 'Atwater check (available carb basis): 4×69.4 + 9×39.5 + 4×53.3 + 2×3.7 + 2.4×0.0
@@ -132,15 +132,15 @@ change_log:
   - assumptions.prep
   sources:
   - url: https://www.theguardian.com/lifeandstyle/2010/sep/25/portuguese-steak-sandwich-recipe
-    note: 'Guardian published Eagle cookbook recipe: 500g steak for 2 sandwiches'
+    note: "Guardian published Eagle cookbook recipe: 500g steak for 2 sandwiches"
   - url: https://www.ars.usda.gov/ARSUserFiles/80400525/Data/retn/retn06.pdf
-    note: 'USDA cooking yields: 80% for grilled sirloin'
+    note: "USDA cooking yields: 80% for grilled sirloin"
   - url: gpt5_pro_analysis
     note: 'GPT-5 Pro component-based analysis: 200g cooked sirloin + 90g roll + 2
       Tbsp oil + onion/lettuce + restaurant salt seasoning. Major corrections: calories
       750→866, sodium 650→1,910mg, protein 55→69.4g'
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - last_verified
@@ -152,8 +152,8 @@ change_log:
   - per_portion.polyols_g
   - version
   sources: []
-- timestamp: '2025-11-03T15:44:11+00:00'
-  updated_by: 'LLM: Claude Code'
+- timestamp: "2025-11-03T15:44:11+00:00"
+  updated_by: "LLM: Claude Code"
   reason: Add iodine estimate from beef (LOW priority nutrient completion)
   fields_changed:
   - last_verified
@@ -161,5 +161,5 @@ change_log:
   - version
   sources:
   - url: https://fdc.nal.usda.gov/
-    note: 'USDA FoodData Central: Beef typically ~5 µg/100g. Estimated 360g sandwich with 200g cooked rump = 18µg. Confidence: LOW-MEDIUM (meat is minor iodine source)'
+    note: "USDA FoodData Central: Beef typically ~5 µg/100g. Estimated 360g sandwich with 200g cooked rump = 18µg. Confidence: LOW-MEDIUM (meat is minor iodine source)"
 ```

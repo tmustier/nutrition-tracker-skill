@@ -3,10 +3,10 @@
 ```yaml
 id: packd_mixed_summer_berries_150g_v1
 version: 5
-last_verified: '2025-11-03'
+last_verified: "2025-11-03"
 source:
   venue: PACK'D (pack/ingredient)
-  menu_page: ''
+  menu_page: ""
   evidence: []
 aliases: []
 category: ingredient
@@ -16,8 +16,8 @@ portion:
   notes: Pack'd mix; per-portion as provided.
 assumptions:
   salt_scheme: normal
-  oil_type: ''
-  prep: ''
+  oil_type: ""
+  prep: ""
 per_portion:
   energy_kcal: 56.3
   protein_g: 1.4
@@ -53,7 +53,7 @@ notes:
   56.3 kcal'
 change_log:
 - timestamp: 2025-10-28T18:51:39+0000
-  updated_by: 'LLM: GPT-5 Thinking'
+  updated_by: "LLM: GPT-5 Thinking"
   reason: Populate per_portion from user-provided data
   fields_changed:
   - per_portion.energy_kcal
@@ -72,7 +72,7 @@ change_log:
   - url: user_input
     note: User-supplied values on 2025-10-28
 - timestamp: 2025-10-28T19:02:30+0000
-  updated_by: 'LLM: GPT-5 Thinking'
+  updated_by: "LLM: GPT-5 Thinking"
   reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
   fields_changed:
   - per_portion.protein_g
@@ -83,7 +83,7 @@ change_log:
   - url: formatting-pass
     note: Automated rounding pass
 - timestamp: 2025-10-28T20:00:00+0000
-  updated_by: 'LLM: Claude Sonnet 4.5'
+  updated_by: "LLM: Claude Sonnet 4.5"
   reason: Research and fill missing fat breakdown, cholesterol, and iodine data
   fields_changed:
   - per_portion.mufa_g
@@ -93,9 +93,9 @@ change_log:
   - per_portion.iodine_ug
   sources:
   - url: https://foodstruct.com/food/raspberry
-    note: 'USDA data: Raspberries MUFA 0.06g, PUFA 0.38g per 100g'
+    note: "USDA data: Raspberries MUFA 0.06g, PUFA 0.38g per 100g"
   - url: https://foodstruct.com/food/strawberries
-    note: 'USDA data: Strawberries MUFA 0.04g, PUFA 0.16g per 100g'
+    note: "USDA data: Strawberries MUFA 0.04g, PUFA 0.16g per 100g"
   - url: https://foodstruct.com/food/blackberry
     note: 'USDA data: Blackberries MUFA 0.047g, PUFA 0.28g per 100g; cholesterol 0mg,
       trans fat 0g'
@@ -108,8 +108,8 @@ change_log:
     0.3g total fat per 150g. PUFA higher than MUFA consistent with berry profiles
     (omega-3 from seeds). Trans fat and cholesterol = 0 (plant-based). Iodine = 1
     mcg (trace, very low in berries).
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - last_verified
@@ -121,8 +121,8 @@ change_log:
   - per_portion.polyols_g
   - version
   sources: []
-- timestamp: '2025-11-03T00:00:00+00:00'
-  updated_by: 'LLM: Claude Sonnet 4.5'
+- timestamp: "2025-11-03T00:00:00+00:00"
+  updated_by: "LLM: Claude Sonnet 4.5"
   reason: Phase 2 nutrient estimation - fiber split for mixed berries
   fields_changed:
   - per_portion.fiber_soluble_g
@@ -132,5 +132,5 @@ change_log:
   sources:
   - url: fiber_split_estimation
     note: Used fruits.berries category (35% soluble, 65% insoluble, HIGH confidence)
-  methodology: 'Applied berries fiber split ratio to total fiber 4.4g: soluble = 4.4 × 0.35 = 1.5g, insoluble = 4.4 × 0.65 = 2.9g. Mixed berry composition (36% raspberries, 34% blueberries, 30% blackberries) confirmed from previous research. High confidence estimation based on well-documented berry fiber profiles.'
+  methodology: "Applied berries fiber split ratio to total fiber 4.4g: soluble = 4.4 × 0.35 = 1.5g, insoluble = 4.4 × 0.65 = 2.9g. Mixed berry composition (36% raspberries, 34% blueberries, 30% blackberries) confirmed from previous research. High confidence estimation based on well-documented berry fiber profiles."
 ```

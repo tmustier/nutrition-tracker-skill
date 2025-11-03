@@ -3,10 +3,10 @@
 ```yaml
 id: skyr_plain_200g_v1
 version: 4
-last_verified: '2025-11-02'
+last_verified: "2025-11-02"
 source:
   venue: pack/ingredient
-  menu_page: ''
+  menu_page: ""
   evidence: []
 aliases: []
 category: ingredient
@@ -16,8 +16,8 @@ portion:
   notes: Plain skyr yoghurt.
 assumptions:
   salt_scheme: normal
-  oil_type: ''
-  prep: ''
+  oil_type: ""
+  prep: ""
 per_portion:
   energy_kcal: 121.2
   protein_g: 22.0
@@ -53,7 +53,7 @@ notes:
   = 121.2 kcal'
 change_log:
 - timestamp: 2025-10-28T18:51:39+0000
-  updated_by: 'LLM: GPT-5 Thinking'
+  updated_by: "LLM: GPT-5 Thinking"
   reason: Populate per_portion from user-provided data
   fields_changed:
   - per_portion.energy_kcal
@@ -73,7 +73,7 @@ change_log:
   - url: user_input
     note: User-supplied values on 2025-10-28
 - timestamp: 2025-10-28T19:02:30+0000
-  updated_by: 'LLM: GPT-5 Thinking'
+  updated_by: "LLM: GPT-5 Thinking"
   reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
   fields_changed:
   - per_portion.protein_g
@@ -82,7 +82,7 @@ change_log:
   - url: formatting-pass
     note: Automated rounding pass
 - timestamp: 2025-10-28T20:15:00+0000
-  updated_by: 'LLM: Claude Sonnet 4.5'
+  updated_by: "LLM: Claude Sonnet 4.5"
   reason: Complete dairy fat profile and trace nutrients based on research
   fields_changed:
   - per_portion.mufa_g
@@ -104,14 +104,14 @@ change_log:
     note: Skyr nutrition information - confirms trace iron and no vitamin C in plain
       dairy
   - url: https://www.nutritionvalue.org/Yogurt,_low_fat,_plain_nutritional_value.html
-    note: 'Dairy fat composition: ~62-70% saturated, ~25-30% MUFA, ~3-5% PUFA'
+    note: "Dairy fat composition: ~62-70% saturated, ~25-30% MUFA, ~3-5% PUFA"
   calculation_notes: 'With 0.4g total fat (0.2g saturated) per 200g: MUFA estimated
     at 0.1g (~27% of total fat), PUFA trace at 0.0g (~3% of total fat), trans-fat
     0.1g representing natural CLA from dairy (~4% of total fat). Vitamin C is 0mg
     (not naturally present in plain dairy). Iron is 0mg rounded from trace amounts
     typical in low-fat dairy products.'
 - timestamp: 2025-10-29T00:00:00+0000
-  updated_by: 'LLM: Claude Sonnet 4.5'
+  updated_by: "LLM: Claude Sonnet 4.5"
   reason: Populate fiber and manganese values for dairy product (all 0)
   fields_changed:
   - per_portion.fiber_total_g
@@ -122,8 +122,8 @@ change_log:
   - url: nutritional_knowledge
     note: Dairy products contain no dietary fiber (plant-based nutrient only). Manganese
       trace amounts rounded to 0.
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - last_verified

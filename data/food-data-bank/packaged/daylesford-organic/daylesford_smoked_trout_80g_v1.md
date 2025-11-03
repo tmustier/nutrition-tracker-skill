@@ -3,14 +3,14 @@
 ```yaml
 id: daylesford_smoked_trout_80g_v1
 version: 3
-last_verified: '2025-11-02'
+last_verified: "2025-11-02"
 source:
   venue: Daylesford Organic
   menu_page: https://www.daylesford.com/
   evidence:
-  - 'Product: Daylesford Smoked Trout (200g pack, Batch 6997, Use by 12.11.25)'
+  - "Product: Daylesford Smoked Trout (200g pack, Batch 6997, Use by 12.11.25)"
   - Dry salted & cold smoked on West Coast of Scotland
-  - 'Ingredients: Trout (96%), Salt, Sugar'
+  - "Ingredients: Trout (96%), Salt, Sugar"
   - Official product label nutrition facts
 aliases:
 - Daylesford Trout
@@ -23,7 +23,7 @@ portion:
   notes: Pond reared farmed rainbow trout, cold smoked, thinly sliced
 assumptions:
   salt_scheme: normal
-  oil_type: ''
+  oil_type: ""
   prep: Dry salted and cold smoked - traditional Scottish method
 per_portion:
   energy_kcal: 161.4
@@ -73,7 +73,7 @@ notes:
 - Good source of vitamin D (~120 IU per 80g) - estimated
 - High in selenium (~10µg per 80g) - estimated
 - Phosphorus content ~200mg per 80g - estimated
-- 'Sodium: 480mg per 80g (from 1.2g salt)'
+- "Sodium: 480mg per 80g (from 1.2g salt)"
 - Sugar listed in ingredients but negligible in final product (<0.1g/100g)
 - PUFA includes omega-3 (EPA+DHA) and some omega-6
 - Zero carb, keto-friendly protein source
@@ -119,8 +119,8 @@ change_log:
   - url: product_label
     note: 'Daylesford Smoked Trout 200g pack label: 202 kcal, 21.8g protein, 12.8g
       fat (2.3g sat), <0.1g carbs per 100g. Batch 6997, use by 12.11.25'
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - last_verified

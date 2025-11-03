@@ -3,13 +3,13 @@
 ```yaml
 id: clementine_fresh_fruit_v1
 version: 2
-last_verified: '2025-11-02'
+last_verified: "2025-11-02"
 source:
   venue: Clementine (Fresh Fruit)
-  menu_page: ''
+  menu_page: ""
   evidence:
   - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/168195/nutrients
-    note: 'USDA FoodData Central: Clementines, raw (FDC ID 168195)'
+    note: "USDA FoodData Central: Clementines, raw (FDC ID 168195)"
   - url: https://tools.myfooddata.com/nutrition-facts/168195/wt1
     note: 'MyFoodData USDA aggregation: Complete nutrition profile per 100g and per
       clementine'
@@ -23,7 +23,7 @@ portion:
   notes: Standard USDA portion weight for one medium clementine
 assumptions:
   salt_scheme: unsalted
-  oil_type: ''
+  oil_type: ""
   prep: fresh, whole, peeled
 per_portion:
   energy_kcal: 41.9
@@ -63,13 +63,13 @@ notes:
 - 'Values scaled from USDA per-100g data: 47 kcal, 0.85g protein, 0.15g fat, 12g carbs,
   1.7g fiber'
 - Fat content negligible (<0.15g) - primarily trace amounts of natural fruit oils
-- 'Excellent source of vitamin C: 36mg provides ~60% daily value'
+- "Excellent source of vitamin C: 36mg provides ~60% daily value"
 - Naturally sodium-free and cholesterol-free
 - 'Atwater check (available carb basis): 4×0.6 + 9×0.1 + 4×9.0 + 2×1.3 + 2.4×0.0 =
   41.9 kcal'
 change_log:
 - timestamp: 2025-10-29 14:00:00+00:00
-  updated_by: 'LLM: Claude Sonnet 4.5'
+  updated_by: "LLM: Claude Sonnet 4.5"
   reason: Initial population from USDA FoodData Central (FDC ID 168195) scaled to
     standard 74g portion
   fields_changed:
@@ -103,8 +103,8 @@ change_log:
     note: USDA FoodData Central primary source for clementines, raw
   - url: https://tools.myfooddata.com/nutrition-facts/168195/wt1
     note: USDA data aggregator showing per-clementine values (74g portion)
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - derived.energy_from_macros_kcal

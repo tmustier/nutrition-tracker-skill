@@ -3,13 +3,13 @@
 ```yaml
 id: carrot_juice_shk_v1
 version: 2
-last_verified: '2025-11-02'
+last_verified: "2025-11-02"
 source:
   venue: Simple Health Kitchen
-  menu_page: ''
+  menu_page: ""
   evidence:
-  - 'USDA FoodData Central FDC #170491 (carrot juice, canned) scaled to 250mL'
-  - 'User confirmed: 250mL fresh carrot juice from Simple Health Kitchen'
+  - "USDA FoodData Central FDC #170491 (carrot juice, canned) scaled to 250mL"
+  - "User confirmed: 250mL fresh carrot juice from Simple Health Kitchen"
 aliases: []
 category: drink
 portion:
@@ -68,10 +68,10 @@ change_log:
   fields_changed:
   - all fields
   sources:
-  - url: 'USDA FoodData Central FDC #170491'
+  - url: "USDA FoodData Central FDC #170491"
     note: Carrot juice nutrition data scaled from per 100g to 250mL serving
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - last_verified

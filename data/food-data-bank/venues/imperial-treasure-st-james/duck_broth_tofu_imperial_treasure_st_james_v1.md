@@ -51,7 +51,8 @@ derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: medium
-  gaps: ["manganese"]
+  gaps:
+    - "manganese"
   estimated_nutrients:
     - name: "fiber_soluble_g"
       value: 0.1
@@ -74,7 +75,8 @@ change_log:
   - timestamp: "2025-11-02T18:00:00+00:00"
     updated_by: "LLM: Claude Sonnet 4.5"
     reason: "Initial component-based nutrition estimation for duck broth with tofu from Imperial Treasure St. James Peking duck course"
-    fields_changed: ["all nutrition fields"]
+    fields_changed:
+      - "all nutrition fields"
     sources:
       - url: "https://honest-food.net/duck-stock-recipe/"
         note: "Hank Shaw duck stock recipe - 13 kcal baseline"

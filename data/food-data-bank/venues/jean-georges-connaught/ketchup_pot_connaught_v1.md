@@ -3,7 +3,7 @@
 ```yaml
 id: ketchup_pot_connaught_v1
 version: 4
-last_verified: '2025-11-02'
+last_verified: "2025-11-02"
 source:
   venue: Jean-Georges at The Connaught, London
   menu_page: https://deliveroo.co.uk/menu/london/mayfair/jean-georges-at-the-connaught
@@ -55,12 +55,12 @@ quality:
   gaps: []
 notes:
 - 25g pot assumed based on typical UK restaurant ketchup portion
-- 'If pot was 30g: add ~5 kcal, +1.2g carbs, +35mg sodium'
+- "If pot was 30g: add ~5 kcal, +1.2g carbs, +35mg sodium"
 - 'Atwater check (available carb basis): 4×0.3 + 9×0.0 + 4×5.8 + 2×0.1 + 2.4×0.0 =
   24.6 kcal'
 change_log:
 - timestamp: 2025-10-28 20:00:00+00:00
-  updated_by: 'LLM: Claude Sonnet 4.5'
+  updated_by: "LLM: Claude Sonnet 4.5"
   reason: Initial population based on Heinz UK ketchup profile scaled to 25g
   fields_changed:
   - per_100g.energy_kcal
@@ -83,7 +83,7 @@ change_log:
     note: ChatGPT nutritional breakdown provided by Thomas on 2025-10-28, based on
       Heinz UK
 - timestamp: 2025-10-28 21:30:00+00:00
-  updated_by: 'LLM: Claude Sonnet 4.5'
+  updated_by: "LLM: Claude Sonnet 4.5"
   reason: Complete missing nutrition data with research-backed values
   fields_changed:
   - per_100g.mufa_g
@@ -112,17 +112,17 @@ change_log:
   - per_portion.vitamin_c_mg
   sources:
   - url: https://www.sainsburys.co.uk/gol-ui/product/heinz-tomato-ketchup-910g
-    note: 'Heinz UK tomato ketchup: 22.8g sugar per 100g'
+    note: "Heinz UK tomato ketchup: 22.8g sugar per 100g"
   - url: https://fdc.nal.usda.gov/food-details/168556/nutrients
     note: 'USDA FoodData Central FDC 168556: micronutrients (potassium 281mg, calcium
       15mg, iron 0.35mg, magnesium 13mg, zinc 0.17mg, vitamin C 4.1mg per 100g)'
   - url: https://www.ars.usda.gov/ARSUSERFILES/80400535/DATA/IODINE/
-    note: 'USDA iodine database: ~1.2 mcg per 100g ketchup'
+    note: "USDA iodine database: ~1.2 mcg per 100g ketchup"
   - url: various USDA sources
     note: 'Fatty acid profile: MUFA 0.01g, PUFA 0.04g, trans fat 0g, cholesterol 0mg
       per 100g'
 - timestamp: 2025-10-29 00:00:00+00:00
-  updated_by: 'LLM: Claude Sonnet 4.5'
+  updated_by: "LLM: Claude Sonnet 4.5"
   reason: Populate fiber split and manganese for minimal fiber content
   fields_changed:
   - per_portion.fiber_soluble_g
@@ -132,8 +132,8 @@ change_log:
   - url: nutritional_research
     note: Tomato fiber is predominantly insoluble. With 0.1g total, split as 0.0g
       soluble (rounded from ~0.03g), 0.1g insoluble. Manganese trace, rounded to 0.
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - last_verified

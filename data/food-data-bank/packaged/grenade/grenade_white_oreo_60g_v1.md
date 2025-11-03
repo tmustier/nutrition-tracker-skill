@@ -3,10 +3,10 @@
 ```yaml
 id: grenade_white_oreo_60g_v1
 version: 2
-last_verified: '2025-11-02'
+last_verified: "2025-11-02"
 source:
   venue: Grenade (Packaged Product)
-  menu_page: ''
+  menu_page: ""
   evidence:
   - Grenade official nutrition data
   - Multiple UK retailer listings
@@ -19,7 +19,7 @@ portion:
   notes: High protein bar with white chocolate coating and Oreo pieces
 assumptions:
   salt_scheme: normal
-  oil_type: ''
+  oil_type: ""
   prep: packaged product
   manganese: "Estimated from USDA data for oats (~4.9 mg/100g), assuming oat-based protein bar formulation. 60g × 4.9 mg/100g = 2.94 mg. Confidence: HIGH - oats are exceptionally high in manganese"
 per_portion:
@@ -71,8 +71,8 @@ change_log:
   sources:
   - url: https://www.healthyplanetcanada.com/grenade-high-protein-bar-oreo-60g.html
     note: Grenade White Oreo bar nutrition facts
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - last_verified
@@ -84,8 +84,8 @@ change_log:
   - per_portion.polyols_g
   - version
   sources: []
-- timestamp: '2025-11-02T22:00:00+00:00'
-  updated_by: 'LLM: Claude Sonnet 4.5'
+- timestamp: "2025-11-02T22:00:00+00:00"
+  updated_by: "LLM: Claude Sonnet 4.5"
   reason: Correct polyol data to match notes - was incorrectly set to 0.0 instead of 17.0g
   fields_changed:
   - per_portion.polyols_g

@@ -16,7 +16,8 @@ source:
       note: "Shrimp micronutrients per 100g"
     - url: "https://www.snapcalorie.com/nutrition/fried_dough_sticks_nutrition.html"
       note: "Youtiao (fried dough stick) nutrition: ~192 kcal/100g"
-aliases: ["Crispy Golden Net Prawn Cheung Fun"]
+aliases:
+  - "Crispy Golden Net Prawn Cheung Fun"
 category: main
 portion:
   description: "1 piece"
@@ -56,7 +57,10 @@ derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: medium
-  gaps: ["Fiber values are estimates; soluble/insoluble fiber breakdown not available", "Manganese not calculated", "Vitamin C minimal/trace"]
+  gaps:
+    - "Fiber values are estimates; soluble/insoluble fiber breakdown not available"
+    - "Manganese not calculated"
+    - "Vitamin C minimal/trace"
 notes:
   - "Component-based estimation (per ESTIMATE.md guidelines): Rice noodle wrapper (30g cooked) + Large shrimp (20g raw→16g cooked) + Golden net crispy coating (8g flour + 5g oil) + Fried dough stick/youtiao (8g) + Additional frying oil (5g) + Sweet soy sauce (5g)"
   - "Rice noodles: 32 kcal, 0.5g P, 0.1g F, 7.2g C (USDA FDC 168914 scaled)"
@@ -69,12 +73,13 @@ notes:
   - "Total sodium breakdown: 6mg (rice noodles) + 18mg (shrimp) + 1mg (flour) + 2mg (youtiao) + 300mg (soy sauce) + 152mg (finishing salt) = 479mg"
   - "Atwater validation: 4×5.6 + 4×15.6 + 9×11.2 = 185.6 kcal ≈ 183 kcal (1.4% difference, within tolerance)"
   - "Price reference: £10.80 for 6 pieces = £1.80 per piece (premium dim sum)"
-  - "The 'crispy' preparation adds significant calories vs. traditional steamed shrimp cheung fun (~27 kcal/piece steamed vs. ~183 kcal/piece crispy fried)"
+  - "The crispy preparation adds significant calories vs. traditional steamed shrimp cheung fun (~27 kcal/piece steamed vs. ~183 kcal/piece crispy fried)"
 change_log:
   - timestamp: 2025-11-02T00:00:00+0000
     updated_by: "LLM: Claude Sonnet 4.5"
     reason: "Initial component-based estimation for Imperial Treasure St. James crispy shrimp cheung fun"
-    fields_changed: ["all fields populated from component analysis"]
+    fields_changed:
+      - "all fields populated from component analysis"
     sources:
       - url: "https://foods.fatsecret.com/calories-nutrition/usda/rice-noodles-(cooked)"
         note: "USDA rice noodles (cooked): 108 kcal/100g, 1.79g P, 0.2g F, 24g C"

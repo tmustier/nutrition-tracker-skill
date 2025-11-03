@@ -3,10 +3,10 @@
 ```yaml
 id: margarita_classic_v1
 version: 2
-last_verified: '2025-11-02'
+last_verified: "2025-11-02"
 source:
   venue: Generic - Bar/Restaurant
-  menu_page: ''
+  menu_page: ""
   evidence:
   - 'Standard margarita recipe: 1.5 oz tequila, 1 oz triple sec/Cointreau, 1 oz lime
     juice'
@@ -20,10 +20,10 @@ category: drink
 portion:
   description: 1 standard margarita (~4 oz / 120ml)
   est_weight_g: 120
-  notes: 'Classic recipe: tequila, triple sec, lime juice - on the rocks or blended'
+  notes: "Classic recipe: tequila, triple sec, lime juice - on the rocks or blended"
 assumptions:
   salt_scheme: normal
-  oil_type: ''
+  oil_type: ""
   prep: Mixed cocktail, served with or without salt rim
 per_portion:
   energy_kcal: 52.6
@@ -58,12 +58,12 @@ quality:
   confidence: medium
   gaps: []
 notes:
-- 'Standard recipe: 45ml (1.5 oz) tequila @ 40% ABV = ~14g alcohol'
+- "Standard recipe: 45ml (1.5 oz) tequila @ 40% ABV = ~14g alcohol"
 - 30ml (1 oz) triple sec @ 40% ABV = ~10g alcohol
 - 30ml (1 oz) fresh lime juice = ~10 kcal, 3g carbs, 12mg vitamin C
-- 'Total alcohol: ~24g contributing ~168 kcal (7 kcal/g)'
+- "Total alcohol: ~24g contributing ~168 kcal (7 kcal/g)"
 - Carbs from triple sec (~10g sugar) and lime juice (~3g)
-- 'Total energy: ~220 kcal (168 from alcohol + 52 from carbs)'
+- "Total energy: ~220 kcal (168 from alcohol + 52 from carbs)"
 - Variations may include simple syrup (adds ~50 kcal and 12g sugar)
 - Salt rim adds negligible calories but ~200-400mg sodium if licked
 - Frozen margaritas may contain additional sugar/syrups
@@ -81,8 +81,8 @@ change_log:
     note: USDA FoodData Central component values
   - url: user_request
     note: User consumed margarita on 2025-11-01
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - derived.energy_from_macros_kcal

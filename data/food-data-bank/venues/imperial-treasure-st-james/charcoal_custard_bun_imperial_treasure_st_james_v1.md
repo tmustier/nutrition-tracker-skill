@@ -16,7 +16,10 @@ source:
     - "https://www.snapcalorie.com/nutrition/chinese_custard_bun_nutrition.html (168 kcal reference)"
     - "https://foods.fatsecret.com/calories-nutrition/dim-sum/steamed-egg-custard-bun (189 kcal reference)"
     - "Recipe sources: Woks of Life, Wok and Kin, Chinese Cooking Demystified for component weights"
-aliases: ["Liu Sha Bao", "Lava Custard Bun", "Salted Egg Custard Bun"]
+aliases:
+  - "Liu Sha Bao"
+  - "Lava Custard Bun"
+  - "Salted Egg Custard Bun"
 category: dessert
 portion:
   description: "1 piece"
@@ -61,10 +64,15 @@ derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: medium
-  gaps: ["potassium", "magnesium", "zinc", "vitamin_c", "manganese"]
+  gaps:
+    - "potassium"
+    - "magnesium"
+    - "zinc"
+    - "vitamin_c"
+    - "manganese"
 notes:
   - "Charcoal custard buns are a signature dim sum dessert featuring activated charcoal in the dough (for aesthetic black color) and a molten sweet custard filling."
-  - "The custard filling is made primarily from salted egg yolk, butter, and sugar, creating a rich, flowing 'lava' center when steamed."
+  - "The custard filling is made primarily from salted egg yolk, butter, and sugar, creating a rich, flowing lava center when steamed."
   - "Activated charcoal contributes negligible calories and is used purely for color/presentation."
   - "Energy calculated via Atwater: 4×3.8 + 4×23.3 + 9×8.8 = 187.6 kcal (matches 186 kcal within rounding)."
   - "Conservative estimate falls within published range (168-200 kcal) for similar dim sum custard buns."
@@ -72,6 +80,7 @@ notes:
 change_log:
   - timestamp: "2025-11-02"
     reason: "Initial entry - component-based estimation from recipe analysis"
-    fields_changed: ["all fields"]
+    fields_changed:
+      - "all fields"
     evidence: "Detailed component breakdown using USDA data for each ingredient, scaled to estimated weights from dim sum custard bun recipes"
 ```

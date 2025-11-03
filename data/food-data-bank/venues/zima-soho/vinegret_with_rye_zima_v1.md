@@ -3,10 +3,10 @@
 ```yaml
 id: vinegret_with_rye_zima_v1
 version: 2
-last_verified: '2025-11-02'
+last_verified: "2025-11-02"
 source:
   venue: Zima, Soho, London
-  menu_page: ''
+  menu_page: ""
   evidence:
   - User-provided nutrition data for full portion as served
   - Traditional Russian beetroot and vegetable salad with 1 slice rye bread (~32g)
@@ -61,7 +61,7 @@ notes:
   = 233.5 kcal'
 change_log:
 - timestamp: 2025-10-30 00:00:00+00:00
-  updated_by: 'LLM: Claude Sonnet 4.5'
+  updated_by: "LLM: Claude Sonnet 4.5"
   reason: Initial entry from user-provided nutrition data for Zima restaurant dish
   fields_changed:
   - per_portion.energy_kcal
@@ -83,8 +83,8 @@ change_log:
   - url: user_input
     note: Complete nutrition data provided by Thomas on 2025-10-30 for Vinegret with
       1 slice rye from Zima, Soho, London
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - last_verified

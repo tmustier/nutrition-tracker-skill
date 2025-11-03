@@ -3,12 +3,12 @@
 ```yaml
 id: homemade_chips_connaught_v1
 version: 4
-last_verified: '2025-11-02'
+last_verified: "2025-11-02"
 source:
   venue: Jean-Georges at The Connaught, London
   menu_page: https://deliveroo.co.uk/menu/london/mayfair/jean-georges-at-the-connaught
   evidence:
-  - 'Deliveroo listing: 459 kcal'
+  - "Deliveroo listing: 459 kcal"
   - Macros scaled from McDonald's UK medium fries profile to match 459 kcal anchor
 aliases: []
 category: side
@@ -63,7 +63,7 @@ notes:
   = 465.4 kcal'
 change_log:
 - timestamp: 2025-10-28 20:00:00+00:00
-  updated_by: 'LLM: Claude Sonnet 4.5'
+  updated_by: "LLM: Claude Sonnet 4.5"
   reason: Initial population from Deliveroo + ChatGPT nutritional analysis
   fields_changed:
   - per_portion.energy_kcal
@@ -75,11 +75,11 @@ change_log:
   - per_portion.sodium_mg
   sources:
   - url: https://deliveroo.co.uk/menu/london/mayfair/jean-georges-at-the-connaught
-    note: 'Deliveroo calorie listing: 459 kcal'
+    note: "Deliveroo calorie listing: 459 kcal"
   - url: user_input
     note: ChatGPT nutritional breakdown provided by Thomas on 2025-10-28
 - timestamp: 2025-10-28 22:30:00+00:00
-  updated_by: 'LLM: Claude Sonnet 4.5'
+  updated_by: "LLM: Claude Sonnet 4.5"
   reason: Research and populate missing nutrition data based on USDA database and
     UK food composition tables
   fields_changed:
@@ -107,7 +107,7 @@ change_log:
       oil); trans fat 0.1g (modern vegetable oils); iodine 1-2mcg/100g (potato is
       very low in iodine)
 - timestamp: 2025-10-29 00:00:00+00:00
-  updated_by: 'LLM: Claude Sonnet 4.5'
+  updated_by: "LLM: Claude Sonnet 4.5"
   reason: Populate fiber split and manganese from potato composition
   fields_changed:
   - per_portion.fiber_soluble_g
@@ -117,8 +117,8 @@ change_log:
   - url: nutritional_research
     note: 'Potato fiber: ~26% soluble, 74% insoluble. Manganese ~0.4mg/100g in french
       fries; estimated 1mg for ~150g portion.'
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - last_verified

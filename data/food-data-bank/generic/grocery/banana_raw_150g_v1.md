@@ -3,12 +3,12 @@
 ```yaml
 id: banana_raw_150g_v1
 version: 2
-last_verified: '2025-11-02'
+last_verified: "2025-11-02"
 source:
   venue: Generic - Grocery/Supermarket
-  menu_page: ''
+  menu_page: ""
   evidence:
-  - 'USDA FoodData Central #173944 - Bananas, raw'
+  - "USDA FoodData Central #173944 - Bananas, raw"
   - Standard fresh banana, medium-large size
 aliases:
 - Banana
@@ -21,7 +21,7 @@ portion:
   notes: Raw, unpeeled weight approximately 180-200g; peeled edible portion 150g
 assumptions:
   salt_scheme: unsalted
-  oil_type: ''
+  oil_type: ""
   prep: Raw, fresh, unprocessed
 per_portion:
   energy_kcal: 155.9
@@ -58,8 +58,8 @@ notes:
 - Excellent source of potassium (537mg, ~11% DV) and vitamin B6 (0.6mg, ~42% DV)
 - Good source of dietary fiber, primarily resistant starch and pectin
 - Contains prebiotic fiber that feeds beneficial gut bacteria
-- 'Vitamin C: ~13mg per 150g serving'
-- 'Manganese: ~0.4mg per 150g serving'
+- "Vitamin C: ~13mg per 150g serving"
+- "Manganese: ~0.4mg per 150g serving"
 - Natural sugars include glucose, fructose, and sucrose
 - Ripeness affects sugar content - riper bananas have more simple sugars
 - Resistant starch content decreases as banana ripens
@@ -79,8 +79,8 @@ change_log:
     note: USDA FoodData Central - Bananas, raw
   - url: user_request
     note: User consumed 150g banana in breakfast smoothie on 2025-11-01 at 09:00
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - last_verified
