@@ -2,8 +2,8 @@
 
 ```yaml
 id: pastel_de_nata_eagle_farringdon_v1
-version: 2
-last_verified: '2025-11-02'
+version: 3
+last_verified: '2025-11-03'
 source:
   venue: The Eagle, Farringdon (London)
   menu_page: https://theeaglefarringdon.co.uk/
@@ -21,6 +21,10 @@ assumptions:
   salt_scheme: normal (pastry dough seasoned)
   oil_type: butter
   prep: House-baked puff pastry case filled with egg custard, baked until caramelised
+  micronutrient_estimates: |
+    Iodine (17 µg): Eggs ~26 µg/100g concentrated in yolk. 25g custard estimated at 65% eggs = 17µg. Confidence: MEDIUM (UK eggs reliable source).
+    Selenium (20 µg): Eggs ~31 µg/100g (USDA). 25g custard estimated at 65% eggs = 20µg. Confidence: MEDIUM.
+    Vitamin D (1.2 µg): Eggs ~1.8 µg/100g in yolk (USDA). 25g custard estimated at 65% eggs = 1.2µg. Confidence: MEDIUM-HIGH (eggs well-documented source).
 per_portion:
   energy_kcal: 281
   protein_g: 5.2
@@ -36,12 +40,14 @@ per_portion:
   fiber_insoluble_g: 0.8
   sodium_mg: 210
   potassium_mg: 105
-  iodine_ug: 0
+  iodine_ug: 17
   magnesium_mg: 0
   calcium_mg: 0
   iron_mg: 0
   zinc_mg: 0
+  selenium_ug: 20
   vitamin_c_mg: 0
+  vitamin_d_ug: 1.2
   manganese_mg: 0
   polyols_g: 0.0
   carbs_available_g: 31.2

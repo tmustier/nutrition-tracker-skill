@@ -2,8 +2,8 @@
 
 ```yaml
 id: bife_ana_steak_sandwich_eagle_farringdon_v1
-version: 3
-last_verified: '2025-11-02'
+version: 4
+last_verified: '2025-11-03'
 source:
   venue: The Eagle, Farringdon (London)
   menu_page: https://theeaglefarringdon.co.uk/
@@ -29,6 +29,8 @@ assumptions:
   prep: 250g raw rump marinated in wine, garlic, chili, bay, parsley, oregano; seared;
     2 Tbsp olive oil from marinade + pan reduction soaked into roll; ~60g onion, 10g
     lettuce; restaurant seasoning ~1.5% of meat weight
+  micronutrient_estimates: |
+    Iodine (18 µg): Beef/rump steak typically ~5 µg/100g (USDA). Estimated 360g total sandwich with 200g cooked rump = 18µg. Confidence: LOW-MEDIUM (meat is minor iodine source).
 per_portion:
   energy_kcal: 853.7
   protein_g: 69.4
@@ -44,7 +46,7 @@ per_portion:
   fiber_insoluble_g: 2.6
   sodium_mg: 1910
   potassium_mg: 1070
-  iodine_ug: 0
+  iodine_ug: 18
   magnesium_mg: 65
   calcium_mg: 45
   iron_mg: 5.5

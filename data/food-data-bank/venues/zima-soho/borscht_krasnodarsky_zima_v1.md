@@ -2,8 +2,8 @@
 
 ```yaml
 id: borscht_krasnodarsky_zima_v1
-version: 2
-last_verified: '2025-11-02'
+version: 3
+last_verified: '2025-11-03'
 source:
   venue: Zima, Soho, London
   menu_page: https://zimarestaurant.co.uk/
@@ -26,6 +26,8 @@ assumptions:
   oil_type: traditional preparation
   prep: Traditional Russian beetroot soup with beef, served with sour cream, cured
     pork fat (salo), and Borodinsky rye bread on the side
+  micronutrient_estimates: |
+    Iodine (19 µg): Meat typically ~5 µg/100g (USDA). Estimated total meat content (beef in soup + 20g salo) ~350-380g combined weight, meat proportion estimate = 19µg total. Confidence: LOW-MEDIUM (meat is minor iodine source, portion size estimate has uncertainty).
 per_portion:
   energy_kcal: 469.1
   protein_g: 8.1
@@ -41,7 +43,7 @@ per_portion:
   fiber_insoluble_g: 3.0
   sodium_mg: 931
   potassium_mg: 595
-  iodine_ug: 0
+  iodine_ug: 19
   magnesium_mg: 0
   calcium_mg: 0
   iron_mg: 0

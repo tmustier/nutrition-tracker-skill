@@ -2,8 +2,8 @@
 
 ```yaml
 id: grilled_salmon_fillet_shk_v1
-version: 5
-last_verified: '2025-11-02'
+version: 6
+last_verified: '2025-11-03'
 source:
   venue: Simple Health Kitchen, Baker Street (London)
   menu_page: ''
@@ -18,6 +18,9 @@ assumptions:
   salt_scheme: normal
   oil_type: ''
   prep: ''
+  micronutrient_estimates: |
+    Selenium (50 µg): Fatty fish ~50 µg/100g average (USDA). Estimated 100g portion = 50µg. Confidence: MEDIUM (fish selenium well-documented).
+    Vitamin D (13.0 µg): Fatty fish ~13 µg/100g (USDA). Salmon is one of the HIGHEST natural sources of vitamin D. Estimated 100g portion = 13µg. Confidence: HIGH (fatty fish vitamin D extremely well-documented).
 per_portion:
   energy_kcal: 260
   protein_g: 28.0
@@ -38,7 +41,9 @@ per_portion:
   calcium_mg: 19
   iron_mg: 0
   zinc_mg: 1
+  selenium_ug: 50
   vitamin_c_mg: 5
+  vitamin_d_ug: 13.0
   manganese_mg: 0
   polyols_g: 0.0
   carbs_available_g: 1.0
