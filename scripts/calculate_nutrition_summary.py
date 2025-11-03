@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Calculate nutrition totals and averages from daily logs.
 
-By default, analyzes the last 7 days (excluding today).
+By default, analyzes the last 7 days (including today).
 Usage: python3 calculate_nutrition_summary.py [days]
 Example: python3 calculate_nutrition_summary.py 14  # Last 14 days
 """
@@ -60,7 +60,7 @@ if len(sys.argv) > 1:
 # Load health profile targets
 targets = load_health_profile_targets()
 
-# Get today's date (excluding today from analysis)
+# Get today's date (including today in analysis)
 today = datetime.now().date()
 
 # Find all log files
@@ -78,8 +78,8 @@ for year_month_dir in sorted(log_dir.iterdir()):
             day = log_file.stem  # e.g., "30"
             file_date = datetime.strptime(f"{year_month}-{day}", "%Y-%m-%d").date()
 
-            # Exclude today
-            if file_date < today:
+            # Include up to and including today
+            if file_date <= today:
                 log_files_with_dates.append((file_date, log_file))
         except ValueError:
             continue  # Skip files that don't match expected format
