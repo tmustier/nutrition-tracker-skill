@@ -1,7 +1,7 @@
 ---
 title: Food Data Bank Index
 description: Auto-generated index of all dishes in the food data bank
-generated: 2025-11-03 05:07:13 UTC
+generated: 2025-11-03 08:18:56 UTC
 ---
 
 # Food Data Bank Index
@@ -11,7 +11,7 @@ generated: 2025-11-03 05:07:13 UTC
 
 ## Overview
 
-Total dishes: 58
+Total dishes: 59
 
 - **Venues**: 8 categories
 - **Packaged Products**: 7 categories
@@ -173,8 +173,9 @@ Total dishes: 58
 
 *Location: `data/food-data-bank/generic/bakery/`*
 
-**1 dishes:**
+**2 dishes:**
 
+- [Almond Croissant (Generic Bakery)](food-data-bank/generic/bakery/almond_croissant_generic_v1.md) {#almond_croissant_generic_v1}
 - [Ham and Cheese Croissant (Generic Bakery)](food-data-bank/generic/bakery/ham_cheese_croissant_generic_v1.md) {#ham_cheese_croissant_generic_v1}
 
 ## Generic: Bar Restaurant
