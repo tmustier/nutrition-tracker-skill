@@ -22,7 +22,6 @@ assumptions:
   salt_scheme: normal
   oil_type: minimal or none
   prep: grilled, no skin, finishing salt 0.5% of weight (0.43g salt)
-  micronutrients: Copper (0.04mg) from 86g chicken breast at 0.05mg/100g USDA reference
 per_portion:
   energy_kcal: 135.6
   protein_g: 27.6

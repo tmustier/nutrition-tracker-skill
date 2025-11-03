@@ -18,9 +18,6 @@ assumptions:
   salt_scheme: normal
   oil_type: ''
   prep: ''
-  micronutrient_estimates: |
-    Selenium (50 µg): Fatty fish ~50 µg/100g average (USDA). Estimated 100g portion = 50µg. Confidence: MEDIUM (fish selenium well-documented).
-    Vitamin D (13.0 µg): Fatty fish ~13 µg/100g (USDA). Salmon is one of the HIGHEST natural sources of vitamin D. Estimated 100g portion = 13µg. Confidence: HIGH (fatty fish vitamin D extremely well-documented).
 per_portion:
   energy_kcal: 260
   protein_g: 28.0

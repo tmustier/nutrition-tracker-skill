@@ -18,7 +18,6 @@ assumptions:
   salt_scheme: normal
   oil_type: ''
   prep: ''
-  fiber_split: Estimated using tropical fruits category ratios (30% soluble, 70% insoluble)
     from FIBER-SPLIT-ESTIMATION-REFERENCE.yaml; mixed pineapple/mango/passion fruit.
     Confidence MEDIUM.
 per_portion:

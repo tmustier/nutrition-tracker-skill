@@ -26,7 +26,6 @@ assumptions:
   oil_type: likely sunflower or vegetable oil (Russian/Polish cuisine standard)
   prep: Pan-fried breaded chicken cutlet, cream-based mushroom sauce, boiled buckwheat
     (kasha), pickled vegetables
-  micronutrients: Iodine (15µg) from chicken (~7µg) and cream in sauce (~8µg). Manganese
     (1.9mg) from 150g cooked buckwheat (≈50g dry at 3.7mg/100g)
 per_portion:
   energy_kcal: 582.3

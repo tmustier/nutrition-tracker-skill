@@ -18,8 +18,6 @@ assumptions:
   salt_scheme: normal
   oil_type: ''
   prep: ''
-  fiber_split: 'Estimated using nuts_seeds.tree_nuts category ratio (20% soluble, 80% insoluble) from FIBER-SPLIT-ESTIMATION-REFERENCE.yaml. Confidence: HIGH.'
-  trace_minerals: 'Manganese (1.9mg) estimated using USDA value ~6.2mg/100g for hazelnuts from MICRONUTRIENT-ESTIMATION-REFERENCE.yaml. Copper (0.5mg) estimated using USDA value ~1.7mg/100g for hazelnuts. Vitamin E (4.5mg) estimated using USDA value ~15.0mg/100g for hazelnuts. All high confidence.'
 per_portion:
   energy_kcal: 207.6
   protein_g: 4.5

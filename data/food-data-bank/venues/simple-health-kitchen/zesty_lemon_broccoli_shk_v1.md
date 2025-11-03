@@ -18,7 +18,6 @@ assumptions:
   salt_scheme: normal
   oil_type: ''
   prep: ''
-  fiber_split: 'Estimated using cruciferous vegetables ratio (30% soluble / 70% insoluble) from FIBER-SPLIT-ESTIMATION-REFERENCE.yaml. Broccoli category: HIGH confidence. Calculation: 3.5g total × 30% = 1.1g soluble, remainder 2.4g insoluble.'
 per_portion:
   energy_kcal: 109.3
   protein_g: 4.5

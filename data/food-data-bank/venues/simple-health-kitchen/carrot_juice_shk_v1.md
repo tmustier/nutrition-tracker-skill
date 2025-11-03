@@ -20,7 +20,6 @@ assumptions:
   salt_scheme: unsalted
   oil_type: none
   prep: fresh-pressed
-  fiber_split: 'Estimated using root vegetables category ratio (35% soluble / 65% insoluble) from FIBER-SPLIT-ESTIMATION-REFERENCE.yaml. Carrots category: HIGH confidence. Calculation: 2.0g total × 35% = 0.7g soluble, × 65% = 1.3g insoluble.'
 per_portion:
   energy_kcal: 110.4
   protein_g: 2.4

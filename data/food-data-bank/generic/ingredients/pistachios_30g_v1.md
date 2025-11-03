@@ -18,7 +18,6 @@ assumptions:
   salt_scheme: normal
   oil_type: ''
   prep: ''
-  fiber_split: "Estimated using nuts_and_seeds.tree_nuts category ratio (20% soluble, 80% insoluble) from total fiber 3.2g. Confidence: HIGH - well-documented tree nut fiber composition"
   manganese: "Estimated from USDA data for tree nuts (~2.3 mg/100g). 30g × 2.3 mg/100g = 0.69 mg. Confidence: HIGH - nuts are excellent manganese source"
 per_portion:
   energy_kcal: 185.5

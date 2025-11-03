@@ -21,7 +21,6 @@ assumptions:
   salt_scheme: normal
   oil_type: ''
   prep: packaged product
-  fiber_split: "Estimated using grains.oats category ratio (45% soluble, 55% insoluble) from total fiber 0.9g. Protein bars typically contain oats/oat fiber as base. Confidence: HIGH - oat fiber composition is well-documented"
   manganese: "Estimated from USDA data for oats (~4.9 mg/100g), assuming oat-based protein bar formulation. 60g × 4.9 mg/100g = 2.94 mg. Confidence: HIGH - oats are exceptionally high in manganese"
 per_portion:
   energy_kcal: 296.6

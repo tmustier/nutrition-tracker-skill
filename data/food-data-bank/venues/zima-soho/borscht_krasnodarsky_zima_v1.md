@@ -26,8 +26,6 @@ assumptions:
   oil_type: traditional preparation
   prep: Traditional Russian beetroot soup with beef, served with sour cream, cured
     pork fat (salo), and Borodinsky rye bread on the side
-  micronutrient_estimates: |
-    Iodine (19 µg): Meat typically ~5 µg/100g (USDA). Estimated total meat content (beef in soup + 20g salo) ~350-380g combined weight, meat proportion estimate = 19µg total. Confidence: LOW-MEDIUM (meat is minor iodine source, portion size estimate has uncertainty).
 per_portion:
   energy_kcal: 469.1
   protein_g: 8.1

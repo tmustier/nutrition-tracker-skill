@@ -25,7 +25,6 @@ assumptions:
   salt_scheme: unsalted
   oil_type: ''
   prep: fresh, whole, peeled
-  fiber_split: Estimated using citrus fruit ratios (45% soluble, 55% insoluble) from
     FIBER-SPLIT-ESTIMATION-REFERENCE.yaml; citrus fruits are rich in pectin. Confidence
     HIGH.
 per_portion:

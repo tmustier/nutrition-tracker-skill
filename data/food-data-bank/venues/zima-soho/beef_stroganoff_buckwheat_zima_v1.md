@@ -26,7 +26,6 @@ assumptions:
   oil_type: butter or neutral oil
   prep: Pan-fried beef strips in sour cream-based sauce, buckwheat groats cooked separately,
     garnished with pickles
-  micronutrients: Iodine (28µg) from beef (~10µg) and sour cream in sauce (~16µg).
     Manganese (1.9mg) from 150g cooked buckwheat (≈50g dry at 3.7mg/100g)
 per_portion:
   energy_kcal: 565.3

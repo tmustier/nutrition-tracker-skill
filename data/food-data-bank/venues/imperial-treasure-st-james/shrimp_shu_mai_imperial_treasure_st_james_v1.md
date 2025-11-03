@@ -26,7 +26,6 @@ assumptions:
   salt_scheme: "normal"
   oil_type: "sesame oil in filling"
   prep: "Steamed, filling contains shrimp, pork, shiitake mushroom, water chestnuts, sesame oil, soy sauce, ginger, scallion"
-  fiber_split: "Estimated using vegetables.mushrooms category ratio (30% soluble, 70% insoluble) from total fiber 0.3g. Confidence: LOW due to small fiber amount and mixed ingredients"
   iodine: "Estimated from shrimp content (~10g). Using shellfish range (prawns 25-45 μg/100g, typical 35 μg/100g). Confidence: MEDIUM. Shrimp provides primary iodine contribution"
 per_portion:
   energy_kcal: 43

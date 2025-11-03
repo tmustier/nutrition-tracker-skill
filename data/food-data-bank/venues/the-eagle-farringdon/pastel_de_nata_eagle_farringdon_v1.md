@@ -21,10 +21,6 @@ assumptions:
   salt_scheme: normal (pastry dough seasoned)
   oil_type: butter
   prep: House-baked puff pastry case filled with egg custard, baked until caramelised
-  micronutrient_estimates: |
-    Iodine (17 µg): Eggs ~26 µg/100g concentrated in yolk. 25g custard estimated at 65% eggs = 17µg. Confidence: MEDIUM (UK eggs reliable source).
-    Selenium (20 µg): Eggs ~31 µg/100g (USDA). 25g custard estimated at 65% eggs = 20µg. Confidence: MEDIUM.
-    Vitamin D (1.2 µg): Eggs ~1.8 µg/100g in yolk (USDA). 25g custard estimated at 65% eggs = 1.2µg. Confidence: MEDIUM-HIGH (eggs well-documented source).
 per_portion:
   energy_kcal: 281
   protein_g: 5.2

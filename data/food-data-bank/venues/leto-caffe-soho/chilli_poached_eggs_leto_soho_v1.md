@@ -28,7 +28,6 @@ assumptions:
   oil_type: butter
   prep: poached eggs, toasted sourdough, sautéed kale, chilli butter (22.2g salted
     butter), finishing salt 1.76g (0.5% of dish weight)
-  micronutrients: Copper (0.2mg) from eggs (0.07mg), yogurt (0.01mg), bread (0.06mg),
     kale (0.05mg). Selenium (41µg) from eggs (31µg), yogurt (6µg), bread (3.6µg). Vitamin
     D (2.0µg) from eggs (1.8µg) and butter (0.2µg)
 per_portion:

@@ -26,7 +26,6 @@ assumptions:
   salt_scheme: "unsalted"
   oil_type: "soybean oil"
   prep: "Steamed bun with lava-style flowing custard center made from salted egg yolk, butter, sugar, and milk. Charcoal powder added to dough for black color."
-  fiber_split: "Estimated using general_plant_foods category ratio (30% soluble, 70% insoluble) from total fiber 0.6g. Confidence: LOW due to refined flour and small fiber amount"
   iodine: "Estimated from egg yolk (6.5g) and dairy content (milk 11.5g, butter 5.5g). Using eggs ~26 μg/100g concentration. For 52g portion: ~14 μg. Confidence: MEDIUM - egg yolk is concentrated iodine source"
   selenium: "Estimated from egg content. Eggs ~31 μg/100g (USDA). For 52g portion: 52g × 31 μg/100g = 16 μg. Confidence: MEDIUM - egg-based custard filling"
   vitamin_d: "Estimated from egg yolk content. Eggs ~1.8 μg/100g (USDA, concentrated in yolk). For 52g portion: 52g × 1.8 μg/100g = 0.9 μg. Confidence: MEDIUM-HIGH"

@@ -23,7 +23,6 @@ assumptions:
   salt_scheme: normal
   oil_type: butter
   prep: butter croissant filled with ham and cheese
-  fiber_split: "Estimated using general_plant_foods category ratio (30% soluble, 70% insoluble) from total fiber 1.8g. Confidence: LOW due to refined flour in croissant with mixed composition"
   iodine: "Estimated from dairy content. Contains 20g Emmental cheese (~30 μg/100g) + butter in croissant. UK dairy is HIGH confidence iodine source. Total estimated 36 μg based on dairy components. Confidence: HIGH"
 per_portion:
   energy_kcal: 399.3

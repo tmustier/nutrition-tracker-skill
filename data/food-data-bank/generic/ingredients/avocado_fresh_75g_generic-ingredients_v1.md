@@ -20,7 +20,6 @@ assumptions:
   salt_scheme: "unsalted"
   oil_type: ""
   prep: "raw"
-  fiber_split: Estimated using avocado-specific ratios (25% soluble, 75% insoluble)
     from FIBER-SPLIT-ESTIMATION-REFERENCE.yaml; avocados have unique fiber composition
     with predominantly insoluble cellulose and hemicellulose. Confidence MEDIUM.
 per_portion:

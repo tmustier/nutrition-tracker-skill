@@ -18,7 +18,6 @@ assumptions:
   salt_scheme: normal
   oil_type: ''
   prep: ''
-  fiber_split: Estimated using berries category ratios (35% soluble, 65% insoluble)
     from FIBER-SPLIT-ESTIMATION-REFERENCE.yaml; berries contain pectin and lignin in
     seeds. Confidence HIGH.
 per_portion:

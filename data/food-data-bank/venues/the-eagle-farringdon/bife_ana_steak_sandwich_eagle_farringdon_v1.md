@@ -29,8 +29,6 @@ assumptions:
   prep: 250g raw rump marinated in wine, garlic, chili, bay, parsley, oregano; seared;
     2 Tbsp olive oil from marinade + pan reduction soaked into roll; ~60g onion, 10g
     lettuce; restaurant seasoning ~1.5% of meat weight
-  micronutrient_estimates: |
-    Iodine (18 µg): Beef/rump steak typically ~5 µg/100g (USDA). Estimated 360g total sandwich with 200g cooked rump = 18µg. Confidence: LOW-MEDIUM (meat is minor iodine source).
 per_portion:
   energy_kcal: 853.7
   protein_g: 69.4

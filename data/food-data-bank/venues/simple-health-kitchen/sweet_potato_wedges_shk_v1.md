@@ -18,7 +18,6 @@ assumptions:
   salt_scheme: normal
   oil_type: ''
   prep: ''
-  fiber_split: 'Estimated using starchy tubers category ratio (28% soluble / 72% insoluble) from FIBER-SPLIT-ESTIMATION-REFERENCE.yaml. Sweet potatoes category: MEDIUM confidence. Calculation: 5.1g total × 28% = 1.4g soluble, × 72% = 3.7g insoluble.'
 per_portion:
   energy_kcal: 163.3
   protein_g: 2.0
