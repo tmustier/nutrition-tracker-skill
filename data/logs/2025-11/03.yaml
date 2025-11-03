@@ -1,6 +1,38 @@
 date: 2025-11-03
 day_type: rest
 entries:
+- timestamp: '2025-11-03T07:54:00+00:00'
+  items:
+  - name: Almond Croissant (half)
+    food_bank_id: almond_croissant_generic_v1
+    quantity: 0.5
+    unit: portion
+    nutrition:
+      energy_kcal: 253
+      protein_g: 5.1
+      fat_g: 16.5
+      sat_fat_g: 7.3
+      mufa_g: 6.3
+      pufa_g: 1.8
+      trans_fat_g: 0.2
+      cholesterol_mg: 33
+      sugar_g: 5.7
+      fiber_total_g: 2.0
+      fiber_soluble_g: null
+      fiber_insoluble_g: null
+      sodium_mg: 174
+      potassium_mg: 87
+      iodine_ug: null
+      magnesium_mg: 21
+      calcium_mg: 24
+      iron_mg: 0.8
+      zinc_mg: 0.4
+      vitamin_c_mg: 0
+      manganese_mg: 0.2
+      polyols_g: 0.0
+      carbs_available_g: 19.3
+      carbs_total_g: 21.3
+  notes: null
 - timestamp: '2025-11-03T08:00:00+00:00'
   items:
   - name: Raspberries
