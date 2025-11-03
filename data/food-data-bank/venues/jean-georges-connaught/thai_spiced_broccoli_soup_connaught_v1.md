@@ -3,13 +3,13 @@
 ```yaml
 id: thai_spiced_broccoli_soup_connaught_v1
 version: 4
-last_verified: '2025-11-02'
+last_verified: "2025-11-02"
 source:
   venue: Jean-Georges at The Connaught, London
   menu_page: https://deliveroo.co.uk/menu/london/mayfair/jean-georges-at-the-connaught
   evidence:
-  - 'Deliveroo listing: 110 kcal'
-  - 'Description: Coconut & lime froth, coriander'
+  - "Deliveroo listing: 110 kcal"
+  - "Description: Coconut & lime froth, coriander"
   - Macros estimated from typical Thai broccoli soup composition
 aliases:
 - Spiced Thai Broccoli Soup
@@ -68,7 +68,7 @@ notes:
   117.5 kcal'
 change_log:
 - timestamp: 2025-10-28 20:15:00+00:00
-  updated_by: 'LLM: Claude Sonnet 4.5'
+  updated_by: "LLM: Claude Sonnet 4.5"
   reason: Initial population from Deliveroo calorie count + estimated macros/micros
   fields_changed:
   - per_portion.energy_kcal
@@ -93,7 +93,7 @@ change_log:
   - url: user_input
     note: Calorie count provided by Thomas on 2025-10-28
 - timestamp: 2025-10-28 21:00:00+00:00
-  updated_by: 'LLM: Claude Sonnet 4.5'
+  updated_by: "LLM: Claude Sonnet 4.5"
   reason: Added missing fatty acid breakdown and micronutrients based on coconut milk
     composition
   fields_changed:
@@ -112,7 +112,7 @@ change_log:
       (2%), trans=trace. Cholesterol=0mg (plant-based). Iodine=2ug (trace from broccoli
       ~1-2ug/100g)'
 - timestamp: 2025-10-29 00:00:00+00:00
-  updated_by: 'LLM: Claude Sonnet 4.5'
+  updated_by: "LLM: Claude Sonnet 4.5"
   reason: Populate fiber split and manganese from broccoli composition
   fields_changed:
   - per_portion.fiber_soluble_g
@@ -122,8 +122,8 @@ change_log:
   - url: nutritional_research
     note: 'Broccoli fiber: ~9% soluble, 91% insoluble. Estimated 0.3g soluble, 3.2g
       insoluble for soup. Manganese diluted by coconut base, rounded to 0.'
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - last_verified

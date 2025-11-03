@@ -3,10 +3,10 @@
 ```yaml
 id: on_whey_drc_30g_v1
 version: 4
-last_verified: '2025-11-03'
+last_verified: "2025-11-03"
 source:
   venue: Optimum Nutrition (pack/ingredient)
-  menu_page: ''
+  menu_page: ""
   evidence: []
 aliases: []
 category: ingredient
@@ -17,8 +17,8 @@ portion:
     error.
 assumptions:
   salt_scheme: normal
-  oil_type: ''
-  prep: ''
+  oil_type: ""
+  prep: ""
 per_portion:
   energy_kcal: 122
   protein_g: 24.0
@@ -55,7 +55,7 @@ notes:
   = 122 kcal'
 change_log:
 - timestamp: 2025-10-28T18:51:39+0000
-  updated_by: 'LLM: GPT-5 Thinking'
+  updated_by: "LLM: GPT-5 Thinking"
   reason: Populate per_portion from user-provided data
   fields_changed:
   - per_portion.energy_kcal
@@ -77,7 +77,7 @@ change_log:
   - url: user_input
     note: User-supplied values on 2025-10-28
 - timestamp: 2025-10-28T19:02:30+0000
-  updated_by: 'LLM: GPT-5 Thinking'
+  updated_by: "LLM: GPT-5 Thinking"
   reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
   fields_changed:
   - per_portion.protein_g
@@ -91,8 +91,8 @@ change_log:
   sources:
   - url: formatting-pass
     note: Automated rounding pass
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - last_verified
@@ -104,8 +104,8 @@ change_log:
   - per_portion.polyols_g
   - version
   sources: []
-- timestamp: '2025-11-03T00:00:00+00:00'
-  updated_by: 'LLM: Claude Sonnet 4.5'
+- timestamp: "2025-11-03T00:00:00+00:00"
+  updated_by: "LLM: Claude Sonnet 4.5"
   reason: Phase 2 nutrient estimation - fiber split for protein powder
   fields_changed:
   - per_portion.fiber_soluble_g
@@ -115,5 +115,5 @@ change_log:
   sources:
   - url: fiber_split_estimation
     note: Used general_plant_foods default ratio (30% soluble, 70% insoluble, LOW confidence)
-  methodology: 'Applied general plant foods fiber split ratio to total fiber 0.7g: soluble = 0.7 × 0.30 = 0.2g, insoluble = 0.7 × 0.70 = 0.5g. Low confidence estimate appropriate for processed protein powder where fiber source (likely cocoa powder or added fiber) composition is unknown. Conservative general ratio used due to lack of specific ingredient data.'
+  methodology: "Applied general plant foods fiber split ratio to total fiber 0.7g: soluble = 0.7 × 0.30 = 0.2g, insoluble = 0.7 × 0.70 = 0.5g. Low confidence estimate appropriate for processed protein powder where fiber source (likely cocoa powder or added fiber) composition is unknown. Conservative general ratio used due to lack of specific ingredient data."
 ```

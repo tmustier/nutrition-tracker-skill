@@ -55,7 +55,11 @@ derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: high
-  gaps: ["cholesterol", "potassium", "magnesium", "manganese"]
+  gaps:
+    - "cholesterol"
+    - "potassium"
+    - "magnesium"
+    - "manganese"
   estimated_nutrients:
     - name: "fiber_soluble_g"
       value: 0.0
@@ -83,6 +87,7 @@ notes:
 change_log:
   - timestamp: "2025-11-02"
     reason: "Initial entry - component-based estimation for Peking duck pancake"
-    fields_changed: ["all fields"]
+    fields_changed:
+      - "all fields"
     evidence: "Complete USDA-based analysis of all components with detailed fatty acid breakdown"
 ```

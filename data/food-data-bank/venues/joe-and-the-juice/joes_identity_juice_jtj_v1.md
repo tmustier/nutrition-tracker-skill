@@ -3,10 +3,10 @@
 ```yaml
 id: joes_identity_juice_jtj_v1
 version: 4
-last_verified: '2025-11-02'
+last_verified: "2025-11-02"
 source:
   venue: Joe & the Juice
-  menu_page: ''
+  menu_page: ""
   evidence: []
 aliases: []
 category: drink
@@ -52,13 +52,13 @@ quality:
   - Micronutrients estimated from ingredient composition; venue formulations may vary
     by location.
 notes:
-- 'Ingredients confirmed: kale, celery, spinach, lemon, cucumber, olive oil'
+- "Ingredients confirmed: kale, celery, spinach, lemon, cucumber, olive oil"
 - Standard serving size is 12 oz (~355ml)
 - 'Atwater check (available carb basis): 4×4.0 + 9×2.0 + 4×9.0 + 2×4.0 + 2.4×0.0 =
   78 kcal'
 change_log:
 - timestamp: 2025-10-28T18:51:39+0000
-  updated_by: 'LLM: GPT-5 Thinking'
+  updated_by: "LLM: GPT-5 Thinking"
   reason: Populate per_portion from user-provided data
   fields_changed:
   - per_portion.energy_kcal
@@ -71,7 +71,7 @@ change_log:
   - url: user_input
     note: User-supplied values on 2025-10-28
 - timestamp: 2025-10-28T19:02:30+0000
-  updated_by: 'LLM: GPT-5 Thinking'
+  updated_by: "LLM: GPT-5 Thinking"
   reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
   fields_changed:
   - per_portion.protein_g
@@ -82,7 +82,7 @@ change_log:
   - url: formatting-pass
     note: Automated rounding pass
 - timestamp: 2025-10-28T20:30:00+0000
-  updated_by: 'LLM: Claude Sonnet 4.5'
+  updated_by: "LLM: Claude Sonnet 4.5"
   reason: Research-based population of missing nutrition fields
   fields_changed:
   - version
@@ -122,7 +122,7 @@ change_log:
       from USDA data for kale (FDC 323505), spinach (FDC 168462), celery (FDC 169988),
       cucumber (FDC 168409) proportional to typical 12oz green juice serving
 - timestamp: 2025-10-29T00:00:00+0000
-  updated_by: 'LLM: Claude Sonnet 4.5'
+  updated_by: "LLM: Claude Sonnet 4.5"
   reason: Populate fiber split and manganese from leafy green composition
   fields_changed:
   - per_portion.fiber_soluble_g
@@ -133,8 +133,8 @@ change_log:
     note: Leafy greens (kale, spinach, celery) ~25% soluble, 75% insoluble fiber;
       kale high in manganese (~0.5mg per 100g). Estimated 1.0g soluble, 3.0g insoluble,
       1mg manganese per 355g juice
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - last_verified

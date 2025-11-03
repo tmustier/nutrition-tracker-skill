@@ -3,7 +3,7 @@
 ```yaml
 id: roasted_hake_lentils_salsa_verde_eagle_farringdon_v1
 version: 3
-last_verified: '2025-11-02'
+last_verified: "2025-11-02"
 source:
   venue: The Eagle, Farringdon (London)
   menu_page: https://theeaglefarringdon.co.uk/
@@ -65,12 +65,12 @@ notes:
 - Fiber dominated by lentils (soluble ≈1.8g, insoluble ≈12.8g)
 - 'Energy cross-check: 36.7g carbs, 56.5g protein, 21.1g fat → ~563 kcal (rounds to
   553 kcal after ingredient rounding)'
-- 'Contains fish and anchovies (allergens: fish)'
+- "Contains fish and anchovies (allergens: fish)"
 - 'Atwater check (available carb basis): 4×56.5 + 9×21.1 + 4×36.7 + 2×14.5 + 2.4×0.0
   = 591.7 kcal'
 change_log:
 - timestamp: 2025-11-01T18:32:00+0000
-  updated_by: 'LLM: GPT-5 Codex'
+  updated_by: "LLM: GPT-5 Codex"
   reason: Initial estimate for roasted hake main at The Eagle
   fields_changed:
   - all fields
@@ -81,7 +81,7 @@ change_log:
     note: GPT-5 Codex component model using 150g cooked hake, 180g lentils, 25g olive
       oil
 - timestamp: 2025-11-02T10:00:00+0000
-  updated_by: 'LLM: GPT-5 Codex'
+  updated_by: "LLM: GPT-5 Codex"
   reason: Synced dish macros with refined user portion model including anchovy/caper
     sodium
   fields_changed:
@@ -106,8 +106,8 @@ change_log:
   sources:
   - url: user_provided_best_effort_estimate
     note: Detailed macro table shared by user on 2025-11-02
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - derived.energy_from_macros_kcal

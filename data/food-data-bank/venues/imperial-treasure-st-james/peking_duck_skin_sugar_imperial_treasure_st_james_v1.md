@@ -13,7 +13,9 @@ source:
     - "Roasted duck skin nutritional baseline from snapcalorie.com and USDA duck data"
     - "ChatGPT 5-Pro analysis: corrected portion to 1″×1″ squares ≈ 2.5g each (not 12g)"
     - "Component-based estimation: 2.5g ultra-crispy duck skin with minimal sugar dabbing"
-aliases: ["Peking Duck Skin", "Duck Skin with Sugar"]
+aliases:
+  - "Peking Duck Skin"
+  - "Duck Skin with Sugar"
 category: main
 portion:
   description: "1 small square with sugar"
@@ -55,7 +57,10 @@ derived:
   omega_6_g: 0.45
 quality:
   confidence: medium
-  gaps: ['Iodine data not available for duck', 'Vitamin D, B vitamins not included (would be present in small amounts)', 'Selenium present (~2µg per piece) but not in schema']
+  gaps:
+    - "Iodine data not available for duck"
+    - "Vitamin D, B vitamins not included (would be present in small amounts)"
+    - "Selenium present (~2µg per piece) but not in schema"
 notes:
   - "Component 1: Crispy duck skin (10g) - Traditional Peking duck preparation with 48hr air-drying and slow roasting"
   - "Component 2: Granulated sugar (2g) for dabbing"
@@ -77,7 +82,22 @@ change_log:
   - timestamp: 2025-11-02T10:00:00+0000
     updated_by: "Claude Code (Sonnet 4.5)"
     reason: "Initial entry with comprehensive component-based estimation following ESTIMATE.md protocol"
-    fields_changed: ['version', 'source.menu_page', 'source.evidence', 'aliases', 'portion.est_weight_g', 'portion.notes', 'assumptions.salt_scheme', 'assumptions.oil_type', 'assumptions.prep', 'all per_portion fields', 'derived.omega_3_total_g', 'derived.omega_6_g', 'quality.confidence', 'quality.gaps', 'notes']
+    fields_changed:
+      - "version"
+      - "source.menu_page"
+      - "source.evidence"
+      - "aliases"
+      - "portion.est_weight_g"
+      - "portion.notes"
+      - "assumptions.salt_scheme"
+      - "assumptions.oil_type"
+      - "assumptions.prep"
+      - "all per_portion fields"
+      - "derived.omega_3_total_g"
+      - "derived.omega_6_g"
+      - "quality.confidence"
+      - "quality.gaps"
+      - "notes"
     sources:
       - url: "https://www.imperialtreasure.com/restaurant/ImperialTreasureSuperPekingDuck-2"
         note: "Imperial Treasure official website - traditional Peking duck preparation method"
@@ -92,7 +112,15 @@ change_log:
   - timestamp: 2025-11-02T21:00:00+0000
     updated_by: "Claude Code (Sonnet 4.5)"
     reason: "v3: Corrected portion weight based on ChatGPT 5-Pro analysis and user feedback. Original estimate of 12g was too high; actual 1×1 inch squares are ≈2.5g. Added new carb schema (carbs_available_g, carbs_total_g, polyols_g) per ESTIMATE.md updates."
-    fields_changed: ['version', 'portion.est_weight_g', 'portion.notes', 'source.evidence', 'all per_portion nutrition values', 'per_portion.carbs_available_g', 'per_portion.polyols_g', 'per_portion.carbs_total_g']
+    fields_changed:
+      - "version"
+      - "portion.est_weight_g"
+      - "portion.notes"
+      - "source.evidence"
+      - "all per_portion nutrition values"
+      - "per_portion.carbs_available_g"
+      - "per_portion.polyols_g"
+      - "per_portion.carbs_total_g"
     sources:
       - url: "user_feedback"
         note: "ChatGPT 5-Pro analysis confirmed 1×1 inch squares with light sugar dabbing are ~20 kcal/2.5g each (not 50 kcal/12g)"

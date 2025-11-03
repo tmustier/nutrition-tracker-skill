@@ -3,10 +3,10 @@
 ```yaml
 id: nff_vanilla_whey_30g_v1
 version: 2
-last_verified: '2025-11-02'
+last_verified: "2025-11-02"
 source:
   venue: Third Space / Natural Fitness Food
-  menu_page: ''
+  menu_page: ""
   evidence:
   - 'OpenFoodFacts entry: 125 kcal, 22g P, 6.5g C (3.4g sugar), 1.4g F (1g sat), 0.5g
     fiber, 0.098g salt'
@@ -63,7 +63,7 @@ notes:
   per 30g scoop'
 - 'Ingredient analysis: 87% whey protein concentrate = 26.1g protein content, actual
   22g suggests 73% protein efficiency typical of WPC-80'
-- 'Fat breakdown: sat 1.0g dominant (dairy fat), trace MUFA/PUFA from milk lipids'
+- "Fat breakdown: sat 1.0g dominant (dairy fat), trace MUFA/PUFA from milk lipids"
 - Fiber (0.5g) entirely from xanthan gum thickener (soluble fiber)
 - Sugar (3.4g) from residual lactose in whey concentrate
 - Sodium (39mg) calculated from stated salt content (0.098g)
@@ -89,8 +89,8 @@ change_log:
   - url: user_input
     note: 'User-provided ingredient list: Whey Protein Concentrate (87%), Natural
       Flavouring (7%), Xanthan Gum, Steviol Glycosides, Sunflower Lecithin'
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - derived.energy_from_macros_kcal

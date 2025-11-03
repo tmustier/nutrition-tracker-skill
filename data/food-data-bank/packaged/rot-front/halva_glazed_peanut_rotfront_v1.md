@@ -3,14 +3,14 @@
 ```yaml
 id: halva_glazed_peanut_rotfront_v1
 version: 2
-last_verified: '2025-11-02'
+last_verified: "2025-11-02"
 source:
   venue: Rot Front
-  menu_page: ''
+  menu_page: ""
   evidence:
   - FatSecret — Рот Фронт Халва глазированная, per-piece entry (25g)
   - FatSecret — 100g entry shows 530 kcal; P14g; F32g; C44g; fibre 5.6g
-  - 'Parma.am product page: peanut base 44%, glaze 30%; 528 kcal/100g'
+  - "Parma.am product page: peanut base 44%, glaze 30%; 528 kcal/100g"
   - Generic halva datasets for mineral scaling (FitAudit, FoodStruct)
 aliases:
 - Халва глазированная
@@ -60,19 +60,14 @@ quality:
   - Potassium range 50-100mg
   - Vitamin C not available
 notes:
-- 'Branded per-piece nutrition from FatSecret: 133 kcal, 8.25g fat (1.4g sat), 11g
-  carbs, 9.35g sugar, 3.5g protein'
-- '100g macros cluster: 528-560 kcal, 32-33g fat, 44-48g carbs, 14g protein across
-  multiple sources'
+- "Branded per-piece nutrition from FatSecret: 133 kcal, 8.25g fat (1.4g sat), 11g carbs, 9.35g sugar, 3.5g protein"
+- "100g macros cluster: 528-560 kcal, 32-33g fat, 44-48g carbs, 14g protein across multiple sources"
 - Fibre 5.6g/100g → 1.4g/25g; split using peanut profile (94% insoluble / 6% soluble)
-- MUFA/PUFA split (3.0g / 3.85g) constrained so SFA+MUFA+PUFA = total fat; typical
-  of peanut-based halva
-- 'Minerals scaled from generic halva composition (FitAudit): K~187mg/100g, Mg~218mg/100g,
-  Ca~33mg/100g'
+- MUFA/PUFA split (3.0g / 3.85g) constrained so SFA+MUFA+PUFA = total fat; typical of peanut-based halva
+- "Minerals scaled from generic halva composition (FitAudit): K~187mg/100g, Mg~218mg/100g, Ca~33mg/100g"
 - Sodium ~195mg/100g in generic halva → ~49mg/25g, rounded to 50mg
-- 'Ingredients: peanut mass 44%, confectioner''s chocolate glaze 30% (varies by batch)'
-- 'Atwater check (available carb basis): 4×3.5 + 9×8.2 + 4×11.0 + 2×1.4 + 2.4×0.0
-  = 135.1 kcal'
+- "Ingredients: peanut mass 44%, confectioner's chocolate glaze 30% (varies by batch)"
+- "Atwater check (available carb basis): 4×3.5 + 9×8.2 + 4×11.0 + 2×1.4 + 2.4×0.0 = 135.1 kcal"
 change_log:
 - timestamp: 2025-10-30T19:35:00+0000
   updated_by: Claude Code (via ChatGPT estimation)
@@ -87,8 +82,8 @@ change_log:
     note: Parma.am product page with ingredient breakdown
   - url: https://fitaudit.ru/food/halva
     note: FitAudit generic halva mineral composition
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - last_verified

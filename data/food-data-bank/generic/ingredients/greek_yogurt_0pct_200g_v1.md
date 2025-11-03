@@ -3,10 +3,10 @@
 ```yaml
 id: greek_yogurt_0pct_200g_v1
 version: 1
-last_verified: '2025-11-03'
+last_verified: "2025-11-03"
 source:
   venue: pack/ingredient
-  menu_page: ''
+  menu_page: ""
   evidence: []
 aliases: []
 category: ingredient
@@ -16,8 +16,8 @@ portion:
   notes: Plain 0% fat Greek yogurt.
 assumptions:
   salt_scheme: normal
-  oil_type: ''
-  prep: ''
+  oil_type: ""
+  prep: ""
 per_portion:
   energy_kcal: 117.6
   protein_g: 20.4
@@ -49,14 +49,14 @@ quality:
   confidence: high
   gaps: []
 notes:
-- 'Atwater check (available carb basis): 4×20.4 + 9×0.8 + 4×7.2 + 2×0.0 + 2.4×0.0 = 117.6 kcal'
+- "Atwater check (available carb basis): 4×20.4 + 9×0.8 + 4×7.2 + 2×0.0 + 2.4×0.0 = 117.6 kcal"
 change_log:
-- timestamp: '2025-11-03T08:00:00+00:00'
-  updated_by: 'LLM: Claude Sonnet 4.5'
+- timestamp: "2025-11-03T08:00:00+00:00"
+  updated_by: "LLM: Claude Sonnet 4.5"
   reason: Initial creation based on USDA and typical 0% fat Greek yogurt nutritional data
   fields_changed:
   - all
   sources:
   - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/170903/nutrients
-    note: 'USDA FoodData Central - Greek yogurt, nonfat, plain. Per 100g: Energy ~59 kcal, Protein ~10.2g, Fat ~0.4g, Carbohydrate ~3.6g (all as sugars from lactose), Calcium ~100mg, Potassium ~141mg. Scaled to 200g portion.'
+    note: "USDA FoodData Central - Greek yogurt, nonfat, plain. Per 100g: Energy ~59 kcal, Protein ~10.2g, Fat ~0.4g, Carbohydrate ~3.6g (all as sugars from lactose), Calcium ~100mg, Potassium ~141mg. Scaled to 200g portion."
 ```

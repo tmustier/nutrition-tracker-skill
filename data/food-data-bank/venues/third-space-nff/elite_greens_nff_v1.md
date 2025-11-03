@@ -3,12 +3,12 @@
 ```yaml
 id: elite_greens_nff_v1
 version: 2
-last_verified: '2025-11-02'
+last_verified: "2025-11-02"
 source:
   venue: Third Space / Natural Fitness Food
-  menu_page: ''
+  menu_page: ""
   evidence:
-  - 'User-provided partial nutrition data: 350 kcal, 8g F, 43g C, 4g Fiber, 25g Protein'
+  - "User-provided partial nutrition data: 350 kcal, 8g F, 43g C, 4g Fiber, 25g Protein"
   - 'Ingredient list from Third Space website: cold-pressed juice (2Boost) by 2-Juice
     featuring Apple, Baby Spinach, Cucumber, Parsley, Lemon & Ginger, with vanilla
     protein powder, oat milk & banana'
@@ -87,8 +87,8 @@ change_log:
       Lemon, Ginger) + vanilla protein + oat milk + banana'
   - url: https://uk-ga.openfoodfacts.org/product/5065003325005/whey-protein-vanilla-natural-fitness-food
     note: NFF Vanilla Whey nutrition data for component analysis
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - derived.energy_from_macros_kcal

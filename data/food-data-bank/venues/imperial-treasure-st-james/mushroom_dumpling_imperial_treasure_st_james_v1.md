@@ -8,7 +8,7 @@ source:
   venue: Mushroom Dumpling (Imperial Treasure St. James)
   menu_page: ""
   evidence:
-    - url: "https://deliveroo.co.uk/menu/london/st-james's/imperial-treasure-fine-chinese-cuisine"
+    - url: "https://deliveroo.co.uk/menu/london/st-jamess/imperial-treasure-fine-chinese-cuisine"
       note: "Imperial Treasure on Deliveroo - dim sum 3-piece portions"
     - url: "https://tools.myfooddata.com/nutrition-facts/168437/wt1"
       note: "USDA cooked shiitake: 56 kcal/100g, 1.56g protein, 14.39g carbs"
@@ -58,7 +58,9 @@ derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: medium
-  gaps: ["iodine_ug", "manganese_mg"]
+  gaps:
+    - "iodine_ug"
+    - "manganese_mg"
   estimated_nutrients:
     - name: "fiber_soluble_g"
       value: 0.2
@@ -78,7 +80,8 @@ notes:
 change_log:
   - timestamp: "2025-11-02"
     reason: "Initial entry - component-based estimation from USDA FoodData Central"
-    fields_changed: ["all fields"]
+    fields_changed:
+      - "all fields"
     evidence: "Comprehensive component analysis using USDA nutrition data for wheat flour, shiitake mushrooms, napa cabbage, sesame oil, and soy sauce"
     methodology: "Component-based per ESTIMATE.md: Wrapper 13g (40 kcal), Shiitake 13g (7.3 kcal), Cabbage 4g (0.5 kcal), Sesame oil 3g (26.5 kcal), Soy sauce 1.5g (0.8 kcal), Aromatics 0.5g (trace). Total 35g."
 ```

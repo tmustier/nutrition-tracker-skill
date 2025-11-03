@@ -3,12 +3,12 @@
 ```yaml
 id: ham_cheese_croissant_generic_v1
 version: 2
-last_verified: '2025-11-02'
+last_verified: "2025-11-02"
 source:
   venue: Generic Bakery
-  menu_page: ''
+  menu_page: ""
   evidence:
-  - 'USDA FoodData Central #174987 - Butter croissants'
+  - "USDA FoodData Central #174987 - Butter croissants"
   - USDA data for cooked ham nutrition
   - Ermitage Emmental cheese nutrition data
   - Component weights estimated from typical bakery portions
@@ -80,11 +80,11 @@ change_log:
     note: 'USDA butter croissant profile (per 100g): 406 kcal, 8.2g P, 21g F, 43.2g
       C'
   - url: https://www.nutritionvalue.org/Ham_22311000_nutritional_value.html
-    note: 'USDA cooked ham profile (per 100g): 145 kcal, 19g P, 8g F'
+    note: "USDA cooked ham profile (per 100g): 145 kcal, 19g P, 8g F"
   - url: https://www.ermitage.com/en/cheese/emmental/
-    note: 'Emmental cheese (per 100g): 377 kcal, 28g P, 29g F, 1000mg Ca'
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+    note: "Emmental cheese (per 100g): 377 kcal, 28g P, 29g F, 1000mg Ca"
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - last_verified

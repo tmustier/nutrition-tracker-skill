@@ -3,7 +3,7 @@
 ```yaml
 id: orange_jaffa_cake_slice_creme_fraiche_eagle_farringdon_v1
 version: 3
-last_verified: '2025-11-02'
+last_verified: "2025-11-02"
 source:
   venue: The Eagle, Farringdon (London)
   menu_page: https://theeaglefarringdon.co.uk/
@@ -63,13 +63,13 @@ notes:
   full-fat crème fraîche (~170g plate)'
 - Sugar load concentrated in sponge syrup and orange jelly
 - Fat split reflects butter + crème fraîche saturated fat with cocoa butter MUFA
-- 'Energy cross-check: 66g carbs, 7.0g protein, 37.0g fat → ≈630 kcal'
+- "Energy cross-check: 66g carbs, 7.0g protein, 37.0g fat → ≈630 kcal"
 - Contains gluten, egg, dairy
 - 'Atwater check (available carb basis): 4×7.0 + 9×37.0 + 4×66.0 + 2×2.6 + 2.4×0.0
   = 630.2 kcal'
 change_log:
 - timestamp: 2025-11-02T12:05:00+0000
-  updated_by: 'LLM: GPT-5 Codex'
+  updated_by: "LLM: GPT-5 Codex"
   reason: Initial estimate for Orange 'Jaffa Cake' slice with crème fraîche at The
     Eagle
   fields_changed:
@@ -82,7 +82,7 @@ change_log:
     note: Component model combining sponge, chocolate glaze, orange jelly, and crème
       fraîche
 - timestamp: 2025-11-02T14:00:00+0000
-  updated_by: 'LLM: GPT-5 Codex'
+  updated_by: "LLM: GPT-5 Codex"
   reason: Scaled portion and macros to align with GPT-5 Pro refined estimate
   fields_changed:
   - portion.est_weight_g
@@ -95,8 +95,8 @@ change_log:
   - url: user_follow_up
     note: GPT-5 Pro estimate shared 2025-11-01 14:13 with larger slice weight and
       crème fraîche portion
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - derived.energy_from_macros_kcal

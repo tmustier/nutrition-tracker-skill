@@ -3,10 +3,10 @@
 ```yaml
 id: beef_stroganoff_buckwheat_zima_v1
 version: 2
-last_verified: '2025-11-02'
+last_verified: "2025-11-02"
 source:
   venue: Zima, Soho, London
-  menu_page: ''
+  menu_page: ""
   evidence:
   - 'User-provided nutrition data: 562 kcal, 37.2g protein, 36.7g carbs, 28.9g fat
     per full portion'
@@ -71,7 +71,7 @@ notes:
   = 565.3 kcal'
 change_log:
 - timestamp: 2025-10-30 00:00:00+00:00
-  updated_by: 'LLM: Claude Sonnet 4.5'
+  updated_by: "LLM: Claude Sonnet 4.5"
   reason: Initial entry from user-provided complete nutrition data for Zima Soho Beef
     Stroganoff
   fields_changed:
@@ -94,8 +94,8 @@ change_log:
   - url: user_input
     note: User-provided nutrition data for Zima Soho Beef Stroganoff with buckwheat
       on 2025-10-30
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - derived.energy_from_macros_kcal

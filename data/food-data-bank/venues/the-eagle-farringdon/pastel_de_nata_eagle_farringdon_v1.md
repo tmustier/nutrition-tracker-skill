@@ -3,7 +3,7 @@
 ```yaml
 id: pastel_de_nata_eagle_farringdon_v1
 version: 3
-last_verified: '2025-11-03'
+last_verified: "2025-11-03"
 source:
   venue: The Eagle, Farringdon (London)
   menu_page: https://theeaglefarringdon.co.uk/
@@ -57,17 +57,17 @@ quality:
   - Custard cream ratio inferred from standard recipes
   - Micronutrients not fully itemised
 notes:
-- 'Macro build: 40g puff pastry + 25g enriched egg custard'
+- "Macro build: 40g puff pastry + 25g enriched egg custard"
 - Sugar estimate combines custard sugar and caramelised top
 - Cholesterol driven by egg yolks and dairy
 - Sodium primarily from salted butter in pastry
-- 'Energy check: 31.2g carbs, 5.2g protein, 14.8g fat → ≈280 kcal'
+- "Energy check: 31.2g carbs, 5.2g protein, 14.8g fat → ≈280 kcal"
 - Contains gluten, egg, dairy
 - 'Atwater check (available carb basis): 4×5.2 + 9×14.8 + 4×31.2 + 2×1.1 + 2.4×0.0
   = 281 kcal'
 change_log:
 - timestamp: 2025-11-02T12:00:00+0000
-  updated_by: 'LLM: GPT-5 Codex'
+  updated_by: "LLM: GPT-5 Codex"
   reason: Initial estimate for Pastel de Nata dessert at The Eagle
   fields_changed:
   - all fields
@@ -76,8 +76,8 @@ change_log:
     note: User asked to add Pastel de Nata from The Eagle to food bank
   - url: gpt_component_estimate
     note: Component model using puff pastry and custard nutrition references
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - derived.energy_from_macros_kcal
@@ -90,8 +90,8 @@ change_log:
   - per_portion.polyols_g
   - version
   sources: []
-- timestamp: '2025-11-03T15:44:11+00:00'
-  updated_by: 'LLM: Claude Code'
+- timestamp: "2025-11-03T15:44:11+00:00"
+  updated_by: "LLM: Claude Code"
   reason: Add iodine, selenium and vitamin D estimates from egg custard (MEDIUM priority nutrient completion)
   fields_changed:
   - last_verified
@@ -101,5 +101,5 @@ change_log:
   - version
   sources:
   - url: https://fdc.nal.usda.gov/
-    note: 'USDA FoodData Central: Eggs ~26 µg/100g iodine, ~31 µg/100g selenium, ~1.8 µg/100g vitamin D. 25g custard estimated at 65% eggs. Confidence: MEDIUM (egg-based estimates well-documented)'
+    note: "USDA FoodData Central: Eggs ~26 µg/100g iodine, ~31 µg/100g selenium, ~1.8 µg/100g vitamin D. 25g custard estimated at 65% eggs. Confidence: MEDIUM (egg-based estimates well-documented)"
 ```

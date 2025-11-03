@@ -3,7 +3,7 @@
 ```yaml
 id: mafaldine_tomato_rosemary_chickpeas_parmesan_eagle_farringdon_v1
 version: 3
-last_verified: '2025-11-02'
+last_verified: "2025-11-02"
 source:
   venue: The Eagle, Farringdon (London)
   menu_page: https://theeaglefarringdon.co.uk/
@@ -68,14 +68,14 @@ notes:
   and canned ingredients
 - Higher fiber (≈20g) from chickpeas and pasta supports training-day carb goals
 - Fat split reflects olive oil MUFA dominance with moderate saturated fat from parmesan
-- 'Energy cross-check: 141.3g carbs, 39.6g protein, 27.2g fat → ~957 kcal from macros'
+- "Energy cross-check: 141.3g carbs, 39.6g protein, 27.2g fat → ~957 kcal from macros"
 - Suitable for vegetarian diet; contains dairy
 - Sodium moderate for a pasta main (~0.8g)
 - 'Atwater check (available carb basis): 4×39.6 + 9×27.2 + 4×141.3 + 2×19.9 + 2.4×0.0
   = 1008.2 kcal'
 change_log:
 - timestamp: 2025-11-01T18:30:00+0000
-  updated_by: 'LLM: GPT-5 Codex'
+  updated_by: "LLM: GPT-5 Codex"
   reason: Initial macro-rich estimate for pasta ordered at The Eagle
   fields_changed:
   - all fields
@@ -86,7 +86,7 @@ change_log:
   - url: gpt_culinary_estimate
     note: GPT-5 Codex component model with 2g finishing salt assumption
 - timestamp: 2025-11-02T10:00:00+0000
-  updated_by: 'LLM: GPT-5 Codex'
+  updated_by: "LLM: GPT-5 Codex"
   reason: Aligned macros and sodium with refined portion model from user research
     notes
   fields_changed:
@@ -113,8 +113,8 @@ change_log:
   sources:
   - url: user_provided_best_effort_estimate
     note: Portion and macro breakdown supplied by user on 2025-11-02
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - derived.energy_from_macros_kcal

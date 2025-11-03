@@ -3,13 +3,13 @@
 ```yaml
 id: grilled_chicken_breast_leto_soho_v1
 version: 3
-last_verified: '2025-11-02'
+last_verified: "2025-11-02"
 source:
   venue: L'ETO Caffe, Soho, London
   menu_page: https://deliveroo.co.uk/menu/london/soho/l-eto-caffe-soho
   evidence:
-  - 'Deliveroo listing: 135 kcal'
-  - 'Component-based: 86g cooked chicken breast scaled from USDA profile'
+  - "Deliveroo listing: 135 kcal"
+  - "Component-based: 86g cooked chicken breast scaled from USDA profile"
   - Finishing salt per skill salt_scheme (0.5% of weight)
 aliases:
 - Chicken Breast
@@ -60,13 +60,11 @@ notes:
 - 135 kcal from Deliveroo
 - 86g portion calculated from USDA 157 kcal/100g profile
 - Plain chicken has zero carbs
-- 'Atwater check (available carb basis): 4×27.6 + 9×2.8 + 4×0.0 + 2×0.0 + 2.4×0.0
-  = 135.6 kcal'
+- "Atwater check (available carb basis): 4×27.6 + 9×2.8 + 4×0.0 + 2×0.0 + 2.4×0.0 = 135.6 kcal"
 change_log:
 - timestamp: 2025-10-29 12:00:00+00:00
-  updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: Initial population from Deliveroo calorie count + reference macros from
-    Whataburger
+  updated_by: "LLM: Claude Sonnet 4.5"
+  reason: Initial population from Deliveroo calorie count + reference macros from Whataburger
   fields_changed:
   - per_portion.energy_kcal
   - per_portion.protein_g
@@ -93,17 +91,14 @@ change_log:
   - portion.est_weight_g
   sources:
   - url: https://deliveroo.co.uk/menu/london/soho/l-eto-caffe-soho
-    note: 'L''ETO Caffe Soho Deliveroo listing: 135 kcal'
+    note: "L'ETO Caffe Soho Deliveroo listing: 135 kcal"
   - url: https://www.mynetdiary.com/food/calories-in-grilled-chicken-breast-by-whataburger-serving-34958765-0.html
-    note: 'Whataburger grilled chicken breast: 135 kcal, 24g protein, 2g carbs, 2.5g
-      fat'
+    note: "Whataburger grilled chicken breast: 135 kcal, 24g protein, 2g carbs, 2.5g fat"
   - url: https://fdc.nal.usda.gov/
-    note: 'USDA FoodData Central: chicken breast micronutrients (potassium 320mg,
-      magnesium 27mg, zinc 1mg, iron 1mg, cholesterol ~70mg per 100g)'
+    note: "USDA FoodData Central: chicken breast micronutrients (potassium 320mg, magnesium 27mg, zinc 1mg, iron 1mg, cholesterol ~70mg per 100g)"
 - timestamp: 2025-10-29 12:30:00+00:00
-  updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: Corrected values based on GPT-5 component analysis with precise portion
-    weight (86g) and proper salt accounting
+  updated_by: "LLM: Claude Sonnet 4.5"
+  reason: Corrected values based on GPT-5 component analysis with precise portion weight (86g) and proper salt accounting
   fields_changed:
   - version
   - portion.est_weight_g
@@ -124,9 +119,9 @@ change_log:
   - quality.confidence
   sources:
   - url: https://tools.myfooddata.com/nutrition-facts/100009715/100g
-    note: 'MyFoodData chicken breast cooked: scaled to 86g to match 135 kcal anchor'
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+    note: "MyFoodData chicken breast cooked: scaled to 86g to match 135 kcal anchor"
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - derived.energy_from_macros_kcal

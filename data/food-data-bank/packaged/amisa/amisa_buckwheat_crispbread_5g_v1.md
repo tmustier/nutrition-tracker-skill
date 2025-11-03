@@ -3,10 +3,10 @@
 ```yaml
 id: amisa_buckwheat_crispbread_5g_v1
 version: 4
-last_verified: '2025-11-03'
+last_verified: "2025-11-03"
 source:
   venue: Amisa (Packaged Product)
-  menu_page: ''
+  menu_page: ""
   evidence:
   - Amisa official UK product page
   - Multiple UK retailer listings (Tesco, Ocado, Holland & Barrett)
@@ -20,7 +20,7 @@ portion:
     salt (1.5%)'
 assumptions:
   salt_scheme: light
-  oil_type: ''
+  oil_type: ""
   prep: baked crispbread
 per_portion:
   energy_kcal: 17.3
@@ -88,8 +88,8 @@ change_log:
   sources:
   - url: user_correction
     note: User confirmed crispbread weight is 5g per piece
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - last_verified
@@ -101,8 +101,8 @@ change_log:
   - per_portion.polyols_g
   - version
   sources: []
-- timestamp: '2025-11-03T00:00:00+00:00'
-  updated_by: 'LLM: Claude Sonnet 4.5'
+- timestamp: "2025-11-03T00:00:00+00:00"
+  updated_by: "LLM: Claude Sonnet 4.5"
   reason: Phase 2 nutrient estimation - fiber split for buckwheat crispbread
   fields_changed:
   - per_portion.fiber_soluble_g
@@ -112,5 +112,5 @@ change_log:
   sources:
   - url: fiber_split_estimation
     note: Used grains.quinoa category for ancient grains (25% soluble, 75% insoluble, LOW confidence)
-  methodology: 'Applied ancient grains (quinoa/buckwheat) fiber split ratio to total fiber 0.4g: soluble = 0.4 × 0.25 = 0.1g, insoluble = 0.4 × 0.75 = 0.3g. Buckwheat is a pseudo-cereal similar to quinoa. Product is 98.5% buckwheat flour. Low confidence estimate due to limited specific data on buckwheat fiber composition, but more specific than general plant foods category.'
+  methodology: "Applied ancient grains (quinoa/buckwheat) fiber split ratio to total fiber 0.4g: soluble = 0.4 × 0.25 = 0.1g, insoluble = 0.4 × 0.75 = 0.3g. Buckwheat is a pseudo-cereal similar to quinoa. Product is 98.5% buckwheat flour. Low confidence estimate due to limited specific data on buckwheat fiber composition, but more specific than general plant foods category."
 ```

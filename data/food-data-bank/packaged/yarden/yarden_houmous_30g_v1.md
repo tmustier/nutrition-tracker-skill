@@ -3,12 +3,12 @@
 ```yaml
 id: yarden_houmous_30g_v1
 version: 3
-last_verified: '2025-11-03'
+last_verified: "2025-11-03"
 source:
   venue: Yarden (Packaged Product)
-  menu_page: ''
+  menu_page: ""
   evidence:
-  - 'Tesco product page #250438255'
+  - "Tesco product page #250438255"
   - Waitrose product listing
   - FatSecret UK nutritional database
 aliases:
@@ -58,7 +58,7 @@ quality:
 notes:
 - 'Scaled from per 100g values: 352 kcal, 6.8g P, 32g F (3.2g sat), 7.0g C, 0.6g sugar,
   4.5g fiber, 1.0g salt'
-- 30g serving = typical 'dollop' or 2 tablespoons
+- 30g serving = typical "dollop" or 2 tablespoons
 - Fat composition estimated from sesame tahini (high MUFA) + vegetable oil blend
 - Contains sesame; may contain eggs, soya, and mustard
 - Available at Tesco, Waitrose, Morrisons; 250g tubs
@@ -73,8 +73,8 @@ change_log:
   sources:
   - url: https://www.tesco.com/groceries/en-GB/products/250438255
     note: Yarden Houmous 250g nutrition facts (per 100g)
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
+- timestamp: "2025-11-02T19:20:00+00:00"
+  updated_by: "LLM: GPT-5 Codex"
   reason: Standardise carbohydrate fields and recompute available-carb energy
   fields_changed:
   - last_verified
@@ -86,8 +86,8 @@ change_log:
   - per_portion.polyols_g
   - version
   sources: []
-- timestamp: '2025-11-03T00:00:00+00:00'
-  updated_by: 'LLM: Claude Sonnet 4.5'
+- timestamp: "2025-11-03T00:00:00+00:00"
+  updated_by: "LLM: Claude Sonnet 4.5"
   reason: Phase 2 nutrient estimation - fiber split for chickpea-based houmous
   fields_changed:
   - per_portion.fiber_soluble_g
@@ -97,5 +97,5 @@ change_log:
   sources:
   - url: fiber_split_estimation
     note: Used legumes.chickpeas category (32% soluble, 68% insoluble, HIGH confidence)
-  methodology: 'Applied chickpea fiber split ratio to total fiber 1.4g: soluble = 1.4 × 0.32 = 0.4g, insoluble = 1.4 × 0.68 = 1.0g. Houmous is chickpea-based, making this category highly appropriate. High confidence estimation based on well-documented chickpea fiber composition (30-35% soluble per USDA data, consistent with Marlett et al. 2002).'
+  methodology: "Applied chickpea fiber split ratio to total fiber 1.4g: soluble = 1.4 × 0.32 = 0.4g, insoluble = 1.4 × 0.68 = 1.0g. Houmous is chickpea-based, making this category highly appropriate. High confidence estimation based on well-documented chickpea fiber composition (30-35% soluble per USDA data, consistent with Marlett et al. 2002)."
 ```

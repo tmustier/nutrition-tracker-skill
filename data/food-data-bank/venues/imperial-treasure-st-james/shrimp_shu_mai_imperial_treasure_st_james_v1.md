@@ -8,15 +8,17 @@ source:
   venue: Shrimp Shu Mai (Imperial Treasure St. James)
   menu_page: "https://deliveroo.co.uk/menu/london/st-james's/imperial-treasure-fine-chinese-cuisine"
   evidence:
-    - "Imperial Treasure Fine Chinese Cuisine, 9 Waterloo Place, St James's, London SW1Y 4BE"
+    - "Imperial Treasure Fine Chinese Cuisine, 9 Waterloo Place, St Jamess, London SW1Y 4BE"
     - "Component-based estimation: 10g shrimp + 3g pork + 5g wrapper + 2g shiitake + 1.5g water chestnuts + 1.5g seasonings"
     - "USDA raw shrimp data: 85 kcal, 20g protein, 0.5g fat, 119mg sodium per 100g"
     - "USDA ground pork (medium fat): 263 kcal, 17g protein, 20g fat per 100g"
     - "Commercial shu mai reference: 24-33 kcal per piece (Nissui 25 kcal, Ajinomoto 30 kcal per piece)"
     - "Restaurant shu mai sodium: typically 50-200mg per piece per research"
-    - "Fine dining portion estimated at 23g per piece based on reviews describing 'well filled' dim sum"
+    - "Fine dining portion estimated at 23g per piece based on reviews describing well-filled dim sum"
     - "Tripadvisor reviews: https://www.tripadvisor.com/Restaurant_Review-g186338-d15237477-Reviews-Imperial_Treasure_Fine_Chinese_Cuisine-London_England.html"
-aliases: ["siew mai", "siu mai"]
+aliases:
+  - "siew mai"
+  - "siu mai"
 category: main
 portion:
   description: "1 piece"
@@ -57,7 +59,9 @@ derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: medium
-  gaps: ["No official menu nutrition data available", "Portion weight estimated from reviews and fine dining standards"]
+  gaps:
+    - "No official menu nutrition data available"
+    - "Portion weight estimated from reviews and fine dining standards"
 notes:
   - "Component breakdown: Primary filling is shrimp (10g) with pork (3g) for texture and fat, wrapped in wheat wrapper (5g). Includes shiitake mushroom (2g), water chestnuts (1.5g), and seasonings (1.5g including sesame oil and soy sauce)."
   - "Calorie density: 1.87 kcal/g, which is higher than commercial frozen products (1.67 kcal/g) but appropriate for fine dining with premium ingredients and more protein."
@@ -68,6 +72,7 @@ notes:
 change_log:
   - timestamp: "2025-11-02"
     reason: "Initial entry created using component-based estimation methodology"
-    fields_changed: ["all fields"]
+    fields_changed:
+      - "all fields"
     evidence: "Comprehensive research including Imperial Treasure reviews, USDA component data, commercial product benchmarking, and traditional Cantonese recipes"
 ```
