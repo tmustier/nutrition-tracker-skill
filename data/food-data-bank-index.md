@@ -1,7 +1,7 @@
 ---
 title: Food Data Bank Index
 description: Auto-generated index of all dishes in the food data bank
-generated: 2025-11-04 20:04:11 UTC
+generated: 2025-11-04 20:06:26 UTC
 ---
 
 # Food Data Bank Index
@@ -11,11 +11,11 @@ generated: 2025-11-04 20:04:11 UTC
 
 ## Overview
 
-Total dishes: 69
+Total dishes: 71
 
-- **Venues**: 8 categories
+- **Venues**: 9 categories
 - **Packaged Products**: 7 categories
-- **Generic Items**: 9 categories
+- **Generic Items**: 10 categories
 
 ---
 
@@ -62,6 +62,14 @@ Total dishes: 69
 
 - [Chilli Poached Eggs (L'ETO Soho)](food-data-bank/venues/leto-caffe-soho/chilli_poached_eggs_leto_soho_v1.md) {#chilli_poached_eggs_leto_soho_v1}
 - [Grilled Chicken Breast (L'ETO Soho)](food-data-bank/venues/leto-caffe-soho/grilled_chicken_breast_leto_soho_v1.md) {#grilled_chicken_breast_leto_soho_v1}
+
+## Panzers
+
+*Location: `data/food-data-bank/venues/panzers/`*
+
+**1 dishes:**
+
+- [Salmon Sushi Set (6 salmon nigiri; 8 pieces salmon avocado roll) (Panzer's)](food-data-bank/venues/panzers/salmon_sushi_set_panzers_v1.md) {#salmon_sushi_set_panzers_panzers_v1}
 
 ## Simple Health Kitchen
 
@@ -247,6 +255,14 @@ Total dishes: 69
 **1 dishes:**
 
 - [Guinness Draught (Pint, 568ml)](food-data-bank/generic/pub-bar/guinness_pint_568ml_v1.md) {#guinness_pint_568ml_v1}
+
+## Generic: St Helens Farm
+
+*Location: `data/food-data-bank/generic/st-helens-farm/`*
+
+**1 dishes:**
+
+- [Goat Milk Yogurt (few dollops, ~50g)](food-data-bank/generic/st-helens-farm/goat-milk-yogurt-dollops_st-helens-farm_v1.md) {#goat-milk-yogurt-dollops_st-helens-farm_v1}
 
 ## Generic: Supplements
 
