@@ -163,7 +163,7 @@ When a dish has multiple identifiable components, use this method:
 2. **Calculate sub-totals** for known components using USDA/MyFoodData, then solve for the unknown component to close the calorie gap
    - Example: Known components = 379 kcal, venue lists 592 kcal → 213 kcal gap → butter is ~7.2 kcal/g → ~30g butter
 
-3. **Sum complete macros** from USDA profiles scaled to estimated weights. Add finishing salt (0.5% of total dish weight) to sodium
+3. **Sum complete macros** from USDA profiles scaled to estimated weights. Add finishing salt (default assumption: 0.5% of total dish weight) to sodium
 
 4. **Validate** energy within ±5-8% using Atwater formula (see Quick Reference). Document method in `notes`
 
