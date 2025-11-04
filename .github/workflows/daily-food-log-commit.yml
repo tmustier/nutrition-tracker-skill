@@ -43,8 +43,8 @@ jobs:
 
           # Check if daily-logs branch exists remotely
           if git ls-remote --exit-code --heads origin daily-logs; then
-            echo "daily-logs branch exists, checking it out"
-            git checkout daily-logs
+            echo "daily-logs branch exists remotely, creating local tracking branch"
+            git checkout -b daily-logs origin/daily-logs
           else
             echo "daily-logs branch does not exist, creating from main"
             git checkout -b daily-logs origin/main
