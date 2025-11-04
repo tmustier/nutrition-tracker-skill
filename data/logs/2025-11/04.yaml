@@ -368,30 +368,30 @@ entries:
     quantity: 1
     unit: portion
     nutrition:
-      energy_kcal: 299.0
-      protein_g: 6.1
-      fat_g: 23.65
-      sat_fat_g: 9.45
-      mufa_g: 9.0
-      pufa_g: 5.2
+      energy_kcal: 131.6
+      protein_g: 2.7
+      fat_g: 10.4
+      sat_fat_g: 4.2
+      mufa_g: 4.0
+      pufa_g: 2.1
       trans_fat_g: 0.0
       cholesterol_mg: 0
-      sugar_g: 15.1
-      fiber_total_g: 1.0
-      fiber_soluble_g: 0.3
-      fiber_insoluble_g: 0.7
-      sodium_mg: 20
-      potassium_mg: 180
+      sugar_g: 6.6
+      fiber_total_g: 1.4
+      fiber_soluble_g: 0.4
+      fiber_insoluble_g: 1.0
+      sodium_mg: 9
+      potassium_mg: 77
       iodine_ug: 0
-      magnesium_mg: 40
-      calcium_mg: 25
+      magnesium_mg: 11
+      calcium_mg: 11
       iron_mg: 2.0
-      zinc_mg: 1.0
+      zinc_mg: 0.7
       vitamin_c_mg: 0
-      manganese_mg: 0.5
+      manganese_mg: 0.4
       polyols_g: 0.0
-      carbs_available_g: 15.1
-      carbs_total_g: 16.1
+      carbs_available_g: 6.6
+      carbs_total_g: 8.0
   notes: Dinner - Panzer's Deli sushi set + London's Chocolate bar
 - timestamp: '2025-11-04T19:00:00+00:00'
   items:
