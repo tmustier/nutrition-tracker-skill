@@ -48,6 +48,18 @@
 
 **Do NOT default to generic values. If exact data is unavailable, use ingredient-based estimation and document your method.**
 
+---
+
+# CLI Scripts
+
+**`validate_data_bank.py`**: Validates all dish files (energy math, fat splits, sodium/salt). Usage: `python scripts/validate_data_bank.py`
+
+**`new_dish_from_template.py`**: Creates dish file in appropriate venue folder. Usage: `python scripts/new_dish_from_template.py --dish_slug NAME --venue_slug ABBR --venue_name "Full Name" --display_name "Dish (Venue)" --category CATEGORY`
+
+**`generate_index.py`**: Regenerates food bank index (auto-called by validator). Usage: `python scripts/generate_index.py`
+
+---
+
 # Quick Reference Data
 
 ## Standard Portions
@@ -77,6 +89,15 @@
 1. **PRIMARY (highest confidence):** Deliveroo UK, Uber Eats UK, venue nutrition PDFs, product labels
 2. **SECONDARY (estimate/scale):** USDA FoodData Central, MyFoodData.com, comparable dishes from similar venues
 
+## Validation Formulas
+
+- **Energy (Atwater):** `4×protein + 9×fat + 4×carbs_available + 2×fiber + 2.4×polyols` (tolerance ±5-8%)
+- **Fat split:** `sat + MUFA + PUFA + trans ≤ total_fat`
+- **Sodium/salt:** `salt_g = sodium_mg × 2.5 / 1000`
+- **Finishing salt:** `0.5% of total dish weight` (≈ sodium_mg = salt_g × 400)
+
+---
+
 # Nutrient Estimation Philosophy
 
 ## Core Principle
@@ -84,7 +105,8 @@
 **Never use null. Always estimate with documented confidence.**
 
 - `0` = TRUE ZERO (scientifically impossible, e.g., cholesterol in plants, fiber in animal products, B12 in unfortified plants)
-- All other values = actual measurement or estimate
+- All other values = actual measurement or estimate (use USDA proxies, component analysis, or category averages if needed)
+- Document estimation method and confidence level in `assumptions`
 
 ## Estimation Process
 
@@ -134,264 +156,55 @@ Always write down what was used. Put links/notes under `source.evidence`.
 
 **Component-based estimation (REQUIRED for multi-ingredient dishes):**
 
-When a dish has multiple identifiable components (e.g., eggs + yogurt + bread + butter), use this rigorous method:
+When a dish has multiple identifiable components, use this method:
 
-1. **List all components** from the ingredient list (e.g., "2 poached eggs, garlic yogurt, sourdough, kale, chilli butter")
+1. **List components and estimate known weights** using standard portions (see Quick Reference). Leave one component (usually fat/oil) as the "closing variable"
 
-2. **Estimate weights for known components** using standard portions:
-   - Eggs: 50g each (100g for 2 eggs)
-   - Yogurt base: 100-120g typical for restaurant
-   - Bread slice: 50-70g (NOT 100g - be conservative!)
-   - Vegetables: 50-80g cooked portions
-   - Leave one component (usually fat/oil/butter) as the "closing variable"
+2. **Calculate sub-totals** for known components using USDA/MyFoodData, then solve for the unknown component to close the calorie gap
+   - Example: Known components = 379 kcal, venue lists 592 kcal → 213 kcal gap → butter is ~7.2 kcal/g → ~30g butter
 
-3. **Calculate sub-totals** for known components using USDA/MyFoodData profiles:
-   - Example: 2 eggs (140 kcal) + yogurt 120g (72 kcal) + bread 60g (150 kcal) + kale 50g (17 kcal) = 379 kcal
+3. **Sum complete macros** from USDA profiles scaled to estimated weights. Add finishing salt (0.5% of total dish weight) to sodium
 
-4. **Solve for the unknown component** (usually butter/oil) to close the calorie gap:
-   - If venue lists 592 kcal total: 592 - 379 = 213 kcal from butter
-   - Butter is ~7.2 kcal/g → 213 ÷ 7.2 = ~30g butter
-   - Check reasonableness: 30g (2 tbsp) is plausible for chilli butter
+4. **Validate** energy within ±5-8% using Atwater formula (see Quick Reference). Document method in `notes`
 
-5. **Calculate complete macros** by summing all components with their precise weights:
-   - Get USDA profiles for each (protein, fat, carbs, sat fat, MUFA, PUFA, sodium, etc.)
-   - Scale each component to its estimated weight
-   - Sum all values
-   - **Document the calculation method in `notes`**
-
-6. **Apply finishing salt** per salt_scheme (0.5% of total dish weight):
-   - Total weight = sum of all components (e.g., 352g)
-   - Finishing salt = 352g × 0.005 = 1.76g salt = ~704mg additional sodium
-   - Add this to intrinsic sodium from ingredients (bread, salted butter, etc.)
-
-7. **Validate** using the available-carb Atwater formula (`4P + 9F + 4*carbs_available + 2*fibre + 2.4*polyols`): keep results within ±5% of venue kcal or document why.
-
-**Example worked calculation:**
-```
-Dish: Chilli Poached Eggs (L'ETO, 592 kcal listed)
-Components: 2 eggs, garlic yogurt, sourdough, kale, chilli butter
-
-Step 1 - Estimate known components:
-- 2 poached eggs: 2×50g = 100g → 140 kcal, 12.6g P, 9.5g F, 0.7g C
-- Greek yogurt (whole): 120g → 72 kcal, 9.6g P, 3.8g F, 4.8g C
-- Sourdough: 60g slice → 150 kcal, 5.4g P, 0.9g F, 29g C
-- Kale (cooked): 50g → 17 kcal, 1.6g P, 0.3g F, 3.3g C
-Sub-total: 379 kcal, 29.2g P, 14.5g F, 37.8g C
-
-Step 2 - Solve for butter to close calorie gap:
-592 - 379 = 213 kcal needed → ~30g butter
-(Refine with actual profiles to 22.2g for exact match)
-
-Step 3 - Apply finishing salt:
-Dish weight: 352g → salt 1.76g = 704mg sodium
-Add intrinsic sodium from bread + butter
-TOTAL SODIUM: ~1,543mg
-
-Step 4 - Validate Atwater:
-4×30.4 + 9×34.2 + 4×40.3 + 2×3.4 + 2.4×0.0 = 597.4 kcal (≈592 kcal label; note variance)
-```
-
-**Standard assumptions (write them in `assumptions`):**
-- `salt_scheme: "normal"` → add ~**0.5% of finished dish weight** as salt (≈ **sodium_mg = salt_g * 400**).
-- `oil_type:` venue norm (e.g., olive oil for SHK). Use typical FA split (~73% MUFA / ~11% PUFA / ~14% SFA).
-- Portion weight → labeled value if present; otherwise an estimate with a one‑line rationale.
-
-**Consistency checks (before saving):**
-- **Energy (Atwater)**: `kcal ≈ 4*protein + 9*fat + 4*carbs_available + 2*fibre + 2.4*polyols` (tolerance ±5–8%). Explain any gap.
-- **Fat split**: `sat + MUFA + PUFA + trans ≤ total fat` (difference = unassigned/rounding).
-- **Sodium↔salt**: compute `salt_g_from_sodium = sodium_mg * 2.5 / 1000` in `derived`.
-- **No negatives**; keep unknowns as `null`.
-- Rounding: kcal integer; grams **1 dp**; mg/µg integers.
-
-**Edit protocol (append‑only):**
-1. Locate dish by `id` (or add a new block from the Schema TEMPLATE).
-2. Edit values → **bump `version`** → update **`last_verified: YYYY-MM-DD`**.
-3. Append a `change_log` item: timestamp, reason, `fields_changed`, and **evidence links**.
-4. Never rewrite old change log entries.
-
-## CLI helpers (scripts)
-
-### `scripts/validate_data_bank.py`
-Validate all dish files in the data bank. Checks:
-- Available-carb energy math, fat‑split coherence, sodium↔salt, missing required keys, negative values.
-- Scans `data/food-data-bank/` directory recursively
-- Emits a human summary and a JSON report (to stdout).
-- Auto-regenerates the index after successful validation.
-
-Usage:
-```bash
-python scripts/validate_data_bank.py
-# Or specify custom directory:
-python scripts/validate_data_bank.py data/food-data-bank
-```
-
-### `scripts/new_dish_from_template.py`
-Create a new dish file in the appropriate venue/category folder.
-
-Usage:
-```bash
-python scripts/new_dish_from_template.py \
-  --dish_slug grilled_salmon_fillet \
-  --venue_slug shk \
-  --venue_name "Simple Health Kitchen, Baker Street (London)" \
-  --display_name "Grilled Salmon Fillet (SHK)" \
-  --category main \
-  --portion_desc "restaurant portion"
-```
-
-The script creates a new file in the appropriate folder and auto-regenerates the index file; review and commit the changes.
-
-### `scripts/generate_index.py`
-Generate the index from all dish files.
-
-Usage:
-```bash
-python scripts/generate_index.py
-```
-
-This is typically called automatically by the validation script, but can be run manually if needed.
-
-## Style guide (data entry)
-- Keep numbers **consistent with evidence** and **state assumptions** in one line.
-- Prefer **fewer, better** sources; list them in `source.evidence` (URLs or short notes).
-- If Deliveroo vs venue PDF disagree, choose the **exact‑match prep** as the macro anchor and explain.
-- Keep language neutral and terse—future‑you will thank current‑you.
-
-## Research notes
-
-**Purpose of venue RESEARCH.md files:**
-- Document **venue-specific** data sources, menu characteristics, and dish-specific learnings
-- **NOT for general methodology** - use this document (ESTIMATE.md) as the canonical reference
-
-**What belongs in venue RESEARCH.md:**
-- Venue data sources (nutrition PDFs, Deliveroo availability, menu URLs)
-- Signature ingredients or cooking styles unique to this venue
-- Case studies of challenging dishes with venue-specific estimation notes
-- Portion size quirks specific to this venue
-
-**What does NOT belong (already in ESTIMATE.md):**
-- Standard portions, fatty acid profiles, validation formulas
-- General component-based methodology
-- Research source prioritization
-
-**Examples:**
-- Jean-Georges at The Connaught → `data/food-data-bank/venues/jean-georges-connaught/RESEARCH.md`
-- L'ETO Caffe Soho → `data/food-data-bank/venues/leto-caffe-soho/RESEARCH.md`
-- Simple Health Kitchen → `data/food-data-bank/venues/simple-health-kitchen/RESEARCH.md`
-
-## Carbohydrate Estimation Protocol
-
-**Updated:** 2025-11-02  
-**Scope:** Applies to every dish, ingredient, and log entry in this skill.
+**Example:** Chilli Poached Eggs (L'ETO, 592 kcal): 2 eggs (100g, 140 kcal) + yogurt (120g, 72 kcal) + sourdough (60g, 150 kcal) + kale (50g, 17 kcal) = 379 kcal. Butter: 213 kcal gap → ~30g. Total weight 352g → finishing salt 1.76g = 704mg sodium. Validates to 597 kcal (±1%).
 
 ---
 
-### 1. Terminology & Required Fields
+# Carbohydrate Estimation Protocol
 
-Every `per_portion` block must track carbohydrate data with three explicit fields:
+**Updated:** 2025-11-02 | **Scope:** All dishes, ingredients, and log entries
 
-| Field | Meaning | Default precision |
+## Required Fields
+
+Every `per_portion` block must include three carbohydrate fields:
+
+| Field | Meaning | Precision |
 | --- | --- | --- |
-| `carbs_total_g` | Label-style total carbohydrate (includes fibre + polyols) | 0.1 g |
-| `carbs_available_g` | Digestible / "available" carbohydrate (a.k.a. net carbs) | 0.1 g |
-| `polyols_g` | Sugar alcohol mass; 0.0 if none or unknown | 0.1 g |
+| `carbs_total_g` | Total carbohydrate (includes fiber + polyols) | 0.1 g |
+| `carbs_available_g` | Digestible / "net" carbohydrate | 0.1 g |
+| `polyols_g` | Sugar alcohols (0.0 if none) | 0.1 g |
 
-- `fiber_total_g` continues to represent total dietary fibre (soluble + insoluble).
-- Relationship check: `carbs_total_g = carbs_available_g + fiber_total_g + polyols_g` (within rounding).
+**Relationship:** `carbs_total = carbs_available + fiber + polyols` (within rounding)
 
-**Zero vs null conventions:**
-- Use `0.0` for confirmed zero values (e.g., zero-carb foods like plain chicken have `carbs_total_g: 0.0`).
-- Use `null` for unknown or unmeasured values.
-- For zero-carb animal protein sources (meat, poultry, fish), set all carb and fiber fields to `0.0` (scientifically accurate).
-- For processed foods without fiber data, use `null` unless you can confirm zero fiber from ingredients.
+**TRUE ZEROS:** For zero-carb animal proteins (meat, poultry, fish), use `0.0` for all carb and fiber fields.
 
----
+## Source Handling
 
-### 2. Source Classification
+**UK/EU labels** (Deliveroo, Tesco, SHK): Report *available* carbs → record directly in `carbs_available_g`, then derive `carbs_total_g = carbs_available_g + fiber_total_g + polyols_g`
 
-1. **UK / EU labels & venue data (Deliveroo, Tesco, SHK, etc.)**
-   - Labels already report *available* carbohydrate.
-   - Record the printed value in `carbs_available_g`.
-   - Derive `carbs_total_g = carbs_available_g + fiber_total_g + polyols_g`.
+**US/Canada sources** (USDA, Nutritionix): Report *total* carbs → record in `carbs_total_g`, then subtract fiber and polyols to get `carbs_available_g`
 
-2. **US / Canada sources (USDA FDC, MyFitnessPal US, Nutritionix, etc.)**
-   - Labels list *total* carbohydrate.
-   - Copy the label into `carbs_total_g`.
-   - Subtract fibre and any polyols to obtain `carbs_available_g`.
-   - Flag the change in the dish `change_log` with source notes.
+**Ambiguous sources:** Check change log for "net carbs" or "available carbs" mentions. If unclear, treat as US handling and document.
 
-3. **Ambiguous / mixed sources**
-   - Check the change log and notes—if “net carbs” or “available carbs” is mentioned, treat as UK/EU style.
-   - Otherwise default to US handling and document assumptions.
+## Polyol Energy Factors
 
----
+- Maltitol, sorbitol, xylitol: **2.4 kcal/g**
+- Erythritol: **0.2 kcal/g**
+- Other polyols: Use EU guidelines or default to 2.4 kcal/g
 
-### 3. Polyol Treatment
+## Energy Calculation
 
-- When a label lists specific sugar alcohols, record them in `polyols_g`.
-- If multiple polyols are present and their masses differ, add a note describing the breakdown.
-- Energy factors (default unless more precise data are available):
-  - Maltitol, sorbitol, xylitol: **2.4 kcal/g**
-  - Erythritol: **0.2 kcal/g**
-  - Other polyols: reference EU guideline tables; if unknown, fall back to 2.4 kcal/g and document.
+Always use: `energy_kcal = 4×protein + 9×fat + 4×carbs_available + 2×fiber + 2.4×polyols`
 
----
-
-### 4. Energy Recalculation Checklist
-
-Use the UK/EU convention and store the result directly in `per_portion.energy_kcal`:
-
-```
-energy_kcal =
-    4 * protein_g
-  + 9 * fat_g
-  + 4 * carbs_available_g
-  + 2 * fiber_total_g
-  + polyol_factor * polyols_g
-```
-
-- `polyol_factor` is 2.4 kcal/g unless evidence specifies another value.
-- Always recompute `per_portion.energy_kcal` after updating carbs.
-
-**Energy storage policy:**
-- **Store the calculated energy** (from the formula above) in `per_portion.energy_kcal`.
-- If the calculated value differs from the venue/label energy, **note the original label value** in the `notes` field.
-- Document the variance in the `change_log` when updating energy values.
-- If the gap exceeds ±8%:
-  1. Confirm source classification (UK/EU vs US/Canada).
-  2. Double-check macronutrient values for accuracy.
-  3. If values are correct, proceed with calculated energy and document the variance.
-
----
-
-### 5. Change Log Requirements
-
-Whenever carbohydrate fields change:
-
-1. Bump `version` (if editing a dish) and update `last_verified`.
-2. Add a `change_log` entry with:
-   - ISO timestamp (Europe/London)
-   - `updated_by`
-   - `reason` (e.g., “Converted USDA total carbs to UK available convention”)
-   - `fields_changed` covering the carb fields and energy
-   - `sources` referencing the label, USDA record, or calculation note
-
----
-
-### 6. Daily Log Alignment
-
-- Logs should mirror the dish data: include `carbs_total_g`, `carbs_available_g`, and `polyols_g` for each entry.
-- When scaling a dish (e.g., half-portion), scale all carbohydrate fields proportionally.
-- Custom log-only items follow the same rules as dishes—classify the source first, then populate the three fields and recompute energy.
-
----
-
-### 7. Validation Script Expectations
-
-The validator (`scripts/validate_data_bank.py`) assumes:
-
-- `carbs_available_g` is present when `carbs_total_g` is present.
-- `carbs_total_g ≈ carbs_available_g + fiber_total_g + polyols_g`.
-- `per_portion.energy_kcal` matches the available-carb formula above (±8% tolerance).
-
-Any violations emit warnings to catch regressions before committing.
+**Storage policy:** Store calculated energy in `per_portion.energy_kcal`. If venue/label differs by >±8%, note original value in `notes` field and document variance in `change_log`. Confirm source classification (UK vs US) and recheck macros before accepting variance.
