@@ -1,7 +1,7 @@
 ---
 title: Food Data Bank Index
 description: Auto-generated index of all dishes in the food data bank
-generated: 2025-11-03 17:25:43 UTC
+generated: 2025-11-04 09:34:34 UTC
 ---
 
 # Food Data Bank Index
@@ -11,7 +11,7 @@ generated: 2025-11-03 17:25:43 UTC
 
 ## Overview
 
-Total dishes: 64
+Total dishes: 65
 
 - **Venues**: 8 categories
 - **Packaged Products**: 7 categories
@@ -207,7 +207,7 @@ Total dishes: 64
 
 *Location: `data/food-data-bank/generic/ingredients/`*
 
-**11 dishes:**
+**12 dishes:**
 
 - [Avocado (Fresh, 75g)](food-data-bank/generic/ingredients/avocado_fresh_75g_generic-ingredients_v1.md) {#avocado_fresh_75g_generic-ingredients_v1}
 - [Blueberries - 150 g](food-data-bank/generic/ingredients/blueberries_150g_v1.md) {#blueberries_150g_v1}
@@ -220,6 +220,7 @@ Total dishes: 64
 - [Raspberries - 150 g](food-data-bank/generic/ingredients/raspberries_150g_v1.md) {#raspberries_150g_v1}
 - [Skyr - plain (200 g)](food-data-bank/generic/ingredients/skyr_plain_200g_v1.md) {#skyr_plain_200g_v1}
 - [Sunflower Seeds, 30 g](food-data-bank/generic/ingredients/sunflower_seeds_30g_v1.md) {#sunflower_seeds_30g_v1}
+- [Tiramisu Yogurt Pot (170g)](food-data-bank/generic/ingredients/tiramisu_yogurt_pot_170g_generic-ingredients_v1.md) {#tiramisu_yogurt_pot_170g_generic-ingredients_v1}
 
 ## Generic: Pub Bar
 
