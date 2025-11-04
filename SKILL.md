@@ -37,7 +37,7 @@ When the user has eaten a dish and you have completed **A) Estimating**:
      - Store `food_bank_id`.
      - Include quantity and unit.
      - Add optional notes if user provided context.
-   - **IMPORTANT - Git Workflow**: Commit food logs to the `daily-logs` branch (NOT a feature branch). Do NOT create PRs manually - the daily automation workflow will automatically commit, create PRs, and merge to main at 4am UTC daily.
+   - **IMPORTANT - Git Workflow**: Commit food logs to your current Claude feature branch (`claude/*`). The daily automation workflow will automatically aggregate logs from all Claude branches at 4am UTC, create a PR from `daily-logs` to `main`, and auto-merge after validation. You can also create PRs immediately if needed.
    - Proceed to **C) Daily Analysis** without asking the user.
 
 **After logging:** Show updated daily totals and gaps: "Logged ✓. Today: X/Y kcal, X/Y protein. Still need Z." Remember that if the user asks you for lunch recommendations, they likely also want to have dinner later, so don't try to meet all targets with that single meal.
