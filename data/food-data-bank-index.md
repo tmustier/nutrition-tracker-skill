@@ -1,7 +1,7 @@
 ---
 title: Food Data Bank Index
 description: Auto-generated index of all dishes in the food data bank
-generated: 2025-11-04 10:41:27 UTC
+generated: 2025-11-04 12:50:11 UTC
 ---
 
 # Food Data Bank Index
@@ -11,7 +11,7 @@ generated: 2025-11-04 10:41:27 UTC
 
 ## Overview
 
-Total dishes: 66
+Total dishes: 67
 
 - **Venues**: 8 categories
 - **Packaged Products**: 7 categories
@@ -192,9 +192,10 @@ Total dishes: 66
 
 *Location: `data/food-data-bank/generic/fresh-produce/`*
 
-**1 dishes:**
+**2 dishes:**
 
 - [Clementine (Fresh Fruit)](food-data-bank/generic/fresh-produce/clementine_fresh_fruit_v1.md) {#clementine_fresh_fruit_v1}
+- [Persimmon (Fresh Fruit)](food-data-bank/generic/fresh-produce/persimmon_fresh_fruit_generic_v1.md) {#persimmon_fresh_fruit_generic_v1}
 
 ## Generic: Grocery
 
