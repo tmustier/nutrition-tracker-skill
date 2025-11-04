@@ -10,7 +10,7 @@
   - [Data Source Reliability: Primary (Deliveroo, PDFs) vs. Secondary (USDA)](#data-source-reliability-primary-deliveroo-pdfs-vs-secondary-usda)
   - [Validation Formulas: Energy (Atwater), Fat Splits, Sodium Conversion](#validation-formulas-energy-atwater-fat-splits-sodium-conversion)
 - [Nutrient Estimation Philosophy: Never Use Null, Always Estimate with Confidence](#nutrient-estimation-philosophy-never-use-null-always-estimate-with-confidence)
-  - [Core Principle: 0 for True Zeros, Estimates for Everything Else](#core-principle-0-for-true-zeros-estimates-for-everything-else)
+  - [Core Principle: 0 for True Zeros, Estimates for Everything Else. NEVER Use NULL](#core-principle-0-for-true-zeros-estimates-for-everything-else)
   - [4-Step Estimation Process: USDA Lookup, Scale, Document, Validate](#4-step-estimation-process-usda-lookup-scale-document-validate)
   - [Estimation Confidence Levels: HIGH (±5-15%), MEDIUM (±20-40%), LOW (±50-100%)](#estimation-confidence-levels-high-5-15-medium-20-40-low-50-100)
   - [UK-Specific: Dairy Iodine 2-3× Higher Than EU](#uk-specific-dairy-iodine-2-3-higher-than-eu)
@@ -124,7 +124,7 @@
 
 # Nutrient Estimation Philosophy: Never Use Null, Always Estimate with Confidence
 
-## Core Principle: 0 for True Zeros, Estimates for Everything Else
+## Core Principle: 0 for True Zeros, Estimates for Everything Else. NEVER Use NULL
 
 **Never use null. Always estimate with documented confidence.**
 
