@@ -51,6 +51,5 @@ The user may sometimes ask for custom analyses. The main data sources for these 
 - `data/food-data-bank/` — Individual dish files organized by venue/category in folders (see `data/food-data-bank-index.md` for complete index).
 - `data/logs/` — Nutrition logs organized by date (`YYYY-MM/DD.yaml`). See `data/logs/SCHEMA.md` for format.
 - `references/health-profile.yaml` — Daily targets and monitored fields.
-- `references/METHODOLOGY.md` — General research methodology and best practices.
 - Venue-specific research notes in `data/food-data-bank/venues/{venue-name}/RESEARCH.md`
 - `scripts/calculate_nutrition_summary.py` — Multi-day nutrition summary script (default: last 7 days). Usage: `python3 scripts/calculate_nutrition_summary.py [days]`

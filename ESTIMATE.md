@@ -36,7 +36,6 @@
 4. **Document research findings** (if applicable):
    - Add learnings, tips, or venue-specific guidance to the venue's `RESEARCH.md` file
    - Venue-specific files: `data/food-data-bank/venues/{venue-name}/RESEARCH.md`
-   - General methodology: `references/METHODOLOGY.md`
    - Include useful research methods, data sources, or estimation techniques
 
 5. **Commit with clear message**:
@@ -44,6 +43,35 @@
    - Include calorie counts and what was added in the commit message
 
 **Do NOT default to generic values. If exact data is unavailable, use ingredient-based estimation and document your method.**
+
+# Quick Reference Data
+
+## Standard Portions
+
+| Item | Weight | Notes |
+|------|--------|-------|
+| Eggs | 50g each | Standard large egg |
+| Bread slice | 60g | 50-70g range; NOT 100g |
+| Yogurt | 100-120g | Restaurant serving |
+| Cooked vegetables | 50-80g | Side portion |
+| Restaurant soup | ~300g | Standard bowl |
+
+## Fatty Acid Profiles
+
+**Common Oils:**
+- **Olive oil:** ~73% MUFA, ~11% PUFA, ~14% SFA
+- **Coconut:** ~83% SFA, ~6% MUFA, ~2% PUFA
+- **Butter:** ~51% SFA, ~21% MUFA, ~3% PUFA
+
+**Common Proteins:**
+- **Wagyu beef:** ~40% MUFA, ~20% PUFA of total fat
+- **Chicken:** ~45% MUFA, ~21% PUFA of total fat
+- **Salmon:** ~29% MUFA, ~40% PUFA of total fat
+
+## Research Source Priority
+
+1. **PRIMARY (highest confidence):** Deliveroo UK, Uber Eats UK, venue nutrition PDFs, product labels
+2. **SECONDARY (estimate/scale):** USDA FoodData Central, MyFoodData.com, comparable dishes from similar venues
 
 # Nutrient Estimation Philosophy
 
@@ -226,8 +254,7 @@ This is typically called automatically by the validation script, but can be run 
 - Keep language neutral and terse—future‑you will thank current‑you.
 
 ## Research notes
-For accumulated research findings, methodology lessons, and venue-specific guidance:
-- General methodology and best practices: `references/METHODOLOGY.md`
+For accumulated research findings and venue-specific guidance:
 - Venue-specific research notes: `data/food-data-bank/venues/{venue-name}/RESEARCH.md` (where available)
   - Example: Jean-Georges at The Connaught → `data/food-data-bank/venues/jean-georges-connaught/RESEARCH.md`
   - Example: L'ETO Caffe Soho → `data/food-data-bank/venues/leto-caffe-soho/RESEARCH.md`
