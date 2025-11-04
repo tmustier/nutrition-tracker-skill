@@ -1,5 +1,29 @@
 # Complete workflow for adding dishes
 
+## Table of Contents
+
+- [Complete workflow for adding dishes](#complete-workflow-for-adding-dishes)
+- [CLI Scripts](#cli-scripts)
+- [Quick Reference Data](#quick-reference-data)
+  - [Standard Portions](#standard-portions)
+  - [Fatty Acid Profiles](#fatty-acid-profiles)
+  - [Research Source Priority](#research-source-priority)
+  - [Validation Formulas](#validation-formulas)
+- [Nutrient Estimation Philosophy](#nutrient-estimation-philosophy)
+  - [Core Principle](#core-principle)
+  - [Estimation Process](#estimation-process)
+  - [Confidence Levels](#confidence-levels)
+  - [UK-Specific Note](#uk-specific-note)
+  - [TRUE ZEROS](#true-zeros)
+- [Analysis rules](#analysis-rules)
+- [Carbohydrate Estimation Protocol](#carbohydrate-estimation-protocol)
+  - [Required Fields](#required-fields)
+  - [Source Handling](#source-handling)
+  - [Polyol Energy Factors](#polyol-energy-factors)
+  - [Energy Calculation](#energy-calculation)
+
+---
+
 **CRITICAL: Follow this complete workflow when adding new dishes. Do NOT skip steps. Complete full estimation workflow without asking the user for details; you can confirm these with the user after you're done.**
 
 1. **Research thoroughly** (use multiple sources):
