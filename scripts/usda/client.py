@@ -33,6 +33,7 @@ class UsdaApiClient:
         1082: 'fiber_soluble_g',
         1084: 'fiber_insoluble_g',
         1005: 'carbs_total_g',
+        1018: 'polyols_g',  # Sugar alcohols (erythritol, xylitol, sorbitol, etc.)
         1093: 'sodium_mg',
         1092: 'potassium_mg',
         1100: 'iodine_ug',
