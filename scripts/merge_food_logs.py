@@ -240,21 +240,50 @@ def merge_log_files(files_by_branch: Dict[str, dict], file_path: str) -> dict:
             # Multiple entries with same timestamp - merge items
             print(f"   ⚠️  Duplicate timestamp {timestamp}: merging {len(entries)} entries")
 
-            merged_items = []
+            all_items = []
             merged_notes = []
 
             for entry in entries:
-                merged_items.extend(entry['items'])
+                all_items.extend(entry['items'])
                 if 'notes' in entry and entry['notes']:
                     merged_notes.append(entry['notes'])
 
+            # Deduplicate items by comparing key properties
+            # Use name, food_bank_id, quantity, unit as unique identifier
+            seen_items = {}  # key -> item
+            for item in all_items:
+                # Create unique key from item properties
+                item_key = (
+                    item.get('name'),
+                    item.get('food_bank_id'),
+                    item.get('quantity'),
+                    item.get('unit')
+                )
+
+                if item_key not in seen_items:
+                    seen_items[item_key] = item
+
+            deduplicated_items = list(seen_items.values())
+
+            # Log if deduplication occurred
+            if len(deduplicated_items) < len(all_items):
+                print(f"      Deduplicated {len(all_items)} items → {len(deduplicated_items)} unique items")
+
             merged_entry = {
                 'timestamp': timestamp,
-                'items': merged_items
+                'items': deduplicated_items
             }
 
-            if merged_notes:
-                merged_entry['notes'] = ' | '.join(merged_notes)
+            # Deduplicate notes as well
+            unique_notes = []
+            seen_notes = set()
+            for note in merged_notes:
+                if note not in seen_notes:
+                    unique_notes.append(note)
+                    seen_notes.add(note)
+
+            if unique_notes:
+                merged_entry['notes'] = ' | '.join(unique_notes)
 
             merged_entries.append(merged_entry)
 
