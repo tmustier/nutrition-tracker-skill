@@ -1,7 +1,7 @@
 ---
 title: Food Data Bank Index
 description: Auto-generated index of all dishes in the food data bank
-generated: 2025-11-04 20:06:26 UTC
+generated: 2025-11-04 20:08:16 UTC
 ---
 
 # Food Data Bank Index
@@ -69,7 +69,7 @@ Total dishes: 71
 
 **1 dishes:**
 
-- [Salmon Sushi Set (6 salmon nigiri; 8 pieces salmon avocado roll) (Panzer's)](food-data-bank/venues/panzers/salmon_sushi_set_panzers_v1.md) {#salmon_sushi_set_panzers_panzers_v1}
+- [Salmon Sushi Set (6 salmon nigiri; 8 pieces salmon avocado roll) (Panzer's)](food-data-bank/venues/panzers/salmon_sushi_set_panzers_v1.md) {#salmon_sushi_set_panzers_v1}
 
 ## Simple Health Kitchen
 
