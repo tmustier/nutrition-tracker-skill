@@ -4,10 +4,12 @@ on:
   push:
     paths:
       - 'data/**.md'
+      - 'data/logs/**'
       - 'scripts/**.py'
   pull_request:
     paths:
       - 'data/**.md'
+      - 'data/logs/**'
       - 'scripts/**.py'
 
 jobs:
@@ -29,3 +31,99 @@ jobs:
       - name: Run validator
         run: |
           python scripts/validate_data_bank.py
+
+  quick-validate-logs:
+    # Run only on pull_request events if PR has automerge:food-log label OR if coming from daily-logs branch
+    if: github.event_name == 'pull_request' && (contains(github.event.pull_request.labels.*.name, 'automerge:food-log') || github.head_ref == 'daily-logs')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install pyyaml
+
+      - name: Quick YAML validation (logs only)
+        run: |
+          python -c "
+          import yaml
+          import sys
+          from pathlib import Path
+
+          log_dir = Path('data/logs')
+          if not log_dir.exists():
+              print(f'❌ Error: {log_dir} does not exist')
+              sys.exit(1)
+
+          errors = []
+          files_checked = 0
+
+          for log_file in log_dir.rglob('*.yaml'):
+              files_checked += 1
+              try:
+                  with open(log_file) as f:
+                      data = yaml.safe_load(f)
+
+                  # Schema validation
+                  if not isinstance(data, dict):
+                      errors.append(f'{log_file}: Root must be a dictionary')
+                      continue
+
+                  # Check required top-level fields
+                  if 'date' not in data:
+                      errors.append(f'{log_file}: Missing required field: date')
+
+                  if 'day_type' not in data:
+                      errors.append(f'{log_file}: Missing required field: day_type')
+                  elif data['day_type'] not in ['rest', 'training']:
+                      errors.append(f'{log_file}: day_type must be \"rest\" or \"training\", got: {data[\"day_type\"]}')
+
+                  if 'entries' not in data:
+                      errors.append(f'{log_file}: Missing required field: entries')
+                  elif not isinstance(data['entries'], list):
+                      errors.append(f'{log_file}: entries must be a list')
+                  else:
+                      # Validate each entry has proper structure
+                      for i, entry in enumerate(data['entries']):
+                          if not isinstance(entry, dict):
+                              errors.append(f'{log_file}: Entry {i} must be a dictionary')
+                              continue
+
+                          if 'items' not in entry:
+                              errors.append(f'{log_file}: Entry {i} missing required field: items')
+                              continue
+
+                          # Validate nutrition fields are numeric (no nulls)
+                          for j, item in enumerate(entry.get('items', [])):
+                              if not isinstance(item, dict):
+                                  continue
+
+                              nutrition = item.get('nutrition', {})
+                              if not isinstance(nutrition, dict):
+                                  continue
+
+                              for field, value in nutrition.items():
+                                  if value is None:
+                                      errors.append(f'{log_file}: Entry {i}, Item {j}, nutrition.{field} is null (must be numeric)')
+                                  elif not isinstance(value, (int, float)):
+                                      errors.append(f'{log_file}: Entry {i}, Item {j}, nutrition.{field} must be numeric, got {type(value).__name__}')
+
+              except yaml.YAMLError as e:
+                  errors.append(f'{log_file}: YAML syntax error: {e}')
+              except Exception as e:
+                  errors.append(f'{log_file}: Unexpected error: {e}')
+
+          if errors:
+              print('❌ Validation errors found:')
+              for err in errors:
+                  print(f'  - {err}')
+              sys.exit(1)
+          else:
+              print(f'✅ All {files_checked} log files passed validation (YAML syntax + schema)')
+          "
