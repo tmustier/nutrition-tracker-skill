@@ -52,7 +52,7 @@
 
 # CLI Scripts
 
-**`validate_data_bank.py`**: Validates all dish files (energy math, fat splits, sodium/salt). Usage: `python scripts/validate_data_bank.py`
+**`validate_data_bank.py`**: Validates all dish files (energy math, fat splits, sodium/salt, required keys, negative values). Usage: `python scripts/validate_data_bank.py`
 
 **`new_dish_from_template.py`**: Creates dish file in appropriate venue folder. Usage: `python scripts/new_dish_from_template.py --dish_slug NAME --venue_slug ABBR --venue_name "Full Name" --display_name "Dish (Venue)" --category CATEGORY`
 
@@ -161,13 +161,13 @@ When a dish has multiple identifiable components, use this method:
 1. **List components and estimate known weights** using standard portions (see Quick Reference). Leave one component (usually fat/oil) as the "closing variable"
 
 2. **Calculate sub-totals** for known components using USDA/MyFoodData, then solve for the unknown component to close the calorie gap
-   - Example: Known components = 379 kcal, venue lists 592 kcal → 213 kcal gap → butter is ~7.2 kcal/g → ~30g butter
+   - Example: Known components = 379 kcal, venue lists 592 kcal → 213 kcal gap → butter is ~7.2 kcal/g → ~30g (refined to 22.2g for exact match)
 
 3. **Sum complete macros** from USDA profiles scaled to estimated weights. Add finishing salt (default assumption: 0.5% of total dish weight) to sodium
 
 4. **Validate** energy within ±5-8% using Atwater formula (see Quick Reference). Document method in `notes`
 
-**Example:** Chilli Poached Eggs (L'ETO, 592 kcal): 2 eggs (100g, 140 kcal) + yogurt (120g, 72 kcal) + sourdough (60g, 150 kcal) + kale (50g, 17 kcal) = 379 kcal. Butter: 213 kcal gap → ~30g. Total weight 352g → finishing salt 1.76g = 704mg sodium. Validates to 597 kcal (±1%).
+**Example:** Chilli Poached Eggs (L'ETO, 592 kcal): 2 eggs (100g, 140 kcal) + yogurt (120g, 72 kcal) + sourdough (60g, 150 kcal) + kale (50g, 17 kcal) = 379 kcal. Butter: 213 kcal gap → ~30g (refined to 22.2g). Total weight 352g → finishing salt 1.76g = 704mg sodium. Total sodium 1,543mg (includes intrinsic from bread + butter). Validates to 597 kcal (±1%).
 
 ---
 

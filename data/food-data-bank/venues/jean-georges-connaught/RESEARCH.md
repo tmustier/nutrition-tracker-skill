@@ -1,6 +1,7 @@
 # Research Notes: Jean-Georges at The Connaught
 
 **Date:** 2025-10-28
+**General Methodology:** See [ESTIMATE.md](/ESTIMATE.md) for standard portions, fatty acid profiles, validation formulas, and component-based estimation
 
 ## Venue-Specific Data Sources
 

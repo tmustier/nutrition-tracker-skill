@@ -1,6 +1,7 @@
 # Research Notes: L'ETO Caffe, Soho
 
 **Date:** 2025-10-29
+**General Methodology:** See [ESTIMATE.md](/ESTIMATE.md) for standard portions, fatty acid profiles, validation formulas, and component-based estimation
 
 ## Venue-Specific Data Sources
 

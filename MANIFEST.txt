@@ -35,12 +35,12 @@ nutrition-tracker-skill/
   data/food-data-bank-index.md
   data/logs/SCHEMA.md
   references/health-profile.yaml
-  references/METHODOLOGY.md
   scripts/validate_data_bank.py
   scripts/new_dish_from_template.py
   scripts/generate_index.py
   scripts/analyze_data_bank.py
   scripts/migrate_to_individual_files.py
+  scripts/standardize_yaml.py
   .github/workflows/validate.yml
   .github/workflows/claude.yml
   .github/workflows/claude-code-review.yml
