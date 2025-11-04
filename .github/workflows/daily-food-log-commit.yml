@@ -13,18 +13,28 @@ on:
         required: false
         type: string
 
+concurrency:
+  group: daily-logs-automation
+  cancel-in-progress: false
+
 jobs:
   commit-and-pr:
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
+      issues: write
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Ensure daily-logs branch exists
         run: |
@@ -41,11 +51,6 @@ jobs:
             git push -u origin daily-logs
           fi
 
-      - name: Configure git
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
       - name: Merge latest main to avoid conflicts
         id: merge_main
         run: |
@@ -56,6 +61,8 @@ jobs:
             exit 1
           else
             echo "merge_conflict=false" >> $GITHUB_OUTPUT
+            # Push the merge commit to keep branch in sync
+            git push origin daily-logs
           fi
 
       - name: Create issue on merge conflict
