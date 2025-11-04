@@ -1,6 +1,6 @@
 # Complete workflow for adding dishes
 
-**CRITICAL: Follow this complete workflow when adding new dishes. Do NOT skip steps.**
+**CRITICAL: Follow this complete workflow when adding new dishes. Do NOT skip steps. Complete full estimation workflow without asking the user for details; you can confirm these with the user after you're done.**
 
 1. **Research thoroughly** (use multiple sources):
    - Start with delivery platforms (Deliveroo/Uber Eats) for calorie counts and ingredient lists
