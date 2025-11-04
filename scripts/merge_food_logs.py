@@ -293,7 +293,8 @@ def merge_log_files(files_by_branch: Dict[str, dict], file_path: str) -> dict:
             merged_entries.append(entries[0])
         else:
             # Multiple entries with same timestamp - merge items
-            print(f"   ⚠️  Duplicate timestamp {timestamp}: merging {len(entries)} entries")
+            print(f"   ⚠️  REVIEW NEEDED: {len(entries)} entries merged at {timestamp}")
+            print(f"       This may indicate duplicate logging. Please verify the merged result.")
 
             all_items = []
             merged_notes = []

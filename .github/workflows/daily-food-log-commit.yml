@@ -15,7 +15,7 @@ on:
 
 concurrency:
   group: daily-logs-automation
-  cancel-in-progress: false
+  cancel-in-progress: true  # Prevent concurrent runs to avoid state file race conditions
 
 jobs:
   commit-and-pr:
