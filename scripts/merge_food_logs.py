@@ -19,8 +19,8 @@ import subprocess
 import sys
 import yaml
 from pathlib import Path
-from datetime import datetime
-from typing import Dict, List, Optional, Tuple
+from datetime import datetime, timezone
+from typing import Dict, List, Tuple
 from collections import defaultdict
 import json
 
@@ -47,16 +47,34 @@ def run_git_command(cmd: List[str]) -> str:
         print(f"   Error: {e.stderr}", file=sys.stderr)
         raise
 
-def discover_claude_branches() -> List[Tuple[str, str]]:
+def get_remote_name() -> str:
+    """
+    Get the primary remote name (usually 'origin').
+
+    Returns:
+        Remote name, defaults to 'origin' if it exists, otherwise first remote
+    """
+    remotes = run_git_command(['git', 'remote']).split('\n')
+    remotes = [r.strip() for r in remotes if r.strip()]
+
+    if not remotes:
+        raise RuntimeError("No git remotes found")
+
+    return 'origin' if 'origin' in remotes else remotes[0]
+
+def discover_claude_branches(remote: str) -> List[Tuple[str, str]]:
     """
     Discover all claude/* branches.
+
+    Args:
+        remote: Git remote name (e.g., 'origin')
 
     Returns:
         List of (branch_name, sha) tuples
     """
     print("🔍 Discovering claude/* branches...")
 
-    output = run_git_command(['git', 'ls-remote', '--heads', 'origin', 'claude/*'])
+    output = run_git_command(['git', 'ls-remote', '--heads', remote, 'claude/*'])
 
     if not output:
         print("   No claude/* branches found")
@@ -73,19 +91,20 @@ def discover_claude_branches() -> List[Tuple[str, str]]:
     print(f"   Found {len(branches)} claude/* branches")
     return branches
 
-def get_log_files_from_branch(branch: str) -> Dict[str, str]:
+def get_log_files_from_branch(branch: str, remote: str) -> Dict[str, str]:
     """
     Get all food log files from a branch.
 
     Args:
-        branch: Branch name (e.g., 'origin/claude/...')
+        branch: Branch name (e.g., 'claude/...')
+        remote: Git remote name (e.g., 'origin')
 
     Returns:
         Dict mapping file paths to blob SHAs
     """
     try:
         output = run_git_command([
-            'git', 'ls-tree', '-r', f'origin/{branch}', 'data/logs/'
+            'git', 'ls-tree', '-r', f'{remote}/{branch}', 'data/logs/'
         ])
     except subprocess.CalledProcessError:
         # Branch doesn't have data/logs/ directory
@@ -109,11 +128,18 @@ def get_log_files_from_branch(branch: str) -> Dict[str, str]:
 
     return log_files
 
-def extract_file_content(branch: str, file_path: str) -> str:
-    """Extract file content from a branch using git show."""
+def extract_file_content(branch: str, file_path: str, remote: str) -> str:
+    """
+    Extract file content from a branch using git show.
+
+    Args:
+        branch: Branch name (e.g., 'claude/...')
+        file_path: Path to file in repo
+        remote: Git remote name (e.g., 'origin')
+    """
     try:
         content = run_git_command([
-            'git', 'show', f'origin/{branch}:{file_path}'
+            'git', 'show', f'{remote}/{branch}:{file_path}'
         ])
         return content
     except subprocess.CalledProcessError:
@@ -169,6 +195,35 @@ def validate_log_schema(log_data: dict, file_path: str) -> List[str]:
 
         if not isinstance(entry['items'], list):
             errors.append(f"Entry {i} items must be a list")
+            continue
+
+        # Validate each item
+        for j, item in enumerate(entry['items']):
+            if not isinstance(item, dict):
+                errors.append(f"Entry {i}, item {j} must be a dictionary")
+                continue
+
+            # Check required item fields
+            required_item_fields = ['name', 'quantity', 'unit', 'nutrition']
+            for field in required_item_fields:
+                if field not in item:
+                    errors.append(f"Entry {i}, item {j} missing: {field}")
+
+            # Validate nutrition object
+            if 'nutrition' in item:
+                nutrition = item['nutrition']
+                if not isinstance(nutrition, dict):
+                    errors.append(f"Entry {i}, item {j}: nutrition must be a dictionary")
+                    continue
+
+                # Check for null values (forbidden per schema)
+                for field, value in nutrition.items():
+                    if value is None:
+                        errors.append(f"Entry {i}, item {j}: nutrition.{field} is null (must be numeric)")
+                    elif not isinstance(value, (int, float)):
+                        errors.append(f"Entry {i}, item {j}: nutrition.{field} must be numeric, got {type(value).__name__}")
+                    elif value < 0:
+                        errors.append(f"Entry {i}, item {j}: nutrition.{field} must be >= 0, got {value}")
 
     return errors
 
@@ -304,7 +359,18 @@ def merge_log_files(files_by_branch: Dict[str, dict], file_path: str) -> dict:
     return merged_log
 
 def load_processed_state() -> dict:
-    """Load state of previously processed branches."""
+    """
+    Load state of previously processed branches.
+
+    CONCURRENCY NOTE: This function assumes that only ONE instance of this script
+    runs at a time. The workflow has `concurrency.cancel-in-progress: false` to
+    prevent concurrent runs. If multiple instances run simultaneously, the last
+    write wins and earlier state updates may be lost. For production use with
+    concurrent runs, consider:
+    - File locking (e.g., fcntl on Linux)
+    - Database storage instead of JSON file
+    - Git notes for distributed state tracking
+    """
     state_file = Path('.github/workflows/processed-branches.json')
 
     if not state_file.exists():
@@ -318,7 +384,13 @@ def load_processed_state() -> dict:
         return {'last_run': None, 'processed': {}}
 
 def save_processed_state(state: dict):
-    """Save state of processed branches."""
+    """
+    Save state of processed branches.
+
+    CONCURRENCY NOTE: No file locking is used. Relies on workflow-level
+    concurrency control to prevent simultaneous writes. See load_processed_state()
+    for details.
+    """
     state_file = Path('.github/workflows/processed-branches.json')
     state_file.parent.mkdir(parents=True, exist_ok=True)
 
@@ -331,11 +403,14 @@ def main():
     print("Food Log Aggregation from Claude Branches")
     print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
 
+    # Get remote name
+    remote = get_remote_name()
+
     # Load state
     state = load_processed_state()
 
     # Discover branches
-    branches = discover_claude_branches()
+    branches = discover_claude_branches(remote)
 
     if not branches:
         print("\n✓ No claude/* branches found, nothing to do")
@@ -369,7 +444,7 @@ def main():
         print(f"\n📂 {branch_name} ({branch_sha[:7]})")
 
         # Get log files from this branch
-        log_files = get_log_files_from_branch(branch_name)
+        log_files = get_log_files_from_branch(branch_name, remote)
 
         if not log_files:
             print("  No log files found")
@@ -381,7 +456,7 @@ def main():
         # Extract each file
         for file_path, file_sha in log_files.items():
             try:
-                content = extract_file_content(branch_name, file_path)
+                content = extract_file_content(branch_name, file_path, remote)
 
                 # Parse YAML
                 log_data = yaml.safe_load(content)
@@ -411,7 +486,7 @@ def main():
         # Mark branch as processed
         state['processed'][branch_name] = {
             'sha': branch_sha,
-            'processed_at': datetime.utcnow().isoformat() + 'Z',
+            'processed_at': datetime.now(timezone.utc).isoformat(),
             'files_extracted': len(log_files)
         }
 
@@ -446,8 +521,19 @@ def main():
         print("Writing merged files")
         print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
 
+        # Define allowed base directory for security
+        allowed_base = Path.cwd() / 'data' / 'logs'
+
         for file_path, log_data in merged_files.items():
-            output_path = Path(file_path)
+            output_path = Path(file_path).resolve()
+
+            # Path traversal protection: ensure file is within data/logs/
+            if not str(output_path).startswith(str(allowed_base.resolve())):
+                error_msg = f"Security: File path {file_path} attempts to write outside data/logs/"
+                print(f"❌ {file_path}: Path traversal detected")
+                stats['errors'].append(error_msg)
+                continue
+
             output_path.parent.mkdir(parents=True, exist_ok=True)
 
             with open(output_path, 'w') as f:
@@ -456,7 +542,7 @@ def main():
             print(f"✓ Wrote {file_path}")
 
     # Update state
-    state['last_run'] = datetime.utcnow().isoformat() + 'Z'
+    state['last_run'] = datetime.now(timezone.utc).isoformat()
     save_processed_state(state)
 
     # Print summary
