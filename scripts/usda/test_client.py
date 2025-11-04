@@ -150,7 +150,7 @@ def main():
         print("  https://fdc.nal.usda.gov/api-key-signup.html\n")
         sys.exit(1)
 
-    print(f"✓ API key is set (starts with: {os.environ['USDA_API_KEY'][:10]}...)\n")
+    print(f"✓ API key is set (starts with: {os.environ['USDA_API_KEY'][:4]}...)\n")
 
     # Run tests
     tests = [

@@ -9,7 +9,7 @@ import os
 import sys
 import json
 import requests
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional
 from pathlib import Path
 
 
@@ -96,9 +96,23 @@ class UsdaApiClient:
             response = requests.get(f"{self.BASE_URL}/foods/search", params=params)
             response.raise_for_status()
             data = response.json()
-            return data.get('foods', [])
+
+            # Validate response structure
+            if not isinstance(data, dict):
+                print(f"Error: Invalid response format (expected dict, got {type(data).__name__})", file=sys.stderr)
+                return []
+
+            foods = data.get('foods', [])
+            if not isinstance(foods, list):
+                print(f"Error: Invalid 'foods' format (expected list, got {type(foods).__name__})", file=sys.stderr)
+                return []
+
+            return foods
         except requests.exceptions.RequestException as e:
             print(f"Error searching USDA database: {e}", file=sys.stderr)
+            return []
+        except (ValueError, KeyError) as e:
+            print(f"Error parsing USDA response: {e}", file=sys.stderr)
             return []
 
     def get_food_details(self, fdc_id: int) -> Optional[Dict]:
@@ -184,6 +198,11 @@ class UsdaApiClient:
         best_match = results[0]
         fdc_id = best_match.get('fdcId')
 
+        # Validate fdcId exists and is valid
+        if not fdc_id or not isinstance(fdc_id, (int, str)):
+            print(f"Error: Invalid or missing fdcId in search result", file=sys.stderr)
+            return None
+
         # Get detailed nutrition data
         details = self.get_food_details(fdc_id)
         if not details:
@@ -219,7 +238,7 @@ class UsdaApiClient:
         patterns = [
             (r'(\d+\.?\d*)\s*g(?:rams?)?', 1.0),  # grams
             (r'(\d+\.?\d*)\s*oz(?:unces?)?', 28.35),  # ounces to grams
-            (r'(\d+\.?\d*)\s*lbs?|pounds?', 453.592),  # pounds to grams
+            (r'(\d+\.?\d*)\s*(?:lbs?|pounds?)', 453.592),  # pounds to grams
         ]
 
         for pattern, multiplier in patterns:
