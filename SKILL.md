@@ -1,5 +1,5 @@
 ---
-name: nutrition-tracker-skill
+name: nutrition-tracking
 description: Comprehensive nutrition toolkit for estimating, logging, and analysing what Thomas eats.
 license: Apache-2.0
 ---
