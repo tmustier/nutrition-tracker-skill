@@ -1,7 +1,7 @@
 ---
 title: Food Data Bank Index
 description: Auto-generated index of all dishes in the food data bank
-generated: 2025-11-04 12:50:11 UTC
+generated: 2025-11-04 20:08:16 UTC
 ---
 
 # Food Data Bank Index
@@ -11,11 +11,11 @@ generated: 2025-11-04 12:50:11 UTC
 
 ## Overview
 
-Total dishes: 67
+Total dishes: 71
 
-- **Venues**: 8 categories
+- **Venues**: 9 categories
 - **Packaged Products**: 7 categories
-- **Generic Items**: 7 categories
+- **Generic Items**: 10 categories
 
 ---
 
@@ -62,6 +62,14 @@ Total dishes: 67
 
 - [Chilli Poached Eggs (L'ETO Soho)](food-data-bank/venues/leto-caffe-soho/chilli_poached_eggs_leto_soho_v1.md) {#chilli_poached_eggs_leto_soho_v1}
 - [Grilled Chicken Breast (L'ETO Soho)](food-data-bank/venues/leto-caffe-soho/grilled_chicken_breast_leto_soho_v1.md) {#grilled_chicken_breast_leto_soho_v1}
+
+## Panzers
+
+*Location: `data/food-data-bank/venues/panzers/`*
+
+**1 dishes:**
+
+- [Salmon Sushi Set (6 salmon nigiri; 8 pieces salmon avocado roll) (Panzer's)](food-data-bank/venues/panzers/salmon_sushi_set_panzers_v1.md) {#salmon_sushi_set_panzers_v1}
 
 ## Simple Health Kitchen
 
@@ -197,6 +205,14 @@ Total dishes: 67
 - [Clementine (Fresh Fruit)](food-data-bank/generic/fresh-produce/clementine_fresh_fruit_v1.md) {#clementine_fresh_fruit_v1}
 - [Persimmon (Fresh Fruit)](food-data-bank/generic/fresh-produce/persimmon_fresh_fruit_generic_v1.md) {#persimmon_fresh_fruit_generic_v1}
 
+## Generic: Germes
+
+*Location: `data/food-data-bank/generic/germes/`*
+
+**1 dishes:**
+
+- [Vareniki with Cherry Filling (250g portion)](food-data-bank/generic/germes/vareniki_cherry_250g_germes_v1.md) {#vareniki_cherry_250g_germes_v1}
+
 ## Generic: Grocery
 
 *Location: `data/food-data-bank/generic/grocery/`*
@@ -224,6 +240,14 @@ Total dishes: 67
 - [Sunflower Seeds, 30 g](food-data-bank/generic/ingredients/sunflower_seeds_30g_v1.md) {#sunflower_seeds_30g_v1}
 - [Tiramisu Yogurt Pot (170g)](food-data-bank/generic/ingredients/tiramisu_yogurt_pot_170g_generic-ingredients_v1.md) {#tiramisu_yogurt_pot_170g_generic-ingredients_v1}
 
+## Generic: Londons Chocolate Company
+
+*Location: `data/food-data-bank/generic/londons-chocolate-company/`*
+
+**1 dishes:**
+
+- [Chocolate Pistachio Praline Bar (half bar, 22g)](food-data-bank/generic/londons-chocolate-company/pistachio_praline_bar_half_londons-chocolate_v1.md) {#pistachio_praline_bar_half_londons-chocolate_v1}
+
 ## Generic: Pub Bar
 
 *Location: `data/food-data-bank/generic/pub-bar/`*
@@ -231,6 +255,14 @@ Total dishes: 67
 **1 dishes:**
 
 - [Guinness Draught (Pint, 568ml)](food-data-bank/generic/pub-bar/guinness_pint_568ml_v1.md) {#guinness_pint_568ml_v1}
+
+## Generic: St Helens Farm
+
+*Location: `data/food-data-bank/generic/st-helens-farm/`*
+
+**1 dishes:**
+
+- [Goat Milk Yogurt (few dollops, ~50g)](food-data-bank/generic/st-helens-farm/goat-milk-yogurt-dollops_st-helens-farm_v1.md) {#goat-milk-yogurt-dollops_st-helens-farm_v1}
 
 ## Generic: Supplements
 

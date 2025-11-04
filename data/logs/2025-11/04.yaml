@@ -332,3 +332,125 @@ entries:
       carbs_available_g: 14.0
       carbs_total_g: 19.1
   notes: Lunch at Simple Health Kitchen - Salmon + Sweet Potato + Broccoli + Hummus
+- timestamp: '2025-11-04T18:00:00+00:00'
+  items:
+  - name: Salmon Sushi Set (6 salmon nigiri; 8 pieces salmon avocado roll)
+    food_bank_id: salmon_sushi_set_panzers_v1
+    quantity: 1
+    unit: portion
+    nutrition:
+      energy_kcal: 670
+      protein_g: 33.0
+      fat_g: 32.0
+      sat_fat_g: 5.3
+      mufa_g: 15.7
+      pufa_g: 10.8
+      trans_fat_g: 0
+      cholesterol_mg: 70
+      sugar_g: 3.0
+      fiber_total_g: 2.8
+      fiber_soluble_g: 0
+      fiber_insoluble_g: 0
+      sodium_mg: 870
+      potassium_mg: 250
+      iodine_ug: 40
+      magnesium_mg: 38
+      calcium_mg: 15
+      iron_mg: 0.7
+      zinc_mg: 1.5
+      vitamin_c_mg: 5.0
+      manganese_mg: 0.8
+      polyols_g: 0.0
+      carbs_available_g: 58.0
+      carbs_total_g: 60.8
+  - name: Chocolate Pistachio Praline Bar (half bar, 22g)
+    food_bank_id: pistachio_praline_bar_half_londons-chocolate_v1
+    quantity: 1
+    unit: portion
+    nutrition:
+      energy_kcal: 131.6
+      protein_g: 2.7
+      fat_g: 10.4
+      sat_fat_g: 4.2
+      mufa_g: 4.0
+      pufa_g: 2.1
+      trans_fat_g: 0.0
+      cholesterol_mg: 0
+      sugar_g: 6.6
+      fiber_total_g: 1.4
+      fiber_soluble_g: 0.4
+      fiber_insoluble_g: 1.0
+      sodium_mg: 9
+      potassium_mg: 77
+      iodine_ug: 0
+      magnesium_mg: 11
+      calcium_mg: 11
+      iron_mg: 2.0
+      zinc_mg: 0.7
+      vitamin_c_mg: 0
+      manganese_mg: 0.4
+      polyols_g: 0.0
+      carbs_available_g: 6.6
+      carbs_total_g: 8.0
+  notes: Dinner - Panzer's Deli sushi set + London's Chocolate bar
+- timestamp: '2025-11-04T19:00:00+00:00'
+  items:
+  - name: Vareniki with Cherry Filling (250g portion)
+    food_bank_id: vareniki_cherry_250g_germes_v1
+    quantity: 250
+    unit: g
+    nutrition:
+      energy_kcal: 497.5
+      protein_g: 11.0
+      fat_g: 4.75
+      sat_fat_g: 0.75
+      mufa_g: 1.4
+      pufa_g: 2.5
+      trans_fat_g: 0.1
+      cholesterol_mg: 10
+      sugar_g: 30.0
+      fiber_total_g: 1.5
+      fiber_soluble_g: 0.5
+      fiber_insoluble_g: 1.0
+      sodium_mg: 600
+      potassium_mg: 305
+      iodine_ug: 12
+      magnesium_mg: 41
+      calcium_mg: 37
+      iron_mg: 2.8
+      zinc_mg: 1.1
+      vitamin_c_mg: 8.8
+      manganese_mg: 0.86
+      polyols_g: 0.0
+      carbs_available_g: 102.5
+      carbs_total_g: 104.0
+  - name: Goat Milk Yogurt (few dollops, ~50g)
+    food_bank_id: goat-milk-yogurt-dollops_st-helens-farm_v1
+    quantity: 50
+    unit: g
+    nutrition:
+      energy_kcal: 35
+      protein_g: 1.8
+      fat_g: 2.4
+      sat_fat_g: 1.7
+      mufa_g: 0.5
+      pufa_g: 0.1
+      trans_fat_g: 0.1
+      cholesterol_mg: 6
+      sugar_g: 1.1
+      fiber_total_g: 0.0
+      fiber_soluble_g: 0.0
+      fiber_insoluble_g: 0.0
+      sodium_mg: 13
+      potassium_mg: 102
+      iodine_ug: 18
+      magnesium_mg: 7
+      calcium_mg: 80
+      iron_mg: 0.03
+      zinc_mg: 0.2
+      vitamin_c_mg: 0.7
+      manganese_mg: 0.01
+      polyols_g: 0.0
+      carbs_available_g: 1.4
+      carbs_total_g: 1.4
+  notes: Dessert snack - Germes Vareniki with St. Helen's Farm goat yogurt
