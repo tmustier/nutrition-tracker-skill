@@ -1,7 +1,7 @@
 ---
 title: Food Data Bank Index
 description: Auto-generated index of all dishes in the food data bank
-generated: 2025-11-04 09:34:34 UTC
+generated: 2025-11-04 10:41:27 UTC
 ---
 
 # Food Data Bank Index
@@ -11,7 +11,7 @@ generated: 2025-11-04 09:34:34 UTC
 
 ## Overview
 
-Total dishes: 65
+Total dishes: 66
 
 - **Venues**: 8 categories
 - **Packaged Products**: 7 categories
@@ -96,8 +96,9 @@ Total dishes: 65
 
 *Location: `data/food-data-bank/venues/third-space-nff/`*
 
-**2 dishes:**
+**3 dishes:**
 
+- [Berry Blast Shake (Third Space NFF)](food-data-bank/venues/third-space-nff/berry_blast_shake_third-space-nff_v1.md) {#berry_blast_shake_third-space-nff_v1}
 - [Elite Greens Shake - Third Space Natural Fitness Food](food-data-bank/venues/third-space-nff/elite_greens_nff_v1.md) {#elite_greens_nff_v1}
 - [Natural Fitness Food Vanilla Whey Protein (30g scoop)](food-data-bank/venues/third-space-nff/nff_vanilla_whey_30g_v1.md) {#nff_vanilla_whey_30g_v1}
 
