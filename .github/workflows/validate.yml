@@ -4,10 +4,12 @@ on:
   push:
     paths:
       - 'data/**.md'
+      - 'data/logs/**'
       - 'scripts/**.py'
   pull_request:
     paths:
       - 'data/**.md'
+      - 'data/logs/**'
       - 'scripts/**.py'
 
 jobs:
@@ -31,7 +33,8 @@ jobs:
           python scripts/validate_data_bank.py
 
   quick-validate-logs:
-    if: contains(github.event.pull_request.labels.*.name, 'automerge:food-log')
+    # Run if PR has automerge:food-log label OR if coming from daily-logs branch
+    if: contains(github.event.pull_request.labels.*.name, 'automerge:food-log') || github.head_ref == 'daily-logs'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

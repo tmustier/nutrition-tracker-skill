@@ -21,11 +21,25 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: Checkout daily-logs branch
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: daily-logs
           fetch-depth: 0
+
+      - name: Ensure daily-logs branch exists
+        run: |
+          # Fetch all branches
+          git fetch origin
+
+          # Check if daily-logs branch exists remotely
+          if git ls-remote --exit-code --heads origin daily-logs; then
+            echo "daily-logs branch exists, checking it out"
+            git checkout daily-logs
+          else
+            echo "daily-logs branch does not exist, creating from main"
+            git checkout -b daily-logs origin/main
+            git push -u origin daily-logs
+          fi
 
       - name: Configure git
         run: |
@@ -33,16 +47,47 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Merge latest main to avoid conflicts
+        id: merge_main
         run: |
           git fetch origin main
-          git merge origin/main --no-edit || {
-            echo "Merge conflict detected. Manual intervention required."
+          if ! git merge origin/main --no-edit; then
+            echo "merge_conflict=true" >> $GITHUB_OUTPUT
+            echo "❌ Merge conflict detected. Manual intervention required."
             exit 1
-          }
+          else
+            echo "merge_conflict=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create issue on merge conflict
+        if: failure() && steps.merge_main.outputs.merge_conflict == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create \
+            --title "🚨 Daily logs merge conflict detected" \
+            --body "The daily food log automation workflow encountered a merge conflict when trying to merge \`main\` into \`daily-logs\`.
+
+          **Action Required:**
+          1. Check out the \`daily-logs\` branch
+          2. Merge \`main\` manually and resolve conflicts
+          3. Push the resolved changes
+
+          **Workflow Run:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+          This issue was automatically created by the [daily-food-log-commit workflow](../.github/workflows/daily-food-log-commit.yml)." \
+            --label "bug,automation"
 
       - name: Check for changes
         id: check_changes
         run: |
+          # Ensure data/logs directory exists
+          if [ ! -d "data/logs" ]; then
+            echo "⚠️ data/logs directory does not exist"
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Check for uncommitted changes in data/logs/
           if [[ -n $(git status --porcelain data/logs/) ]]; then
             echo "has_changes=true" >> $GITHUB_OUTPUT
           else
@@ -53,7 +98,7 @@ jobs:
         if: steps.check_changes.outputs.has_changes == 'true'
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: ${{ inputs.custom_message || format('chore: Daily nutrition logs - {0}', github.event.schedule && 'auto' || 'manual') }}
+          commit_message: ${{ github.event.inputs.custom_message || format('chore: Daily nutrition logs - {0}', github.event_name == 'schedule' && 'auto' || 'manual') }}
           branch: daily-logs
           file_pattern: 'data/logs/**/*.yaml'
           commit_user_name: github-actions[bot]
@@ -96,8 +141,37 @@ jobs:
           fi
 
           # Enable auto-merge (squash merge to keep main history clean)
+          # Retry with exponential backoff to handle race condition with check creation
           if [ -n "$PR_NUMBER" ]; then
-            gh pr merge $PR_NUMBER --auto --squash || echo "Auto-merge may already be enabled or checks haven't started yet"
+            echo "Enabling auto-merge for PR #$PR_NUMBER..."
+            max_attempts=5
+            attempt=1
+            delay=2
+
+            while [ $attempt -le $max_attempts ]; do
+              echo "Attempt $attempt of $max_attempts..."
+
+              if gh pr merge $PR_NUMBER --auto --squash 2>&1 | tee /tmp/merge_output.txt; then
+                echo "✅ Auto-merge enabled successfully"
+                break
+              else
+                # Check if error is about checks not started yet
+                if grep -q "no checks" /tmp/merge_output.txt || grep -q "checks have not" /tmp/merge_output.txt; then
+                  if [ $attempt -lt $max_attempts ]; then
+                    echo "⏳ Checks haven't started yet. Waiting ${delay}s before retry..."
+                    sleep $delay
+                    delay=$((delay * 2))
+                    attempt=$((attempt + 1))
+                  else
+                    echo "⚠️ Max attempts reached. Auto-merge may not be enabled."
+                  fi
+                else
+                  # Different error - might already be enabled or other issue
+                  echo "ℹ️ Auto-merge command failed but may already be enabled"
+                  break
+                fi
+              fi
+            done
           fi
 
       - name: Summary
