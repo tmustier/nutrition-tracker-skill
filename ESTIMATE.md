@@ -1,4 +1,28 @@
-# Complete workflow for adding dishes
+# 5-Step Workflow: Research, Create, Validate, Document, Commit
+
+## Table of Contents
+
+- [5-Step Workflow: Research, Create, Validate, Document, Commit](#5-step-workflow-research-create-validate-document-commit)
+- [Command-Line Tools: Validation, Dish Creation, and Index Generation](#command-line-tools-validation-dish-creation-and-index-generation)
+- [Quick Reference: Portions, Fatty Acids, Sources, and Validation Formulas](#quick-reference-portions-fatty-acids-sources-and-validation-formulas)
+  - [Standard Portion Weights (Eggs, Bread, Vegetables, Soup)](#standard-portion-weights-eggs-bread-vegetables-soup)
+  - [Fatty Acid Breakdown for Common Oils and Proteins](#fatty-acid-breakdown-for-common-oils-and-proteins)
+  - [Data Source Reliability: Primary (Deliveroo, PDFs) vs. Secondary (USDA)](#data-source-reliability-primary-deliveroo-pdfs-vs-secondary-usda)
+  - [Validation Formulas: Energy (Atwater), Fat Splits, Sodium Conversion](#validation-formulas-energy-atwater-fat-splits-sodium-conversion)
+- [Nutrient Estimation Philosophy: Never Use Null, Always Estimate with Confidence](#nutrient-estimation-philosophy-never-use-null-always-estimate-with-confidence)
+  - [Core Principle: 0 for True Zeros, Estimates for Everything Else. NEVER Use NULL](#core-principle-0-for-true-zeros-estimates-for-everything-else)
+  - [4-Step Estimation Process: USDA Lookup, Scale, Document, Validate](#4-step-estimation-process-usda-lookup-scale-document-validate)
+  - [Estimation Confidence Levels: HIGH (±5-15%), MEDIUM (±20-40%), LOW (±50-100%)](#estimation-confidence-levels-high-5-15-medium-20-40-low-50-100)
+  - [UK-Specific: Dairy Iodine 2-3× Higher Than EU](#uk-specific-dairy-iodine-2-3-higher-than-eu)
+  - [When to Use 0: Scientifically Impossible Nutrients](#when-to-use-0-scientifically-impossible-nutrients)
+- [Research Documentation: Sources, Evidence, and Venue-Specific Guidelines](#research-documentation-sources-evidence-and-venue-specific-guidelines)
+- [Carbohydrate Estimation: 3 Required Fields and UK vs. US Label Handling](#carbohydrate-estimation-3-required-fields-and-uk-vs-us-label-handling)
+  - [Three Required Carb Fields: Total, Available, and Polyols](#three-required-carb-fields-total-available-and-polyols)
+  - [UK Labels (Available Carbs) vs. US Labels (Total Carbs)](#uk-labels-available-carbs-vs-us-labels-total-carbs)
+  - [Polyol Energy Factors: Maltitol 2.4 kcal/g, Erythritol 0.2 kcal/g](#polyol-energy-factors-maltitol-24-kcalg-erythritol-02-kcalg)
+  - [Energy Calculation Formula: 4P + 9F + 4C + 2Fiber + 2.4Polyols](#energy-calculation-formula-4p--9f--4c--2fiber--24polyols)
+
+---
 
 **CRITICAL: Follow this complete workflow when adding new dishes. Do NOT skip steps. Complete full estimation workflow without asking the user for details; you can confirm these with the user after you're done.**
 
@@ -50,7 +74,7 @@
 
 ---
 
-# CLI Scripts
+# Command-Line Tools: Validation, Dish Creation, and Index Generation
 
 **`validate_data_bank.py`**: Validates all dish files (energy math, fat splits, sodium/salt, required keys, negative values). Usage: `python scripts/validate_data_bank.py`
 
@@ -60,9 +84,9 @@
 
 ---
 
-# Quick Reference Data
+# Quick Reference: Portions, Fatty Acids, Sources, and Validation Formulas
 
-## Standard Portions
+## Standard Portion Weights (Eggs, Bread, Vegetables, Soup)
 
 | Item | Weight | Notes |
 |------|--------|-------|
@@ -72,7 +96,7 @@
 | Cooked vegetables | 50-80g | Side portion |
 | Restaurant soup | ~300g | Standard bowl |
 
-## Fatty Acid Profiles
+## Fatty Acid Breakdown for Common Oils and Proteins
 
 **Common Oils:**
 - **Olive oil:** ~73% MUFA, ~11% PUFA, ~14% SFA
@@ -84,12 +108,12 @@
 - **Chicken:** ~45% MUFA, ~21% PUFA of total fat
 - **Salmon:** ~29% MUFA, ~40% PUFA of total fat
 
-## Research Source Priority
+## Data Source Reliability: Primary (Deliveroo, PDFs) vs. Secondary (USDA)
 
 1. **PRIMARY (highest confidence):** Deliveroo UK, Uber Eats UK, venue nutrition PDFs, product labels
 2. **SECONDARY (estimate/scale):** USDA FoodData Central, MyFoodData.com, comparable dishes from similar venues
 
-## Validation Formulas
+## Validation Formulas: Energy (Atwater), Fat Splits, Sodium Conversion
 
 - **Energy (Atwater):** `4×protein + 9×fat + 4×carbs_available + 2×fiber + 2.4×polyols` (tolerance ±5-8%)
 - **Fat split:** `sat + MUFA + PUFA + trans ≤ total_fat`
@@ -98,9 +122,9 @@
 
 ---
 
-# Nutrient Estimation Philosophy
+# Nutrient Estimation Philosophy: Never Use Null, Always Estimate with Confidence
 
-## Core Principle
+## Core Principle: 0 for True Zeros, Estimates for Everything Else. NEVER Use NULL
 
 **Never use null. Always estimate with documented confidence.**
 
@@ -108,24 +132,24 @@
 - All other values = actual measurement or estimate (use USDA proxies, component analysis, or category averages if needed)
 - Document estimation method and confidence level in `assumptions`
 
-## Estimation Process
+## 4-Step Estimation Process: USDA Lookup, Scale, Document, Validate
 
 1. **Search USDA FoodData Central** for closest match
 2. **Scale to portion weight** (USDA values are per 100g)
 3. **Document source and confidence** in `assumptions` field if non-obvious
 4. **Validate energy**: 4P + 9F + 4C_avail + 2fiber + 2.4polyols
 
-## Confidence Levels
+## Estimation Confidence Levels: HIGH (±5-15%), MEDIUM (±20-40%), LOW (±50-100%)
 
 - **HIGH** (±5-15%): USDA direct match, nutrition label
 - **MEDIUM** (±20-40%): USDA proxy, component calculation, UK dairy iodine
 - **LOW** (±50-100%): category average, soil-dependent nutrients
 
-## UK-Specific Note
+## UK-Specific: Dairy Iodine 2-3× Higher Than EU
 
 **Iodine in dairy**: UK cattle feed is fortified, resulting in 2-3× higher iodine than EU. UK dairy is MEDIUM-HIGH confidence for iodine estimates.
 
-## TRUE ZEROS
+## When to Use 0: Scientifically Impossible Nutrients
 
 No estimation needed when value is scientifically zero:
 - Cholesterol: plant foods
@@ -133,7 +157,7 @@ No estimation needed when value is scientifically zero:
 - Fiber: pure animal products
 - Iodine: pure oils/fats
 
-# Analysis rules
+# Research Documentation: Sources, Evidence, and Venue-Specific Guidelines
 Always write down what was used. Put links/notes under `source.evidence`.
 
 **For Simple Health Kitchen (SHK):**
@@ -171,11 +195,11 @@ When a dish has multiple identifiable components, use this method:
 
 ---
 
-# Carbohydrate Estimation Protocol
+# Carbohydrate Estimation: 3 Required Fields and UK vs. US Label Handling
 
 **Updated:** 2025-11-02 | **Scope:** All dishes, ingredients, and log entries
 
-## Required Fields
+## Three Required Carb Fields: Total, Available, and Polyols
 
 Every `per_portion` block must include three carbohydrate fields:
 
@@ -189,7 +213,7 @@ Every `per_portion` block must include three carbohydrate fields:
 
 **TRUE ZEROS:** For zero-carb animal proteins (meat, poultry, fish), use `0.0` for all carb and fiber fields.
 
-## Source Handling
+## UK Labels (Available Carbs) vs. US Labels (Total Carbs)
 
 **UK/EU labels** (Deliveroo, Tesco, SHK): Report *available* carbs → record directly in `carbs_available_g`, then derive `carbs_total_g = carbs_available_g + fiber_total_g + polyols_g`
 
@@ -197,13 +221,13 @@ Every `per_portion` block must include three carbohydrate fields:
 
 **Ambiguous sources:** Check change log for "net carbs" or "available carbs" mentions. If unclear, treat as US handling and document.
 
-## Polyol Energy Factors
+## Polyol Energy Factors: Maltitol 2.4 kcal/g, Erythritol 0.2 kcal/g
 
 - Maltitol, sorbitol, xylitol: **2.4 kcal/g**
 - Erythritol: **0.2 kcal/g**
 - Other polyols: Use EU guidelines or default to 2.4 kcal/g
 
-## Energy Calculation
+## Energy Calculation Formula: 4P + 9F + 4C + 2Fiber + 2.4Polyols
 
 Always use: `energy_kcal = 4×protein + 9×fat + 4×carbs_available + 2×fiber + 2.4×polyols`
 
