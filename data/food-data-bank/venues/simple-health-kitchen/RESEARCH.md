@@ -1,5 +1,7 @@
 # Research notes: Simple Health Kitchen (SHK)
 
+**General Methodology:** See [ESTIMATE.md](/ESTIMATE.md) for standard portions, fatty acid profiles, validation formulas, and component-based estimation
+
 ## Overall guidance
 - User typically orders from Deliveroo, but note the Deliveroo site sometimes 403s headless browsers.
 
