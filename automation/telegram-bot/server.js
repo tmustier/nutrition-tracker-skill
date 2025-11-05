@@ -112,8 +112,12 @@ async function handleSetup(req, res) {
     console.log(`\n🔧 Setting up webhook...`);
     console.log(`   URL: ${webhookUrl}`);
 
-    // Call Telegram API to set webhook
-    await webhook.bot.telegram.setWebhook(webhookUrl);
+    // Call Telegram API to set webhook with secret token if configured
+    const webhookOptions = {};
+    if (config.telegram.webhookSecret) {
+      webhookOptions.secret_token = config.telegram.webhookSecret;
+    }
+    await webhook.bot.telegram.setWebhook(webhookUrl, webhookOptions);
 
     // Get webhook info to confirm
     const webhookInfo = await webhook.bot.telegram.getWebhookInfo();
@@ -293,7 +297,12 @@ if (useExpress) {
       console.log(`\n🔧 Setting up webhook...`);
       console.log(`   URL: ${webhookUrl}`);
 
-      await webhook.bot.telegram.setWebhook(webhookUrl);
+      // Configure webhook with secret token if available
+      const webhookOptions = {};
+      if (config.telegram.webhookSecret) {
+        webhookOptions.secret_token = config.telegram.webhookSecret;
+      }
+      await webhook.bot.telegram.setWebhook(webhookUrl, webhookOptions);
       const webhookInfo = await webhook.bot.telegram.getWebhookInfo();
 
       console.log('✓ Webhook setup successful');
