@@ -112,7 +112,9 @@ def add_missing_nutrients(file_path):
     return True
 
 def main():
-    databank_dir = Path("/home/user/nutrition-tracking/data/food-data-bank")
+    # Use relative path based on script location
+    script_dir = Path(__file__).parent
+    databank_dir = script_dir.parent / "data" / "food-data-bank"
 
     print(f"Fixing {len(FILES_TO_FIX)} partially migrated files...\n")
 

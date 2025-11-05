@@ -170,6 +170,8 @@ All schemas use a structured `per_portion` format where:
 | `vanadium_ug` | µg | Vanadium | **NEW** |
 | `nickel_ug` | µg | Nickel | **NEW** |
 
+**Note**: All ultra-trace minerals are REQUIRED fields in Schema V2, not optional.
+
 **Total**: **52 required fields**
 
 ---
@@ -237,7 +239,9 @@ per_portion:
 
 ### For New Dishes (Schema V2)
 
-**All 52 required fields must be populated** (use 0 for confirmed zeros, research for accurate values).
+**All 52 required fields must be populated** (use 0 for confirmed zeros, research for accurate values). 
+
+**IMPORTANT**: The validation script enforces all 52 nutrients as strictly required - no NULL values are permitted in the per_portion section.
 
 Example workflow:
 1. **Search USDA database** for base ingredient
@@ -303,9 +307,9 @@ REQUIRED_NUTRIENTS_V2 = REQUIRED_NUTRIENTS_V1 + [
     # Detailed fatty acids
     'omega3_epa_mg', 'omega3_dha_mg', 'omega3_ala_g', 'omega6_la_g',
 
-    # Ultra-trace minerals (now required)
+    # Ultra-trace minerals (required in V2)
     'boron_mg', 'silicon_mg', 'vanadium_ug', 'nickel_ug'
-]  # 52 fields
+]  # 52 total required fields
 ```
 
 ### Schema Version Detection
@@ -337,6 +341,8 @@ def detect_schema_version(dish):
 |--------|----------|----------|-------|
 | V1     | 24       | 0        | 24    |
 | V2     | 52       | 0        | 52    |
+
+**Critical**: All 52 fields are strictly REQUIRED in Schema V2. The validation script (`validate_data_bank.py`) enforces this requirement and will fail validation if any of the 52 nutrients are missing or NULL.
 
 ### Zero vs NULL Semantics
 
