@@ -3,6 +3,7 @@
 ```yaml
 id: chavroux_mild_creamy_goat_cheese_12g_chavroux_v1
 version: 1
+schema_version: 2
 last_verified: 2025-11-05
 source:
   venue: Chavroux (Packaged Product)

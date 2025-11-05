@@ -3,6 +3,7 @@
 ```yaml
 id: egg_hard_boiled_44g_generic-ingredients_v1
 version: 1
+schema_version: 2
 last_verified: 2025-11-05
 source:
   venue: Generic Ingredients

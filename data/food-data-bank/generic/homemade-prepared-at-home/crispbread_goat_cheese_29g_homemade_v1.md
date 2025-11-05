@@ -3,6 +3,7 @@
 ```yaml
 id: crispbread_goat_cheese_29g_homemade_v1
 version: 1
+schema_version: 2
 last_verified: 2025-11-05
 source:
   venue: Homemade / Prepared at Home

@@ -3,6 +3,7 @@
 ```yaml
 id: kiwi_small_70g_generic-fresh-produce_v1
 version: 1
+schema_version: 2
 last_verified: "2025-11-05"
 source:
   venue: Generic - Fresh Produce
