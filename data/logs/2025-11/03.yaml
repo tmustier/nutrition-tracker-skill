@@ -11,6 +11,8 @@ entries:
       energy_kcal: 253
       protein_g: 5.1
       fat_g: 16.5
+      carbs_total_g: 21.3
+      carbs_available_g: 19.3
       sat_fat_g: 7.3
       mufa_g: 6.3
       pufa_g: 1.8
@@ -20,18 +22,44 @@ entries:
       fiber_total_g: 2.0
       fiber_soluble_g: 0.4
       fiber_insoluble_g: 1.6
+      polyols_g: 0.0
       sodium_mg: 174
       potassium_mg: 87
-      iodine_ug: 0
-      magnesium_mg: 21
       calcium_mg: 24
+      magnesium_mg: 21
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 0.8
       zinc_mg: 0.4
-      vitamin_c_mg: 0
+      copper_mg: 0
       manganese_mg: 0.2
-      polyols_g: 0.0
-      carbs_available_g: 19.3
-      carbs_total_g: 21.3
+      selenium_ug: 0
+      iodine_ug: 0
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 0
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   notes: null
 - timestamp: '2025-11-03T08:00:00+00:00'
   items:
@@ -43,6 +71,8 @@ entries:
       energy_kcal: 65.4
       protein_g: 1.8
       fat_g: 1.0
+      carbs_total_g: 17.2
+      carbs_available_g: 7.4
       sat_fat_g: 0.03
       mufa_g: 0.09
       pufa_g: 0.57
@@ -52,18 +82,44 @@ entries:
       fiber_total_g: 9.8
       fiber_soluble_g: 3.4
       fiber_insoluble_g: 6.4
+      polyols_g: 0.0
       sodium_mg: 2
       potassium_mg: 227
-      iodine_ug: 0
-      magnesium_mg: 33
       calcium_mg: 38
+      magnesium_mg: 33
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 1
       zinc_mg: 1
-      vitamin_c_mg: 39
+      copper_mg: 0
       manganese_mg: 1
-      polyols_g: 0.0
-      carbs_available_g: 7.4
-      carbs_total_g: 17.2
+      selenium_ug: 0
+      iodine_ug: 0
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 39
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   - name: Greek Yogurt 0% Fat
     food_bank_id: greek_yogurt_0pct_200g_v1
     quantity: 200
@@ -72,6 +128,8 @@ entries:
       energy_kcal: 117.6
       protein_g: 20.4
       fat_g: 0.8
+      carbs_total_g: 7.2
+      carbs_available_g: 7.2
       sat_fat_g: 0.2
       mufa_g: 0.2
       pufa_g: 0.04
@@ -81,18 +139,44 @@ entries:
       fiber_total_g: 0
       fiber_soluble_g: 0
       fiber_insoluble_g: 0
+      polyols_g: 0.0
       sodium_mg: 72
       potassium_mg: 282
-      iodine_ug: 36
-      magnesium_mg: 22
       calcium_mg: 200
+      magnesium_mg: 22
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 0
       zinc_mg: 1
-      vitamin_c_mg: 0
+      copper_mg: 0
       manganese_mg: 0
-      polyols_g: 0.0
-      carbs_available_g: 7.2
-      carbs_total_g: 7.2
+      selenium_ug: 0
+      iodine_ug: 36
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 0
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   - name: Pistachios
     food_bank_id: pistachios_30g_v1
     quantity: 30
@@ -101,6 +185,8 @@ entries:
       energy_kcal: 185.5
       protein_g: 6.0
       fat_g: 13.5
+      carbs_total_g: 11.6
+      carbs_available_g: 8.4
       sat_fat_g: 1.7
       mufa_g: 7.0
       pufa_g: 4.3
@@ -110,18 +196,44 @@ entries:
       fiber_total_g: 3.2
       fiber_soluble_g: 0.6
       fiber_insoluble_g: 2.6
+      polyols_g: 0.0
       sodium_mg: 1
       potassium_mg: 308
-      iodine_ug: 0
-      magnesium_mg: 36
       calcium_mg: 30
+      magnesium_mg: 36
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 1
       zinc_mg: 1
-      vitamin_c_mg: 0
+      copper_mg: 0
       manganese_mg: 0.69
-      polyols_g: 0.0
-      carbs_available_g: 8.4
-      carbs_total_g: 11.6
+      selenium_ug: 0
+      iodine_ug: 0
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 0
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   - name: Oats - dry
     food_bank_id: oats_dry_50g_v1
     quantity: 50
@@ -130,6 +242,8 @@ entries:
       energy_kcal: 208.9
       protein_g: 8.5
       fat_g: 3.5
+      carbs_total_g: 38.5
+      carbs_available_g: 33.2
       sat_fat_g: 0.6
       mufa_g: 1.1
       pufa_g: 1.3
@@ -139,18 +253,44 @@ entries:
       fiber_total_g: 5.3
       fiber_soluble_g: 2.0
       fiber_insoluble_g: 3.3
+      polyols_g: 0.0
       sodium_mg: 1
       potassium_mg: 215
-      iodine_ug: 1
-      magnesium_mg: 69
       calcium_mg: 27
+      magnesium_mg: 69
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 2
       zinc_mg: 2
-      vitamin_c_mg: 0
+      copper_mg: 0
       manganese_mg: 2
-      polyols_g: 0.0
-      carbs_available_g: 33.2
-      carbs_total_g: 38.5
+      selenium_ug: 0
+      iodine_ug: 1
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 0
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   - name: ON Gold Standard Whey – Double Rich Chocolate
     food_bank_id: on_whey_drc_30g_v1
     quantity: 1
@@ -159,6 +299,8 @@ entries:
       energy_kcal: 122
       protein_g: 24.0
       fat_g: 1.4
+      carbs_total_g: 3.7
+      carbs_available_g: 3.0
       sat_fat_g: 0.5
       mufa_g: 0.5
       pufa_g: 0.4
@@ -168,18 +310,44 @@ entries:
       fiber_total_g: 0.7
       fiber_soluble_g: 0.2
       fiber_insoluble_g: 0.5
+      polyols_g: 0.0
       sodium_mg: 86
       potassium_mg: 177
-      iodine_ug: 18
-      magnesium_mg: 52
       calcium_mg: 130
+      magnesium_mg: 52
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 0
       zinc_mg: 2
-      vitamin_c_mg: 0
+      copper_mg: 0
       manganese_mg: 0
-      polyols_g: 0.0
-      carbs_available_g: 3.0
-      carbs_total_g: 3.7
+      selenium_ug: 0
+      iodine_ug: 18
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 0
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   notes: Breakfast smoothie
 - timestamp: '2025-11-03T12:00:00+00:00'
   items:
@@ -191,6 +359,8 @@ entries:
       energy_kcal: 69.2
       protein_g: 2.0
       fat_g: 0.4
+      carbs_total_g: 15.2
+      carbs_available_g: 13.6
       sat_fat_g: 0.0
       mufa_g: 0.4
       pufa_g: 0.0
@@ -200,18 +370,44 @@ entries:
       fiber_total_g: 1.6
       fiber_soluble_g: 0.4
       fiber_insoluble_g: 1.2
+      polyols_g: 0.0
       sodium_mg: 96
       potassium_mg: 0
-      iodine_ug: 0
-      magnesium_mg: 0
       calcium_mg: 0
+      magnesium_mg: 0
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 0
       zinc_mg: 0
-      vitamin_c_mg: 0
+      copper_mg: 0
       manganese_mg: 0
-      polyols_g: 0.0
-      carbs_available_g: 13.6
-      carbs_total_g: 15.2
+      selenium_ug: 0
+      iodine_ug: 0
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 0
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   - name: Smoked Trout (Daylesford)
     food_bank_id: daylesford_smoked_trout_80g_v1
     quantity: 40
@@ -220,6 +416,8 @@ entries:
       energy_kcal: 80.7
       protein_g: 8.7
       fat_g: 5.1
+      carbs_total_g: 0.0
+      carbs_available_g: 0.0
       sat_fat_g: 0.9
       mufa_g: 1.3
       pufa_g: 3.0
@@ -229,18 +427,44 @@ entries:
       fiber_total_g: 0.0
       fiber_soluble_g: 0
       fiber_insoluble_g: 0
+      polyols_g: 0.0
       sodium_mg: 240
       potassium_mg: 140
-      iodine_ug: 0
-      magnesium_mg: 12
       calcium_mg: 5
+      magnesium_mg: 12
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 0.2
       zinc_mg: 0.2
-      vitamin_c_mg: 0
+      copper_mg: 0
       manganese_mg: 0
-      polyols_g: 0.0
-      carbs_available_g: 0.0
-      carbs_total_g: 0.0
+      selenium_ug: 0
+      iodine_ug: 0
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 0
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   - name: Avocado (Fresh)
     food_bank_id: avocado_fresh_75g_generic-ingredients_v1
     quantity: 1
@@ -249,6 +473,8 @@ entries:
       energy_kcal: 120.0
       protein_g: 1.5
       fat_g: 11.0
+      carbs_total_g: 6.4
+      carbs_available_g: 1.4
       sat_fat_g: 1.6
       mufa_g: 7.3
       pufa_g: 1.4
@@ -258,18 +484,44 @@ entries:
       fiber_total_g: 5.0
       fiber_soluble_g: 1.2
       fiber_insoluble_g: 3.8
+      polyols_g: 0.0
       sodium_mg: 5
       potassium_mg: 364
-      iodine_ug: 0
-      magnesium_mg: 21
       calcium_mg: 9
+      magnesium_mg: 21
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 0
       zinc_mg: 0
-      vitamin_c_mg: 8
+      copper_mg: 0
       manganese_mg: 0
-      polyols_g: 0.0
-      carbs_available_g: 1.4
-      carbs_total_g: 6.4
+      selenium_ug: 0
+      iodine_ug: 0
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 8
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   - name: Olive Oil
     food_bank_id: olive_oil_14g_generic-ingredients_v1
     quantity: 1
@@ -278,6 +530,8 @@ entries:
       energy_kcal: 123.8
       protein_g: 0.0
       fat_g: 14.0
+      carbs_total_g: 0.0
+      carbs_available_g: 0.0
       sat_fat_g: 1.9
       mufa_g: 10.4
       pufa_g: 1.5
@@ -287,18 +541,44 @@ entries:
       fiber_total_g: 0.0
       fiber_soluble_g: 0
       fiber_insoluble_g: 0
+      polyols_g: 0.0
       sodium_mg: 0
       potassium_mg: 0
-      iodine_ug: 0
-      magnesium_mg: 0
       calcium_mg: 0
+      magnesium_mg: 0
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 0
       zinc_mg: 0
-      vitamin_c_mg: 0
+      copper_mg: 0
       manganese_mg: 0
-      polyols_g: 0.0
-      carbs_available_g: 0.0
-      carbs_total_g: 0.0
+      selenium_ug: 0
+      iodine_ug: 0
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 0
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   notes: Crispbreads with avocado, smoked trout, olive oil, and seasonings (salt,
     pepper, chilli flakes - minimal calories)
 - timestamp: '2025-11-03T12:45:00+00:00'
@@ -311,6 +591,8 @@ entries:
       energy_kcal: 184
       protein_g: 25.3
       fat_g: 7.4
+      carbs_total_g: 4.0
+      carbs_available_g: 4.0
       sat_fat_g: 1.8
       mufa_g: 3.9
       pufa_g: 1.5
@@ -320,18 +602,44 @@ entries:
       fiber_total_g: 0.0
       fiber_soluble_g: 0.0
       fiber_insoluble_g: 0.0
+      polyols_g: 0.0
       sodium_mg: 320
       potassium_mg: 380
-      iodine_ug: 8
-      magnesium_mg: 57
       calcium_mg: 15
+      magnesium_mg: 57
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 1
       zinc_mg: 1
-      vitamin_c_mg: 8
+      copper_mg: 0
       manganese_mg: 0
-      polyols_g: 0.0
-      carbs_available_g: 4.0
-      carbs_total_g: 4.0
+      selenium_ug: 0
+      iodine_ug: 8
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 8
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   - name: Zesty Lemon Broccoli (Simple Health Kitchen)
     food_bank_id: zesty_lemon_broccoli_shk_v1
     quantity: 1
@@ -340,6 +648,8 @@ entries:
       energy_kcal: 109.3
       protein_g: 4.5
       fat_g: 4.7
+      carbs_total_g: 14.0
+      carbs_available_g: 10.5
       sat_fat_g: 0.8
       mufa_g: 3.2
       pufa_g: 0.8
@@ -349,18 +659,44 @@ entries:
       fiber_total_g: 3.5
       fiber_soluble_g: 1.1
       fiber_insoluble_g: 2.4
+      polyols_g: 0.0
       sodium_mg: 150
       potassium_mg: 556
-      iodine_ug: 1
-      magnesium_mg: 40
       calcium_mg: 76
+      magnesium_mg: 40
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 1
       zinc_mg: 1
-      vitamin_c_mg: 123
+      copper_mg: 0
       manganese_mg: 0
-      polyols_g: 0.0
-      carbs_available_g: 10.5
-      carbs_total_g: 14.0
+      selenium_ug: 0
+      iodine_ug: 1
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 123
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   - name: Sweet Potato Wedges (Simple Health Kitchen)
     food_bank_id: sweet_potato_wedges_shk_v1
     quantity: 1
@@ -369,6 +705,8 @@ entries:
       energy_kcal: 163.3
       protein_g: 2.0
       fat_g: 1.9
+      carbs_total_g: 37.1
+      carbs_available_g: 32.0
       sat_fat_g: 1.0
       mufa_g: 0.5
       pufa_g: 0.4
@@ -378,19 +716,46 @@ entries:
       fiber_total_g: 5.1
       fiber_soluble_g: 1.4
       fiber_insoluble_g: 3.7
+      polyols_g: 0.0
       sodium_mg: 350
       potassium_mg: 734
-      iodine_ug: 2
-      magnesium_mg: 42
       calcium_mg: 59
+      magnesium_mg: 42
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 1
       zinc_mg: 0
-      vitamin_c_mg: 30
+      copper_mg: 0
       manganese_mg: 0
-      polyols_g: 0.0
-      carbs_available_g: 32.0
-      carbs_total_g: 37.1
-  notes: Simple Health Kitchen lunch - sea bass fillet (skin on) with lemon dressing, zesty broccoli, and sweet potato wedges
+      selenium_ug: 0
+      iodine_ug: 2
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 30
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
+  notes: Simple Health Kitchen lunch - sea bass fillet (skin on) with lemon dressing,
+    zesty broccoli, and sweet potato wedges
 - timestamp: '2025-11-03T18:54:51+00:00'
   items:
   - name: Lemon & Herb Chicken Breast (Simple Health Kitchen)
@@ -401,6 +766,8 @@ entries:
       energy_kcal: 161
       protein_g: 36.0
       fat_g: 1.9
+      carbs_total_g: 0.0
+      carbs_available_g: 0.0
       sat_fat_g: 0.6
       mufa_g: 0.8
       pufa_g: 0.5
@@ -410,18 +777,44 @@ entries:
       fiber_total_g: 0.0
       fiber_soluble_g: 0.0
       fiber_insoluble_g: 0.0
+      polyols_g: 0.0
       sodium_mg: 275
       potassium_mg: 385
-      iodine_ug: 1
-      magnesium_mg: 36
       calcium_mg: 7
+      magnesium_mg: 36
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 1
       zinc_mg: 1
-      vitamin_c_mg: 0
+      copper_mg: 0
       manganese_mg: 0
-      polyols_g: 0.0
-      carbs_available_g: 0.0
-      carbs_total_g: 0.0
+      selenium_ug: 0
+      iodine_ug: 1
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 0
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   - name: Zesty Lemon Broccoli (Simple Health Kitchen)
     food_bank_id: zesty_lemon_broccoli_shk_v1
     quantity: 1
@@ -430,6 +823,8 @@ entries:
       energy_kcal: 109
       protein_g: 4.5
       fat_g: 4.7
+      carbs_total_g: 14.0
+      carbs_available_g: 10.5
       sat_fat_g: 0.8
       mufa_g: 3.2
       pufa_g: 0.8
@@ -439,18 +834,44 @@ entries:
       fiber_total_g: 3.5
       fiber_soluble_g: 1.1
       fiber_insoluble_g: 2.4
+      polyols_g: 0.0
       sodium_mg: 150
       potassium_mg: 556
-      iodine_ug: 1
-      magnesium_mg: 40
       calcium_mg: 76
+      magnesium_mg: 40
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 1
       zinc_mg: 1
-      vitamin_c_mg: 123
+      copper_mg: 0
       manganese_mg: 0
-      polyols_g: 0.0
-      carbs_available_g: 10.5
-      carbs_total_g: 14.0
+      selenium_ug: 0
+      iodine_ug: 1
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 123
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   - name: Hummus Side Pot (Simple Health Kitchen)
     food_bank_id: hummus_side_pot_shk_v1
     quantity: 1
@@ -459,6 +880,8 @@ entries:
       energy_kcal: 201
       protein_g: 9.0
       fat_g: 11.0
+      carbs_total_g: 19.1
+      carbs_available_g: 14.0
       sat_fat_g: 1.3
       mufa_g: 3.7
       pufa_g: 6.0
@@ -468,16 +891,43 @@ entries:
       fiber_total_g: 5.1
       fiber_soluble_g: 1.6
       fiber_insoluble_g: 3.5
+      polyols_g: 0.0
       sodium_mg: 379
       potassium_mg: 360
-      iodine_ug: 0
-      magnesium_mg: 86
       calcium_mg: 54
+      magnesium_mg: 86
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 3
       zinc_mg: 2
-      vitamin_c_mg: 0
+      copper_mg: 0
       manganese_mg: 0
-      polyols_g: 0.0
-      carbs_available_g: 14.0
-      carbs_total_g: 19.1
-  notes: Simple Health Kitchen dinner - lemon & herb chicken breast, zesty broccoli, hummus side
+      selenium_ug: 0
+      iodine_ug: 0
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 0
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
+  notes: Simple Health Kitchen dinner - lemon & herb chicken breast, zesty broccoli,
+    hummus side

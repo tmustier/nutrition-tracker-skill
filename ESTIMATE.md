@@ -1,3 +1,32 @@
+# Nutrition Estimation Guidelines
+
+## ⚠️ Schema v2 Migration: Critical Context for Historical Data
+
+### Important: 0 vs Unknown Values in Migrated Records
+
+When the nutrition tracking system expanded from 24 to 52 nutrient fields (Schema v1 → v2 migration on 2025-11-05), **28 new nutrient fields** were added to all existing food bank records. These fields were automatically initialized to `0` during migration.
+
+**For the 28 nutrients added during v2 migration, `0` does NOT mean "confirmed zero"** - it means **"unknown/not yet researched"**.
+
+#### The 28 "Unknown" Nutrients Requiring Historical Research:
+1. **Trace Minerals (7)**: `copper_mg`, `selenium_ug`, `chromium_ug`, `molybdenum_ug`, `phosphorus_mg`, `chloride_mg`, `sulfur_g`
+2. **B-Complex Vitamins (9)**: `vitamin_b1_mg`, `vitamin_b2_mg`, `vitamin_b3_mg`, `vitamin_b5_mg`, `vitamin_b6_mg`, `vitamin_b7_ug`, `vitamin_b9_ug`, `vitamin_b12_ug`, `choline_mg`
+3. **Fat-Soluble Vitamins (4)**: `vitamin_a_ug`, `vitamin_d_ug`, `vitamin_e_mg`, `vitamin_k_ug`
+4. **Specific Fatty Acids (4)**: `omega3_epa_mg`, `omega3_dha_mg`, `omega3_ala_mg`, `omega6_la_mg`
+5. **Ultra-Trace Minerals (4)**: `boron_ug`, `silicon_mg`, `vanadium_ug`, `nickel_ug`
+
+### 🎯 Research Priority for Historical Records
+
+**HIGH PRIORITY** - Update These First:
+- **B-vitamins** (B1, B2, B3, B6, B9, B12) - Critical for metabolism tracking
+- **Vitamin D, A, E** - Common deficiencies, high impact
+- **Selenium, copper** - Important trace minerals with narrow ranges
+- **Omega-3 fatty acids** (EPA, DHA, ALA) - Anti-inflammatory tracking
+
+**Future Claude Instructions**: For any pre-2025-11-05 food bank record showing `0` for B-vitamins, vitamin A/D/E, selenium, or copper: These are migration placeholders requiring research, NOT confirmed zeros. Prioritize updating these nutrients using USDA FoodData Central.
+
+---
+
 # 5-Step Workflow: Research, Create, Validate, Document, Commit
 
 ## Table of Contents

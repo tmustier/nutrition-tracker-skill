@@ -29,15 +29,83 @@ TOL_ENERGY_PCT = 0.08
 CARB_TOL_G = 0.2
 FIBER_KCAL_PER_G = 2.0
 POLYOL_KCAL_PER_G = 2.4
+OMEGA_PUFA_TOL_G = 0.05  # 50mg tolerance for omega fatty acid vs PUFA coherence
 
 # Required nutrient fields in per_portion - ALL dishes must have these fields
 # (0 means TRUE ZERO, not placeholder)
+# Schema version 2: Extended to 52 nutrient fields
 REQUIRED_NUTRIENTS = [
-    'energy_kcal', 'protein_g', 'fat_g', 'sat_fat_g', 'mufa_g', 'pufa_g',
-    'trans_fat_g', 'cholesterol_mg', 'sugar_g', 'fiber_total_g',
-    'fiber_soluble_g', 'fiber_insoluble_g', 'sodium_mg', 'potassium_mg',
-    'iodine_ug', 'magnesium_mg', 'calcium_mg', 'iron_mg', 'zinc_mg',
-    'vitamin_c_mg', 'manganese_mg', 'polyols_g', 'carbs_available_g', 'carbs_total_g'
+    # Energy & Core Macronutrients
+    'energy_kcal',
+    'protein_g',
+    'fat_g',
+    'carbs_total_g',
+    'carbs_available_g',
+
+    # Fat Breakdown
+    'sat_fat_g',
+    'mufa_g',
+    'pufa_g',
+    'trans_fat_g',
+    'cholesterol_mg',
+
+    # Omega Fatty Acids
+    'omega3_ala_g',
+    'omega3_dha_mg',
+    'omega3_epa_mg',
+    'omega6_la_g',
+
+    # Carbohydrate Breakdown
+    'sugar_g',
+    'fiber_total_g',
+    'fiber_soluble_g',
+    'fiber_insoluble_g',
+    'polyols_g',
+
+    # Major Minerals
+    'calcium_mg',
+    'chloride_mg',
+    'magnesium_mg',
+    'phosphorus_mg',
+    'potassium_mg',
+    'sodium_mg',
+    'sulfur_g',
+
+    # Trace Minerals
+    'chromium_ug',
+    'copper_mg',
+    'iodine_ug',
+    'iron_mg',
+    'manganese_mg',
+    'molybdenum_ug',
+    'selenium_ug',
+    'zinc_mg',
+
+    # Ultra-Trace Elements
+    'boron_mg',
+    'nickel_ug',
+    'silicon_mg',
+    'vanadium_ug',
+
+    # Fat-Soluble Vitamins
+    'vitamin_a_ug',
+    'vitamin_d_ug',
+    'vitamin_e_mg',
+    'vitamin_k_ug',
+
+    # B-Complex Vitamins
+    'choline_mg',
+    'vitamin_b1_mg',
+    'vitamin_b2_mg',
+    'vitamin_b3_mg',
+    'vitamin_b5_mg',
+    'vitamin_b6_mg',
+    'vitamin_b7_ug',
+    'vitamin_b9_ug',
+    'vitamin_b12_ug',
+
+    # Vitamin C
+    'vitamin_c_mg',
 ]
 
 # Compile polyol detection regex once at module level (performance optimization)
@@ -148,7 +216,11 @@ def check_block(y, filepath):
 
     # Cross-check notes for polyol mentions
     notes = y.get("notes", [])
-    notes_text = ' '.join(notes) if isinstance(notes, list) else str(notes) if notes else ""
+    # Handle notes as list of strings, list of dicts, or a single string
+    if isinstance(notes, list):
+        notes_text = ' '.join(str(n) if not isinstance(n, dict) else n.get('note', '') for n in notes)
+    else:
+        notes_text = str(notes) if notes else ""
     polyol_mentions = POLYOL_PATTERN.findall(notes_text)
 
     # required trees
@@ -242,6 +314,43 @@ def check_block(y, filepath):
             warnings.append(f"Fat split incomplete: {parts_sum:.2f}g accounted for out of {fat_total:.2f}g total (missing {fat_total - parts_sum:.2f}g).")
         elif parts_sum <= fat_total + 0.2:
             passes.append("Fat split coherent (<= total fat).")
+
+    # Omega fatty acid coherence check - omega-3 and omega-6 should not exceed PUFA
+    # EPA and DHA are in mg, need conversion to grams
+    omega3_ala_g = pp.get("omega3_ala_g")
+    omega3_epa_mg = pp.get("omega3_epa_mg")
+    omega3_dha_mg = pp.get("omega3_dha_mg")
+    omega6_la_g = pp.get("omega6_la_g")
+
+    # Only perform check if we have PUFA and at least one omega fatty acid
+    if pufa is not None and isinstance(pufa, (int, float)) and pufa > 0:
+        # Convert to grams with null safety
+        omega3_ala = omega3_ala_g if isinstance(omega3_ala_g, (int, float)) else 0
+        omega3_epa = (omega3_epa_mg / 1000.0) if isinstance(omega3_epa_mg, (int, float)) else 0
+        omega3_dha = (omega3_dha_mg / 1000.0) if isinstance(omega3_dha_mg, (int, float)) else 0
+        omega6_la = omega6_la_g if isinstance(omega6_la_g, (int, float)) else 0
+
+        # Calculate totals
+        omega3_total = omega3_ala + omega3_epa + omega3_dha
+        omega6_total = omega6_la
+        omega_total = omega3_total + omega6_total
+
+        # Check coherence: omega fatty acids should not exceed PUFA
+        if omega_total > pufa + OMEGA_PUFA_TOL_G:
+            warnings.append(
+                f"Omega fatty acids ({omega_total:.3f}g) exceed PUFA ({pufa:.2f}g) "
+                f"by {omega_total - pufa:.3f}g. "
+                f"[Ω-3: {omega3_total:.3f}g (ALA:{omega3_ala:.2f} EPA:{omega3_epa:.3f} DHA:{omega3_dha:.3f}), "
+                f"Ω-6: {omega6_total:.2f}g (LA)]"
+            )
+        elif omega_total > 0:
+            # Calculate proportion of PUFA accounted for by tracked omega fatty acids
+            proportion = (omega_total / pufa * 100) if pufa > 0 else 0
+            passes.append(
+                f"Omega fatty acids coherent: {omega_total:.3f}g "
+                f"({proportion:.1f}% of {pufa:.2f}g PUFA). "
+                f"[Ω-3: {omega3_total:.3f}g, Ω-6: {omega6_total:.2f}g]"
+            )
 
     # Sodium->salt
     sodium = pp.get("sodium_mg")

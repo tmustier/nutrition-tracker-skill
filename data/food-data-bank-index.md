@@ -1,7 +1,7 @@
 ---
 title: Food Data Bank Index
 description: Auto-generated index of all dishes in the food data bank
-generated: 2025-11-05 10:54:43 UTC
+generated: 2025-11-05 11:59:21 UTC
 ---
 
 # Food Data Bank Index
@@ -11,7 +11,7 @@ generated: 2025-11-05 10:54:43 UTC
 
 ## Overview
 
-Total dishes: 77
+Total dishes: 75
 
 - **Venues**: 9 categories
 - **Packaged Products**: 7 categories
@@ -23,12 +23,10 @@ Total dishes: 77
 
 *Location: `data/food-data-bank/venues/imperial-treasure-st-james/`*
 
-**9 dishes:**
+**7 dishes:**
 
 - [Charcoal Custard Bun (Imperial Treasure St. James)](food-data-bank/venues/imperial-treasure-st-james/charcoal_custard_bun_imperial_treasure_st_james_v1.md) {#charcoal_custard_bun_imperial_treasure_st_james_v1}
-- [Crispy Shrimp Cheung Fun (Imperial Treasure St. James)](food-data-bank/venues/imperial-treasure-st-james/crispy_shrimp_cheung_fun_imperial_treasure_st_james_v1.md) {#crispy_shrimp_cheung_fun_imperial_treasure_st_james_v1}
 - [Duck Broth with Tofu (Imperial Treasure St. James)](food-data-bank/venues/imperial-treasure-st-james/duck_broth_tofu_imperial_treasure_st_james_v1.md) {#duck_broth_tofu_imperial_treasure_st_james_v1}
-- [Mushroom Dumpling (Imperial Treasure St. James)](food-data-bank/venues/imperial-treasure-st-james/mushroom_dumpling_imperial_treasure_st_james_v1.md) {#mushroom_dumpling_imperial_treasure_st_james_v1}
 - [Peking Duck Pancake (Imperial Treasure St. James)](food-data-bank/venues/imperial-treasure-st-james/peking_duck_pancake_imperial_treasure_st_james_v1.md) {#peking_duck_pancake_imperial_treasure_st_james_v1}
 - [Peking Duck Skin with Sugar (Imperial Treasure St. James)](food-data-bank/venues/imperial-treasure-st-james/peking_duck_skin_sugar_imperial_treasure_st_james_v1.md) {#peking_duck_skin_sugar_imperial_treasure_st_james_v1}
 - [Prawn & Chive Dumpling (Imperial Treasure St. James)](food-data-bank/venues/imperial-treasure-st-james/prawn_chive_dumpling_imperial_treasure_st_james_v1.md) {#prawn_chive_dumpling_imperial_treasure_st_james_v1}

@@ -11,6 +11,8 @@ entries:
       energy_kcal: 117.6
       protein_g: 20.4
       fat_g: 0.8
+      carbs_total_g: 7.2
+      carbs_available_g: 7.2
       sat_fat_g: 0.2
       mufa_g: 0.2
       pufa_g: 0.04
@@ -20,18 +22,44 @@ entries:
       fiber_total_g: 0
       fiber_soluble_g: 0
       fiber_insoluble_g: 0
+      polyols_g: 0.0
       sodium_mg: 72
       potassium_mg: 282
-      iodine_ug: 36
-      magnesium_mg: 22
       calcium_mg: 200
+      magnesium_mg: 22
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 0
       zinc_mg: 1
-      vitamin_c_mg: 0
+      copper_mg: 0
       manganese_mg: 0
-      polyols_g: 0.0
-      carbs_available_g: 7.2
-      carbs_total_g: 7.2
+      selenium_ug: 0
+      iodine_ug: 36
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 0
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   - name: Strawberries
     food_bank_id: null
     quantity: 85
@@ -40,6 +68,8 @@ entries:
       energy_kcal: 34.5
       protein_g: 0.6
       fat_g: 0.3
+      carbs_total_g: 8.2
+      carbs_available_g: 6.5
       sat_fat_g: 0.02
       mufa_g: 0.03
       pufa_g: 0.14
@@ -49,18 +79,44 @@ entries:
       fiber_total_g: 1.7
       fiber_soluble_g: 0
       fiber_insoluble_g: 0
+      polyols_g: 0.0
       sodium_mg: 1
       potassium_mg: 130
-      iodine_ug: 0
-      magnesium_mg: 11
       calcium_mg: 14
+      magnesium_mg: 11
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 0
       zinc_mg: 0
-      vitamin_c_mg: 50
+      copper_mg: 0
       manganese_mg: 0
-      polyols_g: 0.0
-      carbs_available_g: 6.5
-      carbs_total_g: 8.2
+      selenium_ug: 0
+      iodine_ug: 0
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 50
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   - name: Blueberries
     food_bank_id: blueberries_150g_v1
     quantity: 85
@@ -69,6 +125,8 @@ entries:
       energy_kcal: 58
       protein_g: 0.6
       fat_g: 0.2
+      carbs_total_g: 14.4
+      carbs_available_g: 12.4
       sat_fat_g: 0.02
       mufa_g: 0.04
       pufa_g: 0.12
@@ -78,18 +136,44 @@ entries:
       fiber_total_g: 2.0
       fiber_soluble_g: 0.7
       fiber_insoluble_g: 1.3
+      polyols_g: 0.0
       sodium_mg: 1
       potassium_mg: 66
-      iodine_ug: 0.3
-      magnesium_mg: 5
       calcium_mg: 5
+      magnesium_mg: 5
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 0
       zinc_mg: 0
-      vitamin_c_mg: 9
+      copper_mg: 0
       manganese_mg: 0
-      polyols_g: 0.0
-      carbs_available_g: 12.4
-      carbs_total_g: 14.4
+      selenium_ug: 0
+      iodine_ug: 0.3
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 9
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   - name: ON Gold Standard Whey – Double Rich Chocolate
     food_bank_id: on_whey_drc_30g_v1
     quantity: 1
@@ -98,6 +182,8 @@ entries:
       energy_kcal: 122
       protein_g: 24.0
       fat_g: 1.4
+      carbs_total_g: 3.7
+      carbs_available_g: 3.0
       sat_fat_g: 0.5
       mufa_g: 0.5
       pufa_g: 0.4
@@ -107,18 +193,44 @@ entries:
       fiber_total_g: 0.7
       fiber_soluble_g: 0.2
       fiber_insoluble_g: 0.5
+      polyols_g: 0.0
       sodium_mg: 86
       potassium_mg: 177
-      iodine_ug: 18
-      magnesium_mg: 52
       calcium_mg: 130
+      magnesium_mg: 52
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 0
       zinc_mg: 2
-      vitamin_c_mg: 0
+      copper_mg: 0
       manganese_mg: 0
-      polyols_g: 0.0
-      carbs_available_g: 3.0
-      carbs_total_g: 3.7
+      selenium_ug: 0
+      iodine_ug: 18
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 0
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   - name: Oats - dry
     food_bank_id: oats_dry_50g_v1
     quantity: 1
@@ -127,6 +239,8 @@ entries:
       energy_kcal: 208.9
       protein_g: 8.5
       fat_g: 3.5
+      carbs_total_g: 38.5
+      carbs_available_g: 33.2
       sat_fat_g: 0.6
       mufa_g: 1.1
       pufa_g: 1.3
@@ -136,18 +250,44 @@ entries:
       fiber_total_g: 5.3
       fiber_soluble_g: 2.0
       fiber_insoluble_g: 3.3
+      polyols_g: 0.0
       sodium_mg: 1
       potassium_mg: 215
-      iodine_ug: 1
-      magnesium_mg: 69
       calcium_mg: 27
+      magnesium_mg: 69
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 2
       zinc_mg: 2
-      vitamin_c_mg: 0
+      copper_mg: 0
       manganese_mg: 2
-      polyols_g: 0.0
-      carbs_available_g: 33.2
-      carbs_total_g: 38.5
+      selenium_ug: 0
+      iodine_ug: 1
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 0
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   - name: Pistachios, 30 g
     food_bank_id: pistachios_30g_v1
     quantity: 1
@@ -156,6 +296,8 @@ entries:
       energy_kcal: 185.5
       protein_g: 6.0
       fat_g: 13.5
+      carbs_total_g: 11.6
+      carbs_available_g: 8.4
       sat_fat_g: 1.7
       mufa_g: 7.0
       pufa_g: 4.3
@@ -165,18 +307,44 @@ entries:
       fiber_total_g: 3.2
       fiber_soluble_g: 0.6
       fiber_insoluble_g: 2.6
+      polyols_g: 0.0
       sodium_mg: 1
       potassium_mg: 308
-      iodine_ug: 0
-      magnesium_mg: 36
       calcium_mg: 30
+      magnesium_mg: 36
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 1
       zinc_mg: 1
-      vitamin_c_mg: 0
+      copper_mg: 0
       manganese_mg: 0.69
-      polyols_g: 0.0
-      carbs_available_g: 8.4
-      carbs_total_g: 11.6
+      selenium_ug: 0
+      iodine_ug: 0
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 0
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   notes: Breakfast smoothie
 - timestamp: '2025-11-02T14:30:00+00:00'
   items:
@@ -188,6 +356,8 @@ entries:
       energy_kcal: 250
       protein_g: 9.3
       fat_g: 10.0
+      carbs_total_g: 31.7
+      carbs_available_g: 30.8
       sat_fat_g: 4.4
       mufa_g: 3.9
       pufa_g: 1.1
@@ -197,18 +367,44 @@ entries:
       fiber_total_g: 0.9
       fiber_soluble_g: 0.3
       fiber_insoluble_g: 0.6
+      polyols_g: 0.0
       sodium_mg: 318
       potassium_mg: 90
-      iodine_ug: 8
-      magnesium_mg: 12
       calcium_mg: 45
+      magnesium_mg: 12
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 1.2
       zinc_mg: 0.6
-      vitamin_c_mg: 0
+      copper_mg: 0
       manganese_mg: 0
-      polyols_g: 0.0
-      carbs_available_g: 30.8
-      carbs_total_g: 31.7
+      selenium_ug: 0
+      iodine_ug: 8
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 0
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   - name: Shrimp Shu Mai
     food_bank_id: shrimp_shu_mai_imperial_treasure_st_james_v1
     quantity: 1
@@ -217,6 +413,8 @@ entries:
       energy_kcal: 43
       protein_g: 3.1
       fat_g: 1.5
+      carbs_total_g: 4.8
+      carbs_available_g: 4.5
       sat_fat_g: 0.3
       mufa_g: 0.6
       pufa_g: 0.4
@@ -226,18 +424,44 @@ entries:
       fiber_total_g: 0.3
       fiber_soluble_g: 0.1
       fiber_insoluble_g: 0.2
+      polyols_g: 0.0
       sodium_mg: 140
       potassium_mg: 25
-      iodine_ug: 9
-      magnesium_mg: 6
       calcium_mg: 8
+      magnesium_mg: 6
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 0.3
       zinc_mg: 0.1
-      vitamin_c_mg: 0.2
+      copper_mg: 0
       manganese_mg: 0.02
-      polyols_g: 0.0
-      carbs_available_g: 4.5
-      carbs_total_g: 4.8
+      selenium_ug: 0
+      iodine_ug: 9
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 0.2
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   - name: Prawn & Chive Dumpling
     food_bank_id: prawn_chive_dumpling_imperial_treasure_st_james_v1
     quantity: 1
@@ -246,6 +470,8 @@ entries:
       energy_kcal: 45
       protein_g: 2.0
       fat_g: 1.6
+      carbs_total_g: 5.6
+      carbs_available_g: 5.6
       sat_fat_g: 0.2
       mufa_g: 0.9
       pufa_g: 0.4
@@ -255,18 +481,44 @@ entries:
       fiber_total_g: 0.1
       fiber_soluble_g: 0.0
       fiber_insoluble_g: 0.1
+      polyols_g: 0.0
       sodium_mg: 310
       potassium_mg: 20
-      iodine_ug: 2
-      magnesium_mg: 5
       calcium_mg: 10
+      magnesium_mg: 5
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 0.2
       zinc_mg: 0.2
-      vitamin_c_mg: 1
+      copper_mg: 0
       manganese_mg: 0.1
-      polyols_g: 0.0
-      carbs_available_g: 5.6
-      carbs_total_g: 5.6
+      selenium_ug: 0
+      iodine_ug: 2
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 1
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   - name: Mushroom Dumpling
     food_bank_id: mushroom_dumpling_imperial_treasure_st_james_v1
     quantity: 1
@@ -275,6 +527,8 @@ entries:
       energy_kcal: 75
       protein_g: 1.5
       fat_g: 3.1
+      carbs_total_g: 11.1
+      carbs_available_g: 10.5
       sat_fat_g: 0.5
       mufa_g: 1.2
       pufa_g: 1.3
@@ -284,18 +538,44 @@ entries:
       fiber_total_g: 0.6
       fiber_soluble_g: 0.2
       fiber_insoluble_g: 0.4
+      polyols_g: 0.0
       sodium_mg: 93
       potassium_mg: 24
-      iodine_ug: 0
-      magnesium_mg: 5
       calcium_mg: 3
+      magnesium_mg: 5
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 0.6
       zinc_mg: 0.2
-      vitamin_c_mg: 0.2
+      copper_mg: 0
       manganese_mg: 0
-      polyols_g: 0.0
-      carbs_available_g: 10.5
-      carbs_total_g: 11.1
+      selenium_ug: 0
+      iodine_ug: 0
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 0.2
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   - name: Crispy Shrimp Cheung Fun
     food_bank_id: crispy_shrimp_cheung_fun_imperial_treasure_st_james_v1
     quantity: 2
@@ -304,6 +584,8 @@ entries:
       energy_kcal: 62
       protein_g: 1.8
       fat_g: 3.8
+      carbs_total_g: 6.2
+      carbs_available_g: 5.2
       sat_fat_g: 0.5
       mufa_g: 0.8
       pufa_g: 1.92
@@ -313,18 +595,44 @@ entries:
       fiber_total_g: 1.0
       fiber_soluble_g: 0.4
       fiber_insoluble_g: 0.6
+      polyols_g: 0.0
       sodium_mg: 160
       potassium_mg: 18
-      iodine_ug: 2
-      magnesium_mg: 2
       calcium_mg: 4
+      magnesium_mg: 2
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 2
       zinc_mg: 0
-      vitamin_c_mg: 0
+      copper_mg: 0
       manganese_mg: 0.2
-      polyols_g: 0.0
-      carbs_available_g: 5.2
-      carbs_total_g: 6.2
+      selenium_ug: 0
+      iodine_ug: 2
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 0
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   - name: Peking Duck Skin with Sugar
     food_bank_id: peking_duck_skin_sugar_imperial_treasure_st_james_v1
     quantity: 2
@@ -333,6 +641,8 @@ entries:
       energy_kcal: 40
       protein_g: 0.4
       fat_g: 4.0
+      carbs_total_g: 0.2
+      carbs_available_g: 0.2
       sat_fat_g: 1.4
       mufa_g: 2.0
       pufa_g: 0.5
@@ -342,18 +652,44 @@ entries:
       fiber_total_g: 0.0
       fiber_soluble_g: 0.0
       fiber_insoluble_g: 0.0
+      polyols_g: 0.0
       sodium_mg: 20
       potassium_mg: 2
-      iodine_ug: 0
-      magnesium_mg: 0
       calcium_mg: 0
+      magnesium_mg: 0
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 0.2
       zinc_mg: 0.1
-      vitamin_c_mg: 0
+      copper_mg: 0
       manganese_mg: 0.0
-      polyols_g: 0.0
-      carbs_available_g: 0.2
-      carbs_total_g: 0.2
+      selenium_ug: 0
+      iodine_ug: 0
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 0
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   - name: Peking Duck Pancake
     food_bank_id: peking_duck_pancake_imperial_treasure_st_james_v1
     quantity: 3
@@ -362,6 +698,8 @@ entries:
       energy_kcal: 630
       protein_g: 22.8
       fat_g: 40.8
+      carbs_total_g: 36.0
+      carbs_available_g: 36.0
       sat_fat_g: 12.6
       mufa_g: 18.0
       pufa_g: 7.8
@@ -371,18 +709,44 @@ entries:
       fiber_total_g: 0.3
       fiber_soluble_g: 0.0
       fiber_insoluble_g: 0.3
+      polyols_g: 0.0
       sodium_mg: 537
       potassium_mg: 0
-      iodine_ug: 9
-      magnesium_mg: 0
       calcium_mg: 6
+      magnesium_mg: 0
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 2.7
       zinc_mg: 2.1
-      vitamin_c_mg: 3
+      copper_mg: 0
       manganese_mg: 0
-      polyols_g: 0.0
-      carbs_available_g: 36.0
-      carbs_total_g: 36.0
+      selenium_ug: 0
+      iodine_ug: 9
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 3
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   - name: Duck Broth with Tofu
     food_bank_id: duck_broth_tofu_imperial_treasure_st_james_v1
     quantity: 1
@@ -391,6 +755,8 @@ entries:
       energy_kcal: 45
       protein_g: 4.3
       fat_g: 2.6
+      carbs_total_g: 1.4
+      carbs_available_g: 1.0
       sat_fat_g: 0.6
       mufa_g: 0.9
       pufa_g: 0.9
@@ -400,18 +766,44 @@ entries:
       fiber_total_g: 0.4
       fiber_soluble_g: 0.1
       fiber_insoluble_g: 0.3
+      polyols_g: 0.0
       sodium_mg: 302
       potassium_mg: 148
-      iodine_ug: 7
-      magnesium_mg: 14
       calcium_mg: 112
+      magnesium_mg: 14
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 1
       zinc_mg: 0
-      vitamin_c_mg: 0
+      copper_mg: 0
       manganese_mg: 0
-      polyols_g: 0.0
-      carbs_available_g: 1.0
-      carbs_total_g: 1.4
+      selenium_ug: 0
+      iodine_ug: 7
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 0
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   - name: Charcoal Custard Bun
     food_bank_id: charcoal_custard_bun_imperial_treasure_st_james_v1
     quantity: 1
@@ -420,6 +812,8 @@ entries:
       energy_kcal: 186
       protein_g: 3.8
       fat_g: 8.8
+      carbs_total_g: 23.9
+      carbs_available_g: 23.3
       sat_fat_g: 4.0
       mufa_g: 2.4
       pufa_g: 1.7
@@ -429,18 +823,44 @@ entries:
       fiber_total_g: 0.6
       fiber_soluble_g: 0.2
       fiber_insoluble_g: 0.4
+      polyols_g: 0.0
       sodium_mg: 38
       potassium_mg: 0
-      iodine_ug: 14
-      magnesium_mg: 0
       calcium_mg: 29
+      magnesium_mg: 0
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 1.0
       zinc_mg: 0
-      vitamin_c_mg: 0
+      copper_mg: 0
       manganese_mg: 0
-      polyols_g: 0.0
-      carbs_available_g: 23.3
-      carbs_total_g: 23.9
+      selenium_ug: 0
+      iodine_ug: 14
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 0
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   notes: Lunch at Imperial Treasure St. James (ended 14:30pm) with corrected duck
     skin and cheung fun portions
 - timestamp: '2025-11-02T17:00:00+00:00'
@@ -453,6 +873,8 @@ entries:
       energy_kcal: 581
       protein_g: 36.9
       fat_g: 20.7
+      carbs_total_g: 76.5
+      carbs_available_g: 68.2
       sat_fat_g: 6.9
       mufa_g: 8.3
       pufa_g: 2.8
@@ -462,18 +884,44 @@ entries:
       fiber_total_g: 8.3
       fiber_soluble_g: 0
       fiber_insoluble_g: 0
+      polyols_g: 0.0
       sodium_mg: 369
       potassium_mg: 438
-      iodine_ug: 0
-      magnesium_mg: 55
       calcium_mg: 37
+      magnesium_mg: 55
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 3.0
       zinc_mg: 2.5
-      vitamin_c_mg: 7
+      copper_mg: 0
       manganese_mg: 0
-      polyols_g: 0.0
-      carbs_available_g: 68.2
-      carbs_total_g: 76.5
+      selenium_ug: 0
+      iodine_ug: 0
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 7
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   notes: Post-workout snack - leftovers from dinner logged yesterday (415g out of
     original 900g)
 - timestamp: '2025-11-02T19:30:00+00:00'
@@ -486,6 +934,8 @@ entries:
       energy_kcal: 252
       protein_g: 16.0
       fat_g: 9.0
+      carbs_total_g: 33.2
+      carbs_available_g: 29.6
       sat_fat_g: 3.0
       mufa_g: 3.6
       pufa_g: 1.2
@@ -495,18 +945,44 @@ entries:
       fiber_total_g: 3.6
       fiber_soluble_g: 0
       fiber_insoluble_g: 0
+      polyols_g: 0.0
       sodium_mg: 160
       potassium_mg: 190
-      iodine_ug: 0
-      magnesium_mg: 24
       calcium_mg: 16
+      magnesium_mg: 24
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 1.3
       zinc_mg: 1.1
-      vitamin_c_mg: 3
+      copper_mg: 0
       manganese_mg: 0
-      polyols_g: 0.0
-      carbs_available_g: 29.6
-      carbs_total_g: 33.2
+      selenium_ug: 0
+      iodine_ug: 0
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 3
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   - name: Kiwi (small)
     food_bank_id: null
     quantity: 1.5
@@ -515,6 +991,8 @@ entries:
       energy_kcal: 55
       protein_g: 1.0
       fat_g: 0.4
+      carbs_total_g: 12.8
+      carbs_available_g: 10.5
       sat_fat_g: 0.02
       mufa_g: 0.03
       pufa_g: 0.2
@@ -524,16 +1002,42 @@ entries:
       fiber_total_g: 2.3
       fiber_soluble_g: 0
       fiber_insoluble_g: 0
+      polyols_g: 0.0
       sodium_mg: 2
       potassium_mg: 230
-      iodine_ug: 0
-      magnesium_mg: 13
       calcium_mg: 26
+      magnesium_mg: 13
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
       iron_mg: 0.2
       zinc_mg: 0.1
-      vitamin_c_mg: 70
+      copper_mg: 0
       manganese_mg: 0.1
-      polyols_g: 0.0
-      carbs_available_g: 10.5
-      carbs_total_g: 12.8
+      selenium_ug: 0
+      iodine_ug: 0
+      chromium_ug: 0
+      molybdenum_ug: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 70
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
   notes: Dinner - remaining bolognese with kiwis

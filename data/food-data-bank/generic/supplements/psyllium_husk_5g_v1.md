@@ -2,13 +2,14 @@
 
 ```yaml
 id: psyllium_husk_5g_v1
+schema_version: 2
 version: 2
-last_verified: "2025-11-02"
+last_verified: 2025-11-02
 source:
   venue: Generic - Supplement
-  menu_page: ""
+  menu_page: 
   evidence:
-  - "USDA FoodData Central: Psyllium seed husk, approximately per 5g serving"
+  - USDA FoodData Central: Psyllium seed husk, approximately per 5g serving
   - Typical commercial psyllium husk powder nutrition
 aliases:
 - Psyllium
@@ -21,19 +22,19 @@ portion:
   notes: Psyllium husk powder or whole husks
 assumptions:
   salt_scheme: unsalted
-  oil_type: ""
+  oil_type: 
   prep: Dry powder/husk form, typically mixed with water
 per_portion:
   energy_kcal: 27.7
   protein_g: 0.2
   fat_g: 0.1
-  sat_fat_g: 0.0
-  mufa_g: 0.0
+  sat_fat_g: 0
+  mufa_g: 0
   pufa_g: 0.1
   trans_fat_g: 0
   cholesterol_mg: 0
-  sugar_g: 0.0
-  fiber_total_g: 4.0
+  sugar_g: 0
+  fiber_total_g: 4
   fiber_soluble_g: 3.2
   fiber_insoluble_g: 0.8
   sodium_mg: 2
@@ -45,14 +46,42 @@ per_portion:
   zinc_mg: 0.1
   vitamin_c_mg: 0
   manganese_mg: 0
-  polyols_g: 0.0
+  polyols_g: 0
   carbs_available_g: 4.5
   carbs_total_g: 8.5
+  copper_mg: 0
+  selenium_ug: 0
+  chromium_ug: 0
+  molybdenum_ug: 0
+  phosphorus_mg: 0
+  chloride_mg: 0
+  sulfur_g: 0
+  vitamin_a_ug: 0
+  vitamin_d_ug: 0
+  vitamin_e_mg: 0
+  vitamin_k_ug: 0
+  vitamin_b1_mg: 0
+  vitamin_b2_mg: 0
+  vitamin_b3_mg: 0
+  vitamin_b5_mg: 0
+  vitamin_b6_mg: 0
+  vitamin_b7_ug: 0
+  vitamin_b9_ug: 0
+  vitamin_b12_ug: 0
+  choline_mg: 0
+  omega3_epa_mg: 0
+  omega3_dha_mg: 0
+  omega3_ala_g: 0
+  omega6_la_g: 0
+  boron_mg: 0
+  silicon_mg: 0
+  vanadium_ug: 0
+  nickel_ug: 0
 derived:
-  salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: high
-  gaps: []
+  gaps:
 notes:
 - Psyllium husk is approximately 80% soluble fiber (mucilage), 20% insoluble fiber
 - Soluble fiber forms viscous gel when mixed with water
@@ -62,32 +91,25 @@ notes:
 - Minimal micronutrient content
 - Should be consumed with adequate water (at least 200-250ml per 5g serving)
 - Fat content minimal, trace PUFA from seed hull
-- 'Atwater check (available carb basis): 4×0.2 + 9×0.1 + 4×4.5 + 2×4.0 + 2.4×0.0 =
-  27.7 kcal'
+- Atwater check (available carb basis): 4×0.2 + 9×0.1 + 4×4.5 + 2×4.0 + 2.4×0.0 = 27.7 kcal
 change_log:
 - timestamp: 2025-10-31T00:00:00+0000
   updated_by: Claude Code (Sonnet 4.5)
-  reason: Initial entry for psyllium husk supplement tracking, user requested 5g portion
-    size
-  fields_changed:
-  - all fields
-  sources:
-  - url: https://fdc.nal.usda.gov/
-    note: USDA FoodData Central reference values for psyllium seed husk
-  - url: user_request
-    note: User specified 5g portion size
-- timestamp: "2025-11-02T19:20:00+00:00"
-  updated_by: "LLM: GPT-5 Codex"
+  reason: Initial entry for psyllium husk supplement tracking, user requested 5g portion size
+  fields_changed: [all fields]
+  sources: [{note: USDA FoodData Central reference values for psyllium seed husk, url: 'https://fdc.nal.usda.gov/'},
+  {note: User specified 5g portion size, url: user_request}]
+- timestamp: '2025-11-02T19:20:00+00:00'
+  updated_by: 'LLM: GPT-5 Codex'
   reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed:
-  - derived.energy_from_macros_kcal
-  - last_verified
-  - notes
-  - per_portion.carbs_available_g
-  - per_portion.carbs_g
-  - per_portion.carbs_total_g
-  - per_portion.energy_kcal
-  - per_portion.polyols_g
-  - version
+  fields_changed: [derived.energy_from_macros_kcal, last_verified, notes, per_portion.carbs_available_g,
+  per_portion.carbs_g, per_portion.carbs_total_g, per_portion.energy_kcal, per_portion.polyols_g,
+  version]
   sources: []
+- date: 2025-11-05
+  updated_by: automated_migration_v1_to_v2
+  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+  fields initialized to 0.'
 ```

@@ -2,15 +2,16 @@
 
 ```yaml
 id: daylesford_smoked_trout_80g_v1
+schema_version: 2
 version: 3
-last_verified: "2025-11-02"
+last_verified: 2025-11-02
 source:
   venue: Daylesford Organic
-  menu_page: https://www.daylesford.com/
+  menu_page: "https://www.daylesford.com/"
   evidence:
-  - "Product: Daylesford Smoked Trout (200g pack, Batch 6997, Use by 12.11.25)"
+  - Product: Daylesford Smoked Trout (200g pack, Batch 6997, Use by 12.11.25)
   - Dry salted & cold smoked on West Coast of Scotland
-  - "Ingredients: Trout (96%), Salt, Sugar"
+  - Ingredients: Trout (96%), Salt, Sugar
   - Official product label nutrition facts
 aliases:
 - Daylesford Trout
@@ -23,7 +24,7 @@ portion:
   notes: Pond reared farmed rainbow trout, cold smoked, thinly sliced
 assumptions:
   salt_scheme: normal
-  oil_type: ""
+  oil_type: 
   prep: Dry salted and cold smoked - traditional Scottish method
 per_portion:
   energy_kcal: 161.4
@@ -34,8 +35,8 @@ per_portion:
   pufa_g: 5.9
   trans_fat_g: 0
   cholesterol_mg: 50
-  sugar_g: 0.0
-  fiber_total_g: 0.0
+  sugar_g: 0
+  fiber_total_g: 0
   fiber_soluble_g: 0
   fiber_insoluble_g: 0
   sodium_mg: 480
@@ -47,11 +48,39 @@ per_portion:
   zinc_mg: 0.4
   vitamin_c_mg: 0
   manganese_mg: 0
-  polyols_g: 0.0
-  carbs_available_g: 0.0
-  carbs_total_g: 0.0
+  polyols_g: 0
+  carbs_available_g: 0
+  carbs_total_g: 0
+  copper_mg: 0
+  selenium_ug: 0
+  chromium_ug: 0
+  molybdenum_ug: 0
+  phosphorus_mg: 0
+  chloride_mg: 0
+  sulfur_g: 0
+  vitamin_a_ug: 0
+  vitamin_d_ug: 0
+  vitamin_e_mg: 0
+  vitamin_k_ug: 0
+  vitamin_b1_mg: 0
+  vitamin_b2_mg: 0
+  vitamin_b3_mg: 0
+  vitamin_b5_mg: 0
+  vitamin_b6_mg: 0
+  vitamin_b7_ug: 0
+  vitamin_b9_ug: 0
+  vitamin_b12_ug: 0
+  choline_mg: 0
+  omega3_epa_mg: 0
+  omega3_dha_mg: 0
+  omega3_ala_g: 0
+  omega6_la_g: 0
+  boron_mg: 0
+  silicon_mg: 0
+  vanadium_ug: 0
+  nickel_ug: 0
 derived:
-  salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
+  salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
   omega_3_total_g: 1.4
   epa_g: 0.4
   dha_g: 0.8
@@ -63,8 +92,7 @@ quality:
   - Omega-3 breakdown estimated from farmed rainbow trout composition
 notes:
 - Rainbow trout (Oncorhynchus mykiss) - pond reared, farmed, Scottish origin
-- 'Per 100g (from label): 202 kcal, 21.8g protein, 12.8g fat (2.3g sat), <0.1g carbs,
-  1.5g salt'
+- Per 100g (from label): 202 kcal, 21.8g protein, 12.8g fat (2.3g sat), <0.1g carbs, 1.5g salt
 - Higher fat content (12.8g/100g) than typical smoked trout - premium farmed product
 - Cold smoked process preserves omega-3 fatty acids better than hot smoking
 - Excellent source of complete protein (17.4g per 80g portion)
@@ -73,63 +101,41 @@ notes:
 - Good source of vitamin D (~120 IU per 80g) - estimated
 - High in selenium (~10µg per 80g) - estimated
 - Phosphorus content ~200mg per 80g - estimated
-- "Sodium: 480mg per 80g (from 1.2g salt)"
+- Sodium: 480mg per 80g (from 1.2g salt)
 - Sugar listed in ingredients but negligible in final product (<0.1g/100g)
 - PUFA includes omega-3 (EPA+DHA) and some omega-6
 - Zero carb, keto-friendly protein source
 - Store refrigerated 0-5°C, consume within 3 days once opened
 - May contain bones - check before eating
-- 'Atwater check (available carb basis): 4×17.4 + 9×10.2 + 4×0.0 + 2×0.0 + 2.4×0.0
-  = 161.4 kcal'
+- Atwater check (available carb basis): 4×17.4 + 9×10.2 + 4×0.0 + 2×0.0 + 2.4×0.0 = 161.4 kcal
 change_log:
 - timestamp: 2025-11-01T09:00:00+0000
   updated_by: Claude Code (Sonnet 4.5)
-  reason: Initial entry for Daylesford smoked trout - user consumed on crispbread
-    for breakfast
-  fields_changed:
-  - all fields
-  sources:
-  - url: https://www.ocado.com/products/daylesford-smoked-trout-619556011
-    note: Daylesford Smoked Trout product listing
-  - url: https://fdc.nal.usda.gov/
-    note: USDA FoodData Central smoked trout baseline values
-  - url: user_request
-    note: User consumed 80g (2 slices) Daylesford smoked trout on 2025-11-01 at 09:00
+  reason: Initial entry for Daylesford smoked trout - user consumed on crispbread for breakfast
+  fields_changed: [all fields]
+  sources: [{note: Daylesford Smoked Trout product listing, url: 'https://www.ocado.com/products/daylesford-smoked-trout-619556011'},
+  {note: USDA FoodData Central smoked trout baseline values, url: 'https://fdc.nal.usda.gov/'},
+  {note: 'User consumed 80g (2 slices) Daylesford smoked trout on 2025-11-01 at 09:00',
+    url: user_request}]
 - timestamp: 2025-11-01T09:30:00+0000
   updated_by: Claude Code (Sonnet 4.5)
-  reason: Updated with actual product label nutrition facts - corrected major underestimation
-    of calories and fat
-  fields_changed:
-  - version
-  - per_portion.energy_kcal
-  - per_portion.protein_g
-  - per_portion.fat_g
-  - per_portion.sat_fat_g
-  - per_portion.mufa_g
-  - per_portion.pufa_g
-  - per_portion.carbs_g
-  - per_portion.sugar_g
-  - per_portion.sodium_mg
-  - derived.omega_3_total_g
-  - derived.epa_g
-  - derived.dha_g
-  - quality.confidence
-  - quality.gaps
-  sources:
-  - url: product_label
-    note: 'Daylesford Smoked Trout 200g pack label: 202 kcal, 21.8g protein, 12.8g
-      fat (2.3g sat), <0.1g carbs per 100g. Batch 6997, use by 12.11.25'
-- timestamp: "2025-11-02T19:20:00+00:00"
-  updated_by: "LLM: GPT-5 Codex"
+  reason: Updated with actual product label nutrition facts - corrected major underestimation of calories and fat
+  fields_changed: [version, per_portion.energy_kcal, per_portion.protein_g, per_portion.fat_g, per_portion.sat_fat_g,
+  per_portion.mufa_g, per_portion.pufa_g, per_portion.carbs_g, per_portion.sugar_g,
+  per_portion.sodium_mg, derived.omega_3_total_g, derived.epa_g, derived.dha_g, quality.confidence,
+  quality.gaps]
+  sources: [{note: 'Daylesford Smoked Trout 200g pack label: 202 kcal, 21.8g protein, 12.8g fat
+      (2.3g sat), <0.1g carbs per 100g. Batch 6997, use by 12.11.25', url: product_label}]
+- timestamp: '2025-11-02T19:20:00+00:00'
+  updated_by: 'LLM: GPT-5 Codex'
   reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed:
-  - last_verified
-  - notes
-  - per_portion.carbs_available_g
-  - per_portion.carbs_g
-  - per_portion.carbs_total_g
-  - per_portion.energy_kcal
-  - per_portion.polyols_g
-  - version
+  fields_changed: [last_verified, notes, per_portion.carbs_available_g, per_portion.carbs_g, per_portion.carbs_total_g,
+  per_portion.energy_kcal, per_portion.polyols_g, version]
   sources: []
+- date: 2025-11-05
+  updated_by: automated_migration_v1_to_v2
+  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+  fields initialized to 0.'
 ```
