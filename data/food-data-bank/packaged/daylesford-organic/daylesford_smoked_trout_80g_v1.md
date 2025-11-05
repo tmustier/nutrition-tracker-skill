@@ -110,7 +110,6 @@ notes:
 - Atwater check (available carb basis): 4×17.4 + 9×10.2 + 4×0.0 + 2×0.0 + 2.4×0.0 = 161.4 kcal
 change_log:
 - timestamp: 2025-11-01T09:00:00+0000
-...
   updated_by: Claude Code (Sonnet 4.5)
   reason: Initial entry for Daylesford smoked trout - user consumed on crispbread for breakfast
   fields_changed: [all fields]
@@ -119,7 +118,6 @@ change_log:
   {note: 'User consumed 80g (2 slices) Daylesford smoked trout on 2025-11-01 at 09:00',
     url: user_request}]
 - timestamp: 2025-11-01T09:30:00+0000
-...
   updated_by: Claude Code (Sonnet 4.5)
   reason: Updated with actual product label nutrition facts - corrected major underestimation of calories and fat
   fields_changed: [version, per_portion.energy_kcal, per_portion.protein_g, per_portion.fat_g, per_portion.sat_fat_g,

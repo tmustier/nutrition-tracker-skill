@@ -107,7 +107,6 @@ notes:
 - Atwater check (available carb basis): 4×69.4 + 9×39.5 + 4×53.3 + 2×3.7 + 2.4×0.0 = 853.7 kcal
 change_log:
 - timestamp: 2025-11-01T08:45:00+0000
-...
   updated_by: Claude Code (Sonnet 4.5)
   reason: Initial entry for The Eagle's signature steak sandwich - user planning visit to venue
   fields_changed: [all fields]
@@ -117,7 +116,6 @@ change_log:
     url: 'https://fdc.nal.usda.gov/'}, {note: User researching for upcoming visit
       on 2025-11-01, url: user_request}]
 - timestamp: 2025-11-01T09:35:00+0000
-...
   updated_by: Claude Code (Sonnet 4.5)
   reason: Updated with GPT-5 Pro detailed analysis - significantly more accurate than initial estimate
   fields_changed: [version, per_portion.energy_kcal, per_portion.protein_g, per_portion.fat_g, per_portion.sat_fat_g,

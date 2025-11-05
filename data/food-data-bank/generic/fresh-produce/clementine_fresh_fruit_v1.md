@@ -10,10 +10,8 @@ source:
   menu_page: 
   evidence:
   - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/168195/nutrients
-...
     note: 'USDA FoodData Central: Clementines, raw (FDC ID 168195)'
   - url: https://tools.myfooddata.com/nutrition-facts/168195/wt1
-...
     note: 'MyFoodData USDA aggregation: Complete nutrition profile per 100g and per clementine'
 aliases:
 - mandarin

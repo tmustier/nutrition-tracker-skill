@@ -29,7 +29,7 @@ assumptions:
   salt_scheme: "normal"  # light|normal|heavy|unsalted
   oil_type: ""
   prep: ""
-per_portion:  # Schema v2: 51 nutrient fields
+per_portion:  # Schema v2: 52 nutrient fields
   # Macronutrients
   energy_kcal: 0
   protein_g: 0
@@ -65,6 +65,7 @@ per_portion:  # Schema v2: 51 nutrient fields
   chloride_mg: 0
   sulfur_g: 0
   # Vitamins
+  vitamin_a_ug: 0
   vitamin_d_ug: 0
   vitamin_e_mg: 0
   vitamin_k_ug: 0

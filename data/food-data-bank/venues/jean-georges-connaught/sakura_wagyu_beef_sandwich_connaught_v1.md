@@ -3,6 +3,7 @@
 ```yaml
 id: sakura_wagyu_beef_sandwich_connaught_v1
 version: 3
+schema_version: 2
 last_verified: "2025-11-02"
 source:
   venue: Jean-Georges at The Connaught, London

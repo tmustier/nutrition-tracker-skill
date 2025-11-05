@@ -1,7 +1,7 @@
 ---
 title: Food Data Bank Index
 description: Auto-generated index of all dishes in the food data bank
-generated: 2025-11-05 08:56:00 UTC
+generated: 2025-11-05 10:51:28 UTC
 ---
 
 # Food Data Bank Index
@@ -11,11 +11,11 @@ generated: 2025-11-05 08:56:00 UTC
 
 ## Overview
 
-Total dishes: 35
+Total dishes: 69
 
-- **Venues**: 8 categories
-- **Packaged Products**: 0 categories
-- **Generic Items**: 6 categories
+- **Venues**: 9 categories
+- **Packaged Products**: 7 categories
+- **Generic Items**: 10 categories
 
 ---
 
@@ -23,11 +23,12 @@ Total dishes: 35
 
 *Location: `data/food-data-bank/venues/imperial-treasure-st-james/`*
 
-**6 dishes:**
+**7 dishes:**
 
 - [Charcoal Custard Bun (Imperial Treasure St. James)](food-data-bank/venues/imperial-treasure-st-james/charcoal_custard_bun_imperial_treasure_st_james_v1.md) {#charcoal_custard_bun_imperial_treasure_st_james_v1}
 - [Duck Broth with Tofu (Imperial Treasure St. James)](food-data-bank/venues/imperial-treasure-st-james/duck_broth_tofu_imperial_treasure_st_james_v1.md) {#duck_broth_tofu_imperial_treasure_st_james_v1}
 - [Peking Duck Pancake (Imperial Treasure St. James)](food-data-bank/venues/imperial-treasure-st-james/peking_duck_pancake_imperial_treasure_st_james_v1.md) {#peking_duck_pancake_imperial_treasure_st_james_v1}
+- [Peking Duck Skin with Sugar (Imperial Treasure St. James)](food-data-bank/venues/imperial-treasure-st-james/peking_duck_skin_sugar_imperial_treasure_st_james_v1.md) {#peking_duck_skin_sugar_imperial_treasure_st_james_v1}
 - [Prawn & Chive Dumpling (Imperial Treasure St. James)](food-data-bank/venues/imperial-treasure-st-james/prawn_chive_dumpling_imperial_treasure_st_james_v1.md) {#prawn_chive_dumpling_imperial_treasure_st_james_v1}
 - [Shrimp Shu Mai (Imperial Treasure St. James)](food-data-bank/venues/imperial-treasure-st-james/shrimp_shu_mai_imperial_treasure_st_james_v1.md) {#shrimp_shu_mai_imperial_treasure_st_james_v1}
 - [Snow Mountain Bun (Imperial Treasure St. James)](food-data-bank/venues/imperial-treasure-st-james/snow_mountain_bun_imperial_treasure_st_james_v1.md) {#snow_mountain_bun_imperial_treasure_st_james_v1}
@@ -42,6 +43,14 @@ Total dishes: 35
 - [Ketchup Pot, 25g (Jean-Georges at The Connaught)](food-data-bank/venues/jean-georges-connaught/ketchup_pot_connaught_v1.md) {#ketchup_pot_connaught_v1}
 - [Sakura Wagyu Beef Sandwich (Jean-Georges at The Connaught)](food-data-bank/venues/jean-georges-connaught/sakura_wagyu_beef_sandwich_connaught_v1.md) {#sakura_wagyu_beef_sandwich_connaught_v1}
 - [Thai Spiced Broccoli Soup (Jean-Georges at The Connaught)](food-data-bank/venues/jean-georges-connaught/thai_spiced_broccoli_soup_connaught_v1.md) {#thai_spiced_broccoli_soup_connaught_v1}
+
+## Joe And The Juice
+
+*Location: `data/food-data-bank/venues/joe-and-the-juice/`*
+
+**1 dishes:**
+
+- [Joe & the Juice - Joe’s Identity juice](food-data-bank/venues/joe-and-the-juice/joes_identity_juice_jtj_v1.md) {#joes_identity_juice_jtj_v1}
 
 ## Leto Caffe Soho
 
@@ -64,26 +73,40 @@ Total dishes: 35
 
 *Location: `data/food-data-bank/venues/simple-health-kitchen/`*
 
-**2 dishes:**
+**9 dishes:**
 
+- [Broccoli Stems (Simple Health Kitchen)](food-data-bank/venues/simple-health-kitchen/broccoli_stems_shk_v1.md) {#broccoli_stems_shk_v1}
+- [Carrot Juice (Simple Health Kitchen)](food-data-bank/venues/simple-health-kitchen/carrot_juice_shk_v1.md) {#carrot_juice_shk_v1}
 - [Grilled Salmon Fillet (Simple Health Kitchen)](food-data-bank/venues/simple-health-kitchen/grilled_salmon_fillet_shk_v1.md) {#grilled_salmon_fillet_shk_v1}
+- [Hummus Side Pot (Simple Health Kitchen)](food-data-bank/venues/simple-health-kitchen/hummus_side_pot_shk_v1.md) {#hummus_side_pot_shk_v1}
+- [Lemon & Herb Chicken Breast (Simple Health Kitchen)](food-data-bank/venues/simple-health-kitchen/lemon_herb_chicken_breast_shk_v1.md) {#lemon_herb_chicken_breast_shk_v1}
 - [Sea Bass Fillet with Salsa Verde (Simple Health Kitchen)](food-data-bank/venues/simple-health-kitchen/sea_bass_fillet_salsa_verde_shk_v1.md) {#sea_bass_fillet_salsa_verde_shk_v1}
+- [Sweet Potato Wedges (Simple Health Kitchen)](food-data-bank/venues/simple-health-kitchen/sweet_potato_wedges_shk_v1.md) {#sweet_potato_wedges_shk_v1}
+- [Whole Wheat Pesto Pasta (Simple Health Kitchen)](food-data-bank/venues/simple-health-kitchen/whole_wheat_pesto_pasta_shk_v1.md) {#whole_wheat_pesto_pasta_shk_v1}
+- [Zesty Lemon Broccoli (Simple Health Kitchen)](food-data-bank/venues/simple-health-kitchen/zesty_lemon_broccoli_shk_v1.md) {#zesty_lemon_broccoli_shk_v1}
 
 ## The Eagle Farringdon
 
 *Location: `data/food-data-bank/venues/the-eagle-farringdon/`*
 
-**1 dishes:**
+**6 dishes:**
 
+- [Bife Ana Steak Sandwich (The Eagle, Farringdon)](food-data-bank/venues/the-eagle-farringdon/bife_ana_steak_sandwich_eagle_farringdon_v1.md) {#bife_ana_steak_sandwich_eagle_farringdon_v1}
+- [Mafaldine with Tomato, Rosemary, Chickpeas & Parmesan (The Eagle, Farringdon)](food-data-bank/venues/the-eagle-farringdon/mafaldine_tomato_rosemary_chickpeas_parmesan_eagle_farringdon_v1.md) {#mafaldine_tomato_rosemary_chickpeas_parmesan_eagle_farringdon_v1}
+- [Minestrone with Cannellini Beans, Fennel, Cabbage, Potato & Parmesan (The Eagle, Farringdon)](food-data-bank/venues/the-eagle-farringdon/minestrone_cannellini_fennel_cabbage_potato_parmesan_eagle_farringdon_v1.md) {#minestrone_cannellini_fennel_cabbage_potato_parmesan_eagle_farringdon_v1}
+- [Orange 'Jaffa Cake' Slice with Crème Fraîche (The Eagle, Farringdon)](food-data-bank/venues/the-eagle-farringdon/orange_jaffa_cake_slice_creme_fraiche_eagle_farringdon_v1.md) {#orange_jaffa_cake_slice_creme_fraiche_eagle_farringdon_v1}
 - [Pastel de Nata (The Eagle, Farringdon)](food-data-bank/venues/the-eagle-farringdon/pastel_de_nata_eagle_farringdon_v1.md) {#pastel_de_nata_eagle_farringdon_v1}
+- [Roasted Hake with Lentils & Salsa Verde (The Eagle, Farringdon)](food-data-bank/venues/the-eagle-farringdon/roasted_hake_lentils_salsa_verde_eagle_farringdon_v1.md) {#roasted_hake_lentils_salsa_verde_eagle_farringdon_v1}
 
 ## Third Space Nff
 
 *Location: `data/food-data-bank/venues/third-space-nff/`*
 
-**1 dishes:**
+**3 dishes:**
 
 - [Berry Blast Shake (Third Space NFF)](food-data-bank/venues/third-space-nff/berry_blast_shake_third-space-nff_v1.md) {#berry_blast_shake_third-space-nff_v1}
+- [Elite Greens Shake - Third Space Natural Fitness Food](food-data-bank/venues/third-space-nff/elite_greens_nff_v1.md) {#elite_greens_nff_v1}
+- [Natural Fitness Food Vanilla Whey Protein (30g scoop)](food-data-bank/venues/third-space-nff/nff_vanilla_whey_30g_v1.md) {#nff_vanilla_whey_30g_v1}
 
 ## Zima Soho
 
@@ -98,20 +121,86 @@ Total dishes: 35
 - [Pickled Cabbage / Sauerkraut (Zima)](food-data-bank/venues/zima-soho/sauerkraut_zima_v1.md) {#sauerkraut_zima_v1}
 - [Vinegret with 1 slice rye (Zima)](food-data-bank/venues/zima-soho/vinegret_with_rye_zima_v1.md) {#vinegret_with_rye_zima_v1}
 
+## Packaged: Amisa
+
+*Location: `data/food-data-bank/packaged/amisa/`*
+
+**1 dishes:**
+
+- [Amisa Buckwheat Crispbread (per piece, 5g)](food-data-bank/packaged/amisa/amisa_buckwheat_crispbread_5g_v1.md) {#amisa_buckwheat_crispbread_5g_v1}
+
+## Packaged: Daylesford Organic
+
+*Location: `data/food-data-bank/packaged/daylesford-organic/`*
+
+**1 dishes:**
+
+- [Smoked Trout (Daylesford, 80g)](food-data-bank/packaged/daylesford-organic/daylesford_smoked_trout_80g_v1.md) {#daylesford_smoked_trout_80g_v1}
+
+## Packaged: Grenade
+
+*Location: `data/food-data-bank/packaged/grenade/`*
+
+**1 dishes:**
+
+- [Grenade Carb Killa White Oreo Bar (60g)](food-data-bank/packaged/grenade/grenade_white_oreo_60g_v1.md) {#grenade_white_oreo_60g_v1}
+
+## Packaged: Optimum Nutrition
+
+*Location: `data/food-data-bank/packaged/optimum-nutrition/`*
+
+**1 dishes:**
+
+- [ON Gold Standard Whey – Double Rich Chocolate (1 scoop ≈30 g)](food-data-bank/packaged/optimum-nutrition/on_whey_drc_30g_v1.md) {#on_whey_drc_30g_v1}
+
+## Packaged: Packd
+
+*Location: `data/food-data-bank/packaged/packd/`*
+
+**1 dishes:**
+
+- [PACK'D Mixed Summer Berries (150 g)](food-data-bank/packaged/packd/packd_mixed_summer_berries_150g_v1.md) {#packd_mixed_summer_berries_150g_v1}
+
+## Packaged: Rot Front
+
+*Location: `data/food-data-bank/packaged/rot-front/`*
+
+**1 dishes:**
+
+- [Rot Front Glazed Peanut Halva (1 piece, ~25g)](food-data-bank/packaged/rot-front/halva_glazed_peanut_rotfront_v1.md) {#halva_glazed_peanut_rotfront_v1}
+
+## Packaged: Yarden
+
+*Location: `data/food-data-bank/packaged/yarden/`*
+
+**1 dishes:**
+
+- [Yarden Houmous (30g serving)](food-data-bank/packaged/yarden/yarden_houmous_30g_v1.md) {#yarden_houmous_30g_v1}
+
 ## Generic: Bakery
 
 *Location: `data/food-data-bank/generic/bakery/`*
 
-**1 dishes:**
+**2 dishes:**
 
 - [Almond Croissant (Generic Bakery)](food-data-bank/generic/bakery/almond_croissant_generic_v1.md) {#almond_croissant_generic_v1}
+- [Ham and Cheese Croissant (Generic Bakery)](food-data-bank/generic/bakery/ham_cheese_croissant_generic_v1.md) {#ham_cheese_croissant_generic_v1}
+
+## Generic: Bar Restaurant
+
+*Location: `data/food-data-bank/generic/bar-restaurant/`*
+
+**1 dishes:**
+
+- [Margarita (Classic)](food-data-bank/generic/bar-restaurant/margarita_classic_v1.md) {#margarita_classic_v1}
 
 ## Generic: Fresh Produce
 
 *Location: `data/food-data-bank/generic/fresh-produce/`*
 
-**1 dishes:**
+**2 dishes:**
 
+- [Clementine (Fresh Fruit)](food-data-bank/generic/fresh-produce/clementine_fresh_fruit_v1.md) {#clementine_fresh_fruit_v1}
 - [Persimmon (Fresh Fruit)](food-data-bank/generic/fresh-produce/persimmon_fresh_fruit_generic_v1.md) {#persimmon_fresh_fruit_generic_v1}
 
 ## Generic: Germes
@@ -122,17 +211,30 @@ Total dishes: 35
 
 - [Vareniki with Cherry Filling (250g portion)](food-data-bank/generic/germes/vareniki_cherry_250g_germes_v1.md) {#vareniki_cherry_250g_germes_v1}
 
+## Generic: Grocery
+
+*Location: `data/food-data-bank/generic/grocery/`*
+
+**1 dishes:**
+
+- [Banana (Raw, 150g)](food-data-bank/generic/grocery/banana_raw_150g_v1.md) {#banana_raw_150g_v1}
+
 ## Generic: Ingredients
 
 *Location: `data/food-data-bank/generic/ingredients/`*
 
-**7 dishes:**
+**12 dishes:**
 
 - [Avocado (Fresh, 75g)](food-data-bank/generic/ingredients/avocado_fresh_75g_generic-ingredients_v1.md) {#avocado_fresh_75g_generic-ingredients_v1}
+- [Blueberries - 150 g](food-data-bank/generic/ingredients/blueberries_150g_v1.md) {#blueberries_150g_v1}
 - [Greek Yogurt 0% Fat - 200 g](food-data-bank/generic/ingredients/greek_yogurt_0pct_200g_v1.md) {#greek_yogurt_0pct_200g_v1}
 - [Hazelnuts, 30 g](food-data-bank/generic/ingredients/hazelnuts_30g_v1.md) {#hazelnuts_30g_v1}
+- [Mixed Pineapple/Mango/Passion Fruit (150 g)](food-data-bank/generic/ingredients/pine_mango_passion_150g_v1.md) {#pine_mango_passion_150g_v1}
+- [Oats - dry (50 g)](food-data-bank/generic/ingredients/oats_dry_50g_v1.md) {#oats_dry_50g_v1}
 - [Olive Oil (14g)](food-data-bank/generic/ingredients/olive_oil_14g_generic-ingredients_v1.md) {#olive_oil_14g_generic-ingredients_v1}
+- [Pistachios, 30 g](food-data-bank/generic/ingredients/pistachios_30g_v1.md) {#pistachios_30g_v1}
 - [Raspberries - 150 g](food-data-bank/generic/ingredients/raspberries_150g_v1.md) {#raspberries_150g_v1}
+- [Skyr - plain (200 g)](food-data-bank/generic/ingredients/skyr_plain_200g_v1.md) {#skyr_plain_200g_v1}
 - [Sunflower Seeds, 30 g](food-data-bank/generic/ingredients/sunflower_seeds_30g_v1.md) {#sunflower_seeds_30g_v1}
 - [Tiramisu Yogurt Pot (170g)](food-data-bank/generic/ingredients/tiramisu_yogurt_pot_170g_generic-ingredients_v1.md) {#tiramisu_yogurt_pot_170g_generic-ingredients_v1}
 
@@ -144,6 +246,14 @@ Total dishes: 35
 
 - [Chocolate Pistachio Praline Bar (half bar, 22g)](food-data-bank/generic/londons-chocolate-company/pistachio_praline_bar_half_londons-chocolate_v1.md) {#pistachio_praline_bar_half_londons-chocolate_v1}
 
+## Generic: Pub Bar
+
+*Location: `data/food-data-bank/generic/pub-bar/`*
+
+**1 dishes:**
+
+- [Guinness Draught (Pint, 568ml)](food-data-bank/generic/pub-bar/guinness_pint_568ml_v1.md) {#guinness_pint_568ml_v1}
+
 ## Generic: St Helens Farm
 
 *Location: `data/food-data-bank/generic/st-helens-farm/`*
@@ -151,6 +261,14 @@ Total dishes: 35
 **1 dishes:**
 
 - [Goat Milk Yogurt (few dollops, ~50g)](food-data-bank/generic/st-helens-farm/goat-milk-yogurt-dollops_st-helens-farm_v1.md) {#goat-milk-yogurt-dollops_st-helens-farm_v1}
+
+## Generic: Supplements
+
+*Location: `data/food-data-bank/generic/supplements/`*
+
+**1 dishes:**
+
+- [Psyllium Husk (5g portion)](food-data-bank/generic/supplements/psyllium_husk_5g_v1.md) {#psyllium_husk_5g_v1}
 
 ---
 

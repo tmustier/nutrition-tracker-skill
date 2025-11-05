@@ -94,7 +94,6 @@ notes:
 - Atwater check (available carb basis): 4×0.2 + 9×0.1 + 4×4.5 + 2×4.0 + 2.4×0.0 = 27.7 kcal
 change_log:
 - timestamp: 2025-10-31T00:00:00+0000
-...
   updated_by: Claude Code (Sonnet 4.5)
   reason: Initial entry for psyllium husk supplement tracking, user requested 5g portion size
   fields_changed: [all fields]

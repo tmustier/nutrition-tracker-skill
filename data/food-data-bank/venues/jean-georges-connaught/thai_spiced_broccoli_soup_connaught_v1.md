@@ -3,6 +3,7 @@
 ```yaml
 id: thai_spiced_broccoli_soup_connaught_v1
 version: 4
+schema_version: 2
 last_verified: "2025-11-02"
 source:
   venue: Jean-Georges at The Connaught, London

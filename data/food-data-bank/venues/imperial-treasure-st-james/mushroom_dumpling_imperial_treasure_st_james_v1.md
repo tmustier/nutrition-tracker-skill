@@ -10,19 +10,14 @@ source:
   menu_page: 
   evidence:
   - url: https://deliveroo.co.uk/menu/london/st-jamess/imperial-treasure-fine-chinese-cuisine
-...
     note: Imperial Treasure on Deliveroo - dim sum 3-piece portions
   - url: https://tools.myfooddata.com/nutrition-facts/168437/wt1
-...
     note: 'USDA cooked shiitake: 56 kcal/100g, 1.56g protein, 14.39g carbs'
   - url: https://tools.myfooddata.com/nutrition-facts/171016/wt1
-...
     note: 'USDA sesame oil: 884 kcal/100g, 14.2g SFA, 39.7g MUFA, 41.7g PUFA'
   - url: https://tools.myfooddata.com/nutrition-facts/168572/wt1
-...
     note: 'USDA cooked napa cabbage: 12 kcal/100g'
   - url: https://fdc.nal.usda.gov/
-...
     note: USDA FoodData Central - component nutrition database
 aliases:
 category: main

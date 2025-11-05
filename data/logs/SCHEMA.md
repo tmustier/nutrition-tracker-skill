@@ -22,7 +22,7 @@ entries:
           # Snapshot of nutrition at time of logging
           # ALL nutrition fields must be 0 or positive numbers - NO nulls allowed
           # Use 0 for unmeasured values; qualify estimates in assumptions/notes
-          # Schema Version 2: Expanded to 51 nutrient fields
+          # Schema Version 2: Expanded to 52 nutrient fields
 
           # Macros & Energy
           energy_kcal: 597.4
@@ -99,7 +99,7 @@ entries:
         quantity: 250
         unit: ml
         nutrition:
-          # All 51 fields shown - use 0 for unmeasured values
+          # All 52 fields shown - use 0 for unmeasured values
           energy_kcal: 102.8
           protein_g: 1.7
           fat_g: 0.2
@@ -162,7 +162,7 @@ entries:
         quantity: 1
         unit: portion
         nutrition:
-          # Include all 51 fields (abbreviated for space - follow same order as above)
+          # Include all 52 fields (abbreviated for space - follow same order as above)
           energy_kcal: 420
           protein_g: 35.0
           fat_g: 18.5
@@ -189,7 +189,7 @@ entries:
 
 8. **Notes**: Optional context at entry level (location, how you felt, etc.).
 
-9. **Schema Version 2 - 51 Nutrient Fields**: As of 2025-11-05, the schema has been expanded from 24 to 51 nutrient fields to provide comprehensive tracking. All 51 fields are organized into 8 categories:
+9. **Schema Version 2 - 52 Nutrient Fields**: As of 2025-11-05, the schema has been expanded from 24 to 52 nutrient fields to provide comprehensive tracking. All 52 fields are organized into 8 categories:
    - **Macros & Energy** (8 fields): energy_kcal, protein_g, fat_g, sat_fat_g, mufa_g, pufa_g, trans_fat_g, cholesterol_mg
    - **Carbohydrates** (7 fields): carbs_total_g, polyols_g, carbs_available_g, sugar_g, fiber_total_g, fiber_soluble_g, fiber_insoluble_g
    - **Essential Minerals** (7 fields): sodium_mg, potassium_mg, calcium_mg, magnesium_mg, phosphorus_mg, chloride_mg, sulfur_g
@@ -200,7 +200,7 @@ entries:
    - **Omega-3 & Omega-6 Fatty Acids** (4 fields): omega3_epa_mg, omega3_dha_mg, omega3_ala_g, omega6_la_g
    - **Ultra-Trace Minerals** (4 fields): boron_mg, silicon_mg, vanadium_ug, nickel_ug
 
-   **Backward Compatibility**: Older log entries with only 24 fields remain valid. Analysis tools should handle missing fields by treating them as 0. When updating or creating new entries, always include all 51 fields.
+   **Backward Compatibility**: Older log entries with only 24 fields remain valid. Analysis tools should handle missing fields by treating them as 0. When updating or creating new entries, always include all 52 fields.
 
 ## Querying
 

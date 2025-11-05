@@ -99,7 +99,6 @@ notes:
 - Atwater check (available carb basis): 4×3.5 + 9×8.2 + 4×11.0 + 2×1.4 + 2.4×0.0 = 135.1 kcal
 change_log:
 - timestamp: 2025-10-30T19:35:00+0000
-...
   updated_by: Claude Code (via ChatGPT estimation)
   reason: Initial entry with ChatGPT nutrition analysis cross-checked against multiple databases
   fields_changed: [all fields]

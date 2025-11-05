@@ -3,6 +3,7 @@
 ```yaml
 id: chilli_poached_eggs_leto_soho_v1
 version: 3
+schema_version: 2
 last_verified: "2025-11-02"
 source:
   venue: L'ETO Caffe, Soho, London

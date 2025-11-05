@@ -90,13 +90,11 @@ notes:
 - Atwater check (available carb basis): 4×0.5 + 9×0.1 + 4×3.4 + 2×0.4 + 2.4×0.0 = 17.3 kcal
 change_log:
 - timestamp: 2025-10-30T00:00:00+0000
-...
   updated_by: Claude Code
   reason: Initial entry for Thomas's food diary tracking
   fields_changed: [all fields]
   sources: [{note: Amisa buckwheat crispbread nutrition (per 100g), url: 'https://amisa.co.uk/products/amisa-organic-gluten-free-buckwheat-crispbread/'}]
 - timestamp: 2025-10-30T00:00:00+0000
-...
   updated_by: Claude Code
   reason: Corrected weight from 8g to 5g per crispbread based on user confirmation; recalculated all nutrition values
   fields_changed: [portion.est_weight_g, per_portion.energy_kcal, per_portion.protein_g, per_portion.fat_g,

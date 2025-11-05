@@ -3,6 +3,7 @@
 ```yaml
 id: tiramisu_yogurt_pot_170g_generic-ingredients_v1
 version: 1
+schema_version: 2
 last_verified: 2025-11-04
 source:
   venue: Generic Ingredients

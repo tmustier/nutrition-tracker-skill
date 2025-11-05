@@ -3,6 +3,7 @@
 ```yaml
 id: sea_bass_fillet_salsa_verde_shk_v1
 version: 1
+schema_version: 2
 last_verified: 2025-11-03
 source:
   venue: Simple Health Kitchen, Baker Street (London)

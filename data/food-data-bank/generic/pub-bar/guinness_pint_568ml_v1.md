@@ -98,7 +98,6 @@ notes:
 - Atwater check (available carb basis): 4×1.9 + 9×0.0 + 4×18.0 + 2×0.0 + 2.4×0.0 = 79.6 kcal
 change_log:
 - timestamp: 2025-10-31T17:00:00+0000
-...
   updated_by: Claude Code (Sonnet 4.5)
   reason: Initial entry for tracking Guinness consumption
   fields_changed: [all fields]

@@ -93,7 +93,6 @@ notes:
 - Atwater check (available carb basis): 4×7.0 + 9×37.0 + 4×66.0 + 2×2.6 + 2.4×0.0 = 630.2 kcal
 change_log:
 - timestamp: 2025-11-02T12:05:00+0000
-...
   updated_by: 'LLM: GPT-5 Codex'
   reason: Initial estimate for Orange 'Jaffa Cake' slice with crème fraîche at The Eagle
   fields_changed: [all fields]
@@ -101,7 +100,6 @@ change_log:
       \ food bank", url: user_request}, {note: "Component model combining sponge,\
       \ chocolate glaze, orange jelly, and cr\xE8me fra\xEEche", url: gpt_component_estimate}]
 - timestamp: 2025-11-02T14:00:00+0000
-...
   updated_by: 'LLM: GPT-5 Codex'
   reason: Scaled portion and macros to align with GPT-5 Pro refined estimate
   fields_changed: [portion.est_weight_g, portion.notes, per_portion, derived.energy_from_macros_kcal,

@@ -98,7 +98,6 @@ notes:
 - Atwater check (available carb basis): 4×39.6 + 9×27.2 + 4×141.3 + 2×19.9 + 2.4×0.0 = 1008.2 kcal
 change_log:
 - timestamp: 2025-11-01T18:30:00+0000
-...
   updated_by: 'LLM: GPT-5 Codex'
   reason: Initial macro-rich estimate for pasta ordered at The Eagle
   fields_changed: [all fields]
@@ -106,7 +105,6 @@ change_log:
       2025-11-01', url: user_request}, {note: GPT-5 Codex component model with 2g
       finishing salt assumption, url: gpt_culinary_estimate}]
 - timestamp: 2025-11-02T10:00:00+0000
-...
   updated_by: 'LLM: GPT-5 Codex'
   reason: Aligned macros and sodium with refined portion model from user research notes
   fields_changed: [version, last_verified, portion.est_weight_g, assumptions.salt_scheme, per_portion.energy_kcal,

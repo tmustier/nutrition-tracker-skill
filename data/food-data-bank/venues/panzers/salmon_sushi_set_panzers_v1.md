@@ -3,6 +3,7 @@
 ```yaml
 id: salmon_sushi_set_panzers_v1
 version: 1
+schema_version: 2
 last_verified: 2025-11-04
 source:
   venue: Panzer's Delicatessen & Grocery

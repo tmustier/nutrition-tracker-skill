@@ -96,7 +96,6 @@ notes:
 - Atwater check (available carb basis): 4×56.5 + 9×21.1 + 4×36.7 + 2×14.5 + 2.4×0.0 = 591.7 kcal
 change_log:
 - timestamp: 2025-11-01T18:32:00+0000
-...
   updated_by: 'LLM: GPT-5 Codex'
   reason: Initial estimate for roasted hake main at The Eagle
   fields_changed: [all fields]
@@ -104,7 +103,6 @@ change_log:
   {note: 'GPT-5 Codex component model using 150g cooked hake, 180g lentils, 25g olive
       oil', url: gpt_culinary_estimate}]
 - timestamp: 2025-11-02T10:00:00+0000
-...
   updated_by: 'LLM: GPT-5 Codex'
   reason: Synced dish macros with refined user portion model including anchovy/caper sodium
   fields_changed: [version, last_verified, portion.est_weight_g, per_portion.energy_kcal, per_portion.protein_g,

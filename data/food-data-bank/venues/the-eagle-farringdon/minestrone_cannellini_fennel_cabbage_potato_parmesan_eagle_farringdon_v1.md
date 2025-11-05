@@ -97,7 +97,6 @@ notes:
 - Atwater check (available carb basis): 4×23.0 + 9×15.0 + 4×69.6 + 2×15.6 + 2.4×0.0 = 536.6 kcal
 change_log:
 - timestamp: 2025-11-01T18:34:00+0000
-...
   updated_by: 'LLM: GPT-5 Codex'
   reason: Initial estimate for minestrone bowl at The Eagle
   fields_changed: [all fields]
@@ -105,7 +104,6 @@ change_log:
       & Parmesan on 2025-11-01', url: user_request}, {note: 'GPT-5 Codex component
       model using 200g beans, 15g olive oil, 10g parmesan', url: gpt_culinary_estimate}]
 - timestamp: 2025-11-02T10:00:00+0000
-...
   updated_by: 'LLM: GPT-5 Codex'
   reason: Updated soup macros to match user-supplied estimate with broth sodium detail
   fields_changed: [version, last_verified, portion.est_weight_g, assumptions.salt_scheme, per_portion.energy_kcal,

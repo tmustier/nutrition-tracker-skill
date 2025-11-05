@@ -3,6 +3,7 @@
 ```yaml
 id: pistachio_praline_bar_half_londons-chocolate_v1
 version: 1
+schema_version: 2
 last_verified: 2025-11-04
 source:
   venue: London's Chocolate Company

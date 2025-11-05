@@ -7,8 +7,7 @@ This document defines the evolution of the nutrition data schema used in the nut
 ### Versioning Approach
 
 - **Schema Version 1 (Legacy)**: Core 24 nutrients covering essential macronutrients, major minerals, and basic micronutrients
-- **Schema Version 2 (Current)**: Expanded 51 nutrients with comprehensive vitamin profiles, trace minerals, and fatty acid breakdown
-- **Optional Extensions**: Ultra-trace minerals for advanced tracking (4 additional fields)
+- **Schema Version 2 (Current)**: Expanded 52 nutrients with comprehensive vitamin profiles, trace minerals, and fatty acid breakdown
 
 All schemas use a structured `per_portion` format where:
 - **0 means TRUE ZERO** (confirmed absence, not placeholder)
@@ -77,11 +76,11 @@ All schemas use a structured `per_portion` format where:
 ## Schema Version 2 (Current)
 
 **Active Since**: 2025-11-05
-**Total Fields**: 49 required nutrients
+**Total Fields**: 52 required nutrients
 
 ### Complete Field List
 
-#### 1. Core Macronutrients (9 fields)
+#### 1. Core Macronutrients (8 fields)
 | Field Name | Unit | Description | Status |
 |------------|------|-------------|--------|
 | `energy_kcal` | kcal | Total energy content | Existing |
@@ -92,7 +91,6 @@ All schemas use a structured `per_portion` format where:
 | `pufa_g` | g | Polyunsaturated fatty acids | Existing |
 | `trans_fat_g` | g | Trans fatty acids | Existing |
 | `cholesterol_mg` | mg | Dietary cholesterol | Existing |
-| `water_g` | g | Water content | **NEW** |
 
 #### 2. Carbohydrates (7 fields)
 | Field Name | Unit | Description | Status |
@@ -172,13 +170,13 @@ All schemas use a structured `per_portion` format where:
 | `vanadium_ug` | µg | Vanadium | **NEW** |
 | `nickel_ug` | µg | Nickel | **NEW** |
 
-**Total**: **49 required fields**
+**Total**: **52 required fields**
 
 ---
 
 ## Schema Rationale & Benefits
 
-### Why Expand from 24 to 51+ Fields?
+### Why Expand from 24 to 52 Fields?
 
 #### 1. **Comprehensive RDA Tracking**
 - All essential vitamins and minerals now trackable
@@ -187,7 +185,7 @@ All schemas use a structured `per_portion` format where:
 
 #### 2. **Advanced Fatty Acid Analysis**
 - Track omega-3 (EPA, DHA, ALA) for cardiovascular health
-- Monitor omega-6 (LA, AA) for inflammation markers
+- Monitor omega-6 (LA) for inflammation markers
 - Calculate omega-6:omega-3 ratios
 - Essential for Mediterranean/anti-inflammatory diet tracking
 
@@ -202,9 +200,9 @@ All schemas use a structured `per_portion` format where:
 - Critical for vegan/vegetarian diet monitoring
 
 #### 5. **Research & Optimization**
-- Water content for accurate caloric density calculations
 - Ultra-trace minerals for performance optimization
 - Detailed fatty acid profiles for anti-inflammatory protocols
+- Comprehensive nutrient data for advanced diet analysis
 
 ---
 
@@ -221,7 +219,6 @@ per_portion:
   # ... all 24 V1 fields ...
 
   # New V2 fields - ADD INCREMENTALLY
-  water_g: 0  # Set to 0 if unknown (will update later)
   vitamin_b1_mg: 0  # Placeholder for future research
   vitamin_b2_mg: 0
   # ... etc
@@ -240,11 +237,11 @@ per_portion:
 
 ### For New Dishes (Schema V2)
 
-**All 51 required fields must be populated** (use 0 for confirmed zeros, research for accurate values).
+**All 52 required fields must be populated** (use 0 for confirmed zeros, research for accurate values).
 
 Example workflow:
 1. **Search USDA database** for base ingredient
-2. **Extract all 51 nutrients** using API or manual lookup
+2. **Extract all 52 nutrients** using API or manual lookup
 3. **Adjust for preparation** (cooking losses, added ingredients)
 4. **Validate** using schema validation tools
 5. **Document source** in `quality` section
@@ -291,9 +288,6 @@ REQUIRED_NUTRIENTS_V1 = [
 #### Schema V2 Validation
 ```python
 REQUIRED_NUTRIENTS_V2 = REQUIRED_NUTRIENTS_V1 + [
-    # Core macro additions
-    'water_g',
-
     # Trace minerals
     'copper_mg', 'selenium_ug', 'chromium_ug', 'molybdenum_ug',
     'phosphorus_mg', 'chloride_mg', 'sulfur_g',
@@ -307,13 +301,11 @@ REQUIRED_NUTRIENTS_V2 = REQUIRED_NUTRIENTS_V1 + [
     'vitamin_a_ug', 'vitamin_d_ug', 'vitamin_e_mg', 'vitamin_k_ug',
 
     # Detailed fatty acids
-    'omega3_epa_mg', 'omega3_dha_mg', 'omega3_ala_g',
-    'omega6_la_g', 'omega6_aa_mg', 'omega9_oa_g'
-]  # 51 fields
+    'omega3_epa_mg', 'omega3_dha_mg', 'omega3_ala_g', 'omega6_la_g',
 
-OPTIONAL_NUTRIENTS_V2 = [
+    # Ultra-trace minerals (now required)
     'boron_mg', 'silicon_mg', 'vanadium_ug', 'nickel_ug'
-]  # 4 fields
+]  # 52 fields
 ```
 
 ### Schema Version Detection
@@ -344,7 +336,7 @@ def detect_schema_version(dish):
 | Schema | Required | Optional | Total |
 |--------|----------|----------|-------|
 | V1     | 24       | 0        | 24    |
-| V2     | 51       | 4        | 55    |
+| V2     | 52       | 0        | 52    |
 
 ### Zero vs NULL Semantics
 
@@ -416,7 +408,7 @@ name: "Atlantic Wild Salmon"
 portion_size: "150g"
 
 per_portion:
-  # Core macros (9)
+  # Core macros (8)
   energy_kcal: 280
   protein_g: 31.5
   fat_g: 17.5
@@ -425,7 +417,6 @@ per_portion:
   pufa_g: 7.4
   trans_fat_g: 0.0
   cholesterol_mg: 85
-  water_g: 98.0
 
   # Carbohydrates (7)
   carbs_total_g: 0.0
@@ -475,13 +466,17 @@ per_portion:
   vitamin_e_mg: 2.1
   vitamin_k_ug: 0.5
 
-  # Detailed fatty acids (6)
+  # Detailed fatty acids (4)
   omega3_epa_mg: 750
   omega3_dha_mg: 1100
   omega3_ala_g: 0.15
   omega6_la_g: 0.28
-  omega6_aa_mg: 85
-  omega9_oa_g: 3.8
+
+  # Ultra-trace minerals (4)
+  boron_mg: 0.02
+  silicon_mg: 0.5
+  vanadium_ug: 0.8
+  nickel_ug: 1.2
 
 quality:
   schema_version: "v2"
@@ -496,10 +491,10 @@ quality:
 
 | Aspect | Schema V1 | Schema V2 |
 |--------|-----------|-----------|
-| **Total Fields** | 24 | 51 (+4 optional) |
+| **Total Fields** | 24 | 52 |
 | **Vitamins** | 1 (C only) | 14 (all essential) |
-| **Minerals** | 8 | 15 (+4 optional) |
-| **Fatty Acids** | 4 basic | 10 detailed |
+| **Minerals** | 8 | 15 (including ultra-trace) |
+| **Fatty Acids** | 4 basic | 8 detailed |
 | **Use Case** | Basic tracking | Comprehensive RDA analysis |
 | **Data Sources** | Manual entry | USDA API + research |
 | **Migration** | N/A | Zero-fill backward compatible |

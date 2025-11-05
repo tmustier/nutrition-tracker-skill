@@ -12,13 +12,10 @@ source:
   - url: Component-based estimation using USDA data
     note: Rice noodles (USDA FDC 168914), Shrimp (USDA cooked), Soybean oil, Wheat flour, Youtiao, Sweet soy sauce
   - url: https://www.mynetdiary.com/food/calories-in-shrimp-cheong-fun-rice-noodle-roll-by-doll-dim-sum-serving-21863793-0.html
-...
     note: Reference for steamed shrimp cheung fun baseline (115 kcal)
   - url: https://tools.myfooddata.com/nutrition-facts/171971/wt1
-...
     note: Shrimp micronutrients per 100g
   - url: https://www.snapcalorie.com/nutrition/fried_dough_sticks_nutrition.html
-...
     note: 'Youtiao (fried dough stick) nutrition: ~192 kcal/100g'
 aliases:
 - Crispy Golden Net Prawn Cheung Fun
@@ -107,7 +104,6 @@ notes:
 - The crispy preparation adds significant calories vs. traditional steamed shrimp cheung fun (~27 kcal/piece steamed vs. ~183 kcal/piece crispy fried)
 change_log:
 - timestamp: 2025-11-02T00:00:00+0000
-...
   updated_by: 'LLM: Claude Sonnet 4.5'
   reason: Initial component-based estimation for Imperial Treasure St. James crispy shrimp cheung fun
   fields_changed: [all fields populated from component analysis]

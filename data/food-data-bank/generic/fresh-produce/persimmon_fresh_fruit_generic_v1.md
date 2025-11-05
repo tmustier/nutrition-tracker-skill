@@ -3,6 +3,7 @@
 ```yaml
 id: persimmon_fresh_fruit_generic_v1
 version: 1
+schema_version: 2
 last_verified: 2025-11-04
 source:
   venue: Generic - Fresh Produce

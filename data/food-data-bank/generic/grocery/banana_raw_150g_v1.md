@@ -98,7 +98,6 @@ notes:
 - Atwater check (available carb basis): 4×1.6 + 9×0.5 + 4×34.3 + 2×3.9 + 2.4×0.0 = 155.9 kcal
 change_log:
 - timestamp: 2025-11-01T09:00:00+0000
-...
   updated_by: Claude Code (Sonnet 4.5)
   reason: Initial entry for banana tracking - user consumed in breakfast smoothie
   fields_changed: [all fields]

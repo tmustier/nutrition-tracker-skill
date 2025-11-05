@@ -3,6 +3,7 @@
 ```yaml
 id: hazelnuts_30g_v1
 version: 4
+schema_version: 2
 last_verified: "2025-11-02"
 source:
   venue: pack/ingredient

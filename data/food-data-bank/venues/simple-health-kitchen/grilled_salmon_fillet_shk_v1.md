@@ -3,6 +3,7 @@
 ```yaml
 id: grilled_salmon_fillet_shk_v1
 version: 6
+schema_version: 2
 last_verified: "2025-11-03"
 source:
   venue: Simple Health Kitchen, Baker Street (London)

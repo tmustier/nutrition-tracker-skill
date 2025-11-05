@@ -3,6 +3,7 @@
 ```yaml
 id: pastel_de_nata_eagle_farringdon_v1
 version: 3
+schema_version: 2
 last_verified: "2025-11-03"
 source:
   venue: The Eagle, Farringdon (London)

@@ -99,7 +99,6 @@ notes:
 - Atwater check (available carb basis): 4×0.1 + 9×0.0 + 4×13.0 + 2×0.1 + 2.4×0.0 = 52.6 kcal
 change_log:
 - timestamp: 2025-11-01T00:09:00+0000
-...
   updated_by: Claude Code (Sonnet 4.5)
   reason: Initial entry for tracking margarita consumption
   fields_changed: [all fields]

@@ -89,7 +89,6 @@ notes:
 - Atwater check (available carb basis): 4×2.4 + 9×0.4 + 4×23.3 + 2×2.0 + 2.4×0.0 = 110.4 kcal
 change_log:
 - timestamp: 2025-10-29T00:00:00+0000
-...
   updated_by: Claude Code
   reason: Initial entry for Simple Health Kitchen carrot juice using USDA nutrition data
   fields_changed: [all fields]

@@ -108,7 +108,6 @@ notes:
 - Traditional serving: eaten immediately while hot and crispy, skin should shatter when bitten
 change_log:
 - timestamp: 2025-11-02T10:00:00+0000
-...
   updated_by: Claude Code (Sonnet 4.5)
   reason: Initial entry with comprehensive component-based estimation following ESTIMATE.md protocol
   fields_changed: [version, source.menu_page, source.evidence, aliases, portion.est_weight_g, portion.notes,
@@ -124,7 +123,6 @@ change_log:
     url: 'https://fdc.nal.usda.gov/'}, {note: 'User consumed 2 small squares (24g
       total) on 2025-11-02, Imperial Treasure St. James venue', url: user_request}]
 - timestamp: 2025-11-02T21:00:00+0000
-...
   updated_by: Claude Code (Sonnet 4.5)
   reason: "v3: Corrected portion weight based on ChatGPT 5-Pro analysis and user feedback. Original\
   \ estimate of 12g was too high; actual 1\xD71 inch squares are \u22482.5g. Added\

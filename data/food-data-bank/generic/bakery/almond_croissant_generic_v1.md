@@ -3,6 +3,7 @@
 ```yaml
 id: almond_croissant_generic_v1
 version: 1
+schema_version: 2
 last_verified: "2025-11-03"
 source:
   venue: Generic Bakery

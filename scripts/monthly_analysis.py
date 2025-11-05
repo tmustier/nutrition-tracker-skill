@@ -224,7 +224,7 @@ def analyze_month(year: int, month: int) -> Dict:
         'summary': {}
     }
 
-    # Calculate monthly aggregates - All 51 nutrients
+    # Calculate monthly aggregates - All 52 nutrients
     nutrients = [
         # Macronutrients and energy
         'energy_kcal', 'protein_g', 'fat_g', 'carbs_total_g', 'fiber_total_g',

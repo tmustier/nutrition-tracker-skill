@@ -3,6 +3,7 @@
 ```yaml
 id: goat-milk-yogurt-dollops_st-helens-farm_v1
 version: 1
+schema_version: 2
 last_verified: 2025-11-04
 source:
   venue: St. Helen's Farm

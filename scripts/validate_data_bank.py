@@ -29,10 +29,11 @@ TOL_ENERGY_PCT = 0.08
 CARB_TOL_G = 0.2
 FIBER_KCAL_PER_G = 2.0
 POLYOL_KCAL_PER_G = 2.4
+OMEGA_PUFA_TOL_G = 0.05  # 50mg tolerance for omega fatty acid vs PUFA coherence
 
 # Required nutrient fields in per_portion - ALL dishes must have these fields
 # (0 means TRUE ZERO, not placeholder)
-# Schema version 2: Extended to 51 nutrient fields
+# Schema version 2: Extended to 52 nutrient fields
 REQUIRED_NUTRIENTS = [
     # Energy & Core Macronutrients
     'energy_kcal',
@@ -313,6 +314,43 @@ def check_block(y, filepath):
             warnings.append(f"Fat split incomplete: {parts_sum:.2f}g accounted for out of {fat_total:.2f}g total (missing {fat_total - parts_sum:.2f}g).")
         elif parts_sum <= fat_total + 0.2:
             passes.append("Fat split coherent (<= total fat).")
+
+    # Omega fatty acid coherence check - omega-3 and omega-6 should not exceed PUFA
+    # EPA and DHA are in mg, need conversion to grams
+    omega3_ala_g = pp.get("omega3_ala_g")
+    omega3_epa_mg = pp.get("omega3_epa_mg")
+    omega3_dha_mg = pp.get("omega3_dha_mg")
+    omega6_la_g = pp.get("omega6_la_g")
+
+    # Only perform check if we have PUFA and at least one omega fatty acid
+    if pufa is not None and isinstance(pufa, (int, float)) and pufa > 0:
+        # Convert to grams with null safety
+        omega3_ala = omega3_ala_g if isinstance(omega3_ala_g, (int, float)) else 0
+        omega3_epa = (omega3_epa_mg / 1000.0) if isinstance(omega3_epa_mg, (int, float)) else 0
+        omega3_dha = (omega3_dha_mg / 1000.0) if isinstance(omega3_dha_mg, (int, float)) else 0
+        omega6_la = omega6_la_g if isinstance(omega6_la_g, (int, float)) else 0
+
+        # Calculate totals
+        omega3_total = omega3_ala + omega3_epa + omega3_dha
+        omega6_total = omega6_la
+        omega_total = omega3_total + omega6_total
+
+        # Check coherence: omega fatty acids should not exceed PUFA
+        if omega_total > pufa + OMEGA_PUFA_TOL_G:
+            warnings.append(
+                f"Omega fatty acids ({omega_total:.3f}g) exceed PUFA ({pufa:.2f}g) "
+                f"by {omega_total - pufa:.3f}g. "
+                f"[Ω-3: {omega3_total:.3f}g (ALA:{omega3_ala:.2f} EPA:{omega3_epa:.3f} DHA:{omega3_dha:.3f}), "
+                f"Ω-6: {omega6_total:.2f}g (LA)]"
+            )
+        elif omega_total > 0:
+            # Calculate proportion of PUFA accounted for by tracked omega fatty acids
+            proportion = (omega_total / pufa * 100) if pufa > 0 else 0
+            passes.append(
+                f"Omega fatty acids coherent: {omega_total:.3f}g "
+                f"({proportion:.1f}% of {pufa:.2f}g PUFA). "
+                f"[Ω-3: {omega3_total:.3f}g, Ω-6: {omega6_total:.2f}g]"
+            )
 
     # Sodium->salt
     sodium = pp.get("sodium_mg")

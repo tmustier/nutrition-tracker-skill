@@ -3,6 +3,7 @@
 ```yaml
 id: berry_blast_shake_third-space-nff_v1
 version: 1
+schema_version: 2
 last_verified: 2025-11-04
 source:
   venue: Third Space / Natural Fitness Food

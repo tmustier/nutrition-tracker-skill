@@ -93,7 +93,6 @@ notes:
 - Atwater check (available carb basis): 4×2.0 + 9×9.6 + 4×2.1 + 2×1.4 + 2.4×0.0 = 105.6 kcal
 change_log:
 - timestamp: 2025-10-30T00:00:00+0000
-...
   updated_by: Claude Code
   reason: Initial entry for Thomas's food diary tracking
   fields_changed: [all fields]

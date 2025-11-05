@@ -100,7 +100,6 @@ notes:
 - Atwater check (available carb basis): 4×22.0 + 9×1.4 + 4×6.5 + 2×0.5 + 2.4×0.0 = 127.6 kcal
 change_log:
 - timestamp: 2025-10-31T00:00:00+0000
-...
   updated_by: Claude Code (Sonnet 4.5)
   reason: Initial entry from OpenFoodFacts data with micronutrient estimation from whey concentrate profiles
   fields_changed: [all fields]

@@ -82,7 +82,6 @@ notes:
 - Atwater check (available carb basis): 4×36.0 + 9×1.9 + 4×0.0 + 2×0.0 + 2.4×0.0 = 161.1 kcal
 change_log:
 - timestamp: 2025-10-28T18:51:39+0000
-...
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Populate per_portion from user-provided data
   fields_changed: [per_portion.energy_kcal, per_portion.protein_g, per_portion.fat_g, per_portion.sat_fat_g,
@@ -91,13 +90,11 @@ change_log:
   per_portion.iron_mg, per_portion.zinc_mg]
   sources: [{note: User-supplied values on 2025-10-28, url: user_input}]
 - timestamp: 2025-10-28T18:57:05+0000
-...
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Consistency fix for fat totals/splits
   fields_changed: [per_portion.fat_g]
   sources: [{note: Correction approved by user on 2025-10-28, url: user_input}]
 - timestamp: 2025-10-28T19:02:30+0000
-...
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
   fields_changed: [per_portion.protein_g, per_portion.sat_fat_g, per_portion.pufa_g, per_portion.iodine_ug,

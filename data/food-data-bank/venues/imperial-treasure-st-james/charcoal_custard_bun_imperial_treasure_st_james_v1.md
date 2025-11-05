@@ -3,6 +3,7 @@
 ```yaml
 id: charcoal_custard_bun_imperial_treasure_st_james_v1
 version: 1
+schema_version: 2
 last_verified: 2025-11-02
 source:
   venue: Charcoal Custard Bun (Imperial Treasure St. James)

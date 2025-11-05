@@ -96,7 +96,6 @@ notes:
 - Atwater check (available carb basis): 4×17.0 + 9×22.9 + 4×30.4 + 2×1.8 + 2.4×0.0 = 399.3 kcal
 change_log:
 - timestamp: 2025-10-30T00:00:00+0000
-...
   updated_by: Claude Code
   reason: Initial entry using component-based estimation methodology
   fields_changed: [all fields]

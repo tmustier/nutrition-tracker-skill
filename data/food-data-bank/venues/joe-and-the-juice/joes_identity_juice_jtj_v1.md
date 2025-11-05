@@ -84,20 +84,17 @@ notes:
 - Atwater check (available carb basis): 4×4.0 + 9×2.0 + 4×9.0 + 2×4.0 + 2.4×0.0 = 78 kcal
 change_log:
 - timestamp: 2025-10-28T18:51:39+0000
-...
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Populate per_portion from user-provided data
   fields_changed: [per_portion.energy_kcal, per_portion.protein_g, per_portion.fat_g, per_portion.carbs_g,
   per_portion.fiber_total_g, per_portion.sodium_mg]
   sources: [{note: User-supplied values on 2025-10-28, url: user_input}]
 - timestamp: 2025-10-28T19:02:30+0000
-...
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
   fields_changed: [per_portion.protein_g, per_portion.fat_g, per_portion.carbs_g, per_portion.fiber_total_g]
   sources: [{note: Automated rounding pass, url: formatting-pass}]
 - timestamp: 2025-10-28T20:30:00+0000
-...
   updated_by: 'LLM: Claude Sonnet 4.5'
   reason: Research-based population of missing nutrition fields
   fields_changed: [version, portion.est_weight_g, portion.notes, assumptions.oil_type, assumptions.prep,
@@ -117,7 +114,6 @@ change_log:
       from USDA data for kale (FDC 323505), spinach (FDC 168462), celery (FDC 169988),
       cucumber (FDC 168409) proportional to typical 12oz green juice serving', url: ingredient_analysis}]
 - timestamp: 2025-10-29T00:00:00+0000
-...
   updated_by: 'LLM: Claude Sonnet 4.5'
   reason: Populate fiber split and manganese from leafy green composition
   fields_changed: [per_portion.fiber_soluble_g, per_portion.fiber_insoluble_g, per_portion.manganese_mg]

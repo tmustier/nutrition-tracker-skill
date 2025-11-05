@@ -96,7 +96,6 @@ notes:
 - Atwater check (available carb basis): 4×25.0 + 9×8.0 + 4×43.0 + 2×4.0 + 2.4×0.0 = 352 kcal
 change_log:
 - timestamp: 2025-10-31T00:00:00+0000
-...
   updated_by: Claude Code (Sonnet 4.5)
   reason: Initial entry with component-based triangulation from user-provided macros and confirmed ingredient list
   fields_changed: [all fields]

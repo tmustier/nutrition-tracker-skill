@@ -81,7 +81,6 @@ notes:
 - Atwater check (available carb basis): 4×1.0 + 9×0.4 + 4×21.8 + 2×3.6 + 2.4×0.0 = 102 kcal
 change_log:
 - timestamp: 2025-10-28T18:51:39+0000
-...
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Populate per_portion from user-provided data
   fields_changed: [per_portion.energy_kcal, per_portion.protein_g, per_portion.fat_g, per_portion.carbs_g,
@@ -90,14 +89,12 @@ change_log:
   per_portion.vitamin_c_mg]
   sources: [{note: User-supplied values on 2025-10-28, url: user_input}]
 - timestamp: 2025-10-28T19:02:30+0000
-...
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
   fields_changed: [per_portion.energy_kcal, per_portion.protein_g, per_portion.sugar_g, per_portion.sodium_mg,
   per_portion.potassium_mg, per_portion.iron_mg, per_portion.zinc_mg, per_portion.vitamin_c_mg]
   sources: [{note: Automated rounding pass, url: formatting-pass}]
 - timestamp: 2025-10-28T20:15:00+0000
-...
   updated_by: 'LLM: Claude Sonnet 4.5'
   reason: Research and populate missing fatty acid breakdown and iodine content from USDA FoodData Central
   fields_changed: [per_portion.sat_fat_g, per_portion.mufa_g, per_portion.pufa_g, per_portion.trans_fat_g,
