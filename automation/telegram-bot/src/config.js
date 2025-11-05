@@ -36,12 +36,26 @@ function validateConfig(config) {
     if (!config.telegram.webhookUrl) {
       missing.push('telegram.webhookUrl (required in production)');
     } else if (!config.telegram.webhookUrl.startsWith('https://')) {
-      throw new Error(
-        'Security Error: HTTPS is required for webhook URL in production environment. ' +
-        'HTTP webhooks are vulnerable to man-in-the-middle attacks.'
-      );
+      // Security: Nullify webhook URL to prevent insecure webhook registration
+      console.error('');
+      console.error('🚨 SECURITY ERROR: HTTP webhook URL detected in production');
+      console.error('   Current webhook URL:', config.telegram.webhookUrl);
+      console.error('   HTTP webhooks are vulnerable to man-in-the-middle attacks.');
+      console.error('');
+      console.error('   💡 For Railway deployment:');
+      console.error('      1. Ensure RAILWAY_PUBLIC_DOMAIN is set by Railway (usually automatic)');
+      console.error('      2. OR set WEBHOOK_URL=https://your-app.railway.app manually');
+      console.error('      3. OR set NODE_ENV=development for local testing');
+      console.error('');
+      console.error('   ⚠️  DEGRADED MODE: Server will start for diagnostics only');
+      console.error('   ⚠️  Webhook registration is DISABLED for security');
+      console.error('   ⚠️  Bot will NOT respond to messages until webhook URL is fixed');
+      console.error('');
+
+      // Nullify webhook URL to prevent insecure registration
+      config.telegram.webhookUrl = null;
     }
-    
+
     // Recommend webhook secret in production
     if (!config.telegram.webhookSecret) {
       console.warn('⚠️  Security Warning: WEBHOOK_SECRET not configured for production deployment');
@@ -314,12 +328,31 @@ const config = {
 };
 
 // Validate configuration on module load
+console.log('🔍 Validating configuration...');
+console.log('   NODE_ENV:', process.env.NODE_ENV || 'development');
+console.log('   RAILWAY_PUBLIC_DOMAIN:', process.env.RAILWAY_PUBLIC_DOMAIN || 'not set');
+console.log('   WEBHOOK_URL:', process.env.WEBHOOK_URL || 'not set (using auto-detection)');
+console.log('   Computed webhook URL:', config.telegram.webhookUrl);
+console.log('');
+
 try {
   validateConfig(config);
+  console.log('✅ Configuration validation passed');
 } catch (error) {
   console.error('❌ Configuration Error:', error.message);
+  console.error('');
+  console.error('💡 Troubleshooting tips:');
+  console.error('   1. Check Railway dashboard for missing environment variables');
+  console.error('   2. Ensure all required variables are set: TELEGRAM_BOT_TOKEN, ANTHROPIC_API_KEY, GITHUB_TOKEN');
+  console.error('   3. For Railway: WEBHOOK_URL should be https://your-app.railway.app');
+  console.error('   4. See .env.example for all required variables');
+  console.error('');
+
   if (process.env.NODE_ENV === 'production') {
+    console.error('⛔ Exiting in production mode due to configuration errors');
     process.exit(1);
+  } else {
+    console.warn('⚠️  Continuing in development mode despite errors (bot may not function correctly)');
   }
 }
 
