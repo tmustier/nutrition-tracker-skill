@@ -15,6 +15,6 @@ targets:
   sat_fat_g_max: 20
   sodium_mg_max: 2300
   potassium_mg_min: 4000
- monitoring:
-  Na_K_molar%_ratio: true
-  iodine_mg: true
+monitoring:
+  na_k_molar_ratio: true
+  iodine_ug: true
