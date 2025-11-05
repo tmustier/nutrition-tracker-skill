@@ -23,6 +23,8 @@ assumptions:
   salt_scheme: unsalted
   oil_type: olive_oil
   prep: raw
+  usda_source: USDA SR Legacy FDC ID 171413 (Oil, olive, salad or cooking)
+  enrichment_note: 'Olive oil is 100% fat - only fat-soluble vitamins E and K present in significant amounts; trace choline (0.04mg). All water-soluble vitamins, minerals, and long-chain omega-3s (EPA/DHA) are 0.'
 per_portion:
   energy_kcal: 123.8
   protein_g: 0
@@ -67,7 +69,7 @@ per_portion:
   vitamin_b7_ug: 0
   vitamin_b9_ug: 0
   vitamin_b12_ug: 0
-  choline_mg: 0
+  choline_mg: 0.04
   omega3_epa_mg: 0
   omega3_dha_mg: 0
   omega3_ala_g: 0
@@ -118,4 +120,13 @@ change_log:
     url: 'https://www.zoeharcombe.com/nutrition-data/olive-oil-nutrition-data/'
   - note: 'USDA FoodData Central - Oil, olive, salad or cooking (FDC ID: 171413)'
     url: 'https://fdc.nal.usda.gov/'
+- timestamp: '2025-11-05T16:45:00+00:00'
+  updated_by: Claude Code (Sonnet 4.5)
+  reason: 'Re-verified and enriched 17 priority nutrients from USDA FoodData Central SR Legacy database. Confirmed vitamin E (2.01 mg from 14.35 per 100g) and vitamin K (8.43 mcg from 60.2 per 100g). Updated choline_mg from 0 to 0.04 (from 0.3 per 100g). All other priority nutrients confirmed as 0: vitamin D, A, B1-B12, iodine, phosphorus, copper, selenium, manganese, EPA, DHA. Pure olive oil contains only fat-soluble vitamins E and K in measurable amounts, plus trace choline.'
+  fields_changed: [choline_mg]
+  sources:
+  - note: 'USDA FoodData Central - Oil, olive, salad or cooking'
+    fdc_id: 171413
+    url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/171413/nutrients'
+    data_type: 'SR Legacy'
 ```

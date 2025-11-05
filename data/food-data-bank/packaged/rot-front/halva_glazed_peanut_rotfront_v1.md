@@ -3,8 +3,8 @@
 ```yaml
 id: halva_glazed_peanut_rotfront_v1
 schema_version: 2
-version: 2
-last_verified: 2025-11-02
+version: 3
+last_verified: 2025-11-05
 source:
   venue: Rot Front
   menu_page: 
@@ -25,6 +25,7 @@ assumptions:
   salt_scheme: normal
   oil_type: peanut-based halva with confectioner's chocolate glaze
   prep: Commercial halva; peanut mass ~44% + chocolate glaze ~30%
+  usda_scaling: Priority nutrients sourced from USDA FoodData Central "Candies, sesame crunch" (FDC ID 169588); scaled from per-100g to 25g portion
 per_portion:
   energy_kcal: 135.1
   protein_g: 3.5
@@ -46,30 +47,30 @@ per_portion:
   iron_mg: 1.1
   zinc_mg: 1.1
   vitamin_c_mg: 0
-  manganese_mg: 0.22
+  manganese_mg: 0.4
   polyols_g: 0
   carbs_available_g: 11
   carbs_total_g: 12.4
-  copper_mg: 0
-  selenium_ug: 0
+  copper_mg: 0.24
+  selenium_ug: 1
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 103
   chloride_mg: 0
   sulfur_g: 0
   vitamin_a_ug: 0
   vitamin_d_ug: 0
-  vitamin_e_mg: 0
+  vitamin_e_mg: 0.04
   vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
+  vitamin_b1_mg: 0.11
+  vitamin_b2_mg: 0.04
+  vitamin_b3_mg: 0.93
   vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
+  vitamin_b6_mg: 0.12
   vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
+  vitamin_b9_ug: 12.75
   vitamin_b12_ug: 0
-  choline_mg: 0
+  choline_mg: 4.18
   omega3_epa_mg: 0
   omega3_dha_mg: 0
   omega3_ala_g: 0
@@ -117,4 +118,10 @@ change_log:
   minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
   acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
   fields initialized to 0.'
+- timestamp: '2025-11-05T00:00:00+00:00'
+  updated_by: Claude Code (USDA enrichment)
+  reason: 'Enriched with 14 priority nutrients from USDA FoodData Central'
+  fields_changed: [version, last_verified, per_portion.phosphorus_mg, per_portion.copper_mg, per_portion.selenium_ug, per_portion.manganese_mg, per_portion.vitamin_e_mg, per_portion.vitamin_b1_mg, per_portion.vitamin_b2_mg, per_portion.vitamin_b3_mg, per_portion.vitamin_b6_mg, per_portion.vitamin_b9_ug, per_portion.choline_mg, assumptions.usda_scaling]
+  sources: [{note: 'USDA FoodData Central: Candies, sesame crunch (FDC ID 169588)', url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/169588/nutrients'}]
+  notes: 'Nutrients scaled from per-100g to 25g portion. Not available in USDA data: iodine, vitamin A, vitamin D, vitamin K, vitamin B12, omega-3 EPA, omega-3 DHA (remain at 0).'
 ```

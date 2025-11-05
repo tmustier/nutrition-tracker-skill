@@ -3,8 +3,8 @@
 ```yaml
 id: yarden_houmous_30g_v1
 schema_version: 2
-version: 3
-last_verified: 2025-11-03
+version: 4
+last_verified: 2025-11-05
 source:
   venue: Yarden (Packaged Product)
   menu_page: 
@@ -23,6 +23,7 @@ assumptions:
   salt_scheme: normal
   oil_type: sunflower or olive oil
   prep: packaged tahini-based houmous
+  usda_enrichment: Priority nutrients from USDA FoodData Central FDC ID 321358 (Hummus, commercial, Foundation), scaled from per 100g to 30g portion. Plant-based nutrients only; B12, vitamin D, EPA, and DHA remain 0 (not naturally present in unfortified chickpea-based foods).
 per_portion:
   energy_kcal: 105.6
   protein_g: 2
@@ -44,30 +45,30 @@ per_portion:
   iron_mg: 0
   zinc_mg: 0
   vitamin_c_mg: 0
-  manganese_mg: 0
+  manganese_mg: 0.32
   polyols_g: 0
   carbs_available_g: 2.1
   carbs_total_g: 3.5
-  copper_mg: 0
-  selenium_ug: 0
+  copper_mg: 0.10
+  selenium_ug: 4.9
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 50
   chloride_mg: 0
   sulfur_g: 0
-  vitamin_a_ug: 0
+  vitamin_a_ug: 0.3
   vitamin_d_ug: 0
-  vitamin_e_mg: 0
-  vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
+  vitamin_e_mg: 0.52
+  vitamin_k_ug: 5.2
+  vitamin_b1_mg: 0.045
+  vitamin_b2_mg: 0.035
+  vitamin_b3_mg: 0.28
   vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
+  vitamin_b6_mg: 0.043
   vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
+  vitamin_b9_ug: 11
   vitamin_b12_ug: 0
-  choline_mg: 0
+  choline_mg: 14
   omega3_epa_mg: 0
   omega3_dha_mg: 0
   omega3_ala_g: 0
@@ -120,4 +121,10 @@ change_log:
   minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
   acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
   fields initialized to 0.'
+- timestamp: '2025-11-05T00:00:00+00:00'
+  updated_by: 'LLM: Claude Sonnet 4.5'
+  reason: 'USDA FoodData Central enrichment: Added 13 priority nutrients from Foundation database'
+  fields_changed: [vitamin_a_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b6_mg, vitamin_b9_ug, choline_mg, phosphorus_mg, copper_mg, selenium_ug, manganese_mg, last_verified, version]
+  sources: [{note: 'USDA FoodData Central - Hummus, commercial (Foundation)', fdc_id: 321358, url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/321358/nutrients'}]
+  methodology: "Scaled USDA per-100g values to 30g portion (×0.3). Source: FDC ID 321358 'Hummus, commercial' (Foundation). Found 13 of 17 priority nutrients: vitamin A (0.3 µg), vitamin E (0.52 mg), vitamin K (5.2 µg), thiamin/B1 (0.045 mg), riboflavin/B2 (0.035 mg), niacin/B3 (0.28 mg), vitamin B6 (0.043 mg), folate/B9 (11 µg), choline (14 mg), phosphorus (50 mg), copper (0.10 mg), selenium (4.9 µg), manganese (0.32 mg). Missing nutrients kept at 0: vitamin D, vitamin B12, iodine, EPA, and DHA (not naturally present in unfortified plant-based chickpea foods)."
 ```

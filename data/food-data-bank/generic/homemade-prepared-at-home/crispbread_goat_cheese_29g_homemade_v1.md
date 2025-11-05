@@ -21,6 +21,7 @@ assumptions:
   salt_scheme: "packaged"
   oil_type: ""
   prep: "Fresh assembly: 1 Amisa buckwheat crispbread topped with 2 slices Chavroux mild & creamy goat's cheese"
+  micronutrient_estimation: "Component-based: 17 priority nutrients calculated by summing USDA data for buckwheat flour (scaled to 5g crispbread) and soft goat cheese (scaled to 24g portion)"
 per_portion:
   energy_kcal: 53.3
   protein_g: 2.5
@@ -45,17 +46,17 @@ per_portion:
   iron_mg: 0.4
   zinc_mg: 0.2
   vitamin_c_mg: 0.0
-  manganese_mg: 0.0
+  manganese_mg: 0.1
   copper_mg: 0.2
-  selenium_ug: 0
-  vitamin_d_ug: 0.2
-  vitamin_e_mg: 0.0
+  selenium_ug: 1
+  vitamin_d_ug: 0.1
+  vitamin_e_mg: 0.1
   omega3_ala_g: 0
   omega3_dha_mg: 0
   omega3_epa_mg: 0
   omega6_la_g: 0
   chloride_mg: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 78
   sulfur_g: 0
   chromium_ug: 0
   molybdenum_ug: 0
@@ -63,17 +64,17 @@ per_portion:
   nickel_ug: 0
   silicon_mg: 0
   vanadium_ug: 0
-  vitamin_a_ug: 0
-  vitamin_k_ug: 0
-  choline_mg: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
+  vitamin_a_ug: 69
+  vitamin_k_ug: 0.5
+  choline_mg: 4.6
+  vitamin_b1_mg: 0.05
+  vitamin_b2_mg: 0.10
+  vitamin_b3_mg: 0.5
   vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
+  vitamin_b6_mg: 0.10
   vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
-  vitamin_b12_ug: 0
+  vitamin_b9_ug: 6
+  vitamin_b12_ug: 0.05
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
@@ -113,4 +114,31 @@ change_log:
       - source: "chavroux_mild_creamy_goat_cheese_12g_chavroux_v1"
         note: "Component 2: 24g cheese (2×12g slices) providing 36 kcal, 2.0g protein, 2.8g fat, 96mg sodium"
       - note: "All nutrition values calculated by summing component portions - no added ingredients"
+  - timestamp: "2025-11-05T15:30:00+00:00"
+    updated_by: "Claude Code (Sonnet 4.5)"
+    reason: "Enrichment with 17 priority nutrients using component-based USDA estimation"
+    fields_changed:
+      - "vitamin_d_ug (0.2→0.1)"
+      - "vitamin_a_ug (0→69)"
+      - "vitamin_e_mg (0.0→0.1)"
+      - "vitamin_k_ug (0→0.5)"
+      - "vitamin_b1_mg (0→0.05)"
+      - "vitamin_b2_mg (0→0.10)"
+      - "vitamin_b3_mg (0→0.5)"
+      - "vitamin_b6_mg (0→0.10)"
+      - "vitamin_b9_ug (0→6)"
+      - "vitamin_b12_ug (0→0.05)"
+      - "choline_mg (0→4.6)"
+      - "phosphorus_mg (0→78)"
+      - "selenium_ug (0→1)"
+      - "manganese_mg (0.0→0.1)"
+    evidence:
+      - source: "USDA FoodData Central - Buckwheat flour, whole-groat"
+        url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/718368/nutrients"
+        note: "5g crispbread nutrients: 17mg phosphorus, 0.03mg copper, 0.4µg selenium, 0.12mg manganese, B-vitamins, 3µg folate, 1.0mg choline"
+      - source: "USDA FoodData Central - Cheese, goat, soft type (FDC 173435)"
+        url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/173435/nutrients"
+        note: "24g goat cheese nutrients: 69µg vitamin A, 0.1µg vitamin D, 61mg phosphorus, 0.18mg copper, 0.7µg selenium, 0.05µg B12, 3.6mg choline, B-vitamins"
+      - note: "Component-based method: Summed scaled nutrient values from both components (5g buckwheat crispbread + 24g soft goat cheese)"
+      - note: "Iodine already estimated at 4µg from UK dairy fortification (all from cheese component)"
 ```

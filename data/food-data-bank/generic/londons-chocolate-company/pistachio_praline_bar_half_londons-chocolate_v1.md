@@ -28,10 +28,10 @@ assumptions:
   carbs_adjustment: "Label per 100g shows carbs 29.8g with sugars 30.1g - likely typo, used 29.8g for calculations. Estimated 6.5g fiber per 100g (typical for 70-85% dark chocolate with nuts)."
   fiber: "Estimated at 6.5g per 100g (1.4g per 22g) based on typical dark chocolate 70%+ (5-7g/100g) and pistachio content. Confidence: MEDIUM"
   fatty_acids: "MUFA/PUFA split estimated from cocoa butter (~73% oleic acid/MUFA) and pistachio profiles (~55% MUFA, ~32% PUFA of total fat). Confidence: MEDIUM"
-  micronutrients_method: "Estimated from USDA FoodData Central for dark chocolate 70-85% cocoa (FDC ID 170273) and raw pistachios (FDC ID 170184), proportionally scaled to estimated ingredient composition (~60% cocoa/cocoa butter, ~20% sugar, ~15% pistachios, ~5% other). Confidence: MEDIUM"
+  micronutrients_method: "Estimated from USDA FoodData Central for dark chocolate 70-85% cocoa (FDC ID 170273) and raw pistachios (FDC ID 170184), proportionally scaled to estimated ingredient composition (~60% cocoa/cocoa butter, ~20% sugar, ~15% pistachios, ~5% other). Component-based calculation: weighted average (60% × chocolate nutrients + 15% × pistachio nutrients) scaled to 22g portion. 17 priority nutrients enriched 2025-11-05. Confidence: MEDIUM"
   magnesium: "Dark chocolate (70-85%) contains ~228mg/100g. Estimated 50mg/100g for this bar (with sugar dilution), scaled to 11mg for 22g. Confidence: MEDIUM"
   iron: "Dark chocolate contains ~11.9mg/100g. Estimated 9mg/100g for this bar, scaled to 2.0mg for 22g. Confidence: MEDIUM"
-  copper: "Both cocoa (~1.8mg/100g) and pistachios (~1.3mg/100g) are excellent sources. Estimated 1.5mg/100g, scaled to 0.33mg for 22g. Confidence: MEDIUM"
+  copper: "Both cocoa (~1.77mg/100g) and pistachios (~1.3mg/100g) are excellent sources. Component-based: (60%×1.77 + 15%×1.3) = 1.26mg/100g, scaled to 0.28mg for 22g. Confidence: MEDIUM"
   potassium: "Estimated from cocoa (~715mg/100g) and pistachios. Estimated 350mg/100g, scaled to 77mg for 22g. Confidence: MEDIUM"
 per_portion:
   energy_kcal: 131.6
@@ -57,25 +57,25 @@ per_portion:
   iron_mg: 2.0
   zinc_mg: 0.7
   vitamin_c_mg: 0
-  manganese_mg: 0.4
-  copper_mg: 0.33
-  selenium_ug: 2
+  manganese_mg: 0.30
+  copper_mg: 0.28
+  selenium_ug: 1.1
   vitamin_d_ug: 0
-  vitamin_e_mg: 0.7
+  vitamin_e_mg: 0.17
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 56.8
   chloride_mg: 0
   sulfur_g: 0
-  vitamin_a_ug: 0
-  vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
+  vitamin_a_ug: 1.1
+  vitamin_k_ug: 1.0
+  vitamin_b1_mg: 0.033
+  vitamin_b2_mg: 0.016
+  vitamin_b3_mg: 0.18
   vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
+  vitamin_b6_mg: 0.061
   vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
+  vitamin_b9_ug: 1.7
   vitamin_b12_ug: 0
   choline_mg: 0
   omega3_epa_mg: 0
@@ -141,4 +141,32 @@ change_log:
   - assumptions
   - notes
   sources: []
+- timestamp: "2025-11-05T15:30:00+00:00"
+  updated_by: "Claude Code (Sonnet 4.5)"
+  reason: "Enriched with 17 priority nutrients using component-based estimation from USDA FoodData Central"
+  fields_changed:
+  - phosphorus_mg
+  - vitamin_d_ug
+  - choline_mg
+  - iodine_ug
+  - vitamin_b9_ug
+  - vitamin_b12_ug
+  - copper_mg
+  - selenium_ug
+  - manganese_mg
+  - vitamin_a_ug
+  - vitamin_e_mg
+  - vitamin_k_ug
+  - vitamin_b1_mg
+  - vitamin_b2_mg
+  - vitamin_b3_mg
+  - vitamin_b6_mg
+  - omega3_epa_mg
+  - omega3_dha_mg
+  sources:
+  - url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/170273/nutrients"
+    note: "USDA FDC ID 170273: Dark Chocolate 70-85% cacao solids (per 100g nutrient data)"
+  - url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/170184/nutrients"
+    note: "USDA FDC ID 170184: Raw Pistachios (per 100g nutrient data)"
+  - note: "Method: Weighted average (60% chocolate + 15% pistachio) scaled to 22g portion. Plant-based product: vitamin D, B12, choline, iodine, EPA, DHA are 0 or trace."
 ```

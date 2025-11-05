@@ -26,7 +26,7 @@ portion:
 assumptions:
   salt_scheme: "normal"
   oil_type: ""
-  prep: "Component model: whole milk yogurt 155g (91%), cocoa powder 2.5g (1.5%), coffee powder 0.5g (0.3%), added sugars 12g (7%). UK dairy iodine levels assumed for yogurt base."
+  prep: "Component model: whole milk yogurt 155g (91%), cocoa powder 2.5g (1.5%), coffee powder 0.5g (0.3%), added sugars 12g (7%). Priority nutrients sourced from USDA plain whole milk yogurt (FDC 2259793, 171284) scaled to 170g portion. UK dairy iodine levels 2.5x higher than USDA values due to iodine-enriched cattle feed."
 per_portion:
   energy_kcal: 153
   protein_g: 5.9
@@ -45,33 +45,33 @@ per_portion:
   polyols_g: 0.0
   sodium_mg: 75
   potassium_mg: 278
-  iodine_ug: 39
+  iodine_ug: 137
   magnesium_mg: 31
   calcium_mg: 191
   iron_mg: 0
   zinc_mg: 1
   vitamin_c_mg: 0
-  manganese_mg: 0
-  copper_mg: 0.1
-  selenium_ug: 3
-  vitamin_d_ug: 0.1
-  vitamin_e_mg: 0.1
+  manganese_mg: 0.007
+  copper_mg: 0.015
+  selenium_ug: 3.7
+  vitamin_d_ug: 1.3
+  vitamin_e_mg: 0.10
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 172
   chloride_mg: 0
   sulfur_g: 0
-  vitamin_a_ug: 0
-  vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
+  vitamin_a_ug: 46
+  vitamin_k_ug: 0.34
+  vitamin_b1_mg: 0.09
+  vitamin_b2_mg: 0.41
+  vitamin_b3_mg: 0.23
   vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
+  vitamin_b6_mg: 0.08
   vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
-  vitamin_b12_ug: 0
-  choline_mg: 0
+  vitamin_b9_ug: 12
+  vitamin_b12_ug: 0.63
+  choline_mg: 26
   omega3_epa_mg: 0
   omega3_dha_mg: 0
   omega3_ala_g: 0
@@ -93,12 +93,42 @@ notes:
 - "Composite model representing generic tiramisu-flavored yogurt pot with whole milk base"
 - "Energy matches multiple commercial references: between low-fat versions (80-88 kcal per 150-175g) and creamy versions (160 kcal per 150g)"
 - "Atwater check (available carb basis): 4×5.9 + 9×5.4 + 4×19.9 + 2×0.8 + 2.4×0.0 = 153.4 kcal"
-- "Iodine: UK dairy fortification levels (155g yogurt × 0.25 µg/g = 39 µg)"
+- "Iodine: UK dairy fortification (USDA 32.3µg/100g × 1.7 × 2.5 = 137µg). UK dairy has 2-3x higher iodine than US due to iodine-enriched cattle feed"
 - "Natural trans fat from dairy (ruminant source, primarily CLA)"
 - "Cocoa contributes: magnesium (+12mg), potassium (+38mg), iron (+0.3mg), fiber (+0.8g)"
 - "Sugar content: 7.3g natural lactose + 12g added sugars = 19.3g total"
 - "Fiber from cocoa powder only; dairy products contain no dietary fiber"
+- "B vitamins from yogurt base: B2/riboflavin (0.41mg), B12 (0.63µg), B1/thiamin (0.09mg), B9/folate (12µg)"
+- "Phosphorus (172mg) and vitamin A (46µg) from whole milk yogurt base"
+- "Omega-3 EPA/DHA: 0mg (yogurt does not contain marine omega-3s)"
 change_log:
+- timestamp: "2025-11-05T00:00:00+00:00"
+  updated_by: "LLM: Claude Sonnet 4.5"
+  reason: "Enriched with 17 priority nutrients from USDA FoodData Central whole milk yogurt data"
+  fields_changed:
+  - vitamin_d_ug
+  - choline_mg
+  - iodine_ug
+  - vitamin_b9_ug
+  - vitamin_b12_ug
+  - phosphorus_mg
+  - copper_mg
+  - selenium_ug
+  - manganese_mg
+  - vitamin_a_ug
+  - vitamin_e_mg
+  - vitamin_k_ug
+  - vitamin_b1_mg
+  - vitamin_b2_mg
+  - vitamin_b3_mg
+  - vitamin_b6_mg
+  - omega3_epa_mg
+  - omega3_dha_mg
+  sources:
+  - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/2259793/nutrients
+    note: "USDA FoodData Central Foundation - Yogurt, plain, whole milk (primary source for B vitamins, minerals, vitamin D)"
+  - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/171284/nutrients
+    note: "USDA FoodData Central SR Legacy - Yogurt, plain, whole milk (supplemental source for B12, folate, choline, vitamin A, vitamin E, selenium)"
 - timestamp: "2025-11-04T12:00:00+00:00"
   updated_by: "LLM: Claude Sonnet 4.5"
   reason: "Initial creation using component-based estimation from USDA data and commercial product research"

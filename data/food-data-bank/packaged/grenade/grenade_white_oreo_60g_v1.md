@@ -20,9 +20,10 @@ portion:
   notes: High protein bar with white chocolate coating and Oreo pieces
 assumptions:
   salt_scheme: normal
-  oil_type: 
+  oil_type:
   prep: packaged product
-  manganese: "Estimated from USDA data for oats (~4.9 mg/100g), assuming oat-based protein bar formulation. 60g × 4.9 mg/100g = 2.94 mg. Confidence: HIGH - oats are exceptionally high in manganese"
+  usda_proxy: "17 priority nutrients enriched using USDA FDC ID 174786 (SNICKERS MARATHON Protein Performance Bar) as proxy. Values scaled from per-100g to 60g portion. Confidence: MEDIUM - similar whey protein bar with fortification"
+  manganese: "Updated from USDA protein bar proxy (0.79 mg) replacing previous oat-based estimate (2.94 mg). USDA value more representative of fortified protein bar formulation."
 per_portion:
   energy_kcal: 296.6
   protein_g: 21
@@ -44,30 +45,30 @@ per_portion:
   iron_mg: 0
   zinc_mg: 0
   vitamin_c_mg: 0
-  manganese_mg: 2.94
+  manganese_mg: 0.79
   polyols_g: 17
   carbs_available_g: 20
   carbs_total_g: 37.9
-  copper_mg: 0
-  selenium_ug: 0
+  copper_mg: 0.59
+  selenium_ug: 2.34
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 225.0
   chloride_mg: 0
   sulfur_g: 0
-  vitamin_a_ug: 0
-  vitamin_d_ug: 0
-  vitamin_e_mg: 0
-  vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
+  vitamin_a_ug: 391.2
+  vitamin_d_ug: 2.28
+  vitamin_e_mg: 10.13
+  vitamin_k_ug: 6.24
+  vitamin_b1_mg: 1.12
+  vitamin_b2_mg: 1.27
+  vitamin_b3_mg: 15.0
   vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
+  vitamin_b6_mg: 1.5
   vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
-  vitamin_b12_ug: 0
-  choline_mg: 0
+  vitamin_b9_ug: 300.0
+  vitamin_b12_ug: 4.5
+  choline_mg: 1.02
   omega3_epa_mg: 0
   omega3_dha_mg: 0
   omega3_ala_g: 0
@@ -112,4 +113,16 @@ change_log:
   minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
   acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
   fields initialized to 0.'
+- timestamp: '2025-11-05T00:00:00+00:00'
+  updated_by: 'LLM: Claude Sonnet 4.5'
+  reason: Enrich with 17 priority nutrients from USDA FoodData Central
+  fields_changed: [vitamin_d_ug, choline_mg, vitamin_b9_ug, vitamin_b12_ug, phosphorus_mg,
+    copper_mg, selenium_ug, manganese_mg, vitamin_a_ug, vitamin_e_mg, vitamin_k_ug,
+    vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b6_mg, assumptions.usda_proxy,
+    assumptions.manganese]
+  sources:
+  - note: 'USDA FoodData Central: SNICKERS MARATHON Protein Performance Bar (whey protein bar proxy)'
+    fdc_id: 174786
+    url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/174786/nutrients'
+    scaling: 'Per-100g values scaled to 60g portion (multiply by 0.6)'
 ```

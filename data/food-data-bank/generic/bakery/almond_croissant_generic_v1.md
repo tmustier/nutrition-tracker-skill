@@ -24,6 +24,7 @@ assumptions:
   salt_scheme: light
   oil_type: butter
   prep: butter croissant filled with almond frangipane paste and topped with sliced almonds
+  nutrient_sources: Component-based calculation using USDA FDC #174987 (butter croissant) and #170567 (almonds) scaled to 90g croissant + 20g almonds
 per_portion:
   energy_kcal: 506
   protein_g: 10.2
@@ -44,31 +45,31 @@ per_portion:
   calcium_mg: 47
   iron_mg: 1.6
   zinc_mg: 0.8
-  copper_mg: 0.2
+  copper_mg: 0.3
   vitamin_c_mg: 0
-  vitamin_e_mg: 5.1
-  manganese_mg: 0.4
+  vitamin_e_mg: 5.9
+  manganese_mg: 0.7
   polyols_g: 0.0
   carbs_available_g: 38.6
   carbs_total_g: 42.6
-  selenium_ug: 0
+  selenium_ug: 21.2
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 190.7
   chloride_mg: 0
   sulfur_g: 0
-  vitamin_a_ug: 0
-  vitamin_d_ug: 0
-  vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
+  vitamin_a_ug: 185.4
+  vitamin_d_ug: 0.0
+  vitamin_k_ug: 1.6
+  vitamin_b1_mg: 0.4
+  vitamin_b2_mg: 0.4
+  vitamin_b3_mg: 2.7
   vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
+  vitamin_b6_mg: 0.1
   vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
-  vitamin_b12_ug: 0
-  choline_mg: 0
+  vitamin_b9_ug: 88.0
+  vitamin_b12_ug: 0.1
+  choline_mg: 45.3
   omega3_epa_mg: 0
   omega3_dha_mg: 0
   omega3_ala_g: 0
@@ -101,6 +102,33 @@ notes:
 - Store at room temperature for same day consumption or freeze for longer storage
 - "Atwater check (available carb basis): 4×10.2 + 9×33.0 + 4×38.6 + 2×4.0 = 500.2 kcal ≈ 506 kcal"
 change_log:
+- timestamp: 2025-11-05T00:00:00+0000
+  updated_by: Claude Code (Sonnet 4.5)
+  reason: Enriched with 17 priority nutrients from USDA FoodData Central
+  fields_changed:
+  - vitamin_d_ug (0.0)
+  - choline_mg (45.3)
+  - vitamin_b9_ug (88.0)
+  - vitamin_b12_ug (0.1)
+  - phosphorus_mg (190.7)
+  - copper_mg (0.3, updated from 0.2)
+  - selenium_ug (21.2, updated from 0)
+  - manganese_mg (0.7, updated from 0.4)
+  - vitamin_a_ug (185.4)
+  - vitamin_e_mg (5.9, updated from 5.1)
+  - vitamin_k_ug (1.6)
+  - vitamin_b1_mg (0.4)
+  - vitamin_b2_mg (0.4)
+  - vitamin_b3_mg (2.7)
+  - vitamin_b6_mg (0.1)
+  - omega3_epa_mg (0, no data available)
+  - omega3_dha_mg (0, no data available)
+  - iodine_ug (0, no data available)
+  sources:
+  - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/174987/nutrients
+    note: "USDA FDC #174987: Butter croissant - used for base micronutrients"
+  - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/170567/nutrients
+    note: "USDA FDC #170567: Almonds - used for almond-contributed nutrients (vitamin E, copper, manganese, etc.)"
 - timestamp: 2025-11-03T00:00:00+0000
   updated_by: Claude Code (Sonnet 4.5)
   reason: Initial entry using component-based estimation methodology for user consumption

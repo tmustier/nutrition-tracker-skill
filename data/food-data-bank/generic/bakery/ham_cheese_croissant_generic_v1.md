@@ -25,6 +25,7 @@ assumptions:
   oil_type: butter
   prep: butter croissant filled with ham and cheese
   iodine: "Estimated from dairy content. Contains 20g Emmental cheese (~30 μg/100g) + butter in croissant. UK dairy is HIGH confidence iodine source. Total estimated 36 μg based on dairy components. Confidence: HIGH"
+  usda_enrichment: "17 priority nutrients enriched from USDA FoodData Central FDC ID 173270 (Fast foods, croissant, with egg, cheese, and ham). USDA values per 100g scaled to 120g portion."
 per_portion:
   energy_kcal: 399.3
   protein_g: 17
@@ -46,32 +47,32 @@ per_portion:
   iron_mg: 1.7
   zinc_mg: 2.1
   vitamin_c_mg: 0
-  manganese_mg: 0
+  manganese_mg: 0.174
   polyols_g: 0
   carbs_available_g: 30.4
   carbs_total_g: 32.2
-  copper_mg: 0
-  selenium_ug: 0
+  copper_mg: 0.0996
+  selenium_ug: 21.48
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 265.2
   chloride_mg: 0
   sulfur_g: 0
-  vitamin_a_ug: 0
-  vitamin_d_ug: 0
-  vitamin_e_mg: 0
-  vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
+  vitamin_a_ug: 175.2
+  vitamin_d_ug: 0.96
+  vitamin_e_mg: 0.912
+  vitamin_k_ug: 2.52
+  vitamin_b1_mg: 0.408
+  vitamin_b2_mg: 0.24
+  vitamin_b3_mg: 2.52
   vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
+  vitamin_b6_mg: 0.18
   vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
-  vitamin_b12_ug: 0
-  choline_mg: 0
-  omega3_epa_mg: 0
-  omega3_dha_mg: 0
+  vitamin_b9_ug: 50.4
+  vitamin_b12_ug: 0.792
+  choline_mg: 125.64
+  omega3_epa_mg: 2.4
+  omega3_dha_mg: 18.0
   omega3_ala_g: 0
   omega6_la_g: 0
   boron_mg: 0
@@ -83,7 +84,6 @@ derived:
 quality:
   confidence: medium
   gaps:
-  - Manganese
   - Vitamin C assumed minimal
 notes:
 - Component-based calculation using USDA profiles scaled to estimated weights
@@ -115,4 +115,12 @@ change_log:
   minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
   acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
   fields initialized to 0.'
+- timestamp: '2025-11-05T00:00:00+00:00'
+  updated_by: 'Claude Code Agent'
+  reason: 'Enriched with 17 priority nutrients from USDA FoodData Central'
+  fields_changed: [vitamin_d_ug, choline_mg, vitamin_b9_ug, vitamin_b12_ug, phosphorus_mg,
+    copper_mg, selenium_ug, manganese_mg, vitamin_a_ug, vitamin_e_mg, vitamin_k_ug,
+    vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b6_mg, omega3_epa_mg, omega3_dha_mg]
+  sources: [{note: 'USDA FoodData Central FDC ID 173270: Fast foods, croissant, with egg, cheese, and ham. Per 100g values scaled to 120g portion.',
+    url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/173270/nutrients'}]
 ```
