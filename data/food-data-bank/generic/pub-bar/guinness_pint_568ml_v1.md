@@ -3,8 +3,8 @@
 ```yaml
 id: guinness_pint_568ml_v1
 schema_version: 2
-version: 2
-last_verified: 2025-11-02
+version: 3
+last_verified: 2025-11-05
 source:
   venue: Pub/Bar - Generic
   menu_page: 
@@ -40,7 +40,7 @@ per_portion:
   fiber_insoluble_g: 0
   sodium_mg: 28
   potassium_mg: 200
-  iodine_ug: 3
+  iodine_ug: 5
   magnesium_mg: 28
   calcium_mg: 34
   iron_mg: 0.6
@@ -50,26 +50,26 @@ per_portion:
   polyols_g: 0
   carbs_available_g: 18
   carbs_total_g: 18
-  copper_mg: 0
-  selenium_ug: 0
+  copper_mg: 0.06
+  selenium_ug: 3.4
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 80
   chloride_mg: 0
   sulfur_g: 0
   vitamin_a_ug: 0
   vitamin_d_ug: 0
   vitamin_e_mg: 0
   vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
+  vitamin_b1_mg: 0.06
+  vitamin_b2_mg: 0.17
+  vitamin_b3_mg: 2.9
   vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
+  vitamin_b6_mg: 0.28
   vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
-  vitamin_b12_ug: 0
-  choline_mg: 0
+  vitamin_b9_ug: 34
+  vitamin_b12_ug: 0.11
+  choline_mg: 57
   omega3_epa_mg: 0
   omega3_dha_mg: 0
   omega3_ala_g: 0
@@ -96,6 +96,12 @@ notes:
 - Distinctive dark color from roasted unmalted barley
 - Iron content notable due to dark roasted grains
 - Atwater check (available carb basis): 4×1.9 + 9×0.0 + 4×18.0 + 2×0.0 + 2.4×0.0 = 79.6 kcal
+- 'B vitamins (B1, B2, B3, B6, B9, B12) derived from barley malt and brewing yeast'
+- 'Choline content: 57mg per pint from yeast and malt sources'
+- 'Phosphorus (80mg) and trace minerals (copper, selenium) from barley and water'
+- 'Fat-soluble vitamins (A, D, E, K) and omega-3 fatty acids absent or negligible in beer'
+- 'Iodine content: ~5µg per pint (USDA iodine database: 0.9µg/100ml mean)'
+- 'Most nutrient values calculated from USDA FDC #168746 (regular beer) scaled to 568ml'
 change_log:
 - timestamp: 2025-10-31T17:00:00+0000
   updated_by: Claude Code (Sonnet 4.5)
@@ -117,4 +123,17 @@ change_log:
   minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
   acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
   fields initialized to 0.'
+- timestamp: '2025-11-05T12:00:00+00:00'
+  updated_by: 'Claude Code (Sonnet 4.5)'
+  reason: 'Enriched 17 priority nutrients using USDA FoodData Central data'
+  fields_changed: [version, last_verified, iodine_ug, phosphorus_mg, copper_mg, selenium_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b6_mg, vitamin_b9_ug, vitamin_b12_ug, choline_mg, notes]
+  sources:
+    - note: 'USDA FoodData Central #168746 - Alcoholic beverage, beer, regular, all'
+      url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/168746/nutrients'
+    - note: 'Foodstruct.com beer nutrition data (USDA-derived) per 100g'
+      url: 'https://foodstruct.com/food/beer'
+    - note: 'USDA, FDA, ODS-NIH Database for Iodine Content: beer mean 0.9 µg/100ml'
+      url: 'https://www.ars.usda.gov/ARSUSERFILES/80400535/DATA/IODINE/'
+    - note: 'Values scaled from per 100ml/100g to 568ml pint (multiplier: 5.68x)'
+      calculation: 'Example: B3 (niacin) 0.51mg/100ml × 5.68 = 2.9mg per pint'
 ```

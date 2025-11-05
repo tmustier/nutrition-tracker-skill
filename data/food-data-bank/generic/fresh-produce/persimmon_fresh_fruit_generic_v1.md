@@ -2,9 +2,9 @@
 
 ```yaml
 id: persimmon_fresh_fruit_generic_v1
-version: 1
+version: 2
 schema_version: 2
-last_verified: 2025-11-04
+last_verified: 2025-11-05
 source:
   venue: Generic - Fresh Produce
   menu_page: ""
@@ -57,20 +57,20 @@ per_portion:
   vitamin_e_mg: 1.2
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 29
   chloride_mg: 0
   sulfur_g: 0
-  vitamin_a_ug: 0
-  vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
+  vitamin_a_ug: 136
+  vitamin_k_ug: 4.4
+  vitamin_b1_mg: 0.05
+  vitamin_b2_mg: 0.03
+  vitamin_b3_mg: 0.17
   vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
+  vitamin_b6_mg: 0.17
   vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
+  vitamin_b9_ug: 13
   vitamin_b12_ug: 0
-  choline_mg: 0
+  choline_mg: 12.8
   omega3_epa_mg: 0
   omega3_dha_mg: 0
   omega3_ala_g: 0
@@ -83,15 +83,16 @@ derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: high
-  gaps:
-  - vitamin_a_ug (USDA reports 81µg RAE per 100g = 136µg per portion, but field not in schema)
+  gaps: []
 notes:
 - "USDA FoodData Central per 100g: 70 kcal, 0.58g protein, 0.19g fat, 18.59g total carbs, 3.6g fiber"
 - "All values scaled from per-100g USDA data to 168g medium persimmon portion"
 - "Japanese persimmon (Fuyu variety) - non-astringent type, most common in Western markets"
 - "Excellent source of vitamin C (13mg, ~14% DV) and manganese (0.6mg, ~26% DV)"
-- "High in vitamin A: 136µg RAE per portion (USDA data, not captured in current schema)"
+- "Very high in vitamin A: 136µg RAE per portion (~15% DV) - primarily from beta-carotene"
 - "Rich in antioxidants including beta-carotene, lycopene, lutein, and zeaxanthin"
+- "Good source of B-complex vitamins: B1 (0.05mg), B2 (0.03mg), B3 (0.17mg), B6 (0.17mg), folate (13µg)"
+- "Contains choline (12.8mg), vitamin K (4.4µg), and phosphorus (29mg)"
 - "Sugar composition per 100g: glucose 5.44g, fructose 5.56g, sucrose 1.54g"
 - "Naturally fat-free, cholesterol-free, and sodium-free fruit"
 - "Fiber split based on research showing soluble:insoluble ratio of approximately 1:6 in persimmons"
@@ -110,4 +111,28 @@ change_log:
   - note: "Vitamin A: 81µg RAE/100g from USDA (gap in current schema)"
   - note: "Fiber soluble/insoluble split based on research: PMC8615262 showing persimmon SDF/IDF ratio of 1:3 to 1:6"
   - note: "MUFA 0.04g/100g confirmed from comparative nutrition data"
+- timestamp: "2025-11-05T00:00:00+00:00"
+  updated_by: "LLM: Claude Sonnet 4.5"
+  reason: "Enrichment with 17 priority nutrients from USDA FoodData Central (FDC ID 169941)"
+  fields_changed:
+  - vitamin_a_ug (0 → 136)
+  - vitamin_k_ug (0 → 4.4)
+  - vitamin_b1_mg (0 → 0.05)
+  - vitamin_b2_mg (0 → 0.03)
+  - vitamin_b3_mg (0 → 0.17)
+  - vitamin_b6_mg (0 → 0.17)
+  - vitamin_b9_ug (0 → 13)
+  - choline_mg (0 → 12.8)
+  - phosphorus_mg (0 → 29)
+  sources:
+  - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/169941/nutrients
+    note: "Primary USDA source: Persimmons, japanese, raw (FDC ID 169941)"
+  - url: https://nutrivore.com/foods/japanese-persimmon-nutrients/
+    note: "Cross-validation source with USDA FDC 169941 data per 100g"
+  - url: https://www.nutritionvalue.org/Persimmon%2C_raw_63139010_nutritional_value.html
+    note: "Additional USDA-based cross-reference for nutrient validation"
+  - note: "Per 100g USDA values: vitamin A 81µg RAE, vitamin K 2.6µg, thiamin 0.03mg, riboflavin 0.02mg, niacin 0.10mg, B6 0.10mg, folate 8µg, choline 7.6mg, phosphorus 17mg"
+  - note: "All values scaled from per-100g to 168g portion (scale factor: 1.68)"
+  - note: "Confirmed zero values: vitamin D, B12, iodine, omega-3 EPA/DHA (as expected for plant foods)"
+  - note: "Vitamin A content primarily from beta-carotene; persimmons are exceptionally rich in provitamin A carotenoids"
 ```

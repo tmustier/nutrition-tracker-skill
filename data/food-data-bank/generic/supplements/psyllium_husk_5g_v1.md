@@ -3,8 +3,8 @@
 ```yaml
 id: psyllium_husk_5g_v1
 schema_version: 2
-version: 2
-last_verified: 2025-11-02
+version: 3
+last_verified: 2025-11-05
 source:
   venue: Generic - Supplement
   menu_page: 
@@ -53,20 +53,20 @@ per_portion:
   selenium_ug: 0
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 2.05
   chloride_mg: 0
   sulfur_g: 0
   vitamin_a_ug: 0
   vitamin_d_ug: 0
-  vitamin_e_mg: 0
+  vitamin_e_mg: 0.005
   vitamin_k_ug: 0
-  vitamin_b1_mg: 0
+  vitamin_b1_mg: 0.002
   vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
+  vitamin_b3_mg: 0.02
   vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
+  vitamin_b6_mg: 0.005
   vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
+  vitamin_b9_ug: 2.9
   vitamin_b12_ug: 0
   choline_mg: 0
   omega3_epa_mg: 0
@@ -112,4 +112,14 @@ change_log:
   minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
   acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
   fields initialized to 0.'
+- timestamp: '2025-11-05T00:00:00+00:00'
+  updated_by: 'Claude Code (Sonnet 4.5)'
+  reason: 'Enriched 17 priority nutrients with USDA/research data for 5g portion. Most values remain 0 as expected for pure fiber supplement; updated non-zero values: phosphorus (2.05mg), vitamin B1 (0.002mg), B3 (0.02mg), B6 (0.005mg), B9 (2.9µg), and vitamin E (0.005mg). Copper, manganese, selenium, iodine, and all other priority nutrients confirmed as 0 or trace.'
+  fields_changed: [per_portion.phosphorus_mg, per_portion.vitamin_b1_mg, per_portion.vitamin_b3_mg,
+    per_portion.vitamin_b6_mg, per_portion.vitamin_b9_ug, per_portion.vitamin_e_mg]
+  sources:
+  - note: 'Norwegian Food Composition Database (Matvaretabellen.no) - psyllium husk per 100g, converted to 5g portion'
+    url: 'https://www.matvaretabellen.no/en/psyllium-husk/'
+  - note: 'Scientific literature on Plantago ovata mineral composition for trace element verification'
+    url: 'https://www.researchgate.net/publication/346525992'
 ```

@@ -42,30 +42,30 @@ per_portion:
   iron_mg: 0
   zinc_mg: 0
   vitamin_c_mg: 8
-  manganese_mg: 0
+  manganese_mg: 0.11
   polyols_g: 0
   carbs_available_g: 1.4
   carbs_total_g: 6.4
-  copper_mg: 0
-  selenium_ug: 0
+  copper_mg: 0.13
+  selenium_ug: 0.3
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 40.5
   chloride_mg: 0
   sulfur_g: 0
-  vitamin_a_ug: 0
+  vitamin_a_ug: 5.25
   vitamin_d_ug: 0
-  vitamin_e_mg: 0
-  vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
+  vitamin_e_mg: 1.48
+  vitamin_k_ug: 15.75
+  vitamin_b1_mg: 0.05
+  vitamin_b2_mg: 0.11
+  vitamin_b3_mg: 1.43
   vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
+  vitamin_b6_mg: 0.22
   vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
+  vitamin_b9_ug: 66.75
   vitamin_b12_ug: 0
-  choline_mg: 0
+  choline_mg: 10.65
   omega3_epa_mg: 0
   omega3_dha_mg: 0
   omega3_ala_g: 0
@@ -88,7 +88,13 @@ notes:
 - Contains vitamins K, E, C, and B vitamins
 - Low in sodium, naturally unsalted
 - Atwater check (available carb basis): 4×1.5 + 9×11.0 + 4×1.4 + 2×5.0 + 2.4×0.0 = 120.6 kcal
+- Enriched 2025-11-05 using USDA FoodData Central (FDC ID 171706) for California Hass avocados: Added 15 nutrient values (vitamins A, E, K, B1, B2, B3, B6, B9/folate, choline; minerals phosphorus, copper, selenium, manganese). Vitamin D, B12, EPA, and DHA confirmed as 0 (plant source). Iodine not tracked in USDA database.
 change_log:
+- timestamp: '2025-11-05T00:00:00+00:00'
+  updated_by: Claude Code (Sonnet 4.5)
+  reason: Enriched with 15 priority nutrients from USDA FoodData Central
+  fields_changed: [vitamin_a_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b6_mg, vitamin_b9_ug, choline_mg, phosphorus_mg, copper_mg, selenium_ug, manganese_mg, omega3_epa_mg, omega3_dha_mg]
+  sources: [{note: 'USDA FoodData Central - Avocado, raw, California (Hass) - FDC ID 171706', url: 'https://www.nutritionvalue.org/Avocados%2C_California%2C_raw_nutritional_value.html'}]
 - timestamp: '2025-11-03T10:30:00+00:00'
   updated_by: Claude Code (Sonnet 4.5)
   reason: Initial population with USDA nutrition data for 56g portion (3/8 avocado)

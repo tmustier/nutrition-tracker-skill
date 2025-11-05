@@ -39,23 +39,23 @@ per_portion:
   polyols_g: 0.0
   sodium_mg: 55
   potassium_mg: 55
-  iodine_ug: 11
+  iodine_ug: 22
   magnesium_mg: 4
   calcium_mg: 22
   iron_mg: 0.5
   zinc_mg: 0.5
   vitamin_c_mg: 0
-  manganese_mg: 0
-  copper_mg: 0
+  manganese_mg: 0.011
+  copper_mg: 0.007
   selenium_ug: 14
   vitamin_d_ug: 1.0
   vitamin_e_mg: 0.5
   omega3_ala_g: 0
-  omega3_dha_mg: 0
-  omega3_epa_mg: 0
+  omega3_dha_mg: 0.017
+  omega3_epa_mg: 0.002
   omega6_la_g: 0
   chloride_mg: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 76
   sulfur_g: 0
   chromium_ug: 0
   molybdenum_ug: 0
@@ -63,17 +63,17 @@ per_portion:
   nickel_ug: 0
   silicon_mg: 0
   vanadium_ug: 0
-  vitamin_a_ug: 0
-  vitamin_k_ug: 0
-  choline_mg: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
+  vitamin_a_ug: 66
+  vitamin_k_ug: 0.1
+  choline_mg: 129
+  vitamin_b1_mg: 0.029
+  vitamin_b2_mg: 0.23
+  vitamin_b3_mg: 0.028
   vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
+  vitamin_b6_mg: 0.053
   vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
-  vitamin_b12_ug: 0
+  vitamin_b9_ug: 19
+  vitamin_b12_ug: 0.49
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
@@ -85,11 +85,42 @@ notes:
   - "Eggs are naturally low in carbohydrates (~1.1g per 100g, mostly as glucose)"
   - "Zero fiber (animal product) and zero vitamin C"
   - "Excellent source of protein (5.5g per egg) and high-quality complete amino acids"
-  - "Rich in choline, B vitamins (especially B12, riboflavin, folate), selenium, and vitamin D"
+  - "CHOLINE POWERHOUSE: 129mg per egg (294mg/100g) - eggs are THE top dietary source of choline after beef liver"
+  - "Rich in B vitamins: B12 (0.49µg, ~20% DV), riboflavin/B2 (0.23mg, ~18% DV), folate/B9 (19µg), B6 (0.053mg)"
+  - "Excellent selenium source: 14µg per egg (~25% DV), important antioxidant mineral"
+  - "Good source of vitamin A: 66µg RAE per egg, important for vision and immune function"
+  - "Contains vitamin D: 1.0µg per egg (~5% DV), one of few natural food sources"
+  - "Phosphorus: 76mg per egg (~11% DV), important for bone health and energy metabolism"
+  - "Trace amounts of omega-3s: 0.017mg DHA + 0.002mg EPA (varies with hen diet)"
   - "High in cholesterol (164mg per egg) but dietary cholesterol has minimal impact on blood cholesterol for most people"
-  - "Iodine content varies based on hen diet; using conservative estimate of 24µg/100g"
+  - "Iodine content: 22µg per egg (49.2µg/100g from USDA study), ~15% DV, varies with hen feed"
   - "Atwater validation: 4×5.5 + 9×4.7 + 4×0.5 + 2×0 + 2.4×0 = 66.3 kcal (within 2.5% of USDA 68 kcal)"
 change_log:
+  - timestamp: "2025-11-05T14:00:00+00:00"
+    updated_by: "Claude Code (Sonnet 4.5)"
+    reason: "Enrichment with 17 priority nutrients from USDA FoodData Central per 100g values, scaled to 44g portion"
+    fields_changed:
+      - "choline_mg: 0 → 129 (CRITICAL: eggs are #1 dietary choline source!)"
+      - "vitamin_b12_ug: 0 → 0.49"
+      - "vitamin_b9_ug: 0 → 19"
+      - "vitamin_b2_mg: 0 → 0.23"
+      - "vitamin_b1_mg: 0 → 0.029"
+      - "vitamin_b3_mg: 0 → 0.028"
+      - "vitamin_b6_mg: 0 → 0.053"
+      - "vitamin_a_ug: 0 → 66"
+      - "vitamin_k_ug: 0 → 0.1"
+      - "phosphorus_mg: 0 → 76"
+      - "copper_mg: 0 → 0.007"
+      - "manganese_mg: 0 → 0.011"
+      - "iodine_ug: 11 → 22 (updated with USDA study value)"
+      - "omega3_dha_mg: 0 → 0.017"
+      - "omega3_epa_mg: 0 → 0.002"
+      - "notes: enhanced with nutrient highlights"
+    sources:
+      - url: "https://www.nutritionvalue.org/Egg%2C_hard-boiled%2C_cooked%2C_whole_nutritional_value.html"
+        note: "Comprehensive USDA FDC 173424 nutrient data per 100g"
+      - url: "https://www.ars.usda.gov/ARSUSERFILES/80400535/DATA/IODINE/"
+        note: "USDA, FDA and ODS-NIH Database for Iodine Content - 49.2µg/100g for shell eggs"
   - timestamp: "2025-11-05T10:30:00+00:00"
     updated_by: "Claude Code (Sonnet 4.5)"
     reason: "Initial population with comprehensive USDA nutrition data for medium hard-boiled egg"

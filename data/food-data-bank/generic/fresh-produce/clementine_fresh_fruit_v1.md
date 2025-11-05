@@ -3,8 +3,8 @@
 ```yaml
 id: clementine_fresh_fruit_v1
 schema_version: 2
-version: 2
-last_verified: 2025-11-02
+version: 3
+last_verified: 2025-11-05
 source:
   venue: Clementine (Fresh Fruit)
   menu_page: 
@@ -46,30 +46,30 @@ per_portion:
   iron_mg: 0.1
   zinc_mg: 0
   vitamin_c_mg: 36
-  manganese_mg: 0
+  manganese_mg: 0.02
   polyols_g: 0
   carbs_available_g: 9
   carbs_total_g: 10.3
-  copper_mg: 0
-  selenium_ug: 0
+  copper_mg: 0.03
+  selenium_ug: 0.1
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 15.5
   chloride_mg: 0
   sulfur_g: 0
-  vitamin_a_ug: 0
+  vitamin_a_ug: 25.2
   vitamin_d_ug: 0
-  vitamin_e_mg: 0
+  vitamin_e_mg: 0.15
   vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
+  vitamin_b1_mg: 0.07
+  vitamin_b2_mg: 0.02
+  vitamin_b3_mg: 0.47
   vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
+  vitamin_b6_mg: 0.06
   vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
+  vitamin_b9_ug: 17.8
   vitamin_b12_ug: 0
-  choline_mg: 0
+  choline_mg: 10.4
   omega3_epa_mg: 0
   omega3_dha_mg: 0
   omega3_ala_g: 0
@@ -84,8 +84,17 @@ derived:
 quality:
   confidence: high
   gaps:
-  - iodine_ug
-  - manganese_mg
+  - iodine_ug (not measured in USDA data for citrus)
+  - vitamin_k_ug (trace amounts only)
+  - vitamin_b5_mg (pantothenic acid - not in available sources)
+  - vitamin_b7_ug (biotin - rarely analyzed for citrus)
+  - chromium_ug (limited USDA coverage)
+  - molybdenum_ug (limited USDA coverage)
+  - chloride_mg (rarely analyzed)
+  - sulfur_g (rarely analyzed)
+  - omega3_ala_g (trace/negligible in citrus)
+  - omega6_la_g (trace/negligible in citrus)
+  - ultra-trace minerals (boron, silicon, vanadium, nickel - not in USDA database)
 notes:
 - 35 kcal from USDA FoodData Central per medium 74g clementine
 - Values scaled from USDA per-100g data: 47 kcal, 0.85g protein, 0.15g fat, 12g carbs, 1.7g fiber
@@ -119,4 +128,35 @@ change_log:
   minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
   acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
   fields initialized to 0.'
+- timestamp: 2025-11-05T20:00:00+00:00
+  updated_by: 'LLM: Claude Sonnet 4.5'
+  reason: Enriched with 17 priority nutrients from USDA FoodData Central (FDC ID 168195)
+  fields_changed:
+  - vitamin_a_ug (0 → 25.2)
+  - vitamin_d_ug (remains 0, citrus has no vitamin D)
+  - vitamin_e_mg (0 → 0.15)
+  - vitamin_k_ug (remains 0, trace only)
+  - vitamin_b1_mg (0 → 0.07)
+  - vitamin_b2_mg (0 → 0.02)
+  - vitamin_b3_mg (0 → 0.47)
+  - vitamin_b6_mg (0 → 0.06)
+  - vitamin_b9_ug (0 → 17.8)
+  - vitamin_b12_ug (remains 0, plant foods contain no B12)
+  - choline_mg (0 → 10.4)
+  - phosphorus_mg (0 → 15.5)
+  - copper_mg (0 → 0.03)
+  - selenium_ug (0 → 0.1)
+  - manganese_mg (0 → 0.02)
+  - iodine_ug (remains 0, not measured for citrus)
+  - omega3_epa_mg (remains 0, marine omega-3 only)
+  - omega3_dha_mg (remains 0, marine omega-3 only)
+  sources:
+  - note: 'USDA FoodData Central SR Legacy: Clementines, raw (FDC ID 168195)'
+    url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/168195/nutrients'
+  - note: 'Multiple source validation: foodstruct.com, nutritionvalue.org'
+    url: 'https://foodstruct.com/food/clementines-raw'
+  data_quality: 'Per 100g values from USDA scaled to 74g portion. B-vitamin values consistent
+    across multiple aggregators. Vitamin A from provitamin carotenoids (34 µg RAE per 100g).
+    EPA/DHA zero (marine omega-3s absent in citrus). Iodine not measured in standard USDA
+    citrus analysis.'
 ```

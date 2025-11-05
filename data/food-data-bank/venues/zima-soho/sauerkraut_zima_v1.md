@@ -3,8 +3,8 @@
 ```yaml
 id: sauerkraut_zima_v1
 schema_version: 2
-version: 2
-last_verified: 2025-11-02
+version: 3
+last_verified: 2025-11-05
 source:
   venue: Zima, Soho, London
   menu_page: 
@@ -44,30 +44,30 @@ per_portion:
   iron_mg: 0
   zinc_mg: 0
   vitamin_c_mg: 0
-  manganese_mg: 0
+  manganese_mg: 0.27
   polyols_g: 0
   carbs_available_g: 7.8
   carbs_total_g: 12.3
-  copper_mg: 0
-  selenium_ug: 0
+  copper_mg: 0.17
+  selenium_ug: 1.1
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 36.0
   chloride_mg: 0
   sulfur_g: 0
-  vitamin_a_ug: 0
+  vitamin_a_ug: 1.8
   vitamin_d_ug: 0
-  vitamin_e_mg: 0
-  vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
+  vitamin_e_mg: 0.25
+  vitamin_k_ug: 23.4
+  vitamin_b1_mg: 0.04
+  vitamin_b2_mg: 0.04
+  vitamin_b3_mg: 0.25
   vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
+  vitamin_b6_mg: 0.23
   vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
+  vitamin_b9_ug: 43.2
   vitamin_b12_ug: 0
-  choline_mg: 0
+  choline_mg: 18.7
   omega3_epa_mg: 0
   omega3_dha_mg: 0
   omega3_ala_g: 0
@@ -83,11 +83,15 @@ quality:
   gaps:
   - Fat breakdown (0.3g = 0.1 sat + 0.1 MUFA + 0.1 PUFA) exceeds stated total_fat (0.2g); using values as provided
   - Missing micronutrients: calcium, magnesium, iron, zinc, vitamin C (fermented vegetables typically contain these)
+  - vitamin_b5_mg and vitamin_b7_ug not available in USDA source
 notes:
 - High sodium (1080mg) typical of fermented/pickled vegetables in brine
 - Good fiber content (4.5g) with 0.9g soluble, 3.6g insoluble
 - Low calorie density (40 kcal per 180g portion)
 - Atwater check (available carb basis): 4×1.6 + 9×0.2 + 4×7.8 + 2×4.5 + 2.4×0.0 = 48.4 kcal
+- Excellent source of vitamin K (23.4 μg per portion, ~26% DV) typical of fermented cruciferous vegetables
+- Provides folate (43.2 μg), choline (18.7 mg), and trace amounts of B-vitamins from fermentation
+- Negligible vitamin D and B12 (plant-based food), no EPA/DHA (not from marine sources)
 change_log:
 - timestamp: 2025-10-30 12:00:00+00:00
   updated_by: 'LLM: Claude Sonnet 4.5'
@@ -110,4 +114,19 @@ change_log:
   minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
   acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
   fields initialized to 0.'
+- timestamp: '2025-11-05T20:30:00+00:00'
+  updated_by: 'LLM: Claude Sonnet 4.5'
+  reason: Enriched with 17 priority nutrients from USDA FoodData Central (FDC ID 169279)
+  fields_changed: [version, last_verified, per_portion.vitamin_a_ug, per_portion.vitamin_d_ug,
+    per_portion.vitamin_e_mg, per_portion.vitamin_k_ug, per_portion.vitamin_b1_mg,
+    per_portion.vitamin_b2_mg, per_portion.vitamin_b3_mg, per_portion.vitamin_b6_mg,
+    per_portion.vitamin_b9_ug, per_portion.vitamin_b12_ug, per_portion.choline_mg,
+    per_portion.phosphorus_mg, per_portion.copper_mg, per_portion.selenium_ug,
+    per_portion.manganese_mg, per_portion.omega3_epa_mg, per_portion.omega3_dha_mg,
+    notes, quality.gaps]
+  sources:
+    - note: 'USDA FoodData Central: Sauerkraut, canned, solids and liquids (FDC ID: 169279)'
+      url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/169279/nutrients'
+    - note: 'Nutrivore nutrient database (USDA-derived values per 100g)'
+      url: 'https://nutrivore.com/foods/sauerkraut-nutrients/'
 ```

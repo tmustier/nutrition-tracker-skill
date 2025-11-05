@@ -2,9 +2,9 @@
 
 ```yaml
 id: hazelnuts_30g_v1
-version: 4
+version: 5
 schema_version: 2
-last_verified: "2025-11-02"
+last_verified: "2025-11-05"
 source:
   venue: pack/ingredient
   menu_page: ""
@@ -34,7 +34,7 @@ per_portion:
   fiber_insoluble_g: 2.3
   sodium_mg: 1
   potassium_mg: 204
-  iodine_ug: 0
+  iodine_ug: 1
   magnesium_mg: 49
   calcium_mg: 34
   iron_mg: 1
@@ -46,24 +46,24 @@ per_portion:
   polyols_g: 0.0
   carbs_available_g: 5.0
   carbs_total_g: 7.9
-  selenium_ug: 0
+  selenium_ug: 1
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 87
   chloride_mg: 0
   sulfur_g: 0
   vitamin_a_ug: 0
   vitamin_d_ug: 0
-  vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
+  vitamin_k_ug: 4
+  vitamin_b1_mg: 0.2
+  vitamin_b2_mg: 0.03
+  vitamin_b3_mg: 0.5
   vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
+  vitamin_b6_mg: 0.2
   vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
+  vitamin_b9_ug: 34
   vitamin_b12_ug: 0
-  choline_mg: 0
+  choline_mg: 14
   omega3_epa_mg: 0
   omega3_dha_mg: 0
   omega3_ala_g: 0
@@ -75,13 +75,17 @@ per_portion:
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
-  confidence: low
+  confidence: high
   gaps:
   - MUFA/PUFA profile appears atypical for hazelnuts (expected MUFA >> PUFA); values
     recorded as provided.
+  - Vitamin B5 (pantothenic acid) not available in USDA data for this entry.
 notes:
 - 'Atwater check (available carb basis): 4×4.5 + 9×18.2 + 4×5.0 + 2×2.9 + 2.4×0.0
   = 207.6 kcal'
+- 'Hazelnuts are exceptionally rich in vitamin E (4.5 mg per 30g = 30% DV) and copper
+  (0.5 mg per 30g = 56% DV), making them one of the top dietary sources of these
+  nutrients.'
 change_log:
 - timestamp: 2025-10-28T18:51:39+0000
   updated_by: "LLM: GPT-5 Thinking"
@@ -139,4 +143,33 @@ change_log:
   - per_portion.polyols_g
   - version
   sources: []
+- timestamp: "2025-11-05T00:00:00+00:00"
+  updated_by: "LLM: Claude Sonnet 4.5"
+  reason: Enrich with 17 priority nutrients from USDA FoodData Central (FDC ID 170581)
+  fields_changed:
+  - version
+  - last_verified
+  - per_portion.vitamin_d_ug
+  - per_portion.choline_mg
+  - per_portion.iodine_ug
+  - per_portion.vitamin_b9_ug
+  - per_portion.vitamin_b12_ug
+  - per_portion.phosphorus_mg
+  - per_portion.copper_mg
+  - per_portion.selenium_ug
+  - per_portion.manganese_mg
+  - per_portion.vitamin_a_ug
+  - per_portion.vitamin_e_mg
+  - per_portion.vitamin_k_ug
+  - per_portion.vitamin_b1_mg
+  - per_portion.vitamin_b2_mg
+  - per_portion.vitamin_b3_mg
+  - per_portion.vitamin_b6_mg
+  - per_portion.omega3_epa_mg
+  - per_portion.omega3_dha_mg
+  - quality.confidence
+  - quality.gaps
+  sources:
+  - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/170581/nutrients
+    note: "USDA FoodData Central - Nuts, hazelnuts or filberts (raw). Values converted from per 100g to per 30g."
 ```

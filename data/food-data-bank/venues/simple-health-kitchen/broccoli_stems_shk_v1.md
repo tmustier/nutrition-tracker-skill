@@ -3,8 +3,8 @@
 ```yaml
 id: broccoli_stems_shk_v1
 schema_version: 2
-version: 5
-last_verified: 2025-11-02
+version: 6
+last_verified: 2025-11-05
 source:
   venue: Simple Health Kitchen, Baker Street (London)
   menu_page: 
@@ -13,8 +13,8 @@ aliases:
 category: side
 portion:
   description: steamed/roasted broccoli stems
-  est_weight_g:
-  notes: no raisins variant; zest optional; normal salt
+  est_weight_g: 150
+  notes: no raisins variant; zest optional; normal salt; ~150g broccoli + oil/seasoning
 assumptions:
   salt_scheme: normal
   oil_type: 
@@ -40,30 +40,30 @@ per_portion:
   iron_mg: 1
   zinc_mg: 1
   vitamin_c_mg: 130
-  manganese_mg: 0
+  manganese_mg: 0.3
   polyols_g: 0
   carbs_available_g: 21.5
   carbs_total_g: 28.4
-  copper_mg: 0
-  selenium_ug: 0
+  copper_mg: 0.1
+  selenium_ug: 4
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 99
   chloride_mg: 0
   sulfur_g: 0
-  vitamin_a_ug: 0
+  vitamin_a_ug: 47
   vitamin_d_ug: 0
-  vitamin_e_mg: 0
-  vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
+  vitamin_e_mg: 1.2
+  vitamin_k_ug: 152
+  vitamin_b1_mg: 0.11
+  vitamin_b2_mg: 0.18
+  vitamin_b3_mg: 1.0
   vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
+  vitamin_b6_mg: 0.27
   vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
+  vitamin_b9_ug: 95
   vitamin_b12_ug: 0
-  choline_mg: 0
+  choline_mg: 28
   omega3_epa_mg: 0
   omega3_dha_mg: 0
   omega3_ala_g: 0
@@ -113,4 +113,9 @@ change_log:
   minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
   acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
   fields initialized to 0.'
+- timestamp: 2025-11-05T12:00:00+0000
+  updated_by: 'LLM: Claude Sonnet 4.5'
+  reason: Enriched with 17 priority nutrients from USDA FoodData Central (raw broccoli, FDC ID 169330/170379)
+  fields_changed: [version, last_verified, portion.est_weight_g, portion.notes, per_portion.vitamin_a_ug, per_portion.vitamin_e_mg, per_portion.vitamin_k_ug, per_portion.vitamin_b1_mg, per_portion.vitamin_b2_mg, per_portion.vitamin_b3_mg, per_portion.vitamin_b6_mg, per_portion.vitamin_b9_ug, per_portion.choline_mg, per_portion.phosphorus_mg, per_portion.copper_mg, per_portion.selenium_ug, per_portion.manganese_mg]
+  sources: [{note: 'USDA FoodData Central - Broccoli, raw per 100g, scaled to ~150g portion', url: 'https://fdc.nal.usda.gov/'}]
 ```

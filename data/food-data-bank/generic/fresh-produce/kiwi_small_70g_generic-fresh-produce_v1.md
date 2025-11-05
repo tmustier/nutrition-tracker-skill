@@ -47,9 +47,9 @@ per_portion:
   iron_mg: 0.2
   zinc_mg: 0.1
   vitamin_c_mg: 64.9
-  manganese_mg: 0.1
-  copper_mg: 0.1
-  selenium_ug: 0.1
+  manganese_mg: 0.07
+  copper_mg: 0.09
+  selenium_ug: 0.14
   vitamin_d_ug: 0
   vitamin_e_mg: 1.0
   polyols_g: 0.0
@@ -60,7 +60,7 @@ per_portion:
   omega3_epa_mg: 0
   omega6_la_g: 0
   chloride_mg: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 23.8
   sulfur_g: 0
   chromium_ug: 0
   molybdenum_ug: 0
@@ -68,16 +68,16 @@ per_portion:
   nickel_ug: 0
   silicon_mg: 0
   vanadium_ug: 0
-  vitamin_a_ug: 0
-  vitamin_k_ug: 0
-  choline_mg: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
+  vitamin_a_ug: 2.8
+  vitamin_k_ug: 28.2
+  choline_mg: 5.4
+  vitamin_b1_mg: 0.02
+  vitamin_b2_mg: 0.02
+  vitamin_b3_mg: 0.24
   vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
+  vitamin_b6_mg: 0.04
   vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
+  vitamin_b9_ug: 17.5
   vitamin_b12_ug: 0
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
@@ -92,7 +92,7 @@ notes:
 - Fat content minimal - primarily trace amounts of natural fruit oils (PUFA predominant)
 - 'Excellent source of vitamin C: 64.9mg provides ~108% daily value (60mg DV)'
 - Naturally sodium-free and cholesterol-free
-- 'Micronutrients per 100g: copper 0.13mg, selenium 0.2μg, vitamin E 1.46mg, manganese 0.098mg'
+- 'Micronutrients per 100g from USDA FDC 168153: copper 0.128mg, selenium 0.2μg, vitamin E 1.46mg, manganese 0.098mg, phosphorus 34mg, vitamin K 40.3μg, vitamin A 4μg RAE, choline 7.78mg, folate 25μg, thiamin 0.027mg, riboflavin 0.025mg, niacin 0.34mg, vitamin B6 0.063mg'
 - 'Atwater validation (available carb basis): 4×0.8 + 9×0.4 + 4×7.9 + 2×2.4 + 2.4×0 = 43.2 kcal (within 1.2% of 42.7 kcal - excellent match)'
 - Can be eaten with skin for maximum fiber and nutrient content
 - 'Carbs: US label reports total carbs (14.7g/100g) = available (11.31g) + fiber (3.39g)'
@@ -144,4 +144,30 @@ change_log:
     note: USDA data aggregator with complete micronutrient profile
   - url: https://pmc.ncbi.nlm.nih.gov/articles/PMC6267416/
     note: 'Peer-reviewed research: The nutritional and health attributes of kiwifruit'
+- timestamp: 2025-11-05T14:00:00+00:00
+  updated_by: "LLM: Claude Sonnet 4.5"
+  reason: "Enrichment: Added 17 priority nutrients from USDA FoodData Central (FDC ID 168153) via nutritionvalue.org aggregator"
+  fields_changed:
+  - per_portion.phosphorus_mg (0 → 23.8)
+  - per_portion.copper_mg (0.1 → 0.09, refined from 0.128/100g)
+  - per_portion.selenium_ug (0.1 → 0.14, refined from 0.2/100g)
+  - per_portion.manganese_mg (0.1 → 0.07, refined from 0.098/100g)
+  - per_portion.vitamin_a_ug (0 → 2.8)
+  - per_portion.vitamin_k_ug (0 → 28.2)
+  - per_portion.choline_mg (0 → 5.4)
+  - per_portion.vitamin_b1_mg (0 → 0.02)
+  - per_portion.vitamin_b2_mg (0 → 0.02)
+  - per_portion.vitamin_b3_mg (0 → 0.24)
+  - per_portion.vitamin_b6_mg (0 → 0.04)
+  - per_portion.vitamin_b9_ug (0 → 17.5)
+  - notes (updated micronutrient summary)
+  sources:
+  - url: https://www.nutritionvalue.org/Kiwifruit,_raw,_green_nutritional_value.html
+    note: "Complete USDA nutrient profile including B-vitamins, vitamin A, vitamin K, choline, phosphorus per 100g"
+  nutrients_confirmed:
+  - "vitamin_d_ug: 0 (kiwi contains no vitamin D)"
+  - "vitamin_b12_ug: 0 (plant foods do not contain B12)"
+  - "iodine_ug: 0 (not reported in USDA database for kiwi)"
+  - "omega3_epa_mg: 0 (confirmed, no marine omega-3s in plant foods)"
+  - "omega3_dha_mg: 0 (confirmed, no marine omega-3s in plant foods)"
 ```
