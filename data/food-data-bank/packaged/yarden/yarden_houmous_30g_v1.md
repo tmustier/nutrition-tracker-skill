@@ -3,7 +3,7 @@
 ```yaml
 id: yarden_houmous_30g_v1
 schema_version: 2
-version: 4
+version: 5
 last_verified: 2025-11-05
 source:
   venue: Yarden (Packaged Product)
@@ -23,7 +23,7 @@ assumptions:
   salt_scheme: normal
   oil_type: sunflower or olive oil
   prep: packaged tahini-based houmous
-  usda_enrichment: Priority nutrients from USDA FoodData Central FDC ID 321358 (Hummus, commercial, Foundation), scaled from per 100g to 30g portion. Plant-based nutrients only; B12, vitamin D, EPA, and DHA remain 0 (not naturally present in unfortified chickpea-based foods).
+  usda_enrichment: "Priority nutrients from USDA FoodData Central FDC ID 321358 (Hummus, commercial, Foundation), scaled from per 100g to 30g portion. Plant-based nutrients only; B12, vitamin D, EPA, and DHA remain 0 (not naturally present in unfortified chickpea-based foods). Additional 8 nutrients added 2025-11-05 - vitamin B5, omega-6 LA (2.04g - significant from sesame tahini), omega-3 ALA, calcium, magnesium, potassium, iron, zinc. Biotin (B7) not available in USDA data for this food."
 per_portion:
   energy_kcal: 105.6
   protein_g: 2
@@ -38,12 +38,12 @@ per_portion:
   fiber_soluble_g: 0.4
   fiber_insoluble_g: 1
   sodium_mg: 120
-  potassium_mg: 0
+  potassium_mg: 87
   iodine_ug: 0
-  magnesium_mg: 0
-  calcium_mg: 0
-  iron_mg: 0
-  zinc_mg: 0
+  magnesium_mg: 21
+  calcium_mg: 12
+  iron_mg: 0.73
+  zinc_mg: 0.42
   vitamin_c_mg: 0
   manganese_mg: 0.32
   polyols_g: 0
@@ -63,7 +63,7 @@ per_portion:
   vitamin_b1_mg: 0.045
   vitamin_b2_mg: 0.035
   vitamin_b3_mg: 0.28
-  vitamin_b5_mg: 0
+  vitamin_b5_mg: 0.10
   vitamin_b6_mg: 0.043
   vitamin_b7_ug: 0
   vitamin_b9_ug: 11
@@ -71,8 +71,8 @@ per_portion:
   choline_mg: 14
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.20
+  omega6_la_g: 2.04
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -127,4 +127,10 @@ change_log:
   fields_changed: [vitamin_a_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b6_mg, vitamin_b9_ug, choline_mg, phosphorus_mg, copper_mg, selenium_ug, manganese_mg, last_verified, version]
   sources: [{note: 'USDA FoodData Central - Hummus, commercial (Foundation)', fdc_id: 321358, url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/321358/nutrients'}]
   methodology: "Scaled USDA per-100g values to 30g portion (×0.3). Source: FDC ID 321358 'Hummus, commercial' (Foundation). Found 13 of 17 priority nutrients: vitamin A (0.3 µg), vitamin E (0.52 mg), vitamin K (5.2 µg), thiamin/B1 (0.045 mg), riboflavin/B2 (0.035 mg), niacin/B3 (0.28 mg), vitamin B6 (0.043 mg), folate/B9 (11 µg), choline (14 mg), phosphorus (50 mg), copper (0.10 mg), selenium (4.9 µg), manganese (0.32 mg). Missing nutrients kept at 0: vitamin D, vitamin B12, iodine, EPA, and DHA (not naturally present in unfortified plant-based chickpea foods)."
+- timestamp: '2025-11-05T22:00:00+00:00'
+  updated_by: 'LLM: Claude Sonnet 4.5'
+  reason: 'USDA enrichment phase 2: Added 8 critical nutrients including omega-6 LA (critical for tahini-based houmous)'
+  fields_changed: [vitamin_b5_mg, omega6_la_g, omega3_ala_g, calcium_mg, magnesium_mg, potassium_mg, iron_mg, zinc_mg, version]
+  sources: [{note: 'USDA FoodData Central - Hummus, commercial (Foundation)', fdc_id: 321358, url: 'https://nutritionvalue.org/Hummus%2C_commercial_321358_nutritional_value.html'}]
+  methodology: "Scaled USDA per-100g to 30g portion (×0.3). Added: vitamin B5/pantothenic acid (0.10 mg from 0.32 mg/100g), omega-6 linoleic acid LA (2.04g from 6.81g/100g - significant source from sesame tahini), omega-3 ALA (0.20g from 0.65g/100g), calcium (12mg from 41mg/100g), magnesium (21mg from 71mg/100g), potassium (87mg from 289mg/100g), iron (0.73mg from 2.42mg/100g), zinc (0.42mg from 1.39mg/100g). Biotin/B7 not available in USDA data for hummus."
 ```

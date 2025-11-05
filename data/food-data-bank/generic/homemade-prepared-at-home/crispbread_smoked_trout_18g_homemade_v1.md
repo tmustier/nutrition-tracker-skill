@@ -37,22 +37,22 @@ per_portion:
   fiber_insoluble_g: 0.3
   polyols_g: 0.0
   sodium_mg: 182
-  potassium_mg: 46
+  potassium_mg: 75
   iodine_ug: 3.2
-  magnesium_mg: 4
-  calcium_mg: 2
-  iron_mg: 0.0
-  zinc_mg: 0.1
+  magnesium_mg: 17
+  calcium_mg: 4
+  iron_mg: 0.25
+  zinc_mg: 0.23
   vitamin_c_mg: 0
   manganese_mg: 0.21
   copper_mg: 0.05
   selenium_ug: 2.0
   vitamin_d_ug: 0.5
   vitamin_e_mg: 0.042
-  omega3_ala_g: 0
+  omega3_ala_g: 0.006
   omega3_dha_mg: 104.0
   omega3_epa_mg: 52.0
-  omega6_la_g: 0
+  omega6_la_g: 0.04
   chloride_mg: 0
   phosphorus_mg: 48.7
   sulfur_g: 0
@@ -68,9 +68,9 @@ per_portion:
   vitamin_b1_mg: 0.067
   vitamin_b2_mg: 0.052
   vitamin_b3_mg: 0.89
-  vitamin_b5_mg: 0
+  vitamin_b5_mg: 0.23
   vitamin_b6_mg: 0.055
-  vitamin_b7_ug: 0
+  vitamin_b7_ug: 0.9
   vitamin_b9_ug: 4.4
   vitamin_b12_ug: 1.0
 derived:
@@ -166,4 +166,23 @@ change_log:
   - url: "daylesford_smoked_trout_80g_v1"
     note: "Source file for smoked trout component (13g scaled from 80g): used enriched nutrient data from USDA rainbow trout profile"
   methodology: "Component-based nutrient estimation: (1) Extracted 17 priority nutrients from enriched source files amisa_buckwheat_crispbread_5g_v1 and daylesford_smoked_trout_80g_v1. (2) Scaled smoked trout nutrients from 80g to 13g (factor: 0.1625). (3) Summed nutrients from both components: crispbread (5g) + smoked trout (13g). Key nutrients: Omega-3 EPA (52mg) and DHA (104mg) from trout; B vitamins (B12: 1.0µg, B3: 0.89mg) from trout; vitamin D (0.5µg) from trout; phosphorus (48.7mg) and selenium (2.0µg) from both components; choline (11.2mg) primarily from trout. Component files were previously enriched with USDA FoodData Central data."
+- timestamp: "2025-11-05T20:00:00+00:00"
+  updated_by: "Claude Code (Sonnet 4.5)"
+  reason: "Phase 2 enrichment: Added 8 critical nutrients using REAL USDA values from enriched component files. FIXED incorrect mineral summations from previous enrichment."
+  fields_changed:
+  - vitamin_b5_mg (0 → 0.23)
+  - vitamin_b7_ug (0 → 0.9)
+  - omega3_ala_g (0 → 0.006)
+  - omega6_la_g (0 → 0.04)
+  - calcium_mg (2 → 4, CORRECTED sum)
+  - magnesium_mg (4 → 17, CORRECTED sum)
+  - potassium_mg (46 → 75, CORRECTED sum)
+  - iron_mg (0.0 → 0.25, CORRECTED sum)
+  - zinc_mg (0.1 → 0.23, CORRECTED sum)
+  sources:
+  - url: "amisa_buckwheat_crispbread_5g_v1"
+    note: "Crispbread 5g: B5=0.022mg, B7=0µg, ALA=0.004g, LA=0.035g, Ca=2mg, Mg=13mg, K=29mg, Fe=0.20mg, Zn=0.16mg"
+  - url: "daylesford_smoked_trout_80g_v1"
+    note: "Trout 13g (scaled from 80g × 0.1625): B5=0.208mg, B7=0.91µg, ALA=0.0016g, LA=0.0097g, Ca=1.6mg, Mg=3.9mg, K=45.5mg, Fe=0.049mg, Zn=0.065mg"
+  methodology: "Component-based summation: Buckwheat (5g) + Smoked trout (13g from 80g portion). Calculations: B5: 0.022+0.208=0.23mg; B7: 0+0.91=0.9µg (biotin from fish); ALA: 0.004+0.0016=0.006g; LA: 0.035+0.0097=0.04g; Ca: 2+1.6=4mg; Mg: 13+3.9=17mg; K: 29+45.5=75mg; Fe: 0.20+0.049=0.25mg; Zn: 0.16+0.065=0.23mg. Previous enrichment had incomplete mineral summations - now corrected with proper component addition."
 ```

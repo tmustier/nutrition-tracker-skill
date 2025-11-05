@@ -2,7 +2,7 @@
 
 ```yaml
 id: sunflower_seeds_30g_v1
-version: 4
+version: 5
 schema_version: 2
 last_verified: "2025-11-05"
 source:
@@ -58,7 +58,7 @@ per_portion:
   vitamin_b1_mg: 0.4
   vitamin_b2_mg: 0.1
   vitamin_b3_mg: 2.5
-  vitamin_b5_mg: 0
+  vitamin_b5_mg: 0.34
   vitamin_b6_mg: 0.4
   vitamin_b7_ug: 0
   vitamin_b9_ug: 68
@@ -66,8 +66,8 @@ per_portion:
   choline_mg: 16.5
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.02
+  omega6_la_g: 6.92
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -174,4 +174,15 @@ change_log:
       170562)'
   - url: https://www.nutritionvalue.org/Seeds%2C_dried%2C_sunflower_seed_kernels_nutritional_value.html
     note: USDA nutrient data verification source
+- timestamp: "2025-11-05T14:00:00+00:00"
+  updated_by: "LLM: Claude Sonnet 4.5"
+  reason: Enrich with 3 additional nutrients from USDA FoodData Central API (FDC ID 170562)
+  fields_changed:
+  - version
+  - per_portion.vitamin_b5_mg
+  - per_portion.omega3_ala_g
+  - per_portion.omega6_la_g
+  sources:
+  - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/170562/nutrients
+    note: "USDA API: Pantothenic acid (1.13mg/100g), ALA/18:3 n-3 (0.06g/100g), LA/18:2 n-6 (23.05g/100g). Biotin, chromium, molybdenum not available in USDA database."
 ```

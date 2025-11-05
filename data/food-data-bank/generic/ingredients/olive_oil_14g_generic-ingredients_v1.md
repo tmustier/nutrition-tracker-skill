@@ -72,8 +72,8 @@ per_portion:
   choline_mg: 0.04
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.11
+  omega6_la_g: 1.4
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -129,4 +129,9 @@ change_log:
     fdc_id: 171413
     url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/171413/nutrients'
     data_type: 'SR Legacy'
+- timestamp: '2025-11-05T17:00:00+00:00'
+  updated_by: 'LLM: Claude Sonnet 4.5'
+  reason: Enrich with omega-3 ALA and omega-6 LA from USDA FoodData Central. Confirmed B-vitamins and trace minerals remain 0 (olive oil is 100% fat).
+  fields_changed: [per_portion.omega3_ala_g, per_portion.omega6_la_g, version]
+  sources: [{note: 'USDA FoodData Central per 100g olive oil: 18:3 n-3 ALA 0.76g, 18:2 n-6 LA 9.76g. Scaled to 14g portion: ALA 0.11g, LA 1.4g. All B-vitamins (B5, B7) and trace minerals (chromium, molybdenum) confirmed as 0 - olive oil is pure fat with only fat-soluble vitamins E and K present.', url: 'USDA FoodData Central FDC ID 171413'}]
 ```

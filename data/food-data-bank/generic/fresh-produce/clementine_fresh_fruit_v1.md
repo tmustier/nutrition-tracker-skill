@@ -64,7 +64,7 @@ per_portion:
   vitamin_b1_mg: 0.07
   vitamin_b2_mg: 0.02
   vitamin_b3_mg: 0.47
-  vitamin_b5_mg: 0
+  vitamin_b5_mg: 0.11
   vitamin_b6_mg: 0.06
   vitamin_b7_ug: 0
   vitamin_b9_ug: 17.8
@@ -72,8 +72,8 @@ per_portion:
   choline_mg: 10.4
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.002
+  omega6_la_g: 0.02
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -86,14 +86,13 @@ quality:
   gaps:
   - iodine_ug (not measured in USDA data for citrus)
   - vitamin_k_ug (trace amounts only)
-  - vitamin_b5_mg (pantothenic acid - not in available sources)
-  - vitamin_b7_ug (biotin - rarely analyzed for citrus)
-  - chromium_ug (limited USDA coverage)
-  - molybdenum_ug (limited USDA coverage)
+  - vitamin_b7_ug (biotin - not analyzed/reported in USDA for clementines)
+  - chromium_ug (not measured/reported in USDA database for clementines)
+  - molybdenum_ug (not measured/reported in USDA database for clementines)
   - chloride_mg (rarely analyzed)
   - sulfur_g (rarely analyzed)
-  - omega3_ala_g (trace/negligible in citrus)
-  - omega6_la_g (trace/negligible in citrus)
+  - omega3_ala_g (estimated trace based on 0.15g/100g total fat - not quantified by USDA)
+  - omega6_la_g (estimated trace based on 0.15g/100g total fat - not quantified by USDA)
   - ultra-trace minerals (boron, silicon, vanadium, nickel - not in USDA database)
 notes:
 - 35 kcal from USDA FoodData Central per medium 74g clementine
@@ -103,6 +102,16 @@ notes:
 - Naturally sodium-free and cholesterol-free
 - Atwater check (available carb basis): 4×0.6 + 9×0.1 + 4×9.0 + 2×1.3 + 2.4×0.0 = 41.9 kcal
 change_log:
+- timestamp: '2025-11-05T16:00:00+00:00'
+  updated_by: Claude Code (Sonnet 4.5)
+  reason: Second enrichment with pantothenic acid and estimated trace omega fatty acids
+  fields_changed: [vitamin_b5_mg, omega3_ala_g, omega6_la_g, quality.gaps]
+  sources:
+  - note: 'USDA FoodData Central - Clementines, raw (FDC ID 168195): Pantothenic acid 0.151mg/100g'
+    url: 'https://www.nutritionvalue.org/Clementines%2C_raw_nutritional_value.html'
+  - note: 'Omega fatty acids: Research indicates citrus fruits contain trace amounts of ALA and LA, but USDA does not quantify these for clementines. Total fat content 0.15g/100g limits all fatty acid content.'
+    url: 'https://www.sciencedirect.com/science/article/pii/S0889157522002757'
+  data_notes: 'Scaled from per-100g to 74g portion. B5 confirmed from USDA. Biotin, chromium, molybdenum not measured/reported in USDA database. Omega-3 ALA and omega-6 LA estimated as trace amounts (0.002g and 0.02g respectively) based on citrus fatty acid research showing presence but very low quantities given minimal total fat. These are conservative estimates, not USDA-verified values.'
 - timestamp: 2025-10-29 14:00:00+00:00
   updated_by: 'LLM: Claude Sonnet 4.5'
   reason: Initial population from USDA FoodData Central (FDC ID 168195) scaled to standard 74g portion

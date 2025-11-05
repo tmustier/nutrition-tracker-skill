@@ -56,10 +56,10 @@ per_portion:
   polyols_g: 0.0
   carbs_available_g: 7.9
   carbs_total_g: 10.3
-  omega3_ala_g: 0
+  omega3_ala_g: 0.03
   omega3_dha_mg: 0
   omega3_epa_mg: 0
-  omega6_la_g: 0
+  omega6_la_g: 0.17
   chloride_mg: 0
   phosphorus_mg: 23.8
   sulfur_g: 0
@@ -75,9 +75,9 @@ per_portion:
   vitamin_b1_mg: 0.02
   vitamin_b2_mg: 0.02
   vitamin_b3_mg: 0.24
-  vitamin_b5_mg: 0
+  vitamin_b5_mg: 0.13
   vitamin_b6_mg: 0.04
-  vitamin_b7_ug: 0
+  vitamin_b7_ug: 1.1
   vitamin_b9_ug: 17.5
   vitamin_b12_ug: 0
 derived:
@@ -98,6 +98,16 @@ notes:
 - Can be eaten with skin for maximum fiber and nutrient content
 - 'Carbs: US label reports total carbs (14.7g/100g) = available (11.31g) + fiber (3.39g)'
 change_log:
+- timestamp: '2025-11-05T16:00:00+00:00'
+  updated_by: Claude Code (Sonnet 4.5)
+  reason: Second enrichment with 4 additional priority nutrients from USDA FoodData Central
+  fields_changed: [vitamin_b5_mg, vitamin_b7_ug, omega3_ala_g, omega6_la_g]
+  sources:
+  - note: 'USDA FoodData Central - Kiwifruit, green, raw (FDC ID 168153): Pantothenic acid 0.183mg/100g, ALA 0.042g/100g, LA 0.246g/100g'
+    url: 'https://www.nutritionvalue.org/Kiwifruit%2C_raw%2C_green_nutritional_value.html'
+  - note: 'Biotin content: ~1.55μg/100g (calculated from 1.4μg per 90g edible portion)'
+    url: 'https://wholefoodcatalog.info/nutrient/vitamin_b7(biotin)/fruits/'
+  data_notes: 'Scaled from per-100g to 70g portion. Chromium and molybdenum remain 0 (not measured/reported in USDA database for kiwifruit).'
 - timestamp: 2025-11-05T12:00:00+00:00
   updated_by: "LLM: Claude Sonnet 4.5"
   reason: Initial population from USDA FoodData Central (FDC ID 168153) scaled to standard 70g small kiwifruit portion

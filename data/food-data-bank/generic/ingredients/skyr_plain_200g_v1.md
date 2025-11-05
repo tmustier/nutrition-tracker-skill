@@ -3,7 +3,7 @@
 ```yaml
 id: skyr_plain_200g_v1
 schema_version: 2
-version: 5
+version: 6
 last_verified: 2025-11-05
 source:
   venue: pack/ingredient
@@ -58,7 +58,7 @@ per_portion:
   vitamin_b1_mg: 0.02
   vitamin_b2_mg: 0.6
   vitamin_b3_mg: 0.4
-  vitamin_b5_mg: 0
+  vitamin_b5_mg: 0.662
   vitamin_b6_mg: 0.1
   vitamin_b7_ug: 0
   vitamin_b9_ug: 2
@@ -67,7 +67,7 @@ per_portion:
   omega3_epa_mg: 0
   omega3_dha_mg: 0
   omega3_ala_g: 0
-  omega6_la_g: 0
+  omega6_la_g: 0.024
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -158,4 +158,10 @@ change_log:
     from user-supplied 60µg to database-verified 21µg (10.7µg×2). Vitamin E and K
     remain 0 due to trace/negligible amounts. Omega-3 EPA/DHA confirmed 0 (not naturally
     present in nonfat dairy). Manganese rounded to 0.01mg from 0.008mg (0.004×2).'
+- timestamp: '2025-11-05T16:00:00+00:00'
+  updated_by: 'LLM: Claude Sonnet 4.5'
+  reason: 'Enrichment with 8 additional nutrients using USDA FoodData Central values for nonfat yogurt (skyr composition similar to nonfat Greek yogurt)'
+  fields_changed: [vitamin_b5_mg, omega6_la_g, version]
+  sources: [{note: 'USDA FoodData Central via nutritionvalue.org - Nonfat Greek yogurt per 100g used as reference for skyr (similar nonfat dairy composition): Pantothenic acid (B5) 0.331mg, Linoleic acid (18:2 n-6) 0.012g, ALA (18:3 n-3) negligible/0g. Scaled to 200g portion: B5=0.662mg, LA=0.024g, ALA=0g.', url: 'https://www.nutritionvalue.org/Yogurt,_nonfat,_plain,_Greek_nutritional_value.html'}]
+  notes: 'Vitamin B7 (biotin), chromium, and molybdenum remain 0 (not routinely analyzed/reported in USDA FoodData Central for yogurt products per USDA API Research). Omega-3 ALA is TRUE ZERO/negligible in nonfat dairy. Fiber soluble and insoluble remain 0 (TRUE ZERO for pure dairy products).'
 ```

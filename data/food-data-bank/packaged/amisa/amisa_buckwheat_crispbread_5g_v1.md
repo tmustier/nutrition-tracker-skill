@@ -3,7 +3,7 @@
 ```yaml
 id: amisa_buckwheat_crispbread_5g_v1
 schema_version: 2
-version: 5
+version: 6
 last_verified: 2025-11-05
 source:
   venue: Amisa (Packaged Product)
@@ -22,7 +22,7 @@ assumptions:
   salt_scheme: light
   oil_type:
   prep: baked crispbread
-  nutrient_enrichment: 17 priority nutrients (vitamins B1-B3, B6, B9, E, K; minerals phosphorus, copper, selenium, manganese; choline) sourced from USDA FoodData Central SR Legacy buckwheat flour (FDC ID 170687) and scaled from per-100g to 5g portion. Vitamins A, D, B12, and omega-3 EPA/DHA remain 0 as scientifically appropriate for plant-based product.
+  nutrient_enrichment: "17 priority nutrients (vitamins B1-B3, B6, B9, E, K; minerals phosphorus, copper, selenium, manganese; choline) sourced from USDA FoodData Central SR Legacy buckwheat flour (FDC ID 170687) and scaled from per-100g to 5g portion. Vitamins A, D, B12, and omega-3 EPA/DHA remain 0 as scientifically appropriate for plant-based product. Additional 8 nutrients added 2025-11-05 - vitamin B5, omega-6 LA (0.035g from buckwheat), omega-3 ALA (0.004g), calcium, magnesium, potassium, iron, zinc. Biotin (B7) not available in USDA data."
 per_portion:
   energy_kcal: 17.3
   protein_g: 0.5
@@ -37,12 +37,12 @@ per_portion:
   fiber_soluble_g: 0.1
   fiber_insoluble_g: 0.3
   sodium_mg: 24
-  potassium_mg: 0
+  potassium_mg: 29
   iodine_ug: 0
-  magnesium_mg: 0
-  calcium_mg: 0
-  iron_mg: 0
-  zinc_mg: 0
+  magnesium_mg: 13
+  calcium_mg: 2
+  iron_mg: 0.20
+  zinc_mg: 0.16
   vitamin_c_mg: 0
   manganese_mg: 0.102
   polyols_g: 0
@@ -62,7 +62,7 @@ per_portion:
   vitamin_b1_mg: 0.021
   vitamin_b2_mg: 0.010
   vitamin_b3_mg: 0.308
-  vitamin_b5_mg: 0
+  vitamin_b5_mg: 0.022
   vitamin_b6_mg: 0.029
   vitamin_b7_ug: 0
   vitamin_b9_ug: 2.7
@@ -70,8 +70,8 @@ per_portion:
   choline_mg: 2.71
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.004
+  omega6_la_g: 0.035
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -131,4 +131,10 @@ change_log:
   fields_changed: [phosphorus_mg, copper_mg, selenium_ug, manganese_mg, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b6_mg, vitamin_b9_ug, choline_mg, last_verified, version]
   sources: [{note: 'USDA FoodData Central - Buckwheat flour, whole-groat (SR Legacy)', fdc_id: 170687, url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/170687/nutrients'}]
   methodology: "Scaled USDA per-100g nutrient values to 5g portion size (÷20). Product is 98.5% buckwheat flour, making this an appropriate reference food. Values for vitamin_a_ug, vitamin_d_ug, vitamin_b12_ug, iodine_ug, omega3_epa_mg, and omega3_dha_mg remain 0 as scientifically appropriate for plant-based buckwheat product (no animal-source nutrients)."
+- timestamp: '2025-11-05T22:00:00+00:00'
+  updated_by: 'LLM: Claude Sonnet 4.5'
+  reason: 'USDA enrichment phase 2: Added 8 critical nutrients for whole grain buckwheat crispbread'
+  fields_changed: [vitamin_b5_mg, omega6_la_g, omega3_ala_g, calcium_mg, magnesium_mg, potassium_mg, iron_mg, zinc_mg, version]
+  sources: [{note: 'USDA FoodData Central - Buckwheat flour, whole-groat (SR Legacy)', fdc_id: 170687, url: 'https://nutritionvalue.org/Buckwheat_flour%2C_whole-groat_170687_nutritional_value.html'}]
+  methodology: "Scaled USDA per-100g to 5g portion (÷20). Added: vitamin B5/pantothenic acid (0.022 mg from 0.44 mg/100g - good source for whole grains), omega-6 linoleic acid LA (0.035g estimated from PUFA content), omega-3 ALA (0.004g from 0.071g/100g), calcium (2mg from 41mg/100g), magnesium (13mg from 251mg/100g - excellent for pseudo-cereal), potassium (29mg from 577mg/100g), iron (0.20mg from 4.06mg/100g), zinc (0.16mg from 3.12mg/100g). Biotin/B7 not available in USDA data for buckwheat."
 ```

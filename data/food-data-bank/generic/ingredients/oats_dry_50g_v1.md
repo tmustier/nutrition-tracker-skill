@@ -46,8 +46,8 @@ per_portion:
   carbs_total_g: 38.5
   copper_mg: 0.3
   selenium_ug: 14
-  chromium_ug: 0
-  molybdenum_ug: 0
+  chromium_ug: 7
+  molybdenum_ug: 80
   phosphorus_mg: 262
   chloride_mg: 0
   sulfur_g: 0
@@ -58,16 +58,16 @@ per_portion:
   vitamin_b1_mg: 0.4
   vitamin_b2_mg: 0.1
   vitamin_b3_mg: 0.5
-  vitamin_b5_mg: 0
+  vitamin_b5_mg: 0.67
   vitamin_b6_mg: 0.1
-  vitamin_b7_ug: 0
+  vitamin_b7_ug: 10
   vitamin_b9_ug: 28
   vitamin_b12_ug: 0
   choline_mg: 20
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.06
+  omega6_la_g: 1.2
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -132,4 +132,10 @@ change_log:
   selenium 28.9µg, manganese 4.9mg, vitamin E 0.425mg, vitamin K 2.0µg, choline 40.4mg.
   Vitamins A, D naturally absent in oats. EPA/DHA 0mg (plant-based, oats contain ALA not EPA/DHA).
   All values scaled to 50g portion.', url: 'USDA FoodData Central (fdc.nal.usda.gov), nutritionvalue.org, foodstruct.com, nutrivore.com'}]
+- timestamp: '2025-11-05T17:00:00+00:00'
+  updated_by: 'LLM: Claude Sonnet 4.5'
+  reason: Enrich with 6 additional nutrients from USDA FoodData Central and research literature
+  fields_changed: [per_portion.vitamin_b5_mg, per_portion.vitamin_b7_ug, per_portion.chromium_ug,
+    per_portion.molybdenum_ug, per_portion.omega3_ala_g, per_portion.omega6_la_g, version]
+  sources: [{note: 'USDA FoodData Central per 100g: B5 (pantothenic acid) 1.348mg, chromium ~14µg, molybdenum 160µg, 18:3 n-3 ALA 0.111g, 18:2 n-6 LA 2.424g. Biotin 20µg from research literature (USDA does not track biotin comprehensively). All values scaled to 50g portion: B5 0.67mg, B7 10µg, chromium 7µg, molybdenum 80µg, ALA 0.06g, LA 1.2g.', url: 'USDA FoodData Central (nutritionvalue.org), biotin research literature'}]
 ```

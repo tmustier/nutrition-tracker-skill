@@ -122,4 +122,9 @@ change_log:
     url: 'https://www.matvaretabellen.no/en/psyllium-husk/'
   - note: 'Scientific literature on Plantago ovata mineral composition for trace element verification'
     url: 'https://www.researchgate.net/publication/346525992'
+- timestamp: '2025-11-05T17:00:00+00:00'
+  updated_by: 'LLM: Claude Sonnet 4.5'
+  reason: Verified 6 additional nutrients remain 0 - psyllium husk is pure fiber with negligible fat content
+  fields_changed: []
+  sources: [{note: 'Norwegian Food Composition Database (Matvaretabellen.no) per 100g psyllium husk: total fat 0.5g with omega-3 and omega-6 both 0g. B5 (pantothenic acid), B7 (biotin), chromium, and molybdenum not listed (trace/absent in pure fiber supplement). Confirmed all target nutrients remain 0 for 5g portion.', url: 'https://www.matvaretabellen.no/en/psyllium-husk/'}]
 ```

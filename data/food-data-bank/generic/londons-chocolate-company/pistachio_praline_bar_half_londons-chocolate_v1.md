@@ -2,9 +2,9 @@
 
 ```yaml
 id: pistachio_praline_bar_half_londons-chocolate_v1
-version: 1
+version: 2
 schema_version: 2
-last_verified: 2025-11-04
+last_verified: 2025-11-05
 source:
   venue: London's Chocolate Company
   menu_page: ""
@@ -72,16 +72,16 @@ per_portion:
   vitamin_b1_mg: 0.033
   vitamin_b2_mg: 0.016
   vitamin_b3_mg: 0.18
-  vitamin_b5_mg: 0
+  vitamin_b5_mg: 0.07
   vitamin_b6_mg: 0.061
-  vitamin_b7_ug: 0
+  vitamin_b7_ug: 1.0
   vitamin_b9_ug: 1.7
   vitamin_b12_ug: 0
-  choline_mg: 0
+  choline_mg: 4.4
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.01
+  omega6_la_g: 0.69
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -169,4 +169,17 @@ change_log:
   - url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/170184/nutrients"
     note: "USDA FDC ID 170184: Raw Pistachios (per 100g nutrient data)"
   - note: "Method: Weighted average (60% chocolate + 15% pistachio) scaled to 22g portion. Plant-based product: vitamin D, B12, choline, iodine, EPA, DHA are 0 or trace."
+- timestamp: "2025-11-05T18:45:00+00:00"
+  updated_by: "Claude Code (Sonnet 4.5)"
+  reason: "Component-based enrichment: B5, B7, choline, omega-6 LA, omega-3 ALA"
+  fields_changed: [version, last_verified, vitamin_b5_mg, vitamin_b7_ug, choline_mg, omega6_la_g, omega3_ala_g]
+  sources:
+  - url: "https://www.nutritionvalue.org/Chocolate%2C_70-85%25_cacao_solids%2C_dark_nutritional_value.html"
+    note: "USDA dark chocolate 70-85% per 100g: B5=0.42mg, LA=1.20g, ALA=0.035g, choline~15mg"
+    component_calculation: "Chocolate (60%×22g=13.2g): B5=0.42×0.132=0.055mg; LA=1.20×0.132=0.158g; ALA=0.035×0.132=0.005g; choline=15×0.132=2.0mg"
+  - note: "USDA pistachios per 100g: B5=0.54mg, B7=30µg, LA=16.14g, ALA=0.26g, choline=72mg"
+    component_calculation: "Pistachios (15%×22g=3.3g): B5=0.54×0.033=0.018mg; B7=30×0.033=0.99µg; LA=16.14×0.033=0.533g; ALA=0.26×0.033=0.009g; choline=72×0.033=2.4mg"
+  - note: "Component-based totals for 22g bar (60% chocolate + 15% pistachios + 20% sugar + 5% other)"
+    calculation: "B5: 0.055+0.018=0.073≈0.07mg; B7: 0.04+0.99=1.03≈1.0µg; LA: 0.158+0.533=0.691≈0.69g; ALA: 0.005+0.009=0.014≈0.01g; Choline: 2.0+2.4=4.4mg"
+  - note: "Pistachios contribute 77% of linoleic acid (0.533g of 0.69g total) and 96% of biotin (0.99µg of 1.0µg total)"
 ```

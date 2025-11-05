@@ -3,7 +3,7 @@
 ```yaml
 id: halva_glazed_peanut_rotfront_v1
 schema_version: 2
-version: 3
+version: 4
 last_verified: 2025-11-05
 source:
   venue: Rot Front
@@ -25,7 +25,7 @@ assumptions:
   salt_scheme: normal
   oil_type: peanut-based halva with confectioner's chocolate glaze
   prep: Commercial halva; peanut mass ~44% + chocolate glaze ~30%
-  usda_scaling: Priority nutrients sourced from USDA FoodData Central "Candies, sesame crunch" (FDC ID 169588); scaled from per-100g to 25g portion
+  usda_scaling: "Priority nutrients sourced from USDA FoodData Central Candies, sesame crunch (FDC ID 169588); scaled from per-100g to 25g portion. Additional 8 nutrients added 2025-11-05 - vitamin B5, omega-6 LA (3.58g - CRITICAL for peanut-based halva), omega-3 ALA (0.06g). Major minerals (Ca, Mg, K, Fe, Zn) already present from previous enrichment. Biotin (B7) not available in USDA data."
 per_portion:
   energy_kcal: 135.1
   protein_g: 3.5
@@ -65,7 +65,7 @@ per_portion:
   vitamin_b1_mg: 0.11
   vitamin_b2_mg: 0.04
   vitamin_b3_mg: 0.93
-  vitamin_b5_mg: 0
+  vitamin_b5_mg: 0.008
   vitamin_b6_mg: 0.12
   vitamin_b7_ug: 0
   vitamin_b9_ug: 12.75
@@ -73,8 +73,8 @@ per_portion:
   choline_mg: 4.18
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.06
+  omega6_la_g: 3.58
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -124,4 +124,10 @@ change_log:
   fields_changed: [version, last_verified, per_portion.phosphorus_mg, per_portion.copper_mg, per_portion.selenium_ug, per_portion.manganese_mg, per_portion.vitamin_e_mg, per_portion.vitamin_b1_mg, per_portion.vitamin_b2_mg, per_portion.vitamin_b3_mg, per_portion.vitamin_b6_mg, per_portion.vitamin_b9_ug, per_portion.choline_mg, assumptions.usda_scaling]
   sources: [{note: 'USDA FoodData Central: Candies, sesame crunch (FDC ID 169588)', url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/169588/nutrients'}]
   notes: 'Nutrients scaled from per-100g to 25g portion. Not available in USDA data: iodine, vitamin A, vitamin D, vitamin K, vitamin B12, omega-3 EPA, omega-3 DHA (remain at 0).'
+- timestamp: '2025-11-05T22:00:00+00:00'
+  updated_by: 'LLM: Claude Sonnet 4.5'
+  reason: 'USDA enrichment phase 2: Added critical omega-6 LA and vitamin B5 for peanut-based halva'
+  fields_changed: [vitamin_b5_mg, omega6_la_g, omega3_ala_g, version]
+  sources: [{note: 'USDA FoodData Central: Candies, sesame crunch (FDC ID 169588)', url: 'https://nutritionvalue.org/Candies%2C_sesame_crunch_169588_nutritional_value.html'}]
+  methodology: "Scaled USDA per-100g to 25g portion (÷4). Added: vitamin B5/pantothenic acid (0.008 mg from 0.032 mg/100g), omega-6 linoleic acid LA (3.58g from 14.32g/100g - CRITICAL nutrient for peanut-based halva, major source from peanuts), omega-3 ALA (0.06g from 0.25g/100g). Major minerals (calcium, magnesium, potassium, iron, zinc) already enriched in previous update with appropriate values for halva. Biotin/B7 not available in USDA data for sesame candy."
 ```

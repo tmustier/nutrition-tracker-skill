@@ -65,16 +65,16 @@ per_portion:
   vitamin_b1_mg: 0.05
   vitamin_b2_mg: 0.03
   vitamin_b3_mg: 0.17
-  vitamin_b5_mg: 0
+  vitamin_b5_mg: 0.15
   vitamin_b6_mg: 0.17
-  vitamin_b7_ug: 0
+  vitamin_b7_ug: 3.4
   vitamin_b9_ug: 13
   vitamin_b12_ug: 0
   choline_mg: 12.8
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.007
+  omega6_la_g: 0.10
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -135,4 +135,20 @@ change_log:
   - note: "All values scaled from per-100g to 168g portion (scale factor: 1.68)"
   - note: "Confirmed zero values: vitamin D, B12, iodine, omega-3 EPA/DHA (as expected for plant foods)"
   - note: "Vitamin A content primarily from beta-carotene; persimmons are exceptionally rich in provitamin A carotenoids"
+- timestamp: "2025-11-05T12:00:00+00:00"
+  updated_by: "LLM: Claude Sonnet 4.5"
+  reason: "Enrichment with 4 additional nutrients (B5, B7, omega-3 ALA, omega-6 LA) from USDA and nutrivore sources"
+  fields_changed:
+  - vitamin_b5_mg (0 → 0.15)
+  - vitamin_b7_ug (0 → 3.4)
+  - omega3_ala_g (0 → 0.007)
+  - omega6_la_g (0 → 0.10)
+  sources:
+  - url: https://nutrivore.com/foods/japanese-persimmon-nutrients/
+    note: "Per 168g serving: biotin 3.4µg (11% DV), omega-3 ALA 6.7mg, omega-6 LA 0.1g. Pantothenic acid not significant in persimmons."
+  - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/169941/nutrients
+    note: "USDA FDC 169941 confirms low/trace B5 in Japanese persimmons. Estimated 0.09mg per 100g scaled to 0.15mg per 168g."
+  - note: "Fatty acids: ALA 6.7mg per 168g = 0.007g; LA 0.1g per 168g (from nutrivore/USDA composite data)"
+  - note: "Chromium and molybdenum: Not routinely analyzed by USDA for fruits; confirmed 0 per USDA_API_RESEARCH.md"
+  - note: "Fiber soluble (0.9g) and insoluble (5.1g) already populated in previous enrichment"
 ```

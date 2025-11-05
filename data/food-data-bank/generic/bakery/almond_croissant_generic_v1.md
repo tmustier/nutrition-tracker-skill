@@ -64,16 +64,16 @@ per_portion:
   vitamin_b1_mg: 0.4
   vitamin_b2_mg: 0.4
   vitamin_b3_mg: 2.7
-  vitamin_b5_mg: 0
+  vitamin_b5_mg: 0.73
   vitamin_b6_mg: 0.1
-  vitamin_b7_ug: 0
+  vitamin_b7_ug: 15
   vitamin_b9_ug: 88.0
   vitamin_b12_ug: 0.1
   choline_mg: 45.3
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.05
+  omega6_la_g: 3.2
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -143,4 +143,20 @@ change_log:
     note: Complete USDA almond micronutrient data
   - url: user_request
     note: "User consumed half an almond croissant on 2025-11-03"
+- timestamp: 2025-11-05T21:00:00+0000
+  updated_by: Claude Code (Sonnet 4.5)
+  reason: Phase 2 enrichment - Added 4 critical nutrients using USDA component data for composite croissant
+  fields_changed:
+  - vitamin_b5_mg (0 → 0.73)
+  - vitamin_b7_ug (0 → 15)
+  - omega3_ala_g (0 → 0.05)
+  - omega6_la_g (0 → 3.2)
+  sources:
+  - url: https://nutritionvalue.org/Croissant%2C_butter_174987_nutritional_value.html
+    note: "USDA FDC #174987 Butter croissant: B5=0.86mg/100g, LA=0.79g/100g. Scaled to 70g: B5=0.60mg, LA=0.55g"
+  - url: https://nutritionvalue.org/Nuts%2C_almonds_170567_nutritional_value.html
+    note: "USDA FDC #170567 Almonds: B5=0.47mg/100g, B7=~65µg/100g (literature), ALA=0g/100g, LA=12.31g/100g. Scaled to 20g total almonds: B5=0.094mg, B7=13µg, LA=2.46g"
+  - url: scientific_literature
+    note: "Butter (10g in frangipane): B5=0.005mg, ALA=0.03g, LA=0.15g. Egg (2g in frangipane): B5=0.028mg, B7=0.4µg"
+  methodology: "Component-based summation for 110g composite: Butter croissant 70g + Almonds 20g (10g in frangipane + 10g sliced) + Butter 10g + Egg 2g + Sugar 8g. TOTALS: B5: 0.60+0.094+0.005+0.028=0.73mg; B7: 1.4+13+0.05+0.4=15µg (almonds primary source); ALA: 0.016+0+0.03+0.001=0.05g (mainly from butter in frangipane); LA: 0.55+2.46+0.15+0.03=3.2g (almonds dominant source, 77%). Biotin value uses literature estimate for almonds (~65µg/100g) as USDA database often doesn't track this nutrient."
 ```

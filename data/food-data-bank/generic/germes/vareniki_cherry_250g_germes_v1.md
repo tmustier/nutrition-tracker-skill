@@ -2,9 +2,9 @@
 
 ```yaml
 id: vareniki_cherry_250g_germes_v1
-version: 1
+version: 2
 schema_version: 2
-last_verified: 2025-11-04
+last_verified: 2025-11-05
 source:
   venue: Germes
   menu_page: "Product label"
@@ -64,16 +64,16 @@ per_portion:
   vitamin_b1_mg: 0.73
   vitamin_b2_mg: 0.56
   vitamin_b3_mg: 5.50
-  vitamin_b5_mg: 0
+  vitamin_b5_mg: 1.0
   vitamin_b6_mg: 0.16
-  vitamin_b7_ug: 0
+  vitamin_b7_ug: 8.5
   vitamin_b9_ug: 160
   vitamin_b12_ug: 0.2
   choline_mg: 24.0
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.09
+  omega6_la_g: 0.61
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -92,4 +92,18 @@ notes:
 change_log:
   - "2025-11-04: Initial entry. Scaled from 100g label data to 250g portion. Macros from product label: 199 kcal, 4.4g protein, 1.9g fat (0.3g sat), 41g carbs available, 12g sugars, 0.60g salt per 100g. Micronutrients estimated using component analysis (65% wheat dough + 35% cherry filling) with USDA data for comparable ingredients. Fiber adjusted to 1.5g to match energy calculation within 0.5% tolerance."
   - "2025-11-05: Enriched with 17 priority nutrients using USDA FoodData Central (FDC ID: 169779 - Dumpling, potato- or cheese-filled, frozen). Added/updated: vitamin_a_ug (7.5), vitamin_e_mg (2.45), vitamin_k_ug (19.75), vitamin_b1_mg (0.73), vitamin_b2_mg (0.56), vitamin_b3_mg (5.50), vitamin_b6_mg (0.16), vitamin_b9_ug (160), vitamin_b12_ug (0.2), choline_mg (24.0), phosphorus_mg (197.5), copper_mg (0.16), selenium_ug (33.5). Values scaled from USDA per-100g to 250g portion (multiply by 2.5). Omega-3 EPA/DHA confirmed as 0 (no marine sources). Iodine and manganese retained from previous estimates as USDA source lacks these values."
+  - timestamp: "2025-11-05T19:00:00+00:00"
+    updated_by: "Claude Code (Sonnet 4.5)"
+    reason: "Component-based enrichment: B5, B7, omega-6 LA, omega-3 ALA"
+    fields_changed: [version, last_verified, vitamin_b5_mg, vitamin_b7_ug, omega6_la_g, omega3_ala_g]
+    sources:
+    - note: "USDA enriched wheat flour/noodles per 100g: B5=0.5mg, B7=5µg, LA=0.35g, ALA=0.04g, choline=9mg"
+      url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/168890/nutrients"
+      component_calculation: "Wheat dough (65%×250g=162.5g): B5=0.5×1.625=0.81mg; B7=5×1.625=8.1µg; LA=0.35×1.625=0.57g; ALA=0.04×1.625=0.065g; choline=9×1.625=14.6mg"
+    - note: "USDA cherries, sweet, raw per 100g: B5=0.2mg, B7=0.4µg, LA=0.04g, ALA=0.03g, choline=6.1mg"
+      url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/173032/nutrients"
+      component_calculation: "Cherry filling (35%×250g=87.5g): B5=0.2×0.875=0.18mg; B7=0.4×0.875=0.35µg; LA=0.04×0.875=0.035g; ALA=0.03×0.875=0.026g; choline=6.1×0.875=5.3mg"
+    - note: "Component-based totals for 250g vareniki (65% wheat dough + 35% cherry filling)"
+      calculation: "B5: 0.81+0.18=0.99≈1.0mg; B7: 8.1+0.35=8.45≈8.5µg; LA: 0.57+0.035=0.605≈0.61g; ALA: 0.065+0.026=0.091≈0.09g"
+    - note: "Wheat flour dough contributes 94% of linoleic acid (0.57g of 0.61g) and 96% of biotin (8.1µg of 8.5µg total)"
 ```

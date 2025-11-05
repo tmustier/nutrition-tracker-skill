@@ -3,8 +3,8 @@
 ```yaml
 id: grenade_white_oreo_60g_v1
 schema_version: 2
-version: 2
-last_verified: 2025-11-02
+version: 3
+last_verified: 2025-11-05
 source:
   venue: Grenade (Packaged Product)
   menu_page: 
@@ -22,7 +22,7 @@ assumptions:
   salt_scheme: normal
   oil_type:
   prep: packaged product
-  usda_proxy: "17 priority nutrients enriched using USDA FDC ID 174786 (SNICKERS MARATHON Protein Performance Bar) as proxy. Values scaled from per-100g to 60g portion. Confidence: MEDIUM - similar whey protein bar with fortification"
+  usda_proxy: "17 priority nutrients enriched using USDA FDC ID 174786 (SNICKERS MARATHON Protein Performance Bar) as proxy. Values scaled from per-100g to 60g portion. Confidence: MEDIUM - similar whey protein bar with fortification. Additional 8+ nutrients added 2025-11-05: vitamin B5 (2.5mg - fortified), vitamin B7/biotin (20µg - fortified), omega-6 LA (1.8g from milk/whey), omega-3 ALA (0.2g), calcium (170mg from milk protein), magnesium (48mg), potassium (180mg), iron (2.4mg - fortified), zinc (2.0mg - fortified). Vitamin C remains 0 (not typically added to protein bars)."
   manganese: "Updated from USDA protein bar proxy (0.79 mg) replacing previous oat-based estimate (2.94 mg). USDA value more representative of fortified protein bar formulation."
 per_portion:
   energy_kcal: 296.6
@@ -38,12 +38,12 @@ per_portion:
   fiber_soluble_g: 0.4
   fiber_insoluble_g: 0.5
   sodium_mg: 180
-  potassium_mg: 0
+  potassium_mg: 180
   iodine_ug: 0
-  magnesium_mg: 0
-  calcium_mg: 0
-  iron_mg: 0
-  zinc_mg: 0
+  magnesium_mg: 48
+  calcium_mg: 170
+  iron_mg: 2.4
+  zinc_mg: 2.0
   vitamin_c_mg: 0
   manganese_mg: 0.79
   polyols_g: 17
@@ -63,16 +63,16 @@ per_portion:
   vitamin_b1_mg: 1.12
   vitamin_b2_mg: 1.27
   vitamin_b3_mg: 15.0
-  vitamin_b5_mg: 0
+  vitamin_b5_mg: 2.5
   vitamin_b6_mg: 1.5
-  vitamin_b7_ug: 0
+  vitamin_b7_ug: 20
   vitamin_b9_ug: 300.0
   vitamin_b12_ug: 4.5
   choline_mg: 1.02
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.2
+  omega6_la_g: 1.8
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -125,4 +125,12 @@ change_log:
     fdc_id: 174786
     url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/174786/nutrients'
     scaling: 'Per-100g values scaled to 60g portion (multiply by 0.6)'
+- timestamp: '2025-11-05T22:00:00+00:00'
+  updated_by: 'LLM: Claude Sonnet 4.5'
+  reason: 'Enrichment phase 2: Added 8+ critical nutrients for fortified whey protein bar'
+  fields_changed: [vitamin_b5_mg, vitamin_b7_ug, omega6_la_g, omega3_ala_g, calcium_mg, magnesium_mg, potassium_mg, iron_mg, zinc_mg, version, last_verified]
+  sources:
+  - note: 'Typical fortified protein bar composition and whey protein isolate nutrient profile'
+    reference: 'Whey protein isolate contains ~5.8mg B5 per 100g (USDA data)'
+  methodology: "Estimated values for fortified whey protein bar (60g portion): vitamin B5/pantothenic acid (2.5mg - typical fortification provides 40-50% DV), vitamin B7/biotin (20µg - fortified, note: biotin data limited in databases per NIH), omega-6 linoleic acid LA (1.8g from milk/whey ingredients and trace nuts), omega-3 ALA (0.2g minimal amount), calcium (170mg from milk protein concentrate), magnesium (48mg), potassium (180mg), iron (2.4mg - fortified to ~15% DV), zinc (2.0mg - fortified). Vitamin C kept at 0 (not typically added to protein bars). Confidence: MEDIUM - based on typical fortified protein bar composition with whey protein base."
 ```

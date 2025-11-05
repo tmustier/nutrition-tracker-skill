@@ -3,7 +3,7 @@
 ```yaml
 id: sauerkraut_zima_v1
 schema_version: 2
-version: 3
+version: 4
 last_verified: 2025-11-05
 source:
   venue: Zima, Soho, London
@@ -39,11 +39,11 @@ per_portion:
   sodium_mg: 1080
   potassium_mg: 306
   iodine_ug: 0
-  magnesium_mg: 0
-  calcium_mg: 0
-  iron_mg: 0
-  zinc_mg: 0
-  vitamin_c_mg: 0
+  magnesium_mg: 23
+  calcium_mg: 54
+  iron_mg: 2.65
+  zinc_mg: 0.34
+  vitamin_c_mg: 26.5
   manganese_mg: 0.27
   polyols_g: 0
   carbs_available_g: 7.8
@@ -62,7 +62,7 @@ per_portion:
   vitamin_b1_mg: 0.04
   vitamin_b2_mg: 0.04
   vitamin_b3_mg: 0.25
-  vitamin_b5_mg: 0
+  vitamin_b5_mg: 0.17
   vitamin_b6_mg: 0.23
   vitamin_b7_ug: 0
   vitamin_b9_ug: 43.2
@@ -70,8 +70,8 @@ per_portion:
   choline_mg: 18.7
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.06
+  omega6_la_g: 0.06
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -129,4 +129,10 @@ change_log:
       url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/169279/nutrients'
     - note: 'Nutrivore nutrient database (USDA-derived values per 100g)'
       url: 'https://nutrivore.com/foods/sauerkraut-nutrients/'
+- timestamp: '2025-11-05T22:00:00+00:00'
+  updated_by: 'LLM: Claude Sonnet 4.5'
+  reason: 'USDA enrichment phase 2: Added 8 critical nutrients for fermented cabbage'
+  fields_changed: [vitamin_b5_mg, omega6_la_g, omega3_ala_g, calcium_mg, magnesium_mg, iron_mg, zinc_mg, vitamin_c_mg, version]
+  sources: [{note: 'USDA FoodData Central: Sauerkraut, canned, solids and liquids (FDC ID: 169279)', url: 'https://nutritionvalue.org/Sauerkraut%2C_canned%2C_solids_and_liquids_169279_nutritional_value.html'}]
+  methodology: "Scaled USDA per-100g to 180g portion (×1.8). Added: vitamin B5/pantothenic acid (0.17 mg from 0.093 mg/100g), omega-6 linoleic acid LA (0.06g from 0.034g/100g - minimal in fermented vegetables), omega-3 ALA (0.06g from 0.033g/100g), calcium (54mg from 30mg/100g), magnesium (23mg from 13mg/100g), iron (2.65mg from 1.47mg/100g), zinc (0.34mg from 0.19mg/100g), vitamin C (26.5mg from 14.7mg/100g - preserved through fermentation). Potassium kept at previously enriched value (306mg > USDA 170mg). Biotin/B7 not available in USDA data for sauerkraut."
 ```

@@ -57,10 +57,10 @@ per_portion:
   selenium_ug: 0.3
   vitamin_d_ug: 0.05
   vitamin_e_mg: 0.02
-  omega3_ala_g: 0
+  omega3_ala_g: 0.01
   omega3_dha_mg: 0
   omega3_epa_mg: 0
-  omega6_la_g: 0
+  omega6_la_g: 0.04
   chloride_mg: 0
   phosphorus_mg: 31
   sulfur_g: 0
@@ -76,7 +76,7 @@ per_portion:
   vitamin_b1_mg: 0.01
   vitamin_b2_mg: 0.05
   vitamin_b3_mg: 0.05
-  vitamin_b5_mg: 0
+  vitamin_b5_mg: 0.08
   vitamin_b6_mg: 0.03
   vitamin_b7_ug: 0
   vitamin_b9_ug: 1.4
@@ -156,4 +156,17 @@ change_log:
     evidence:
       - url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/173435/nutrients"
         note: "USDA FDC ID 173435: Cheese, goat, soft type - all nutrient values scaled from per-100g to 12g portion (multiply by 0.12)"
+  - timestamp: "2025-11-05T18:00:00+00:00"
+    updated_by: "Claude Code (Sonnet 4.5)"
+    reason: "Final enrichment: Added 3 remaining nutrients (B5, ALA, LA) using USDA and goat milk fatty acid research"
+    fields_changed:
+      - "vitamin_b5_mg: 0 → 0.08"
+      - "omega3_ala_g: 0 → 0.01"
+      - "omega6_la_g: 0 → 0.04"
+    evidence:
+      - url: "https://nutrientoptimiser.com/nutritional-value-cheese-goat-soft-type/"
+        note: "Soft goat cheese pantothenic acid (B5): 0.7mg per 100g, scaled to 12g = 0.08mg"
+      - url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6680990/"
+        note: "Goat milk fatty acids research: LA 2.0-3.1% of total fat (used 2.5%), ALA 0.41-0.81% of total fat (used 0.6%). Goat cheese 12% fat: LA=0.3g/100g, ALA=0.072g/100g, scaled to 12g portion"
+    notes: "Vitamin B7 (biotin), chromium, and molybdenum remain 0 (not routinely analyzed in cheese per USDA research). Fiber soluble/insoluble remain 0.0 (TRUE ZERO for dairy). All omega-3/6 values now complete."
 ```

@@ -3,7 +3,7 @@
 ```yaml
 id: margarita_classic_v1
 schema_version: 2
-version: 3
+version: 4
 last_verified: 2025-11-05
 source:
   venue: Generic - Bar/Restaurant
@@ -65,16 +65,16 @@ per_portion:
   vitamin_b1_mg: 0.046
   vitamin_b2_mg: 0.019
   vitamin_b3_mg: 0.23
-  vitamin_b5_mg: 0
+  vitamin_b5_mg: 0.065
   vitamin_b6_mg: 0.06
-  vitamin_b7_ug: 0
+  vitamin_b7_ug: 0.2
   vitamin_b9_ug: 13.2
   vitamin_b12_ug: 0
-  choline_mg: 0
+  choline_mg: 1.5
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.001
+  omega6_la_g: 0.003
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -98,6 +98,11 @@ notes:
 - Frozen margaritas may contain additional sugar/syrups
 - Vitamin C primarily from fresh lime juice
 - Atwater check (available carb basis): 4×0.1 + 9×0.0 + 4×13.0 + 2×0.1 + 2.4×0.0 = 52.6 kcal
+- 'B5 (Pantothenic acid): 0.065mg from lime juice (30ml × 0.217mg/100ml USDA lime juice value)'
+- 'B7 (Biotin): 0.2µg from lime juice (trace amounts, tequila/triple sec provide essentially 0)'
+- 'Choline: 1.5mg from lime juice (30ml × 5.1mg/100ml USDA lime juice value)'
+- 'Omega-6 LA: 0.003g trace from lime (distilled spirits contain no fatty acids)'
+- 'Omega-3 ALA: 0.001g trace from lime (cocktail is ~80% alcohol by volume which has no lipids)'
 change_log:
 - timestamp: 2025-11-01T00:09:00+0000
   updated_by: Claude Code (Sonnet 4.5)
@@ -124,4 +129,14 @@ change_log:
   fields_changed: [phosphorus_mg, copper_mg, selenium_ug, manganese_mg, vitamin_a_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b6_mg, vitamin_b9_ug, vitamin_b12_ug, version, last_verified]
   sources: [{note: 'USDA FoodData Central - FDC ID 168753 (Alcoholic beverage, tequila sunrise, canned)', url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/168753/nutrients'}]
   details: 'Added 10 non-zero nutrients from USDA tequila sunrise data (closest available match): phosphorus (12.0mg), copper (0.05mg), manganese (0.02mg), vitamin A (6.0µg), B1/thiamin (0.046mg), B2/riboflavin (0.019mg), B3/niacin (0.23mg), B6 (0.06mg), B9/folate (13.2µg). Values scaled from USDA per-100ml to 120ml portion. Nutrients not present in USDA data remain at 0: vitamin D, E, K, B12, choline, iodine, omega-3 EPA/DHA.'
+- timestamp: '2025-11-05T18:15:00+00:00'
+  updated_by: 'Claude Code (Sonnet 4.5)'
+  reason: 'Additional nutrient enrichment: B5, B7, choline, omega-6 LA, omega-3 ALA from lime juice component'
+  fields_changed: [version, vitamin_b5_mg, vitamin_b7_ug, choline_mg, omega6_la_g, omega3_ala_g, notes]
+  sources:
+    - note: 'USDA FoodData Central #167747 - Lime juice, raw'
+      url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/167747/nutrients'
+    - note: 'Margarita recipe: 45ml tequila + 30ml triple sec + 30ml fresh lime juice (+ 15ml simple syrup)'
+      calculation: 'All added nutrients derive from 30ml lime juice component: B5=0.217mg/100ml×0.3=0.065mg; B7=0.6µg/100ml×0.3=0.2µg; Choline=5.1mg/100ml×0.3=1.5mg; LA=0.01g/100ml×0.3=0.003g; ALA=0.003g/100ml×0.3=0.001g'
+    - note: 'Distilled spirits (tequila, triple sec) provide essentially no B-vitamins, choline, or fatty acids'
 ```

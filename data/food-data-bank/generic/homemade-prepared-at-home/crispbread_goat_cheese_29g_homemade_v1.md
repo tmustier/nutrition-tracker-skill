@@ -40,22 +40,22 @@ per_portion:
   fiber_insoluble_g: 0.3
   polyols_g: 0.0
   sodium_mg: 120
-  potassium_mg: 38
+  potassium_mg: 67
   iodine_ug: 4
-  magnesium_mg: 6
-  calcium_mg: 72
-  iron_mg: 0.4
-  zinc_mg: 0.2
+  magnesium_mg: 19
+  calcium_mg: 74
+  iron_mg: 0.6
+  zinc_mg: 0.36
   vitamin_c_mg: 0.0
   manganese_mg: 0.1
   copper_mg: 0.2
   selenium_ug: 1
   vitamin_d_ug: 0.1
   vitamin_e_mg: 0.1
-  omega3_ala_g: 0
+  omega3_ala_g: 0.02
   omega3_dha_mg: 0
   omega3_epa_mg: 0
-  omega6_la_g: 0
+  omega6_la_g: 0.12
   chloride_mg: 0
   phosphorus_mg: 78
   sulfur_g: 0
@@ -71,7 +71,7 @@ per_portion:
   vitamin_b1_mg: 0.05
   vitamin_b2_mg: 0.10
   vitamin_b3_mg: 0.5
-  vitamin_b5_mg: 0
+  vitamin_b5_mg: 0.18
   vitamin_b6_mg: 0.10
   vitamin_b7_ug: 0
   vitamin_b9_ug: 6
@@ -142,4 +142,23 @@ change_log:
         note: "24g goat cheese nutrients: 69µg vitamin A, 0.1µg vitamin D, 61mg phosphorus, 0.18mg copper, 0.7µg selenium, 0.05µg B12, 3.6mg choline, B-vitamins"
       - note: "Component-based method: Summed scaled nutrient values from both components (5g buckwheat crispbread + 24g soft goat cheese)"
       - note: "Iodine already estimated at 4µg from UK dairy fortification (all from cheese component)"
+  - timestamp: "2025-11-05T20:30:00+00:00"
+    updated_by: "Claude Code (Sonnet 4.5)"
+    reason: "Phase 2 enrichment: Added 8 critical nutrients using REAL USDA values from enriched component files. FIXED incomplete mineral summations."
+    fields_changed:
+      - "vitamin_b5_mg (0 → 0.18)"
+      - "vitamin_b7_ug (0, remains 0 - not available in USDA goat cheese data)"
+      - "omega3_ala_g (0 → 0.02)"
+      - "omega6_la_g (0 → 0.12)"
+      - "calcium_mg (72 → 74, CORRECTED sum)"
+      - "magnesium_mg (6 → 19, CORRECTED sum)"
+      - "potassium_mg (38 → 67, CORRECTED sum)"
+      - "iron_mg (0.4 → 0.6, CORRECTED sum)"
+      - "zinc_mg (0.2 → 0.36, CORRECTED sum)"
+    sources:
+      - url: "amisa_buckwheat_crispbread_5g_v1"
+        note: "Crispbread 5g: B5=0.022mg, B7=0µg, ALA=0.004g, LA=0.035g, Ca=2mg, Mg=13mg, K=29mg, Fe=0.20mg, Zn=0.16mg"
+      - url: "chavroux_mild_creamy_goat_cheese_12g_chavroux_v1"
+        note: "Goat cheese 24g (2 × 12g slices): B5=0.16mg, B7=0µg, ALA=0.02g, LA=0.08g, Ca=72mg, Mg=6mg, K=38mg, Fe=0.4mg, Zn=0.2mg"
+    methodology: "Component-based summation: Buckwheat (5g) + Goat cheese (24g = 2 slices). Calculations: B5: 0.022+0.16=0.18mg; B7: remains 0 (not measured in USDA cheese data); ALA: 0.004+0.02=0.02g; LA: 0.035+0.08=0.12g; Ca: 2+72=74mg; Mg: 13+6=19mg; K: 29+38=67mg; Fe: 0.20+0.4=0.6mg; Zn: 0.16+0.2=0.36mg. Previous enrichment had incomplete mineral summations - now corrected."
 ```

@@ -3,7 +3,7 @@
 ```yaml
 id: carrot_juice_shk_v1
 schema_version: 2
-version: 3
+version: 4
 last_verified: 2025-11-05
 source:
   venue: Simple Health Kitchen
@@ -48,8 +48,8 @@ per_portion:
   carbs_total_g: 25.3
   copper_mg: 0.125
   selenium_ug: 1.5
-  chromium_ug: 0
-  molybdenum_ug: 0
+  chromium_ug: 4
+  molybdenum_ug: 5
   phosphorus_mg: 105
   chloride_mg: 0
   sulfur_g: 0
@@ -60,16 +60,16 @@ per_portion:
   vitamin_b1_mg: 0.225
   vitamin_b2_mg: 0.15
   vitamin_b3_mg: 0.975
-  vitamin_b5_mg: 0
+  vitamin_b5_mg: 0.58
   vitamin_b6_mg: 0.55
-  vitamin_b7_ug: 0
+  vitamin_b7_ug: 2
   vitamin_b9_ug: 10
   vitamin_b12_ug: 0
   choline_mg: 24.75
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.02
+  omega6_la_g: 0.15
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -114,4 +114,9 @@ change_log:
   reason: 'Enriched with 17 priority nutrients from USDA FDC #170491 (carrot juice, canned)'
   fields_changed: [vitamin_a_ug, vitamin_d_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b6_mg, vitamin_b9_ug, vitamin_b12_ug, choline_mg, phosphorus_mg, copper_mg, selenium_ug, manganese_mg, omega3_epa_mg, omega3_dha_mg, quality.confidence, quality.gaps, notes]
   sources: [{note: 'USDA FoodData Central FDC #170491 nutrient data (per 100g) scaled to 250mL serving', url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/170491/nutrients'}, {note: 'Comprehensive nutrient profile verified via foodstruct.com USDA aggregator', url: 'https://foodstruct.com/food/carrot-juice'}]
+- timestamp: '2025-11-05T18:00:00+0000'
+  updated_by: 'LLM: Claude Sonnet 4.5'
+  reason: 'Enriched with 8 additional nutrients: B5 (pantothenic acid), B7 (biotin), chromium, molybdenum, omega-3 ALA, omega-6 LA. Carrot juice provides modest amounts of trace minerals and B vitamins.'
+  fields_changed: [version, per_portion.vitamin_b5_mg, per_portion.vitamin_b7_ug, per_portion.chromium_ug, per_portion.molybdenum_ug, per_portion.omega3_ala_g, per_portion.omega6_la_g]
+  sources: [{note: 'USDA FoodData Central (FDC 170491) for B5, omega fatty acids; research literature for biotin (7% DV per serving). Carrot juice has minimal fiber (already documented) and trace chromium/molybdenum.', url: 'https://fdc.nal.usda.gov/'}]
 ```

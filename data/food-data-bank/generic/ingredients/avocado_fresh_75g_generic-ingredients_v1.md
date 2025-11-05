@@ -60,16 +60,16 @@ per_portion:
   vitamin_b1_mg: 0.05
   vitamin_b2_mg: 0.11
   vitamin_b3_mg: 1.43
-  vitamin_b5_mg: 0
+  vitamin_b5_mg: 1.1
   vitamin_b6_mg: 0.22
-  vitamin_b7_ug: 0
+  vitamin_b7_ug: 4.5
   vitamin_b9_ug: 66.75
   vitamin_b12_ug: 0
   choline_mg: 10.65
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.08
+  omega6_la_g: 1.25
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -89,7 +89,18 @@ notes:
 - Low in sodium, naturally unsalted
 - Atwater check (available carb basis): 4×1.5 + 9×11.0 + 4×1.4 + 2×5.0 + 2.4×0.0 = 120.6 kcal
 - Enriched 2025-11-05 using USDA FoodData Central (FDC ID 171706) for California Hass avocados: Added 15 nutrient values (vitamins A, E, K, B1, B2, B3, B6, B9/folate, choline; minerals phosphorus, copper, selenium, manganese). Vitamin D, B12, EPA, and DHA confirmed as 0 (plant source). Iodine not tracked in USDA database.
+- Second enrichment 2025-11-05: Added pantothenic acid (B5: 1.1mg from 1.46mg/100g USDA), biotin (B7: 4.5μg from 6μg/100g estimated mid-range), omega-3 ALA (0.08g from 0.11g/100g USDA), omega-6 LA (1.25g from 1.67g/100g USDA). Chromium and molybdenum remain 0 (not measured in USDA database for avocados).
 change_log:
+- timestamp: '2025-11-05T16:00:00+00:00'
+  updated_by: Claude Code (Sonnet 4.5)
+  reason: Second enrichment with 4 additional priority nutrients from USDA FoodData Central
+  fields_changed: [vitamin_b5_mg, vitamin_b7_ug, omega3_ala_g, omega6_la_g]
+  sources:
+  - note: 'USDA FoodData Central - Avocado, raw, California (Hass) - FDC ID 171706: Pantothenic acid 1.46mg/100g, ALA 0.11g/100g, LA 1.67g/100g'
+    url: 'https://www.nutritionvalue.org/Avocados%2C_California%2C_raw_nutritional_value.html'
+  - note: 'Biotin content: 6μg/100g (mid-range estimate from literature range 3.2-10μg/100g)'
+    url: 'https://wholefoodcatalog.info/nutrient/vitamin_b7(biotin)/fruits/'
+  data_notes: 'Scaled from per-100g to 75g portion. Chromium and molybdenum remain 0 (not measured/reported in USDA database for avocados).'
 - timestamp: '2025-11-05T00:00:00+00:00'
   updated_by: Claude Code (Sonnet 4.5)
   reason: Enriched with 15 priority nutrients from USDA FoodData Central

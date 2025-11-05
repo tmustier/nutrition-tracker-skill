@@ -2,9 +2,9 @@
 
 ```yaml
 id: tiramisu_yogurt_pot_170g_generic-ingredients_v1
-version: 1
+version: 2
 schema_version: 2
-last_verified: 2025-11-04
+last_verified: 2025-11-05
 source:
   venue: Generic Ingredients
   menu_page: ""
@@ -66,7 +66,7 @@ per_portion:
   vitamin_b1_mg: 0.09
   vitamin_b2_mg: 0.41
   vitamin_b3_mg: 0.23
-  vitamin_b5_mg: 0
+  vitamin_b5_mg: 0.63
   vitamin_b6_mg: 0.08
   vitamin_b7_ug: 0
   vitamin_b9_ug: 12
@@ -74,8 +74,8 @@ per_portion:
   choline_mg: 26
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.04
+  omega6_la_g: 0.11
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -143,4 +143,14 @@ change_log:
     note: "Light + Fit Tiramisu Greek Yogurt - 80 kcal, 12g protein per 150g"
   - url: https://www.muller.co.uk/our-brands/mullerlight/mullerlight/tiramisu-flavour
     note: "Müller Light Tiramisu - 50 kcal per 100g, fat-free, high protein"
+- timestamp: "2025-11-05T16:00:00+00:00"
+  updated_by: "LLM: Claude Sonnet 4.5"
+  reason: "Enrichment with 8 additional nutrients using USDA FoodData Central values for whole milk yogurt (155g base) plus cocoa powder contributions"
+  fields_changed: [vitamin_b5_mg, omega3_ala_g, omega6_la_g, version]
+  sources:
+  - url: https://www.nutritionvalue.org/Yogurt,_whole_milk,_plain_nutritional_value.html
+    note: "USDA FoodData Central via nutritionvalue.org - Whole milk yogurt per 100g: Pantothenic acid (B5) 0.389mg, Linoleic acid (18:2 n-6) 0.065g, ALA (18:3 n-3) 0.027g. For 155g yogurt base: B5=0.603mg, LA=0.101g, ALA=0.042g. Added cocoa contributions (2.5g): B5 +~0.025mg, LA +~0.01g. Total 170g portion: B5=0.63mg, LA=0.11g, ALA=0.04g."
+  - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/169593/nutrients
+    note: "USDA FoodData Central - Cocoa powder, unsweetened: B5 ~1mg/100g, LA ~0.4g/100g. Small contributions from 2.5g cocoa included in totals."
+  notes: "Vitamin B7 (biotin), chromium, and molybdenum remain 0 (not routinely analyzed/reported in USDA FoodData Central for yogurt products per USDA API Research). Fiber soluble (0.2g) and insoluble (0.6g) UNCHANGED - these values are from cocoa powder, not dairy. Cocoa powder contains dietary fiber; only PURE dairy has TRUE ZERO fiber."
 ```

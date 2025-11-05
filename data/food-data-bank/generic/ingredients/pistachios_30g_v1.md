@@ -3,7 +3,7 @@
 ```yaml
 id: pistachios_30g_v1
 schema_version: 2
-version: 4
+version: 5
 last_verified: 2025-11-05
 source:
   venue: pack/ingredient
@@ -67,8 +67,8 @@ per_portion:
   choline_mg: 21
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.09
+  omega6_la_g: 4.23
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -114,4 +114,9 @@ change_log:
     vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b9_ug, vitamin_b12_ug,
     choline_mg, phosphorus_mg, copper_mg, selenium_ug, manganese_mg, omega3_epa_mg, omega3_dha_mg]
   sources: [{note: 'USDA FoodData Central - Nuts, pistachio nuts, raw', url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/170184/nutrients'}]
+- timestamp: '2025-11-05T14:00:00+00:00'
+  updated_by: 'LLM: Claude Sonnet 4.5'
+  reason: Enrich with 2 additional omega fatty acids from USDA FoodData Central API (FDC ID 170184)
+  fields_changed: [version, per_portion.omega3_ala_g, per_portion.omega6_la_g]
+  sources: [{note: 'USDA API: ALA/18:3 n-3 (0.289g/100g), LA/18:2 n-6 (14.091g/100g). Biotin, chromium, molybdenum not available in USDA database.', url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/170184/nutrients'}]
 ```

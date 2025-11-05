@@ -58,16 +58,16 @@ per_portion:
   vitamin_b1_mg: 0.06
   vitamin_b2_mg: 0.06
   vitamin_b3_mg: 0.63
-  vitamin_b5_mg: 0
+  vitamin_b5_mg: 0.19
   vitamin_b6_mg: 0.08
-  vitamin_b7_ug: 0
+  vitamin_b7_ug: 3.6
   vitamin_b9_ug: 9
   vitamin_b12_ug: 0
   choline_mg: 9
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.09
+  omega6_la_g: 0.13
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -133,4 +133,18 @@ change_log:
       Phosphorus 12 mg → 18 mg; Copper 0.054 mg → 0.08 mg; Selenium 0.10 mcg → 0.2
       mcg; Manganese 0.336 mg → 0.5 mg. Vitamin D, B12, EPA, and DHA remain 0 (not
       naturally present in blueberries).', url: 'https://www.nutritionvalue.org/Blueberries%2C_raw_nutritional_value.html'}]
+- timestamp: '2025-11-05T14:00:00+00:00'
+  updated_by: 'LLM: Claude Sonnet 4.5'
+  reason: Enrichment with 4 additional nutrients (B5, B7, omega-3 ALA, omega-6 LA) from USDA sources
+  fields_changed: [per_portion.vitamin_b5_mg, per_portion.vitamin_b7_ug, per_portion.omega3_ala_g,
+    per_portion.omega6_la_g]
+  sources: [{note: 'USDA FoodData Central & nutritionvalue.org - Raw blueberries
+      (FDC 171711). Per 100g: pantothenic acid (B5) 0.124mg, biotin (B7) 2.43µg,
+      18:3 n-3 ALA 0.058g, 18:2 n-6 LA 0.088g. Scaled to 150g: B5 0.19mg, B7 3.6µg,
+      ALA 0.09g, LA 0.13g.', url: 'https://www.nutritionvalue.org/Blueberries%2C_raw_nutritional_value.html'},
+  {note: 'Nutrivore blueberry nutrients database confirmed biotin value: 2.43µg per
+      100g (3.6µg per 150g represents 12% DV).', url: 'https://nutrivore.com/foods/blueberry-nutrients/'},
+  {note: 'Chromium and molybdenum: Not routinely analyzed by USDA for berries; confirmed
+      0 per USDA_API_RESEARCH.md. These trace minerals have limited coverage (<50%
+      of foods).'}]
 ```

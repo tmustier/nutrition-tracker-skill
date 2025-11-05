@@ -63,16 +63,16 @@ per_portion:
   vitamin_b1_mg: 0.05
   vitamin_b2_mg: 0.11
   vitamin_b3_mg: 1.0
-  vitamin_b5_mg: 0
+  vitamin_b5_mg: 0.50
   vitamin_b6_mg: 0.6
-  vitamin_b7_ug: 0
+  vitamin_b7_ug: 0.3
   vitamin_b9_ug: 30
   vitamin_b12_ug: 0
   choline_mg: 14.6
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.012
+  omega6_la_g: 0.07
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -97,6 +97,18 @@ notes:
 - Soluble fiber (~0.9g) mainly pectin, insoluble fiber (~3g) mainly cellulose
 - Atwater check (available carb basis): 4×1.6 + 9×0.5 + 4×34.3 + 2×3.9 + 2.4×0.0 = 155.9 kcal
 change_log:
+- timestamp: '2025-11-05T16:00:00+00:00'
+  updated_by: Claude Code (Sonnet 4.5)
+  reason: Second enrichment with 4 additional priority nutrients from USDA FoodData Central
+  fields_changed: [vitamin_b5_mg, vitamin_b7_ug, omega3_ala_g, omega6_la_g]
+  sources:
+  - note: 'USDA FoodData Central - Bananas, raw (FDC ID 173944): Pantothenic acid 0.33mg/100g, LA 0.046g/100g'
+    url: 'https://www.nutritionvalue.org/Bananas%2C_raw_nutritional_value.html'
+  - note: 'Biotin content: 0.2μg/100g (most commonly reported value across multiple sources)'
+    url: 'https://wholefoodcatalog.info/nutrient/vitamin_b7(biotin)/fruits/'
+  - note: 'ALA omega-3: ~0.008g/100g (7.6mg per 100g from nutritional research)'
+    url: 'https://www.myfooddata.com/articles/foods-high-in-ALA.php'
+  data_notes: 'Scaled from per-100g to 150g portion. Chromium and molybdenum remain 0 (not measured/reported in USDA database for bananas).'
 - timestamp: 2025-11-01T09:00:00+0000
   updated_by: Claude Code (Sonnet 4.5)
   reason: Initial entry for banana tracking - user consumed in breakfast smoothie

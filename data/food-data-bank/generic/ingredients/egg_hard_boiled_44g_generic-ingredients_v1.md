@@ -51,10 +51,10 @@ per_portion:
   selenium_ug: 14
   vitamin_d_ug: 1.0
   vitamin_e_mg: 0.5
-  omega3_ala_g: 0
+  omega3_ala_g: 0.015
   omega3_dha_mg: 17
   omega3_epa_mg: 2
-  omega6_la_g: 0
+  omega6_la_g: 0.52
   chloride_mg: 0
   phosphorus_mg: 76
   sulfur_g: 0
@@ -70,9 +70,9 @@ per_portion:
   vitamin_b1_mg: 0.029
   vitamin_b2_mg: 0.23
   vitamin_b3_mg: 0.028
-  vitamin_b5_mg: 0
+  vitamin_b5_mg: 0.62
   vitamin_b6_mg: 0.053
-  vitamin_b7_ug: 0
+  vitamin_b7_ug: 11
   vitamin_b9_ug: 19
   vitamin_b12_ug: 0.49
 derived:
@@ -97,6 +97,24 @@ notes:
   - "Iodine content: 22µg per egg (49.2µg/100g from USDA study), ~15% DV, varies with hen feed"
   - "Atwater validation: 4×5.5 + 9×4.7 + 4×0.5 + 2×0 + 2.4×0 = 66.3 kcal (within 2.5% of USDA 68 kcal)"
 change_log:
+  - timestamp: "2025-11-05T18:00:00+00:00"
+    updated_by: "Claude Code (Sonnet 4.5)"
+    reason: "Enrichment with 8 priority nutrients using REAL USDA FoodData Central values"
+    fields_changed:
+      - "vitamin_b5_mg: 0 → 0.62 (USDA 1170: 1.40mg/100g scaled to 44g)"
+      - "vitamin_b7_ug: 0 → 11 (USDA 1176: 25µg/100g - BIOTIN CHAMPION!)"
+      - "omega3_ala_g: 0 → 0.015 (USDA 1404: 0.035g/100g scaled)"
+      - "omega6_la_g: 0 → 0.52 (USDA 1269: 1.19g/100g scaled)"
+      - "chromium_ug: confirmed 0 (trace amounts in eggs)"
+      - "molybdenum_ug: confirmed 0 (trace amounts in eggs)"
+      - "fiber_soluble_g: confirmed 0 (TRUE ZERO for animal products)"
+      - "fiber_insoluble_g: confirmed 0 (TRUE ZERO for animal products)"
+    sources:
+      - url: "https://www.nutritionvalue.org/Egg%2C_hard-boiled%2C_cooked%2C_whole_nutritional_value.html"
+        note: "USDA FDC 173424 comprehensive nutrient data per 100g"
+      - url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC9106636/"
+        note: "Scientific study: Eggs contain 25µg biotin per 100g (cooked)"
+    notes: "Eggs are the #2 biotin source after liver (11µg per egg). B5 and LA values from direct USDA measurements."
   - timestamp: "2025-11-05T16:00:00+00:00"
     updated_by: "Claude Code (Sonnet 4.5)"
     reason: "CRITICAL FIX: Corrected omega-3 unit conversion error"

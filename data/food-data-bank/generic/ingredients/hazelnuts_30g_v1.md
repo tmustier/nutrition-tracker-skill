@@ -2,7 +2,7 @@
 
 ```yaml
 id: hazelnuts_30g_v1
-version: 5
+version: 6
 schema_version: 2
 last_verified: "2025-11-05"
 source:
@@ -58,7 +58,7 @@ per_portion:
   vitamin_b1_mg: 0.2
   vitamin_b2_mg: 0.03
   vitamin_b3_mg: 0.5
-  vitamin_b5_mg: 0
+  vitamin_b5_mg: 0.28
   vitamin_b6_mg: 0.2
   vitamin_b7_ug: 0
   vitamin_b9_ug: 34
@@ -66,8 +66,8 @@ per_portion:
   choline_mg: 14
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.03
+  omega6_la_g: 2.35
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -172,4 +172,15 @@ change_log:
   sources:
   - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/170581/nutrients
     note: "USDA FoodData Central - Nuts, hazelnuts or filberts (raw). Values converted from per 100g to per 30g."
+- timestamp: "2025-11-05T14:00:00+00:00"
+  updated_by: "LLM: Claude Sonnet 4.5"
+  reason: Enrich with 3 additional nutrients from USDA FoodData Central API (FDC ID 170581)
+  fields_changed:
+  - version
+  - per_portion.vitamin_b5_mg
+  - per_portion.omega3_ala_g
+  - per_portion.omega6_la_g
+  sources:
+  - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/170581/nutrients
+    note: "USDA API: Pantothenic acid (0.918mg/100g), ALA/18:3 n-3 (0.087g/100g), LA/18:2 n-6 (7.833g/100g). Biotin, chromium, molybdenum not available in USDA database."
 ```
