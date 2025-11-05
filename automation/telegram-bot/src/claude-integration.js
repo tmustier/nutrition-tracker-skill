@@ -183,9 +183,10 @@ class ClaudeIntegration {
   constructor() {
     this.apiKey = config.claude.apiKey;
     this.model = config.claude.model || 'claude-sonnet-4-20250514';
-    this.maxTokens = config.claude.maxTokens || 4096;
+    this.maxTokens = config.claude.maxTokens || 16000;
     this.apiUrl = 'https://api.anthropic.com/v1/messages';
-    
+    this.extendedThinking = config.claude.extendedThinking || { enabled: false, budgetTokens: 10000 };
+
     // Rate limiting for Claude API (50 requests per minute)
     this.rateLimitRequests = [];
     this.rateLimitWindow = 60 * 1000; // 1 minute
@@ -272,16 +273,14 @@ class ClaudeIntegration {
       // Check rate limiting before making API call
       this.checkRateLimit();
 
-      const response = await axios.post(
-        this.apiUrl,
-        {
-          model: this.model,
-          max_tokens: this.maxTokens,
-          system: SKILL_CONTEXT,
-          messages: [
-            {
-              role: 'user',
-              content: `I just ate: ${sanitizePromptInput(userMessage)}
+      const requestBody = {
+        model: this.model,
+        max_tokens: this.maxTokens,
+        system: SKILL_CONTEXT,
+        messages: [
+          {
+            role: 'user',
+            content: `I just ate: ${sanitizePromptInput(userMessage)}
 
 Please estimate the complete nutrition data and return it in the JSON format specified in your instructions.
 
@@ -293,9 +292,21 @@ Requirements:
 - Document any assumptions or estimation methods in the "notes" field
 
 Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
-            }
-          ]
-        },
+          }
+        ]
+      };
+
+      // Add extended thinking if enabled
+      if (this.extendedThinking.enabled) {
+        requestBody.thinking = {
+          type: 'enabled',
+          budget_tokens: this.extendedThinking.budgetTokens
+        };
+      }
+
+      const response = await axios.post(
+        this.apiUrl,
+        requestBody,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -402,27 +413,25 @@ Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
 
       const base64Image = imageBuffer.toString('base64');
 
-      const response = await axios.post(
-        this.apiUrl,
-        {
-          model: this.model,
-          max_tokens: this.maxTokens,
-          system: SKILL_CONTEXT,
-          messages: [
-            {
-              role: 'user',
-              content: [
-                {
-                  type: 'image',
-                  source: {
-                    type: 'base64',
-                    media_type: mimeType,
-                    data: base64Image
-                  }
-                },
-                {
-                  type: 'text',
-                  text: `This is a screenshot of a menu item, nutrition label, or food photo.
+      const requestBody = {
+        model: this.model,
+        max_tokens: this.maxTokens,
+        system: SKILL_CONTEXT,
+        messages: [
+          {
+            role: 'user',
+            content: [
+              {
+                type: 'image',
+                source: {
+                  type: 'base64',
+                  media_type: mimeType,
+                  data: base64Image
+                }
+              },
+              {
+                type: 'text',
+                text: `This is a screenshot of a menu item, nutrition label, or food photo.
 
 Please analyze the image and extract/estimate complete nutrition information.
 
@@ -440,11 +449,23 @@ Requirements:
 - Document extraction method and confidence in the "notes" field
 
 Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
-                }
-              ]
-            }
-          ]
-        },
+              }
+            ]
+          }
+        ]
+      };
+
+      // Add extended thinking if enabled
+      if (this.extendedThinking.enabled) {
+        requestBody.thinking = {
+          type: 'enabled',
+          budget_tokens: this.extendedThinking.budgetTokens
+        };
+      }
+
+      const response = await axios.post(
+        this.apiUrl,
+        requestBody,
         {
           headers: {
             'Content-Type': 'application/json',
