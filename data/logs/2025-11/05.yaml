@@ -1,0 +1,184 @@
+date: 2025-11-05
+day_type: rest
+entries:
+- timestamp: '2025-11-05T12:00:00+00:00'
+  items:
+  - name: Crispbread with Smoked Trout
+    food_bank_id: crispbread_smoked_trout_18g_homemade_v1
+    quantity: 3
+    unit: pieces
+    nutrition:
+      energy_kcal: 131
+      protein_g: 9.9
+      fat_g: 5.4
+      sat_fat_g: 0.9
+      mufa_g: 1.5
+      pufa_g: 3.0
+      trans_fat_g: 0.0
+      cholesterol_mg: 24
+      sugar_g: 0.3
+      fiber_total_g: 1.2
+      fiber_soluble_g: 0.3
+      fiber_insoluble_g: 0.9
+      sodium_mg: 546
+      potassium_mg: 138
+      iodine_ug: 0
+      magnesium_mg: 12
+      calcium_mg: 6
+      iron_mg: 0
+      zinc_mg: 0
+      vitamin_c_mg: 0
+      manganese_mg: 0
+      polyols_g: 0.0
+      carbs_available_g: 10.2
+      carbs_total_g: 11.4
+  - name: Crispbread with Avocado
+    food_bank_id: crispbread_avocado_30g_homemade_v1
+    quantity: 3
+    unit: pieces
+    nutrition:
+      energy_kcal: 172
+      protein_g: 3.0
+      fat_g: 11.4
+      sat_fat_g: 1.5
+      mufa_g: 7.5
+      pufa_g: 1.5
+      trans_fat_g: 0.0
+      cholesterol_mg: 0
+      sugar_g: 0.9
+      fiber_total_g: 6.3
+      fiber_soluble_g: 1.5
+      fiber_insoluble_g: 4.8
+      sodium_mg: 318
+      potassium_mg: 363
+      iodine_ug: 0
+      magnesium_mg: 21
+      calcium_mg: 9
+      iron_mg: 0
+      zinc_mg: 0
+      vitamin_c_mg: 8
+      manganese_mg: 0
+      polyols_g: 0.0
+      carbs_available_g: 11.7
+      carbs_total_g: 17.7
+  - name: Crispbread with Chavroux Goat's Cheese
+    food_bank_id: crispbread_goat_cheese_29g_homemade_v1
+    quantity: 1
+    unit: piece
+    nutrition:
+      energy_kcal: 53
+      protein_g: 2.5
+      fat_g: 2.9
+      sat_fat_g: 2.2
+      mufa_g: 0.5
+      pufa_g: 0.2
+      trans_fat_g: 0.0
+      cholesterol_mg: 12
+      sugar_g: 0.7
+      fiber_total_g: 0.4
+      fiber_soluble_g: 0.1
+      fiber_insoluble_g: 0.3
+      sodium_mg: 120
+      potassium_mg: 38
+      iodine_ug: 4
+      magnesium_mg: 6
+      calcium_mg: 72
+      iron_mg: 0
+      zinc_mg: 0
+      vitamin_c_mg: 0
+      manganese_mg: 0
+      polyols_g: 0.0
+      carbs_available_g: 4.0
+      carbs_total_g: 4.4
+  - name: Egg, Hard-Boiled (Medium)
+    food_bank_id: egg_hard_boiled_44g_generic-ingredients_v1
+    quantity: 2
+    unit: eggs
+    nutrition:
+      energy_kcal: 136
+      protein_g: 11.0
+      fat_g: 9.4
+      sat_fat_g: 3.0
+      mufa_g: 3.6
+      pufa_g: 1.2
+      trans_fat_g: 0
+      cholesterol_mg: 328
+      sugar_g: 1.0
+      fiber_total_g: 0.0
+      fiber_soluble_g: 0
+      fiber_insoluble_g: 0
+      sodium_mg: 110
+      potassium_mg: 110
+      iodine_ug: 22
+      magnesium_mg: 8
+      calcium_mg: 44
+      iron_mg: 1
+      zinc_mg: 1
+      vitamin_c_mg: 0
+      manganese_mg: 0
+      polyols_g: 0.0
+      carbs_available_g: 1.0
+      carbs_total_g: 1.0
+  - name: Kiwi (Small, Fresh)
+    food_bank_id: kiwi_small_70g_generic-fresh-produce_v1
+    quantity: 1
+    unit: portion
+    nutrition:
+      energy_kcal: 43
+      protein_g: 0.8
+      fat_g: 0.4
+      sat_fat_g: 0.0
+      mufa_g: 0.0
+      pufa_g: 0.2
+      trans_fat_g: 0.0
+      cholesterol_mg: 0
+      sugar_g: 6.3
+      fiber_total_g: 2.4
+      fiber_soluble_g: 0.5
+      fiber_insoluble_g: 1.8
+      sodium_mg: 2
+      potassium_mg: 218
+      iodine_ug: 0
+      magnesium_mg: 12
+      calcium_mg: 24
+      iron_mg: 0
+      zinc_mg: 0
+      vitamin_c_mg: 65
+      manganese_mg: 0
+      polyols_g: 0.0
+      carbs_available_g: 7.9
+      carbs_total_g: 10.3
+  - name: Persimmon (Fresh Fruit)
+    food_bank_id: persimmon_fresh_fruit_generic_v1
+    quantity: 240
+    unit: g
+    nutrition:
+      energy_kcal: 168
+      protein_g: 1.4
+      fat_g: 0.4
+      sat_fat_g: 0.04
+      mufa_g: 0.10
+      pufa_g: 0.31
+      trans_fat_g: 0
+      cholesterol_mg: 0
+      sugar_g: 30.1
+      fiber_total_g: 8.6
+      fiber_soluble_g: 1.3
+      fiber_insoluble_g: 7.3
+      sodium_mg: 3
+      potassium_mg: 386
+      iodine_ug: 0
+      magnesium_mg: 21
+      calcium_mg: 19
+      iron_mg: 0
+      zinc_mg: 0
+      vitamin_c_mg: 19
+      manganese_mg: 1
+      polyols_g: 0.0
+      carbs_available_g: 36.0
+      carbs_total_g: 44.6
+  notes: >-
+    Brunch/lunch meal. 3 crispbreads topped with smoked trout (with added salt sprinkle
+    on each), 3 crispbreads topped with avocado (with added salt sprinkle on each),
+    1 crispbread topped with 2 slices goat's cheese (no added salt). 2 boiled eggs
+    (no added salt). 1 small kiwi. 1 large persimmon (240g).
