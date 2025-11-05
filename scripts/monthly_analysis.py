@@ -787,6 +787,17 @@ def generate_markdown_report(analysis: Dict) -> str:
     profile = analysis['profile']
     targets = profile.get('targets', {})
     summary = analysis['summary']
+    days_logged = analysis['days_logged']
+    meal_freq = analysis['meal_frequency']
+
+    # Extract commonly used values
+    alcohol_data = analysis.get('alcohol', {})
+    days_with_alcohol = alcohol_data.get('days_with_alcohol', 0)
+    days_without_alcohol = alcohol_data.get('days_without_alcohol', 0)
+    total_drinks = alcohol_data.get('estimated_drinks', 0)
+
+    timing = analysis.get('timing', {})
+    avg_window = timing.get('avg_eating_window', 0)
 
     report = []
 
@@ -1001,8 +1012,8 @@ def generate_markdown_report(analysis: Dict) -> str:
     report.append(f"% of Total Carbs:     {sugar_pct_carbs:.1f}%")
     report.append(f"Sugar Density:        {sugar_density:.1f}g per 1000 kcal")
     report.append(f"Highest Day:          {max_sugar:.1f}g")
-    report.append(f"Days >50g (WHO max):  {days_over_50g}/{days_logged}")
-    report.append(f"Days >25g (WHO ideal): {days_over_25g}/{days_logged}")
+    report.append(f"Days >50g (WHO max):  {days_over_50g}/{analysis['days_logged']}")
+    report.append(f"Days >25g (WHO ideal): {days_over_25g}/{analysis['days_logged']}")
     report.append(f"```")
     report.append("")
 
