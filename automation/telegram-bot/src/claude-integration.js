@@ -237,7 +237,8 @@ class ClaudeIntegration {
       ];
 
       const lowerMessage = userMessage.toLowerCase();
-      const isGenericFood = genericFoodKeywords.some(kw => lowerMessage.includes(kw));
+      // Temporarily disable USDA due to API reliability issues - fallback to Claude for all requests
+      const isGenericFood = false; // genericFoodKeywords.some(kw => lowerMessage.includes(kw));
 
       if (isGenericFood) {
         try {
@@ -318,7 +319,15 @@ Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
       );
 
       // Step 3: Extract JSON from Claude's response
-      const claudeText = response.data.content[0].text;
+      // With extended thinking, response may have multiple content blocks (thinking + text)
+      // Find the text block (skip thinking blocks)
+      const textBlock = response.data.content.find(block => block.type === 'text');
+      if (!textBlock || !textBlock.text) {
+        console.error('No text content in Claude response:', JSON.stringify(response.data.content));
+        throw new Error('No text content in Claude response');
+      }
+
+      const claudeText = textBlock.text;
       const jsonMatch = claudeText.match(/```json\n([\s\S]*?)\n```/);
 
       if (jsonMatch) {
@@ -477,7 +486,15 @@ Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
       );
 
       // Extract JSON from Claude's response
-      const claudeText = response.data.content[0].text;
+      // With extended thinking, response may have multiple content blocks (thinking + text)
+      // Find the text block (skip thinking blocks)
+      const textBlock = response.data.content.find(block => block.type === 'text');
+      if (!textBlock || !textBlock.text) {
+        console.error('No text content in Claude Vision response:', JSON.stringify(response.data.content));
+        throw new Error('No text content in Claude Vision response');
+      }
+
+      const claudeText = textBlock.text;
       const jsonMatch = claudeText.match(/```json\n([\s\S]*?)\n```/);
 
       if (jsonMatch) {

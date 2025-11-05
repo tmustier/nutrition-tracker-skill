@@ -99,13 +99,18 @@ class UsdaApi {
     try {
       // Check rate limiting before making API call
       this.checkRateLimit();
-      
+
       const response = await axios.get(`${this.baseUrl}/food/${fdcId}`, {
         params: {
           api_key: this.apiKey,
         },
         timeout: 30000 // 30 seconds timeout
       });
+
+      // Validate response is actual food data, not HTML error page
+      if (!response.data || typeof response.data !== 'object' || !response.data.foodNutrients) {
+        throw new Error('Invalid response from USDA API - missing foodNutrients');
+      }
 
       return response.data;
     } catch (error) {
@@ -267,18 +272,28 @@ class UsdaApi {
 
     // Get best match (first result is usually most relevant)
     const bestMatch = results[0];
-    const details = await this.getFoodDetails(bestMatch.fdcId);
-    const nutrition = this.parseNutrition(details, grams);
 
-    return {
-      success: true,
-      food_name: bestMatch.description,
-      fdc_id: bestMatch.fdcId,
-      serving_grams: grams,
-      nutrition: nutrition,
-      source: 'USDA FoodData Central',
-      confidence: 'high',
-    };
+    try {
+      const details = await this.getFoodDetails(bestMatch.fdcId);
+      const nutrition = this.parseNutrition(details, grams);
+
+      return {
+        success: true,
+        food_name: bestMatch.description,
+        fdc_id: bestMatch.fdcId,
+        serving_grams: grams,
+        nutrition: nutrition,
+        source: 'USDA FoodData Central',
+        confidence: 'high',
+      };
+    } catch (error) {
+      // If getFoodDetails fails (timeout, 504, etc), return failure so Claude can take over
+      console.error(`Failed to get details for FDC ID ${bestMatch.fdcId}: ${error.message}`);
+      return {
+        success: false,
+        message: `USDA API failed: ${error.message}`,
+      };
+    }
   }
 }
 
