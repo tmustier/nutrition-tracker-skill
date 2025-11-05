@@ -132,6 +132,33 @@ async function handleSetup(req, res) {
 }
 
 /**
+ * Webhook secret verification for POST requests
+ * @param {Object} req - HTTP request object
+ * @returns {boolean} True if verification passes or no secret configured
+ */
+function verifyWebhookSecret(req) {
+  // If no webhook secret configured, skip verification (for backward compatibility)
+  if (!config.telegram.webhookSecret) {
+    return true;
+  }
+
+  const providedSecret = req.headers['x-telegram-bot-api-secret-token'] || 
+                        req.headers['x-webhook-secret'];
+  
+  if (!providedSecret) {
+    console.warn('Webhook verification failed: No secret token provided');
+    return false;
+  }
+
+  if (providedSecret !== config.telegram.webhookSecret) {
+    console.warn('Webhook verification failed: Invalid secret token');
+    return false;
+  }
+
+  return true;
+}
+
+/**
  * POST /webhook - Main webhook handler
  * Processes incoming Telegram updates
  */
@@ -139,6 +166,17 @@ async function handleWebhook(req, res) {
   logRequest(req, res);
 
   try {
+    // Verify webhook secret token for security
+    if (!verifyWebhookSecret(req)) {
+      console.warn('Unauthorized webhook request - invalid or missing secret token');
+      res.writeHead(401, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ 
+        error: 'Unauthorized',
+        message: 'Invalid webhook secret token'
+      }));
+      return;
+    }
+
     // Validate request has a body
     if (!req.body || Object.keys(req.body).length === 0) {
       console.warn('⚠️  Received webhook request with empty body');
