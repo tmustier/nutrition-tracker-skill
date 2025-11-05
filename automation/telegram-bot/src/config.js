@@ -294,7 +294,9 @@ const config = {
   // Anthropic Claude API Configuration
   claude: {
     apiKey: process.env.ANTHROPIC_API_KEY,
-    model: process.env.CLAUDE_MODEL || 'claude-sonnet-4-20250514',
+    // Using Claude Sonnet 4.5 (latest as of Sept 2025)
+    // Format: claude-sonnet-4-5-20250929 or use alias claude-sonnet-4-5
+    model: process.env.CLAUDE_MODEL || 'claude-sonnet-4-5-20250929',
     maxTokens: parseInt(process.env.CLAUDE_MAX_TOKENS || '4096', 10),
     apiVersion: '2023-06-01',
   },

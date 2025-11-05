@@ -269,6 +269,13 @@ class ClaudeIntegration {
       // Step 2: Use Claude for estimation (either non-generic or USDA failed)
       console.log(`Using Claude API for: ${userMessage}`);
 
+      // Log configuration for debugging
+      console.log('Claude API Configuration:');
+      console.log('  Model:', this.model);
+      console.log('  Max Tokens:', this.maxTokens);
+      console.log('  API Key:', this.apiKey ? `${this.apiKey.substring(0, 8)}...` : 'NOT SET');
+      console.log('  System Context Length:', SKILL_CONTEXT.length, 'characters');
+
       // Check rate limiting before making API call
       this.checkRateLimit();
 
@@ -350,8 +357,27 @@ Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
         );
 
         if (missingFields.length > 0) {
-          console.warn(`Missing nutrition fields: ${missingFields.join(', ')}`);
-          // Fill missing fields with 0 as fallback
+          // Define core macronutrients that must be present
+          const coreMacros = ['energy_kcal', 'protein_g', 'fat_g', 'carbs_available_g', 'carbs_total_g'];
+          const missingCoreMacros = coreMacros.filter(field => missingFields.includes(field));
+
+          if (missingCoreMacros.length > 0) {
+            // Core macros are missing - this is a critical error
+            console.error(`❌ CRITICAL: Missing core nutrition fields: ${missingCoreMacros.join(', ')}`);
+            console.error('Full Claude response:', JSON.stringify(nutritionData, null, 2));
+            console.error('All missing fields:', missingFields.join(', '));
+
+            return {
+              success: false,
+              message: 'Claude API returned incomplete nutrition data. Core macronutrients (energy, protein, fat, carbs) are missing. This usually indicates an API configuration issue.',
+              missing_core_fields: missingCoreMacros,
+              all_missing_fields: missingFields,
+              hint: 'Check that ANTHROPIC_API_KEY is valid and Claude model name is correct'
+            };
+          }
+
+          // Only optional fields are missing - safe to fill with 0
+          console.warn(`Filling optional missing fields with 0: ${missingFields.join(', ')}`);
           missingFields.forEach(field => {
             nutritionData.per_portion[field] = 0;
           });
@@ -396,6 +422,13 @@ Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
   async processImage(imageBuffer, mimeType) {
     try {
       console.log(`Processing image with Claude Vision API (${mimeType})`);
+
+      // Log configuration for debugging
+      console.log('Claude Vision API Configuration:');
+      console.log('  Model:', this.model);
+      console.log('  Max Tokens:', this.maxTokens);
+      console.log('  Image Size:', imageBuffer.length, 'bytes');
+      console.log('  MIME Type:', mimeType);
 
       // Check rate limiting before making API call
       this.checkRateLimit();
@@ -499,8 +532,27 @@ Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
         );
 
         if (missingFields.length > 0) {
-          console.warn(`Missing nutrition fields from image: ${missingFields.join(', ')}`);
-          // Fill missing fields with 0 as fallback
+          // Define core macronutrients that must be present
+          const coreMacros = ['energy_kcal', 'protein_g', 'fat_g', 'carbs_available_g', 'carbs_total_g'];
+          const missingCoreMacros = coreMacros.filter(field => missingFields.includes(field));
+
+          if (missingCoreMacros.length > 0) {
+            // Core macros are missing - this is a critical error
+            console.error(`❌ CRITICAL: Missing core nutrition fields from image: ${missingCoreMacros.join(', ')}`);
+            console.error('Full Claude Vision response:', JSON.stringify(extractedData, null, 2));
+            console.error('All missing fields:', missingFields.join(', '));
+
+            return {
+              success: false,
+              message: 'Claude Vision API returned incomplete nutrition data. Core macronutrients (energy, protein, fat, carbs) are missing. This usually indicates the image was not clear enough or not a nutrition label.',
+              missing_core_fields: missingCoreMacros,
+              all_missing_fields: missingFields,
+              hint: 'Try sending a clearer photo or provide a text description instead'
+            };
+          }
+
+          // Only optional fields are missing - safe to fill with 0
+          console.warn(`Filling optional missing fields with 0 from image: ${missingFields.join(', ')}`);
           missingFields.forEach(field => {
             extractedData.per_portion[field] = 0;
           });
