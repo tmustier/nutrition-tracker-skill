@@ -244,6 +244,7 @@ def analyze_month(year: int, month: int) -> Dict:
         'fiber_min': sum(1 for d in daily_data if d['totals'].get('fiber_total_g', 0) >= targets.get('fiber_g_min', 0)),
         'sat_fat_max': sum(1 for d in daily_data if d['totals'].get('sat_fat_g', 0) <= targets.get('sat_fat_g_max', 0)),
         'sodium_max': sum(1 for d in daily_data if d['totals'].get('sodium_mg', 0) <= targets.get('sodium_mg_max', 0)),
+        'potassium_min': sum(1 for d in daily_data if d['totals'].get('potassium_mg', 0) >= targets.get('potassium_mg_min', 0)),
     }
 
     # Energy compliance (separate for rest/training)
@@ -471,6 +472,7 @@ def _generate_target_achievement_section(analysis: Dict, targets: Dict) -> List[
         ('Fat', 'fat_g', targets.get('fat_g_min'), 'min'),
         ('Carbs', 'carbs_total_g', targets.get('carbs_g_min'), 'min'),
         ('Fiber', 'fiber_total_g', targets.get('fiber_g_min'), 'min'),
+        ('Potassium', 'potassium_mg', targets.get('potassium_mg_min'), 'min'),
     ]
 
     for label, key, target_val, target_type in macro_targets:
@@ -547,7 +549,9 @@ def _generate_diet_quality_section(analysis: Dict, targets: Dict) -> List[str]:
     avg_total_fat = summary['fat_g']['mean']
     avg_sodium = summary['sodium_mg']['mean']
     avg_potassium = summary['potassium_mg']['mean']
-    na_k_ratio = avg_sodium / avg_potassium if avg_potassium > 0 else 999
+    na_k_mass_ratio = avg_sodium / avg_potassium if avg_potassium > 0 else 999
+    # Calculate molar ratio: Na (22.99 g/mol) / K (39.10 g/mol)
+    na_k_molar_ratio = (avg_sodium / 22.99) / (avg_potassium / 39.10) if avg_potassium > 0 else 999
     sat_pct = (avg_sat / avg_total_fat * 100) if avg_total_fat > 0 else 0
 
     sugar_data = analysis.get('sugar_analysis', {})
@@ -601,7 +605,8 @@ def _generate_diet_quality_section(analysis: Dict, targets: Dict) -> List[str]:
     score_components.append(diversity_score)
 
     # Micronutrient adequacy (0-10 points) - based on potassium, calcium, magnesium
-    potassium_adequacy = min(1, summary['potassium_mg']['mean'] / 3500)  # RDA ~3500mg
+    potassium_target = targets.get('potassium_mg_min', 4000)
+    potassium_adequacy = min(1, summary['potassium_mg']['mean'] / potassium_target)
     calcium_adequacy = min(1, summary['calcium_mg']['mean'] / 1000)  # RDA ~1000mg
     magnesium_adequacy = min(1, summary['magnesium_mg']['mean'] / 400)  # RDA ~400mg
     micronutrient_score = (potassium_adequacy + calcium_adequacy + magnesium_adequacy) / 3 * 10
@@ -677,7 +682,7 @@ def _generate_diet_quality_section(analysis: Dict, targets: Dict) -> List[str]:
         strengths.append("Outstanding fiber intake")
     if protein_score >= 13:
         strengths.append("Excellent protein intake")
-    if na_k_ratio < 1:
+    if na_k_mass_ratio < 1:
         strengths.append("Optimal sodium:potassium ratio")
     if fat_quality_score >= 12:
         strengths.append("High-quality fat sources")
@@ -734,7 +739,7 @@ def _generate_diet_quality_section(analysis: Dict, targets: Dict) -> List[str]:
     else:
         implications.append("ℹ️ **Digestive health:** Increasing fiber would benefit gut microbiome, satiety, and metabolic health.")
 
-    if na_k_ratio < 1:
+    if na_k_mass_ratio < 1:
         implications.append("✅ **Cardiovascular health:** Excellent sodium:potassium balance supports healthy blood pressure.")
     else:
         implications.append("⚠️ **Blood pressure:** Elevated sodium:potassium ratio may increase cardiovascular strain. Add more fruits and vegetables.")
@@ -834,11 +839,14 @@ def generate_markdown_report(analysis: Dict) -> str:
     # Sodium:Potassium Ratio
     avg_sodium = summary['sodium_mg']['mean']
     avg_potassium = summary['potassium_mg']['mean']
-    na_k_ratio = avg_sodium / avg_potassium if avg_potassium > 0 else 999
+    na_k_mass_ratio = avg_sodium / avg_potassium if avg_potassium > 0 else 999
+    # Calculate molar ratio: Na (22.99 g/mol) / K (39.10 g/mol)
+    na_k_molar_ratio = (avg_sodium / 22.99) / (avg_potassium / 39.10) if avg_potassium > 0 else 999
 
     report.append("### Sodium:Potassium Ratio")
     report.append(f"```")
-    report.append(f"Ratio: {na_k_ratio:.2f}:1  {'✅ Excellent (<1:1)' if na_k_ratio < 1 else '⚠️ Consider more potassium (target <1:1)'}")
+    report.append(f"Mass Ratio:  {na_k_mass_ratio:.2f}:1  {'✅ Excellent (<1:1)' if na_k_mass_ratio < 1 else '⚠️ Consider more potassium (target <1:1)'}")
+    report.append(f"Molar Ratio: {na_k_molar_ratio:.2f}:1  {'✅ Excellent (<1:1)' if na_k_molar_ratio < 1 else '⚠️ Consider more potassium (target <1:1)'}")
     report.append(f"```")
     report.append("")
 
@@ -1016,7 +1024,8 @@ def generate_markdown_report(analysis: Dict) -> str:
     score_components.append(diversity_score)
 
     # Micronutrient adequacy (0-10 points) - based on potassium, calcium, magnesium
-    potassium_adequacy = min(1, summary['potassium_mg']['mean'] / 3500)  # RDA ~3500mg
+    potassium_target = targets.get('potassium_mg_min', 4000)
+    potassium_adequacy = min(1, summary['potassium_mg']['mean'] / potassium_target)
     calcium_adequacy = min(1, summary['calcium_mg']['mean'] / 1000)  # RDA ~1000mg
     magnesium_adequacy = min(1, summary['magnesium_mg']['mean'] / 400)  # RDA ~400mg
     micronutrient_score = (potassium_adequacy + calcium_adequacy + magnesium_adequacy) / 3 * 10
@@ -1092,7 +1101,7 @@ def generate_markdown_report(analysis: Dict) -> str:
         strengths.append("Outstanding fiber intake")
     if protein_score >= 13:
         strengths.append("Excellent protein intake")
-    if na_k_ratio < 1:
+    if na_k_mass_ratio < 1:
         strengths.append("Optimal sodium:potassium ratio")
     if fat_quality_score >= 12:
         strengths.append("High-quality fat sources")
@@ -1148,7 +1157,7 @@ def generate_markdown_report(analysis: Dict) -> str:
     else:
         implications.append("ℹ️ **Digestive health:** Increasing fiber would benefit gut microbiome, satiety, and metabolic health.")
 
-    if na_k_ratio < 1:
+    if na_k_mass_ratio < 1:
         implications.append("✅ **Cardiovascular health:** Excellent sodium:potassium balance supports healthy blood pressure.")
     else:
         implications.append("⚠️ **Blood pressure:** Elevated sodium:potassium ratio may increase cardiovascular strain. Add more fruits and vegetables.")
@@ -1194,6 +1203,13 @@ def generate_markdown_report(analysis: Dict) -> str:
         over = summary['sodium_mg']['mean'] - targets.get('sodium_mg_max', 0)
         recommendations.append(f"📉 **Reduce sodium:** Currently averaging {summary['sodium_mg']['mean']:.0f}mg/day. Target max is {targets.get('sodium_mg_max')}mg. Reduce by {over:.0f}mg daily.")
 
+    # Potassium
+    if summary['potassium_mg']['mean'] < targets.get('potassium_mg_min', 0):
+        gap = targets.get('potassium_mg_min', 0) - summary['potassium_mg']['mean']
+        recommendations.append(f"📈 **Increase potassium:** Currently averaging {summary['potassium_mg']['mean']:.0f}mg/day. Target is {targets.get('potassium_mg_min')}mg. Add {gap:.0f}mg more daily (vegetables, fruits, legumes).")
+    else:
+        recommendations.append(f"✅ **Potassium:** Excellent intake! Averaging {summary['potassium_mg']['mean']:.0f}mg/day (target: {targets.get('potassium_mg_min')}mg).")
+
     # Meal frequency
     if meal_freq.get('breakfast', 0) < days_logged * 0.9:
         recommendations.append(f"🍳 **Breakfast consistency:** Log breakfast more regularly. Currently logged {meal_freq.get('breakfast', 0)}/{days_logged} days.")
@@ -1205,8 +1221,8 @@ def generate_markdown_report(analysis: Dict) -> str:
         recommendations.append(f"🍽️ **Dinner consistency:** Log dinner more regularly. Currently logged {meal_freq.get('dinner', 0)}/{days_logged} days.")
 
     # Sodium:potassium
-    if na_k_ratio > 1:
-        recommendations.append(f"🥦 **Increase potassium:** Your sodium:potassium ratio is {na_k_ratio:.2f}:1. Aim for <1:1 by eating more vegetables, fruits, and legumes.")
+    if na_k_mass_ratio > 1:
+        recommendations.append(f"🥦 **Increase potassium:** Your sodium:potassium ratio is {na_k_mass_ratio:.2f}:1. Aim for <1:1 by eating more vegetables, fruits, and legumes.")
 
     for rec in recommendations:
         report.append(f"- {rec}")
