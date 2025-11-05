@@ -1,7 +1,7 @@
 ---
 title: Food Data Bank Index
 description: Auto-generated index of all dishes in the food data bank
-generated: 2025-11-05 10:51:28 UTC
+generated: 2025-11-05 10:54:43 UTC
 ---
 
 # Food Data Bank Index
@@ -11,11 +11,11 @@ generated: 2025-11-05 10:51:28 UTC
 
 ## Overview
 
-Total dishes: 69
+Total dishes: 77
 
 - **Venues**: 9 categories
 - **Packaged Products**: 7 categories
-- **Generic Items**: 10 categories
+- **Generic Items**: 12 categories
 
 ---
 
@@ -194,13 +194,22 @@ Total dishes: 69
 
 - [Margarita (Classic)](food-data-bank/generic/bar-restaurant/margarita_classic_v1.md) {#margarita_classic_v1}
 
+## Generic: Chavroux Packaged Product
+
+*Location: `data/food-data-bank/generic/chavroux-packaged-product/`*
+
+**1 dishes:**
+
+- [Chavroux Mild & Creamy Goat's Cheese (12g slice)](food-data-bank/generic/chavroux-packaged-product/chavroux_mild_creamy_goat_cheese_12g_chavroux_v1.md) {#chavroux_mild_creamy_goat_cheese_12g_chavroux_v1}
+
 ## Generic: Fresh Produce
 
 *Location: `data/food-data-bank/generic/fresh-produce/`*
 
-**2 dishes:**
+**3 dishes:**
 
 - [Clementine (Fresh Fruit)](food-data-bank/generic/fresh-produce/clementine_fresh_fruit_v1.md) {#clementine_fresh_fruit_v1}
+- [Kiwi (Small, Fresh)](food-data-bank/generic/fresh-produce/kiwi_small_70g_generic-fresh-produce_v1.md) {#kiwi_small_70g_generic-fresh-produce_v1}
 - [Persimmon (Fresh Fruit)](food-data-bank/generic/fresh-produce/persimmon_fresh_fruit_generic_v1.md) {#persimmon_fresh_fruit_generic_v1}
 
 ## Generic: Germes
@@ -219,14 +228,25 @@ Total dishes: 69
 
 - [Banana (Raw, 150g)](food-data-bank/generic/grocery/banana_raw_150g_v1.md) {#banana_raw_150g_v1}
 
+## Generic: Homemade Prepared At Home
+
+*Location: `data/food-data-bank/generic/homemade-prepared-at-home/`*
+
+**3 dishes:**
+
+- [Crispbread with Avocado](food-data-bank/generic/homemade-prepared-at-home/crispbread_avocado_30g_homemade_v1.md) {#crispbread_avocado_30g_homemade_v1}
+- [Crispbread with Chavroux Goat's Cheese](food-data-bank/generic/homemade-prepared-at-home/crispbread_goat_cheese_29g_homemade_v1.md) {#crispbread_goat_cheese_29g_homemade_v1}
+- [Crispbread with Smoked Trout](food-data-bank/generic/homemade-prepared-at-home/crispbread_smoked_trout_18g_homemade_v1.md) {#crispbread_smoked_trout_18g_homemade_v1}
+
 ## Generic: Ingredients
 
 *Location: `data/food-data-bank/generic/ingredients/`*
 
-**12 dishes:**
+**13 dishes:**
 
 - [Avocado (Fresh, 75g)](food-data-bank/generic/ingredients/avocado_fresh_75g_generic-ingredients_v1.md) {#avocado_fresh_75g_generic-ingredients_v1}
 - [Blueberries - 150 g](food-data-bank/generic/ingredients/blueberries_150g_v1.md) {#blueberries_150g_v1}
+- [Egg, Hard-Boiled (Medium, 44g)](food-data-bank/generic/ingredients/egg_hard_boiled_44g_generic-ingredients_v1.md) {#egg_hard_boiled_44g_generic-ingredients_v1}
 - [Greek Yogurt 0% Fat - 200 g](food-data-bank/generic/ingredients/greek_yogurt_0pct_200g_v1.md) {#greek_yogurt_0pct_200g_v1}
 - [Hazelnuts, 30 g](food-data-bank/generic/ingredients/hazelnuts_30g_v1.md) {#hazelnuts_30g_v1}
 - [Mixed Pineapple/Mango/Passion Fruit (150 g)](food-data-bank/generic/ingredients/pine_mango_passion_150g_v1.md) {#pine_mango_passion_150g_v1}
