@@ -182,3 +182,122 @@ entries:
     on each), 3 crispbreads topped with avocado (with added salt sprinkle on each),
     1 crispbread topped with 2 slices goat's cheese (no added salt). 2 boiled eggs
     (no added salt). 1 small kiwi. 1 large persimmon (240g).
+- timestamp: '2025-11-05T14:33:41+00:00'
+  items:
+  - name: Protein Granola Yogurt (SHK)
+    food_bank_id: protein_granola_yogurt_shk_v1
+    quantity: 1
+    unit: portion
+    nutrition:
+      energy_kcal: 264
+      protein_g: 35.0
+      fat_g: 7.6
+      sat_fat_g: 1.5
+      mufa_g: 2.0
+      pufa_g: 3.9
+      trans_fat_g: 0.1
+      cholesterol_mg: 0
+      sugar_g: 12.0
+      fiber_total_g: 5.1
+      fiber_soluble_g: 2.6
+      fiber_insoluble_g: 2.5
+      sodium_mg: 125
+      potassium_mg: 465
+      iodine_ug: 12
+      magnesium_mg: 95
+      calcium_mg: 230
+      iron_mg: 4
+      zinc_mg: 3
+      vitamin_c_mg: 2
+      manganese_mg: 1
+      polyols_g: 0.0
+      carbs_available_g: 18.0
+      carbs_total_g: 23.1
+  - name: Grilled Salmon Fillet (Simple Health Kitchen)
+    food_bank_id: grilled_salmon_fillet_shk_v1
+    quantity: 1
+    unit: portion
+    nutrition:
+      energy_kcal: 260
+      protein_g: 28.0
+      fat_g: 16.0
+      sat_fat_g: 3.1
+      mufa_g: 6.2
+      pufa_g: 6.7
+      trans_fat_g: 0
+      cholesterol_mg: 80
+      sugar_g: 0
+      fiber_total_g: 0
+      fiber_soluble_g: 0
+      fiber_insoluble_g: 0
+      sodium_mg: 370
+      potassium_mg: 486
+      iodine_ug: 17
+      magnesium_mg: 38
+      calcium_mg: 19
+      iron_mg: 0
+      zinc_mg: 1
+      vitamin_c_mg: 5
+      manganese_mg: 0
+      polyols_g: 0.0
+      carbs_available_g: 1.0
+      carbs_total_g: 1.4
+  - name: Sweet Potato Wedges (Simple Health Kitchen)
+    food_bank_id: sweet_potato_wedges_shk_v1
+    quantity: 1
+    unit: portion
+    nutrition:
+      energy_kcal: 163
+      protein_g: 2.0
+      fat_g: 1.9
+      sat_fat_g: 1.0
+      mufa_g: 0.5
+      pufa_g: 0.4
+      trans_fat_g: 0.1
+      cholesterol_mg: 0
+      sugar_g: 10.1
+      fiber_total_g: 5.1
+      fiber_soluble_g: 1.4
+      fiber_insoluble_g: 3.7
+      sodium_mg: 350
+      potassium_mg: 734
+      iodine_ug: 2
+      magnesium_mg: 42
+      calcium_mg: 59
+      iron_mg: 1
+      zinc_mg: 0
+      vitamin_c_mg: 30
+      manganese_mg: 0
+      polyols_g: 0
+      carbs_available_g: 32.0
+      carbs_total_g: 37.1
+  - name: Zesty Lemon Broccoli (Simple Health Kitchen)
+    food_bank_id: zesty_lemon_broccoli_shk_v1
+    quantity: 1
+    unit: portion
+    nutrition:
+      energy_kcal: 109
+      protein_g: 4.5
+      fat_g: 4.7
+      sat_fat_g: 0.8
+      mufa_g: 3.2
+      pufa_g: 0.8
+      trans_fat_g: 0
+      cholesterol_mg: 0
+      sugar_g: 2.7
+      fiber_total_g: 3.5
+      fiber_soluble_g: 1.1
+      fiber_insoluble_g: 2.4
+      sodium_mg: 150
+      potassium_mg: 556
+      iodine_ug: 1
+      magnesium_mg: 40
+      calcium_mg: 76
+      iron_mg: 1
+      zinc_mg: 1
+      vitamin_c_mg: 123
+      manganese_mg: 0
+      polyols_g: 0
+      carbs_available_g: 10.5
+      carbs_total_g: 14.0
+  notes: Simple Health Kitchen lunch. Protein granola yogurt while waiting, then salmon fillet with sweet potato wedges and zesty lemon broccoli.
