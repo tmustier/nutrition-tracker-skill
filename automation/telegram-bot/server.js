@@ -82,11 +82,14 @@ function handleHealthCheck(req, res) {
   logRequest(req, res);
 
   const health = webhook.healthCheck();
+  const isDegraded = !WEBHOOK_URL && config.app.environment === 'production';
 
   res.writeHead(200, { 'Content-Type': 'application/json' });
   res.end(JSON.stringify({
-    status: 'ok',
-    message: 'Nutrition Tracker Telegram Bot is running',
+    status: isDegraded ? 'degraded' : 'ok',
+    message: isDegraded
+      ? 'Bot is running in DEGRADED MODE - webhook disabled due to invalid URL'
+      : 'Nutrition Tracker Telegram Bot is running',
     version: '1.0.0',
     environment: config.app.environment,
     configuration: health,
@@ -95,7 +98,11 @@ function handleHealthCheck(req, res) {
       setup: 'GET /setup',
       webhook: 'POST /webhook'
     },
-    webhook_url: WEBHOOK_URL
+    webhook_url: WEBHOOK_URL || 'NOT CONFIGURED (degraded mode)',
+    ...(isDegraded && {
+      warning: 'Webhook registration is disabled. Bot will not respond to messages.',
+      fix: 'Set WEBHOOK_URL or ensure RAILWAY_PUBLIC_DOMAIN is available'
+    })
   }, null, 2));
 }
 
@@ -105,6 +112,24 @@ function handleHealthCheck(req, res) {
  */
 async function handleSetup(req, res) {
   logRequest(req, res);
+
+  // Security: Prevent webhook setup if URL is null (degraded mode)
+  if (!WEBHOOK_URL) {
+    console.error('❌ Webhook setup blocked: No valid webhook URL configured');
+    res.writeHead(400, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({
+      success: false,
+      error: 'Webhook setup disabled',
+      message: 'Bot is running in degraded mode due to invalid webhook URL configuration',
+      details: 'In production, HTTPS webhook URL is required for security. HTTP URLs are blocked.',
+      help: {
+        railway: 'Ensure RAILWAY_PUBLIC_DOMAIN is set (usually automatic)',
+        manual: 'Set WEBHOOK_URL=https://your-app.railway.app in environment variables',
+        testing: 'Set NODE_ENV=development for local testing with HTTP'
+      }
+    }, null, 2));
+    return;
+  }
 
   try {
     const webhookUrl = `${WEBHOOK_URL}/webhook`;

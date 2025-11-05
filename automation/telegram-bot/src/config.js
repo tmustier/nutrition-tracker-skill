@@ -36,17 +36,24 @@ function validateConfig(config) {
     if (!config.telegram.webhookUrl) {
       missing.push('telegram.webhookUrl (required in production)');
     } else if (!config.telegram.webhookUrl.startsWith('https://')) {
-      // Don't throw immediately - allow server to start for debugging
-      console.error('❌ Security Error: HTTPS is required for webhook URL in production environment.');
+      // Security: Nullify webhook URL to prevent insecure webhook registration
+      console.error('');
+      console.error('🚨 SECURITY ERROR: HTTP webhook URL detected in production');
       console.error('   Current webhook URL:', config.telegram.webhookUrl);
       console.error('   HTTP webhooks are vulnerable to man-in-the-middle attacks.');
       console.error('');
       console.error('   💡 For Railway deployment:');
-      console.error('      - Set WEBHOOK_URL to https://your-app.railway.app (replace with your domain)');
-      console.error('      - OR ensure RAILWAY_PUBLIC_DOMAIN is set by Railway automatically');
-      console.error('      - OR set NODE_ENV to development for testing');
+      console.error('      1. Ensure RAILWAY_PUBLIC_DOMAIN is set by Railway (usually automatic)');
+      console.error('      2. OR set WEBHOOK_URL=https://your-app.railway.app manually');
+      console.error('      3. OR set NODE_ENV=development for local testing');
       console.error('');
-      console.warn('⚠️  Bot will start but webhook registration will likely fail');
+      console.error('   ⚠️  DEGRADED MODE: Server will start for diagnostics only');
+      console.error('   ⚠️  Webhook registration is DISABLED for security');
+      console.error('   ⚠️  Bot will NOT respond to messages until webhook URL is fixed');
+      console.error('');
+
+      // Nullify webhook URL to prevent insecure registration
+      config.telegram.webhookUrl = null;
     }
 
     // Recommend webhook secret in production

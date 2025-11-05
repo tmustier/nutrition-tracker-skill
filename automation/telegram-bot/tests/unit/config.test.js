@@ -147,7 +147,7 @@ describe('Configuration Validation', () => {
             throw new Error('GitHub owner and repo are required');
           }
         });
-        
+
         const config = {
           github: {
             token: 'test_token',
@@ -155,9 +155,100 @@ describe('Configuration Validation', () => {
             repo: ''
           }
         };
-        
+
         validateConfig(config);
       }).toThrow('GitHub owner and repo are required');
+    });
+  });
+
+  describe('HTTPS Webhook Security Validation', () => {
+    it('should nullify HTTP webhook URL in production (degraded mode)', () => {
+      // Simulate production with HTTP localhost fallback
+      process.env.NODE_ENV = 'production';
+      process.env.TELEGRAM_BOT_TOKEN = 'test_token';
+      process.env.ANTHROPIC_API_KEY = 'test_key';
+      process.env.GITHUB_TOKEN = 'test_github';
+      process.env.GITHUB_OWNER = 'test_owner';
+      process.env.GITHUB_REPO = 'test_repo';
+      process.env.GITHUB_BRANCH = 'test_branch';
+
+      // No WEBHOOK_URL or RAILWAY_PUBLIC_DOMAIN set
+      delete process.env.WEBHOOK_URL;
+      delete process.env.RAILWAY_PUBLIC_DOMAIN;
+
+      // Mock console.error to prevent test output pollution
+      const originalConsoleError = console.error;
+      console.error = jest.fn();
+
+      delete require.cache[require.resolve('../../src/config')];
+      const config = require('../../src/config');
+
+      // Webhook URL should be nullified for security
+      expect(config.telegram.webhookUrl).toBeNull();
+
+      // Should have logged security error
+      expect(console.error).toHaveBeenCalledWith(
+        expect.stringContaining('SECURITY ERROR')
+      );
+
+      // Restore console.error
+      console.error = originalConsoleError;
+    });
+
+    it('should allow HTTP webhook URL in development', () => {
+      // Development mode allows HTTP for testing
+      process.env.NODE_ENV = 'development';
+      process.env.TELEGRAM_BOT_TOKEN = 'test_token';
+      process.env.ANTHROPIC_API_KEY = 'test_key';
+      process.env.GITHUB_TOKEN = 'test_github';
+      process.env.GITHUB_OWNER = 'test_owner';
+      process.env.GITHUB_REPO = 'test_repo';
+      process.env.GITHUB_BRANCH = 'test_branch';
+
+      delete process.env.WEBHOOK_URL;
+      delete process.env.RAILWAY_PUBLIC_DOMAIN;
+
+      delete require.cache[require.resolve('../../src/config')];
+      const config = require('../../src/config');
+
+      // Should keep HTTP localhost URL in development
+      expect(config.telegram.webhookUrl).toBe('http://localhost:3000');
+    });
+
+    it('should allow HTTPS webhook URL in production', () => {
+      process.env.NODE_ENV = 'production';
+      process.env.TELEGRAM_BOT_TOKEN = 'test_token';
+      process.env.ANTHROPIC_API_KEY = 'test_key';
+      process.env.GITHUB_TOKEN = 'test_github';
+      process.env.GITHUB_OWNER = 'test_owner';
+      process.env.GITHUB_REPO = 'test_repo';
+      process.env.GITHUB_BRANCH = 'test_branch';
+      process.env.WEBHOOK_URL = 'https://secure-app.railway.app';
+
+      delete require.cache[require.resolve('../../src/config')];
+      const config = require('../../src/config');
+
+      // HTTPS URL should be preserved
+      expect(config.telegram.webhookUrl).toBe('https://secure-app.railway.app');
+    });
+
+    it('should auto-detect Railway domain with HTTPS in production', () => {
+      process.env.NODE_ENV = 'production';
+      process.env.TELEGRAM_BOT_TOKEN = 'test_token';
+      process.env.ANTHROPIC_API_KEY = 'test_key';
+      process.env.GITHUB_TOKEN = 'test_github';
+      process.env.GITHUB_OWNER = 'test_owner';
+      process.env.GITHUB_REPO = 'test_repo';
+      process.env.GITHUB_BRANCH = 'test_branch';
+      process.env.RAILWAY_PUBLIC_DOMAIN = 'myapp.railway.app';
+
+      delete process.env.WEBHOOK_URL;
+
+      delete require.cache[require.resolve('../../src/config')];
+      const config = require('../../src/config');
+
+      // Should auto-construct HTTPS URL from Railway domain
+      expect(config.telegram.webhookUrl).toBe('https://myapp.railway.app');
     });
   });
 
