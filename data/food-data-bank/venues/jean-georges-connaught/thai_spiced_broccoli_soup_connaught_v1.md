@@ -44,32 +44,32 @@ per_portion:
   magnesium_mg: 25
   calcium_mg: 45
   iron_mg: 1
-  zinc_mg: 0
+  zinc_mg: 0.5
   vitamin_c_mg: 40
-  manganese_mg: 0
+  manganese_mg: 0.3
   copper_mg: 0.3
   polyols_g: 0.0
   carbs_available_g: 9.5
   carbs_total_g: 13.0
-  selenium_ug: 0
+  selenium_ug: 4
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 99
   chloride_mg: 0
   sulfur_mg: 0
-  vitamin_a_ug: 0
+  vitamin_a_ug: 47
   vitamin_d_ug: 0
-  vitamin_e_mg: 0
-  vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
-  vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
-  vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
+  vitamin_e_mg: 1.2
+  vitamin_k_ug: 152
+  vitamin_b1_mg: 0.1
+  vitamin_b2_mg: 0.18
+  vitamin_b3_mg: 1.0
+  vitamin_b5_mg: 0.9
+  vitamin_b6_mg: 0.26
+  vitamin_b7_ug: 2
+  vitamin_b9_ug: 95
   vitamin_b12_ug: 0
-  choline_mg: 0
+  choline_mg: 29
   omega3_epa_mg: 0
   omega3_dha_mg: 0
   omega3_ala_g: 0
@@ -163,4 +163,29 @@ change_log:
   - per_portion.polyols_g
   - version
   sources: []
+- timestamp: "2025-11-05T12:40:00+00:00"
+  updated_by: "LLM: Claude Sonnet 4.5 (Agent 3)"
+  reason: "Schema v2 enrichment: Complete nutrient profile with USDA data for broccoli (~150g in 300g soup). Added 17 missing nutrients including B-complex vitamins, vitamin K (152µg), vitamin A (47µg), phosphorus (99mg), and minerals."
+  fields_changed:
+  - per_portion.zinc_mg
+  - per_portion.manganese_mg
+  - per_portion.selenium_ug
+  - per_portion.phosphorus_mg
+  - per_portion.vitamin_a_ug
+  - per_portion.vitamin_d_ug
+  - per_portion.vitamin_e_mg
+  - per_portion.vitamin_k_ug
+  - per_portion.vitamin_b1_mg
+  - per_portion.vitamin_b2_mg
+  - per_portion.vitamin_b3_mg
+  - per_portion.vitamin_b5_mg
+  - per_portion.vitamin_b6_mg
+  - per_portion.vitamin_b7_ug
+  - per_portion.vitamin_b9_ug
+  - per_portion.vitamin_b12_ug
+  - per_portion.choline_mg
+  - version
+  sources:
+  - url: https://fdc.nal.usda.gov/
+    note: "USDA broccoli data scaled for ~150g broccoli content in 300g soup. B-vitamins: B1=0.1mg, B2=0.18mg, B3=1.0mg, B5=0.9mg, B6=0.26mg, B9=95µg. Vitamin K=152µg (excellent source), vitamin A=47µg, E=1.2mg. Minerals: phosphorus=99mg, manganese=0.3mg, selenium=4µg, zinc=0.5mg, choline=29mg. B12=0 (true zero - plant-based soup). Confidence: MEDIUM-HIGH (broccoli content estimated from portion size)"
 ```

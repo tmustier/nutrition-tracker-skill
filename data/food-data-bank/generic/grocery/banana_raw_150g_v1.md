@@ -55,7 +55,7 @@ per_portion:
   molybdenum_ug: 0
   phosphorus_mg: 33
   chloride_mg: 0
-  sulfur_mg: 0
+  sulfur_g: 0.005
   vitamin_a_ug: 4.5
   vitamin_d_ug: 0
   vitamin_e_mg: 0.2
@@ -109,6 +109,13 @@ change_log:
   - note: 'ALA omega-3: ~0.008g/100g (7.6mg per 100g from nutritional research)'
     url: 'https://www.myfooddata.com/articles/foods-high-in-ALA.php'
   data_notes: 'Scaled from per-100g to 150g portion. Chromium and molybdenum remain 0 (not measured/reported in USDA database for bananas).'
+- timestamp: '2025-11-05T22:30:00+00:00'
+  updated_by: 'Agent 8 - Claude Sonnet 4.5'
+  reason: 'Schema compliance fix: Added sulfur_g field (was sulfur_mg). Sulfur estimated from protein content (fruit: ~3mg S per g protein).'
+  fields_changed: [per_portion.sulfur_g]
+  sources:
+  - note: 'Sulfur content estimated at 0.005g based on 1.6g protein × 3mg/g coefficient for fruits. Bananas are very low in sulfur-containing amino acids.'
+    url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4438303/'
 - timestamp: 2025-11-01T09:00:00+0000
   updated_by: Claude Code (Sonnet 4.5)
   reason: Initial entry for banana tracking - user consumed in breakfast smoothie

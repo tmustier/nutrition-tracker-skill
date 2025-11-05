@@ -60,7 +60,7 @@ per_portion:
   molybdenum_ug: 0
   phosphorus_mg: 172
   chloride_mg: 0
-  sulfur_mg: 0
+  sulfur_g: 0.062
   vitamin_a_ug: 46
   vitamin_k_ug: 0.34
   vitamin_b1_mg: 0.09
@@ -153,4 +153,12 @@ change_log:
   - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/169593/nutrients
     note: "USDA FoodData Central - Cocoa powder, unsweetened: B5 ~1mg/100g, LA ~0.4g/100g. Small contributions from 2.5g cocoa included in totals."
   notes: "Vitamin B7 (biotin), chromium, and molybdenum remain 0 (not routinely analyzed/reported in USDA FoodData Central for yogurt products per USDA API Research). Fiber soluble (0.2g) and insoluble (0.6g) UNCHANGED - these values are from cocoa powder, not dairy. Cocoa powder contains dietary fiber; only PURE dairy has TRUE ZERO fiber."
+- timestamp: "2025-11-05T22:30:00+00:00"
+  updated_by: "Agent 8 - Claude Sonnet 4.5"
+  reason: "Schema compliance fix: Added sulfur_g field (was sulfur_mg). Sulfur estimated from protein content (dairy: ~10.5mg S per g protein)."
+  fields_changed:
+  - per_portion.sulfur_g
+  sources:
+  - note: "Sulfur content estimated at 0.062g based on 5.9g protein × 10.5mg/g coefficient for dairy. Milk proteins (whey, casein) are moderate sources of sulfur-containing amino acids."
+    url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4438303/"
 ```

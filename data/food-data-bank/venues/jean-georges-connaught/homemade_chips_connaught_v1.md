@@ -2,9 +2,9 @@
 
 ```yaml
 id: homemade_chips_connaught_v1
-version: 4
+version: 5
 schema_version: 2
-last_verified: "2025-11-02"
+last_verified: "2025-11-05"
 source:
   venue: Jean-Georges at The Connaught, London
   menu_page: https://deliveroo.co.uk/menu/london/mayfair/jean-georges-at-the-connaught
@@ -49,29 +49,29 @@ per_portion:
   polyols_g: 0.0
   carbs_available_g: 57.2
   carbs_total_g: 62.1
-  selenium_ug: 0
+  selenium_ug: 1.4
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 188
   chloride_mg: 0
   sulfur_mg: 0
   vitamin_a_ug: 0
   vitamin_d_ug: 0
-  vitamin_e_mg: 0
-  vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
-  vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
+  vitamin_e_mg: 2.6
+  vitamin_k_ug: 17
+  vitamin_b1_mg: 0.26
+  vitamin_b2_mg: 0.06
+  vitamin_b3_mg: 4.5
+  vitamin_b5_mg: 0.9
+  vitamin_b6_mg: 0.56
   vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
+  vitamin_b9_ug: 45
   vitamin_b12_ug: 0
-  choline_mg: 0
+  choline_mg: 56
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.6
+  omega6_la_g: 7.4
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -158,4 +158,27 @@ change_log:
   - per_portion.polyols_g
   - version
   sources: []
+- timestamp: "2025-11-05T20:00:00+00:00"
+  updated_by: "Claude Code Agent 5 (Sonnet 4.5)"
+  reason: "Phase 3 enrichment: Added 13 missing nutrients from USDA FoodData Central french fries data"
+  fields_changed:
+  - version
+  - last_verified
+  - selenium_ug (0 → 1.4)
+  - phosphorus_mg (0 → 188)
+  - vitamin_e_mg (0 → 2.6)
+  - vitamin_k_ug (0 → 17)
+  - vitamin_b1_mg (0 → 0.26)
+  - vitamin_b2_mg (0 → 0.06)
+  - vitamin_b3_mg (0 → 4.5)
+  - vitamin_b5_mg (0 → 0.9)
+  - vitamin_b6_mg (0 → 0.56)
+  - vitamin_b9_ug (0 → 45)
+  - choline_mg (0 → 56)
+  - omega3_ala_g (0 → 0.6)
+  - omega6_la_g (0 → 7.4)
+  sources:
+  - url: "https://foodstruct.com/food/french-fries"
+    note: "USDA-derived french fries nutrition data per 100g, scaled by 1.5x for ~150g portion"
+  - note: "Scaling factor calculated from energy: 465.4 kcal ÷ 312 kcal/100g = 1.49 ≈ 1.5"
 ```

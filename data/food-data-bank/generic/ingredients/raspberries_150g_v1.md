@@ -50,7 +50,7 @@ per_portion:
   molybdenum_ug: 0
   phosphorus_mg: 43.5
   chloride_mg: 0
-  sulfur_mg: 0
+  sulfur_g: 0.006
   vitamin_a_ug: 3.0
   vitamin_d_ug: 0
   vitamin_e_mg: 1.31
@@ -114,4 +114,11 @@ change_log:
   {note: 'Biotin (B7): Not routinely analyzed by USDA for raspberries; confirmed
       0 per USDA_API_RESEARCH.md. Chromium and molybdenum: Also not routinely analyzed
       for berries; limited coverage (<50% of foods).'}]
+- timestamp: '2025-11-05T22:30:00+00:00'
+  updated_by: 'Agent 8 - Claude Sonnet 4.5'
+  reason: 'Schema compliance fix: Added sulfur_g field (was sulfur_mg). Sulfur estimated from protein content (fruit: ~3mg S per g protein).'
+  fields_changed: [per_portion.sulfur_g]
+  sources:
+  - note: 'Sulfur content estimated at 0.006g based on 1.8g protein × 3mg/g coefficient for fruits. Berries are very low in sulfur-containing amino acids.'
+    url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4438303/'
 ```

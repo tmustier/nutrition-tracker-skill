@@ -37,37 +37,37 @@ per_portion:
   iodine_ug: 17
   magnesium_mg: 38
   calcium_mg: 19
-  iron_mg: 0
+  iron_mg: 0.8
   zinc_mg: 1
   selenium_ug: 50
   vitamin_c_mg: 5
   vitamin_d_ug: 13.0
-  vitamin_e_mg: 0
-  manganese_mg: 0
-  copper_mg: 0
+  vitamin_e_mg: 1.1
+  manganese_mg: 0.02
+  copper_mg: 0.25
   polyols_g: 0.0
   carbs_available_g: 1.0
   carbs_total_g: 1.4
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 240
   chloride_mg: 0
   sulfur_mg: 0
-  vitamin_a_ug: 0
-  vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
-  vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
-  vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
-  vitamin_b12_ug: 0
-  choline_mg: 0
-  omega3_epa_mg: 0
-  omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  vitamin_a_ug: 12
+  vitamin_k_ug: 0.4
+  vitamin_b1_mg: 0.2
+  vitamin_b2_mg: 0.2
+  vitamin_b3_mg: 8.7
+  vitamin_b5_mg: 1.5
+  vitamin_b6_mg: 0.6
+  vitamin_b7_ug: 5
+  vitamin_b9_ug: 25
+  vitamin_b12_ug: 3.2
+  choline_mg: 75
+  omega3_epa_mg: 620
+  omega3_dha_mg: 800
+  omega3_ala_g: 0.1
+  omega6_la_g: 0.17
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -154,4 +154,32 @@ change_log:
   sources:
   - url: https://fdc.nal.usda.gov/
     note: "USDA FoodData Central: Salmon selenium ~50 µg/100g, vitamin D ~13 µg/100g. Estimated 100g portion. Confidence: MEDIUM (selenium), HIGH (vitamin D - fatty fish is one of best natural sources)"
+- timestamp: "2025-11-05T12:30:00+00:00"
+  updated_by: "LLM: Claude Sonnet 4.5 (Agent 3)"
+  reason: "Schema v2 enrichment: Complete nutrient profile with USDA FoodData Central data for farmed Atlantic salmon (100g portion). Added 18 missing nutrients including B-complex vitamins, phosphorus, minerals, and omega-3 fatty acids (EPA 620mg, DHA 800mg)."
+  fields_changed:
+  - per_portion.iron_mg
+  - per_portion.vitamin_e_mg
+  - per_portion.manganese_mg
+  - per_portion.copper_mg
+  - per_portion.phosphorus_mg
+  - per_portion.vitamin_a_ug
+  - per_portion.vitamin_k_ug
+  - per_portion.vitamin_b1_mg
+  - per_portion.vitamin_b2_mg
+  - per_portion.vitamin_b3_mg
+  - per_portion.vitamin_b5_mg
+  - per_portion.vitamin_b6_mg
+  - per_portion.vitamin_b7_ug
+  - per_portion.vitamin_b9_ug
+  - per_portion.vitamin_b12_ug
+  - per_portion.choline_mg
+  - per_portion.omega3_epa_mg
+  - per_portion.omega3_dha_mg
+  - per_portion.omega3_ala_g
+  - per_portion.omega6_la_g
+  - version
+  sources:
+  - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/175167/nutrients
+    note: "USDA FDC 175167 - Farmed Atlantic Salmon, raw. B-vitamins: B1=0.2mg, B2=0.2mg, B3=8.7mg, B5=1.5mg, B6=0.6mg, B12=3.2µg per 100g. Phosphorus=240mg. Omega-3: EPA=620mg, DHA=800mg per 100g. Vitamin A=12µg, E=1.1mg, K=0.4µg. Iron=0.8mg, copper=0.25mg, manganese=0.02mg, choline=75mg. Confidence: HIGH (direct USDA match for salmon fillet)"
 ```

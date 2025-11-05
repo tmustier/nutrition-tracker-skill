@@ -2,9 +2,9 @@
 
 ```yaml
 id: salmon_sushi_set_panzers_v1
-version: 1
+version: 2
 schema_version: 2
-last_verified: 2025-11-04
+last_verified: 2025-11-05
 source:
   venue: Panzer's Delicatessen & Grocery
   menu_page: "https://panzers.co.uk/sushi/"
@@ -59,24 +59,24 @@ per_portion:
   vitamin_e_mg: 1.5
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 380
   chloride_mg: 0
   sulfur_mg: 0
-  vitamin_a_ug: 0
-  vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
-  vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
+  vitamin_a_ug: 77
+  vitamin_k_ug: 9
+  vitamin_b1_mg: 0.28
+  vitamin_b2_mg: 0.21
+  vitamin_b3_mg: 11.5
+  vitamin_b5_mg: 2.6
+  vitamin_b6_mg: 0.9
   vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
-  vitamin_b12_ug: 0
-  choline_mg: 0
-  omega3_epa_mg: 0
-  omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  vitamin_b9_ug: 34
+  vitamin_b12_ug: 4.2
+  choline_mg: 110
+  omega3_epa_mg: 1135
+  omega3_dha_mg: 1452
+  omega3_ala_g: 0.2
+  omega6_la_g: 0.5
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -118,4 +118,31 @@ change_log:
         note: "Standard sushi rice portions: nigiri 18-25g rice, maki roll 80-90g rice total"
       - url: "component_analysis"
         note: "Applied component-based estimation per ESTIMATE.md: identified all ingredients, estimated weights from standard portions and photos, calculated nutrition from USDA profiles, validated energy with Atwater formula"
+  - timestamp: "2025-11-05T20:45:00+00:00"
+    updated_by: "Claude Code Agent 5 (Sonnet 4.5)"
+    reason: "Phase 3 enrichment: Added 16 missing nutrients from USDA component data (salmon, rice, avocado)"
+    fields_changed:
+      - version
+      - last_verified
+      - phosphorus_mg (0 → 380)
+      - vitamin_a_ug (0 → 77)
+      - vitamin_k_ug (0 → 9)
+      - vitamin_b1_mg (0 → 0.28)
+      - vitamin_b2_mg (0 → 0.21)
+      - vitamin_b3_mg (0 → 11.5)
+      - vitamin_b5_mg (0 → 2.6)
+      - vitamin_b6_mg (0 → 0.9)
+      - vitamin_b9_ug (0 → 34)
+      - vitamin_b12_ug (0 → 4.2)
+      - choline_mg (0 → 110)
+      - omega3_epa_mg (0 → 1135)
+      - omega3_dha_mg (0 → 1452)
+      - omega3_ala_g (0 → 0.2)
+      - omega6_la_g (0 → 0.5)
+    sources:
+      - url: "https://foodstruct.com/food/fish-salmon-atlantic-farmed-raw"
+        note: "USDA farmed Atlantic salmon per 100g, scaled by 1.32x for 132g salmon"
+      - note: "Salmon (132g): EPA 1135mg, DHA 1452mg, vitamin B3 11.5mg, B12 4.2µg, phosphorus 317mg"
+      - note: "Rice (200g) + avocado (40g) contributions: phosphorus +60mg, vitamin K +9µg"
+      - note: "EXCEPTIONAL omega-3 source: 2587mg total omega-3 (EPA+DHA) per portion"
 ```

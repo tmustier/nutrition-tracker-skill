@@ -34,43 +34,43 @@ per_portion:
   mufa_g: 6
   pufa_g: 2.6
   trans_fat_g: 0
-  cholesterol_mg: 0
+  cholesterol_mg: 30
   sugar_g: 2
   fiber_total_g: 0.1
   fiber_soluble_g: 0
   fiber_insoluble_g: 0.1
   sodium_mg: 179
-  potassium_mg: 0
+  potassium_mg: 77
   iodine_ug: 3
-  magnesium_mg: 0
+  magnesium_mg: 6
   calcium_mg: 2
   iron_mg: 0.9
   zinc_mg: 0.7
   vitamin_c_mg: 1
-  manganese_mg: 0
+  manganese_mg: 0.02
   polyols_g: 0
   carbs_available_g: 12
   carbs_total_g: 12
-  copper_mg: 0
-  selenium_ug: 0
+  copper_mg: 0.08
+  selenium_ug: 5
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 79
   chloride_mg: 0
   sulfur_mg: 0
-  vitamin_a_ug: 0
-  vitamin_d_ug: 0
-  vitamin_e_mg: 0
-  vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
-  vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
-  vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
-  vitamin_b12_ug: 0
-  choline_mg: 0
+  vitamin_a_ug: 5
+  vitamin_d_ug: 0.1
+  vitamin_e_mg: 0.3
+  vitamin_k_ug: 1
+  vitamin_b1_mg: 0.1
+  vitamin_b2_mg: 0.15
+  vitamin_b3_mg: 2.0
+  vitamin_b5_mg: 0.5
+  vitamin_b6_mg: 0.07
+  vitamin_b7_ug: 1
+  vitamin_b9_ug: 9
+  vitamin_b12_ug: 0.1
+  choline_mg: 20
   omega3_epa_mg: 0
   omega3_dha_mg: 0
   omega3_ala_g: 0
@@ -123,4 +123,32 @@ change_log:
   minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
   acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
   fields initialized to 0.'
+- timestamp: "2025-11-05T12:55:00+00:00"
+  updated_by: "LLM: Claude Sonnet 4.5 (Agent 3)"
+  reason: "Schema v2 enrichment: Complete nutrient profile for Peking duck pancake (35g duck + 15g pancake + condiments). Added 19 missing nutrients from duck meat and enriched flour. B-vitamins rich from duck (B3=2.0mg, B5=0.5mg). Corrected cholesterol to 30mg (duck contains cholesterol). Phosphorus (79mg), choline (20mg)."
+  fields_changed:
+  - per_portion.cholesterol_mg
+  - per_portion.potassium_mg
+  - per_portion.magnesium_mg
+  - per_portion.manganese_mg
+  - per_portion.copper_mg
+  - per_portion.selenium_ug
+  - per_portion.phosphorus_mg
+  - per_portion.vitamin_a_ug
+  - per_portion.vitamin_d_ug
+  - per_portion.vitamin_e_mg
+  - per_portion.vitamin_k_ug
+  - per_portion.vitamin_b1_mg
+  - per_portion.vitamin_b2_mg
+  - per_portion.vitamin_b3_mg
+  - per_portion.vitamin_b5_mg
+  - per_portion.vitamin_b6_mg
+  - per_portion.vitamin_b7_ug
+  - per_portion.vitamin_b9_ug
+  - per_portion.vitamin_b12_ug
+  - per_portion.choline_mg
+  - version
+  sources:
+  - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/172409/nutrients
+    note: "USDA FDC 172409 - Duck, domesticated, meat and skin, cooked, roasted (35g). Duck provides: B1=0.06mg, B2=0.1mg, B3=1.7mg, B5=0.4mg, B6=0.06mg, B12=0.1µg, phosphorus=55mg, choline=18mg, selenium=5µg, copper=0.08mg, vitamin A=5µg, D=0.1µg, E=0.2mg, K=1µg, potassium=77mg, magnesium=6mg, cholesterol=30mg. Pancake (15g enriched flour) adds: B1=0.03mg, B2=0.05mg, B3=0.24mg, B9=6µg, phosphorus=24mg. Confidence: HIGH (USDA duck + pancake components)"
 ```

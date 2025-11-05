@@ -52,7 +52,7 @@ per_portion:
   molybdenum_ug: 5
   phosphorus_mg: 105
   chloride_mg: 0
-  sulfur_mg: 0
+  sulfur_g: 0.008
   vitamin_a_ug: 2390
   vitamin_d_ug: 0
   vitamin_e_mg: 3.0
@@ -119,4 +119,9 @@ change_log:
   reason: 'Enriched with 8 additional nutrients: B5 (pantothenic acid), B7 (biotin), chromium, molybdenum, omega-3 ALA, omega-6 LA. Carrot juice provides modest amounts of trace minerals and B vitamins.'
   fields_changed: [version, per_portion.vitamin_b5_mg, per_portion.vitamin_b7_ug, per_portion.chromium_ug, per_portion.molybdenum_ug, per_portion.omega3_ala_g, per_portion.omega6_la_g]
   sources: [{note: 'USDA FoodData Central (FDC 170491) for B5, omega fatty acids; research literature for biotin (7% DV per serving). Carrot juice has minimal fiber (already documented) and trace chromium/molybdenum.', url: 'https://fdc.nal.usda.gov/'}]
+- timestamp: '2025-11-05T22:00:00+0000'
+  updated_by: 'Agent 8 - Claude Sonnet 4.5'
+  reason: 'Schema compliance fix: Added sulfur_g field (was sulfur_mg). Sulfur estimated from protein content (vegetables: ~3mg S per g protein).'
+  fields_changed: [per_portion.sulfur_g]
+  sources: [{note: 'Sulfur content estimated at 0.008g based on 2.4g protein × 3mg/g coefficient for vegetables. Sulfur primarily from sulfur-containing amino acids (methionine, cysteine).', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4438303/'}]
 ```

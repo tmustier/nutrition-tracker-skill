@@ -2,9 +2,9 @@
 
 ```yaml
 id: chilli_poached_eggs_leto_soho_v1
-version: 3
+version: 4
 schema_version: 2
-last_verified: "2025-11-02"
+last_verified: "2025-11-05"
 source:
   venue: L'ETO Caffe, Soho, London
   menu_page: https://deliveroo.co.uk/menu/london/soho/l-eto-caffe-soho
@@ -51,30 +51,30 @@ per_portion:
   copper_mg: 0.2
   selenium_ug: 41
   vitamin_d_ug: 2.0
-  vitamin_e_mg: 0
+  vitamin_e_mg: 1.6
   polyols_g: 0.0
   carbs_available_g: 40.3
   carbs_total_g: 43.7
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 400
   chloride_mg: 0
   sulfur_mg: 0
-  vitamin_a_ug: 0
-  vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
-  vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
+  vitamin_a_ug: 709
+  vitamin_k_ug: 410
+  vitamin_b1_mg: 0.52
+  vitamin_b2_mg: 1.1
+  vitamin_b3_mg: 3.2
+  vitamin_b5_mg: 1.8
+  vitamin_b6_mg: 0.26
   vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
-  vitamin_b12_ug: 0
-  choline_mg: 0
+  vitamin_b9_ug: 163
+  vitamin_b12_ug: 2.0
+  choline_mg: 312
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.035
+  omega6_la_g: 1.2
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -183,4 +183,32 @@ change_log:
   - per_portion.polyols_g
   - version
   sources: []
+- timestamp: "2025-11-05T20:30:00+00:00"
+  updated_by: "Claude Code Agent 5 (Sonnet 4.5)"
+  reason: "Phase 3 enrichment: Added 16 missing nutrients via component-based calculation from USDA data"
+  fields_changed:
+  - version
+  - last_verified
+  - vitamin_e_mg (0 → 1.6)
+  - phosphorus_mg (0 → 400)
+  - vitamin_a_ug (0 → 709)
+  - vitamin_k_ug (0 → 410)
+  - vitamin_b1_mg (0 → 0.52)
+  - vitamin_b2_mg (0 → 1.1)
+  - vitamin_b3_mg (0 → 3.2)
+  - vitamin_b5_mg (0 → 1.8)
+  - vitamin_b6_mg (0 → 0.26)
+  - vitamin_b9_ug (0 → 163)
+  - vitamin_b12_ug (0 → 2.0)
+  - choline_mg (0 → 312)
+  - omega3_ala_g (0 → 0.035)
+  - omega6_la_g (0 → 1.2)
+  sources:
+  - note: "Component-based enrichment from USDA data for 5 ingredients"
+  - note: "Eggs (100g): vitamin A 149µg, B12 1.11µg, choline 294mg, phosphorus 172mg"
+  - note: "Butter (22.2g): vitamin A 152µg, vitamin E 0.52mg, vitamin K 1.55µg"
+  - note: "Kale (50g): vitamin A 408µg, vitamin K 408µg (exceptional source)"
+  - note: "Greek yogurt (120g): B2 0.334mg, B12 0.90mg, phosphorus 162mg"
+  - note: "Sourdough (60g): B1 0.425mg, B3 2.890mg, B9 113µg, phosphorus 63mg"
+  - note: "Excellent source of vitamin A (709µg, ~79% DV) and vitamin K (410µg, ~342% DV)"
 ```

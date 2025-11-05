@@ -59,7 +59,7 @@ per_portion:
   molybdenum_ug: 0
   phosphorus_mg: 29
   chloride_mg: 0
-  sulfur_mg: 0
+  sulfur_g: 0.003
   vitamin_a_ug: 136
   vitamin_k_ug: 4.4
   vitamin_b1_mg: 0.05
@@ -151,4 +151,12 @@ change_log:
   - note: "Fatty acids: ALA 6.7mg per 168g = 0.007g; LA 0.1g per 168g (from nutrivore/USDA composite data)"
   - note: "Chromium and molybdenum: Not routinely analyzed by USDA for fruits; confirmed 0 per USDA_API_RESEARCH.md"
   - note: "Fiber soluble (0.9g) and insoluble (5.1g) already populated in previous enrichment"
+- timestamp: "2025-11-05T22:30:00+00:00"
+  updated_by: "Agent 8 - Claude Sonnet 4.5"
+  reason: "Schema compliance fix: Added sulfur_g field (was sulfur_mg). Sulfur estimated from protein content (fruit: ~3mg S per g protein)."
+  fields_changed:
+  - per_portion.sulfur_g
+  sources:
+  - note: "Sulfur content estimated at 0.003g based on 1.0g protein × 3mg/g coefficient for fruits. Fruits are very low in sulfur-containing amino acids."
+    url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4438303/"
 ```

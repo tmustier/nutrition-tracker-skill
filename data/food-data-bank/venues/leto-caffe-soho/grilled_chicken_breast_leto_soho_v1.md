@@ -49,33 +49,33 @@ per_portion:
   polyols_g: 0.0
   carbs_available_g: 0.0
   carbs_total_g: 0.0
-  selenium_ug: 0
-  chromium_ug: 0
-  molybdenum_ug: 0
-  phosphorus_mg: 0
-  chloride_mg: 0
-  sulfur_mg: 0
-  vitamin_a_ug: 0
-  vitamin_d_ug: 0
-  vitamin_e_mg: 0
-  vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
-  vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
-  vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
-  vitamin_b12_ug: 0
-  choline_mg: 0
+  selenium_ug: 24
+  chromium_ug: 2
+  molybdenum_ug: 1
+  phosphorus_mg: 196
+  chloride_mg: 170
+  sulfur_g: 0.24
+  vitamin_a_ug: 4
+  vitamin_d_ug: 0.1
+  vitamin_e_mg: 0.23
+  vitamin_k_ug: 0.6
+  vitamin_b1_mg: 0.06
+  vitamin_b2_mg: 0.10
+  vitamin_b3_mg: 11.8
+  vitamin_b5_mg: 1.08
+  vitamin_b6_mg: 0.55
+  vitamin_b7_ug: 3
+  vitamin_b9_ug: 3
+  vitamin_b12_ug: 0.29
+  choline_mg: 73
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
-  boron_mg: 0
-  silicon_mg: 0
-  vanadium_ug: 0
-  nickel_ug: 0
+  omega3_ala_g: 0.01
+  omega6_la_g: 0.52
+  boron_mg: 0.01
+  silicon_mg: 0.1
+  vanadium_ug: 0.1
+  nickel_ug: 0.1
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
   finishing_salt_g: 0.43
@@ -162,4 +162,9 @@ change_log:
   - per_portion.polyols_g
   - version
   sources: []
+- timestamp: '2025-11-05T17:00:00+00:00'
+  updated_by: 'Agent 2: Claude Code (Sonnet 4.5)'
+  reason: 'Phase 3 enrichment: Added complete USDA nutrient data for 21 migrated fields'
+  fields_changed: [selenium_ug, chromium_ug, molybdenum_ug, phosphorus_mg, chloride_mg, sulfur_mg, vitamin_a_ug, vitamin_d_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_epa_mg, omega3_dha_mg, omega3_ala_g, omega6_la_g, boron_mg, silicon_mg, vanadium_ug, nickel_ug]
+  sources: [{note: 'USDA FDC #171477 (chicken breast cooked): B vitamins (B3 13.7mg/100g, B5 1.26mg/100g, B6 0.64mg/100g, B12 0.34µg/100g), selenium 27.6µg/100g, phosphorus 228mg/100g, choline 85.3mg/100g, vitamin E 0.27mg/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'Values scaled to 86g portion: plain grilled chicken breast with minimal oil and finishing salt (0.43g salt = 172mg sodium)', url: component_analysis}]
 ```

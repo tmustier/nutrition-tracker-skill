@@ -3,7 +3,7 @@
 ```yaml
 id: sweet_potato_wedges_shk_v1
 schema_version: 2
-version: 7
+version: 8
 last_verified: 2025-11-05
 source:
   venue: Simple Health Kitchen, Baker Street (London)
@@ -38,19 +38,19 @@ per_portion:
   magnesium_mg: 42
   calcium_mg: 59
   iron_mg: 1
-  zinc_mg: 0
+  zinc_mg: 0.6
   vitamin_c_mg: 30
   manganese_mg: 0.9
   polyols_g: 0
   carbs_available_g: 32
   carbs_total_g: 37.1
   copper_mg: 0.3
-  selenium_ug: 0
+  selenium_ug: 0.4
   chromium_ug: 36
   molybdenum_ug: 7
   phosphorus_mg: 98
   chloride_mg: 0
-  sulfur_mg: 0
+  sulfur_g: 0
   vitamin_a_ug: 1744
   vitamin_d_ug: 0
   vitamin_e_mg: 1.3
@@ -125,4 +125,10 @@ change_log:
   reason: 'Enriched with 8 additional nutrients: B5 (pantothenic acid), B7 (biotin), chromium, molybdenum. Sweet potato is an EXCELLENT source of B5 (1.6mg, 32% DV) and chromium (36µg, 103% DV). Omega fatty acids remain 0 (negligible in tubers).'
   fields_changed: [version, per_portion.vitamin_b5_mg, per_portion.vitamin_b7_ug, per_portion.chromium_ug, per_portion.molybdenum_ug]
   sources: [{note: 'USDA FoodData Central (FDC 168483) and research literature. Sweet potato provides 21% DV for B5 per cup and ~41µg chromium per cup (USDA National Nutrient Database). Biotin content from analytical research on cooked sweet potato.', url: 'https://fdc.nal.usda.gov/'}]
+- timestamp: '2025-11-05T23:30:00+0000'
+  updated_by: 'LLM: Claude Sonnet 4.5 (Agent 6)'
+  reason: 'Added missing zinc and selenium based on USDA FoodData Central values for baked sweet potato'
+  fields_changed: [zinc_mg, selenium_ug, version]
+  sources: [{note: 'USDA FoodData Central - Sweet potato, cooked, baked in skin (FDC ID 168483): Zinc 0.32 mg/100g, Selenium 0.2 μg/100g. Scaled to 181g portion (based on energy match): zinc 0.58mg rounded to 0.6mg, selenium 0.36μg rounded to 0.4μg.', url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/168483/nutrients'}]
+  methodology: "USDA values per 100g scaled to estimated 181g portion (factor 1.81): Zinc 0.32×1.81=0.58mg→0.6mg, Selenium 0.2×1.81=0.36μg→0.4μg. Sweet potatoes are a modest source of zinc and very low source of selenium."
 ```

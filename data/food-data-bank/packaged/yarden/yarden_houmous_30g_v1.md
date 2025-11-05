@@ -55,7 +55,7 @@ per_portion:
   molybdenum_ug: 0
   phosphorus_mg: 50
   chloride_mg: 0
-  sulfur_mg: 0
+  sulfur_g: 0.026
   vitamin_a_ug: 0.3
   vitamin_d_ug: 0
   vitamin_e_mg: 0.52
@@ -133,4 +133,9 @@ change_log:
   fields_changed: [vitamin_b5_mg, omega6_la_g, omega3_ala_g, calcium_mg, magnesium_mg, potassium_mg, iron_mg, zinc_mg, version]
   sources: [{note: 'USDA FoodData Central - Hummus, commercial (Foundation)', fdc_id: 321358, url: 'https://nutritionvalue.org/Hummus%2C_commercial_321358_nutritional_value.html'}]
   methodology: "Scaled USDA per-100g to 30g portion (×0.3). Added: vitamin B5/pantothenic acid (0.10 mg from 0.32 mg/100g), omega-6 linoleic acid LA (2.04g from 6.81g/100g - significant source from sesame tahini), omega-3 ALA (0.20g from 0.65g/100g), calcium (12mg from 41mg/100g), magnesium (21mg from 71mg/100g), potassium (87mg from 289mg/100g), iron (0.73mg from 2.42mg/100g), zinc (0.42mg from 1.39mg/100g). Biotin/B7 not available in USDA data for hummus."
+- timestamp: '2025-11-05T22:30:00+00:00'
+  updated_by: 'Agent 8 - Claude Sonnet 4.5'
+  reason: 'Schema compliance fix: Added sulfur_g field (was sulfur_mg). Sulfur estimated from protein content (legumes: ~13mg S per g protein).'
+  fields_changed: [per_portion.sulfur_g]
+  sources: [{note: 'Sulfur content estimated at 0.026g based on 2.0g protein × 13mg/g coefficient for legumes. Chickpeas and tahini (sesame) are moderate sources of sulfur-containing amino acids.', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4438303/'}]
 ```

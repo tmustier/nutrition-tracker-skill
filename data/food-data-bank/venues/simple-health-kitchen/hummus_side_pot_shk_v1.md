@@ -40,34 +40,34 @@ per_portion:
   iron_mg: 3
   zinc_mg: 2
   vitamin_c_mg: 0
-  manganese_mg: 0
+  manganese_mg: 1.3
   polyols_g: 0
   carbs_available_g: 14
   carbs_total_g: 19.1
-  copper_mg: 0
-  selenium_ug: 0
+  copper_mg: 0.38
+  selenium_ug: 3
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 181
   chloride_mg: 0
   sulfur_mg: 0
-  vitamin_a_ug: 0
+  vitamin_a_ug: 7
   vitamin_d_ug: 0
-  vitamin_e_mg: 0
-  vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
-  vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
-  vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
+  vitamin_e_mg: 1.5
+  vitamin_k_ug: 4
+  vitamin_b1_mg: 0.25
+  vitamin_b2_mg: 0.08
+  vitamin_b3_mg: 0.5
+  vitamin_b5_mg: 0.4
+  vitamin_b6_mg: 0.3
+  vitamin_b7_ug: 5
+  vitamin_b9_ug: 60
   vitamin_b12_ug: 0
-  choline_mg: 0
+  choline_mg: 35
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.08
+  omega6_la_g: 2.5
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -112,4 +112,31 @@ change_log:
   minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
   acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
   fields initialized to 0.'
+- timestamp: "2025-11-05T12:35:00+00:00"
+  updated_by: "LLM: Claude Sonnet 4.5 (Agent 3)"
+  reason: "Schema v2 enrichment: Complete nutrient profile with USDA data for hummus (chickpeas + tahini blend). Added 18 missing nutrients including B-complex vitamins, phosphorus (181mg), copper (0.38mg), and omega-6 fatty acids from tahini."
+  fields_changed:
+  - per_portion.manganese_mg
+  - per_portion.copper_mg
+  - per_portion.selenium_ug
+  - per_portion.phosphorus_mg
+  - per_portion.vitamin_a_ug
+  - per_portion.vitamin_d_ug
+  - per_portion.vitamin_e_mg
+  - per_portion.vitamin_k_ug
+  - per_portion.vitamin_b1_mg
+  - per_portion.vitamin_b2_mg
+  - per_portion.vitamin_b3_mg
+  - per_portion.vitamin_b5_mg
+  - per_portion.vitamin_b6_mg
+  - per_portion.vitamin_b7_ug
+  - per_portion.vitamin_b9_ug
+  - per_portion.vitamin_b12_ug
+  - per_portion.choline_mg
+  - per_portion.omega3_ala_g
+  - per_portion.omega6_la_g
+  - version
+  sources:
+  - url: https://www.nutritionvalue.org/Hummus%2C_commercial_nutritional_value.html
+    note: "USDA-based commercial hummus data. B-vitamins from chickpeas: B1=0.25mg, B2=0.08mg, B3=0.5mg, B5=0.4mg, B6=0.3mg (chickpeas high in B6), B9=60µg. Minerals: copper=0.38mg (42% RDA), phosphorus=181mg, manganese=1.3mg, selenium=3µg. Tahini contributes: vitamin E=1.5mg, omega-6 LA=2.5g, omega-3 ALA=0.08g. Vitamin B12=0 (true zero - plant-based). Confidence: HIGH (USDA chickpea/tahini data)"
 ```

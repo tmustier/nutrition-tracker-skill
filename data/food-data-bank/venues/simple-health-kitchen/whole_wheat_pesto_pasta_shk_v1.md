@@ -3,8 +3,8 @@
 ```yaml
 id: whole_wheat_pesto_pasta_shk_v1
 schema_version: 2
-version: 5
-last_verified: 2025-11-02
+version: 6
+last_verified: 2025-11-05
 source:
   venue: Simple Health Kitchen, Baker Street (London)
   menu_page: 
@@ -44,30 +44,30 @@ per_portion:
   polyols_g: 0
   carbs_available_g: 28
   carbs_total_g: 32
-  copper_mg: 0
-  selenium_ug: 0
-  chromium_ug: 0
-  molybdenum_ug: 0
-  phosphorus_mg: 0
-  chloride_mg: 0
-  sulfur_mg: 0
-  vitamin_a_ug: 0
+  copper_mg: 0.22
+  selenium_ug: 27
+  chromium_ug: 2
+  molybdenum_ug: 28
+  phosphorus_mg: 104
+  chloride_mg: 52
+  sulfur_mg: 68
+  vitamin_a_ug: 16
   vitamin_d_ug: 0
-  vitamin_e_mg: 0
-  vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
-  vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
-  vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
-  vitamin_b12_ug: 0
-  choline_mg: 0
+  vitamin_e_mg: 0.9
+  vitamin_k_ug: 18
+  vitamin_b1_mg: 0.10
+  vitamin_b2_mg: 0.05
+  vitamin_b3_mg: 0.7
+  vitamin_b5_mg: 0.33
+  vitamin_b6_mg: 0.08
+  vitamin_b7_ug: 1.3
+  vitamin_b9_ug: 11
+  vitamin_b12_ug: 0.03
+  choline_mg: 9
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.04
+  omega6_la_g: 1.5
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -126,4 +126,17 @@ change_log:
   minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
   acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
   fields initialized to 0.'
+- timestamp: '2025-11-05T15:00:00+00:00'
+  updated_by: 'Agent 4: Claude Code (Sonnet 4.5)'
+  reason: 'Comprehensive nutrient enrichment for whole wheat pesto pasta side using component-based USDA data (whole wheat pasta ~100g, pesto ~20g with basil, pine nuts, parmesan, olive oil)'
+  fields_changed: [copper_mg, selenium_ug, chromium_ug, molybdenum_ug, phosphorus_mg, chloride_mg, sulfur_mg, vitamin_a_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_ala_g, omega6_la_g, version, last_verified]
+  sources:
+  - note: 'USDA FoodData Central - Whole wheat pasta cooked (FDC 168890): selenium 26µg/100g, copper 0.17mg/100g, molybdenum 27µg/100g, phosphorus, B vitamins'
+    url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/168890'
+  - note: 'USDA FoodData Central - Basil fresh: vitamin K 415µg/100g, vitamin A'
+    url: 'https://fdc.nal.usda.gov/'
+  - note: 'USDA FoodData Central - Pine nuts: omega-6 LA, vitamin E, copper'
+    url: 'https://fdc.nal.usda.gov/'
+  - note: 'Component aggregation for pasta with pesto. Vitamin D remains 0 (plant-based). B12 trace from parmesan. EPA/DHA remain 0 (no fish). Ultra-trace elements remain 0 (insufficient data).'
+    url: 'component_analysis'
 ```
