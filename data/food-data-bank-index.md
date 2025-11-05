@@ -1,7 +1,7 @@
 ---
 title: Food Data Bank Index
 description: Auto-generated index of all dishes in the food data bank
-generated: 2025-11-05 10:54:43 UTC
+generated: 2025-11-05 11:59:21 UTC
 ---
 
 # Food Data Bank Index
@@ -11,7 +11,7 @@ generated: 2025-11-05 10:54:43 UTC
 
 ## Overview
 
-Total dishes: 77
+Total dishes: 75
 
 - **Venues**: 9 categories
 - **Packaged Products**: 7 categories
