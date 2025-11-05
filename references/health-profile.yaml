@@ -3,7 +3,7 @@ meta:
   owner: "Thomas"
   timezone: "Europe/London"
   updated: "2025-10-28T19:28:26+00:00"
-  notes: "Maintenance/body recomp; moderately active; 30yo male, 183cm, ~85kg"
+  notes: "Maintenance/body recomp; moderately active; 31yo male, 183cm, ~84kg"
 targets:
   energy_kcal:
     rest_day_max: 2500
@@ -14,32 +14,7 @@ targets:
   fiber_g_min: 40
   sat_fat_g_max: 20
   sodium_mg_max: 2300
-  fruit_veg_servings_min: 5
-monitoring:
-  fats:
-    trans_fat_g: true
-    cholesterol_mg: true
-    mufa_g: true
-    pufa_g: true
-    unsat_total_g: true
-  carbs:
-    sugar_g: true
-    fiber_soluble_g: true
-    fiber_insoluble_g: true
-  minerals:
-    potassium_mg: true
-    iodine_ug: true
-    magnesium_mg: true
-    calcium_mg: true
-    iron_mg: true
-    zinc_mg: true
-  vitamins:
-    vitamin_c_mg: true
-assumptions:
-  salt_scheme_default: "normal"   # light|normal|heavy|unsalted
-  salt_normal_fraction: 0.005     # ~0.5% of finished weight
-  oil_default: "olive_oil"
-  rounding:
-    energy_kcal: "int"
-    grams: "0.1"
-    mg_ug: "int"
+  potassium_mg_min: 4000
+ monitoring:
+  Na_K_molar%_ratio: true
+  iodine_mg: true
