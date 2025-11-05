@@ -1,0 +1,156 @@
+date: 2025-11-05
+day_type: rest
+entries:
+- timestamp: '2025-11-05T12:00:00+00:00'
+  items:
+  - name: Amisa Buckwheat Crispbread
+    food_bank_id: amisa_buckwheat_crispbread_5g_v1
+    quantity: 7
+    unit: pieces
+    nutrition:
+      energy_kcal: 121
+      protein_g: 3.5
+      fat_g: 0.7
+      sat_fat_g: 0.0
+      mufa_g: 0.7
+      pufa_g: 0.0
+      trans_fat_g: 0.0
+      cholesterol_mg: 0
+      sugar_g: 0.7
+      fiber_total_g: 2.8
+      fiber_soluble_g: 0.7
+      fiber_insoluble_g: 2.1
+      sodium_mg: 168
+      potassium_mg: 0
+      iodine_ug: 0
+      magnesium_mg: 0
+      calcium_mg: 0
+      iron_mg: 0
+      zinc_mg: 0
+      vitamin_c_mg: 0
+      manganese_mg: 0
+      polyols_g: 0.0
+      carbs_available_g: 23.8
+      carbs_total_g: 26.6
+  - name: Daylesford Smoked Trout (with added salt)
+    food_bank_id: daylesford_smoked_trout_80g_v1
+    quantity: 80
+    unit: g
+    nutrition:
+      energy_kcal: 161
+      protein_g: 17.4
+      fat_g: 10.2
+      sat_fat_g: 1.8
+      mufa_g: 2.5
+      pufa_g: 5.9
+      trans_fat_g: 0
+      cholesterol_mg: 50
+      sugar_g: 0.0
+      fiber_total_g: 0.0
+      fiber_soluble_g: 0
+      fiber_insoluble_g: 0
+      sodium_mg: 720
+      potassium_mg: 280
+      iodine_ug: 0
+      magnesium_mg: 24
+      calcium_mg: 10
+      iron_mg: 0
+      zinc_mg: 0
+      vitamin_c_mg: 0
+      manganese_mg: 0
+      polyols_g: 0.0
+      carbs_available_g: 0.0
+      carbs_total_g: 0.0
+  - name: Avocado (Fresh, with added salt)
+    food_bank_id: avocado_fresh_75g_generic-ingredients_v1
+    quantity: 75
+    unit: g
+    nutrition:
+      energy_kcal: 120
+      protein_g: 1.5
+      fat_g: 11.0
+      sat_fat_g: 1.6
+      mufa_g: 7.3
+      pufa_g: 1.4
+      trans_fat_g: 0
+      cholesterol_mg: 0
+      sugar_g: 0.5
+      fiber_total_g: 5.0
+      fiber_soluble_g: 1.2
+      fiber_insoluble_g: 3.8
+      sodium_mg: 245
+      potassium_mg: 364
+      iodine_ug: 0
+      magnesium_mg: 21
+      calcium_mg: 9
+      iron_mg: 0
+      zinc_mg: 0
+      vitamin_c_mg: 8
+      manganese_mg: 0
+      polyols_g: 0.0
+      carbs_available_g: 1.4
+      carbs_total_g: 6.4
+  - name: Chavroux Mild & Creamy Goat's Cheese
+    food_bank_id: chavroux_mild_creamy_goat_cheese_12g_chavroux_v1
+    quantity: 2
+    unit: slices
+    nutrition:
+      energy_kcal: 36
+      protein_g: 2.0
+      fat_g: 2.8
+      sat_fat_g: 2.2
+      mufa_g: 0.4
+      pufa_g: 0.2
+      trans_fat_g: 0.0
+      cholesterol_mg: 12
+      sugar_g: 0.6
+      fiber_total_g: 0.0
+      fiber_soluble_g: 0
+      fiber_insoluble_g: 0
+      sodium_mg: 96
+      potassium_mg: 38
+      iodine_ug: 4
+      magnesium_mg: 6
+      calcium_mg: 72
+      iron_mg: 0
+      zinc_mg: 0
+      vitamin_c_mg: 0
+      manganese_mg: 0
+      polyols_g: 0.0
+      carbs_available_g: 0.6
+      carbs_total_g: 0.6
+  - name: Egg, Hard-Boiled (Medium)
+    food_bank_id: egg_hard_boiled_44g_generic-ingredients_v1
+    quantity: 2
+    unit: eggs
+    nutrition:
+      energy_kcal: 136
+      protein_g: 11.0
+      fat_g: 9.4
+      sat_fat_g: 3.0
+      mufa_g: 3.6
+      pufa_g: 1.2
+      trans_fat_g: 0
+      cholesterol_mg: 328
+      sugar_g: 1.0
+      fiber_total_g: 0.0
+      fiber_soluble_g: 0
+      fiber_insoluble_g: 0
+      sodium_mg: 110
+      potassium_mg: 110
+      iodine_ug: 22
+      magnesium_mg: 8
+      calcium_mg: 44
+      iron_mg: 1
+      zinc_mg: 1
+      vitamin_c_mg: 0
+      manganese_mg: 0
+      polyols_g: 0.0
+      carbs_available_g: 1.0
+      carbs_total_g: 1.0
+  notes: >-
+    Brunch/lunch meal. The smoked trout was distributed across 3 crispbreads (with
+    added salt sprinkle on each). The avocado was distributed across 3 crispbreads
+    (with added salt sprinkle on each). The goat's cheese was on 1 crispbread (no
+    added salt). The 2 boiled eggs had no added salt. Total salt added: ~480mg sodium
+    (240mg on trout crispbreads, 240mg on avocado crispbreads).

@@ -1,7 +1,7 @@
 ---
 title: Food Data Bank Index
 description: Auto-generated index of all dishes in the food data bank
-generated: 2025-11-04 20:08:16 UTC
+generated: 2025-11-05 10:36:01 UTC
 ---
 
 # Food Data Bank Index
@@ -11,11 +11,11 @@ generated: 2025-11-04 20:08:16 UTC
 
 ## Overview
 
-Total dishes: 71
+Total dishes: 73
 
 - **Venues**: 9 categories
 - **Packaged Products**: 7 categories
-- **Generic Items**: 10 categories
+- **Generic Items**: 11 categories
 
 ---
 
@@ -196,6 +196,14 @@ Total dishes: 71
 
 - [Margarita (Classic)](food-data-bank/generic/bar-restaurant/margarita_classic_v1.md) {#margarita_classic_v1}
 
+## Generic: Chavroux Packaged Product
+
+*Location: `data/food-data-bank/generic/chavroux-packaged-product/`*
+
+**1 dishes:**
+
+- [Chavroux Mild & Creamy Goat's Cheese (12g slice)](food-data-bank/generic/chavroux-packaged-product/chavroux_mild_creamy_goat_cheese_12g_chavroux_v1.md) {#chavroux_mild_creamy_goat_cheese_12g_chavroux_v1}
+
 ## Generic: Fresh Produce
 
 *Location: `data/food-data-bank/generic/fresh-produce/`*
@@ -225,10 +233,11 @@ Total dishes: 71
 
 *Location: `data/food-data-bank/generic/ingredients/`*
 
-**12 dishes:**
+**13 dishes:**
 
 - [Avocado (Fresh, 75g)](food-data-bank/generic/ingredients/avocado_fresh_75g_generic-ingredients_v1.md) {#avocado_fresh_75g_generic-ingredients_v1}
 - [Blueberries - 150 g](food-data-bank/generic/ingredients/blueberries_150g_v1.md) {#blueberries_150g_v1}
+- [Egg, Hard-Boiled (Medium, 44g)](food-data-bank/generic/ingredients/egg_hard_boiled_44g_generic-ingredients_v1.md) {#egg_hard_boiled_44g_generic-ingredients_v1}
 - [Greek Yogurt 0% Fat - 200 g](food-data-bank/generic/ingredients/greek_yogurt_0pct_200g_v1.md) {#greek_yogurt_0pct_200g_v1}
 - [Hazelnuts, 30 g](food-data-bank/generic/ingredients/hazelnuts_30g_v1.md) {#hazelnuts_30g_v1}
 - [Mixed Pineapple/Mango/Passion Fruit (150 g)](food-data-bank/generic/ingredients/pine_mango_passion_150g_v1.md) {#pine_mango_passion_150g_v1}
