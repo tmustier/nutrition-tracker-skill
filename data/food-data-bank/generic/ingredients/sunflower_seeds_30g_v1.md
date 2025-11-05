@@ -64,7 +64,7 @@ per_portion:
   vitamin_b9_ug: 68
   vitamin_b12_ug: 0
   choline_mg: 16.5
-  omega3_epa_mg: 4
+  omega3_epa_mg: 0
   omega3_dha_mg: 0
   omega3_ala_g: 0
   omega6_la_g: 0
@@ -90,6 +90,12 @@ notes:
 - 'Note: Vitamin D, B12, vitamin K, and iodine are naturally absent or trace in plant-based
   seeds'
 change_log:
+- timestamp: "2025-11-05T16:00:00+00:00"
+  updated_by: "Claude Code (Sonnet 4.5)"
+  reason: "CRITICAL FIX: Corrected EPA value - plant foods cannot contain marine omega-3s"
+  fields_changed:
+    - "omega3_epa_mg: 4 → 0 (EPA is a marine omega-3 found only in fish/algae, not in plant seeds)"
+  notes: "Sunflower seeds contain ALA (plant omega-3), not EPA/DHA. The 4mg value was biologically impossible and has been corrected to 0."
 - timestamp: 2025-10-28T18:51:39+0000
   updated_by: "LLM: GPT-5 Thinking"
   reason: Populate per_portion from user-provided data

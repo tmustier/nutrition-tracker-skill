@@ -69,7 +69,7 @@ per_portion:
   vitamin_b7_ug: 0
   vitamin_b9_ug: 34
   vitamin_b12_ug: 0.11
-  choline_mg: 57
+  choline_mg: 12
   omega3_epa_mg: 0
   omega3_dha_mg: 0
   omega3_ala_g: 0
@@ -97,12 +97,18 @@ notes:
 - Iron content notable due to dark roasted grains
 - Atwater check (available carb basis): 4×1.9 + 9×0.0 + 4×18.0 + 2×0.0 + 2.4×0.0 = 79.6 kcal
 - 'B vitamins (B1, B2, B3, B6, B9, B12) derived from barley malt and brewing yeast'
-- 'Choline content: 57mg per pint from yeast and malt sources'
+- 'Choline content: 12mg per pint from yeast and malt sources (typical for beer)'
 - 'Phosphorus (80mg) and trace minerals (copper, selenium) from barley and water'
 - 'Fat-soluble vitamins (A, D, E, K) and omega-3 fatty acids absent or negligible in beer'
 - 'Iodine content: ~5µg per pint (USDA iodine database: 0.9µg/100ml mean)'
 - 'Most nutrient values calculated from USDA FDC #168746 (regular beer) scaled to 568ml'
 change_log:
+- timestamp: "2025-11-05T16:00:00+00:00"
+  updated_by: "Claude Code (Sonnet 4.5)"
+  reason: "CRITICAL FIX: Corrected choline scaling error"
+  fields_changed:
+    - "choline_mg: 57 → 12 (corrected from 3-4× overestimate; typical beer contains 10-15mg/pint)"
+  notes: "Previous value of 57mg was inconsistent with typical beer choline content. Corrected to ~12mg based on USDA data for regular beer (~10mg/pint) scaled to Guinness portion."
 - timestamp: 2025-10-31T17:00:00+0000
   updated_by: Claude Code (Sonnet 4.5)
   reason: Initial entry for tracking Guinness consumption

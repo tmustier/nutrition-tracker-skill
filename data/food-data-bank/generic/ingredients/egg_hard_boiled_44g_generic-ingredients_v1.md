@@ -51,8 +51,8 @@ per_portion:
   vitamin_d_ug: 1.0
   vitamin_e_mg: 0.5
   omega3_ala_g: 0
-  omega3_dha_mg: 0.017
-  omega3_epa_mg: 0.002
+  omega3_dha_mg: 17
+  omega3_epa_mg: 2
   omega6_la_g: 0
   chloride_mg: 0
   phosphorus_mg: 76
@@ -91,11 +91,18 @@ notes:
   - "Good source of vitamin A: 66µg RAE per egg, important for vision and immune function"
   - "Contains vitamin D: 1.0µg per egg (~5% DV), one of few natural food sources"
   - "Phosphorus: 76mg per egg (~11% DV), important for bone health and energy metabolism"
-  - "Trace amounts of omega-3s: 0.017mg DHA + 0.002mg EPA (varies with hen diet)"
+  - "Trace amounts of omega-3s: 17mg DHA + 2mg EPA (varies with hen diet; standard eggs, not omega-3 enriched)"
   - "High in cholesterol (164mg per egg) but dietary cholesterol has minimal impact on blood cholesterol for most people"
   - "Iodine content: 22µg per egg (49.2µg/100g from USDA study), ~15% DV, varies with hen feed"
   - "Atwater validation: 4×5.5 + 9×4.7 + 4×0.5 + 2×0 + 2.4×0 = 66.3 kcal (within 2.5% of USDA 68 kcal)"
 change_log:
+  - timestamp: "2025-11-05T16:00:00+00:00"
+    updated_by: "Claude Code (Sonnet 4.5)"
+    reason: "CRITICAL FIX: Corrected omega-3 unit conversion error"
+    fields_changed:
+      - "omega3_dha_mg: 0.017 → 17 (×1000 - values were stored in grams instead of milligrams)"
+      - "omega3_epa_mg: 0.002 → 2 (×1000 - values were stored in grams instead of milligrams)"
+    notes: "USDA reports omega-3 values in grams, schema requires milligrams. Multiplication by 1000 was missed in initial enrichment."
   - timestamp: "2025-11-05T14:00:00+00:00"
     updated_by: "Claude Code (Sonnet 4.5)"
     reason: "Enrichment with 17 priority nutrients from USDA FoodData Central per 100g values, scaled to 44g portion"
