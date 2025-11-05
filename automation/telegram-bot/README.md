@@ -38,6 +38,21 @@ A comprehensive Telegram bot for tracking nutrition via mobile, powered by Claud
 - Daily automated PRs and merges (4am UTC)
 - User whitelist support for private deployment
 
+### Security Features
+- **User Authentication**: Telegram user ID-based access control
+- **Webhook Verification**: Secret token validation for secure webhooks
+- **Rate Limiting**: 30 requests per minute per user with exponential backoff
+- **Input Sanitization**: Protection against log injection and malicious input
+- **Race Condition Handling**: Atomic GitHub operations with retry logic
+- **Error Recovery**: Graceful degradation when APIs are unavailable
+
+### Testing Infrastructure
+- **Comprehensive Test Suite**: 500+ test cases covering all functionality
+- **Security Testing**: Authentication, rate limiting, and attack vector coverage
+- **API Integration Tests**: Mocked external services for reliable testing
+- **Error Scenario Testing**: Network failures, race conditions, and edge cases
+- **70% Code Coverage**: Lines, functions, branches, and statements
+
 ---
 
 ## Architecture
@@ -219,8 +234,12 @@ GITHUB_BRANCH=daily-logs
 # USDA FoodData Central API
 USDA_API_KEY=DEMO_KEY
 
-# Optional: User Whitelist (comma-separated Telegram user IDs)
-# ALLOWED_USERS=123456789,987654321
+# Security Configuration (Optional but Recommended)
+# User Whitelist: Comma-separated Telegram user IDs
+ALLOWED_USERS=123456789,987654321
+
+# Webhook Security: Secret token for webhook verification
+WEBHOOK_SECRET=your-random-secret-token
 ```
 
 **Getting your Telegram User ID:**
@@ -356,18 +375,32 @@ telegram-bot/
 │   ├── claude-integration.js      # Claude AI integration (463 lines)
 │   ├── usda-api.js                # USDA FoodData API (218 lines)
 │   ├── github-integration.js      # GitHub logging (463 lines)
-│   ├── config.js                  # Configuration management (293 lines)
+│   ├── webhook.js                 # Telegram webhook handlers (794 lines)
+│   ├── config.js                  # Configuration management (301 lines)
 │   ├── CLAUDE_INTEGRATION_README.md
 │   ├── github-integration.README.md
 │   └── QUICK_START.md
-├── test/
+├── tests/
+│   ├── setup.js                   # Jest configuration and utilities
+│   ├── unit/
+│   │   ├── server.test.js         # HTTP endpoints tests
+│   │   ├── webhook.test.js        # Webhook handler tests
+│   │   └── config.test.js         # Configuration validation tests
+│   └── integration/
+│       ├── claude-integration.test.js # Claude AI API tests
+│       ├── github-integration.test.js # GitHub operations tests
+│       ├── usda-api.test.js          # USDA API integration tests
+│       ├── security.test.js          # Security middleware tests
+│       └── error-handling.test.js    # Error scenarios tests
+├── test/                          # Legacy tests (compatibility)
 │   ├── test-github-integration.js # Integration tests
 │   └── verify-module.js           # Module verification
 ├── .env.example                   # Environment template
 ├── .gitignore
-├── package.json
+├── package.json                   # Dependencies and test scripts
 ├── railway.json                   # Railway deployment config
 ├── vercel.json                    # Vercel deployment config
+├── TESTING_GUIDE.md               # Comprehensive testing documentation
 └── README.md                      # This file
 ```
 
@@ -455,11 +488,33 @@ For local development with webhook testing:
 
 ### Running Tests
 
+#### Comprehensive Test Suite
+
+```bash
+# Run all tests
+npm test
+
+# Run tests with coverage report
+npm run test:coverage
+
+# Run tests in watch mode (for development)
+npm run test:watch
+
+# Run only unit tests
+npm run test:unit
+
+# Run only integration tests
+npm run test:integration
+```
+
+#### Legacy Tests (Compatibility)
+
 ```bash
 # Basic module tests (no API calls)
-node test/test-github-integration.js
+npm run test:legacy
 
-# Module structure verification
+# Or run individually:
+node test/test-github-integration.js
 node test/verify-module.js
 
 # Syntax check
@@ -475,6 +530,16 @@ node -e "
     .catch(e => console.error(e.message));
 "
 ```
+
+#### Test Coverage
+
+The test suite includes:
+- **Unit Tests**: Server endpoints, webhook handlers, configuration
+- **Integration Tests**: Claude API, GitHub API, USDA API integrations
+- **Security Tests**: Authentication, rate limiting, input sanitization
+- **Error Handling**: Network failures, race conditions, API errors
+
+See [TESTING_GUIDE.md](TESTING_GUIDE.md) for detailed testing documentation.
 
 ### Adding Features
 

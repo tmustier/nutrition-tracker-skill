@@ -239,9 +239,16 @@ const config = {
   // Telegram Bot Configuration
   telegram: {
     botToken: process.env.TELEGRAM_BOT_TOKEN,
-    webhookUrl: process.env.WEBHOOK_URL || process.env.RAILWAY_PUBLIC_DOMAIN
-      ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}`
-      : 'http://localhost:3000',
+    webhookUrl: process.env.WEBHOOK_URL || 
+      (process.env.RAILWAY_PUBLIC_DOMAIN 
+        ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}`
+        : 'http://localhost:3000'),
+    // Security: Comma-separated list of allowed Telegram user IDs
+    allowedUsers: process.env.ALLOWED_USERS 
+      ? process.env.ALLOWED_USERS.split(',').map(id => parseInt(id.trim(), 10)).filter(id => !isNaN(id))
+      : null, // null means allow all users (for backward compatibility)
+    // Security: Secret token for webhook verification
+    webhookSecret: process.env.WEBHOOK_SECRET || null,
   },
 
   // Anthropic Claude API Configuration

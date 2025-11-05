@@ -24,6 +24,12 @@ class GitHubIntegration {
     this.branch = config.github.branch;
     this.apiUrl = 'https://api.github.com';
 
+    // Retry configuration for race condition handling
+    this.MAX_RETRIES = 5;
+    this.INITIAL_RETRY_DELAY_MS = 100;
+    this.MAX_RETRY_DELAY_MS = 2000;
+    this.BACKOFF_MULTIPLIER = 2;
+
     // Validate required configuration
     if (!this.token) {
       throw new Error('GitHub token is required (GITHUB_TOKEN env var)');
@@ -131,6 +137,64 @@ class GitHubIntegration {
   }
 
   /**
+   * Execute a GitHub API operation with exponential backoff retry logic
+   *
+   * This helper method handles race conditions when multiple requests try to
+   * modify the same file simultaneously (409 conflicts). It implements exponential
+   * backoff to reduce contention and increase success rate.
+   *
+   * @private
+   * @param {Function} operation - Async function that performs the GitHub API call
+   * @param {string} operationName - Human-readable name for logging purposes
+   * @returns {Promise<any>} Result from the successful operation
+   * @throws {Error} If all retries are exhausted
+   */
+  async _retryWithBackoff(operation, operationName) {
+    let lastError = null;
+    let delay = this.INITIAL_RETRY_DELAY_MS;
+
+    for (let attempt = 1; attempt <= this.MAX_RETRIES; attempt++) {
+      try {
+        const result = await operation();
+        
+        // Log successful retry if it wasn't the first attempt
+        if (attempt > 1) {
+          console.log(`${operationName} succeeded on attempt ${attempt}/${this.MAX_RETRIES}`);
+        }
+        
+        return result;
+      } catch (error) {
+        lastError = error;
+
+        // Only retry on 409 conflicts (race conditions)
+        if (error.response?.status !== 409) {
+          throw error;
+        }
+
+        // Don't retry on the last attempt
+        if (attempt === this.MAX_RETRIES) {
+          console.error(`${operationName} failed after ${this.MAX_RETRIES} attempts due to persistent race condition`);
+          break;
+        }
+
+        console.warn(`${operationName} conflict (attempt ${attempt}/${this.MAX_RETRIES}), retrying in ${delay}ms`);
+
+        // Wait with exponential backoff
+        await new Promise(resolve => setTimeout(resolve, delay));
+        
+        // Calculate next delay with exponential backoff and jitter
+        delay = Math.min(
+          delay * this.BACKOFF_MULTIPLIER + Math.random() * 100, // Add jitter to reduce thundering herd
+          this.MAX_RETRY_DELAY_MS
+        );
+      }
+    }
+
+    // All retries exhausted
+    throw new Error(`${operationName} failed after ${this.MAX_RETRIES} attempts: ${lastError.message}`);
+  }
+
+  /**
    * Append a new nutrition entry to today's log file
    *
    * This method:
@@ -138,6 +202,7 @@ class GitHubIntegration {
    * 2. Adds a new entry with timestamp and nutrition data
    * 3. Converts to YAML
    * 4. Commits to GitHub with atomic update (using file SHA)
+   * 5. Implements retry logic with exponential backoff for race condition handling
    *
    * All 24 nutrition fields from SCHEMA.md must be present with numeric values.
    * No null values are allowed - use 0 for unmeasured/unknown values.
@@ -169,71 +234,79 @@ class GitHubIntegration {
         throw new Error('nutritionData.nutrition is required');
       }
 
-      // Get current log file
-      const logFile = await this.getOrCreateLogFile();
-
       // Generate timestamp if not provided
       const entryTimestamp = timestamp || new Date().toISOString();
 
-      // Create new entry according to SCHEMA.md format
-      const newEntry = {
-        timestamp: entryTimestamp,
-        items: [
-          {
-            name: nutritionData.name,
-            food_bank_id: nutritionData.food_bank_id || null,
-            quantity: nutritionData.quantity || 1,
-            unit: nutritionData.unit || 'portion',
-            nutrition: this._validateNutrition(nutritionData.nutrition),
+      // Use retry logic to handle race conditions
+      const result = await this._retryWithBackoff(async () => {
+        // Get current log file (fresh fetch for each retry to get latest SHA)
+        const logFile = await this.getOrCreateLogFile();
+
+        // Create new entry according to SCHEMA.md format
+        const newEntry = {
+          timestamp: entryTimestamp,
+          items: [
+            {
+              name: nutritionData.name,
+              food_bank_id: nutritionData.food_bank_id || null,
+              quantity: nutritionData.quantity || 1,
+              unit: nutritionData.unit || 'portion',
+              nutrition: this._validateNutrition(nutritionData.nutrition),
+            },
+          ],
+          notes: nutritionData.notes || null,
+        };
+
+        // Append to entries array
+        logFile.data.entries.push(newEntry);
+
+        // Convert to YAML with proper formatting
+        const yamlContent = yaml.dump(logFile.data, {
+          lineWidth: -1,      // Don't wrap long lines
+          noRefs: true,       // Don't use YAML references
+          quotingType: '"',   // Use double quotes for strings with special chars
+          forceQuotes: false, // Only quote when necessary
+        });
+
+        // Commit to GitHub
+        const url = `${this.apiUrl}/repos/${this.owner}/${this.repo}/contents/${logFile.path}`;
+        const commitMessage = `chore: Log food entry - ${nutritionData.name}`;
+
+        const requestBody = {
+          message: commitMessage,
+          content: Buffer.from(yamlContent).toString('base64'),
+          branch: this.branch,
+        };
+
+        // Include SHA for updates (atomic operation)
+        if (logFile.sha) {
+          requestBody.sha = logFile.sha;
+        }
+
+        const response = await axios.put(url, requestBody, {
+          headers: {
+            Authorization: `token ${this.token}`,
+            Accept: 'application/vnd.github.v3+json',
           },
-        ],
-        notes: nutritionData.notes || null,
-      };
+        });
 
-      // Append to entries array
-      logFile.data.entries.push(newEntry);
-
-      // Convert to YAML with proper formatting
-      const yamlContent = yaml.dump(logFile.data, {
-        lineWidth: -1,      // Don't wrap long lines
-        noRefs: true,       // Don't use YAML references
-        quotingType: '"',   // Use double quotes for strings with special chars
-        forceQuotes: false, // Only quote when necessary
-      });
-
-      // Commit to GitHub
-      const url = `${this.apiUrl}/repos/${this.owner}/${this.repo}/contents/${logFile.path}`;
-      const commitMessage = `chore: Log food entry - ${nutritionData.name}`;
-
-      const requestBody = {
-        message: commitMessage,
-        content: Buffer.from(yamlContent).toString('base64'),
-        branch: this.branch,
-      };
-
-      // Include SHA for updates (atomic operation)
-      if (logFile.sha) {
-        requestBody.sha = logFile.sha;
-      }
-
-      const response = await axios.put(url, requestBody, {
-        headers: {
-          Authorization: `token ${this.token}`,
-          Accept: 'application/vnd.github.v3+json',
-        },
-      });
+        return {
+          response,
+          logFile
+        };
+      }, 'GitHub commit');
 
       console.log('Successfully committed log entry:', {
-        file: logFile.path,
-        commit_sha: response.data.commit.sha,
+        file: result.logFile.path,
+        commit_sha: result.response.data.commit.sha,
         food: nutritionData.name,
       });
 
       return {
         success: true,
-        commit_sha: response.data.commit.sha,
-        commit_url: response.data.commit.html_url,
-        file_path: logFile.path,
+        commit_sha: result.response.data.commit.sha,
+        commit_url: result.response.data.commit.html_url,
+        file_path: result.logFile.path,
       };
     } catch (error) {
       console.error('Error committing to GitHub:', {
@@ -248,8 +321,9 @@ class GitHubIntegration {
         throw new Error('GitHub authentication failed - check GITHUB_TOKEN');
       } else if (error.response?.status === 404) {
         throw new Error(`Repository not found: ${this.owner}/${this.repo}`);
-      } else if (error.response?.status === 409) {
-        throw new Error('Commit conflict - file was modified by another process');
+      } else if (error.message.includes('failed after')) {
+        // This is from our retry logic
+        throw new Error(`Persistent commit conflicts detected - multiple users may be logging simultaneously. Please try again in a few seconds.`);
       } else {
         throw new Error(`Failed to commit log entry: ${error.message}`);
       }

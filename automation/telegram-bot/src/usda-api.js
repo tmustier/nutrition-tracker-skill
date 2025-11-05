@@ -11,6 +11,22 @@ const config = require('./config');
  * API Documentation: https://fdc.nal.usda.gov/api-guide.html
  */
 
+// Constants for nutrition calculations and unit conversions
+const ENERGY_TOLERANCE_PERCENT = 0.1; // 10% tolerance for energy validation
+const ATWATER_FORMULA_CONSTANTS = {
+  PROTEIN_KCAL_PER_G: 4,
+  FAT_KCAL_PER_G: 9,
+  CARB_KCAL_PER_G: 4,
+  FIBER_KCAL_PER_G: 2,
+  POLYOLS_KCAL_PER_G: 2.4,
+};
+const UNIT_CONVERSIONS = {
+  OZ_TO_GRAMS: 28.35,
+  LB_TO_GRAMS: 453.592,
+};
+const DEFAULT_SERVING_SIZE_G = 100;
+const USDA_BASE_SERVING_SIZE_G = 100;
+
 class UsdaApi {
   constructor() {
     this.baseUrl = config.usda.baseUrl;
@@ -102,7 +118,7 @@ class UsdaApi {
         const fieldName = nutrientMapping[nutrient.nutrientId];
         if (fieldName) {
           // Scale to requested serving size (USDA values are per 100g)
-          const value = (nutrient.value || 0) * (grams / 100);
+          const value = (nutrient.value || 0) * (grams / USDA_BASE_SERVING_SIZE_G);
 
           // Round appropriately
           if (fieldName === 'energy_kcal') {
@@ -142,16 +158,16 @@ class UsdaApi {
 
     // Validate energy using Atwater formula: 4P + 9F + 4C + 2Fiber + 2.4Polyols
     const calculatedEnergy = Math.round(
-      4 * nutrients.protein_g +
-      9 * nutrients.fat_g +
-      4 * nutrients.carbs_available_g +
-      2 * nutrients.fiber_total_g +
-      2.4 * nutrients.polyols_g
+      ATWATER_FORMULA_CONSTANTS.PROTEIN_KCAL_PER_G * nutrients.protein_g +
+      ATWATER_FORMULA_CONSTANTS.FAT_KCAL_PER_G * nutrients.fat_g +
+      ATWATER_FORMULA_CONSTANTS.CARB_KCAL_PER_G * nutrients.carbs_available_g +
+      ATWATER_FORMULA_CONSTANTS.FIBER_KCAL_PER_G * nutrients.fiber_total_g +
+      ATWATER_FORMULA_CONSTANTS.POLYOLS_KCAL_PER_G * nutrients.polyols_g
     );
 
-    // Use calculated energy if USDA energy is missing or differs by >10%
-    if (!nutrients.energy_kcal || Math.abs(nutrients.energy_kcal - calculatedEnergy) / calculatedEnergy > 0.1) {
-      console.log(`Adjusting energy: USDA=${nutrients.energy_kcal}, calculated=${calculatedEnergy}`);
+    // Use calculated energy if USDA energy is missing or differs by the tolerance threshold
+    if (!nutrients.energy_kcal || Math.abs(nutrients.energy_kcal - calculatedEnergy) / calculatedEnergy > ENERGY_TOLERANCE_PERCENT) {
+      console.log(`Adjusting energy: USDA=${nutrients.energy_kcal}, calculated=${calculatedEnergy} (threshold: ${ENERGY_TOLERANCE_PERCENT * 100}%)`);
       nutrients.energy_kcal = calculatedEnergy;
     }
 
@@ -166,17 +182,17 @@ class UsdaApi {
   async quickLookup(query) {
     // Extract quantity and unit if present
     const quantityMatch = query.match(/(\d+)\s*(g|grams?|oz|ounces?|lb|pounds?)/i);
-    let grams = 100; // Default serving size
+    let grams = DEFAULT_SERVING_SIZE_G; // Default serving size
 
     if (quantityMatch) {
       const amount = parseInt(quantityMatch[1]);
       const unit = quantityMatch[2].toLowerCase();
 
-      // Convert to grams
+      // Convert to grams using standard conversion factors
       if (unit.startsWith('oz')) {
-        grams = amount * 28.35;
+        grams = amount * UNIT_CONVERSIONS.OZ_TO_GRAMS;
       } else if (unit.startsWith('lb') || unit.startsWith('pound')) {
-        grams = amount * 453.592;
+        grams = amount * UNIT_CONVERSIONS.LB_TO_GRAMS;
       } else {
         grams = amount;
       }

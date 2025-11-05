@@ -28,6 +28,220 @@ const githubIntegration = require('./github-integration');
 const bot = new Telegraf(config.telegram.botToken);
 
 // ============================================================================
+// CONSTANTS
+// ============================================================================
+
+// Nutrition calculation constants
+const NUTRITION_ROUNDING_FACTOR = 10; // For rounding to 1 decimal place
+const TARGET_ACHIEVEMENT_THRESHOLDS = {
+  ENERGY_NEARLY_MET_PERCENT: 90, // 90% of energy target
+  PROTEIN_ACHIEVED_PERCENT: 100, // 100% of protein target
+};
+
+// Input sanitization constants
+const MAX_LOG_MESSAGE_LENGTH = 500;
+
+// Rate limiting warning threshold
+const RATE_LIMIT_WARNING_THRESHOLD = 0.8; // Warn at 80% of limit
+
+// ============================================================================
+// UTILITY FUNCTIONS
+// ============================================================================
+
+/**
+ * Detect MIME type from file path extension
+ * @param {string} filePath - File path from Telegram (e.g., "photos/file_123.jpg")
+ * @returns {string} MIME type (defaults to image/jpeg for unknown types)
+ */
+const detectMimeTypeFromPath = (filePath) => {
+  if (!filePath) {
+    console.warn('No file path provided, defaulting to image/jpeg');
+    return 'image/jpeg';
+  }
+
+  // Extract extension from file path
+  const extension = filePath.split('.').pop()?.toLowerCase();
+  
+  // Map common image extensions to MIME types
+  const mimeTypeMap = {
+    'jpg': 'image/jpeg',
+    'jpeg': 'image/jpeg',
+    'png': 'image/png',
+    'gif': 'image/gif',
+    'bmp': 'image/bmp',
+    'webp': 'image/webp',
+    'tiff': 'image/tiff',
+    'tif': 'image/tiff',
+    'svg': 'image/svg+xml',
+    'ico': 'image/x-icon',
+    'heic': 'image/heic',
+    'heif': 'image/heif',
+  };
+
+  const mimeType = mimeTypeMap[extension] || 'image/jpeg';
+  
+  if (!mimeTypeMap[extension]) {
+    console.warn(`Unknown file extension '${extension}', defaulting to image/jpeg`);
+  }
+
+  return mimeType;
+};
+
+// ============================================================================
+// RATE LIMITING
+// ============================================================================
+
+/**
+ * Rate limiting configuration and storage
+ */
+const RATE_LIMIT_REQUESTS_PER_MINUTE = 30;
+const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
+const rateLimitStorage = new Map(); // userId -> array of request timestamps
+
+/**
+ * Clean up old rate limit entries periodically
+ */
+const cleanupRateLimit = () => {
+  const now = Date.now();
+  const cutoff = now - RATE_LIMIT_WINDOW_MS;
+  
+  for (const [userId, timestamps] of rateLimitStorage) {
+    const validTimestamps = timestamps.filter(ts => ts > cutoff);
+    
+    if (validTimestamps.length === 0) {
+      rateLimitStorage.delete(userId);
+    } else {
+      rateLimitStorage.set(userId, validTimestamps);
+    }
+  }
+};
+
+// Clean up rate limit storage every 5 minutes
+setInterval(cleanupRateLimit, 5 * 60 * 1000);
+
+/**
+ * Rate limiting middleware - Prevents API abuse by limiting requests per user
+ * @param {Object} ctx - Telegraf context
+ * @param {Function} next - Next middleware function
+ */
+const rateLimitMiddleware = (ctx, next) => {
+  const userId = ctx.from?.id;
+  if (!userId) {
+    return next(); // Skip if no user ID (shouldn't happen after auth middleware)
+  }
+
+  const now = Date.now();
+  const cutoff = now - RATE_LIMIT_WINDOW_MS;
+  
+  // Get or create user's request history
+  let userRequests = rateLimitStorage.get(userId) || [];
+  
+  // Filter out old requests (sliding window)
+  userRequests = userRequests.filter(timestamp => timestamp > cutoff);
+  
+  // Check if user has exceeded rate limit
+  if (userRequests.length >= RATE_LIMIT_REQUESTS_PER_MINUTE) {
+    const oldestRequest = Math.min(...userRequests);
+    const resetTime = Math.ceil((oldestRequest + RATE_LIMIT_WINDOW_MS - now) / 1000);
+    
+    console.warn(`Rate limit exceeded for user ${userId}: ${userRequests.length}/${RATE_LIMIT_REQUESTS_PER_MINUTE} requests`);
+    
+    return ctx.reply(
+      `⚠️ Rate limit exceeded. You can make up to ${RATE_LIMIT_REQUESTS_PER_MINUTE} requests per minute.\n\n` +
+      `Please wait ${resetTime} seconds before trying again.`
+    );
+  }
+  
+  // Add current request timestamp
+  userRequests.push(now);
+  rateLimitStorage.set(userId, userRequests);
+  
+  // Log rate limit status for monitoring
+  if (userRequests.length > RATE_LIMIT_REQUESTS_PER_MINUTE * RATE_LIMIT_WARNING_THRESHOLD) { // Warn at 80% of limit
+    console.warn(`User ${userId} approaching rate limit: ${userRequests.length}/${RATE_LIMIT_REQUESTS_PER_MINUTE} requests`);
+  }
+  
+  return next();
+};
+
+// ============================================================================
+// SECURITY MIDDLEWARE
+// ============================================================================
+
+/**
+ * User authentication middleware - Checks if user is authorized
+ * @param {Object} ctx - Telegraf context
+ * @param {Function} next - Next middleware function
+ */
+const authenticateUser = (ctx, next) => {
+  // If no allowedUsers configured, allow all users (backward compatibility)
+  if (!config.telegram.allowedUsers || config.telegram.allowedUsers.length === 0) {
+    return next();
+  }
+
+  const userId = ctx.from?.id;
+  if (!userId) {
+    console.warn('Authentication failed: No user ID in request');
+    return ctx.reply('❌ Authentication error. Please try again.');
+  }
+
+  if (!config.telegram.allowedUsers.includes(userId)) {
+    console.warn(`Unauthorized access attempt from user ${userId}`);
+    return ctx.reply('❌ Unauthorized. This bot is restricted to authorized users only.');
+  }
+
+  return next();
+};
+
+/**
+ * Input sanitization for logging - Prevents log injection attacks
+ * @param {string} input - Raw user input
+ * @returns {string} Sanitized input safe for logging
+ */
+const sanitizeForLogging = (input) => {
+  if (typeof input !== 'string') {
+    return String(input);
+  }
+  
+  // Remove or escape characters that could be used for log injection
+  return input
+    .replace(/[\r\n]/g, ' ') // Replace newlines with spaces
+    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '') // Remove control characters
+    .substring(0, MAX_LOG_MESSAGE_LENGTH); // Limit length to prevent log flooding
+};
+
+/**
+ * Webhook secret verification for POST requests
+ * @param {Object} req - HTTP request object
+ * @returns {boolean} True if verification passes or no secret configured
+ */
+const verifyWebhookSecret = (req) => {
+  // If no webhook secret configured, skip verification (for backward compatibility)
+  if (!config.telegram.webhookSecret) {
+    return true;
+  }
+
+  const providedSecret = req.headers['x-telegram-bot-api-secret-token'] || 
+                        req.headers['x-webhook-secret'];
+  
+  if (!providedSecret) {
+    console.warn('Webhook verification failed: No secret token provided');
+    return false;
+  }
+
+  if (providedSecret !== config.telegram.webhookSecret) {
+    console.warn('Webhook verification failed: Invalid secret token');
+    return false;
+  }
+
+  return true;
+};
+
+// Apply security middleware to all bot interactions
+bot.use(authenticateUser);
+bot.use(rateLimitMiddleware);
+
+// ============================================================================
 // COMMAND HANDLERS
 // ============================================================================
 
@@ -158,8 +372,8 @@ bot.command('today', async (ctx) => {
 • Iron: ${totals.iron_mg}mg
 • Zinc: ${totals.zinc_mg}mg
 
-${energyPercent >= 90 ? '✅ Energy target nearly met!' : ''}
-${proteinPercent >= 100 ? '✅ Protein target achieved!' : ''}`;
+${energyPercent >= TARGET_ACHIEVEMENT_THRESHOLDS.ENERGY_NEARLY_MET_PERCENT ? '✅ Energy target nearly met!' : ''}
+${proteinPercent >= TARGET_ACHIEVEMENT_THRESHOLDS.PROTEIN_ACHIEVED_PERCENT ? '✅ Protein target achieved!' : ''}`;
 
     // Update the processing message with results
     await ctx.telegram.editMessageText(
@@ -209,7 +423,7 @@ bot.on('text', async (ctx) => {
     const processingMsg = await ctx.reply('🔍 Processing your food log...');
 
     // Step 2: Process with Claude/USDA
-    console.log(`Processing food log from user ${userId}: ${userMessage}`);
+    console.log(`Processing food log from user ${userId}: ${sanitizeForLogging(userMessage)}`);
     const result = await claudeIntegration.processFoodLog(userMessage, userId);
 
     if (!result.success) {
@@ -257,11 +471,27 @@ bot.on('text', async (ctx) => {
       '💾 Logging to database...'
     );
 
-    const commitResult = await githubIntegration.appendLogEntry(nutritionData);
+    // Step 5: Run commit and totals calculation in parallel for better performance
+    const [commitResult, currentTotals] = await Promise.all([
+      githubIntegration.appendLogEntry(nutritionData),
+      githubIntegration.getTodaysTotals() // Get current totals before commit
+    ]);
+    
     console.log('Successfully logged entry:', commitResult);
 
-    // Step 5: Get updated totals
-    const totals = await githubIntegration.getTodaysTotals();
+    // Add current meal to totals for immediate accurate display
+    const mealNutrition = nutritionData.nutrition;
+    const totals = {
+      date: currentTotals.date,
+      entries: currentTotals.entries + 1,
+      items: currentTotals.items + 1,
+      energy_kcal: Math.round((currentTotals.energy_kcal + mealNutrition.energy_kcal) * NUTRITION_ROUNDING_FACTOR) / NUTRITION_ROUNDING_FACTOR,
+      protein_g: Math.round((currentTotals.protein_g + mealNutrition.protein_g) * NUTRITION_ROUNDING_FACTOR) / NUTRITION_ROUNDING_FACTOR,
+      fat_g: Math.round((currentTotals.fat_g + mealNutrition.fat_g) * NUTRITION_ROUNDING_FACTOR) / NUTRITION_ROUNDING_FACTOR,
+      carbs_total_g: Math.round((currentTotals.carbs_total_g + mealNutrition.carbs_total_g) * NUTRITION_ROUNDING_FACTOR) / NUTRITION_ROUNDING_FACTOR,
+      fiber_total_g: Math.round((currentTotals.fiber_total_g + mealNutrition.fiber_total_g) * NUTRITION_ROUNDING_FACTOR) / NUTRITION_ROUNDING_FACTOR,
+    };
+    
     const targets = claudeIntegration.getTargets('rest');
 
     const remaining = {
@@ -323,6 +553,14 @@ bot.on('photo', async (ctx) => {
 
     console.log(`Processing photo from user ${ctx.from.id}, file_id: ${fileId}`);
 
+    // Get file info from Telegram to detect MIME type
+    const fileInfo = await ctx.telegram.getFile(fileId);
+    console.log(`File info:`, { file_path: fileInfo.file_path, file_size: fileInfo.file_size });
+
+    // Detect MIME type from file extension
+    const mimeType = detectMimeTypeFromPath(fileInfo.file_path);
+    console.log(`Detected MIME type: ${mimeType}`);
+
     // Get file download link from Telegram
     const fileLink = await ctx.telegram.getFileLink(fileId);
     console.log(`Downloading image from: ${fileLink.href}`);
@@ -339,8 +577,8 @@ bot.on('photo', async (ctx) => {
       '🤖 Analyzing image with AI...'
     );
 
-    // Step 4: Process with Claude Vision
-    const result = await claudeIntegration.processImage(imageBuffer, 'image/jpeg');
+    // Step 4: Process with Claude Vision using detected MIME type
+    const result = await claudeIntegration.processImage(imageBuffer, mimeType);
 
     if (!result.success) {
       await ctx.telegram.editMessageText(
@@ -370,11 +608,26 @@ bot.on('photo', async (ctx) => {
       '💾 Logging to database...'
     );
 
-    const commitResult = await githubIntegration.appendLogEntry(nutritionData);
+    // Step 7: Run commit and totals calculation in parallel for better performance
+    const [commitResult, currentTotals] = await Promise.all([
+      githubIntegration.appendLogEntry(nutritionData),
+      githubIntegration.getTodaysTotals() // Get current totals before commit
+    ]);
+    
     console.log('Successfully logged entry from screenshot:', commitResult);
 
-    // Step 7: Get updated totals
-    const totals = await githubIntegration.getTodaysTotals();
+    // Add current meal to totals for immediate accurate display
+    const mealNutrition = nutritionData.nutrition;
+    const totals = {
+      date: currentTotals.date,
+      entries: currentTotals.entries + 1,
+      items: currentTotals.items + 1,
+      energy_kcal: Math.round((currentTotals.energy_kcal + mealNutrition.energy_kcal) * NUTRITION_ROUNDING_FACTOR) / NUTRITION_ROUNDING_FACTOR,
+      protein_g: Math.round((currentTotals.protein_g + mealNutrition.protein_g) * NUTRITION_ROUNDING_FACTOR) / NUTRITION_ROUNDING_FACTOR,
+      fat_g: Math.round((currentTotals.fat_g + mealNutrition.fat_g) * NUTRITION_ROUNDING_FACTOR) / NUTRITION_ROUNDING_FACTOR,
+      carbs_total_g: Math.round((currentTotals.carbs_total_g + mealNutrition.carbs_total_g) * NUTRITION_ROUNDING_FACTOR) / NUTRITION_ROUNDING_FACTOR,
+    };
+    
     const targets = claudeIntegration.getTargets('rest');
 
     const remaining = {
@@ -446,19 +699,42 @@ const handler = async (req, res) => {
       console.log('Setting up webhook...');
       const webhookUrl = `${config.telegram.webhookUrl}/webhook`;
 
-      await bot.telegram.setWebhook(webhookUrl);
+      // Set webhook with optional secret token for enhanced security
+      const webhookOptions = {
+        url: webhookUrl,
+      };
+
+      if (config.telegram.webhookSecret) {
+        webhookOptions.secret_token = config.telegram.webhookSecret;
+        console.log('Webhook secret token configured for enhanced security');
+      }
+
+      await bot.telegram.setWebhook(webhookOptions.url, {
+        secret_token: webhookOptions.secret_token
+      });
       console.log(`Webhook set to: ${webhookUrl}`);
 
       res.status(200).json({
         success: true,
         message: 'Webhook configured successfully',
         webhook_url: webhookUrl,
+        secret_configured: !!config.telegram.webhookSecret,
       });
       return;
     }
 
     // POST /webhook - Handle Telegram updates
     if (req.method === 'POST' && (req.url === '/webhook' || req.url === '/api/webhook')) {
+      // Verify webhook secret token for security
+      if (!verifyWebhookSecret(req)) {
+        console.warn('Unauthorized webhook request - invalid or missing secret token');
+        res.status(401).json({ 
+          error: 'Unauthorized',
+          message: 'Invalid webhook secret token'
+        });
+        return;
+      }
+
       await bot.handleUpdate(req.body);
       res.status(200).json({ ok: true });
       return;
