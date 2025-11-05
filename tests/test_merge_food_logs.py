@@ -18,6 +18,7 @@ from pathlib import Path
 from datetime import datetime, timezone
 import tempfile
 import json
+import yaml
 
 # Add scripts directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent / 'scripts'))
@@ -29,6 +30,7 @@ from merge_food_logs import (
     ValidationError,
     load_processed_state,
     save_processed_state,
+    load_existing_log,
 )
 
 
@@ -552,6 +554,81 @@ class TestStateManagement:
 
             state = load_processed_state()
             assert state == {'last_run': None, 'processed': {}}
+
+
+class TestWorkingTreeIntegration:
+    """Test load_existing_log function."""
+
+    def test_load_nonexistent_file(self):
+        """Test that nonexistent files return None."""
+        result = load_existing_log('data/logs/2024-01/nonexistent.yaml')
+        assert result is None
+
+    def test_load_valid_existing_file(self):
+        """Test loading a valid existing log file."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            # Create a valid log file
+            log_file = Path(tmpdir) / 'data' / 'logs' / '2024-01' / '15.yaml'
+            log_file.parent.mkdir(parents=True, exist_ok=True)
+            
+            log_data = {
+                'date': '2024-01-15',
+                'day_type': 'rest',
+                'entries': [
+                    {
+                        'timestamp': '2024-01-15T08:00:00Z',
+                        'items': [
+                            {
+                                'name': 'Test Food',
+                                'quantity': 100,
+                                'unit': 'g',
+                                'nutrition': {'calories': 200, 'protein': 10, 'carbs': 20, 'fat': 5}
+                            }
+                        ]
+                    }
+                ]
+            }
+            
+            with open(log_file, 'w') as f:
+                yaml.dump(log_data, f)
+            
+            # Mock the current working directory
+            import merge_food_logs
+            original_cwd = merge_food_logs.Path.cwd
+            merge_food_logs.Path.cwd = lambda: Path(tmpdir)
+            
+            try:
+                result = load_existing_log('data/logs/2024-01/15.yaml')
+                assert result == log_data
+            finally:
+                merge_food_logs.Path.cwd = original_cwd
+
+    def test_load_invalid_existing_file(self):
+        """Test that invalid log files return None."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            # Create an invalid log file
+            log_file = Path(tmpdir) / 'data' / 'logs' / '2024-01' / '15.yaml'
+            log_file.parent.mkdir(parents=True, exist_ok=True)
+            
+            # Missing required fields
+            invalid_log_data = {
+                'date': '2024-01-15',
+                # Missing 'day_type' and 'entries'
+            }
+            
+            with open(log_file, 'w') as f:
+                yaml.dump(invalid_log_data, f)
+            
+            # Mock the current working directory
+            import merge_food_logs
+            original_cwd = merge_food_logs.Path.cwd
+            merge_food_logs.Path.cwd = lambda: Path(tmpdir)
+            
+            try:
+                result = load_existing_log('data/logs/2024-01/15.yaml')
+                assert result is None
+            finally:
+                merge_food_logs.Path.cwd = original_cwd
 
 
 if __name__ == '__main__':

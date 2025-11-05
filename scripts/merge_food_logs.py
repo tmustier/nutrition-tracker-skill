@@ -307,6 +307,8 @@ def merge_log_files(files_by_branch: Dict[str, dict], file_path: str) -> dict:
             # Deduplicate items by comparing key properties
             # Use name, food_bank_id, quantity, unit as unique identifier
             seen_items = {}  # key -> item
+            nutrition_conflicts = []
+            
             for item in all_items:
                 # Create unique key from item properties
                 item_key = (
@@ -318,8 +320,24 @@ def merge_log_files(files_by_branch: Dict[str, dict], file_path: str) -> dict:
 
                 if item_key not in seen_items:
                     seen_items[item_key] = item
+                else:
+                    # Check if nutrition values differ
+                    existing_nutrition = seen_items[item_key].get('nutrition', {})
+                    current_nutrition = item.get('nutrition', {})
+                    
+                    if existing_nutrition != current_nutrition:
+                        conflict_msg = f"Same item '{item.get('name')}' has different nutrition values"
+                        nutrition_conflicts.append(conflict_msg)
+                        print(f"      ⚠️  CONFLICT: {conflict_msg}")
+                        print(f"         Existing: {existing_nutrition}")
+                        print(f"         New:      {current_nutrition}")
+                        print(f"         Using first version found")
 
             deduplicated_items = list(seen_items.values())
+            
+            # Add nutrition conflicts to warnings if any found
+            if nutrition_conflicts:
+                stats.setdefault('warnings', []).extend(nutrition_conflicts)
 
             # Log if deduplication occurred
             if len(deduplicated_items) < len(all_items):
@@ -398,6 +416,45 @@ def save_processed_state(state: dict):
     with open(state_file, 'w') as f:
         json.dump(state, f, indent=2)
 
+def load_existing_log(file_path: str) -> dict:
+    """
+    Load existing log file from working tree to preserve manual edits.
+    
+    Args:
+        file_path: Path to log file (e.g., 'data/logs/2024-01/15.yaml')
+    
+    Returns:
+        Log data dict if file exists and is valid, None otherwise
+    """
+    try:
+        log_file = Path(file_path)
+        if not log_file.exists():
+            return None
+            
+        # Path traversal protection: ensure file is within data/logs/
+        allowed_base = Path.cwd() / 'data' / 'logs'
+        resolved_path = log_file.resolve()
+        if not str(resolved_path).startswith(str(allowed_base.resolve())):
+            print(f"⚠️  Security: Skipping file outside data/logs/: {file_path}")
+            return None
+            
+        with open(log_file, 'r', encoding='utf-8') as f:
+            log_data = yaml.safe_load(f)
+            
+        # Validate the existing log
+        errors = validate_log_schema(log_data, file_path)
+        if errors:
+            print(f"⚠️  Working tree {file_path} has validation errors, skipping")
+            for error in errors[:3]:  # Show first 3 errors
+                print(f"     - {error}")
+            return None
+            
+        return log_data
+        
+    except (yaml.YAMLError, IOError, ValueError) as e:
+        print(f"⚠️  Could not load existing {file_path}: {e}")
+        return None
+
 def main():
     """Main entry point."""
     print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
@@ -424,7 +481,8 @@ def main():
         'files_extracted': 0,
         'files_merged': 0,
         'conflicts': [],
-        'errors': []
+        'errors': [],
+        'warnings': []
     }
 
     # Collect all log files grouped by path
@@ -500,12 +558,19 @@ def main():
 
     for file_path, files_by_branch in files_by_path.items():
         try:
+            # Load existing file from working tree to preserve manual edits
+            working_tree_data = load_existing_log(file_path)
+            if working_tree_data:
+                # Add working tree version to merge candidates
+                files_by_branch['working-tree'] = working_tree_data
+                print(f"   Including existing working tree version of {file_path}")
+
             merged_data = merge_log_files(files_by_branch, file_path)
             merged_files[file_path] = merged_data
 
             if len(files_by_branch) > 1:
                 stats['files_merged'] += 1
-                print(f"✓ {file_path} (merged from {len(files_by_branch)} branches)")
+                print(f"✓ {file_path} (merged from {len(files_by_branch)} sources)")
             else:
                 print(f"✓ {file_path}")
 
@@ -555,7 +620,14 @@ def main():
     print(f"Files extracted:   {stats['files_extracted']}")
     print(f"Files merged:      {stats['files_merged']}")
     print(f"Conflicts:         {len(stats['conflicts'])}")
+    print(f"Warnings:          {len(stats['warnings'])}")
     print(f"Errors:            {len(stats['errors'])}")
+
+    # Print warnings
+    if stats['warnings']:
+        print("\n⚠️  Warnings (review recommended):")
+        for warning in stats['warnings']:
+            print(f"  - {warning}")
 
     # Print conflicts
     if stats['conflicts']:
