@@ -157,7 +157,7 @@ entries:
       protein_g: 1.4
       fat_g: 0.4
       sat_fat_g: 0.04
-      mufa_g: 0.10
+      mufa_g: 0.1
       pufa_g: 0.31
       trans_fat_g: 0
       cholesterol_mg: 0
@@ -177,8 +177,239 @@ entries:
       polyols_g: 0.0
       carbs_available_g: 36.0
       carbs_total_g: 44.6
-  notes: >-
-    Brunch/lunch meal. 3 crispbreads topped with smoked trout (with added salt sprinkle
-    on each), 3 crispbreads topped with avocado (with added salt sprinkle on each),
-    1 crispbread topped with 2 slices goat's cheese (no added salt). 2 boiled eggs
-    (no added salt). 1 small kiwi. 1 large persimmon (240g).
+  notes: Brunch/lunch meal. 3 crispbreads topped with smoked trout (with added salt
+    sprinkle on each), 3 crispbreads topped with avocado (with added salt sprinkle
+    on each), 1 crispbread topped with 2 slices goat's cheese (no added salt). 2 boiled
+    eggs (no added salt). 1 small kiwi. 1 large persimmon (240g).
+- timestamp: '2025-11-05T14:33:41+00:00'
+  items:
+  - name: Protein Granola Yogurt (SHK)
+    food_bank_id: protein_granola_yogurt_shk_v1
+    quantity: 1
+    unit: portion
+    nutrition:
+      energy_kcal: 290.6
+      protein_g: 35
+      fat_g: 7.6
+      sat_fat_g: 1.5
+      mufa_g: 2.0
+      pufa_g: 3.9
+      trans_fat_g: 0.1
+      cholesterol_mg: 0
+      carbs_total_g: 23.1
+      polyols_g: 0.0
+      carbs_available_g: 18
+      sugar_g: 12
+      fiber_total_g: 5.1
+      fiber_soluble_g: 2.6
+      fiber_insoluble_g: 2.5
+      sodium_mg: 125
+      potassium_mg: 465
+      calcium_mg: 230
+      magnesium_mg: 95
+      phosphorus_mg: 360
+      chloride_mg: 195
+      sulfur_g: 0.42
+      iron_mg: 3.6
+      zinc_mg: 2.6
+      copper_mg: 0.3
+      manganese_mg: 0.8
+      selenium_ug: 13
+      iodine_ug: 12
+      chromium_ug: 2
+      molybdenum_ug: 11
+      vitamin_a_ug: 18
+      vitamin_d_ug: 0.6
+      vitamin_e_mg: 1.6
+      vitamin_k_ug: 6
+      vitamin_b1_mg: 0.16
+      vitamin_b2_mg: 0.27
+      vitamin_b3_mg: 2.1
+      vitamin_b5_mg: 0.52
+      vitamin_b6_mg: 0.17
+      vitamin_b7_ug: 9
+      vitamin_b9_ug: 28
+      vitamin_b12_ug: 0.85
+      choline_mg: 38
+      vitamin_c_mg: 2
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 1.85
+      omega6_la_g: 0.62
+      boron_mg: 0.32
+      silicon_mg: 2.1
+      vanadium_ug: 6
+      nickel_ug: 11
+  - name: Grilled Salmon Fillet (Simple Health Kitchen)
+    food_bank_id: grilled_salmon_fillet_shk_v1
+    quantity: 1
+    unit: portion
+    nutrition:
+      energy_kcal: 260
+      protein_g: 28.0
+      fat_g: 16.0
+      sat_fat_g: 3.1
+      mufa_g: 6.2
+      pufa_g: 6.7
+      trans_fat_g: 0
+      cholesterol_mg: 80
+      carbs_total_g: 1.4
+      polyols_g: 0.0
+      carbs_available_g: 1.0
+      sugar_g: 0
+      fiber_total_g: 0
+      fiber_soluble_g: 0
+      fiber_insoluble_g: 0
+      sodium_mg: 370
+      potassium_mg: 486
+      calcium_mg: 19
+      magnesium_mg: 38
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
+      iron_mg: 0
+      zinc_mg: 1
+      copper_mg: 0
+      manganese_mg: 0
+      selenium_ug: 50
+      iodine_ug: 17
+      chromium_ug: 0
+      molybdenum_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 13.0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 5
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+  - name: Sweet Potato Wedges (Simple Health Kitchen)
+    food_bank_id: sweet_potato_wedges_shk_v1
+    quantity: 1
+    unit: portion
+    nutrition:
+      energy_kcal: 163.3
+      protein_g: 2
+      fat_g: 1.9
+      sat_fat_g: 1
+      mufa_g: 0.5
+      pufa_g: 0.4
+      trans_fat_g: 0.1
+      cholesterol_mg: 0
+      carbs_total_g: 37.1
+      polyols_g: 0
+      carbs_available_g: 32
+      sugar_g: 10.1
+      fiber_total_g: 5.1
+      fiber_soluble_g: 1.4
+      fiber_insoluble_g: 3.7
+      sodium_mg: 350
+      potassium_mg: 734
+      calcium_mg: 59
+      magnesium_mg: 42
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
+      iron_mg: 1
+      zinc_mg: 0
+      copper_mg: 0
+      manganese_mg: 0
+      selenium_ug: 0
+      iodine_ug: 2
+      chromium_ug: 0
+      molybdenum_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 30
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+  - name: Zesty Lemon Broccoli (Simple Health Kitchen)
+    food_bank_id: zesty_lemon_broccoli_shk_v1
+    quantity: 1
+    unit: portion
+    nutrition:
+      energy_kcal: 109.3
+      protein_g: 4.5
+      fat_g: 4.7
+      sat_fat_g: 0.8
+      mufa_g: 3.2
+      pufa_g: 0.8
+      trans_fat_g: 0
+      cholesterol_mg: 0
+      carbs_total_g: 14
+      polyols_g: 0
+      carbs_available_g: 10.5
+      sugar_g: 2.7
+      fiber_total_g: 3.5
+      fiber_soluble_g: 1.1
+      fiber_insoluble_g: 2.4
+      sodium_mg: 150
+      potassium_mg: 556
+      calcium_mg: 76
+      magnesium_mg: 40
+      phosphorus_mg: 0
+      chloride_mg: 0
+      sulfur_g: 0
+      iron_mg: 1
+      zinc_mg: 1
+      copper_mg: 0
+      manganese_mg: 0
+      selenium_ug: 0
+      iodine_ug: 1
+      chromium_ug: 0
+      molybdenum_ug: 0
+      vitamin_a_ug: 0
+      vitamin_d_ug: 0
+      vitamin_e_mg: 0
+      vitamin_k_ug: 0
+      vitamin_b1_mg: 0
+      vitamin_b2_mg: 0
+      vitamin_b3_mg: 0
+      vitamin_b5_mg: 0
+      vitamin_b6_mg: 0
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 0
+      vitamin_b12_ug: 0
+      choline_mg: 0
+      vitamin_c_mg: 123
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0
+      omega6_la_g: 0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+  notes: Simple Health Kitchen lunch. Protein granola yogurt while waiting, then salmon
+    fillet with sweet potato wedges and zesty lemon broccoli.
