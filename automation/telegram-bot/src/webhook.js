@@ -471,12 +471,11 @@ bot.on('text', async (ctx) => {
       '💾 Logging to database...'
     );
 
-    // Step 5: Run commit and totals calculation in parallel for better performance
-    const [commitResult, currentTotals] = await Promise.all([
-      githubIntegration.appendLogEntry(nutritionData),
-      githubIntegration.getTodaysTotals() // Get current totals before commit
-    ]);
+    // Step 5: Get current totals before committing to avoid race condition
+    const currentTotals = await githubIntegration.getTodaysTotals();
     
+    // Step 6: Commit the entry
+    const commitResult = await githubIntegration.appendLogEntry(nutritionData);
     console.log('Successfully logged entry:', commitResult);
 
     // Add current meal to totals for immediate accurate display
@@ -499,7 +498,7 @@ bot.on('text', async (ctx) => {
       protein_g: Math.max(0, targets.protein_g - totals.protein_g),
     };
 
-    // Step 6: Format and send success message
+    // Step 7: Format and send success message
     const nutrition = nutritionData.nutrition;
     const successMessage = `✅ **Logged: ${nutritionData.name}**
 
@@ -608,12 +607,11 @@ bot.on('photo', async (ctx) => {
       '💾 Logging to database...'
     );
 
-    // Step 7: Run commit and totals calculation in parallel for better performance
-    const [commitResult, currentTotals] = await Promise.all([
-      githubIntegration.appendLogEntry(nutritionData),
-      githubIntegration.getTodaysTotals() // Get current totals before commit
-    ]);
+    // Step 7: Get current totals before committing to avoid race condition
+    const currentTotals = await githubIntegration.getTodaysTotals();
     
+    // Step 8: Commit the entry
+    const commitResult = await githubIntegration.appendLogEntry(nutritionData);
     console.log('Successfully logged entry from screenshot:', commitResult);
 
     // Add current meal to totals for immediate accurate display
@@ -635,7 +633,7 @@ bot.on('photo', async (ctx) => {
       protein_g: Math.max(0, targets.protein_g - totals.protein_g),
     };
 
-    // Step 8: Send success message
+    // Step 9: Send success message
     const nutrition = nutritionData.nutrition;
     const successMessage = `✅ **Logged from screenshot: ${nutritionData.name}**
 

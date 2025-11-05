@@ -294,6 +294,15 @@ if (useExpress) {
   // Main webhook endpoint
   app.post('/webhook', async (req, res) => {
     try {
+      // Verify webhook secret token for security
+      if (!verifyWebhookSecret(req)) {
+        console.warn('Unauthorized webhook request - invalid or missing secret token');
+        return res.status(401).json({ 
+          error: 'Unauthorized',
+          message: 'Invalid webhook secret token'
+        });
+      }
+
       if (!req.body || Object.keys(req.body).length === 0) {
         console.warn('⚠️  Received webhook request with empty body');
         return res.status(400).json({ error: 'Empty request body' });
