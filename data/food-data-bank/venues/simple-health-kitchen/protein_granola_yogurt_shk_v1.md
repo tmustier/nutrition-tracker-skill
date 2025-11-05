@@ -25,7 +25,7 @@ assumptions:
   prep: "cold assembly; protein powder mixed into yogurt base"
 per_portion:  # Schema v2: 52 nutrient fields
   # Macronutrients
-  energy_kcal: 264
+  energy_kcal: 290.6
   protein_g: 35
   fat_g: 7.6
   sat_fat_g: 1.5
@@ -93,7 +93,8 @@ quality:
     - "Berry protein flavor may contain small amounts of freeze-dried berry powder (minimal nutritional impact)"
 notes:
   - "Atwater check (available carb basis): 4×35.0 + 9×7.6 + 4×18.0 + 2×5.1 + 2.4×0.0 = 140.0 + 68.4 + 72.0 + 10.2 = 290.6 kcal"
-  - "Venue reports 264 kcal vs calculated 290.6 kcal (9% variance); likely uses 4-4-9 without fiber factor"
+  - "Venue-provided label energy: 264 kcal (SHK PDF page 71). Differs from calculated by 10% - venue likely uses simplified 4-4-9 without fiber energy factor"
+  - "Per ESTIMATE.md policy: Stored calculated energy (290.6 kcal) due to >8% variance from label value"
   - "Exceptionally high protein (35g) achieved via berry protein powder (~28g serving = ~22g protein) plus soy yogurt (~140g = ~5g), chia seeds (~10g = ~1.7g), and granola (~20g = ~2g)"
   - "Chia seeds contribute high ALA omega-3 (~1.85g from 10g chia at 17.8g/100g USDA value)"
   - "Marked DF (Dairy Free) despite 'Greek Yogurt' description; allergen list confirms soya-based alternative"
