@@ -1,7 +1,7 @@
 ---
 title: Food Data Bank Index
 description: Auto-generated index of all dishes in the food data bank
-generated: 2025-11-05 10:36:01 UTC
+generated: 2025-11-05 10:54:43 UTC
 ---
 
 # Food Data Bank Index
@@ -11,11 +11,11 @@ generated: 2025-11-05 10:36:01 UTC
 
 ## Overview
 
-Total dishes: 73
+Total dishes: 77
 
 - **Venues**: 9 categories
 - **Packaged Products**: 7 categories
-- **Generic Items**: 11 categories
+- **Generic Items**: 12 categories
 
 ---
 
@@ -208,9 +208,10 @@ Total dishes: 73
 
 *Location: `data/food-data-bank/generic/fresh-produce/`*
 
-**2 dishes:**
+**3 dishes:**
 
 - [Clementine (Fresh Fruit)](food-data-bank/generic/fresh-produce/clementine_fresh_fruit_v1.md) {#clementine_fresh_fruit_v1}
+- [Kiwi (Small, Fresh)](food-data-bank/generic/fresh-produce/kiwi_small_70g_generic-fresh-produce_v1.md) {#kiwi_small_70g_generic-fresh-produce_v1}
 - [Persimmon (Fresh Fruit)](food-data-bank/generic/fresh-produce/persimmon_fresh_fruit_generic_v1.md) {#persimmon_fresh_fruit_generic_v1}
 
 ## Generic: Germes
@@ -228,6 +229,16 @@ Total dishes: 73
 **1 dishes:**
 
 - [Banana (Raw, 150g)](food-data-bank/generic/grocery/banana_raw_150g_v1.md) {#banana_raw_150g_v1}
+
+## Generic: Homemade Prepared At Home
+
+*Location: `data/food-data-bank/generic/homemade-prepared-at-home/`*
+
+**3 dishes:**
+
+- [Crispbread with Avocado](food-data-bank/generic/homemade-prepared-at-home/crispbread_avocado_30g_homemade_v1.md) {#crispbread_avocado_30g_homemade_v1}
+- [Crispbread with Chavroux Goat's Cheese](food-data-bank/generic/homemade-prepared-at-home/crispbread_goat_cheese_29g_homemade_v1.md) {#crispbread_goat_cheese_29g_homemade_v1}
+- [Crispbread with Smoked Trout](food-data-bank/generic/homemade-prepared-at-home/crispbread_smoked_trout_18g_homemade_v1.md) {#crispbread_smoked_trout_18g_homemade_v1}
 
 ## Generic: Ingredients
 
