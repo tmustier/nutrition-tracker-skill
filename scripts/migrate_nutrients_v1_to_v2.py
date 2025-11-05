@@ -217,14 +217,11 @@ def needs_migration(data, verbose=False):
     if schema_version is not None and schema_version >= 2:
         return (False, f"Already migrated (schema_version: {schema_version})")
 
-    # Check if any new nutrients are already present
-    per_portion = data.get('per_portion', {})
-    existing_new_nutrients = [name for name, _ in NEW_NUTRIENTS if name in per_portion]
-
-    if existing_new_nutrients:
-        return (False, f"Already has new nutrients: {', '.join(existing_new_nutrients[:3])}...")
-
-    return (True, "Needs migration")
+    # If no schema_version or schema_version < 2, needs migration
+    if schema_version is None:
+        return (True, "Needs migration (schema_version missing)")
+    else:
+        return (True, f"Needs migration (schema_version: {schema_version} < 2)")
 
 
 def serialize_yaml_value(value):

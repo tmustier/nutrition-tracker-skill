@@ -77,7 +77,7 @@ All schemas use a structured `per_portion` format where:
 ## Schema Version 2 (Current)
 
 **Active Since**: 2025-11-05
-**Total Fields**: 51 required nutrients + 4 optional
+**Total Fields**: 49 required nutrients
 
 ### Complete Field List
 
@@ -154,27 +154,25 @@ All schemas use a structured `per_portion` format where:
 | `vitamin_e_mg` | mg | Vitamin E (alpha-tocopherol) | **NEW** |
 | `vitamin_k_ug` | µg | Vitamin K (phylloquinone) | **NEW** |
 
-#### 8. Fatty Acids - Detailed (6 fields)
+#### 8. Fatty Acids - Detailed (4 fields)
 | Field Name | Unit | Description | Status |
 |------------|------|-------------|--------|
 | `omega3_epa_mg` | mg | EPA (eicosapentaenoic acid) | **NEW** |
 | `omega3_dha_mg` | mg | DHA (docosahexaenoic acid) | **NEW** |
 | `omega3_ala_g` | g | ALA (alpha-linolenic acid) | **NEW** |
 | `omega6_la_g` | g | LA (linoleic acid) | **NEW** |
-| `omega6_aa_mg` | mg | AA (arachidonic acid) | **NEW** |
-| `omega9_oa_g` | g | OA (oleic acid) | **NEW** |
 
-**Note**: Omega-3 and omega-6 fatty acids are subsets of PUFA. EPA+DHA+ALA (omega-3) and LA+AA (omega-6) should not exceed `pufa_g` when summed.
+**Note**: Omega-3 and omega-6 fatty acids are subsets of PUFA. EPA+DHA+ALA (omega-3) and LA (omega-6) should not exceed `pufa_g` when summed.
 
-#### 9. OPTIONAL: Ultra-Trace Minerals (4 fields)
-| Field Name | Unit | Description | Required? |
-|------------|------|-------------|-----------|
-| `boron_mg` | mg | Boron | Optional |
-| `silicon_mg` | mg | Silicon | Optional |
-| `vanadium_ug` | µg | Vanadium | Optional |
-| `nickel_ug` | µg | Nickel | Optional |
+#### 9. Ultra-Trace Minerals (4 fields)
+| Field Name | Unit | Description | Status |
+|------------|------|-------------|--------|
+| `boron_mg` | mg | Boron | **NEW** |
+| `silicon_mg` | mg | Silicon | **NEW** |
+| `vanadium_ug` | µg | Vanadium | **NEW** |
+| `nickel_ug` | µg | Nickel | **NEW** |
 
-**Total**: 51 required fields + 4 optional fields = **55 fields maximum**
+**Total**: **49 required fields**
 
 ---
 

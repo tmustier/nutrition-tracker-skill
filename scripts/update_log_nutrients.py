@@ -82,7 +82,8 @@ def update_log_file(log_path):
     return True
 
 def main():
-    logs_dir = Path("/home/user/nutrition-tracking/data/logs")
+    # Use relative path from script location
+    logs_dir = Path(__file__).parent.parent / "data" / "logs"
 
     # Find all .yaml files
     log_files = sorted(logs_dir.rglob("*.yaml"))
