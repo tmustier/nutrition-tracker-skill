@@ -177,12 +177,41 @@ print(f"NUTRITION SUMMARY - {num_days} DAYS ({date_range})")
 print("="*80)
 print()
 
-# Energy and macros
-print("MACRONUTRIENTS")
-print("-" * 80)
-print(f"{'Nutrient':<30} {f'{period_label} Total':>15} {'Daily Average':>15}")
-print("-" * 80)
+# Helper function for progressive disclosure
+def should_display_nutrient(field, totals, targets):
+    """Display nutrient if it has non-zero value OR has a defined target."""
+    if field in totals and totals[field] > 0:
+        return True
+    # Check if field has any target defined (min, max, or exact)
+    if field in targets:
+        return True
+    # Check for special target structures
+    base_field = field.replace('_kcal', '').replace('_g', '').replace('_mg', '').replace('_ug', '')
+    if base_field in targets:
+        return True
+    return False
 
+def print_section(title, fields, totals, averages, targets, period_label):
+    """Print a nutrition section with progressive disclosure."""
+    # Filter fields to display
+    fields_to_display = [(field, label) for field, label in fields
+                         if should_display_nutrient(field, totals, targets)]
+
+    if not fields_to_display:
+        return  # Skip empty sections
+
+    print(title)
+    print("-" * 80)
+    print(f"{'Nutrient':<30} {f'{period_label} Total':>15} {'Daily Average':>15}")
+    print("-" * 80)
+
+    for field, label in fields_to_display:
+        if field in totals:
+            print(f"{label:<30} {totals[field]:>15.1f} {averages[field]:>15.1f}")
+
+    print()
+
+# Define all nutrient sections
 macro_fields = [
     ('energy_kcal', 'Energy (kcal)'),
     ('protein_g', 'Protein (g)'),
@@ -192,38 +221,13 @@ macro_fields = [
     ('fiber_total_g', 'Fiber - Total (g)'),
 ]
 
-for field, label in macro_fields:
-    if field in totals:
-        print(f"{label:<30} {totals[field]:>15.1f} {averages[field]:>15.1f}")
-
-print()
-
-# Fat breakdown
-print("FAT BREAKDOWN")
-print("-" * 80)
-print(f"{'Nutrient':<30} {f'{period_label} Total':>15} {'Daily Average':>15}")
-print("-" * 80)
-
 fat_fields = [
     ('sat_fat_g', 'Saturated Fat (g)'),
     ('mufa_g', 'MUFA (g)'),
     ('pufa_g', 'PUFA (g)'),
-    ('unsat_total_g', 'Unsaturated Fat - Total (g)'),
     ('trans_fat_g', 'Trans Fat (g)'),
     ('cholesterol_mg', 'Cholesterol (mg)'),
 ]
-
-for field, label in fat_fields:
-    if field in totals:
-        print(f"{label:<30} {totals[field]:>15.1f} {averages[field]:>15.1f}")
-
-print()
-
-# Carb breakdown
-print("CARBOHYDRATE BREAKDOWN")
-print("-" * 80)
-print(f"{'Nutrient':<30} {f'{period_label} Total':>15} {'Daily Average':>15}")
-print("-" * 80)
 
 carb_fields = [
     ('sugar_g', 'Sugar (g)'),
@@ -232,50 +236,72 @@ carb_fields = [
     ('polyols_g', 'Polyols (g)'),
 ]
 
-for field, label in carb_fields:
-    if field in totals:
-        print(f"{label:<30} {totals[field]:>15.1f} {averages[field]:>15.1f}")
-
-print()
-
-# Minerals
-print("MINERALS")
-print("-" * 80)
-print(f"{'Nutrient':<30} {f'{period_label} Total':>15} {'Daily Average':>15}")
-print("-" * 80)
-
-mineral_fields = [
+minerals_major_fields = [
     ('sodium_mg', 'Sodium (mg)'),
     ('potassium_mg', 'Potassium (mg)'),
     ('calcium_mg', 'Calcium (mg)'),
     ('magnesium_mg', 'Magnesium (mg)'),
-    ('iron_mg', 'Iron (mg)'),
-    ('zinc_mg', 'Zinc (mg)'),
-    ('iodine_ug', 'Iodine (μg)'),
-    ('manganese_mg', 'Manganese (mg)'),
+    ('phosphorus_mg', 'Phosphorus (mg)'),
+    ('chloride_mg', 'Chloride (mg)'),
+    ('sulfur_g', 'Sulfur (g)'),
 ]
 
-for field, label in mineral_fields:
-    if field in totals:
-        print(f"{label:<30} {totals[field]:>15.1f} {averages[field]:>15.1f}")
+minerals_trace_fields = [
+    ('iron_mg', 'Iron (mg)'),
+    ('zinc_mg', 'Zinc (mg)'),
+    ('copper_mg', 'Copper (mg)'),
+    ('manganese_mg', 'Manganese (mg)'),
+    ('selenium_ug', 'Selenium (μg)'),
+    ('iodine_ug', 'Iodine (μg)'),
+    ('chromium_ug', 'Chromium (μg)'),
+    ('molybdenum_ug', 'Molybdenum (μg)'),
+]
 
-print()
+minerals_ultratrace_fields = [
+    ('boron_mg', 'Boron (mg)'),
+    ('silicon_mg', 'Silicon (mg)'),
+    ('vanadium_ug', 'Vanadium (μg)'),
+    ('nickel_ug', 'Nickel (μg)'),
+]
 
-# Vitamins
-print("VITAMINS")
-print("-" * 80)
-print(f"{'Nutrient':<30} {f'{period_label} Total':>15} {'Daily Average':>15}")
-print("-" * 80)
+vitamins_b_complex_fields = [
+    ('vitamin_b1_mg', 'Vitamin B1 - Thiamin (mg)'),
+    ('vitamin_b2_mg', 'Vitamin B2 - Riboflavin (mg)'),
+    ('vitamin_b3_mg', 'Vitamin B3 - Niacin (mg)'),
+    ('vitamin_b5_mg', 'Vitamin B5 - Pantothenic Acid (mg)'),
+    ('vitamin_b6_mg', 'Vitamin B6 - Pyridoxine (mg)'),
+    ('vitamin_b7_ug', 'Vitamin B7 - Biotin (μg)'),
+    ('vitamin_b9_ug', 'Vitamin B9 - Folate (μg)'),
+    ('vitamin_b12_ug', 'Vitamin B12 - Cobalamin (μg)'),
+    ('choline_mg', 'Choline (mg)'),
+]
 
-vitamin_fields = [
+vitamins_fat_soluble_fields = [
+    ('vitamin_a_ug', 'Vitamin A (μg)'),
+    ('vitamin_d_ug', 'Vitamin D (μg)'),
+    ('vitamin_e_mg', 'Vitamin E (mg)'),
+    ('vitamin_k_ug', 'Vitamin K (μg)'),
     ('vitamin_c_mg', 'Vitamin C (mg)'),
 ]
 
-for field, label in vitamin_fields:
-    if field in totals:
-        print(f"{label:<30} {totals[field]:>15.1f} {averages[field]:>15.1f}")
+fatty_acids_omega_fields = [
+    ('omega3_epa_mg', 'Omega-3 EPA (mg)'),
+    ('omega3_dha_mg', 'Omega-3 DHA (mg)'),
+    ('omega3_ala_g', 'Omega-3 ALA (g)'),
+    ('omega6_la_g', 'Omega-6 LA (g)'),
+]
 
-print()
+# Print all sections with progressive disclosure
+print_section("MACRONUTRIENTS", macro_fields, totals, averages, targets, period_label)
+print_section("FAT BREAKDOWN", fat_fields, totals, averages, targets, period_label)
+print_section("CARBOHYDRATE BREAKDOWN", carb_fields, totals, averages, targets, period_label)
+print_section("MINERALS (Major)", minerals_major_fields, totals, averages, targets, period_label)
+print_section("MINERALS (Trace)", minerals_trace_fields, totals, averages, targets, period_label)
+print_section("MINERALS (Ultra-trace)", minerals_ultratrace_fields, totals, averages, targets, period_label)
+print_section("VITAMINS (B-Complex)", vitamins_b_complex_fields, totals, averages, targets, period_label)
+print_section("VITAMINS (Fat-Soluble)", vitamins_fat_soluble_fields, totals, averages, targets, period_label)
+print_section("FATTY ACIDS (Omega)", fatty_acids_omega_fields, totals, averages, targets, period_label)
+
 print("="*80)
 print()
 

@@ -224,11 +224,27 @@ def analyze_month(year: int, month: int) -> Dict:
         'summary': {}
     }
 
-    # Calculate monthly aggregates
+    # Calculate monthly aggregates - All 51 nutrients
     nutrients = [
+        # Macronutrients and energy
         'energy_kcal', 'protein_g', 'fat_g', 'carbs_total_g', 'fiber_total_g',
-        'sat_fat_g', 'mufa_g', 'pufa_g', 'sugar_g', 'sodium_mg', 'potassium_mg',
-        'calcium_mg', 'iron_mg', 'magnesium_mg', 'zinc_mg', 'vitamin_c_mg'
+        # Fat types
+        'sat_fat_g', 'mufa_g', 'pufa_g', 'trans_fat_g', 'cholesterol_mg',
+        # Carbohydrate types
+        'carbs_available_g', 'fiber_soluble_g', 'fiber_insoluble_g', 'sugar_g', 'polyols_g',
+        # Major minerals
+        'sodium_mg', 'potassium_mg', 'calcium_mg', 'magnesium_mg', 'phosphorus_mg', 'chloride_mg', 'sulfur_g',
+        # Trace minerals
+        'iron_mg', 'zinc_mg', 'copper_mg', 'manganese_mg', 'selenium_ug', 'iodine_ug', 'chromium_ug', 'molybdenum_ug',
+        # Ultra-trace minerals
+        'boron_mg', 'silicon_mg', 'vanadium_ug', 'nickel_ug',
+        # Fat-soluble vitamins
+        'vitamin_a_ug', 'vitamin_d_ug', 'vitamin_e_mg', 'vitamin_k_ug',
+        # Water-soluble vitamins
+        'vitamin_c_mg', 'vitamin_b1_mg', 'vitamin_b2_mg', 'vitamin_b3_mg', 'vitamin_b5_mg',
+        'vitamin_b6_mg', 'vitamin_b7_ug', 'vitamin_b9_ug', 'vitamin_b12_ug', 'choline_mg',
+        # Fatty acids
+        'omega3_epa_mg', 'omega3_dha_mg', 'omega3_ala_g', 'omega6_la_g'
     ]
 
     summary = {}
@@ -787,26 +803,152 @@ def generate_markdown_report(analysis: Dict) -> str:
     report.extend(_generate_meal_timing_section(analysis))
     report.extend(_generate_target_achievement_section(analysis, targets))
 
-    # Micronutrients
+    # Micronutrients - Comprehensive Analysis
     report.append("## 🔬 MICRONUTRIENT AVERAGES")
+    report.append("")
+
+    # B-Complex Vitamins
+    report.append("### B-Complex Vitamins")
     report.append("")
     report.append("| Nutrient | Daily Average | Range |")
     report.append("|----------|---------------|-------|")
 
-    micronutrients = [
-        ('Potassium', 'potassium_mg', 'mg'),
-        ('Calcium', 'calcium_mg', 'mg'),
-        ('Magnesium', 'magnesium_mg', 'mg'),
-        ('Iron', 'iron_mg', 'mg'),
-        ('Zinc', 'zinc_mg', 'mg'),
+    b_vitamins = [
+        ('Vitamin B1 (Thiamin)', 'vitamin_b1_mg', 'mg'),
+        ('Vitamin B2 (Riboflavin)', 'vitamin_b2_mg', 'mg'),
+        ('Vitamin B3 (Niacin)', 'vitamin_b3_mg', 'mg'),
+        ('Vitamin B5 (Pantothenic Acid)', 'vitamin_b5_mg', 'mg'),
+        ('Vitamin B6 (Pyridoxine)', 'vitamin_b6_mg', 'mg'),
+        ('Vitamin B7 (Biotin)', 'vitamin_b7_ug', 'μg'),
+        ('Vitamin B9 (Folate)', 'vitamin_b9_ug', 'μg'),
+        ('Vitamin B12 (Cobalamin)', 'vitamin_b12_ug', 'μg'),
+        ('Choline', 'choline_mg', 'mg'),
+    ]
+
+    for label, key, unit in b_vitamins:
+        if key in summary:
+            avg = summary[key]['mean']
+            min_val = summary[key]['min']
+            max_val = summary[key]['max']
+            report.append(f"| {label} | {avg:.1f} {unit} | {min_val:.1f} - {max_val:.1f} |")
+
+    report.append("")
+
+    # Fat-Soluble Vitamins
+    report.append("### Fat-Soluble Vitamins")
+    report.append("")
+    report.append("| Nutrient | Daily Average | Range |")
+    report.append("|----------|---------------|-------|")
+
+    fat_sol_vitamins = [
+        ('Vitamin A', 'vitamin_a_ug', 'μg'),
+        ('Vitamin D', 'vitamin_d_ug', 'μg'),
+        ('Vitamin E', 'vitamin_e_mg', 'mg'),
+        ('Vitamin K', 'vitamin_k_ug', 'μg'),
         ('Vitamin C', 'vitamin_c_mg', 'mg'),
     ]
 
-    for label, key, unit in micronutrients:
-        avg = summary[key]['mean']
-        min_val = summary[key]['min']
-        max_val = summary[key]['max']
-        report.append(f"| {label} | {avg:.1f} {unit} | {min_val:.1f} - {max_val:.1f} |")
+    for label, key, unit in fat_sol_vitamins:
+        if key in summary:
+            avg = summary[key]['mean']
+            min_val = summary[key]['min']
+            max_val = summary[key]['max']
+            report.append(f"| {label} | {avg:.1f} {unit} | {min_val:.1f} - {max_val:.1f} |")
+
+    report.append("")
+
+    # Major Minerals
+    report.append("### Major Minerals")
+    report.append("")
+    report.append("| Nutrient | Daily Average | Range |")
+    report.append("|----------|---------------|-------|")
+
+    major_minerals = [
+        ('Sodium', 'sodium_mg', 'mg'),
+        ('Potassium', 'potassium_mg', 'mg'),
+        ('Calcium', 'calcium_mg', 'mg'),
+        ('Magnesium', 'magnesium_mg', 'mg'),
+        ('Phosphorus', 'phosphorus_mg', 'mg'),
+        ('Chloride', 'chloride_mg', 'mg'),
+        ('Sulfur', 'sulfur_g', 'g'),
+    ]
+
+    for label, key, unit in major_minerals:
+        if key in summary:
+            avg = summary[key]['mean']
+            min_val = summary[key]['min']
+            max_val = summary[key]['max']
+            report.append(f"| {label} | {avg:.1f} {unit} | {min_val:.1f} - {max_val:.1f} |")
+
+    report.append("")
+
+    # Trace Minerals
+    report.append("### Trace Minerals")
+    report.append("")
+    report.append("| Nutrient | Daily Average | Range |")
+    report.append("|----------|---------------|-------|")
+
+    trace_minerals = [
+        ('Iron', 'iron_mg', 'mg'),
+        ('Zinc', 'zinc_mg', 'mg'),
+        ('Copper', 'copper_mg', 'mg'),
+        ('Manganese', 'manganese_mg', 'mg'),
+        ('Selenium', 'selenium_ug', 'μg'),
+        ('Iodine', 'iodine_ug', 'μg'),
+        ('Chromium', 'chromium_ug', 'μg'),
+        ('Molybdenum', 'molybdenum_ug', 'μg'),
+    ]
+
+    for label, key, unit in trace_minerals:
+        if key in summary:
+            avg = summary[key]['mean']
+            min_val = summary[key]['min']
+            max_val = summary[key]['max']
+            report.append(f"| {label} | {avg:.1f} {unit} | {min_val:.1f} - {max_val:.1f} |")
+
+    report.append("")
+
+    # Ultra-trace Minerals
+    report.append("### Ultra-trace Minerals")
+    report.append("")
+    report.append("| Nutrient | Daily Average | Range |")
+    report.append("|----------|---------------|-------|")
+
+    ultratrace_minerals = [
+        ('Boron', 'boron_mg', 'mg'),
+        ('Silicon', 'silicon_mg', 'mg'),
+        ('Vanadium', 'vanadium_ug', 'μg'),
+        ('Nickel', 'nickel_ug', 'μg'),
+    ]
+
+    for label, key, unit in ultratrace_minerals:
+        if key in summary:
+            avg = summary[key]['mean']
+            min_val = summary[key]['min']
+            max_val = summary[key]['max']
+            report.append(f"| {label} | {avg:.1f} {unit} | {min_val:.1f} - {max_val:.1f} |")
+
+    report.append("")
+
+    # Essential Fatty Acids
+    report.append("### Essential Fatty Acids")
+    report.append("")
+    report.append("| Nutrient | Daily Average | Range |")
+    report.append("|----------|---------------|-------|")
+
+    fatty_acids = [
+        ('Omega-3 EPA', 'omega3_epa_mg', 'mg'),
+        ('Omega-3 DHA', 'omega3_dha_mg', 'mg'),
+        ('Omega-3 ALA', 'omega3_ala_g', 'g'),
+        ('Omega-6 LA', 'omega6_la_g', 'g'),
+    ]
+
+    for label, key, unit in fatty_acids:
+        if key in summary:
+            avg = summary[key]['mean']
+            min_val = summary[key]['min']
+            max_val = summary[key]['max']
+            report.append(f"| {label} | {avg:.1f} {unit} | {min_val:.1f} - {max_val:.1f} |")
 
     report.append("")
 

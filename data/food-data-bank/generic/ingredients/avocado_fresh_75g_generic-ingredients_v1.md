@@ -2,40 +2,38 @@
 
 ```yaml
 id: avocado_fresh_75g_generic-ingredients_v1
+schema_version: 2
 version: 1
 last_verified: 2025-11-03
 source:
   venue: Generic Ingredients
-  menu_page: ""
+  menu_page: 
   evidence:
-    - "USDA FoodData Central - Avocado, raw, California (Hass)"
-    - "FDC ID: 171706"
-aliases: []
+  - USDA FoodData Central - Avocado, raw, California (Hass)
+  - FDC ID: 171706
+aliases:
 category: ingredient
 portion:
-  description: "1/2 of one medium avocado (edible flesh only)"
+  description: 1/2 of one medium avocado (edible flesh only)
   est_weight_g: 75
-  notes: "Fresh Hass avocado, pit and skin removed"
+  notes: Fresh Hass avocado, pit and skin removed
 assumptions:
-  salt_scheme: "unsalted"
-  oil_type: ""
-  prep: "raw"
+  salt_scheme: unsalted
+  oil_type: 
+  prep: raw
 per_portion:
-  energy_kcal: 120.0
+  energy_kcal: 120
   protein_g: 1.5
-  fat_g: 11.0
+  fat_g: 11
   sat_fat_g: 1.6
   mufa_g: 7.3
   pufa_g: 1.4
   trans_fat_g: 0
   cholesterol_mg: 0
-  carbs_total_g: 6.4
-  carbs_available_g: 1.4
   sugar_g: 0.5
-  fiber_total_g: 5.0
+  fiber_total_g: 5
   fiber_soluble_g: 1.2
   fiber_insoluble_g: 3.8
-  polyols_g: 0.0
   sodium_mg: 5
   potassium_mg: 364
   iodine_ug: 0
@@ -45,38 +43,66 @@ per_portion:
   zinc_mg: 0
   vitamin_c_mg: 8
   manganese_mg: 0
+  polyols_g: 0
+  carbs_available_g: 1.4
+  carbs_total_g: 6.4
+  copper_mg: 0
+  selenium_ug: 0
+  chromium_ug: 0
+  molybdenum_ug: 0
+  phosphorus_mg: 0
+  chloride_mg: 0
+  sulfur_g: 0
+  vitamin_a_ug: 0
+  vitamin_d_ug: 0
+  vitamin_e_mg: 0
+  vitamin_k_ug: 0
+  vitamin_b1_mg: 0
+  vitamin_b2_mg: 0
+  vitamin_b3_mg: 0
+  vitamin_b5_mg: 0
+  vitamin_b6_mg: 0
+  vitamin_b7_ug: 0
+  vitamin_b9_ug: 0
+  vitamin_b12_ug: 0
+  choline_mg: 0
+  omega3_epa_mg: 0
+  omega3_dha_mg: 0
+  omega3_ala_g: 0
+  omega6_la_g: 0
+  boron_mg: 0
+  silicon_mg: 0
+  vanadium_ug: 0
+  nickel_ug: 0
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
   confidence: high
-  gaps: []
+  gaps:
 notes:
-  - "Scaled from USDA per 100g values: 160 kcal, 2.0g P, 14.7g F (2.1g sat, 9.8g MUFA, 1.8g PUFA), 8.5g C, 6.7g fiber, 0.7g sugar"
-  - "Average medium Hass avocado: ~150g edible flesh, so 75g = 1/2 portion"
-  - "Rich in heart-healthy monounsaturated fats (oleic acid)"
-  - "Excellent source of potassium (364mg per 75g)"
-  - "Good source of fiber (5.0g per 75g)"
-  - "Contains vitamins K, E, C, and B vitamins"
-  - "Low in sodium, naturally unsalted"
-  - "Atwater check (available carb basis): 4×1.5 + 9×11.0 + 4×1.4 + 2×5.0 + 2.4×0.0 = 120.6 kcal"
+- Scaled from USDA per 100g values: 160 kcal, 2.0g P, 14.7g F (2.1g sat, 9.8g MUFA, 1.8g PUFA), 8.5g C, 6.7g fiber, 0.7g sugar
+- Average medium Hass avocado: ~150g edible flesh, so 75g = 1/2 portion
+- Rich in heart-healthy monounsaturated fats (oleic acid)
+- Excellent source of potassium (364mg per 75g)
+- Good source of fiber (5.0g per 75g)
+- Contains vitamins K, E, C, and B vitamins
+- Low in sodium, naturally unsalted
+- Atwater check (available carb basis): 4×1.5 + 9×11.0 + 4×1.4 + 2×5.0 + 2.4×0.0 = 120.6 kcal
 change_log:
-  - timestamp: "2025-11-03T10:30:00+00:00"
-    updated_by: "Claude Code (Sonnet 4.5)"
-    reason: "Initial population with USDA nutrition data for 56g portion (3/8 avocado)"
-    fields_changed:
-      - "all fields"
-    sources:
-      - url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/171706/nutrients"
-        note: "USDA FoodData Central - Avocado, raw, California"
-  - timestamp: "2025-11-03T09:10:00+00:00"
-    updated_by: "Claude Code (Sonnet 4.5)"
-    reason: "Updated default portion from 3/8 (56g) to 1/2 avocado (75g) for databank consistency"
-    fields_changed:
-      - "portion.description"
-      - "portion.est_weight_g"
-      - "all per_portion nutrition values"
-      - "id"
-    sources:
-      - url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/171706/nutrients"
-        note: "USDA FoodData Central - Avocado, raw, California"
+- timestamp: '2025-11-03T10:30:00+00:00'
+  updated_by: Claude Code (Sonnet 4.5)
+  reason: Initial population with USDA nutrition data for 56g portion (3/8 avocado)
+  fields_changed: [all fields]
+  sources: [{note: 'USDA FoodData Central - Avocado, raw, California', url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/171706/nutrients'}]
+- timestamp: '2025-11-03T09:10:00+00:00'
+  updated_by: Claude Code (Sonnet 4.5)
+  reason: Updated default portion from 3/8 (56g) to 1/2 avocado (75g) for databank consistency
+  fields_changed: [portion.description, portion.est_weight_g, all per_portion nutrition values, id]
+  sources: [{note: 'USDA FoodData Central - Avocado, raw, California', url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/171706/nutrients'}]
+- date: 2025-11-05
+  updated_by: automated_migration_v1_to_v2
+  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+  fields initialized to 0.'
 ```

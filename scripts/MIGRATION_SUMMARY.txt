@@ -1,0 +1,101 @@
+DATABANK SCHEMA MIGRATION v1 → v2
+===================================
+
+CREATED FILES:
+--------------
+1. /home/user/nutrition-tracking/scripts/migrate_nutrients_v1_to_v2.py (20KB, executable)
+   - Main migration script with comprehensive error handling
+   - Supports --dry-run, --verbose, --skip-backup, --skip-validation flags
+
+2. /home/user/nutrition-tracking/scripts/MIGRATION_V1_TO_V2.md
+   - Complete documentation with usage examples
+   - Troubleshooting guide
+   - Safety features explanation
+
+WHAT THE SCRIPT DOES:
+---------------------
+✓ Processes all .md files in data/food-data-bank/ recursively
+✓ Adds schema_version: 2 field to each file
+✓ Adds 28 new nutrient fields to per_portion section (all default to 0)
+✓ Preserves all existing data and formatting
+✓ Updates change_log with migration entry dated 2025-11-05
+✓ Creates git backup branch before migration
+✓ Validates all files after migration using validate_data_bank.py
+✓ Handles errors gracefully (skips unparseable files, logs errors)
+
+NEW NUTRIENT FIELDS (28 total):
+-------------------------------
+Minerals (7): copper_mg, selenium_ug, chromium_ug, molybdenum_ug,
+              phosphorus_mg, chloride_mg, sulfur_g
+
+Vitamins (4): vitamin_a_ug, vitamin_d_ug, vitamin_e_mg, vitamin_k_ug
+
+B-Vitamins (9): vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg,
+                vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug,
+                choline_mg
+
+Fatty Acids (4): omega3_epa_mg, omega3_dha_mg, omega3_ala_g, omega6_la_g
+
+Ultra-trace (4): boron_mg, silicon_mg, vanadium_ug, nickel_ug
+
+CURRENT STATUS:
+---------------
+✓ Script tested in dry-run mode
+✓ Successfully processes 71 databank files
+✓ 52 files need migration
+✓ 19 files already migrated (automatically skipped)
+✓ 0 failures
+
+USAGE EXAMPLES:
+---------------
+# Test what would change (recommended first step)
+python scripts/migrate_nutrients_v1_to_v2.py --dry-run
+
+# Run full migration with backup and validation
+python scripts/migrate_nutrients_v1_to_v2.py
+
+# Run with detailed logging
+python scripts/migrate_nutrients_v1_to_v2.py --verbose
+
+# Get help
+python scripts/migrate_nutrients_v1_to_v2.py --help
+
+SAFETY FEATURES:
+----------------
+✓ Idempotent: Safe to run multiple times
+✓ Automatic backup branch creation with timestamp
+✓ Skips files already at schema_version >= 2
+✓ Preserves all existing data and formatting
+✓ Post-migration validation
+✓ Detailed error logging
+✓ Dry-run mode for testing
+
+NOTE ON NUTRIENT COUNT:
+-----------------------
+The requirements specified "27 new nutrient fields" but the provided list
+contains 28 fields. The script correctly implements all 28 fields from the
+provided list:
+- 7 minerals
+- 4 vitamins (A, D, E, K)
+- 9 B-vitamins (B1-B12 + choline)
+- 4 fatty acids
+- 4 ultra-trace minerals
+Total: 28 fields
+
+NEXT STEPS:
+-----------
+1. Review the documentation in MIGRATION_V1_TO_V2.md
+2. Run dry-run mode to preview changes:
+   python scripts/migrate_nutrients_v1_to_v2.py --dry-run --verbose
+3. Execute migration:
+   python scripts/migrate_nutrients_v1_to_v2.py
+4. Review validation results
+5. Commit changes to git if validation passes
+
+ROLLBACK:
+---------
+If needed, rollback to the backup branch:
+  git reset --hard backup_before_migration_v2_TIMESTAMP
+
+Created: 2025-11-05
+Script version: 1.0

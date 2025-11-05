@@ -32,12 +32,79 @@ POLYOL_KCAL_PER_G = 2.4
 
 # Required nutrient fields in per_portion - ALL dishes must have these fields
 # (0 means TRUE ZERO, not placeholder)
+# Schema version 2: Extended to 51 nutrient fields
 REQUIRED_NUTRIENTS = [
-    'energy_kcal', 'protein_g', 'fat_g', 'sat_fat_g', 'mufa_g', 'pufa_g',
-    'trans_fat_g', 'cholesterol_mg', 'sugar_g', 'fiber_total_g',
-    'fiber_soluble_g', 'fiber_insoluble_g', 'sodium_mg', 'potassium_mg',
-    'iodine_ug', 'magnesium_mg', 'calcium_mg', 'iron_mg', 'zinc_mg',
-    'vitamin_c_mg', 'manganese_mg', 'polyols_g', 'carbs_available_g', 'carbs_total_g'
+    # Energy & Core Macronutrients
+    'energy_kcal',
+    'protein_g',
+    'fat_g',
+    'carbs_total_g',
+    'carbs_available_g',
+
+    # Fat Breakdown
+    'sat_fat_g',
+    'mufa_g',
+    'pufa_g',
+    'trans_fat_g',
+    'cholesterol_mg',
+
+    # Omega Fatty Acids
+    'omega3_ala_g',
+    'omega3_dha_mg',
+    'omega3_epa_mg',
+    'omega6_la_g',
+
+    # Carbohydrate Breakdown
+    'sugar_g',
+    'fiber_total_g',
+    'fiber_soluble_g',
+    'fiber_insoluble_g',
+    'polyols_g',
+
+    # Major Minerals
+    'calcium_mg',
+    'chloride_mg',
+    'magnesium_mg',
+    'phosphorus_mg',
+    'potassium_mg',
+    'sodium_mg',
+    'sulfur_g',
+
+    # Trace Minerals
+    'chromium_ug',
+    'copper_mg',
+    'iodine_ug',
+    'iron_mg',
+    'manganese_mg',
+    'molybdenum_ug',
+    'selenium_ug',
+    'zinc_mg',
+
+    # Ultra-Trace Elements
+    'boron_mg',
+    'nickel_ug',
+    'silicon_mg',
+    'vanadium_ug',
+
+    # Fat-Soluble Vitamins
+    'vitamin_a_ug',
+    'vitamin_d_ug',
+    'vitamin_e_mg',
+    'vitamin_k_ug',
+
+    # B-Complex Vitamins
+    'choline_mg',
+    'vitamin_b1_mg',
+    'vitamin_b2_mg',
+    'vitamin_b3_mg',
+    'vitamin_b5_mg',
+    'vitamin_b6_mg',
+    'vitamin_b7_ug',
+    'vitamin_b9_ug',
+    'vitamin_b12_ug',
+
+    # Vitamin C
+    'vitamin_c_mg',
 ]
 
 # Compile polyol detection regex once at module level (performance optimization)
@@ -148,7 +215,11 @@ def check_block(y, filepath):
 
     # Cross-check notes for polyol mentions
     notes = y.get("notes", [])
-    notes_text = ' '.join(notes) if isinstance(notes, list) else str(notes) if notes else ""
+    # Handle notes as list of strings, list of dicts, or a single string
+    if isinstance(notes, list):
+        notes_text = ' '.join(str(n) if not isinstance(n, dict) else n.get('note', '') for n in notes)
+    else:
+        notes_text = str(notes) if notes else ""
     polyol_mentions = POLYOL_PATTERN.findall(notes_text)
 
     # required trees

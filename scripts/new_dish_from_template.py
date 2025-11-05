@@ -29,7 +29,8 @@ assumptions:
   salt_scheme: "normal"  # light|normal|heavy|unsalted
   oil_type: ""
   prep: ""
-per_portion:
+per_portion:  # Schema v2: 51 nutrient fields
+  # Macronutrients
   energy_kcal: 0
   protein_g: 0
   fat_g: 0
@@ -38,6 +39,7 @@ per_portion:
   pufa_g: 0
   trans_fat_g: 0
   cholesterol_mg: 0
+  # Carbohydrates
   carbs_total_g: 0
   carbs_available_g: 0
   sugar_g: 0
@@ -45,6 +47,7 @@ per_portion:
   fiber_soluble_g: 0
   fiber_insoluble_g: 0
   polyols_g: 0.0
+  # Minerals
   sodium_mg: 0
   potassium_mg: 0
   iodine_ug: 0
@@ -56,8 +59,34 @@ per_portion:
   manganese_mg: 0
   copper_mg: 0
   selenium_ug: 0
+  chromium_ug: 0
+  molybdenum_ug: 0
+  phosphorus_mg: 0
+  chloride_mg: 0
+  sulfur_g: 0
+  # Vitamins
   vitamin_d_ug: 0
   vitamin_e_mg: 0
+  vitamin_k_ug: 0
+  vitamin_b1_mg: 0
+  vitamin_b2_mg: 0
+  vitamin_b3_mg: 0
+  vitamin_b5_mg: 0
+  vitamin_b6_mg: 0
+  vitamin_b7_ug: 0
+  vitamin_b9_ug: 0
+  vitamin_b12_ug: 0
+  choline_mg: 0
+  # Fatty acids
+  omega3_epa_mg: 0
+  omega3_dha_mg: 0
+  omega3_ala_g: 0
+  omega6_la_g: 0
+  # Ultra-trace minerals
+  boron_mg: 0
+  silicon_mg: 0
+  vanadium_ug: 0
+  nickel_ug: 0
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:

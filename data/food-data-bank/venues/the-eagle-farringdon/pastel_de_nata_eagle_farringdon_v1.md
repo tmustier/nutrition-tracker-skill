@@ -44,10 +44,36 @@ per_portion:
   selenium_ug: 20
   vitamin_c_mg: 0
   vitamin_d_ug: 1.2
+  vitamin_e_mg: 0
   manganese_mg: 0
+  copper_mg: 0
   polyols_g: 0.0
   carbs_available_g: 31.2
   carbs_total_g: 32.3
+  chromium_ug: 0
+  molybdenum_ug: 0
+  phosphorus_mg: 0
+  chloride_mg: 0
+  sulfur_g: 0
+  vitamin_a_ug: 0
+  vitamin_k_ug: 0
+  vitamin_b1_mg: 0
+  vitamin_b2_mg: 0
+  vitamin_b3_mg: 0
+  vitamin_b5_mg: 0
+  vitamin_b6_mg: 0
+  vitamin_b7_ug: 0
+  vitamin_b9_ug: 0
+  vitamin_b12_ug: 0
+  choline_mg: 0
+  omega3_epa_mg: 0
+  omega3_dha_mg: 0
+  omega3_ala_g: 0
+  omega6_la_g: 0
+  boron_mg: 0
+  silicon_mg: 0
+  vanadium_ug: 0
+  nickel_ug: 0
 derived:
   salt_g_from_sodium: = per_portion.sodium_mg * 2.5 / 1000
 quality:
