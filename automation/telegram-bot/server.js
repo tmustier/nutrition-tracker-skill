@@ -13,6 +13,7 @@
 // - Railway deployment (auto-detects RAILWAY_PUBLIC_DOMAIN)
 // - Other cloud platforms via WEBHOOK_URL env var
 
+const crypto = require('crypto');
 const config = require('./src/config');
 const webhook = require('./src/webhook');
 
@@ -23,9 +24,24 @@ let useExpress = false;
 try {
   const express = require('express');
   app = express();
-  app.use(express.json());
+  
+  // Add request size limits to prevent memory exhaustion attacks
+  app.use(express.json({ limit: '10mb' }));
+  app.use(express.urlencoded({ limit: '10mb', extended: true }));
+  
+  // Add security headers for production hardening
+  app.use((req, res, next) => {
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('X-Frame-Options', 'DENY');
+    res.setHeader('Strict-Transport-Security', 'max-age=31536000');
+    res.setHeader('X-XSS-Protection', '1; mode=block');
+    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+    res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+    next();
+  });
+  
   useExpress = true;
-  console.log('✓ Using Express.js');
+  console.log('✓ Using Express.js with 10MB request size limits and security headers');
 } catch (error) {
   console.log('⚠️  Express not installed, using built-in http module');
   console.log('   Run: npm install express  (recommended for production)');
@@ -132,7 +148,7 @@ async function handleSetup(req, res) {
 }
 
 /**
- * Webhook secret verification for POST requests
+ * Webhook secret verification for POST requests using timing-safe comparison
  * @param {Object} req - HTTP request object
  * @returns {boolean} True if verification passes or no secret configured
  */
@@ -150,12 +166,27 @@ function verifyWebhookSecret(req) {
     return false;
   }
 
-  if (providedSecret !== config.telegram.webhookSecret) {
-    console.warn('Webhook verification failed: Invalid secret token');
+  // Use timing-safe comparison to prevent timing attacks
+  try {
+    const expectedBuffer = Buffer.from(config.telegram.webhookSecret, 'utf8');
+    const providedBuffer = Buffer.from(providedSecret, 'utf8');
+    
+    // Ensure buffers are same length to prevent timing attacks
+    if (expectedBuffer.length !== providedBuffer.length) {
+      console.warn('Webhook verification failed: Invalid secret token length');
+      return false;
+    }
+    
+    // Use crypto.timingSafeEqual for constant-time comparison
+    const isValid = crypto.timingSafeEqual(expectedBuffer, providedBuffer);
+    if (!isValid) {
+      console.warn('Webhook verification failed: Invalid secret token');
+    }
+    return isValid;
+  } catch (error) {
+    console.error('Webhook verification error:', error.message);
     return false;
   }
-
-  return true;
 }
 
 /**

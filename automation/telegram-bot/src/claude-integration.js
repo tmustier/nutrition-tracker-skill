@@ -4,12 +4,53 @@ const config = require('./config');
 const usdaApi = require('./usda-api');
 
 /**
+ * Sanitizes user input to prevent prompt injection attacks
+ * @param {string} input - Raw user input
+ * @returns {string} Sanitized input safe for Claude prompts
+ */
+const sanitizePromptInput = (input) => {
+  if (typeof input !== 'string') {
+    return String(input);
+  }
+  
+  // Define patterns that could be used for prompt injection
+  const dangerous = [
+    /ignore (previous|all|earlier) (instructions|directions|commands)/gi,
+    /system:/gi,
+    /assistant:/gi,
+    /```json/gi,
+    /<\/?[^>]+(>|$)/gi, // HTML tags
+    /\[INST\]/gi, // Instruction markers
+    /\[\/INST\]/gi,
+    /human:/gi,
+    /ai:/gi,
+  ];
+  
+  let sanitized = input;
+  dangerous.forEach(pattern => {
+    sanitized = sanitized.replace(pattern, '');
+  });
+  
+  // Remove control characters that could be used for injection
+  sanitized = sanitized.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '');
+  
+  // Truncate to prevent context stuffing attacks
+  return sanitized.substring(0, 1000);
+};
+
+/**
  * Claude API Integration for Nutrition Tracking
  *
  * This module provides methods to:
  * 1. Process food logs using Claude API with USDA fallback
  * 2. Process images/screenshots using Claude Vision API
  * 3. Generate daily summaries
+ *
+ * SECURITY FEATURES:
+ * - Prompt injection protection: User input is sanitized before being sent to Claude API
+ * - Input validation: All user inputs are validated and truncated to prevent abuse
+ * - Rate limiting: Handled at the webhook level to prevent API abuse
+ * - Error handling: Detailed errors are logged but not exposed to users
  *
  * The skill context is embedded from SKILL.md to ensure Claude understands
  * the complete nutrition tracking workflow.
@@ -144,6 +185,35 @@ class ClaudeIntegration {
     this.model = config.claude.model || 'claude-sonnet-4-20250514';
     this.maxTokens = config.claude.maxTokens || 4096;
     this.apiUrl = 'https://api.anthropic.com/v1/messages';
+    
+    // Rate limiting for Claude API (50 requests per minute)
+    this.rateLimitRequests = [];
+    this.rateLimitWindow = 60 * 1000; // 1 minute
+    this.maxRequestsPerMinute = 50;
+  }
+
+  /**
+   * Check and enforce rate limiting for Claude API
+   * @returns {boolean} True if request is allowed, false if rate limited
+   */
+  checkRateLimit() {
+    const now = Date.now();
+    const cutoff = now - this.rateLimitWindow;
+    
+    // Remove old requests outside the window
+    this.rateLimitRequests = this.rateLimitRequests.filter(timestamp => timestamp > cutoff);
+    
+    // Check if we've exceeded the limit
+    if (this.rateLimitRequests.length >= this.maxRequestsPerMinute) {
+      const oldestRequest = Math.min(...this.rateLimitRequests);
+      const resetTime = Math.ceil((oldestRequest + this.rateLimitWindow - now) / 1000);
+      console.warn(`Claude API rate limit exceeded: ${this.rateLimitRequests.length}/${this.maxRequestsPerMinute} requests per minute`);
+      throw new Error(`Claude API rate limit exceeded. Try again in ${resetTime} seconds.`);
+    }
+    
+    // Add current request timestamp
+    this.rateLimitRequests.push(now);
+    return true;
   }
 
   /**
@@ -199,6 +269,9 @@ class ClaudeIntegration {
       // Step 2: Use Claude for estimation (either non-generic or USDA failed)
       console.log(`Using Claude API for: ${userMessage}`);
 
+      // Check rate limiting before making API call
+      this.checkRateLimit();
+
       const response = await axios.post(
         this.apiUrl,
         {
@@ -208,7 +281,7 @@ class ClaudeIntegration {
           messages: [
             {
               role: 'user',
-              content: `I just ate: ${userMessage}
+              content: `I just ate: ${sanitizePromptInput(userMessage)}
 
 Please estimate the complete nutrition data and return it in the JSON format specified in your instructions.
 
@@ -228,7 +301,8 @@ Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
             'Content-Type': 'application/json',
             'x-api-key': this.apiKey,
             'anthropic-version': '2023-06-01'
-          }
+          },
+          timeout: 30000 // 30 seconds timeout
         }
       );
 
@@ -237,7 +311,29 @@ Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
       const jsonMatch = claudeText.match(/```json\n([\s\S]*?)\n```/);
 
       if (jsonMatch) {
-        const nutritionData = JSON.parse(jsonMatch[1]);
+        // Validate and parse JSON safely
+        let nutritionData;
+        try {
+          nutritionData = JSON.parse(jsonMatch[1]);
+        } catch (parseError) {
+          console.error('JSON parsing error from Claude response:', parseError.message);
+          return {
+            success: false,
+            message: 'Invalid JSON format in Claude response',
+            error: parseError.message
+          };
+        }
+
+        // Comprehensive validation of nutrition data structure
+        const validationResult = this.validateNutritionData(nutritionData);
+        if (!validationResult.valid) {
+          console.error('Nutrition data validation failed:', validationResult.errors);
+          return {
+            success: false,
+            message: 'Invalid nutrition data structure from Claude',
+            errors: validationResult.errors
+          };
+        }
 
         // Validate that all required fields are present
         const requiredFields = [
@@ -301,6 +397,9 @@ Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
     try {
       console.log(`Processing image with Claude Vision API (${mimeType})`);
 
+      // Check rate limiting before making API call
+      this.checkRateLimit();
+
       const base64Image = imageBuffer.toString('base64');
 
       const response = await axios.post(
@@ -351,7 +450,8 @@ Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
             'Content-Type': 'application/json',
             'x-api-key': this.apiKey,
             'anthropic-version': '2023-06-01'
-          }
+          },
+          timeout: 30000 // 30 seconds timeout
         }
       );
 
@@ -360,7 +460,29 @@ Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
       const jsonMatch = claudeText.match(/```json\n([\s\S]*?)\n```/);
 
       if (jsonMatch) {
-        const extractedData = JSON.parse(jsonMatch[1]);
+        // Validate and parse JSON safely
+        let extractedData;
+        try {
+          extractedData = JSON.parse(jsonMatch[1]);
+        } catch (parseError) {
+          console.error('JSON parsing error from Claude Vision response:', parseError.message);
+          return {
+            success: false,
+            message: 'Invalid JSON format in Claude Vision response',
+            error: parseError.message
+          };
+        }
+
+        // Comprehensive validation of nutrition data structure
+        const validationResult = this.validateNutritionData(extractedData);
+        if (!validationResult.valid) {
+          console.error('Nutrition data validation failed for image:', validationResult.errors);
+          return {
+            success: false,
+            message: 'Invalid nutrition data structure from Claude Vision',
+            errors: validationResult.errors
+          };
+        }
 
         // Validate required fields
         const requiredFields = [
@@ -456,6 +578,134 @@ Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
       fat_g: HEALTH_PROFILE.targets.fat_g_min,
       carbs_g: HEALTH_PROFILE.targets.carbs_g_min,
       fiber_g: HEALTH_PROFILE.targets.fiber_g_min
+    };
+  }
+
+  /**
+   * Comprehensive validation of nutrition data structure from Claude API
+   * Prevents malformed JSON from causing crashes or data corruption
+   * @param {Object} data - Parsed nutrition data object
+   * @returns {Object} Validation result with valid flag and errors array
+   */
+  validateNutritionData(data) {
+    const errors = [];
+
+    // Check basic structure
+    if (typeof data !== 'object' || data === null || Array.isArray(data)) {
+      errors.push('Data must be a non-null object');
+      return { valid: false, errors };
+    }
+
+    // Check required top-level fields
+    const requiredTopLevel = ['name', 'per_portion'];
+    for (const field of requiredTopLevel) {
+      if (!(field in data)) {
+        errors.push(`Missing required field: ${field}`);
+      }
+    }
+
+    // Validate name field
+    if (data.name && typeof data.name !== 'string') {
+      errors.push('Field "name" must be a string');
+    }
+
+    // Validate per_portion object
+    if (!data.per_portion || typeof data.per_portion !== 'object' || Array.isArray(data.per_portion)) {
+      errors.push('Field "per_portion" must be an object');
+      return { valid: false, errors };
+    }
+
+    // Define all nutrition fields with their validation rules
+    const nutritionFields = {
+      // Energy (must be non-negative, reasonable range)
+      energy_kcal: { type: 'number', min: 0, max: 10000 },
+      
+      // Macronutrients (must be non-negative)
+      protein_g: { type: 'number', min: 0, max: 1000 },
+      fat_g: { type: 'number', min: 0, max: 1000 },
+      sat_fat_g: { type: 'number', min: 0, max: 1000 },
+      mufa_g: { type: 'number', min: 0, max: 1000 },
+      pufa_g: { type: 'number', min: 0, max: 1000 },
+      trans_fat_g: { type: 'number', min: 0, max: 1000 },
+      cholesterol_mg: { type: 'number', min: 0, max: 10000 },
+      
+      // Carbohydrates
+      carbs_total_g: { type: 'number', min: 0, max: 1000 },
+      carbs_available_g: { type: 'number', min: 0, max: 1000 },
+      sugar_g: { type: 'number', min: 0, max: 1000 },
+      fiber_total_g: { type: 'number', min: 0, max: 1000 },
+      fiber_soluble_g: { type: 'number', min: 0, max: 1000 },
+      fiber_insoluble_g: { type: 'number', min: 0, max: 1000 },
+      polyols_g: { type: 'number', min: 0, max: 1000 },
+      
+      // Minerals (mg)
+      sodium_mg: { type: 'number', min: 0, max: 100000 },
+      potassium_mg: { type: 'number', min: 0, max: 100000 },
+      magnesium_mg: { type: 'number', min: 0, max: 10000 },
+      calcium_mg: { type: 'number', min: 0, max: 10000 },
+      iron_mg: { type: 'number', min: 0, max: 1000 },
+      zinc_mg: { type: 'number', min: 0, max: 1000 },
+      manganese_mg: { type: 'number', min: 0, max: 1000 },
+      
+      // Vitamins and trace elements
+      vitamin_c_mg: { type: 'number', min: 0, max: 10000 },
+      iodine_ug: { type: 'number', min: 0, max: 10000 }
+    };
+
+    // Validate each nutrition field
+    for (const [fieldName, rules] of Object.entries(nutritionFields)) {
+      if (fieldName in data.per_portion) {
+        const value = data.per_portion[fieldName];
+        
+        // Check type
+        if (typeof value !== rules.type) {
+          errors.push(`Field "${fieldName}" must be a ${rules.type}, got ${typeof value}`);
+          continue;
+        }
+        
+        // Check range for numbers
+        if (rules.type === 'number') {
+          if (isNaN(value) || !isFinite(value)) {
+            errors.push(`Field "${fieldName}" must be a finite number, got ${value}`);
+            continue;
+          }
+          
+          if (value < rules.min) {
+            errors.push(`Field "${fieldName}" must be >= ${rules.min}, got ${value}`);
+          }
+          
+          if (value > rules.max) {
+            errors.push(`Field "${fieldName}" must be <= ${rules.max}, got ${value}`);
+          }
+        }
+      }
+    }
+
+    // Validate optional fields if present
+    if ('quantity' in data && typeof data.quantity !== 'number') {
+      errors.push('Field "quantity" must be a number');
+    }
+    
+    if ('unit' in data && typeof data.unit !== 'string') {
+      errors.push('Field "unit" must be a string');
+    }
+    
+    if ('notes' in data && typeof data.notes !== 'string') {
+      errors.push('Field "notes" must be a string');
+    }
+
+    // Additional business logic validations
+    if (data.per_portion.carbs_available_g > data.per_portion.carbs_total_g) {
+      errors.push('Available carbs cannot exceed total carbs');
+    }
+
+    if (data.per_portion.sat_fat_g + data.per_portion.mufa_g + data.per_portion.pufa_g + data.per_portion.trans_fat_g > data.per_portion.fat_g * 1.1) {
+      errors.push('Sum of fat components cannot significantly exceed total fat');
+    }
+
+    return {
+      valid: errors.length === 0,
+      errors
     };
   }
 }

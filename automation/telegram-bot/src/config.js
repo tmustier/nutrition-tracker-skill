@@ -1,10 +1,18 @@
 // config.js - Configuration module for Nutrition Tracker Telegram Bot
+//
+// SECURITY FEATURES:
+// - Environment variable validation with required field checks
+// - HTTPS enforcement in production environments
+// - Webhook secret configuration for enhanced security
+// - User access control through allowedUsers configuration
+// - Comprehensive validation with security-focused error messages
+//
 require('dotenv').config();
 
 /**
- * Validates that required environment variables are present
+ * Validates that required environment variables are present and security requirements are met
  * @param {Object} config - Configuration object to validate
- * @throws {Error} If required variables are missing
+ * @throws {Error} If required variables are missing or security requirements not met
  */
 function validateConfig(config) {
   const required = {
@@ -22,6 +30,24 @@ function validateConfig(config) {
       }
     });
   });
+
+  // Security validation: Ensure HTTPS in production
+  if (process.env.NODE_ENV === 'production') {
+    if (!config.telegram.webhookUrl) {
+      missing.push('telegram.webhookUrl (required in production)');
+    } else if (!config.telegram.webhookUrl.startsWith('https://')) {
+      throw new Error(
+        'Security Error: HTTPS is required for webhook URL in production environment. ' +
+        'HTTP webhooks are vulnerable to man-in-the-middle attacks.'
+      );
+    }
+    
+    // Recommend webhook secret in production
+    if (!config.telegram.webhookSecret) {
+      console.warn('⚠️  Security Warning: WEBHOOK_SECRET not configured for production deployment');
+      console.warn('   Recommendation: Set WEBHOOK_SECRET environment variable for enhanced security');
+    }
+  }
 
   if (missing.length > 0) {
     throw new Error(

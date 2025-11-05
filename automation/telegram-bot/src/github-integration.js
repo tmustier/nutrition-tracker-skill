@@ -28,6 +28,11 @@ class GitHubIntegration {
     this.MAX_RETRIES = 5;
     this.INITIAL_RETRY_DELAY_MS = 100;
     this.MAX_RETRY_DELAY_MS = 2000;
+    
+    // Rate limiting for GitHub API (5000 requests per hour = ~83 per minute)
+    this.rateLimitRequests = [];
+    this.rateLimitWindow = 60 * 1000; // 1 minute
+    this.maxRequestsPerMinute = 80; // Conservative limit
     this.BACKOFF_MULTIPLIER = 2;
 
     // Validate required configuration
@@ -50,6 +55,30 @@ class GitHubIntegration {
   getCurrentDate() {
     const now = new Date();
     return now.toISOString().split('T')[0];
+  }
+
+  /**
+   * Check and enforce rate limiting for GitHub API
+   * @returns {boolean} True if request is allowed, throws error if rate limited
+   */
+  checkRateLimit() {
+    const now = Date.now();
+    const cutoff = now - this.rateLimitWindow;
+    
+    // Remove old requests outside the window
+    this.rateLimitRequests = this.rateLimitRequests.filter(timestamp => timestamp > cutoff);
+    
+    // Check if we've exceeded the limit
+    if (this.rateLimitRequests.length >= this.maxRequestsPerMinute) {
+      const oldestRequest = Math.min(...this.rateLimitRequests);
+      const resetTime = Math.ceil((oldestRequest + this.rateLimitWindow - now) / 1000);
+      console.warn(`GitHub API rate limit exceeded: ${this.rateLimitRequests.length}/${this.maxRequestsPerMinute} requests per minute`);
+      throw new Error(`GitHub API rate limit exceeded. Try again in ${resetTime} seconds.`);
+    }
+    
+    // Add current request timestamp
+    this.rateLimitRequests.push(now);
+    return true;
   }
 
   /**
@@ -88,15 +117,19 @@ class GitHubIntegration {
     const url = `${this.apiUrl}/repos/${this.owner}/${this.repo}/contents/${path}`;
 
     try {
+      // Check rate limiting before making API call
+      this.checkRateLimit();
+      
       // Try to read existing file from daily-logs branch
       const response = await axios.get(url, {
         headers: {
-          Authorization: `token ${this.token}`,
+          Authorization: `Bearer ${this.token}`,
           Accept: 'application/vnd.github.v3+json',
         },
         params: {
           ref: this.branch,
         },
+        timeout: 30000 // 30 seconds timeout
       });
 
       // Decode base64 content and parse YAML
@@ -283,11 +316,15 @@ class GitHubIntegration {
           requestBody.sha = logFile.sha;
         }
 
+        // Check rate limiting before making API call
+        this.checkRateLimit();
+
         const response = await axios.put(url, requestBody, {
           headers: {
-            Authorization: `token ${this.token}`,
+            Authorization: `Bearer ${this.token}`,
             Accept: 'application/vnd.github.v3+json',
           },
+          timeout: 30000 // 30 seconds timeout
         });
 
         return {

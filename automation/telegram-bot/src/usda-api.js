@@ -31,6 +31,35 @@ class UsdaApi {
   constructor() {
     this.baseUrl = config.usda.baseUrl;
     this.apiKey = config.usda.apiKey;
+    
+    // Rate limiting for USDA API (3600 requests per hour = 60 per minute)
+    this.rateLimitRequests = [];
+    this.rateLimitWindow = 60 * 1000; // 1 minute
+    this.maxRequestsPerMinute = 50; // Conservative limit
+  }
+
+  /**
+   * Check and enforce rate limiting for USDA API
+   * @returns {boolean} True if request is allowed, throws error if rate limited
+   */
+  checkRateLimit() {
+    const now = Date.now();
+    const cutoff = now - this.rateLimitWindow;
+    
+    // Remove old requests outside the window
+    this.rateLimitRequests = this.rateLimitRequests.filter(timestamp => timestamp > cutoff);
+    
+    // Check if we've exceeded the limit
+    if (this.rateLimitRequests.length >= this.maxRequestsPerMinute) {
+      const oldestRequest = Math.min(...this.rateLimitRequests);
+      const resetTime = Math.ceil((oldestRequest + this.rateLimitWindow - now) / 1000);
+      console.warn(`USDA API rate limit exceeded: ${this.rateLimitRequests.length}/${this.maxRequestsPerMinute} requests per minute`);
+      throw new Error(`USDA API rate limit exceeded. Try again in ${resetTime} seconds.`);
+    }
+    
+    // Add current request timestamp
+    this.rateLimitRequests.push(now);
+    return true;
   }
 
   /**
@@ -41,6 +70,9 @@ class UsdaApi {
    */
   async searchFoods(query, pageSize = 5) {
     try {
+      // Check rate limiting before making API call
+      this.checkRateLimit();
+      
       const response = await axios.get(`${this.baseUrl}/foods/search`, {
         params: {
           api_key: this.apiKey,
@@ -48,6 +80,7 @@ class UsdaApi {
           dataType: 'Foundation,SR Legacy', // Most reliable data types
           pageSize: pageSize,
         },
+        timeout: 30000 // 30 seconds timeout
       });
 
       return response.data.foods || [];
@@ -64,10 +97,14 @@ class UsdaApi {
    */
   async getFoodDetails(fdcId) {
     try {
+      // Check rate limiting before making API call
+      this.checkRateLimit();
+      
       const response = await axios.get(`${this.baseUrl}/food/${fdcId}`, {
         params: {
           api_key: this.apiKey,
         },
+        timeout: 30000 // 30 seconds timeout
       });
 
       return response.data;
@@ -188,6 +225,14 @@ class UsdaApi {
       const amount = parseInt(quantityMatch[1]);
       const unit = quantityMatch[2].toLowerCase();
 
+      // Validate quantity range to prevent system errors
+      const MIN_QUANTITY = 1;
+      const MAX_QUANTITY = 10000;
+      
+      if (isNaN(amount) || amount < MIN_QUANTITY || amount > MAX_QUANTITY) {
+        throw new Error(`Invalid quantity: ${amount}. Must be between ${MIN_QUANTITY} and ${MAX_QUANTITY}.`);
+      }
+
       // Convert to grams using standard conversion factors
       if (unit.startsWith('oz')) {
         grams = amount * UNIT_CONVERSIONS.OZ_TO_GRAMS;
@@ -195,6 +240,12 @@ class UsdaApi {
         grams = amount * UNIT_CONVERSIONS.LB_TO_GRAMS;
       } else {
         grams = amount;
+      }
+
+      // Additional validation for converted grams
+      const MAX_GRAMS = 50000; // 50kg maximum reasonable serving size
+      if (grams > MAX_GRAMS) {
+        throw new Error(`Converted quantity too large: ${grams}g. Maximum allowed is ${MAX_GRAMS}g.`);
       }
     }
 

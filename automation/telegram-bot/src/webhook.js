@@ -1,6 +1,7 @@
 // src/webhook.js - Main webhook handler and bot logic
 const { Telegraf } = require('telegraf');
 const axios = require('axios');
+const crypto = require('crypto');
 const config = require('./config');
 const claudeIntegration = require('./claude-integration');
 const githubIntegration = require('./github-integration');
@@ -16,6 +17,13 @@ const githubIntegration = require('./github-integration');
  * - Photo processing: Screenshots -> Claude Vision -> GitHub
  * - Daily summaries: /today command to see progress vs targets
  * - Help and onboarding: /start and /help commands
+ *
+ * SECURITY FEATURES:
+ * - User authentication: Restricts access to authorized users only
+ * - Rate limiting: Prevents API abuse with sliding window rate limiting
+ * - Webhook secret verification: Uses timing-safe comparison to prevent attacks
+ * - Input sanitization: All user inputs are sanitized to prevent injection attacks
+ * - Request validation: All incoming requests are validated before processing
  *
  * Deployment:
  * - Designed for serverless platforms (Railway, Vercel)
@@ -211,7 +219,70 @@ const sanitizeForLogging = (input) => {
 };
 
 /**
- * Webhook secret verification for POST requests
+ * Sanitize error messages for user-facing responses to prevent information leakage
+ * @param {Error|string} error - Error object or error message
+ * @returns {string} Safe error message for users
+ */
+const sanitizeErrorForUser = (error) => {
+  const message = typeof error === 'string' ? error : error.message;
+  
+  // Define patterns that might leak sensitive information
+  const sensitivePatterns = [
+    // File paths (absolute and relative)
+    /\/[a-zA-Z0-9_\-\.\/]+/g,
+    /[A-Z]:\\[a-zA-Z0-9_\-\.\\]+/g,
+    // API keys and tokens
+    /[a-zA-Z0-9_\-]{20,}/g,
+    // Internal server details
+    /localhost:\d+/g,
+    /127\.0\.0\.1:\d+/g,
+    // Database connection strings
+    /(mongodb|postgres|mysql):\/\/[^\s]+/g,
+    // Stack traces
+    /at .+ \(.+:\d+:\d+\)/g,
+    // Internal module names
+    /node_modules/g,
+    // Environment variables
+    /process\.env\.[A-Z_]+/g
+  ];
+  
+  let sanitized = message;
+  
+  // Remove sensitive patterns
+  sensitivePatterns.forEach(pattern => {
+    sanitized = sanitized.replace(pattern, '[REDACTED]');
+  });
+  
+  // Map known error types to user-friendly messages
+  const errorMappings = {
+    'rate limit': 'Service temporarily unavailable due to high demand. Please try again in a few minutes.',
+    'timeout': 'Request timed out. Please try again.',
+    'network': 'Network connection error. Please check your internet connection.',
+    'authentication': 'Authentication error. Please try again.',
+    'invalid json': 'Invalid data format received. Please try again.',
+    'file size': 'File too large. Please use a smaller file.',
+    'permission denied': 'Access denied. Please contact support.',
+    'not found': 'Resource not found. Please try again.',
+    'connection refused': 'Service temporarily unavailable. Please try again later.'
+  };
+  
+  // Check if the error matches any known patterns
+  for (const [pattern, userMessage] of Object.entries(errorMappings)) {
+    if (sanitized.toLowerCase().includes(pattern)) {
+      return userMessage;
+    }
+  }
+  
+  // If no specific mapping found, return a generic safe message
+  if (sanitized.length > 100 || sanitized !== message) {
+    return 'An unexpected error occurred. Please try again or contact support if the issue persists.';
+  }
+  
+  return sanitized;
+};
+
+/**
+ * Webhook secret verification for POST requests using timing-safe comparison
  * @param {Object} req - HTTP request object
  * @returns {boolean} True if verification passes or no secret configured
  */
@@ -229,12 +300,27 @@ const verifyWebhookSecret = (req) => {
     return false;
   }
 
-  if (providedSecret !== config.telegram.webhookSecret) {
-    console.warn('Webhook verification failed: Invalid secret token');
+  // Use timing-safe comparison to prevent timing attacks
+  try {
+    const expectedBuffer = Buffer.from(config.telegram.webhookSecret, 'utf8');
+    const providedBuffer = Buffer.from(providedSecret, 'utf8');
+    
+    // Ensure buffers are same length to prevent timing attacks
+    if (expectedBuffer.length !== providedBuffer.length) {
+      console.warn('Webhook verification failed: Invalid secret token length');
+      return false;
+    }
+    
+    // Use crypto.timingSafeEqual for constant-time comparison
+    const isValid = crypto.timingSafeEqual(expectedBuffer, providedBuffer);
+    if (!isValid) {
+      console.warn('Webhook verification failed: Invalid secret token');
+    }
+    return isValid;
+  } catch (error) {
+    console.error('Webhook verification error:', error.message);
     return false;
   }
-
-  return true;
 };
 
 // Apply security middleware to all bot interactions
@@ -531,7 +617,7 @@ ${result.source === 'usda' ? '📚 Data source: USDA FoodData Central' : '🤖 D
   } catch (error) {
     console.error('Error processing text message:', error);
     await ctx.reply(
-      `❌ Error logging food: ${error.message}\n\nPlease try again or contact support if the issue persists.`
+      `❌ Error logging food: ${sanitizeErrorForUser(error)}\n\nPlease try again or contact support if the issue persists.`
     );
   }
 });
@@ -556,6 +642,18 @@ bot.on('photo', async (ctx) => {
     const fileInfo = await ctx.telegram.getFile(fileId);
     console.log(`File info:`, { file_path: fileInfo.file_path, file_size: fileInfo.file_size });
 
+    // Validate file size before download to prevent memory exhaustion attacks
+    const MAX_IMAGE_SIZE = 10 * 1024 * 1024; // 10MB
+    if (fileInfo.file_size > MAX_IMAGE_SIZE) {
+      await ctx.telegram.editMessageText(
+        ctx.chat.id,
+        processingMsg.message_id,
+        null,
+        `❌ Image too large (${Math.round(fileInfo.file_size / 1024 / 1024)}MB). Please send images under 10MB.`
+      );
+      return;
+    }
+
     // Detect MIME type from file extension
     const mimeType = detectMimeTypeFromPath(fileInfo.file_path);
     console.log(`Detected MIME type: ${mimeType}`);
@@ -564,8 +662,11 @@ bot.on('photo', async (ctx) => {
     const fileLink = await ctx.telegram.getFileLink(fileId);
     console.log(`Downloading image from: ${fileLink.href}`);
 
-    // Download image as buffer
-    const response = await axios.get(fileLink.href, { responseType: 'arraybuffer' });
+    // Download image as buffer with timeout to prevent hanging requests
+    const response = await axios.get(fileLink.href, { 
+      responseType: 'arraybuffer',
+      timeout: 30000 // 30 seconds timeout
+    });
     const imageBuffer = Buffer.from(response.data);
 
     // Step 3: Update processing message
@@ -662,7 +763,7 @@ bot.on('photo', async (ctx) => {
   } catch (error) {
     console.error('Error processing photo:', error);
     await ctx.reply(
-      `❌ Error processing screenshot: ${error.message}\n\nPlease try again with a different image or send a text description.`
+      `❌ Error processing screenshot: ${sanitizeErrorForUser(error)}\n\nPlease try again with a different image or send a text description.`
     );
   }
 });
@@ -711,6 +812,23 @@ const handler = async (req, res) => {
         secret_token: webhookOptions.secret_token
       });
       console.log(`Webhook set to: ${webhookUrl}`);
+
+      // Register bot commands for better UX
+      const commands = [
+        { command: 'start', description: 'Welcome message and quick start guide' },
+        { command: 'help', description: 'Detailed help and usage instructions' },
+        { command: 'today', description: 'Show today\'s nutrition totals vs targets' },
+        { command: 'week', description: 'Weekly summary (coming soon)' },
+        { command: 'cancel', description: 'Cancel current operation' }
+      ];
+
+      try {
+        await bot.telegram.setMyCommands(commands);
+        console.log('✓ Bot commands registered successfully');
+      } catch (commandError) {
+        console.warn('Failed to register bot commands:', commandError.message);
+        // Don't fail the setup if command registration fails
+      }
 
       res.status(200).json({
         success: true,
@@ -762,7 +880,7 @@ const handler = async (req, res) => {
     console.error('Webhook handler error:', error);
     res.status(500).json({
       error: 'Internal server error',
-      message: error.message,
+      message: sanitizeErrorForUser(error),
     });
   }
 };
