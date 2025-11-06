@@ -65,6 +65,40 @@ const RATE_LIMIT_WARNING_THRESHOLD = 0.8; // Warn at 80% of limit
 // ============================================================================
 
 /**
+ * Escape special Telegram Markdown characters to prevent parsing errors
+ * Markdown special characters: _ * [ ] ( ) ~ ` > # + - = | { } . !
+ * @param {string} text - Text to escape
+ * @returns {string} Escaped text safe for Telegram Markdown
+ */
+const escapeMarkdown = (text) => {
+  if (typeof text !== 'string') {
+    return String(text);
+  }
+
+  // Escape all Telegram Markdown special characters
+  return text
+    .replace(/\\/g, '\\\\')   // Backslash must be first
+    .replace(/_/g, '\\_')     // Underscore
+    .replace(/\*/g, '\\*')    // Asterisk
+    .replace(/\[/g, '\\[')    // Left bracket
+    .replace(/\]/g, '\\]')    // Right bracket
+    .replace(/\(/g, '\\(')    // Left parenthesis
+    .replace(/\)/g, '\\)')    // Right parenthesis
+    .replace(/~/g, '\\~')     // Tilde
+    .replace(/`/g, '\\`')     // Backtick
+    .replace(/>/g, '\\>')     // Greater than
+    .replace(/#/g, '\\#')     // Hash
+    .replace(/\+/g, '\\+')    // Plus
+    .replace(/-/g, '\\-')     // Minus
+    .replace(/=/g, '\\=')     // Equals
+    .replace(/\|/g, '\\|')    // Pipe
+    .replace(/\{/g, '\\{')    // Left brace
+    .replace(/\}/g, '\\}')    // Right brace
+    .replace(/\./g, '\\.')    // Period
+    .replace(/!/g, '\\!');    // Exclamation mark
+};
+
+/**
  * Prepare nutrition data from API result (USDA or Claude)
  * Standardizes the data structure for logging
  * @param {Object} result - Result from processFoodLog or processImage
@@ -272,11 +306,11 @@ const sanitizeForLogging = (input) => {
 /**
  * Sanitize error messages for user-facing responses to prevent information leakage
  * @param {Error|string} error - Error object or error message
- * @returns {string} Safe error message for users
+ * @returns {string} Safe error message for users (markdown-escaped)
  */
 const sanitizeErrorForUser = (error) => {
   const message = typeof error === 'string' ? error : error.message;
-  
+
   // Define patterns that might leak sensitive information
   const sensitivePatterns = [
     // File paths (absolute and relative)
@@ -296,12 +330,12 @@ const sanitizeErrorForUser = (error) => {
     // Environment variables
     /process\.env\.[A-Z_]+/g
   ];
-  
+
   let sanitized = message;
-  
-  // Remove sensitive patterns
+
+  // Remove sensitive patterns (use REDACTED without brackets to avoid markdown issues)
   sensitivePatterns.forEach(pattern => {
-    sanitized = sanitized.replace(pattern, '[REDACTED]');
+    sanitized = sanitized.replace(pattern, 'REDACTED');
   });
   
   // Map known error types to user-friendly messages
@@ -320,16 +354,17 @@ const sanitizeErrorForUser = (error) => {
   // Check if the error matches any known patterns
   for (const [pattern, userMessage] of Object.entries(errorMappings)) {
     if (sanitized.toLowerCase().includes(pattern)) {
-      return userMessage;
+      return userMessage; // Pre-defined messages are safe, no escaping needed
     }
   }
-  
+
   // If no specific mapping found, return a generic safe message
   if (sanitized.length > 100 || sanitized !== message) {
     return 'An unexpected error occurred. Please try again or contact support if the issue persists.';
   }
-  
-  return sanitized;
+
+  // Escape any remaining dynamic content to prevent markdown injection
+  return escapeMarkdown(sanitized);
 };
 
 /**
@@ -693,7 +728,7 @@ bot.on('text', async (ctx) => {
         ctx.chat.id,
         processingMsg.message_id,
         null,
-        `❌ Could not process food log. ${result.message || 'Please try again with more details.'}\n\nExample: "200g grilled chicken breast" or "2 scrambled eggs"`,
+        `❌ Could not process food log. ${escapeMarkdown(result.message || 'Please try again with more details.')}\n\nExample: "200g grilled chicken breast" or "2 scrambled eggs"`,
         { parse_mode: 'Markdown' }
       );
       return;
@@ -750,7 +785,7 @@ bot.on('text', async (ctx) => {
 
     // Step 7: Format and send success message
     const nutrition = nutritionData.nutrition;
-    const successMessage = `✅ **Logged: ${nutritionData.name}**
+    const successMessage = `✅ **Logged: ${escapeMarkdown(nutritionData.name)}**
 
 📊 **This meal:**
 • ${nutrition.energy_kcal} kcal
@@ -871,7 +906,7 @@ bot.on('photo', async (ctx) => {
         ctx.chat.id,
         processingMsg.message_id,
         null,
-        `❌ Could not extract nutrition data from image.\n\n${result.message || 'Please try with a clearer photo or send a text description instead.'}`,
+        `❌ Could not extract nutrition data from image.\n\n${escapeMarkdown(result.message || 'Please try with a clearer photo or send a text description instead.')}`,
         { parse_mode: 'Markdown' }
       );
       return;
@@ -927,7 +962,7 @@ bot.on('photo', async (ctx) => {
 
     // Step 9: Send success message
     const nutrition = nutritionData.nutrition;
-    const successMessage = `✅ **Logged from screenshot: ${nutritionData.name}**
+    const successMessage = `✅ **Logged from screenshot: ${escapeMarkdown(nutritionData.name)}**
 
 📊 **This meal:**
 • ${nutrition.energy_kcal} kcal
