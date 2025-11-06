@@ -14,9 +14,16 @@
  * - All conversation history is sanitized before storage
  * - User isolation prevents cross-contamination
  * - Lock timeout prevents indefinite blocking
+ *
+ * MEMORY MANAGEMENT:
+ * - Token-based conversation limits (20,000 tokens per conversation)
+ * - Automatic message trimming when token limit exceeded
+ * - Minimum 5 messages retained for context continuity
+ * - Per-message token counting for efficient tracking
  */
 
 const claudeIntegration = require('./claude-integration');
+const { encoding_for_model } = require('tiktoken');
 
 class ConversationManager {
   constructor() {
@@ -25,14 +32,32 @@ class ConversationManager {
     this.processingLocks = new Map();
 
     // Conversation history storage (if needed in future)
-    // Map<userId: string, messages: Array<{role, content, timestamp}>>
+    // Map<userId: string, messages: Array<{role, content, timestamp, tokens}>>
     this.conversations = new Map();
+
+    // Token count tracking per conversation
+    // Map<userId: string, totalTokens: number>
+    this.conversationTokens = new Map();
 
     // Lock timeout configuration (30 seconds max processing time)
     this.lockTimeout = 30000;
 
     // DoS Protection: Maximum total conversations allowed globally
     this.maxTotalConversations = 1000;
+
+    // Token limit configuration
+    this.maxTokensPerConversation = 20000; // 20K tokens per conversation
+    this.minMessagesRetained = 5; // Always keep at least 5 messages for context
+
+    // Initialize tiktoken encoder for Claude (using GPT-4's encoding as approximation)
+    // cl100k_base is the encoding used by GPT-4, which is similar to Claude's tokenizer
+    try {
+      this.tokenEncoder = encoding_for_model('gpt-4');
+      console.log('[ConversationManager] Token encoder initialized successfully');
+    } catch (error) {
+      console.error('[ConversationManager] Failed to initialize token encoder:', error.message);
+      this.tokenEncoder = null;
+    }
 
     // Start periodic cleanup of stale locks
     this.startLockCleanup();
@@ -111,9 +136,86 @@ class ConversationManager {
   }
 
   /**
+   * Count tokens in a text string
+   *
+   * Uses tiktoken to accurately count tokens similar to how Claude counts them.
+   * Falls back to word-based approximation if encoder is not available.
+   *
+   * @param {string} text - Text to count tokens for
+   * @returns {number} Number of tokens
+   */
+  countTokens(text) {
+    if (!text || typeof text !== 'string') {
+      return 0;
+    }
+
+    // If encoder is available, use tiktoken for accurate counting
+    if (this.tokenEncoder) {
+      try {
+        const tokens = this.tokenEncoder.encode(text);
+        return tokens.length;
+      } catch (error) {
+        console.error('[ConversationManager] Token encoding error:', error.message);
+        // Fall through to approximation
+      }
+    }
+
+    // Fallback: Rough approximation (1 token ≈ 4 characters on average)
+    // This is less accurate but better than nothing
+    return Math.ceil(text.length / 4);
+  }
+
+  /**
+   * Get total token count for a conversation
+   *
+   * @param {string|number} userId - Telegram user ID
+   * @returns {number} Total tokens in the conversation
+   */
+  getConversationTokenCount(userId) {
+    const userIdStr = String(userId);
+    return this.conversationTokens.get(userIdStr) || 0;
+  }
+
+  /**
+   * Trim conversation messages to stay within token limit
+   *
+   * Removes messages from the beginning of the conversation (oldest first)
+   * while respecting the minimum message retention policy.
+   *
+   * @param {string|number} userId - Telegram user ID
+   */
+  trimConversationByTokens(userId) {
+    const userIdStr = String(userId);
+    const conversation = this.conversations.get(userIdStr);
+
+    if (!conversation || conversation.length <= this.minMessagesRetained) {
+      // Don't trim if we're at or below minimum message count
+      return;
+    }
+
+    let totalTokens = this.conversationTokens.get(userIdStr) || 0;
+
+    // Keep removing oldest messages until we're under the limit
+    // but always preserve at least minMessagesRetained messages
+    while (totalTokens > this.maxTokensPerConversation &&
+           conversation.length > this.minMessagesRetained) {
+      const removedMessage = conversation.shift();
+      totalTokens -= (removedMessage.tokens || 0);
+
+      console.log(`[ConversationManager] Trimmed message for user ${userIdStr} ` +
+                  `(${removedMessage.tokens} tokens). New total: ${totalTokens} tokens, ` +
+                  `${conversation.length} messages`);
+    }
+
+    // Update the stored token count
+    this.conversationTokens.set(userIdStr, totalTokens);
+  }
+
+  /**
    * Add message to conversation history
    *
    * SECURITY: All user messages MUST be sanitized before storing
+   * MEMORY: Automatically trims conversation if token limit exceeded
    *
    * @param {string|number} userId - Telegram user ID
    * @param {string} role - Message role ('user' or 'assistant')
@@ -128,6 +230,9 @@ class ConversationManager {
       ? claudeIntegration.sanitizePromptInput(content)
       : content;
 
+    // Count tokens for this message
+    const messageTokens = this.countTokens(finalContent);
+
     // DoS PROTECTION: Check if we've hit the global conversation limit
     if (!this.conversations.has(userIdStr) && this.conversations.size >= this.maxTotalConversations) {
       console.warn(`[ConversationManager] Global conversation limit reached (${this.maxTotalConversations}), evicting oldest conversation`);
@@ -137,21 +242,33 @@ class ConversationManager {
     // Get or create conversation history for this user
     if (!this.conversations.has(userIdStr)) {
       this.conversations.set(userIdStr, []);
+      this.conversationTokens.set(userIdStr, 0);
     }
 
     const conversation = this.conversations.get(userIdStr);
+
+    // Add message with token count
     conversation.push({
       role,
       content: finalContent,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      tokens: messageTokens
     });
 
-    // Limit conversation history to last 20 messages to prevent memory growth
-    if (conversation.length > 20) {
-      conversation.shift();
-    }
+    // Update total token count
+    const currentTokens = this.conversationTokens.get(userIdStr) || 0;
+    this.conversationTokens.set(userIdStr, currentTokens + messageTokens);
 
-    console.log(`[ConversationManager] Added ${role} message to conversation for user ${userIdStr}`);
+    console.log(`[ConversationManager] Added ${role} message to conversation for user ${userIdStr} ` +
+                `(${messageTokens} tokens, total: ${currentTokens + messageTokens} tokens, ` +
+                `${conversation.length} messages)`);
+
+    // Trim conversation if it exceeds token limit
+    // This ensures we stay within the 20K token budget
+    if (this.conversationTokens.get(userIdStr) > this.maxTokensPerConversation) {
+      console.log(`[ConversationManager] Token limit exceeded for user ${userIdStr}, trimming conversation...`);
+      this.trimConversationByTokens(userIdStr);
+    }
   }
 
   /**
@@ -202,6 +319,7 @@ class ConversationManager {
   clearConversation(userId) {
     const userIdStr = String(userId);
     this.conversations.delete(userIdStr);
+    this.conversationTokens.delete(userIdStr);
     console.log(`[ConversationManager] Cleared conversation history for user ${userIdStr}`);
   }
 
@@ -270,15 +388,36 @@ class ConversationManager {
   /**
    * Get manager statistics for monitoring
    *
-   * @returns {Object} Statistics about locks and conversations
+   * @returns {Object} Statistics about locks, conversations, and token usage
    */
   getStats() {
+    const totalMessages = Array.from(this.conversations.values())
+      .reduce((sum, messages) => sum + messages.length, 0);
+
+    const totalTokens = Array.from(this.conversationTokens.values())
+      .reduce((sum, tokens) => sum + tokens, 0);
+
+    // Calculate average tokens per conversation
+    const avgTokensPerConversation = this.conversations.size > 0
+      ? Math.round(totalTokens / this.conversations.size)
+      : 0;
+
+    // Find max tokens in any single conversation
+    const maxTokens = this.conversations.size > 0
+      ? Math.max(...Array.from(this.conversationTokens.values()))
+      : 0;
+
     return {
       activeLocks: this.processingLocks.size,
       activeConversations: this.conversations.size,
       lockTimeout: this.lockTimeout,
-      totalMessages: Array.from(this.conversations.values())
-        .reduce((sum, messages) => sum + messages.length, 0)
+      totalMessages,
+      totalTokens,
+      avgTokensPerConversation,
+      maxTokens,
+      maxTokensPerConversation: this.maxTokensPerConversation,
+      minMessagesRetained: this.minMessagesRetained,
+      tokenEncoderAvailable: !!this.tokenEncoder
     };
   }
 }
