@@ -142,5 +142,5 @@ change_log:
   updated_by: 'Agent 7: Claude Sonnet 4.5'
   reason: Verification that all priority nutrients are complete - no additional enrichment needed
   fields_changed: [version]
-  sources: [{note: 'Oats already fully enriched with biotin (10µg), chromium (7µg), and molybdenum (80µg). All 48 USDA-available nutrients populated. Chloride and sulfur remain 0 (rarely analyzed per USDA_API_RESEARCH.md). Ultra-trace minerals (boron, silicon, vanadium, nickel) remain 0 (not tracked by USDA). This food is COMPLETE.'}]
+  sources: [{note: 'Oats already fully enriched with biotin (10µg), chromium (7µg), and molybdenum (80µg). All 48 USDA-available nutrients populated. Chloride and sulfur remain 0 (rarely analyzed per research/usda-api-research.md). Ultra-trace minerals (boron, silicon, vanadium, nickel) remain 0 (not tracked by USDA). This food is COMPLETE.'}]
 ```

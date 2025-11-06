@@ -24,6 +24,17 @@ Research on aligning food database values with RDA/DRI nutritional guidelines:
 
 - **`computational-nutrition-assessment.md`** - Comprehensive design document for computing "% of Daily Value" correctly. Includes bioavailability factors, nutrient-specific handling (RAE, DFE, iron types), confidence levels, and implementation strategies. Provides concrete algorithms for accurate nutritional adequacy assessment.
 
+### `implementation-starter-kit/`
+Code templates, test cases, and system documentation:
+
+- **`validation-warnings.md`** - Comprehensive documentation of validation warning types, acceptable issues, and validation formulas. Snapshot from the v2 schema migration explaining warning categories and running validation scripts.
+
+### Project History & API Research
+
+- **`usda-api-research.md`** - Comprehensive research on USDA FoodData Central API including nutrient ID mappings, API usage patterns, coverage information, and practical reference guide for USDA data integration.
+
+- **`nutrient-extension-summary.md`** - Project completion report documenting the Schema v1 → v2 migration (24 → 52 nutrient fields). Includes migration statistics, git commits, design decisions, and historical context for schema evolution.
+
 ## Key Findings Summary
 
 ### Food Preparation Effects (6 mechanisms)

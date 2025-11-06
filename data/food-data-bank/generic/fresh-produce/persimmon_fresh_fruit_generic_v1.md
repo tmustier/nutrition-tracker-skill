@@ -149,7 +149,7 @@ change_log:
   - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/169941/nutrients
     note: "USDA FDC 169941 confirms low/trace B5 in Japanese persimmons. Estimated 0.09mg per 100g scaled to 0.15mg per 168g."
   - note: "Fatty acids: ALA 6.7mg per 168g = 0.007g; LA 0.1g per 168g (from nutrivore/USDA composite data)"
-  - note: "Chromium and molybdenum: Not routinely analyzed by USDA for fruits; confirmed 0 per USDA_API_RESEARCH.md"
+  - note: "Chromium and molybdenum: Not routinely analyzed by USDA for fruits; confirmed 0 per research/usda-api-research.md"
   - note: "Fiber soluble (0.9g) and insoluble (5.1g) already populated in previous enrichment"
 - timestamp: "2025-11-05T22:30:00+00:00"
   updated_by: "Agent 8 - Claude Sonnet 4.5"

@@ -112,7 +112,7 @@ change_log:
   {note: 'Wild berries research confirms raspberries are a good source of omega-3
       fatty acids, particularly ALA. Per 100g raspberries provide 126mg ALA.', url: 'https://pubmed.ncbi.nlm.nih.gov/16900081/'},
   {note: 'Biotin (B7): Not routinely analyzed by USDA for raspberries; confirmed
-      0 per USDA_API_RESEARCH.md. Chromium and molybdenum: Also not routinely analyzed
+      0 per research/usda-api-research.md. Chromium and molybdenum: Also not routinely analyzed
       for berries; limited coverage (<50% of foods).'}]
 - timestamp: '2025-11-05T22:30:00+00:00'
   updated_by: 'Agent 8 - Claude Sonnet 4.5'

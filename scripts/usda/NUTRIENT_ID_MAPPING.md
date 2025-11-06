@@ -310,7 +310,7 @@ curl "https://api.nal.usda.gov/fdc/v1/food/171477?api_key=YOUR_KEY&nutrients=100
 
 ## References
 
-- **Full Research Report**: `/home/user/nutrition-tracking/USDA_API_RESEARCH.md`
+- **Full Research Report**: `/home/user/nutrition-tracking/research/usda-api-research.md`
 - **USDA API Guide**: https://fdc.nal.usda.gov/api-guide/
 - **Schema Documentation**: `/home/user/nutrition-tracking/data/schemas/VERSIONS.md`
 - **Existing Client**: `/home/user/nutrition-tracking/scripts/usda/client.py`

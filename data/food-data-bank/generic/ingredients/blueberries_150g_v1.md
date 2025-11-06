@@ -145,7 +145,7 @@ change_log:
   {note: 'Nutrivore blueberry nutrients database confirmed biotin value: 2.43µg per
       100g (3.6µg per 150g represents 12% DV).', url: 'https://nutrivore.com/foods/blueberry-nutrients/'},
   {note: 'Chromium and molybdenum: Not routinely analyzed by USDA for berries; confirmed
-      0 per USDA_API_RESEARCH.md. These trace minerals have limited coverage (<50%
+      0 per research/usda-api-research.md. These trace minerals have limited coverage (<50%
       of foods).'}]
 - timestamp: '2025-11-05T19:45:00+00:00'
   updated_by: 'Agent 7: Claude Sonnet 4.5'
