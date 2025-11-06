@@ -10,7 +10,6 @@ The index is auto-generated and should not be manually edited.
 
 import yaml
 from pathlib import Path
-from datetime import datetime, timezone
 from collections import defaultdict
 
 
@@ -140,8 +139,6 @@ def format_category_name(category_path):
 
 def generate_index_file(dishes, output_path):
     """Generate the index markdown file."""
-    timestamp = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')
-
     # Organize by category
     by_category = organize_by_category(dishes)
 
@@ -159,7 +156,6 @@ def generate_index_file(dishes, output_path):
     content = f"""---
 title: Food Data Bank Index
 description: Auto-generated index of all dishes in the food data bank
-generated: {timestamp}
 ---
 
 # Food Data Bank Index
