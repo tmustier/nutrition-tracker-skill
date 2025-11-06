@@ -167,41 +167,44 @@ setInterval(cleanupRateLimit, 5 * 60 * 1000);
  */
 const rateLimitMiddleware = (ctx, next) => {
   const userId = ctx.from?.id;
-  if (!userId) {
-    return next(); // Skip if no user ID (shouldn't happen after auth middleware)
+
+  // P0 Security Fix: Validate userId is a valid positive integer
+  if (!userId || !Number.isInteger(userId) || userId <= 0) {
+    console.warn('Rate limiter: Invalid or missing user ID, rejecting request', { userId, type: typeof userId });
+    return ctx.reply('❌ Invalid request format. Please try again.');
   }
 
   const now = Date.now();
   const cutoff = now - RATE_LIMIT_WINDOW_MS;
-  
+
   // Get or create user's request history
   let userRequests = rateLimitStorage.get(userId) || [];
-  
+
   // Filter out old requests (sliding window)
   userRequests = userRequests.filter(timestamp => timestamp > cutoff);
-  
+
   // Check if user has exceeded rate limit
   if (userRequests.length >= RATE_LIMIT_REQUESTS_PER_MINUTE) {
     const oldestRequest = Math.min(...userRequests);
     const resetTime = Math.ceil((oldestRequest + RATE_LIMIT_WINDOW_MS - now) / 1000);
-    
+
     console.warn(`Rate limit exceeded for user ${userId}: ${userRequests.length}/${RATE_LIMIT_REQUESTS_PER_MINUTE} requests`);
-    
+
     return ctx.reply(
       `⚠️ Rate limit exceeded. You can make up to ${RATE_LIMIT_REQUESTS_PER_MINUTE} requests per minute.\n\n` +
       `Please wait ${resetTime} seconds before trying again.`
     );
   }
-  
+
   // Add current request timestamp
   userRequests.push(now);
   rateLimitStorage.set(userId, userRequests);
-  
+
   // Log rate limit status for monitoring
   if (userRequests.length > RATE_LIMIT_REQUESTS_PER_MINUTE * RATE_LIMIT_WARNING_THRESHOLD) { // Warn at 80% of limit
     console.warn(`User ${userId} approaching rate limit: ${userRequests.length}/${RATE_LIMIT_REQUESTS_PER_MINUTE} requests`);
   }
-  
+
   return next();
 };
 
@@ -215,8 +218,14 @@ const rateLimitMiddleware = (ctx, next) => {
  * @param {Function} next - Next middleware function
  */
 const authenticateUser = (ctx, next) => {
-  // If no allowedUsers configured, allow all users (backward compatibility)
+  // If no allowedUsers configured, allow all users (development mode only - production requires ALLOWED_USERS)
   if (!config.telegram.allowedUsers || config.telegram.allowedUsers.length === 0) {
+    // This should only happen in development due to config validation
+    if (config.app.environment === 'production') {
+      console.error('🚨 CRITICAL: Bot in production without ALLOWED_USERS - this should not happen!');
+      return ctx.reply('❌ Bot misconfiguration. Please contact administrator.');
+    }
+    console.warn('⚠️  Bot in OPEN MODE - all users can access (development only)');
     return next();
   }
 

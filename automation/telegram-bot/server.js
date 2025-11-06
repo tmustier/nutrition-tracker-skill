@@ -435,11 +435,25 @@ if (useExpress) {
 
   const http = require('http');
 
-  // Simple JSON body parser
-  function parseBody(req) {
+  // Simple JSON body parser with size limit (P0 security fix)
+  function parseBody(req, maxSize = 10 * 1024 * 1024) { // 10MB limit
     return new Promise((resolve, reject) => {
       let body = '';
-      req.on('data', chunk => { body += chunk.toString(); });
+      let size = 0;
+
+      req.on('data', chunk => {
+        size += chunk.length;
+
+        // Security: Prevent memory exhaustion by limiting request size
+        if (size > maxSize) {
+          req.destroy(); // Immediately close connection
+          reject(new Error('Request body too large'));
+          return;
+        }
+
+        body += chunk.toString();
+      });
+
       req.on('end', () => {
         try {
           req.body = body ? JSON.parse(body) : {};
@@ -448,6 +462,7 @@ if (useExpress) {
           reject(error);
         }
       });
+
       req.on('error', reject);
     });
   }
