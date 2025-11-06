@@ -1,0 +1,269 @@
+# Test Case: Boiled Pasta
+# Description: Grain example demonstrating water absorption and concentration effects
+# Validation: Demonstrates reverse concentration (nutrients become less concentrated)
+
+test_case:
+  name: "Boiled Pasta"
+  description: "100g dry pasta boiled in water until al dente"
+  food_category: "pasta"
+  cooking_method: "boiled"
+  complexity: "simple"
+  tags: ["grain", "carbohydrate", "moist_heat", "water_absorption"]
+
+input:
+  raw_weight_g: 100
+
+  raw_nutrients:
+    # Macronutrients
+    protein_g: 13.0
+    fat_g: 1.5
+    carbohydrate_g: 75.0
+    fiber_g: 3.0
+
+    # Vitamins
+    vitamin_c_mg: 0.0
+    thiamin_b1_mg: 0.90        # Often fortified
+    riboflavin_b2_mg: 0.40     # Often fortified
+    niacin_b3_mg: 7.2          # Often fortified
+    pantothenic_acid_b5_mg: 0.4
+    vitamin_b6_mg: 0.14
+    folate_ug: 180             # Often fortified
+    vitamin_b12_ug: 0.0
+    vitamin_a_ug_rae: 0
+    vitamin_d_ug: 0
+    vitamin_e_mg: 0.1
+    vitamin_k_ug: 0.0
+
+    # Minerals
+    calcium_mg: 20
+    iron_mg: 3.3               # Often fortified
+    magnesium_mg: 53
+    phosphorus_mg: 190
+    potassium_mg: 220
+    sodium_mg: 6
+    zinc_mg: 1.4
+    selenium_ug: 63
+    manganese_mg: 0.9
+
+    # Energy (calculated)
+    # 4*13 + 9*1.5 + 4*75 + 2*3 = 52 + 13.5 + 300 + 6 = 371.5 kcal
+    energy_kcal: 371
+
+processing:
+  steps:
+    - step: 1
+      action: "Calculate cooked weight using yield factor"
+      yield_factor: 2.50
+      calculation: "100g * 2.50 = 250g"
+      cooked_weight_g: 250
+      note: "Pasta absorbs water and more than doubles in weight"
+
+    - step: 2
+      action: "Apply retention factors for boiled method"
+      retention_factors:
+        protein: 1.00            # Protein stays in pasta
+        fat: 0.98                # Minimal loss
+        carbohydrate: 1.00       # Carbs stay in pasta
+        fiber: 1.00              # Fiber stays in pasta
+        vitamin_c: 0.45          # N/A (no vitamin C)
+        thiamin_b1: 0.75         # Water-soluble, some loss
+        riboflavin_b2: 0.85      # More stable
+        niacin_b3: 0.88
+        pantothenic_acid_b5: 0.78
+        vitamin_b6: 0.70
+        folate: 0.50             # Significant loss to water
+        vitamin_b12: 1.00        # N/A (no B12)
+        vitamin_a: 1.00          # N/A
+        vitamin_d: 1.00          # N/A
+        vitamin_e: 0.85
+        vitamin_k: 1.00          # N/A
+        calcium: 1.00            # Minerals stable
+        iron: 1.00
+        magnesium: 1.00
+        phosphorus: 1.00
+        potassium: 1.00
+        sodium: 1.00
+        zinc: 1.00
+        selenium: 1.00
+        manganese: 1.00
+
+    - step: 3
+      action: "Note concentration effect"
+      note: "Nutrients are now distributed through 250g instead of 100g"
+      concentration_factor: 0.40  # 100/250
+      effect: "Per-gram nutrient density decreases, but total amounts remain (after retention)"
+
+expected_output:
+  cooked_weight_g: 250
+  weight_gain_g: 150
+  weight_gain_pct: 150.0
+
+  cooked_nutrients:
+    # Macronutrients (after retention, total amounts)
+    protein_g: 13.0            # 13.0 * 1.00
+    fat_g: 1.47                # 1.5 * 0.98
+    carbohydrate_g: 75.0       # 75.0 * 1.00
+    fiber_g: 3.0               # 3.0 * 1.00
+
+    # Vitamins (after retention, total amounts)
+    vitamin_c_mg: 0.0
+    thiamin_b1_mg: 0.675       # 0.90 * 0.75
+    riboflavin_b2_mg: 0.340    # 0.40 * 0.85
+    niacin_b3_mg: 6.336        # 7.2 * 0.88
+    pantothenic_acid_b5_mg: 0.312  # 0.4 * 0.78
+    vitamin_b6_mg: 0.098       # 0.14 * 0.70
+    folate_ug: 90.0            # 180 * 0.50 (significant loss!)
+    vitamin_b12_ug: 0.0
+    vitamin_a_ug_rae: 0
+    vitamin_d_ug: 0
+    vitamin_e_mg: 0.085        # 0.1 * 0.85
+    vitamin_k_ug: 0.0
+
+    # Minerals (stable, total amounts)
+    calcium_mg: 20
+    iron_mg: 3.3
+    magnesium_mg: 53
+    phosphorus_mg: 190
+    potassium_mg: 220
+    sodium_mg: 6
+    zinc_mg: 1.4
+    selenium_ug: 63
+    manganese_mg: 0.9
+
+    # Energy (conserved)
+    # 4*13 + 9*1.47 + 4*75 + 2*3 = 52 + 13.23 + 300 + 6 = 371.23 kcal
+    energy_kcal: 371.2
+
+  # Per-100g values for comparison (how concentrated nutrients are)
+  per_100g_cooked:
+    protein_g: 5.2             # 13.0 / 2.5
+    carbohydrate_g: 30.0       # 75.0 / 2.5
+    energy_kcal: 148.5         # 371.2 / 2.5
+    note: "Nutrients are diluted by water absorption"
+
+validation:
+  energy_balance:
+    raw_kcal: 371
+    cooked_kcal: 371.2
+    difference_kcal: 0.2
+    difference_pct: 0.05
+    tolerance_pct: 3.0
+    passes: true
+    note: "Energy perfectly conserved (water has no calories)"
+
+  yield_factor_check:
+    calculated: 2.50
+    expected_range: [2.25, 2.75]
+    passes: true
+    note: "Typical for pasta boiled al dente"
+
+  nutrient_plausibility:
+    folate_retention: 0.50
+    expected_folate_range: [0.45, 0.55]
+    passes: true
+    note: "Folate is water-soluble and leaches into cooking water"
+
+    thiamin_retention: 0.75
+    expected_thiamin_range: [0.70, 0.80]
+    passes: true
+
+    carbohydrate_retention: 1.00
+    expected_carb_range: [0.98, 1.00]
+    passes: true
+    note: "Very minimal starch loss to water"
+
+percent_daily_value:
+  demographic: "adult_male_19_50"
+  per_serving: "250g cooked (from 100g dry)"
+
+  nutrients:
+    carbohydrate_g:
+      amount: 75.0
+      rda: 130
+      percent_dv: 57.7
+
+    protein_g:
+      amount: 13.0
+      rda: 56
+      percent_dv: 23.2
+
+    thiamin_b1_mg:
+      amount: 0.675
+      rda: 1.2
+      percent_dv: 56.3
+
+    folate_ug:
+      amount: 90.0
+      rda: 400
+      percent_dv: 22.5
+      note: "50% loss during cooking"
+
+    iron_mg:
+      amount: 3.3
+      rda: 8
+      percent_dv: 41.3
+
+    selenium_ug:
+      amount: 63
+      rda: 55
+      percent_dv: 114.5
+
+concentration_analysis:
+  concept: "Dilution by water absorption"
+
+  raw_per_100g:
+    protein_g: 13.0
+    carbohydrate_g: 75.0
+    energy_kcal: 371
+
+  cooked_per_100g:
+    protein_g: 5.2
+    carbohydrate_g: 30.0
+    energy_kcal: 148.5
+
+  concentration_factor: 0.40   # 100g raw → 250g cooked
+
+  interpretation:
+    - "Same total nutrients spread through 2.5x more mass"
+    - "Per-gram nutrient density is 40% of raw"
+    - "But you eat the whole portion, so total nutrients matter"
+    - "This is why dry pasta has high calorie counts per 100g"
+
+notes:
+  - "Pasta is unique: gains weight rather than loses it"
+  - "Water absorption is the primary change, not nutrient loss"
+  - "Folate shows significant loss (50%) to cooking water"
+  - "Other water-soluble vitamins show moderate losses (70-85% retention)"
+  - "Minerals and macronutrients very stable"
+  - "Energy density per gram drops dramatically, but total energy conserved"
+  - "This demonstrates why portion size matters for dry vs. cooked grains"
+  - "Salting the water doesn't significantly affect nutrient retention"
+
+assumptions:
+  - "Boiled in unsalted water (or minimally salted)"
+  - "Cooked to al dente (9-11 minutes typical)"
+  - "Water discarded after cooking (not consumed)"
+  - "No sauce or additions included"
+  - "Standard enriched pasta (not whole wheat)"
+  - "Drained but not rinsed"
+
+serving_size_guidance:
+  dry_pasta_serving: "56g (2 oz) dry"
+  cooked_equivalent: "140g (about 1 cup) cooked"
+  note: "This test uses 100g dry for round numbers, but 56g is a standard serving"
+
+  standard_serving_nutrients:
+    from_56g_dry:
+      protein_g: 7.3
+      carbohydrate_g: 42.0
+      energy_kcal: 208
+    yields_140g_cooked:
+      protein_g: 7.3
+      carbohydrate_g: 42.0
+      energy_kcal: 208
+      note: "Total nutrients same, just in more mass"
+
+references:
+  - "USDA FoodData Central: Pasta, dry, enriched"
+  - "USDA Table of Nutrient Retention Factors, Release 6"
+  - "Effect of Cooking on Folate Content in Food (J Food Sci, 2002)"

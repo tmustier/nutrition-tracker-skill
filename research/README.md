@@ -50,6 +50,16 @@ Research on aligning food database values with RDA/DRI nutritional guidelines:
 3. **Addition Factor** - Cooking medium absorbed (+ oil, salt)
 4. **Subtraction Factor** - Components discarded (- rendered fat, cooking water)
 
+## Related Documentation
+
+- **[/ESTIMATE.md](/ESTIMATE.md)** - Nutrient estimation methodology, confidence levels, component-based calculation workflow, and validation formulas
+- **[/SKILL.md](/SKILL.md)** - Overall nutrition tracking workflow, agent guidelines, and project skill documentation
+- **[/data/food-data-bank-index.md](/data/food-data-bank-index.md)** - Browse all dishes in the food database by venue and category
+- **[/data/logs/SCHEMA.md](/data/logs/SCHEMA.md)** - Daily nutrition log format, field definitions, and data structure specifications
+- **[/references/health-profile.yaml](/references/health-profile.yaml)** - User targets (RDA/DRI values), monitoring fields, and health goals configuration
+- **[/scripts/validate_data_bank.py](/scripts/validate_data_bank.py)** - Validation tool for checking energy math, fat splits, sodium calculations, and data integrity
+- **[/scripts/new_dish_from_template.py](/scripts/new_dish_from_template.py)** - Tool for creating new dish files with proper structure in the correct venue folder
+
 ## Implementation Recommendations
 
 ### Minimal Viable Approach

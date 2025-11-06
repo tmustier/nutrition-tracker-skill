@@ -1,0 +1,359 @@
+# Raw-to-Cooked Yield Factors
+# Source: USDA Table of Cooking Yields for Meat and Poultry (2012)
+#         + FoodData Central observations
+# Format: food_category -> cooking_method -> yield_factor
+# Yield factor = cooked_weight / raw_weight
+
+yield_factors:
+  # POULTRY
+  chicken_breast:
+    # Boneless, skinless - significant moisture loss
+    raw: 1.00
+    grilled: 0.75           # 25% weight loss (moisture evaporation)
+    baked: 0.80             # Less moisture loss than grilling
+    roasted: 0.78           # Similar to baking
+    boiled: 0.85            # Water environment reduces loss
+    poached: 0.87           # Gentle cooking, minimal loss
+    pan_fried: 0.77         # Quick high heat
+    stir_fried: 0.82        # Very quick cooking
+    microwaved: 0.83        # Even heating, moderate loss
+    pressure_cooked: 0.88   # Sealed environment retains moisture
+    slow_cooked: 0.85       # Liquid environment
+    braised: 0.82           # Some loss despite liquid
+
+  chicken_thigh:
+    # Higher fat content, retains more moisture
+    raw: 1.00
+    grilled: 0.80
+    baked: 0.83
+    roasted: 0.82
+    boiled: 0.88
+    poached: 0.90
+    pan_fried: 0.81
+    stir_fried: 0.85
+    microwaved: 0.86
+    pressure_cooked: 0.91
+    slow_cooked: 0.88
+    braised: 0.85
+
+  turkey_breast:
+    # Similar to chicken but slightly drier
+    raw: 1.00
+    grilled: 0.72
+    baked: 0.78
+    roasted: 0.76
+    boiled: 0.83
+    poached: 0.85
+    pan_fried: 0.75
+
+  # BEEF
+  beef_steak:
+    # Lean cuts (sirloin, tenderloin) - moderate fat
+    raw: 1.00
+    grilled_rare: 0.78      # Less cooking time = less loss
+    grilled_medium: 0.73    # Standard cooking
+    grilled_well: 0.68      # Maximum moisture loss
+    baked: 0.75
+    roasted: 0.73
+    pan_fried: 0.75
+    broiled: 0.72
+    stir_fried: 0.85        # Quick cooking
+
+  beef_roast:
+    # Larger cuts, varied doneness
+    raw: 1.00
+    roasted_rare: 0.78
+    roasted_medium: 0.73
+    roasted_well: 0.67
+    braised: 0.75           # Liquid cooking offsets some loss
+    slow_cooked: 0.72
+    pressure_cooked: 0.78
+
+  ground_beef:
+    # Fat content varies (80/20, 90/10, etc.)
+    # These assume 85/15 (85% lean)
+    raw: 1.00
+    pan_fried_drained: 0.65 # Significant fat/water loss
+    pan_fried_undrained: 0.75
+    baked: 0.70
+    grilled: 0.68
+    boiled: 0.72
+
+  # PORK
+  pork_chop:
+    raw: 1.00
+    grilled: 0.75
+    baked: 0.78
+    pan_fried: 0.76
+    broiled: 0.74
+
+  pork_tenderloin:
+    raw: 1.00
+    roasted: 0.76
+    grilled: 0.73
+    baked: 0.77
+
+  bacon:
+    # Extreme fat rendering
+    raw: 1.00
+    pan_fried: 0.40         # 60% loss (mostly fat)
+    baked: 0.42
+    microwaved: 0.45
+
+  # LAMB
+  lamb_chop:
+    raw: 1.00
+    grilled: 0.72
+    broiled: 0.70
+    pan_fried: 0.74
+
+  # FISH & SEAFOOD
+  salmon:
+    # Moderate fat fish
+    raw: 1.00
+    grilled: 0.80           # Less moisture loss than chicken
+    baked: 0.85
+    roasted: 0.83
+    pan_fried: 0.82
+    poached: 0.90           # Minimal loss
+    steamed: 0.92
+    broiled: 0.81
+    microwaved: 0.88
+
+  white_fish:
+    # Cod, halibut, tilapia - lean fish
+    raw: 1.00
+    grilled: 0.78
+    baked: 0.82
+    roasted: 0.80
+    pan_fried: 0.80
+    poached: 0.88
+    steamed: 0.90
+    broiled: 0.79
+    microwaved: 0.86
+    fried_breaded: 1.10     # Coating adds weight
+
+  shrimp:
+    raw: 1.00
+    boiled: 0.85
+    grilled: 0.82
+    sauteed: 0.88
+    steamed: 0.87
+    fried_breaded: 1.15
+
+  # GRAINS & PASTA
+  pasta:
+    # Dry pasta - gains water significantly
+    raw: 1.00
+    boiled: 2.50            # Pasta more than doubles in weight
+
+  rice_white:
+    # Long grain, dry
+    raw: 1.00
+    boiled: 3.00            # Triples in weight
+    steamed: 2.80
+    pilaf: 2.50             # Some fat added, less water absorbed
+
+  rice_brown:
+    raw: 1.00
+    boiled: 2.80
+    steamed: 2.60
+
+  quinoa:
+    raw: 1.00
+    boiled: 3.00
+
+  oats:
+    # Rolled oats
+    raw: 1.00
+    boiled: 2.50            # Becomes oatmeal
+
+  couscous:
+    raw: 1.00
+    steamed: 2.20
+
+  # LEGUMES
+  beans_dried:
+    # Kidney, black, pinto - dry to cooked
+    raw: 1.00
+    boiled: 2.50
+    pressure_cooked: 2.40
+    slow_cooked: 2.60
+
+  lentils_dried:
+    raw: 1.00
+    boiled: 2.25
+
+  chickpeas_dried:
+    raw: 1.00
+    boiled: 2.50
+    pressure_cooked: 2.40
+
+  # VEGETABLES
+  broccoli:
+    raw: 1.00
+    steamed: 0.87           # Slight moisture loss
+    boiled: 0.92            # Water environment
+    microwaved: 0.90
+    stir_fried: 0.75        # High heat, moisture loss
+    roasted: 0.70           # Significant moisture loss
+
+  carrots:
+    raw: 1.00
+    steamed: 0.90
+    boiled: 0.95
+    roasted: 0.75
+    microwaved: 0.88
+    stir_fried: 0.80
+
+  spinach:
+    # High water content, dramatic shrinkage
+    raw: 1.00
+    steamed: 0.20           # 80% volume loss
+    boiled: 0.25
+    sauteed: 0.15           # Maximum shrinkage
+    microwaved: 0.22
+
+  kale:
+    raw: 1.00
+    steamed: 0.35
+    boiled: 0.40
+    sauteed: 0.30
+
+  bell_pepper:
+    raw: 1.00
+    grilled: 0.80
+    roasted: 0.75
+    sauteed: 0.85
+    stir_fried: 0.87
+
+  onion:
+    raw: 1.00
+    sauteed: 0.60           # Significant water loss
+    caramelized: 0.40       # Extended cooking, maximum loss
+    grilled: 0.75
+    roasted: 0.70
+    boiled: 0.85
+
+  mushroom:
+    raw: 1.00
+    sauteed: 0.50           # Very high water content
+    grilled: 0.55
+    roasted: 0.50
+    boiled: 0.75
+
+  tomato:
+    raw: 1.00
+    roasted: 0.70
+    grilled: 0.75
+    sauteed: 0.65
+    stewed: 0.90            # Liquid retained
+
+  zucchini:
+    raw: 1.00
+    sauteed: 0.70
+    grilled: 0.75
+    roasted: 0.68
+    steamed: 0.85
+
+  sweet_potato:
+    raw: 1.00
+    baked: 0.88             # Slight moisture loss
+    roasted: 0.85
+    boiled: 0.95
+    microwaved: 0.90
+
+  potato:
+    raw: 1.00
+    baked: 0.85
+    boiled: 0.98            # Minimal loss
+    roasted: 0.82
+    fried: 0.70             # Moisture loss + some oil absorption
+    mashed: 1.10            # Assumes milk/butter added
+
+  asparagus:
+    raw: 1.00
+    steamed: 0.85
+    grilled: 0.78
+    roasted: 0.75
+    boiled: 0.88
+
+  green_beans:
+    raw: 1.00
+    steamed: 0.87
+    boiled: 0.90
+    sauteed: 0.80
+    roasted: 0.75
+
+  cauliflower:
+    raw: 1.00
+    steamed: 0.88
+    boiled: 0.92
+    roasted: 0.72
+    riced_sauteed: 0.65
+
+  eggplant:
+    raw: 1.00
+    grilled: 0.75
+    roasted: 0.70
+    sauteed: 0.65           # Absorbs oil, loses water
+
+  # EGGS
+  egg:
+    # Whole eggs
+    raw: 1.00
+    scrambled: 1.00         # Minimal change
+    fried: 0.97
+    boiled: 1.00
+    poached: 1.00
+    omelette: 1.05          # May include additions
+
+  # TOFU
+  tofu_firm:
+    raw: 1.00
+    pan_fried: 0.85
+    baked: 0.80
+    grilled: 0.82
+    stir_fried: 0.90
+
+  tofu_soft:
+    raw: 1.00
+    boiled: 0.98
+    steamed: 0.95
+
+# Special cases and notes:
+special_cases:
+  breaded_foods:
+    note: "Breading adds weight. Typical yield factors: 1.10-1.30 depending on coating thickness"
+    example: "100g raw chicken → 75g cooked chicken → 98g breaded fried chicken (75g * 1.30)"
+
+  marinated_foods:
+    note: "Marinade absorbed adds weight (usually 5-15%), then cooking removes moisture"
+    calculation: "raw_weight * (1 + marinade_absorption) * cooking_yield"
+
+  stuffed_foods:
+    note: "Calculate stuffing and main food separately with their respective yield factors"
+
+  dehydrated_foods:
+    note: "Reverse of normal cooking - water removal. Yields typically 0.10-0.30"
+
+  deep_fried_foods:
+    note: "Oil absorption (5-15%) partially offsets moisture loss"
+    calculation: "raw_weight * base_yield * (1 + oil_absorption_rate)"
+
+# Usage guidelines:
+guidelines:
+  - "Always apply yield factor BEFORE applying retention factors"
+  - "For recipes with added ingredients (oil, butter), calculate separately"
+  - "Yield factors are averages - actual values depend on cooking time/temperature"
+  - "For mixed dishes, calculate each component separately"
+  - "When in doubt, measure cooked weight directly"
+  - "Account for removed parts (bone, skin, fat) separately"
+
+# Validation ranges:
+validation:
+  minimum_plausible_yield: 0.10  # Dried/dehydrated foods
+  maximum_plausible_yield: 4.00  # Dried grains/legumes cooked
+  typical_meat_range: [0.65, 0.90]
+  typical_vegetable_range: [0.15, 0.95]
+  typical_grain_range: [2.00, 3.50]

@@ -1,0 +1,395 @@
+# Cooking Methods Taxonomy
+# Standardized classification of cooking methods with typical parameters
+# Use this to map user-input cooking methods to standardized retention/yield factors
+
+cooking_methods:
+  # DRY HEAT METHODS - High temperature, no water
+  grilling:
+    category: dry_heat
+    heat_source: direct
+    typical_temp_celsius: [200, 260]
+    typical_temp_fahrenheit: [400, 500]
+    typical_duration_min: [8, 20]
+    liquid_present: false
+    description: "Cooking over direct heat source (charcoal, gas, electric)"
+    aliases: ["grill", "grilled", "barbecue", "bbq", "char-grilled"]
+    equipment: ["grill", "barbecue", "grill pan"]
+    best_for: ["meat", "fish", "vegetables"]
+    nutrient_impact: "High - vitamin C/B losses moderate, fat rendering high"
+
+  broiling:
+    category: dry_heat
+    heat_source: direct_overhead
+    typical_temp_celsius: [230, 290]
+    typical_temp_fahrenheit: [450, 550]
+    typical_duration_min: [5, 15]
+    liquid_present: false
+    description: "Cooking under direct overhead heat in oven"
+    aliases: ["broil", "broiled"]
+    equipment: ["oven broiler"]
+    best_for: ["meat", "fish"]
+    nutrient_impact: "High - similar to grilling"
+
+  baking:
+    category: dry_heat
+    heat_source: indirect
+    typical_temp_celsius: [160, 200]
+    typical_temp_fahrenheit: [325, 400]
+    typical_duration_min: [20, 60]
+    liquid_present: false
+    description: "Cooking with indirect dry heat in enclosed oven"
+    aliases: ["bake", "baked", "oven-baked"]
+    equipment: ["oven"]
+    best_for: ["meat", "fish", "vegetables", "casseroles"]
+    nutrient_impact: "Moderate - longer time but lower temp than grilling"
+
+  roasting:
+    category: dry_heat
+    heat_source: indirect
+    typical_temp_celsius: [175, 230]
+    typical_temp_fahrenheit: [350, 450]
+    typical_duration_min: [30, 120]
+    liquid_present: false
+    description: "High-temperature baking, typically for larger cuts or whole items"
+    aliases: ["roast", "roasted", "oven-roasted"]
+    equipment: ["oven", "roasting pan"]
+    best_for: ["large meat cuts", "whole poultry", "root vegetables"]
+    nutrient_impact: "Moderate - extended time causes some vitamin loss"
+
+  pan_frying:
+    category: dry_heat
+    heat_source: direct
+    typical_temp_celsius: [160, 190]
+    typical_temp_fahrenheit: [320, 375]
+    typical_duration_min: [5, 15]
+    liquid_present: false
+    added_fat: true
+    description: "Cooking in shallow fat in a pan"
+    aliases: ["fry", "fried", "pan-fried", "pan fried", "shallow fry"]
+    equipment: ["frying pan", "skillet"]
+    best_for: ["meat", "fish", "eggs"]
+    nutrient_impact: "Low-moderate - quick cooking preserves nutrients, fat adds calories"
+
+  deep_frying:
+    category: dry_heat
+    heat_source: direct
+    typical_temp_celsius: [175, 190]
+    typical_temp_fahrenheit: [350, 375]
+    typical_duration_min: [3, 10]
+    liquid_present: false
+    added_fat: true
+    description: "Submerging food completely in hot oil"
+    aliases: ["deep fry", "deep-fried", "deep fried"]
+    equipment: ["deep fryer", "wok", "heavy pot"]
+    best_for: ["breaded items", "potatoes"]
+    nutrient_impact: "Moderate - quick cooking but high fat absorption"
+
+  sauteing:
+    category: dry_heat
+    heat_source: direct
+    typical_temp_celsius: [150, 180]
+    typical_temp_fahrenheit: [300, 350]
+    typical_duration_min: [3, 10]
+    liquid_present: false
+    added_fat: true
+    description: "Quick cooking in small amount of fat with frequent stirring"
+    aliases: ["saute", "sauteed", "sauté", "sautéed", "pan-seared"]
+    equipment: ["saute pan", "skillet"]
+    best_for: ["vegetables", "thin meat cuts"]
+    nutrient_impact: "Low - very quick cooking preserves nutrients well"
+
+  stir_frying:
+    category: dry_heat
+    heat_source: direct
+    typical_temp_celsius: [200, 260]
+    typical_temp_fahrenheit: [400, 500]
+    typical_duration_min: [3, 8]
+    liquid_present: false
+    added_fat: true
+    description: "Very quick cooking at high heat with constant stirring"
+    aliases: ["stir fry", "stir-fry", "stir-fried", "wok-fried"]
+    equipment: ["wok", "large skillet"]
+    best_for: ["vegetables", "thin meat strips", "tofu"]
+    nutrient_impact: "Very low - extremely quick cooking minimizes nutrient loss"
+
+  # MOIST HEAT METHODS - Water/steam present
+  boiling:
+    category: moist_heat
+    heat_source: direct
+    typical_temp_celsius: [100, 100]
+    typical_temp_fahrenheit: [212, 212]
+    typical_duration_min: [5, 30]
+    liquid_present: true
+    description: "Cooking in water at 100°C/212°F"
+    aliases: ["boil", "boiled"]
+    equipment: ["pot", "saucepan"]
+    best_for: ["pasta", "rice", "eggs", "vegetables"]
+    nutrient_impact: "High - water-soluble vitamins leach into water"
+
+  boiling_drained:
+    category: moist_heat
+    heat_source: direct
+    typical_temp_celsius: [100, 100]
+    typical_temp_fahrenheit: [212, 212]
+    typical_duration_min: [5, 30]
+    liquid_present: true
+    liquid_discarded: true
+    description: "Boiling with cooking water discarded"
+    aliases: ["boil and drain", "boiled (drained)"]
+    equipment: ["pot", "colander"]
+    best_for: ["pasta", "vegetables"]
+    nutrient_impact: "Very high - nutrients lost to discarded water"
+
+  steaming:
+    category: moist_heat
+    heat_source: indirect
+    typical_temp_celsius: [100, 100]
+    typical_temp_fahrenheit: [212, 212]
+    typical_duration_min: [5, 20]
+    liquid_present: true
+    direct_water_contact: false
+    description: "Cooking with steam, food not in direct water contact"
+    aliases: ["steam", "steamed"]
+    equipment: ["steamer basket", "bamboo steamer", "instant pot"]
+    best_for: ["vegetables", "fish", "dumplings"]
+    nutrient_impact: "Low - minimal nutrient loss, no leaching"
+
+  poaching:
+    category: moist_heat
+    heat_source: direct
+    typical_temp_celsius: [70, 85]
+    typical_temp_fahrenheit: [160, 185]
+    typical_duration_min: [5, 20]
+    liquid_present: true
+    description: "Gentle cooking in liquid below boiling point"
+    aliases: ["poach", "poached"]
+    equipment: ["pot", "saucepan", "poaching pan"]
+    best_for: ["eggs", "fish", "chicken"]
+    nutrient_impact: "Moderate - lower temp than boiling reduces loss"
+
+  simmering:
+    category: moist_heat
+    heat_source: direct
+    typical_temp_celsius: [85, 95]
+    typical_temp_fahrenheit: [185, 205]
+    typical_duration_min: [15, 60]
+    liquid_present: true
+    description: "Cooking in liquid just below boiling point"
+    aliases: ["simmer", "simmered"]
+    equipment: ["pot", "saucepan"]
+    best_for: ["soups", "stews", "sauces"]
+    nutrient_impact: "Moderate - if liquid retained, nutrients preserved"
+
+  blanching:
+    category: moist_heat
+    heat_source: direct
+    typical_temp_celsius: [100, 100]
+    typical_temp_fahrenheit: [212, 212]
+    typical_duration_min: [1, 5]
+    liquid_present: true
+    description: "Brief boiling followed by ice bath"
+    aliases: ["blanch", "blanched", "parboil", "parboiled"]
+    equipment: ["pot", "bowl with ice water"]
+    best_for: ["vegetables"]
+    nutrient_impact: "Low-moderate - brief time limits loss"
+
+  # COMBINATION METHODS - Both dry and moist heat
+  braising:
+    category: combination
+    heat_source: indirect
+    typical_temp_celsius: [150, 175]
+    typical_temp_fahrenheit: [300, 350]
+    typical_duration_min: [60, 240]
+    liquid_present: true
+    description: "Searing followed by slow cooking in small amount of liquid"
+    aliases: ["braise", "braised", "pot roast"]
+    equipment: ["dutch oven", "heavy pot with lid"]
+    best_for: ["tough meat cuts", "root vegetables"]
+    nutrient_impact: "Moderate - long time but liquid often consumed"
+
+  stewing:
+    category: combination
+    heat_source: direct
+    typical_temp_celsius: [85, 95]
+    typical_temp_fahrenheit: [185, 205]
+    typical_duration_min: [60, 180]
+    liquid_present: true
+    description: "Simmering ingredients completely covered in liquid"
+    aliases: ["stew", "stewed"]
+    equipment: ["pot", "dutch oven"]
+    best_for: ["tough meat cuts", "mixed dishes"]
+    nutrient_impact: "Moderate - nutrients remain in consumed liquid"
+
+  # MODERN/SPECIALIZED METHODS
+  microwaving:
+    category: microwave
+    heat_source: electromagnetic
+    typical_temp_celsius: [variable, variable]
+    typical_temp_fahrenheit: [variable, variable]
+    typical_duration_min: [2, 10]
+    liquid_present: variable
+    description: "Cooking with microwave radiation"
+    aliases: ["microwave", "microwaved", "zapped"]
+    equipment: ["microwave oven"]
+    best_for: ["reheating", "vegetables", "quick cooking"]
+    nutrient_impact: "Very low - short cooking time preserves nutrients well"
+
+  pressure_cooking:
+    category: moist_heat
+    heat_source: direct
+    typical_temp_celsius: [115, 120]
+    typical_temp_fahrenheit: [240, 250]
+    typical_duration_min: [5, 40]
+    liquid_present: true
+    pressure: "high"
+    description: "Cooking in sealed vessel with steam under pressure"
+    aliases: ["pressure cook", "pressure cooked", "instant pot", "pressure cooker"]
+    equipment: ["pressure cooker", "instant pot"]
+    best_for: ["tough meats", "beans", "rice", "stews"]
+    nutrient_impact: "Low - high temp but very short time, sealed environment"
+
+  slow_cooking:
+    category: moist_heat
+    heat_source: indirect
+    typical_temp_celsius: [80, 95]
+    typical_temp_fahrenheit: [175, 205]
+    typical_duration_min: [240, 600]
+    liquid_present: true
+    description: "Extended cooking at low temperature"
+    aliases: ["slow cook", "slow cooked", "crock pot", "slow cooker"]
+    equipment: ["slow cooker", "crock pot"]
+    best_for: ["tough meats", "stews", "soups"]
+    nutrient_impact: "High - extended time causes significant vitamin degradation"
+
+  sous_vide:
+    category: moist_heat
+    heat_source: indirect
+    typical_temp_celsius: [55, 85]
+    typical_temp_fahrenheit: [130, 185]
+    typical_duration_min: [30, 240]
+    liquid_present: true
+    vacuum_sealed: true
+    description: "Vacuum-sealed cooking in precisely controlled water bath"
+    aliases: ["sous-vide", "sous vide cooked"]
+    equipment: ["immersion circulator", "water bath"]
+    best_for: ["meat", "fish", "eggs"]
+    nutrient_impact: "Very low - precise low temp, sealed environment"
+
+  air_frying:
+    category: dry_heat
+    heat_source: convection
+    typical_temp_celsius: [175, 200]
+    typical_temp_fahrenheit: [350, 400]
+    typical_duration_min: [10, 25]
+    liquid_present: false
+    description: "Convection cooking with circulating hot air"
+    aliases: ["air fry", "air fried", "air-fried"]
+    equipment: ["air fryer"]
+    best_for: ["frozen foods", "vegetables", "proteins"]
+    nutrient_impact: "Moderate - similar to baking but faster"
+
+  # RAW/NO COOKING
+  raw:
+    category: none
+    heat_source: none
+    typical_temp_celsius: [ambient, ambient]
+    typical_temp_fahrenheit: [ambient, ambient]
+    typical_duration_min: [0, 0]
+    liquid_present: false
+    description: "No cooking applied"
+    aliases: ["fresh", "uncooked", "raw"]
+    best_for: ["salads", "fruits", "certain vegetables"]
+    nutrient_impact: "None - baseline nutrient values"
+
+  # DEHYDRATION
+  dehydrating:
+    category: dry_heat
+    heat_source: indirect
+    typical_temp_celsius: [55, 70]
+    typical_temp_fahrenheit: [130, 160]
+    typical_duration_min: [240, 960]
+    liquid_present: false
+    description: "Removing moisture through extended low heat"
+    aliases: ["dehydrate", "dehydrated", "dried"]
+    equipment: ["food dehydrator", "oven"]
+    best_for: ["fruits", "vegetables", "meat jerky"]
+    nutrient_impact: "Moderate - heat-sensitive vitamins degrade over time"
+
+# Method categorization for quick lookup
+categories:
+  dry_heat:
+    - grilling
+    - broiling
+    - baking
+    - roasting
+    - pan_frying
+    - deep_frying
+    - sauteing
+    - stir_frying
+    - air_frying
+    - dehydrating
+
+  moist_heat:
+    - boiling
+    - boiling_drained
+    - steaming
+    - poaching
+    - simmering
+    - blanching
+    - pressure_cooking
+    - slow_cooking
+    - sous_vide
+
+  combination:
+    - braising
+    - stewing
+
+  microwave:
+    - microwaving
+
+  none:
+    - raw
+
+# Common user input mapping
+# Use this to normalize user input to standardized method names
+user_input_mapping:
+  "grilled": grilling
+  "bbq": grilling
+  "barbecued": grilling
+  "char-grilled": grilling
+  "broiled": broiling
+  "baked": baking
+  "oven-baked": baking
+  "roasted": roasting
+  "fried": pan_frying
+  "pan-fried": pan_frying
+  "deep-fried": deep_frying
+  "sautéed": sauteing
+  "sauteed": sauteing
+  "stir-fried": stir_frying
+  "boiled": boiling
+  "steamed": steaming
+  "poached": poaching
+  "simmered": simmering
+  "blanched": blanching
+  "braised": braising
+  "stewed": stewing
+  "microwaved": microwaving
+  "pressure cooked": pressure_cooking
+  "instant pot": pressure_cooking
+  "slow cooked": slow_cooking
+  "crock pot": slow_cooking
+  "sous vide": sous_vide
+  "air fried": air_frying
+  "raw": raw
+  "fresh": raw
+
+# Temperature ranges for validation
+temperature_validation:
+  min_celsius: 40    # Below this is not really "cooking"
+  max_celsius: 290   # Above this is burning
+  typical_ranges:
+    low: [40, 95]
+    medium: [95, 175]
+    high: [175, 260]
+    very_high: [260, 290]

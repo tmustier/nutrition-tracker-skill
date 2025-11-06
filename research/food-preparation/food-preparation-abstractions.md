@@ -20,6 +20,75 @@ This document proposes a **three-tier system** for handling food preparation var
 
 ---
 
+## Developer Implementation Checklist
+
+This checklist guides developers through implementing the food preparation tracking system. Follow these phases sequentially to ensure proper foundation and incremental delivery.
+
+### Phase 1: Foundation (Weeks 1-2)
+
+- [ ] Review all research reports in research/ directory
+- [ ] Understand three-tier architecture (Simple/Ingredient/Recipe modes)
+- [ ] Understand four adjustment types (yield/retention/addition/subtraction)
+- [ ] Read ESTIMATE.md for current estimation workflow
+- [ ] Identify which existing dishes could benefit from preparation tracking
+
+### Phase 2: Data Structures (Weeks 3-4)
+
+- [ ] Extend YAML schema with optional `preparation` block
+- [ ] Extend YAML schema with optional `recipe` block
+- [ ] Add validation rules to scripts/validate_data_bank.py
+- [ ] Create retention factor reference table (CSV or YAML)
+- [ ] Create cooking method taxonomy (YAML)
+
+### Phase 3: Tier 2 Backend (Weeks 5-6)
+
+- [ ] Implement yield factor calculations
+- [ ] Implement retention factor application
+- [ ] Implement cooking medium addition logic
+- [ ] Create test cases for grilled chicken example
+- [ ] Update scripts/new_dish_from_template.py with --mode flag
+
+### Phase 4: Tier 3 Recipe Mode (Weeks 7-8)
+
+- [ ] Implement multi-component recipe calculator
+- [ ] Handle order of operations (yield → retention → addition → subtraction)
+- [ ] Add energy validation with Atwater formula
+- [ ] Create test cases for complex dishes (stir-fry example)
+- [ ] Document confidence levels
+
+### Phase 5: Integration & Testing (Weeks 9-10)
+
+- [ ] Migrate 5-10 pilot dishes to Tier 2 format
+- [ ] Validate energy calculations within ±3%
+- [ ] Update documentation with examples
+- [ ] Train users on when to use each tier
+- [ ] Monitor for edge cases
+
+### Prerequisites
+
+Before starting implementation, ensure you have:
+
+- Python 3.8+ familiarity
+- Understanding of YAML schema validation
+- Basic nutrition science (macros, micros, Atwater factors)
+- Familiarity with USDA FoodData Central
+
+### Key Files to Modify
+
+- **scripts/validate_data_bank.py** - Add preparation block validation
+- **scripts/new_dish_from_template.py** - Add --mode flag for base/recipe
+- **data/references/** - Add retention-factors.yaml, cooking-methods.yaml
+- **Schema documentation** - Update with new optional blocks
+
+### Common Pitfalls
+
+- **Don't double-adjust** - Retention factors are already in RDA
+- **Apply adjustments in correct order** - yield → retention → addition → subtraction
+- **Validate energy after every adjustment** - Use Atwater formula
+- **Document confidence levels** - All estimates need LOW/MEDIUM/HIGH ratings
+
+---
+
 ## 1. Data Model Design
 
 ### 1.1 Core Abstractions
