@@ -26,6 +26,7 @@ assumptions:
   salt_scheme: "unsalted"  # light|normal|heavy|unsalted
   oil_type: ""
   prep: "Natural/plain goat milk yogurt, made from whole goat milk with live cultures. No added salt, sugar, or thickeners."
+  usda_source: "Micronutrients primarily from USDA FoodData Central FDC 171278 (goat milk, fluid with added vitamin D), scaled to 50g portion. Note: UK dairy products typically contain 2-3x higher iodine than US due to fortified cattle/goat feed - iodine estimate adjusted accordingly (35µg per 100g baseline × 2.5 factor)."
 per_portion:
   energy_kcal: 35
   protein_g: 1.8
@@ -50,31 +51,31 @@ per_portion:
   iron_mg: 0.03
   zinc_mg: 0.2
   vitamin_c_mg: 0.7
-  manganese_mg: 0.01
-  copper_mg: 0.03
-  selenium_ug: 1.1
-  vitamin_d_ug: 0.7
-  vitamin_e_mg: 0.04
+  manganese_mg: 0.009
+  copper_mg: 0.023
+  selenium_ug: 0.7
+  vitamin_d_ug: 0.65
+  vitamin_e_mg: 0.035
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 55.5
   chloride_mg: 0
-  sulfur_g: 0
-  vitamin_a_ug: 0
-  vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
-  vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
-  vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
-  vitamin_b12_ug: 0
-  choline_mg: 0
+  sulfur_g: 0.0
+  vitamin_a_ug: 28.5
+  vitamin_k_ug: 0.15
+  vitamin_b1_mg: 0.024
+  vitamin_b2_mg: 0.069
+  vitamin_b3_mg: 0.14
+  vitamin_b5_mg: 0.16
+  vitamin_b6_mg: 0.023
+  vitamin_b7_ug: 1.1
+  vitamin_b9_ug: 0.5
+  vitamin_b12_ug: 0.035
+  choline_mg: 8.0
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.01
+  omega6_la_g: 0.06
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -97,5 +98,7 @@ notes:
   - "All sugars are naturally occurring lactose; no added sugars per product description"
   - "Product contains live cultures: Lactobacillus bulgaricus, Streptococcus thermophilus, Lactobacillus acidophilus, Bifidobacterium"
 change_log:
+  - "2025-11-05: Enriched with 17 priority nutrients from USDA FoodData Central FDC 171278 (goat milk). Added/updated: vitamin_a_ug (28.5), vitamin_k_ug (0.15), vitamin_b1_mg (0.024), vitamin_b2_mg (0.069), vitamin_b3_mg (0.14), vitamin_b6_mg (0.023), vitamin_b9_ug (0.5), vitamin_b12_ug (0.035), choline_mg (8.0), phosphorus_mg (55.5), and refined values for vitamin_d_ug (0.65), vitamin_e_mg (0.035), copper_mg (0.023), selenium_ug (0.7), manganese_mg (0.009). Omega-3 EPA/DHA confirmed at 0 (not present in goat milk). All values scaled from per-100g to 50g portion."
+  - "2025-11-05T18:15:00+00:00: Final enrichment - Added 4 remaining nutrients (B5, B7, ALA, LA) using goat milk research and fatty acid studies. vitamin_b5_mg: 0 → 0.16 (0.32mg per 100g goat milk × 0.5), vitamin_b7_ug: 0 → 1.1 (2.21µg per 100g goat milk × 0.5), omega3_ala_g: 0 → 0.01 (0.029g per 100g calculated from 0.6% of 4.87g fat × 0.5), omega6_la_g: 0 → 0.06 (0.122g per 100g calculated from 2.5% of 4.87g fat × 0.5). Evidence: Goat milk B5 from Small Ruminant Research showing 0.31-0.32mg/100g; B7 from JHVMS study showing 2.21µg/100ml; fatty acids from PMC6680990 showing LA 2.0-3.1% and ALA 0.41-0.81% of total fat. Chromium and molybdenum remain 0 (not routinely analyzed per USDA research). Fiber soluble/insoluble remain 0.0 (TRUE ZERO for dairy)."
   - "2025-11-04: Initial entry created with complete nutrition profile for 50g portion. Macros from Open Food Facts verified label data. Micronutrients from USDA goat milk data (FDC 171278) and goat milk/yogurt research studies. Fatty acid profile estimated from published goat milk research. All values scaled to 50g portion."
 ```

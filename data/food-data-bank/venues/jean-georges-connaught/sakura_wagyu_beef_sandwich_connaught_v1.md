@@ -2,9 +2,9 @@
 
 ```yaml
 id: sakura_wagyu_beef_sandwich_connaught_v1
-version: 3
+version: 4
 schema_version: 2
-last_verified: "2025-11-02"
+last_verified: "2025-11-05"
 source:
   venue: Jean-Georges at The Connaught, London
   menu_page: https://deliveroo.co.uk/menu/london/mayfair/jean-georges-at-the-connaught
@@ -51,29 +51,29 @@ per_portion:
   polyols_g: 0.0
   carbs_available_g: 78.0
   carbs_total_g: 82.0
-  selenium_ug: 0
-  chromium_ug: 0
-  molybdenum_ug: 0
-  phosphorus_mg: 0
-  chloride_mg: 0
-  sulfur_g: 0
-  vitamin_a_ug: 0
-  vitamin_d_ug: 0
-  vitamin_e_mg: 0
-  vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
-  vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
-  vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
-  vitamin_b12_ug: 0
-  choline_mg: 0
+  selenium_ug: 67
+  chromium_ug: 4
+  molybdenum_ug: 17
+  phosphorus_mg: 410
+  chloride_mg: 890
+  sulfur_g: 0.318
+  vitamin_a_ug: 5
+  vitamin_d_ug: 0.1
+  vitamin_e_mg: 2.1
+  vitamin_k_ug: 6
+  vitamin_b1_mg: 0.64
+  vitamin_b2_mg: 0.60
+  vitamin_b3_mg: 15
+  vitamin_b5_mg: 1.4
+  vitamin_b6_mg: 0.62
+  vitamin_b7_ug: 12
+  vitamin_b9_ug: 150
+  vitamin_b12_ug: 2.5
+  choline_mg: 120
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.69
+  omega6_la_g: 5.8
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -151,4 +151,15 @@ change_log:
   - per_portion.polyols_g
   - version
   sources: []
+- timestamp: '2025-11-05T14:35:00+00:00'
+  updated_by: 'Agent 4: Claude Code (Sonnet 4.5)'
+  reason: 'Comprehensive nutrient enrichment using component-based USDA data for 360g wagyu sandwich (wagyu beef ~130g, pain de mie ~140g, neutral oil ~20g, garnish)'
+  fields_changed: [selenium_ug, chromium_ug, molybdenum_ug, phosphorus_mg, chloride_mg, sulfur_mg, vitamin_a_ug, vitamin_d_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_ala_g, omega6_la_g, version, last_verified]
+  sources:
+  - note: 'USDA FoodData Central - Beef wagyu composition: similar mineral/vitamin profile to regular beef with higher fat content'
+    url: 'https://fdc.nal.usda.gov/'
+  - note: 'USDA FoodData Central - White bread enriched (pain de mie): B vitamins, selenium, phosphorus, enriched folate'
+    url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/172687'
+  - note: 'Component aggregation for 360g sandwich. EPA/DHA remain 0 (no fish). Ultra-trace elements remain 0 (insufficient data). Copper already present at 0.36mg.'
+    url: 'component_analysis'
 ```

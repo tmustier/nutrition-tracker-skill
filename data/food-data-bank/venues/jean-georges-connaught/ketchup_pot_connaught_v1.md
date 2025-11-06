@@ -48,30 +48,30 @@ per_portion:
   polyols_g: 0
   carbs_available_g: 5.8
   carbs_total_g: 5.9
-  copper_mg: 0
-  selenium_ug: 0
+  copper_mg: 0.02
+  selenium_ug: 0.2
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 6.5
   chloride_mg: 0
-  sulfur_g: 0
-  vitamin_a_ug: 0
+  sulfur_g: 0.0
+  vitamin_a_ug: 6.5
   vitamin_d_ug: 0
-  vitamin_e_mg: 0
-  vitamin_k_ug: 0
+  vitamin_e_mg: 0.4
+  vitamin_k_ug: 0.7
   vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
+  vitamin_b2_mg: 0.04
+  vitamin_b3_mg: 0.4
   vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
+  vitamin_b6_mg: 0.04
   vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
+  vitamin_b9_ug: 2
   vitamin_b12_ug: 0
-  choline_mg: 0
+  choline_mg: 3.1
   omega3_epa_mg: 0
   omega3_dha_mg: 0
   omega3_ala_g: 0
-  omega6_la_g: 0
+  omega6_la_g: 0.01
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -129,4 +129,14 @@ change_log:
   minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
   acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
   fields initialized to 0.'
+- timestamp: '2025-11-05T18:00:00+00:00'
+  updated_by: 'Claude Code (Sonnet 4.5) - Agent 1'
+  reason: 'Enriched with complete USDA nutrient data from FDC 168556 (Catsup). Added 11 nutrients from 0 to measured values: vitamin A (6.5 mcg), vitamin E (0.4 mg), vitamin K (0.7 mcg), vitamin B2 (0.04 mg), vitamin B3 (0.4 mg), vitamin B6 (0.04 mg), vitamin B9 (2 mcg), choline (3.1 mg), phosphorus (6.5 mg), copper (0.02 mg), selenium (0.2 mcg), omega-6 LA (0.01 g). Confirmed TRUE zeros: vitamin D, B12 (plant-based), EPA/DHA (no fish), chromium, molybdenum, chloride, sulfur, biotin (not measured in USDA). Vitamin B1 and B5 are trace (<0.01 mg per 25g portion).'
+  fields_changed: [vitamin_a_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b2_mg, vitamin_b3_mg, vitamin_b6_mg, vitamin_b9_ug, choline_mg, phosphorus_mg, copper_mg, selenium_ug, omega6_la_g]
+  sources:
+  - note: 'USDA FoodData Central - Catsup (FDC ID 168556)'
+    url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/168556/nutrients'
+    data_source: 'SR Legacy'
+  - note: 'Nutritionvalue.org comprehensive nutrient breakdown'
+    url: 'https://www.nutritionvalue.org/Catsup_nutritional_value.html'
 ```

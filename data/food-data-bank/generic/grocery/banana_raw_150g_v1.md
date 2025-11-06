@@ -3,8 +3,8 @@
 ```yaml
 id: banana_raw_150g_v1
 schema_version: 2
-version: 2
-last_verified: 2025-11-02
+version: 3
+last_verified: 2025-11-05
 source:
   venue: Generic - Grocery/Supermarket
   menu_page: 
@@ -45,34 +45,34 @@ per_portion:
   iron_mg: 0.4
   zinc_mg: 0.2
   vitamin_c_mg: 13
-  manganese_mg: 0.4
+  manganese_mg: 0.45
   polyols_g: 0
   carbs_available_g: 34.3
   carbs_total_g: 38.2
-  copper_mg: 0
-  selenium_ug: 0
+  copper_mg: 0.12
+  selenium_ug: 1.5
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 33
   chloride_mg: 0
-  sulfur_g: 0
-  vitamin_a_ug: 0
+  sulfur_g: 0.005
+  vitamin_a_ug: 4.5
   vitamin_d_ug: 0
-  vitamin_e_mg: 0
-  vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
-  vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
-  vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
+  vitamin_e_mg: 0.2
+  vitamin_k_ug: 0.8
+  vitamin_b1_mg: 0.05
+  vitamin_b2_mg: 0.11
+  vitamin_b3_mg: 1.0
+  vitamin_b5_mg: 0.50
+  vitamin_b6_mg: 0.6
+  vitamin_b7_ug: 0.3
+  vitamin_b9_ug: 30
   vitamin_b12_ug: 0
-  choline_mg: 0
+  choline_mg: 14.6
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.012
+  omega6_la_g: 0.07
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -97,6 +97,25 @@ notes:
 - Soluble fiber (~0.9g) mainly pectin, insoluble fiber (~3g) mainly cellulose
 - Atwater check (available carb basis): 4×1.6 + 9×0.5 + 4×34.3 + 2×3.9 + 2.4×0.0 = 155.9 kcal
 change_log:
+- timestamp: '2025-11-05T16:00:00+00:00'
+  updated_by: Claude Code (Sonnet 4.5)
+  reason: Second enrichment with 4 additional priority nutrients from USDA FoodData Central
+  fields_changed: [vitamin_b5_mg, vitamin_b7_ug, omega3_ala_g, omega6_la_g]
+  sources:
+  - note: 'USDA FoodData Central - Bananas, raw (FDC ID 173944): Pantothenic acid 0.33mg/100g, LA 0.046g/100g'
+    url: 'https://www.nutritionvalue.org/Bananas%2C_raw_nutritional_value.html'
+  - note: 'Biotin content: 0.2μg/100g (most commonly reported value across multiple sources)'
+    url: 'https://wholefoodcatalog.info/nutrient/vitamin_b7(biotin)/fruits/'
+  - note: 'ALA omega-3: ~0.008g/100g (7.6mg per 100g from nutritional research)'
+    url: 'https://www.myfooddata.com/articles/foods-high-in-ALA.php'
+  data_notes: 'Scaled from per-100g to 150g portion. Chromium and molybdenum remain 0 (not measured/reported in USDA database for bananas).'
+- timestamp: '2025-11-05T22:30:00+00:00'
+  updated_by: 'Agent 8 - Claude Sonnet 4.5'
+  reason: 'Schema compliance fix: Added sulfur_g field (was sulfur_mg). Sulfur estimated from protein content (fruit: ~3mg S per g protein).'
+  fields_changed: [per_portion.sulfur_g]
+  sources:
+  - note: 'Sulfur content estimated at 0.005g based on 1.6g protein × 3mg/g coefficient for fruits. Bananas are very low in sulfur-containing amino acids.'
+    url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4438303/'
 - timestamp: 2025-11-01T09:00:00+0000
   updated_by: Claude Code (Sonnet 4.5)
   reason: Initial entry for banana tracking - user consumed in breakfast smoothie
@@ -116,4 +135,22 @@ change_log:
   minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
   acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
   fields initialized to 0.'
+- timestamp: '2025-11-05T00:00:00+00:00'
+  updated_by: 'Claude Code (Sonnet 4.5)'
+  reason: 'Enriched banana data with 17 priority nutrients from USDA FoodData Central #173944'
+  fields_changed: [version, last_verified, per_portion.vitamin_a_ug, per_portion.vitamin_e_mg,
+    per_portion.vitamin_k_ug, per_portion.vitamin_b1_mg, per_portion.vitamin_b2_mg,
+    per_portion.vitamin_b3_mg, per_portion.vitamin_b6_mg, per_portion.vitamin_b9_ug,
+    per_portion.choline_mg, per_portion.phosphorus_mg, per_portion.copper_mg, per_portion.selenium_ug,
+    per_portion.manganese_mg]
+  sources:
+  - note: 'USDA FoodData Central - Bananas, raw (FDC #173944): Per 100g values converted
+      to 150g portion'
+    url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/173944/nutrients'
+  - note: 'USDA Database for the Choline Content of Common Foods: Choline 9.7mg/100g'
+    url: 'https://www.ars.usda.gov/ARSUserFiles/80400525/data/choline/choln02.pdf'
+  notes: 'B-complex vitamins: B1=0.031mg, B2=0.073mg, B3=0.665mg, B6=0.4mg, B9=20mcg
+    per 100g. Fat-soluble: A=3mcg, E=0.1mg, K=0.5mcg per 100g. Minerals: P=22mg, Cu=0.078mg,
+    Se=1mcg, Mn=0.3mg per 100g. Choline=9.7mg per 100g. Vitamin D, B12, EPA, DHA=0
+    (not present in bananas).'
 ```

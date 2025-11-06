@@ -314,7 +314,7 @@ Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
             'x-api-key': this.apiKey,
             'anthropic-version': '2023-06-01'
           },
-          timeout: 30000 // 30 seconds timeout
+          timeout: 120000 // 120 seconds timeout (extended thinking can take longer)
         }
       );
 
@@ -481,7 +481,7 @@ Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
             'x-api-key': this.apiKey,
             'anthropic-version': '2023-06-01'
           },
-          timeout: 30000 // 30 seconds timeout
+          timeout: 120000 // 120 seconds timeout (extended thinking can take longer)
         }
       );
 
