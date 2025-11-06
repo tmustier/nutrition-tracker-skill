@@ -5,6 +5,8 @@ const crypto = require('crypto');
 const config = require('./config');
 const claudeIntegration = require('./claude-integration');
 const githubIntegration = require('./github-integration');
+const conversationManager = require('./conversation-manager');
+const responseHandler = require('./response-handler');
 
 /**
  * Telegram Bot for Nutrition Tracking
@@ -365,13 +367,17 @@ Let's get started! Tell me what you ate.`;
 bot.command('help', async (ctx) => {
   const helpMessage = `📖 **How Nutrition Tracker Works**
 
-**1. Text Messages**
+**1. Text Messages & Conversations**
 Describe what you ate and I'll estimate the nutrition:
 • "Just had 200g grilled chicken breast"
 • "Oats with banana and almonds"
 • "Pret chicken & avocado sandwich"
 
-I'll use USDA data for generic foods and Claude AI for restaurant/branded items.
+💬 **NEW: Multi-turn conversations!**
+• Ask follow-up questions
+• Make corrections ("actually it was 250g")
+• Get clarifications before logging
+• I'll remember our conversation context
 
 **2. Screenshots**
 Send photos of:
@@ -392,6 +398,13 @@ I'll extract the data automatically.
 • Fat: 70g min
 • Carbs: 250g min
 • Fiber: 40g min
+
+**Commands:**
+• /today - See today's totals
+• /clear - Clear conversation history
+• /context - View conversation info
+• /cancel - Cancel and clear conversation
+• /help - Show this message
 
 **Tips:**
 ✓ Include quantities (e.g., "200g", "2 eggs", "1 bowl")
@@ -483,10 +496,47 @@ bot.command('week', async (ctx) => {
 });
 
 /**
- * /cancel - Cancel current operation
+ * /cancel - Cancel current operation and clear conversation
  */
 bot.command('cancel', async (ctx) => {
-  await ctx.reply('✅ Operation cancelled. Send me your next meal whenever you\'re ready!');
+  const userId = ctx.from.id;
+  conversationManager.clearConversation(userId);
+  await ctx.reply('✅ Operation cancelled and conversation cleared. Send me your next meal whenever you\'re ready!');
+});
+
+/**
+ * /clear - Clear conversation history
+ */
+bot.command('clear', async (ctx) => {
+  const userId = ctx.from.id;
+  conversationManager.clearConversation(userId);
+  await ctx.reply('🗑️ Conversation history cleared! Starting fresh.');
+});
+
+/**
+ * /context - Show current conversation context
+ */
+bot.command('context', async (ctx) => {
+  const userId = ctx.from.id;
+  const conversation = conversationManager.getConversation(userId);
+  const stats = conversationManager.getStats();
+
+  if (conversation.length === 0) {
+    await ctx.reply('💬 No active conversation.\n\nStart chatting to build conversation context!');
+    return;
+  }
+
+  const contextMessage = `📋 **Conversation Context**
+
+**Your messages:** ${conversation.length} messages
+**System stats:**
+  • Active conversations: ${stats.activeConversations}
+  • Total messages: ${stats.totalMessages}
+  • Active locks: ${stats.activeLocks}
+
+💡 Use /clear to reset the conversation.`;
+
+  await ctx.reply(contextMessage);
 });
 
 // ============================================================================
@@ -505,16 +555,74 @@ bot.on('text', async (ctx) => {
     return;
   }
 
+  // Check for processing lock
+  if (conversationManager.isLocked(userId)) {
+    await ctx.reply('⏳ Please wait, I\'m still processing your previous message...');
+    return;
+  }
+
+  // Acquire lock
+  if (!conversationManager.acquireLock(userId)) {
+    await ctx.reply('⏳ Please wait, I\'m still processing your previous message...');
+    return;
+  }
+
   try {
     // Step 1: Send processing message
-    const processingMsg = await ctx.reply('🔍 Processing your food log...');
+    const processingMsg = await ctx.reply('🔍 Processing...');
 
-    // Step 2: Process with Claude/USDA
-    console.log(`Processing food log from user ${userId}: ${sanitizeForLogging(userMessage)}`);
-    const result = await claudeIntegration.processFoodLog(userMessage, userId);
+    // Step 2: Get conversation history
+    const conversationHistory = conversationManager.getConversation(userId);
+
+    // Step 3: Add user message to history (auto-sanitized)
+    conversationManager.addMessage(userId, 'user', userMessage);
+
+    // Step 4: Process with Claude (with conversation history)
+    console.log(`Processing message from user ${userId} (history: ${conversationHistory.length} messages): ${sanitizeForLogging(userMessage)}`);
+
+    // Convert conversation to Claude API format
+    const messages = conversationHistory.map(msg => ({
+      role: msg.role,
+      content: msg.content
+    }));
+
+    const result = await claudeIntegration.processFoodLog(userMessage, userId, messages);
+
+    // Step 5: Detect response type and handle accordingly
+    const responseText = result.responseText || '';
+    const detection = responseHandler.detectResponseType(responseText);
+
+    console.log(`Response type detected: ${detection.type} (hasJSON: ${detection.hasJSON}, hasText: ${detection.hasText})`);
+
+    // Store assistant's response in conversation history
+    if (responseText) {
+      conversationManager.addMessage(userId, 'assistant', responseText, false); // Don't sanitize assistant responses
+    }
+
+    // Handle conversational responses (no logging)
+    if (detection.type === responseHandler.ResponseType.CONVERSATIONAL) {
+      await ctx.telegram.editMessageText(
+        ctx.chat.id,
+        processingMsg.message_id,
+        null,
+        `💬 ${responseText}`
+      );
+      return;
+    }
 
     if (!result.success) {
-      // Failed to process
+      // Check if this is a conversational response (Claude asking for clarification)
+      if (result.isConversational && responseText) {
+        await ctx.telegram.editMessageText(
+          ctx.chat.id,
+          processingMsg.message_id,
+          null,
+          `💬 ${responseText}`
+        );
+        return;
+      }
+
+      // Otherwise, it's an error
       await ctx.telegram.editMessageText(
         ctx.chat.id,
         processingMsg.message_id,
@@ -630,6 +738,9 @@ ${result.source === 'usda' ? '📚 Data source: USDA FoodData Central' : '🤖 D
     await ctx.reply(
       `❌ Error logging food: ${sanitizeErrorForUser(error)}\n\nPlease try again or contact support if the issue persists.`
     );
+  } finally {
+    // CRITICAL: Always release lock, even on error
+    conversationManager.releaseLock(userId);
   }
 });
 
@@ -637,13 +748,33 @@ ${result.source === 'usda' ? '📚 Data source: USDA FoodData Central' : '🤖 D
  * Handle photo messages - Process screenshots
  */
 bot.on('photo', async (ctx) => {
+  const userId = ctx.from.id;
+
+  // Validate photo input
+  const photos = ctx.message.photo;
+  if (!Array.isArray(photos) || photos.length === 0) {
+    await ctx.reply('❌ No photo data received. Please try again.');
+    return;
+  }
+
+  // Check for processing lock
+  if (conversationManager.isLocked(userId)) {
+    await ctx.reply('⏳ Please wait, I\'m still processing your previous message...');
+    return;
+  }
+
+  // Acquire lock
+  if (!conversationManager.acquireLock(userId)) {
+    await ctx.reply('⏳ Please wait, I\'m still processing your previous message...');
+    return;
+  }
+
   try {
     // Step 1: Send processing message
     const processingMsg = await ctx.reply('📸 Processing screenshot...');
 
     // Step 2: Download photo
     // Telegram sends multiple photo sizes - get the highest resolution
-    const photos = ctx.message.photo;
     const photo = photos[photos.length - 1]; // Largest size
     const fileId = photo.file_id;
 
@@ -787,6 +918,9 @@ bot.on('photo', async (ctx) => {
     await ctx.reply(
       `❌ Error processing screenshot: ${sanitizeErrorForUser(error)}\n\nPlease try again with a different image or send a text description.`
     );
+  } finally {
+    // CRITICAL: Always release lock, even on error
+    conversationManager.releaseLock(userId);
   }
 });
 

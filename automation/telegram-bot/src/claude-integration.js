@@ -5,6 +5,16 @@ const usdaApi = require('./usda-api');
 
 /**
  * Sanitizes user input to prevent prompt injection attacks
+ *
+ * SECURITY CRITICAL: This function MUST be called on ALL user input before:
+ * 1. Sending to Claude API
+ * 2. Storing in conversation history (if implemented)
+ * 3. Including in any prompt or context
+ *
+ * IMPORTANT: Sanitize ONCE at the entry point, then use the sanitized version
+ * throughout the request lifecycle. Never store both sanitized and unsanitized
+ * versions as this defeats the security measure.
+ *
  * @param {string} input - Raw user input
  * @returns {string} Sanitized input safe for Claude prompts
  */
@@ -12,28 +22,29 @@ const sanitizePromptInput = (input) => {
   if (typeof input !== 'string') {
     return String(input);
   }
-  
+
   // Define patterns that could be used for prompt injection
   const dangerous = [
     /ignore (previous|all|earlier) (instructions|directions|commands)/gi,
     /system:/gi,
     /assistant:/gi,
-    /```json/gi,
+    // Removed /```json/gi - this breaks legitimate JSON code fences that Claude uses
+    // Users saying "```json" in messages is not a security risk
     /<\/?[^>]+(>|$)/gi, // HTML tags
     /\[INST\]/gi, // Instruction markers
     /\[\/INST\]/gi,
     /human:/gi,
     /ai:/gi,
   ];
-  
+
   let sanitized = input;
   dangerous.forEach(pattern => {
     sanitized = sanitized.replace(pattern, '');
   });
-  
+
   // Remove control characters that could be used for injection
   sanitized = sanitized.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '');
-  
+
   // Truncate to prevent context stuffing attacks
   return sanitized.substring(0, 1000);
 };
@@ -227,6 +238,10 @@ class ClaudeIntegration {
    */
   async processFoodLog(userMessage, userId) {
     try {
+      // SECURITY: Sanitize input immediately at entry point to prevent injection attacks
+      // This sanitized version is used throughout the request lifecycle
+      const sanitizedMessage = sanitizePromptInput(userMessage);
+
       // Step 1: Try USDA quick lookup for generic foods
       // Check for common generic food keywords
       const genericFoodKeywords = [
@@ -236,17 +251,17 @@ class ClaudeIntegration {
         'carrot', 'tomato', 'avocado', 'almond', 'walnut', 'cashew'
       ];
 
-      const lowerMessage = userMessage.toLowerCase();
+      const lowerMessage = sanitizedMessage.toLowerCase();
       // Temporarily disable USDA due to API reliability issues - fallback to Claude for all requests
       const isGenericFood = false; // genericFoodKeywords.some(kw => lowerMessage.includes(kw));
 
       if (isGenericFood) {
         try {
-          console.log(`Attempting USDA lookup for: ${userMessage}`);
-          const usdaResult = await usdaApi.quickLookup(userMessage);
+          console.log(`Attempting USDA lookup for: ${sanitizedMessage}`);
+          const usdaResult = await usdaApi.quickLookup(sanitizedMessage);
 
           if (usdaResult.success) {
-            console.log(`✓ USDA lookup successful for: ${userMessage}`);
+            console.log(`✓ USDA lookup successful for: ${sanitizedMessage}`);
 
             // Transform USDA result to our format
             return {
@@ -269,7 +284,7 @@ class ClaudeIntegration {
       }
 
       // Step 2: Use Claude for estimation (either non-generic or USDA failed)
-      console.log(`Using Claude API for: ${userMessage}`);
+      console.log(`Using Claude API for: ${sanitizedMessage}`);
 
       // Check rate limiting before making API call
       this.checkRateLimit();
@@ -281,7 +296,7 @@ class ClaudeIntegration {
         messages: [
           {
             role: 'user',
-            content: `I just ate: ${sanitizePromptInput(userMessage)}
+            content: `I just ate: ${sanitizedMessage}
 
 Please estimate the complete nutrition data and return it in the JSON format specified in your instructions.
 
@@ -748,4 +763,11 @@ Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
   }
 }
 
-module.exports = new ClaudeIntegration();
+// Export ClaudeIntegration instance as default export
+const claudeIntegration = new ClaudeIntegration();
+
+// Also export sanitizePromptInput for use in other modules
+// SECURITY: Use this when storing conversation history or processing user input
+claudeIntegration.sanitizePromptInput = sanitizePromptInput;
+
+module.exports = claudeIntegration;
