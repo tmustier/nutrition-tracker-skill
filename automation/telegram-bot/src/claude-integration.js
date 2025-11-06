@@ -621,6 +621,139 @@ Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
   }
 
   /**
+   * Detect if image contains a person (with or without food)
+   * Easter egg feature: respond with a fun message if someone sends a selfie without food
+   *
+   * @param {Buffer} imageBuffer - Image data
+   * @param {string} mimeType - Image MIME type (e.g., 'image/jpeg', 'image/png')
+   * @returns {Promise<Object>} Detection result with has_person, has_food, confidence, and details
+   */
+  async detectPersonInImage(imageBuffer, mimeType) {
+    try {
+      console.log(`Detecting person in image with Claude Vision API (${mimeType})`);
+
+      // Check rate limiting before making API call
+      this.checkRateLimit();
+
+      const base64Image = imageBuffer.toString('base64');
+
+      const requestBody = {
+        model: this.model,
+        max_tokens: 1000, // Lower token count for quick detection
+        messages: [
+          {
+            role: 'user',
+            content: [
+              {
+                type: 'image',
+                source: {
+                  type: 'base64',
+                  media_type: mimeType,
+                  data: base64Image
+                }
+              },
+              {
+                type: 'text',
+                text: `Analyze this image and determine if there are any people visible in it, and if there is any food visible.
+
+Instructions:
+1. Carefully examine the entire image for any human presence (faces, bodies, limbs, reflections, etc.)
+2. Check if there is any food, meal, nutrition label, or menu visible in the image
+3. Be thorough - look for partial views, people at edge of frame, or in the background
+4. Consider selfies, group photos, and any human presence
+
+Return ONLY this JSON structure:
+\`\`\`json
+{
+  "has_person": true/false,
+  "has_food": true/false,
+  "confidence": "high" | "medium" | "low",
+  "details": "Brief description of what you see"
+}
+\`\`\``
+              }
+            ]
+          }
+        ]
+      };
+
+      const response = await axios.post(
+        this.apiUrl,
+        requestBody,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': this.apiKey,
+            'anthropic-version': '2023-06-01'
+          },
+          timeout: 30000 // 30 seconds timeout (faster for detection)
+        }
+      );
+
+      // Extract JSON from Claude's response
+      const textBlock = response.data.content.find(block => block.type === 'text');
+      if (!textBlock || !textBlock.text) {
+        console.error('No text content in Claude Vision response:', JSON.stringify(response.data.content));
+        throw new Error('No text content in Claude Vision response');
+      }
+
+      const claudeText = textBlock.text;
+      const jsonMatch = claudeText.match(/```json\n([\s\S]*?)\n```/);
+
+      if (jsonMatch) {
+        try {
+          const detectionResult = JSON.parse(jsonMatch[1]);
+
+          // Validate the expected fields
+          if (typeof detectionResult.has_person !== 'boolean' ||
+              typeof detectionResult.has_food !== 'boolean') {
+            console.error('Invalid detection result format:', detectionResult);
+            return {
+              success: false,
+              message: 'Invalid detection result format'
+            };
+          }
+
+          return {
+            success: true,
+            has_person: detectionResult.has_person,
+            has_food: detectionResult.has_food,
+            confidence: detectionResult.confidence || 'medium',
+            details: detectionResult.details || 'No details provided'
+          };
+        } catch (parseError) {
+          console.error('JSON parsing error from detection response:', parseError.message);
+          return {
+            success: false,
+            message: 'Failed to parse detection result'
+          };
+        }
+      } else {
+        console.error('No JSON block in detection response:', claudeText.substring(0, 200));
+        return {
+          success: false,
+          message: 'Could not extract detection result',
+          raw_response: claudeText.substring(0, 500)
+        };
+      }
+    } catch (error) {
+      console.error('Person detection error:', error.response?.data || error.message);
+
+      if (error.response?.status === 401) {
+        throw new Error('Invalid Claude API key - check configuration');
+      } else if (error.response?.status === 429) {
+        throw new Error('Claude API rate limit exceeded - please try again later');
+      } else {
+        // Return a fallback response instead of throwing for easter egg feature
+        return {
+          success: false,
+          message: `Detection failed: ${error.message}`
+        };
+      }
+    }
+  }
+
+  /**
    * Get daily summary for a specific date
    * Placeholder for now - can be implemented to read log files and calculate totals
    *
