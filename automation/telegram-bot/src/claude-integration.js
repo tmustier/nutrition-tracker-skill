@@ -95,6 +95,15 @@ When the user asks you to estimate nutrition for a dish:
 - US labels report total carbs → subtract fiber and polyols to get available
 - carbs_total_g = carbs_available_g + fiber_total_g + polyols_g
 
+## Conversation Handling:
+When this is a multi-turn conversation (indicated by conversation history):
+- Handle follow-up questions: If the user is asking for clarification, corrections, or adjustments to previous estimates, provide a conversational response
+- Handle clarifications/corrections: If the user provides additional details (e.g., "actually it was 200g not 150g"), recalculate and provide updated estimates
+- Response types:
+  - Return JSON when: Initial nutrition estimation request, or when user explicitly asks for final/complete data
+  - Return conversational text when: User is asking questions, seeking clarification, making corrections, or discussing options
+- When returning conversational text (no JSON), still be helpful and informative about nutrition, but indicate this is an intermediate response
+
 ## Response Format:
 Return JSON in the following structure:
 \`\`\`json
@@ -223,9 +232,10 @@ class ClaudeIntegration {
    *
    * @param {string} userMessage - User's food description (e.g., "200g chicken breast grilled")
    * @param {string} userId - Telegram user ID (for context/logging)
-   * @returns {Promise<Object>} Processed nutrition data with all 24 fields
+   * @param {Array<Object>} conversationHistory - Optional array of {role, content} message objects for multi-turn conversations
+   * @returns {Promise<Object>} Processed nutrition data with all 24 fields, plus responseText for response type detection
    */
-  async processFoodLog(userMessage, userId) {
+  async processFoodLog(userMessage, userId, conversationHistory = []) {
     try {
       // Step 1: Try USDA quick lookup for generic foods
       // Check for common generic food keywords
@@ -274,11 +284,25 @@ class ClaudeIntegration {
       // Check rate limiting before making API call
       this.checkRateLimit();
 
-      const requestBody = {
-        model: this.model,
-        max_tokens: this.maxTokens,
-        system: SKILL_CONTEXT,
-        messages: [
+      // Prepare system prompt based on whether we have conversation history
+      let systemPrompt = SKILL_CONTEXT;
+      let messages = [];
+
+      if (conversationHistory && conversationHistory.length > 0) {
+        // Multi-turn conversation mode
+        systemPrompt = SKILL_CONTEXT + '\n\nThis is a multi-turn conversation. Previous messages are provided in the conversation history. Handle follow-up questions, clarifications, and corrections naturally.';
+
+        // Use the provided conversation history and append the new user message
+        messages = [
+          ...conversationHistory,
+          {
+            role: 'user',
+            content: sanitizePromptInput(userMessage)
+          }
+        ];
+      } else {
+        // Single-turn mode (original behavior)
+        messages = [
           {
             role: 'user',
             content: `I just ate: ${sanitizePromptInput(userMessage)}
@@ -294,7 +318,14 @@ Requirements:
 
 Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
           }
-        ]
+        ];
+      }
+
+      const requestBody = {
+        model: this.model,
+        max_tokens: this.maxTokens,
+        system: systemPrompt,
+        messages: messages
       };
 
       // Add extended thinking if enabled
@@ -340,7 +371,8 @@ Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
           return {
             success: false,
             message: 'Invalid JSON format in Claude response',
-            error: parseError.message
+            error: parseError.message,
+            responseText: claudeText
           };
         }
 
@@ -351,7 +383,8 @@ Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
           return {
             success: false,
             message: 'Invalid nutrition data structure from Claude',
-            errors: validationResult.errors
+            errors: validationResult.errors,
+            responseText: claudeText
           };
         }
 
@@ -380,15 +413,18 @@ Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
         return {
           success: true,
           source: 'claude',
-          data: nutritionData
+          data: nutritionData,
+          responseText: claudeText
         };
       } else {
-        // Claude didn't return properly formatted JSON
-        console.error('Claude response missing JSON block:', claudeText);
+        // Claude didn't return properly formatted JSON - this might be a conversational response
+        console.log('Claude response without JSON block (possibly conversational):', claudeText.substring(0, 200));
         return {
           success: false,
           message: 'Could not parse nutrition data from Claude response',
-          raw_response: claudeText.substring(0, 500) // Truncate for safety
+          raw_response: claudeText.substring(0, 500), // Truncate for safety
+          responseText: claudeText,
+          isConversational: true // Flag to indicate this might be a conversational response
         };
       }
     } catch (error) {
