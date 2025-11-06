@@ -596,13 +596,11 @@ bot.on('text', async (ctx) => {
     // Step 1: Send processing message
     const processingMsg = await ctx.reply('🔍 Processing...');
 
-    // Step 2: Add user message to history FIRST (auto-sanitized)
-    conversationManager.addMessage(userId, 'user', userMessage);
-
-    // Step 3: Get conversation history (now includes the current message)
+    // Step 2: Get conversation history BEFORE adding current message
+    // (processFoodLog will append the current message to the backlog)
     const conversationHistory = conversationManager.getConversation(userId);
 
-    // Step 4: Process with Claude (with conversation history including current message)
+    // Step 3: Process with Claude (history is backlog, current message will be appended)
     console.log(`Processing message from user ${userId} (history: ${conversationHistory.length} messages): ${sanitizeForLogging(userMessage)}`);
 
     // Convert conversation to Claude API format
@@ -613,7 +611,10 @@ bot.on('text', async (ctx) => {
 
     const result = await claudeIntegration.processFoodLog(userMessage, userId, messages);
 
-    // Step 5: Store assistant's response in conversation history FIRST
+    // Step 4: Add user message to history AFTER processing (for next turn)
+    conversationManager.addMessage(userId, 'user', userMessage);
+
+    // Step 5: Store assistant's response in conversation history
     const responseText = result.responseText || '';
     if (responseText) {
       conversationManager.addMessage(userId, 'assistant', responseText, false); // Don't sanitize assistant responses

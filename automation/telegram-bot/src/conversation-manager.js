@@ -5,10 +5,18 @@
  * Handles conversation state and prevents race conditions when users send
  * multiple messages concurrently.
  *
+ * ARCHITECTURE & DEPLOYMENT:
+ * - In-memory storage using JavaScript Maps (no external database)
+ * - Leverages Node.js single-threaded event loop for atomic operations
+ * - In serverless/multi-instance deployments: each instance has isolated memory
+ * - State is lost on server restart/redeploy - conversation history not persisted
+ * - For production persistence, consider Redis or database-backed storage
+ *
  * CONCURRENCY SAFETY:
  * - Atomic lock acquisition prevents duplicate processing
  * - Per-user locks ensure isolated processing
  * - Automatic lock cleanup prevents memory leaks
+ * - Lock mechanism is atomic within a single Node.js instance
  *
  * SECURITY:
  * - All conversation history is sanitized before storage
@@ -16,14 +24,42 @@
  * - Lock timeout prevents indefinite blocking
  *
  * MEMORY MANAGEMENT:
- * - Token-based conversation limits (20,000 tokens per conversation)
+ * - Token-based conversation limits (configurable, default 20K tokens)
  * - Automatic message trimming when token limit exceeded
- * - Minimum 5 messages retained for context continuity
+ * - Minimum messages retained for context continuity (configurable)
  * - Per-message token counting for efficient tracking
+ * - Global conversation limit with LRU eviction for DoS protection
  */
 
 const claudeIntegration = require('./claude-integration');
 const { encoding_for_model } = require('tiktoken');
+
+/**
+ * Configuration for ConversationManager
+ * These values can be overridden via environment variables for production tuning
+ */
+const CONFIG = {
+  // Lock timeout in milliseconds (30 seconds)
+  // Consider increasing for Claude extended thinking mode if timeouts occur
+  LOCK_TIMEOUT_MS: parseInt(process.env.CONVERSATION_LOCK_TIMEOUT_MS) || 30000,
+
+  // Maximum number of total conversations stored globally (DoS protection)
+  // When exceeded, oldest conversations are evicted (LRU)
+  MAX_TOTAL_CONVERSATIONS: parseInt(process.env.MAX_TOTAL_CONVERSATIONS) || 1000,
+
+  // Maximum tokens per conversation before trimming
+  // Claude API supports ~200K context, but we limit to 20K for cost control
+  MAX_TOKENS_PER_CONVERSATION: parseInt(process.env.MAX_TOKENS_PER_CONVERSATION) || 20000,
+
+  // Minimum messages to retain when trimming (ensures context continuity)
+  MIN_MESSAGES_RETAINED: parseInt(process.env.MIN_MESSAGES_RETAINED) || 5,
+
+  // Cleanup interval in milliseconds (1 minute)
+  CLEANUP_INTERVAL_MS: parseInt(process.env.CLEANUP_INTERVAL_MS) || 60000,
+
+  // Maximum conversation age in milliseconds (24 hours)
+  MAX_CONVERSATION_AGE_MS: parseInt(process.env.MAX_CONVERSATION_AGE_MS) || 24 * 60 * 60 * 1000
+};
 
 class ConversationManager {
   constructor() {
@@ -39,15 +75,13 @@ class ConversationManager {
     // Map<userId: string, totalTokens: number>
     this.conversationTokens = new Map();
 
-    // Lock timeout configuration (30 seconds max processing time)
-    this.lockTimeout = 30000;
-
-    // DoS Protection: Maximum total conversations allowed globally
-    this.maxTotalConversations = 1000;
-
-    // Token limit configuration
-    this.maxTokensPerConversation = 20000; // 20K tokens per conversation
-    this.minMessagesRetained = 5; // Always keep at least 5 messages for context
+    // Load configuration from CONFIG object (supports environment variables)
+    this.lockTimeout = CONFIG.LOCK_TIMEOUT_MS;
+    this.maxTotalConversations = CONFIG.MAX_TOTAL_CONVERSATIONS;
+    this.maxTokensPerConversation = CONFIG.MAX_TOKENS_PER_CONVERSATION;
+    this.minMessagesRetained = CONFIG.MIN_MESSAGES_RETAINED;
+    this.cleanupInterval = CONFIG.CLEANUP_INTERVAL_MS;
+    this.maxConversationAge = CONFIG.MAX_CONVERSATION_AGE_MS;
 
     // Initialize tiktoken encoder for Claude (using GPT-4's encoding as approximation)
     // cl100k_base is the encoding used by GPT-4, which is similar to Claude's tokenizer
@@ -327,13 +361,13 @@ class ConversationManager {
 
   /**
    * Start periodic cleanup of stale locks and old conversations
-   * Runs every minute to prevent memory leaks
+   * Interval configured via CONFIG.CLEANUP_INTERVAL_MS (default: 1 minute)
    */
   startLockCleanup() {
     setInterval(() => {
       this.cleanupStaleLocks();
       this.cleanupOldConversations();
-    }, 60000); // Every minute
+    }, this.cleanupInterval);
   }
 
   /**
@@ -357,11 +391,11 @@ class ConversationManager {
   }
 
   /**
-   * Clean up conversations that haven't been active for 24 hours
+   * Clean up conversations that haven't been active for configured max age
+   * Max age configured via CONFIG.MAX_CONVERSATION_AGE_MS (default: 24 hours)
    */
   cleanupOldConversations() {
     const now = Date.now();
-    const maxAge = 24 * 60 * 60 * 1000; // 24 hours
     let cleanedCount = 0;
 
     for (const [userId, messages] of this.conversations) {
@@ -376,7 +410,7 @@ class ConversationManager {
       const lastMessage = messages[messages.length - 1];
       const lastTimestamp = new Date(lastMessage.timestamp).getTime();
 
-      if (now - lastTimestamp >= maxAge) {
+      if (now - lastTimestamp >= this.maxConversationAge) {
         this.conversations.delete(userId);
         this.conversationTokens.delete(userId); // CRITICAL: Also delete token count to prevent memory leak
         cleanedCount++;
