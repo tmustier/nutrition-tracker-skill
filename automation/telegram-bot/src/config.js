@@ -295,8 +295,13 @@ const config = {
   claude: {
     apiKey: process.env.ANTHROPIC_API_KEY,
     model: process.env.CLAUDE_MODEL || 'claude-sonnet-4-20250514',
-    maxTokens: parseInt(process.env.CLAUDE_MAX_TOKENS || '4096', 10),
+    maxTokens: parseInt(process.env.CLAUDE_MAX_TOKENS || '16000', 10),
     apiVersion: '2023-06-01',
+    // Extended thinking configuration
+    extendedThinking: {
+      enabled: process.env.CLAUDE_EXTENDED_THINKING === 'true',
+      budgetTokens: parseInt(process.env.CLAUDE_THINKING_BUDGET || '10000', 10),
+    },
   },
 
   // GitHub Configuration
