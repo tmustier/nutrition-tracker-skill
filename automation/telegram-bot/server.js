@@ -109,9 +109,45 @@ function handleHealthCheck(req, res) {
 /**
  * GET /setup - Webhook setup endpoint
  * Registers the webhook URL with Telegram's servers
+ *
+ * P0 Security Fix: Added authentication to prevent unauthorized webhook registration
  */
 async function handleSetup(req, res) {
   logRequest(req, res);
+
+  // P0 Security Fix: Require authentication for setup endpoint
+  // In production, require SETUP_TOKEN query parameter or header
+  if (config.app.environment === 'production') {
+    const providedToken = req.url?.includes('?token=')
+      ? new URL(req.url, `http://localhost`).searchParams.get('token')
+      : req.headers['x-setup-token'];
+
+    const expectedToken = process.env.SETUP_TOKEN;
+
+    if (!expectedToken) {
+      console.error('❌ Setup blocked: SETUP_TOKEN not configured in production');
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({
+        success: false,
+        error: 'Setup endpoint misconfigured',
+        message: 'SETUP_TOKEN must be set in production for security',
+        help: 'Set SETUP_TOKEN environment variable to a secure random string'
+      }, null, 2));
+      return;
+    }
+
+    if (!providedToken || providedToken !== expectedToken) {
+      console.warn('⚠️  Unauthorized setup attempt blocked');
+      res.writeHead(401, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({
+        success: false,
+        error: 'Unauthorized',
+        message: 'Valid SETUP_TOKEN required for webhook setup in production',
+        help: 'Provide token via ?token=<SETUP_TOKEN> query parameter or X-Setup-Token header'
+      }, null, 2));
+      return;
+    }
+  }
 
   // Security: Prevent webhook setup if URL is null (degraded mode)
   if (!WEBHOOK_URL) {
@@ -159,18 +195,26 @@ async function handleSetup(req, res) {
         url: webhookInfo.url,
         has_custom_certificate: webhookInfo.has_custom_certificate,
         pending_update_count: webhookInfo.pending_update_count,
-        last_error_date: webhookInfo.last_error_date,
-        last_error_message: webhookInfo.last_error_message
+        // P1 Security Fix: Don't expose last_error details in public response
+        // last_error_date: webhookInfo.last_error_date,
+        // last_error_message: webhookInfo.last_error_message
       }
     }, null, 2));
   } catch (error) {
     console.error('❌ Webhook setup failed:', error.message);
 
+    // P1 Security Fix: Sanitize error message to prevent information disclosure
+    const sanitizedMessage = error.message.includes('ENOTFOUND') || error.message.includes('ETIMEDOUT')
+      ? 'Network error connecting to Telegram API'
+      : error.message.includes('401') || error.message.includes('Unauthorized')
+      ? 'Invalid TELEGRAM_BOT_TOKEN'
+      : 'Failed to setup webhook';
+
     res.writeHead(500, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({
       success: false,
       error: 'Failed to setup webhook',
-      message: error.message,
+      message: sanitizedMessage,
       help: 'Ensure TELEGRAM_BOT_TOKEN is valid and WEBHOOK_URL is publicly accessible'
     }, null, 2));
   }
@@ -314,8 +358,34 @@ if (useExpress) {
     });
   });
 
-  // Webhook setup
+  // Webhook setup (P0 Security Fix: Added authentication)
   app.get('/setup', async (req, res) => {
+    // P0 Security Fix: Require authentication for setup endpoint in production
+    if (config.app.environment === 'production') {
+      const providedToken = req.query.token || req.headers['x-setup-token'];
+      const expectedToken = process.env.SETUP_TOKEN;
+
+      if (!expectedToken) {
+        console.error('❌ Setup blocked: SETUP_TOKEN not configured in production');
+        return res.status(500).json({
+          success: false,
+          error: 'Setup endpoint misconfigured',
+          message: 'SETUP_TOKEN must be set in production for security',
+          help: 'Set SETUP_TOKEN environment variable to a secure random string'
+        });
+      }
+
+      if (!providedToken || providedToken !== expectedToken) {
+        console.warn('⚠️  Unauthorized setup attempt blocked');
+        return res.status(401).json({
+          success: false,
+          error: 'Unauthorized',
+          message: 'Valid SETUP_TOKEN required for webhook setup in production',
+          help: 'Provide token via ?token=<SETUP_TOKEN> query parameter or X-Setup-Token header'
+        });
+      }
+    }
+
     try {
       const webhookUrl = `${WEBHOOK_URL}/webhook`;
 
@@ -341,16 +411,25 @@ if (useExpress) {
           url: webhookInfo.url,
           has_custom_certificate: webhookInfo.has_custom_certificate,
           pending_update_count: webhookInfo.pending_update_count,
-          last_error_date: webhookInfo.last_error_date,
-          last_error_message: webhookInfo.last_error_message
+          // P1 Security Fix: Don't expose last_error details
+          // last_error_date: webhookInfo.last_error_date,
+          // last_error_message: webhookInfo.last_error_message
         }
       });
     } catch (error) {
       console.error('❌ Webhook setup failed:', error.message);
+
+      // P1 Security Fix: Sanitize error message
+      const sanitizedMessage = error.message.includes('ENOTFOUND') || error.message.includes('ETIMEDOUT')
+        ? 'Network error connecting to Telegram API'
+        : error.message.includes('401') || error.message.includes('Unauthorized')
+        ? 'Invalid TELEGRAM_BOT_TOKEN'
+        : 'Failed to setup webhook';
+
       res.status(500).json({
         success: false,
         error: 'Failed to setup webhook',
-        message: error.message,
+        message: sanitizedMessage,
         help: 'Ensure TELEGRAM_BOT_TOKEN is valid and WEBHOOK_URL is publicly accessible'
       });
     }
