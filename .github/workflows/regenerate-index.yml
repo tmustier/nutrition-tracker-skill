@@ -10,7 +10,7 @@ on:
 
 concurrency:
   group: regenerate-index
-  cancel-in-progress: true
+  cancel-in-progress: false  # Queue workflows to prevent data loss (missing dishes)
 
 jobs:
   regenerate:

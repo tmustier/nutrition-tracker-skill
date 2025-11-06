@@ -8,6 +8,7 @@ an index file organized by venue/category folders.
 The index is auto-generated and should not be manually edited.
 """
 
+import sys
 import yaml
 import subprocess
 from pathlib import Path
@@ -72,7 +73,14 @@ def parse_dish_file(filepath):
             'category': data.get('category', 'unknown')
         }
     except Exception as e:
-        # Return None but let caller track the error
+        # Log the error for debugging
+        try:
+            # Try to get relative path from food-data-bank/
+            rel_path = filepath.relative_to(filepath.parents[2])
+        except (ValueError, IndexError):
+            # Fallback to just filename if relative path fails
+            rel_path = filepath.name
+        print(f"Warning: Failed to parse {rel_path}: {e}", file=sys.stderr)
         return None
 
 
@@ -150,7 +158,8 @@ def get_git_metadata():
             ['git', 'rev-parse', '--short', 'HEAD'],
             capture_output=True,
             text=True,
-            check=True
+            check=True,
+            timeout=10
         ).stdout.strip()
 
         # Get current branch
@@ -158,7 +167,8 @@ def get_git_metadata():
             ['git', 'rev-parse', '--abbrev-ref', 'HEAD'],
             capture_output=True,
             text=True,
-            check=True
+            check=True,
+            timeout=10
         ).stdout.strip()
 
         # Check if running in CI (common CI environment variables)

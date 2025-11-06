@@ -230,7 +230,7 @@ The CI workflow uses `git add -f` to commit the index to main:
 - **PR validation**: `.github/workflows/validate.yml` (check-no-index-commit job)
 - **Pre-commit hook**: `scripts/hooks/pre-commit`
 - **Hook installer**: `scripts/install-hooks.sh`
-- **Gitignore**: `.gitignore` (line 42)
+- **Gitignore**: `.gitignore` (index exclusion rule)
 
 ---
 
