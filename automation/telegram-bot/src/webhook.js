@@ -59,6 +59,37 @@ const RATE_LIMIT_WARNING_THRESHOLD = 0.8; // Warn at 80% of limit
 // ============================================================================
 
 /**
+ * Prepare nutrition data from API result (USDA or Claude)
+ * Standardizes the data structure for logging
+ * @param {Object} result - Result from processFoodLog or processImage
+ * @param {string} defaultNotes - Default notes if not provided in result
+ * @returns {Object} Standardized nutrition data object
+ */
+const prepareNutritionData = (result, defaultNotes = '') => {
+  if (result.source === 'usda') {
+    return {
+      name: result.data.name,
+      food_bank_id: null,
+      quantity: result.data.quantity,
+      unit: result.data.unit,
+      nutrition: result.data.per_portion,
+      notes: result.data.notes || defaultNotes || `Source: ${result.source}`,
+    };
+  } else if (result.source === 'claude') {
+    return {
+      name: result.data.name,
+      food_bank_id: result.data.food_bank_id || null,
+      quantity: result.data.quantity || 1,
+      unit: result.data.unit || 'portion',
+      nutrition: result.data.per_portion,
+      notes: result.data.notes || defaultNotes || `Source: ${result.source}`,
+    };
+  } else {
+    throw new Error(`Unknown result source: ${result.source}`);
+  }
+};
+
+/**
  * Detect MIME type from file path extension
  * @param {string} filePath - File path from Telegram (e.g., "photos/file_123.jpg")
  * @returns {string} MIME type (defaults to image/jpeg for unknown types)
@@ -555,13 +586,7 @@ bot.on('text', async (ctx) => {
     return;
   }
 
-  // Check for processing lock
-  if (conversationManager.isLocked(userId)) {
-    await ctx.reply('⏳ Please wait, I\'m still processing your previous message...');
-    return;
-  }
-
-  // Acquire lock
+  // Acquire processing lock (acquireLock already checks if locked internally)
   if (!conversationManager.acquireLock(userId)) {
     await ctx.reply('⏳ Please wait, I\'m still processing your previous message...');
     return;
@@ -571,13 +596,13 @@ bot.on('text', async (ctx) => {
     // Step 1: Send processing message
     const processingMsg = await ctx.reply('🔍 Processing...');
 
-    // Step 2: Get conversation history
-    const conversationHistory = conversationManager.getConversation(userId);
-
-    // Step 3: Add user message to history (auto-sanitized)
+    // Step 2: Add user message to history FIRST (auto-sanitized)
     conversationManager.addMessage(userId, 'user', userMessage);
 
-    // Step 4: Process with Claude (with conversation history)
+    // Step 3: Get conversation history (now includes the current message)
+    const conversationHistory = conversationManager.getConversation(userId);
+
+    // Step 4: Process with Claude (with conversation history including current message)
     console.log(`Processing message from user ${userId} (history: ${conversationHistory.length} messages): ${sanitizeForLogging(userMessage)}`);
 
     // Convert conversation to Claude API format
@@ -588,16 +613,15 @@ bot.on('text', async (ctx) => {
 
     const result = await claudeIntegration.processFoodLog(userMessage, userId, messages);
 
-    // Step 5: Detect response type and handle accordingly
+    // Step 5: Store assistant's response in conversation history FIRST
     const responseText = result.responseText || '';
-    const detection = responseHandler.detectResponseType(responseText);
-
-    console.log(`Response type detected: ${detection.type} (hasJSON: ${detection.hasJSON}, hasText: ${detection.hasText})`);
-
-    // Store assistant's response in conversation history
     if (responseText) {
       conversationManager.addMessage(userId, 'assistant', responseText, false); // Don't sanitize assistant responses
     }
+
+    // Step 6: Detect response type AFTER storing (ensures proper classification)
+    const detection = responseHandler.detectResponseType(responseText);
+    console.log(`Response type detected: ${detection.type} (hasJSON: ${detection.hasJSON}, hasText: ${detection.hasText})`)
 
     // Handle conversational responses (no logging)
     if (detection.type === responseHandler.ResponseType.CONVERSATIONAL) {
@@ -632,31 +656,8 @@ bot.on('text', async (ctx) => {
       return;
     }
 
-    // Step 3: Extract nutrition data from result
-    let nutritionData;
-    if (result.source === 'usda') {
-      // USDA result format
-      nutritionData = {
-        name: result.data.name,
-        food_bank_id: null,
-        quantity: result.data.quantity,
-        unit: result.data.unit,
-        nutrition: result.data.per_portion,
-        notes: result.data.notes || `Source: ${result.source}`,
-      };
-    } else if (result.source === 'claude') {
-      // Claude result format
-      nutritionData = {
-        name: result.data.name,
-        food_bank_id: result.data.food_bank_id || null,
-        quantity: result.data.quantity || 1,
-        unit: result.data.unit || 'portion',
-        nutrition: result.data.per_portion,
-        notes: result.data.notes || `Source: ${result.source}`,
-      };
-    } else {
-      throw new Error(`Unknown result source: ${result.source}`);
-    }
+    // Step 3: Extract nutrition data from result using helper function
+    const nutritionData = prepareNutritionData(result);
 
     // Step 4: Commit to GitHub
     await ctx.telegram.editMessageText(
@@ -757,13 +758,7 @@ bot.on('photo', async (ctx) => {
     return;
   }
 
-  // Check for processing lock
-  if (conversationManager.isLocked(userId)) {
-    await ctx.reply('⏳ Please wait, I\'m still processing your previous message...');
-    return;
-  }
-
-  // Acquire lock
+  // Acquire processing lock (acquireLock already checks if locked internally)
   if (!conversationManager.acquireLock(userId)) {
     await ctx.reply('⏳ Please wait, I\'m still processing your previous message...');
     return;
@@ -832,15 +827,8 @@ bot.on('photo', async (ctx) => {
       return;
     }
 
-    // Step 5: Prepare nutrition data
-    const nutritionData = {
-      name: result.data.name,
-      food_bank_id: result.data.food_bank_id || null,
-      quantity: result.data.quantity || 1,
-      unit: result.data.unit || 'portion',
-      nutrition: result.data.per_portion,
-      notes: result.data.notes || 'Extracted from screenshot',
-    };
+    // Step 5: Prepare nutrition data using helper function
+    const nutritionData = prepareNutritionData(result, 'Extracted from screenshot');
 
     // Step 6: Log to GitHub
     await ctx.telegram.editMessageText(
