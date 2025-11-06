@@ -1,2 +1,3 @@
 - Read [SKILL.md](SKILL.md) for instructions.
 - For all estimation & research tasks, ultrathink. Parallelize wherever sensible with as many agents as necessary. Have these agents ultrathink.
+- Git: Open or switch to a new branch rather than committing directly to Main.

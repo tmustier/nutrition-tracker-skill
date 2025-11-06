@@ -1,0 +1,7 @@
+# CI/CD Dependencies with pinned versions and hashes for supply chain security
+# Generated for Python 3.11+ environments
+# To update: pip install --upgrade pyyaml && pip hash pyyaml
+
+# YAML parser for generate_index.py and validate_data_bank.py
+PyYAML==6.0.3 \
+    --hash=sha256:d76623373421df22fb4cf8817020cbb7ef15c725b9d5e45f17e189bfc384190f

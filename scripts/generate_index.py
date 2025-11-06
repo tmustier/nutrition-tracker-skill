@@ -171,8 +171,13 @@ def get_git_metadata():
             timeout=10
         ).stdout.strip()
 
-        # Check if running in CI (common CI environment variables)
+        # Handle detached HEAD state in CI environments
         import os
+        if branch == 'HEAD':
+            # In GitHub Actions, fall back to environment variables
+            branch = os.environ.get('GITHUB_HEAD_REF') or os.environ.get('GITHUB_REF_NAME') or 'HEAD'
+
+        # Check if running in CI (common CI environment variables)
         is_ci = any(key in os.environ for key in ['CI', 'GITHUB_ACTIONS', 'GITLAB_CI', 'CIRCLECI'])
 
         return {
@@ -180,8 +185,8 @@ def get_git_metadata():
             'branch': branch,
             'is_ci': is_ci
         }
-    except (subprocess.CalledProcessError, FileNotFoundError):
-        # Not in a git repo or git not available
+    except (subprocess.CalledProcessError, subprocess.TimeoutExpired, FileNotFoundError):
+        # Not in a git repo, git not available, or git command timed out
         return None
 
 
@@ -218,9 +223,16 @@ def generate_index_file(dishes, output_path):
     ]
 
     if git_meta:
-        metadata_lines.append(f"  commit: \"{git_meta['commit']}\"")
-        metadata_lines.append(f"  branch: \"{git_meta['branch']}\"")
-        metadata_lines.append(f"  by: \"{'CI' if git_meta['is_ci'] else 'local'}\"")
+        # Use yaml.safe_dump to properly escape values and prevent YAML injection
+        git_metadata = {
+            'commit': git_meta['commit'],
+            'branch': git_meta['branch'],
+            'by': 'CI' if git_meta['is_ci'] else 'local'
+        }
+        # Dump and indent properly (skip first line which contains {})
+        git_yaml = yaml.safe_dump(git_metadata, default_flow_style=False, allow_unicode=True)
+        for line in git_yaml.strip().split('\n'):
+            metadata_lines.append(f"  {line}")
     else:
         metadata_lines.append("  by: \"local\"")
 
