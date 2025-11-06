@@ -58,7 +58,7 @@ per_portion:
   omega6_la_g: 0.45
   chloride_mg: 0
   phosphorus_mg: 30.9
-  sulfur_mg: 0
+  sulfur_g: 0.0
   chromium_ug: 0
   molybdenum_ug: 0
   boron_mg: 0

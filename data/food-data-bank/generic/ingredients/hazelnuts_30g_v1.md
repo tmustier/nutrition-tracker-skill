@@ -51,7 +51,7 @@ per_portion:
   molybdenum_ug: 5.5
   phosphorus_mg: 87
   chloride_mg: 0
-  sulfur_mg: 0
+  sulfur_g: 0.0
   vitamin_a_ug: 0
   vitamin_d_ug: 0
   vitamin_k_ug: 4
@@ -77,9 +77,9 @@ derived:
 quality:
   confidence: high
   gaps:
-  - MUFA/PUFA profile appears atypical for hazelnuts (expected MUFA >> PUFA); values
-    recorded as provided.
   - Biotin (B7) not available in standard databases (remains 0 but hazelnuts are known to be good source)
+  notes:
+  - MUFA/PUFA ratio of 5.8:1 is typical for hazelnuts, which are exceptionally high in oleic acid (similar to olive oil)
 notes:
 - 'Atwater check (available carb basis): 4×4.5 + 9×18.2 + 4×5.0 + 2×2.9 + 2.4×0.0
   = 207.6 kcal'

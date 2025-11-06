@@ -50,7 +50,7 @@ entries:
           magnesium_mg: 85
           phosphorus_mg: 220
           chloride_mg: 2340
-          sulfur_mg: 300
+          sulfur_g: 0.3
 
           # Trace Minerals
           iron_mg: 3.2
@@ -121,7 +121,7 @@ entries:
           magnesium_mg: 27
           phosphorus_mg: 42
           chloride_mg: 0
-          sulfur_mg: 0
+          sulfur_g: 0.0
           iron_mg: 0.5
           zinc_mg: 0.1
           copper_mg: 0.1

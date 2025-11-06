@@ -35,7 +35,7 @@ NUTRIENT_MAPPING = {
     1090: 'magnesium_mg',              # Magnesium, Mg
     1091: 'phosphorus_mg',             # Phosphorus, P
     1088: 'chloride_mg',               # Chloride, Cl (LIMITED DATA)
-    1094: 'sulfur_mg',                 # Sulfur, S (LIMITED DATA)
+    1094: 'sulfur_g',                 # Sulfur, S (LIMITED DATA)
 
     # ===== TRACE MINERALS (8 fields) =====
     1089: 'iron_mg',                   # Iron, Fe
@@ -98,7 +98,7 @@ REQUIRED_FIELDS = [
 
     # Essential Minerals (7)
     'sodium_mg', 'potassium_mg', 'calcium_mg', 'magnesium_mg',
-    'phosphorus_mg', 'chloride_mg', 'sulfur_mg',
+    'phosphorus_mg', 'chloride_mg', 'sulfur_g',
 
     # Trace Minerals (8)
     'iron_mg', 'zinc_mg', 'copper_mg', 'manganese_mg',

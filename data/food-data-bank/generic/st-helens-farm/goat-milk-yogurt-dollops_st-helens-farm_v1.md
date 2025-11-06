@@ -60,7 +60,7 @@ per_portion:
   molybdenum_ug: 0
   phosphorus_mg: 55.5
   chloride_mg: 0
-  sulfur_mg: 0
+  sulfur_g: 0.0
   vitamin_a_ug: 28.5
   vitamin_k_ug: 0.15
   vitamin_b1_mg: 0.024
