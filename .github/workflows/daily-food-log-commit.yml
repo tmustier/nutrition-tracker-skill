@@ -175,7 +175,7 @@ jobs:
         if: steps.check_changes.outputs.has_changes == 'true'
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: ${{ github.event.inputs.custom_message || format('chore: Daily nutrition logs - {0}', github.event_name == 'schedule' && 'auto' || 'manual') }}
+          commit_message: "${{ github.event.inputs.custom_message || format('chore: Daily nutrition logs - {0}', github.event_name == 'schedule' && 'auto' || 'manual') }}"
           branch: daily-logs
           file_pattern: 'data/logs/**/*.yaml'
           commit_user_name: github-actions[bot]
