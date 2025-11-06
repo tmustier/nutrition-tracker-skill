@@ -282,6 +282,7 @@ class ConversationManager {
     for (const [userId, messages] of this.conversations) {
       if (messages.length === 0) {
         this.conversations.delete(userId);
+        this.conversationTokens.delete(userId); // CRITICAL: Also delete token count to prevent memory leak
         return;
       }
 
@@ -296,6 +297,7 @@ class ConversationManager {
 
     if (oldestUserId) {
       this.conversations.delete(oldestUserId);
+      this.conversationTokens.delete(oldestUserId); // CRITICAL: Also delete token count to prevent memory leak
       console.log(`[ConversationManager] Evicted oldest conversation for user ${oldestUserId}`);
     }
   }
@@ -365,6 +367,7 @@ class ConversationManager {
     for (const [userId, messages] of this.conversations) {
       if (messages.length === 0) {
         this.conversations.delete(userId);
+        this.conversationTokens.delete(userId); // CRITICAL: Also delete token count to prevent memory leak
         cleanedCount++;
         continue;
       }
@@ -375,6 +378,7 @@ class ConversationManager {
 
       if (now - lastTimestamp >= maxAge) {
         this.conversations.delete(userId);
+        this.conversationTokens.delete(userId); // CRITICAL: Also delete token count to prevent memory leak
         cleanedCount++;
         console.log(`[ConversationManager] Cleaned up old conversation for user ${userId}`);
       }

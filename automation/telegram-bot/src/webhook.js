@@ -788,6 +788,7 @@ bot.on('photo', async (ctx) => {
         null,
         `❌ Image too large (${Math.round(fileInfo.file_size / 1024 / 1024)}MB). Please send images under 10MB.`
       );
+      conversationManager.releaseLock(userId); // CRITICAL: Release lock before return
       return;
     }
 
