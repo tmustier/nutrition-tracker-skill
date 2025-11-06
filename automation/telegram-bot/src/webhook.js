@@ -720,20 +720,20 @@ bot.on('photo', async (ctx) => {
     );
 
     // Step 7: Extract user information for multi-user tracking
-    const photoUserId = ctx.from.id;
-    const photoUserName = [ctx.from.first_name, ctx.from.last_name]
+    const userId = ctx.from.id;
+    const userName = [ctx.from.first_name, ctx.from.last_name]
       .filter(Boolean)
-      .join(' ') || ctx.from.username || `User ${photoUserId}`;
+      .join(' ') || ctx.from.username || `User ${userId}`;
 
     // Step 8: Get current totals before committing to avoid race condition (for this user only)
-    const currentTotals = await githubIntegration.getTodaysTotals(null, photoUserId);
+    const currentTotals = await githubIntegration.getTodaysTotals(null, userId);
 
     // Step 9: Commit the entry with user information
     const commitResult = await githubIntegration.appendLogEntry(
       nutritionData,
       null, // timestamp (use default)
-      photoUserId,
-      photoUserName
+      userId,
+      userName
     );
     console.log('Successfully logged entry from screenshot:', commitResult);
 

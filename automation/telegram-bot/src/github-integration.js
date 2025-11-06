@@ -437,8 +437,14 @@ class GitHubIntegration {
       // If userId is provided, only count entries for that user
       logFile.data.entries.forEach(entry => {
         // Filter by user if userId is specified
-        if (userId !== null && entry.user_id !== userId) {
-          return; // Skip entries from other users
+        if (userId !== null) {
+          if (entry.user_id == null) {
+            console.warn(`⚠️  Entry without user_id found (timestamp: ${entry.timestamp}). Skipping for user filtering.`);
+            return; // Skip entries without user_id
+          }
+          if (entry.user_id !== userId) {
+            return; // Skip entries from other users
+          }
         }
 
         if (!entry.items || !Array.isArray(entry.items)) {
