@@ -412,8 +412,9 @@ bot.command('today', async (ctx) => {
     // Send initial processing message
     const processingMsg = await ctx.reply('📊 Calculating today\'s totals...');
 
-    // Get totals from GitHub
-    const totals = await githubIntegration.getTodaysTotals();
+    // Get totals from GitHub for this specific user
+    const userId = ctx.from.id;
+    const totals = await githubIntegration.getTodaysTotals(null, userId);
 
     // Get targets from claude-integration (uses health profile)
     const targets = claudeIntegration.getTargets('rest'); // TODO: Detect training vs rest day
@@ -557,11 +558,21 @@ bot.on('text', async (ctx) => {
       '💾 Logging to database...'
     );
 
-    // Step 5: Get current totals before committing to avoid race condition
-    const currentTotals = await githubIntegration.getTodaysTotals();
-    
-    // Step 6: Commit the entry
-    const commitResult = await githubIntegration.appendLogEntry(nutritionData);
+    // Step 5: Get current totals before committing to avoid race condition (for this user only)
+    const currentTotals = await githubIntegration.getTodaysTotals(null, userId);
+
+    // Step 6: Extract user information for multi-user tracking
+    const userName = [ctx.from.first_name, ctx.from.last_name]
+      .filter(Boolean)
+      .join(' ') || ctx.from.username || `User ${userId}`;
+
+    // Step 7: Commit the entry with user information
+    const commitResult = await githubIntegration.appendLogEntry(
+      nutritionData,
+      null, // timestamp (use default)
+      userId,
+      userName
+    );
     console.log('Successfully logged entry:', commitResult);
 
     // Add current meal to totals for immediate accurate display
@@ -708,11 +719,22 @@ bot.on('photo', async (ctx) => {
       '💾 Logging to database...'
     );
 
-    // Step 7: Get current totals before committing to avoid race condition
-    const currentTotals = await githubIntegration.getTodaysTotals();
-    
-    // Step 8: Commit the entry
-    const commitResult = await githubIntegration.appendLogEntry(nutritionData);
+    // Step 7: Extract user information for multi-user tracking
+    const userId = ctx.from.id;
+    const userName = [ctx.from.first_name, ctx.from.last_name]
+      .filter(Boolean)
+      .join(' ') || ctx.from.username || `User ${userId}`;
+
+    // Step 8: Get current totals before committing to avoid race condition (for this user only)
+    const currentTotals = await githubIntegration.getTodaysTotals(null, userId);
+
+    // Step 9: Commit the entry with user information
+    const commitResult = await githubIntegration.appendLogEntry(
+      nutritionData,
+      null, // timestamp (use default)
+      userId,
+      userName
+    );
     console.log('Successfully logged entry from screenshot:', commitResult);
 
     // Add current meal to totals for immediate accurate display
