@@ -149,6 +149,24 @@ When the nutrition tracking system expanded from 24 to 52 nutrient fields (Schem
 - **Sodium/salt:** `salt_g = sodium_mg × 2.5 / 1000`
 - **Finishing salt:** `0.5% of total dish weight` (≈ sodium_mg = salt_g × 400)
 
+### Energy Consistency Principle
+
+**Rule: Energy must always equal Atwater(macros).**
+
+Since we estimate everything from USDA data and scaled component analysis, the energy should always be the mathematical result of the macronutrient values using the Atwater formula. Do not apply additional arbitrary adjustments to energy alone.
+
+**Why this matters:**
+- Macros are primary data (measured or scaled from USDA)
+- Energy is derived from macros via Atwater formula
+- Applying separate adjustments to energy creates inconsistency
+
+**Common mistake to avoid:**
+- ❌ Using USDA "cooked" macro values, then reducing energy further for "cooking losses"
+- ❌ This double-counts losses since USDA "cooked" values already measure the final cooked product
+- ✅ If evidence suggests different energy, reverse-engineer the macros themselves, not energy alone
+
+**Example:** Cote de Boeuf uses USDA ribeye "cooked, grilled" data (already accounts for 25% cooking loss including water evaporation and fat dripping). Macros: 136.5g P, 134.7g F → Energy = 1,759 kcal. Do not reduce energy further.
+
 ---
 
 # Nutrient Estimation Philosophy: Never Use Null, Always Estimate with Confidence
