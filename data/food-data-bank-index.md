@@ -1,7 +1,7 @@
 ---
 title: Food Data Bank Index
 description: Auto-generated index of all dishes in the food data bank
-generated: 2025-11-05 18:00:54 UTC
+generated: 2025-11-06 11:09:27 UTC
 ---
 
 # Food Data Bank Index
@@ -11,11 +11,11 @@ generated: 2025-11-05 18:00:54 UTC
 
 ## Overview
 
-Total dishes: 76
+Total dishes: 81
 
-- **Venues**: 9 categories
+- **Venues**: 10 categories
 - **Packaged Products**: 7 categories
-- **Generic Items**: 12 categories
+- **Generic Items**: 13 categories
 
 ---
 
@@ -60,6 +60,17 @@ Total dishes: 76
 
 - [Chilli Poached Eggs (L'ETO Soho)](food-data-bank/venues/leto-caffe-soho/chilli_poached_eggs_leto_soho_v1.md) {#chilli_poached_eggs_leto_soho_v1}
 - [Grilled Chicken Breast (L'ETO Soho)](food-data-bank/venues/leto-caffe-soho/grilled_chicken_breast_leto_soho_v1.md) {#grilled_chicken_breast_leto_soho_v1}
+
+## Maset
+
+*Location: `data/food-data-bank/venues/maset/`*
+
+**4 dishes:**
+
+- [Brandade Beignet with Aioli (Maset)](food-data-bank/venues/maset/brandade_beignet_aioli_maset_v1.md) {#brandade_beignet_aioli_maset_v1}
+- [Cote de Boeuf, Ex-Dairy, 30 days age (Maset)](food-data-bank/venues/maset/cote_de_boeuf_ex_dairy_30_days_maset_v1.md) {#cote_de_boeuf_ex_dairy_30_days_maset_v1}
+- [Profiteroles, Chocolate, Chestnut Cream (Maset)](food-data-bank/venues/maset/profiteroles_chocolate_chestnut_cream_maset_v1.md) {#profiteroles_chocolate_chestnut_cream_maset_v1}
+- [Thick-Cut Frites (Maset)](food-data-bank/venues/maset/thick_cut_frites_maset_v1.md) {#thick_cut_frites_maset_v1}
 
 ## Panzers
 
@@ -264,6 +275,14 @@ Total dishes: 76
 **1 dishes:**
 
 - [Chocolate Pistachio Praline Bar (half bar, 22g)](food-data-bank/generic/londons-chocolate-company/pistachio_praline_bar_half_londons-chocolate_v1.md) {#pistachio_praline_bar_half_londons-chocolate_v1}
+
+## Generic: Maset Chiltern Street Marylebone London
+
+*Location: `data/food-data-bank/generic/maset-chiltern-street-marylebone-london/`*
+
+**1 dishes:**
+
+- [Charred Green Beans, Crispy Capers (Maset)](food-data-bank/generic/maset-chiltern-street-marylebone-london/charred_green_beans_crispy_capers_maset_v1.md) {#charred_green_beans_crispy_capers_maset_v1}
 
 ## Generic: Pub Bar
 
