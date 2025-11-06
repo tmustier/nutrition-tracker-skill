@@ -1,0 +1,443 @@
+# Test Case: Chicken and Vegetable Stir-Fry
+# Description: Complex multi-ingredient recipe demonstrating mixed cooking effects
+# Validation: Each ingredient processed separately, then combined
+
+test_case:
+  name: "Chicken and Vegetable Stir-Fry"
+  description: "Multi-ingredient Asian-style stir-fry with chicken, vegetables, and oil"
+  complexity: "complex"
+  tags: ["recipe", "multi_ingredient", "stir_fry", "high_heat", "mixed_foods"]
+
+recipe:
+  name: "Chicken Vegetable Stir-Fry"
+  servings: 2
+  cooking_method: "stir_frying"
+  cooking_time_min: 8
+  temperature_celsius: 220
+
+ingredients:
+  - ingredient: "chicken_breast"
+    raw_weight_g: 300
+    food_category: "chicken_breast"
+    cooking_method: "stir_fried"
+
+  - ingredient: "bell_pepper"
+    raw_weight_g: 150
+    food_category: "bell_pepper"
+    cooking_method: "stir_fried"
+
+  - ingredient: "broccoli"
+    raw_weight_g: 200
+    food_category: "broccoli"
+    cooking_method: "stir_fried"
+
+  - ingredient: "onion"
+    raw_weight_g: 100
+    food_category: "onion"
+    cooking_method: "sauteed"
+
+  - ingredient: "vegetable_oil"
+    amount_g: 15
+    cooking_method: "added"
+    note: "Added during cooking, not transformed"
+
+  - ingredient: "soy_sauce"
+    amount_ml: 20
+    amount_g: 22
+    cooking_method: "added"
+    note: "Added at end, not cooked significantly"
+
+  - ingredient: "garlic"
+    raw_weight_g: 10
+    food_category: "garlic"
+    cooking_method: "sauteed"
+
+# Process each ingredient separately
+ingredient_processing:
+
+  chicken_breast:
+    input:
+      raw_weight_g: 300
+      raw_nutrients:
+        protein_g: 69.0
+        fat_g: 7.5
+        carbohydrate_g: 0.0
+        vitamin_b6_mg: 1.8
+        niacin_b3_mg: 31.8
+        phosphorus_mg: 630
+        selenium_ug: 69
+        energy_kcal: 344
+
+    processing:
+      yield_factor: 0.82        # Quick cooking, less water loss
+      retention_factors:
+        protein: 1.00
+        fat: 1.00
+        vitamin_b6: 0.90
+        niacin_b3: 0.95
+        phosphorus: 1.00
+        selenium: 1.00
+
+    output:
+      cooked_weight_g: 246      # 300 * 0.82
+      cooked_nutrients:
+        protein_g: 69.0
+        fat_g: 7.5
+        carbohydrate_g: 0.0
+        vitamin_b6_mg: 1.62     # 1.8 * 0.90
+        niacin_b3_mg: 30.21     # 31.8 * 0.95
+        phosphorus_mg: 630
+        selenium_ug: 69
+        energy_kcal: 344
+
+  bell_pepper:
+    input:
+      raw_weight_g: 150
+      raw_nutrients:
+        protein_g: 1.5
+        fat_g: 0.5
+        carbohydrate_g: 9.0
+        fiber_g: 3.0
+        vitamin_c_mg: 192       # Very high in peppers!
+        vitamin_a_ug_rae: 45
+        folate_ug: 69
+        potassium_mg: 315
+        energy_kcal: 46
+
+    processing:
+      yield_factor: 0.87        # Quick cooking, minimal loss
+      retention_factors:
+        protein: 1.00
+        fat: 1.00
+        carbohydrate: 1.00
+        fiber: 1.00
+        vitamin_c: 0.88         # Quick cooking preserves vitamin C well
+        vitamin_a: 1.00
+        folate: 0.85
+        potassium: 1.00
+
+    output:
+      cooked_weight_g: 130.5    # 150 * 0.87
+      cooked_nutrients:
+        protein_g: 1.5
+        fat_g: 0.5
+        carbohydrate_g: 9.0
+        fiber_g: 3.0
+        vitamin_c_mg: 169       # 192 * 0.88 - excellent retention!
+        vitamin_a_ug_rae: 45
+        folate_ug: 58.7
+        potassium_mg: 315
+        energy_kcal: 46
+
+  broccoli:
+    input:
+      raw_weight_g: 200
+      raw_nutrients:
+        protein_g: 5.6
+        fat_g: 0.7
+        carbohydrate_g: 13.2
+        fiber_g: 5.2
+        vitamin_c_mg: 178
+        vitamin_k_ug: 202
+        folate_ug: 126
+        calcium_mg: 94
+        iron_mg: 1.5
+        energy_kcal: 68
+
+    processing:
+      yield_factor: 0.75        # Stir-frying reduces volume significantly
+      retention_factors:
+        protein: 1.00
+        fat: 1.00
+        carbohydrate: 1.00
+        fiber: 1.00
+        vitamin_c: 0.88
+        vitamin_k: 0.96
+        folate: 0.85
+        calcium: 1.00
+        iron: 1.00
+
+    output:
+      cooked_weight_g: 150      # 200 * 0.75
+      cooked_nutrients:
+        protein_g: 5.6
+        fat_g: 0.7
+        carbohydrate_g: 13.2
+        fiber_g: 5.2
+        vitamin_c_mg: 156.6     # 178 * 0.88
+        vitamin_k_ug: 193.9     # 202 * 0.96
+        folate_ug: 107.1        # 126 * 0.85
+        calcium_mg: 94
+        iron_mg: 1.5
+        energy_kcal: 68
+
+  onion:
+    input:
+      raw_weight_g: 100
+      raw_nutrients:
+        protein_g: 1.1
+        fat_g: 0.1
+        carbohydrate_g: 9.3
+        fiber_g: 1.7
+        vitamin_c_mg: 7.4
+        folate_ug: 19
+        potassium_mg: 146
+        energy_kcal: 40
+
+    processing:
+      yield_factor: 0.60        # Onions lose significant water
+      retention_factors:
+        protein: 1.00
+        fat: 1.00
+        carbohydrate: 1.00
+        fiber: 1.00
+        vitamin_c: 0.85
+        folate: 0.82
+        potassium: 1.00
+
+    output:
+      cooked_weight_g: 60       # 100 * 0.60
+      cooked_nutrients:
+        protein_g: 1.1
+        fat_g: 0.1
+        carbohydrate_g: 9.3
+        fiber_g: 1.7
+        vitamin_c_mg: 6.3       # 7.4 * 0.85
+        folate_ug: 15.6         # 19 * 0.82
+        potassium_mg: 146
+        energy_kcal: 40
+
+  garlic:
+    input:
+      raw_weight_g: 10
+      raw_nutrients:
+        protein_g: 0.6
+        carbohydrate_g: 3.3
+        vitamin_c_mg: 3.1
+        manganese_mg: 0.2
+        energy_kcal: 15
+
+    processing:
+      yield_factor: 0.70
+      retention_factors:
+        protein: 1.00
+        carbohydrate: 1.00
+        vitamin_c: 0.85
+        manganese: 1.00
+
+    output:
+      cooked_weight_g: 7
+      cooked_nutrients:
+        protein_g: 0.6
+        carbohydrate_g: 3.3
+        vitamin_c_mg: 2.6
+        manganese_mg: 0.2
+        energy_kcal: 15
+
+  vegetable_oil:
+    input:
+      amount_g: 15
+      nutrients:
+        fat_g: 15.0
+        vitamin_e_mg: 2.0
+        energy_kcal: 135
+
+    processing:
+      note: "Oil is added, not cooked from raw state"
+      transformation: "minimal"
+      retention_factors:
+        fat: 1.00              # Oil doesn't evaporate in stir-fry
+        vitamin_e: 0.90        # Some degradation at high heat
+
+    output:
+      amount_g: 15
+      nutrients:
+        fat_g: 15.0
+        vitamin_e_mg: 1.8      # 2.0 * 0.90
+        energy_kcal: 135
+
+  soy_sauce:
+    input:
+      amount_g: 22
+      nutrients:
+        protein_g: 1.3
+        carbohydrate_g: 0.8
+        sodium_mg: 879
+        energy_kcal: 9
+
+    processing:
+      note: "Added at end, not significantly cooked"
+      retention_factors:
+        protein: 1.00
+        carbohydrate: 1.00
+        sodium: 1.00
+
+    output:
+      amount_g: 22
+      nutrients:
+        protein_g: 1.3
+        carbohydrate_g: 0.8
+        sodium_mg: 879
+        energy_kcal: 9
+
+# Combine all ingredients
+final_recipe:
+  total_raw_weight_g: 797      # Sum of all ingredients
+  total_cooked_weight_g: 630.5 # Sum of all cooked weights
+  overall_yield_factor: 0.79   # 630.5 / 797
+
+  total_nutrients:
+    # Sum of all cooked nutrients
+    protein_g: 79.1            # 69.0 + 1.5 + 5.6 + 1.1 + 0.6 + 1.3
+    fat_g: 23.8                # 7.5 + 0.5 + 0.7 + 0.1 + 15.0
+    carbohydrate_g: 35.6       # 0 + 9.0 + 13.2 + 9.3 + 3.3 + 0.8
+    fiber_g: 10.9              # 0 + 3.0 + 5.2 + 1.7 + 0
+
+    # Vitamins (summed)
+    vitamin_c_mg: 334.5        # 0 + 169 + 156.6 + 6.3 + 2.6
+    vitamin_a_ug_rae: 45
+    vitamin_e_mg: 1.8
+    vitamin_k_ug: 193.9
+    vitamin_b6_mg: 1.62
+    niacin_b3_mg: 30.21
+    folate_ug: 181.4           # Sum of all folates
+
+    # Minerals (summed)
+    calcium_mg: 94
+    iron_mg: 1.5
+    phosphorus_mg: 630
+    potassium_mg: 607          # 315 + 146 + 146
+    sodium_mg: 879             # Primarily from soy sauce
+    selenium_ug: 69
+    manganese_mg: 0.2
+
+    # Energy (summed)
+    energy_kcal: 657           # 344 + 46 + 68 + 40 + 15 + 135 + 9
+
+validation:
+  energy_balance:
+    raw_total_kcal: 657
+    cooked_total_kcal: 657
+    difference: 0
+    passes: true
+    note: "Perfect conservation - oil and chicken dominate energy"
+
+  weight_changes:
+    chicken: {raw: 300, cooked: 246, yield: 0.82}
+    bell_pepper: {raw: 150, cooked: 130.5, yield: 0.87}
+    broccoli: {raw: 200, cooked: 150, yield: 0.75}
+    onion: {raw: 100, cooked: 60, yield: 0.60}
+    garlic: {raw: 10, cooked: 7, yield: 0.70}
+    note: "Each ingredient has different water loss pattern"
+
+  nutrient_retention_highlights:
+    vitamin_c:
+      raw_total_mg: 380.5
+      cooked_total_mg: 334.5
+      retention: 0.88
+      note: "Excellent retention due to quick cooking"
+
+    folate:
+      raw_total_ug: 214
+      cooked_total_ug: 181.4
+      retention: 0.85
+      note: "Good retention for water-soluble vitamin"
+
+    protein:
+      raw_total_g: 79.1
+      cooked_total_g: 79.1
+      retention: 1.00
+      note: "Perfect retention - protein very stable"
+
+per_serving:
+  servings: 2
+  per_serving_weight_g: 315.3  # 630.5 / 2
+
+  per_serving_nutrients:
+    protein_g: 39.6
+    fat_g: 11.9
+    carbohydrate_g: 17.8
+    fiber_g: 5.5
+    vitamin_c_mg: 167.3
+    energy_kcal: 328.5
+
+percent_daily_value:
+  demographic: "adult_male_19_50"
+  per_serving: "One serving (1/2 of recipe)"
+
+  nutrients:
+    protein_g:
+      amount: 39.6
+      rda: 56
+      percent_dv: 70.7
+
+    vitamin_c_mg:
+      amount: 167.3
+      rda: 90
+      percent_dv: 185.9
+      assessment: "Excellent - exceeds daily needs"
+
+    fiber_g:
+      amount: 5.5
+      ai: 38
+      percent_ai: 14.5
+
+    niacin_b3_mg:
+      amount: 15.1              # 30.21 / 2
+      rda: 16
+      percent_dv: 94.4
+
+    phosphorus_mg:
+      amount: 315
+      rda: 700
+      percent_dv: 45.0
+
+macronutrient_distribution:
+  per_serving:
+    protein_kcal: 158.4         # 39.6 * 4
+    fat_kcal: 107.1             # 11.9 * 9
+    carb_kcal: 71.2             # 17.8 * 4
+    total_kcal: 328.5
+
+  percentages:
+    protein_pct: 48.2           # High protein meal
+    fat_pct: 32.6
+    carb_pct: 21.7              # Note: fiber subtracted from carbs for this calc
+
+notes:
+  - "This demonstrates how to handle complex multi-ingredient recipes"
+  - "Each ingredient must be processed separately before combining"
+  - "Different ingredients have different yield factors even with same method"
+  - "Stir-frying preserves vitamin C remarkably well (88% retention)"
+  - "High heat + short time = good nutrient preservation"
+  - "Added ingredients (oil, sauce) contribute without transformation"
+  - "Final dish is high in protein and vitamin C, moderate in fat"
+  - "This is a nutritionally balanced meal"
+
+practical_considerations:
+  prep_time_min: 15
+  cook_time_min: 8
+  total_time_min: 23
+  skill_level: "intermediate"
+  equipment: ["wok or large skillet", "cutting board", "knife"]
+
+  cooking_tips:
+    - "Cut all ingredients before starting (stir-fry is fast)"
+    - "Cook chicken first, remove, then vegetables"
+    - "Or cook everything together if wok is large enough"
+    - "Keep ingredients moving to prevent burning"
+    - "Don't overcrowd the pan - reduces temperature"
+
+assumptions:
+  - "High heat throughout (220°C / 425°F)"
+  - "Constant stirring/tossing"
+  - "Total cooking time 8 minutes"
+  - "All cooked food is consumed (no waste)"
+  - "Oil fully absorbed/retained in dish"
+  - "Soy sauce added at end, not reduced"
+
+references:
+  - "USDA FoodData Central: multiple entries"
+  - "USDA Table of Nutrient Retention Factors, Release 6"
+  - "Effect of Stir-Frying on Antioxidant Activity of Vegetables (J Food Sci, 2009)"
+  - "Vitamin C Retention in Eight Fruits and Vegetables (J Am Diet Assoc, 2007)"

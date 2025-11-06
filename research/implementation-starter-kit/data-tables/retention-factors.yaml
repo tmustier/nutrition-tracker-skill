@@ -1,0 +1,430 @@
+# USDA Nutrient Retention Factors
+# Source: USDA Table of Nutrient Retention Factors, Release 6 (2007)
+# Values represent the fraction of nutrients retained after cooking
+# Format: nutrient -> cooking_method -> retention_factor (0.0 to 1.0+)
+
+retention_factors:
+  # Water-soluble vitamins - highly sensitive to heat and water
+  vitamin_c:
+    # Ascorbic acid - most heat-sensitive vitamin
+    raw: 1.00
+    boiling: 0.45          # High loss due to heat + leaching into water
+    boiling_drained: 0.40  # Additional loss when water discarded
+    steaming: 0.80         # Less water contact = better retention
+    microwaving: 0.92      # Short cooking time = minimal loss
+    grilling: 0.75         # Direct heat causes some oxidation
+    baking: 0.70           # Extended heat exposure
+    roasting: 0.72         # Similar to baking
+    frying: 0.85           # Quick cooking preserves more
+    stir_frying: 0.88      # Very quick high heat
+    pressure_cooking: 0.65 # High heat but sealed environment
+    slow_cooking: 0.35     # Extended heat exposure
+    blanching: 0.75        # Brief boiling
+    sauteing: 0.85         # Quick, high heat
+    poaching: 0.50         # Gentle heat but water immersion
+    braising: 0.45         # Long cooking with liquid
+
+  folate:
+    # Vitamin B9 - moderately sensitive to heat
+    raw: 1.00
+    boiling: 0.50
+    boiling_drained: 0.45
+    steaming: 0.70
+    microwaving: 0.85
+    grilling: 0.80
+    baking: 0.75
+    roasting: 0.77
+    frying: 0.82
+    stir_frying: 0.85
+    pressure_cooking: 0.60
+    slow_cooking: 0.40
+    blanching: 0.70
+    sauteing: 0.82
+    poaching: 0.55
+    braising: 0.50
+
+  thiamin:
+    # Vitamin B1 - moderately heat-sensitive
+    raw: 1.00
+    boiling: 0.75
+    boiling_drained: 0.70
+    steaming: 0.85
+    microwaving: 0.90
+    grilling: 0.85
+    baking: 0.80
+    roasting: 0.82
+    frying: 0.88
+    stir_frying: 0.90
+    pressure_cooking: 0.75
+    slow_cooking: 0.60
+    blanching: 0.85
+    sauteing: 0.88
+    poaching: 0.78
+    braising: 0.70
+
+  riboflavin:
+    # Vitamin B2 - relatively stable, some loss to light
+    raw: 1.00
+    boiling: 0.85
+    boiling_drained: 0.80
+    steaming: 0.90
+    microwaving: 0.95
+    grilling: 0.90
+    baking: 0.88
+    roasting: 0.88
+    frying: 0.92
+    stir_frying: 0.93
+    pressure_cooking: 0.85
+    slow_cooking: 0.75
+    blanching: 0.90
+    sauteing: 0.92
+    poaching: 0.87
+    braising: 0.82
+
+  niacin:
+    # Vitamin B3 - relatively heat-stable
+    raw: 1.00
+    boiling: 0.88
+    boiling_drained: 0.85
+    steaming: 0.92
+    microwaving: 0.95
+    grilling: 0.92
+    baking: 0.90
+    roasting: 0.90
+    frying: 0.94
+    stir_frying: 0.95
+    pressure_cooking: 0.88
+    slow_cooking: 0.80
+    blanching: 0.92
+    sauteing: 0.94
+    poaching: 0.90
+    braising: 0.85
+
+  vitamin_b6:
+    # Pyridoxine - moderately heat-sensitive
+    raw: 1.00
+    boiling: 0.70
+    boiling_drained: 0.65
+    steaming: 0.82
+    microwaving: 0.88
+    grilling: 0.85
+    baking: 0.80
+    roasting: 0.82
+    frying: 0.87
+    stir_frying: 0.90
+    pressure_cooking: 0.72
+    slow_cooking: 0.55
+    blanching: 0.82
+    sauteing: 0.87
+    poaching: 0.75
+    braising: 0.68
+
+  vitamin_b12:
+    # Cobalamin - relatively heat-stable
+    raw: 1.00
+    boiling: 0.90
+    boiling_drained: 0.88
+    steaming: 0.95
+    microwaving: 0.97
+    grilling: 0.93
+    baking: 0.92
+    roasting: 0.92
+    frying: 0.95
+    stir_frying: 0.96
+    pressure_cooking: 0.90
+    slow_cooking: 0.85
+    blanching: 0.95
+    sauteing: 0.95
+    poaching: 0.92
+    braising: 0.88
+
+  # Fat-soluble vitamins - generally more heat-stable
+  vitamin_a:
+    # Retinol and carotenoids - some increase due to matrix breakdown
+    raw: 1.00
+    boiling: 1.10           # Matrix breakdown increases bioavailability
+    boiling_drained: 1.08
+    steaming: 1.15
+    microwaving: 1.05
+    grilling: 0.95          # Some oxidation at high heat
+    baking: 0.98
+    roasting: 0.97
+    frying: 0.92            # High heat can degrade
+    stir_frying: 1.00       # Quick cooking, minimal change
+    pressure_cooking: 1.12
+    slow_cooking: 1.20      # Extended cooking increases bioavailability
+    blanching: 1.05
+    sauteing: 0.98
+    poaching: 1.08
+    braising: 1.15
+
+  beta_carotene:
+    # Provitamin A - cooking often increases bioavailability
+    raw: 1.00
+    boiling: 1.50           # Significant increase from cell wall breakdown
+    boiling_drained: 1.45
+    steaming: 1.60
+    microwaving: 1.20
+    grilling: 1.10
+    baking: 1.25
+    roasting: 1.30
+    frying: 1.15            # Fat presence aids absorption
+    stir_frying: 1.40       # Quick cooking + fat
+    pressure_cooking: 1.55
+    slow_cooking: 2.00      # Maximum cell breakdown
+    blanching: 1.15
+    sauteing: 1.35
+    poaching: 1.40
+    braising: 1.70
+
+  vitamin_d:
+    # Calciferol - heat-stable
+    raw: 1.00
+    boiling: 0.95
+    boiling_drained: 0.95
+    steaming: 0.97
+    microwaving: 0.98
+    grilling: 0.93
+    baking: 0.95
+    roasting: 0.95
+    frying: 0.93
+    stir_frying: 0.95
+    pressure_cooking: 0.95
+    slow_cooking: 0.92
+    blanching: 0.97
+    sauteing: 0.95
+    poaching: 0.96
+    braising: 0.94
+
+  vitamin_e:
+    # Tocopherols - moderately stable, some loss at high heat
+    raw: 1.00
+    boiling: 0.85
+    boiling_drained: 0.85
+    steaming: 0.90
+    microwaving: 0.92
+    grilling: 0.80          # High heat causes some oxidation
+    baking: 0.85
+    roasting: 0.83
+    frying: 0.75            # Extended high heat exposure
+    stir_frying: 0.88
+    pressure_cooking: 0.87
+    slow_cooking: 0.78
+    blanching: 0.92
+    sauteing: 0.88
+    poaching: 0.88
+    braising: 0.82
+
+  vitamin_k:
+    # Phylloquinone - very heat-stable
+    raw: 1.00
+    boiling: 0.95
+    boiling_drained: 0.90   # Some loss to water
+    steaming: 0.97
+    microwaving: 0.98
+    grilling: 0.95
+    baking: 0.96
+    roasting: 0.96
+    frying: 0.94
+    stir_frying: 0.96
+    pressure_cooking: 0.95
+    slow_cooking: 0.93
+    blanching: 0.97
+    sauteing: 0.96
+    poaching: 0.95
+    braising: 0.93
+
+  # Macronutrients
+  protein:
+    # Generally stable, some loss to drippings
+    raw: 1.00
+    boiling: 1.00           # Protein remains in water unless drained
+    boiling_drained: 0.95   # Some loss to cooking water
+    steaming: 1.00
+    microwaving: 1.00
+    grilling: 0.98          # Minimal loss to drippings
+    baking: 0.99
+    roasting: 0.97          # Some loss to drippings/evaporation
+    frying: 0.99
+    stir_frying: 1.00
+    pressure_cooking: 1.00
+    slow_cooking: 0.95      # Some loss to liquid if discarded
+    blanching: 1.00
+    sauteing: 1.00
+    poaching: 0.98
+    braising: 0.97
+
+  fat:
+    # Can be lost to drippings or added during cooking
+    # These factors assume no added fat and drained drippings
+    raw: 1.00
+    boiling: 0.98
+    boiling_drained: 0.95
+    steaming: 1.00
+    microwaving: 0.95       # Fat can render out
+    grilling: 0.85          # Significant fat drips away
+    baking: 0.90            # Fat renders and drips
+    roasting: 0.88          # Fat renders into pan
+    frying: 1.00            # Fat absorbed if not drained
+    stir_frying: 1.00       # Minimal fat loss
+    pressure_cooking: 0.98
+    slow_cooking: 0.90      # Fat rises and can be skimmed
+    blanching: 1.00
+    sauteing: 0.98
+    poaching: 0.97
+    braising: 0.92
+
+  carbohydrate:
+    # Very stable, only lost if cooking water discarded
+    raw: 1.00
+    boiling: 1.00
+    boiling_drained: 0.98   # Minimal loss
+    steaming: 1.00
+    microwaving: 1.00
+    grilling: 1.00
+    baking: 1.00
+    roasting: 1.00
+    frying: 1.00
+    stir_frying: 1.00
+    pressure_cooking: 1.00
+    slow_cooking: 1.00
+    blanching: 1.00
+    sauteing: 1.00
+    poaching: 1.00
+    braising: 1.00
+
+  # Minerals - generally very stable
+  calcium:
+    raw: 1.00
+    boiling: 1.00
+    boiling_drained: 0.95   # Loss only if water discarded
+    steaming: 1.00
+    microwaving: 1.00
+    grilling: 1.00
+    baking: 1.00
+    roasting: 1.00
+    frying: 1.00
+    stir_frying: 1.00
+    pressure_cooking: 1.00
+    slow_cooking: 1.00
+    blanching: 1.00
+    sauteing: 1.00
+    poaching: 0.98
+    braising: 0.97
+
+  iron:
+    raw: 1.00
+    boiling: 1.00
+    boiling_drained: 0.92   # Some loss to water
+    steaming: 1.00
+    microwaving: 1.00
+    grilling: 1.00
+    baking: 1.00
+    roasting: 1.00
+    frying: 1.00
+    stir_frying: 1.00
+    pressure_cooking: 1.00
+    slow_cooking: 1.00
+    blanching: 1.00
+    sauteing: 1.00
+    poaching: 0.97
+    braising: 0.95
+
+  magnesium:
+    raw: 1.00
+    boiling: 1.00
+    boiling_drained: 0.93
+    steaming: 1.00
+    microwaving: 1.00
+    grilling: 1.00
+    baking: 1.00
+    roasting: 1.00
+    frying: 1.00
+    stir_frying: 1.00
+    pressure_cooking: 1.00
+    slow_cooking: 1.00
+    blanching: 1.00
+    sauteing: 1.00
+    poaching: 0.97
+    braising: 0.95
+
+  phosphorus:
+    raw: 1.00
+    boiling: 1.00
+    boiling_drained: 0.95
+    steaming: 1.00
+    microwaving: 1.00
+    grilling: 1.00
+    baking: 1.00
+    roasting: 1.00
+    frying: 1.00
+    stir_frying: 1.00
+    pressure_cooking: 1.00
+    slow_cooking: 1.00
+    blanching: 1.00
+    sauteing: 1.00
+    poaching: 0.98
+    braising: 0.97
+
+  potassium:
+    raw: 1.00
+    boiling: 1.00
+    boiling_drained: 0.85   # Significant loss to water
+    steaming: 1.00
+    microwaving: 1.00
+    grilling: 1.00
+    baking: 1.00
+    roasting: 1.00
+    frying: 1.00
+    stir_frying: 1.00
+    pressure_cooking: 1.00
+    slow_cooking: 1.00
+    blanching: 0.95
+    sauteing: 1.00
+    poaching: 0.90
+    braising: 0.88
+
+  sodium:
+    raw: 1.00
+    boiling: 1.00
+    boiling_drained: 0.80   # Loss to cooking water
+    steaming: 1.00
+    microwaving: 1.00
+    grilling: 1.00
+    baking: 1.00
+    roasting: 1.00
+    frying: 1.00
+    stir_frying: 1.00
+    pressure_cooking: 1.00
+    slow_cooking: 1.00
+    blanching: 0.90
+    sauteing: 1.00
+    poaching: 0.85
+    braising: 0.82
+
+  zinc:
+    raw: 1.00
+    boiling: 1.00
+    boiling_drained: 0.93
+    steaming: 1.00
+    microwaving: 1.00
+    grilling: 1.00
+    baking: 1.00
+    roasting: 1.00
+    frying: 1.00
+    stir_frying: 1.00
+    pressure_cooking: 1.00
+    slow_cooking: 1.00
+    blanching: 1.00
+    sauteing: 1.00
+    poaching: 0.97
+    braising: 0.95
+
+# Notes:
+# 1. Values >1.0 indicate increased bioavailability (e.g., beta-carotene)
+# 2. "boiling_drained" assumes cooking water is discarded
+# 3. Actual retention varies by food matrix, temperature, and duration
+# 4. These are conservative averages from USDA data
+# 5. For foods cooked in retained liquid (soups, stews), use non-drained values
+# 6. Pressure cooking retains nutrients well due to reduced cooking time
+# 7. Slow cooking has longer exposure but lower temperatures

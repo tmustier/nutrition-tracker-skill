@@ -179,12 +179,16 @@ Since we estimate everything from USDA data and scaled component analysis, the e
 - All other values = actual measurement or estimate (use USDA proxies, component analysis, or category averages if needed)
 - Document estimation method and confidence level in `assumptions`
 
+> **📚 Deep Dive:** Food preparation significantly affects nutrient content through cooking transformations, oil absorption, and water loss/gain. For comprehensive research on these mechanisms and retention factors, see [research/food-preparation/](research/food-preparation/).
+
 ## 4-Step Estimation Process: USDA Lookup, Scale, Document, Validate
 
 1. **Search USDA FoodData Central** for closest match
 2. **Scale to portion weight** (USDA values are per 100g)
 3. **Document source and confidence** in `assumptions` field if non-obvious
 4. **Validate energy**: 4P + 9F + 4C_avail + 2fiber + 2.4polyols
+
+> **📚 Deep Dive:** When comparing intake to RDAs/DRIs, remember that RDAs already account for bioavailability and are based on as-consumed foods. For proper computational approaches including RAE, DFE, and confidence levels, see [research/rda-alignment/computational-nutrition-assessment.md](research/rda-alignment/computational-nutrition-assessment.md).
 
 ## Estimation Confidence Levels: HIGH (±5-15%), MEDIUM (±20-40%), LOW (±50-100%)
 
@@ -194,7 +198,7 @@ Since we estimate everything from USDA data and scaled component analysis, the e
 
 ## UK-Specific: Dairy Iodine 2-3× Higher Than EU
 
-**Iodine in dairy**: UK cattle feed is fortified, resulting in 2-3× higher iodine than EU. UK dairy is MEDIUM-HIGH confidence for iodine estimates.
+**Iodine in dairy**: UK cattle feed is fortified, resulting in 2-3× higher iodine than EU. UK dairy is MEDIUM-HIGH confidence for iodine estimates. For broader context on bioavailability variations and nutrient-specific handling, see [research/rda-alignment/](research/rda-alignment/).
 
 ## When to Use 0: Scientifically Impossible Nutrients
 
@@ -206,6 +210,8 @@ No estimation needed when value is scientifically zero:
 
 # Research Documentation: Sources, Evidence, and Venue-Specific Guidelines
 Always write down what was used. Put links/notes under `source.evidence`.
+
+> **📚 Deep Dive:** For comprehensive scientific foundations on food preparation effects (cooking transformations, retention factors, weight changes) and proper RDA alignment (bioavailability, confidence levels, nutrient-specific conversions), see [research/](research/).
 
 **For Simple Health Kitchen (SHK):**
 - **Check both**: the **Deliveroo** page (names, **ingredient list**, photos) **and** the **SHK Calories PDF**
