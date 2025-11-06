@@ -1,313 +1,287 @@
+// src/conversation-manager.js
 /**
- * Conversation Memory Manager
+ * Conversation Manager for Telegram Bot
  *
- * Manages multi-turn conversation state for the Telegram nutrition bot.
- * Stores conversation history per user with automatic cleanup and token management.
+ * Handles conversation state and prevents race conditions when users send
+ * multiple messages concurrently.
+ *
+ * CONCURRENCY SAFETY:
+ * - Atomic lock acquisition prevents duplicate processing
+ * - Per-user locks ensure isolated processing
+ * - Automatic lock cleanup prevents memory leaks
+ *
+ * SECURITY:
+ * - All conversation history is sanitized before storage
+ * - User isolation prevents cross-contamination
+ * - Lock timeout prevents indefinite blocking
  */
 
+const claudeIntegration = require('./claude-integration');
+
 class ConversationManager {
-  constructor(config = {}) {
-    // Configuration
-    this.maxMessagesPerUser = config.maxMessagesPerUser || 20;
-    this.maxTokensPerUser = config.maxTokensPerUser || 20000;
-    this.conversationTTL = config.conversationTTL || 1800000; // 30 minutes default
-    this.cleanupInterval = config.cleanupInterval || 300000; // 5 minutes
-
-    // Storage: userId -> ConversationState
-    this.conversations = new Map();
-
-    // Processing locks to prevent race conditions
+  constructor() {
+    // Per-user processing locks to prevent race conditions
+    // Map<userId: string, lockTimestamp: number>
     this.processingLocks = new Map();
 
-    // Start periodic cleanup
-    this.startCleanup();
+    // Conversation history storage (if needed in future)
+    // Map<userId: string, messages: Array<{role, content, timestamp}>>
+    this.conversations = new Map();
 
-    console.log('ConversationManager initialized:', {
-      maxMessages: this.maxMessagesPerUser,
-      maxTokens: this.maxTokensPerUser,
-      ttl: `${this.conversationTTL / 1000}s`,
-      cleanupInterval: `${this.cleanupInterval / 1000}s`
-    });
+    // Lock timeout configuration (30 seconds max processing time)
+    this.lockTimeout = 30000;
+
+    // DoS Protection: Maximum total conversations allowed globally
+    this.maxTotalConversations = 1000;
+
+    // Start periodic cleanup of stale locks
+    this.startLockCleanup();
   }
 
   /**
-   * Get conversation history for a user
-   * @param {number|string} userId - Telegram user ID
-   * @returns {Array} Array of message objects with role and content
-   */
-  getHistory(userId) {
-    const conversation = this.conversations.get(String(userId));
-
-    if (!conversation) {
-      return [];
-    }
-
-    // Check if conversation has expired
-    if (this.isExpired(conversation)) {
-      console.log(`Conversation expired for user ${userId}, clearing`);
-      this.clearHistory(userId);
-      return [];
-    }
-
-    // Update last access time
-    conversation.lastAccess = Date.now();
-
-    return conversation.messages;
-  }
-
-  /**
-   * Add a message to conversation history
-   * @param {number|string} userId - Telegram user ID
-   * @param {string} role - Message role ('user' or 'assistant')
-   * @param {string} content - Message content
-   */
-  addMessage(userId, role, content) {
-    const userIdStr = String(userId);
-
-    // Get or create conversation
-    let conversation = this.conversations.get(userIdStr);
-    if (!conversation) {
-      conversation = {
-        userId: userIdStr,
-        messages: [],
-        createdAt: Date.now(),
-        lastAccess: Date.now(),
-        tokenCount: 0
-      };
-      this.conversations.set(userIdStr, conversation);
-      console.log(`Created new conversation for user ${userId}`);
-    }
-
-    // Add message
-    const message = { role, content, timestamp: Date.now() };
-    conversation.messages.push(message);
-    conversation.lastAccess = Date.now();
-
-    // Estimate token count (rough approximation: 1 token ≈ 4 characters)
-    conversation.tokenCount += Math.ceil(content.length / 4);
-
-    console.log(`Added ${role} message to conversation ${userId} (${conversation.messages.length} messages, ~${conversation.tokenCount} tokens)`);
-
-    // Trim if necessary
-    this.trimIfNeeded(userIdStr);
-  }
-
-  /**
-   * Add user message to history
-   * @param {number|string} userId - Telegram user ID
-   * @param {string} content - Message content
-   */
-  addUserMessage(userId, content) {
-    this.addMessage(userId, 'user', content);
-  }
-
-  /**
-   * Add assistant message to history
-   * @param {number|string} userId - Telegram user ID
-   * @param {string} content - Message content
-   */
-  addAssistantMessage(userId, content) {
-    this.addMessage(userId, 'assistant', content);
-  }
-
-  /**
-   * Clear conversation history for a user
-   * @param {number|string} userId - Telegram user ID
-   */
-  clearHistory(userId) {
-    const userIdStr = String(userId);
-    const hadConversation = this.conversations.has(userIdStr);
-    this.conversations.delete(userIdStr);
-
-    if (hadConversation) {
-      console.log(`Cleared conversation for user ${userId}`);
-    }
-
-    return hadConversation;
-  }
-
-  /**
-   * Check if a conversation has expired
-   * @param {Object} conversation - Conversation state object
-   * @returns {boolean}
-   */
-  isExpired(conversation) {
-    return (Date.now() - conversation.lastAccess) > this.conversationTTL;
-  }
-
-  /**
-   * Trim conversation history if it exceeds limits
-   * @param {string} userId - User ID string
-   */
-  trimIfNeeded(userId) {
-    const conversation = this.conversations.get(userId);
-    if (!conversation) return;
-
-    let trimmed = false;
-
-    // Trim by message count
-    if (conversation.messages.length > this.maxMessagesPerUser) {
-      const excess = conversation.messages.length - this.maxMessagesPerUser;
-      conversation.messages = conversation.messages.slice(excess);
-      trimmed = true;
-      console.log(`Trimmed ${excess} old messages for user ${userId}`);
-    }
-
-    // Trim by token count (approximate)
-    if (conversation.tokenCount > this.maxTokensPerUser) {
-      // Remove oldest messages until under limit
-      while (conversation.tokenCount > this.maxTokensPerUser && conversation.messages.length > 2) {
-        const removed = conversation.messages.shift();
-        conversation.tokenCount -= Math.ceil(removed.content.length / 4);
-        trimmed = true;
-      }
-      console.log(`Trimmed by tokens for user ${userId}, now ~${conversation.tokenCount} tokens`);
-    }
-
-    return trimmed;
-  }
-
-  /**
-   * Acquire a processing lock for a user to prevent race conditions
-   * @param {number|string} userId - User ID
-   * @returns {boolean} True if lock acquired, false if already locked
+   * Acquire processing lock for a user (ATOMIC OPERATION)
+   *
+   * CRITICAL: This operation is atomic to prevent race conditions.
+   * Two concurrent requests for the same user will not both succeed.
+   *
+   * @param {string|number} userId - Telegram user ID
+   * @returns {boolean} True if lock acquired, false if already processing
    */
   acquireLock(userId) {
     const userIdStr = String(userId);
+    const now = Date.now();
 
-    if (this.processingLocks.has(userIdStr)) {
+    // ATOMIC CHECK-AND-SET: Get the current lock timestamp
+    const existingLock = this.processingLocks.get(userIdStr);
+
+    // If lock exists and hasn't timed out, deny acquisition
+    if (existingLock && (now - existingLock < this.lockTimeout)) {
+      console.log(`[ConversationManager] Lock acquisition failed for user ${userIdStr}: already processing`);
       return false;
     }
 
-    this.processingLocks.set(userIdStr, Date.now());
+    // If lock doesn't exist or has timed out, acquire it atomically
+    // This is safe because JavaScript is single-threaded; the get() and set()
+    // operations cannot be interleaved by another request
+    this.processingLocks.set(userIdStr, now);
+    console.log(`[ConversationManager] Lock acquired for user ${userIdStr}`);
     return true;
   }
 
   /**
-   * Release a processing lock for a user
-   * @param {number|string} userId - User ID
+   * Release processing lock for a user
+   *
+   * @param {string|number} userId - Telegram user ID
    */
   releaseLock(userId) {
     const userIdStr = String(userId);
-    this.processingLocks.delete(userIdStr);
-  }
+    const wasLocked = this.processingLocks.delete(userIdStr);
 
-  /**
-   * Check if a user's messages are currently being processed
-   * @param {number|string} userId - User ID
-   * @returns {boolean}
-   */
-  isProcessing(userId) {
-    return this.processingLocks.has(String(userId));
-  }
-
-  /**
-   * Get conversation statistics for a user
-   * @param {number|string} userId - User ID
-   * @returns {Object|null} Statistics object or null if no conversation
-   */
-  getStats(userId) {
-    const conversation = this.conversations.get(String(userId));
-
-    if (!conversation) {
-      return null;
-    }
-
-    return {
-      messageCount: conversation.messages.length,
-      estimatedTokens: conversation.tokenCount,
-      age: Date.now() - conversation.createdAt,
-      lastActivity: Date.now() - conversation.lastAccess,
-      isExpired: this.isExpired(conversation)
-    };
-  }
-
-  /**
-   * Get overall system statistics
-   * @returns {Object} System statistics
-   */
-  getSystemStats() {
-    const activeConversations = Array.from(this.conversations.values())
-      .filter(conv => !this.isExpired(conv));
-
-    const totalMessages = activeConversations.reduce(
-      (sum, conv) => sum + conv.messages.length, 0
-    );
-
-    const totalTokens = activeConversations.reduce(
-      (sum, conv) => sum + conv.tokenCount, 0
-    );
-
-    return {
-      activeConversations: activeConversations.length,
-      totalConversations: this.conversations.size,
-      totalMessages,
-      estimatedTotalTokens: totalTokens,
-      processingLocks: this.processingLocks.size
-    };
-  }
-
-  /**
-   * Start periodic cleanup of expired conversations
-   */
-  startCleanup() {
-    this.cleanupTimer = setInterval(() => {
-      this.cleanup();
-    }, this.cleanupInterval);
-
-    // Don't keep the process alive just for cleanup
-    if (this.cleanupTimer.unref) {
-      this.cleanupTimer.unref();
+    if (wasLocked) {
+      console.log(`[ConversationManager] Lock released for user ${userIdStr}`);
+    } else {
+      console.warn(`[ConversationManager] Attempted to release non-existent lock for user ${userIdStr}`);
     }
   }
 
   /**
-   * Stop periodic cleanup
+   * Check if user has an active processing lock
+   *
+   * @param {string|number} userId - Telegram user ID
+   * @returns {boolean} True if user is currently being processed
    */
-  stopCleanup() {
-    if (this.cleanupTimer) {
-      clearInterval(this.cleanupTimer);
-      this.cleanupTimer = null;
-    }
-  }
+  isLocked(userId) {
+    const userIdStr = String(userId);
+    const lockTimestamp = this.processingLocks.get(userIdStr);
 
-  /**
-   * Clean up expired conversations and stale locks
-   */
-  cleanup() {
+    if (!lockTimestamp) {
+      return false;
+    }
+
+    // Check if lock has timed out
     const now = Date.now();
-    let expiredCount = 0;
-    let staleLocks = 0;
+    if (now - lockTimestamp >= this.lockTimeout) {
+      // Lock has timed out, clean it up
+      this.processingLocks.delete(userIdStr);
+      console.warn(`[ConversationManager] Lock timeout for user ${userIdStr}, cleaned up stale lock`);
+      return false;
+    }
 
-    // Clean up expired conversations
-    for (const [userId, conversation] of this.conversations.entries()) {
-      if (this.isExpired(conversation)) {
+    return true;
+  }
+
+  /**
+   * Add message to conversation history
+   *
+   * SECURITY: All user messages MUST be sanitized before storing
+   *
+   * @param {string|number} userId - Telegram user ID
+   * @param {string} role - Message role ('user' or 'assistant')
+   * @param {string} content - Message content (must be sanitized if from user)
+   * @param {boolean} sanitize - Whether to sanitize content (default: true for user messages)
+   */
+  addMessage(userId, role, content, sanitize = true) {
+    const userIdStr = String(userId);
+
+    // SECURITY: Sanitize user input to prevent prompt injection
+    const finalContent = (role === 'user' && sanitize)
+      ? claudeIntegration.sanitizePromptInput(content)
+      : content;
+
+    // DoS PROTECTION: Check if we've hit the global conversation limit
+    if (!this.conversations.has(userIdStr) && this.conversations.size >= this.maxTotalConversations) {
+      console.warn(`[ConversationManager] Global conversation limit reached (${this.maxTotalConversations}), evicting oldest conversation`);
+      this.evictOldestConversation();
+    }
+
+    // Get or create conversation history for this user
+    if (!this.conversations.has(userIdStr)) {
+      this.conversations.set(userIdStr, []);
+    }
+
+    const conversation = this.conversations.get(userIdStr);
+    conversation.push({
+      role,
+      content: finalContent,
+      timestamp: new Date().toISOString()
+    });
+
+    // Limit conversation history to last 20 messages to prevent memory growth
+    if (conversation.length > 20) {
+      conversation.shift();
+    }
+
+    console.log(`[ConversationManager] Added ${role} message to conversation for user ${userIdStr}`);
+  }
+
+  /**
+   * Evict the oldest conversation (LRU eviction)
+   * Called when global conversation limit is reached
+   */
+  evictOldestConversation() {
+    let oldestUserId = null;
+    let oldestTimestamp = Infinity;
+
+    for (const [userId, messages] of this.conversations) {
+      if (messages.length === 0) {
         this.conversations.delete(userId);
-        expiredCount++;
+        return;
+      }
+
+      const lastMessage = messages[messages.length - 1];
+      const timestamp = new Date(lastMessage.timestamp).getTime();
+
+      if (timestamp < oldestTimestamp) {
+        oldestTimestamp = timestamp;
+        oldestUserId = userId;
       }
     }
 
-    // Clean up stale processing locks (older than 5 minutes)
-    const lockTimeout = 300000; // 5 minutes
-    for (const [userId, lockTime] of this.processingLocks.entries()) {
-      if (now - lockTime > lockTimeout) {
-        this.processingLocks.delete(userId);
-        staleLocks++;
-      }
-    }
-
-    if (expiredCount > 0 || staleLocks > 0) {
-      console.log(`Cleanup: removed ${expiredCount} expired conversations, ${staleLocks} stale locks`);
+    if (oldestUserId) {
+      this.conversations.delete(oldestUserId);
+      console.log(`[ConversationManager] Evicted oldest conversation for user ${oldestUserId}`);
     }
   }
 
   /**
-   * Shutdown the conversation manager gracefully
+   * Get conversation history for a user
+   *
+   * @param {string|number} userId - Telegram user ID
+   * @returns {Array} Array of message objects with {role, content, timestamp}
    */
-  shutdown() {
-    this.stopCleanup();
-    console.log('ConversationManager shutdown complete');
+  getConversation(userId) {
+    const userIdStr = String(userId);
+    return this.conversations.get(userIdStr) || [];
+  }
+
+  /**
+   * Clear conversation history for a user
+   *
+   * @param {string|number} userId - Telegram user ID
+   */
+  clearConversation(userId) {
+    const userIdStr = String(userId);
+    this.conversations.delete(userIdStr);
+    console.log(`[ConversationManager] Cleared conversation history for user ${userIdStr}`);
+  }
+
+  /**
+   * Start periodic cleanup of stale locks and old conversations
+   * Runs every minute to prevent memory leaks
+   */
+  startLockCleanup() {
+    setInterval(() => {
+      this.cleanupStaleLocks();
+      this.cleanupOldConversations();
+    }, 60000); // Every minute
+  }
+
+  /**
+   * Clean up locks that have timed out
+   */
+  cleanupStaleLocks() {
+    const now = Date.now();
+    let cleanedCount = 0;
+
+    for (const [userId, lockTimestamp] of this.processingLocks) {
+      if (now - lockTimestamp >= this.lockTimeout) {
+        this.processingLocks.delete(userId);
+        cleanedCount++;
+        console.warn(`[ConversationManager] Cleaned up stale lock for user ${userId}`);
+      }
+    }
+
+    if (cleanedCount > 0) {
+      console.log(`[ConversationManager] Cleaned up ${cleanedCount} stale lock(s)`);
+    }
+  }
+
+  /**
+   * Clean up conversations that haven't been active for 24 hours
+   */
+  cleanupOldConversations() {
+    const now = Date.now();
+    const maxAge = 24 * 60 * 60 * 1000; // 24 hours
+    let cleanedCount = 0;
+
+    for (const [userId, messages] of this.conversations) {
+      if (messages.length === 0) {
+        this.conversations.delete(userId);
+        cleanedCount++;
+        continue;
+      }
+
+      // Check timestamp of most recent message
+      const lastMessage = messages[messages.length - 1];
+      const lastTimestamp = new Date(lastMessage.timestamp).getTime();
+
+      if (now - lastTimestamp >= maxAge) {
+        this.conversations.delete(userId);
+        cleanedCount++;
+        console.log(`[ConversationManager] Cleaned up old conversation for user ${userId}`);
+      }
+    }
+
+    if (cleanedCount > 0) {
+      console.log(`[ConversationManager] Cleaned up ${cleanedCount} old conversation(s)`);
+    }
+  }
+
+  /**
+   * Get manager statistics for monitoring
+   *
+   * @returns {Object} Statistics about locks and conversations
+   */
+  getStats() {
+    return {
+      activeLocks: this.processingLocks.size,
+      activeConversations: this.conversations.size,
+      lockTimeout: this.lockTimeout,
+      totalMessages: Array.from(this.conversations.values())
+        .reduce((sum, messages) => sum + messages.length, 0)
+    };
   }
 }
 
-module.exports = ConversationManager;
+// Export singleton instance
+module.exports = new ConversationManager();

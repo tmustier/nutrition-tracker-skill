@@ -5,7 +5,7 @@ const crypto = require('crypto');
 const config = require('./config');
 const claudeIntegration = require('./claude-integration');
 const githubIntegration = require('./github-integration');
-const ConversationManager = require('./conversation-manager');
+const conversationManager = require('./conversation-manager');
 const responseHandler = require('./response-handler');
 
 /**
@@ -36,14 +36,6 @@ const responseHandler = require('./response-handler');
 
 // Initialize Telegraf bot
 const bot = new Telegraf(config.telegram.botToken);
-
-// Initialize Conversation Manager for multi-turn conversations
-const conversationManager = new ConversationManager({
-  maxMessagesPerUser: 20,
-  maxTokensPerUser: 20000,
-  conversationTTL: 1800000, // 30 minutes
-  cleanupInterval: 300000 // 5 minutes
-});
 
 // ============================================================================
 // CONSTANTS
@@ -508,7 +500,7 @@ bot.command('week', async (ctx) => {
  */
 bot.command('cancel', async (ctx) => {
   const userId = ctx.from.id;
-  conversationManager.clearHistory(userId);
+  conversationManager.clearConversation(userId);
   await ctx.reply('✅ Operation cancelled and conversation cleared. Send me your next meal whenever you\'re ready!');
 });
 
@@ -517,13 +509,8 @@ bot.command('cancel', async (ctx) => {
  */
 bot.command('clear', async (ctx) => {
   const userId = ctx.from.id;
-  const hadConversation = conversationManager.clearHistory(userId);
-
-  if (hadConversation) {
-    await ctx.reply('🗑️ Conversation history cleared! Starting fresh.');
-  } else {
-    await ctx.reply('💬 No active conversation to clear.');
-  }
+  conversationManager.clearConversation(userId);
+  await ctx.reply('🗑️ Conversation history cleared! Starting fresh.');
 });
 
 /**
@@ -531,44 +518,25 @@ bot.command('clear', async (ctx) => {
  */
 bot.command('context', async (ctx) => {
   const userId = ctx.from.id;
-  const stats = conversationManager.getStats(userId);
+  const conversation = conversationManager.getConversation(userId);
+  const stats = conversationManager.getStats();
 
-  if (!stats) {
+  if (conversation.length === 0) {
     await ctx.reply('💬 No active conversation.\n\nStart chatting to build conversation context!');
     return;
   }
 
-  const ageMinutes = Math.round(stats.age / 60000);
-  const lastActivityMinutes = Math.round(stats.lastActivity / 60000);
-
   const contextMessage = `📋 **Conversation Context**
 
-**Messages:** ${stats.messageCount} messages in history
-**Estimated tokens:** ~${stats.estimatedTokens} tokens
-**Age:** ${ageMinutes} minutes
-**Last activity:** ${lastActivityMinutes} minutes ago
-**Status:** ${stats.isExpired ? '⚠️ Expired' : '✅ Active'}
+**Your messages:** ${conversation.length} messages
+**System stats:**
+  • Active conversations: ${stats.activeConversations}
+  • Total messages: ${stats.totalMessages}
+  • Active locks: ${stats.activeLocks}
 
 💡 Use /clear to reset the conversation.`;
 
   await ctx.reply(contextMessage);
-});
-
-/**
- * /stats - Show system statistics (for debugging)
- */
-bot.command('stats', async (ctx) => {
-  const systemStats = conversationManager.getSystemStats();
-
-  const statsMessage = `📊 **System Statistics**
-
-**Active conversations:** ${systemStats.activeConversations}
-**Total conversations:** ${systemStats.totalConversations}
-**Total messages:** ${systemStats.totalMessages}
-**Estimated tokens:** ~${systemStats.estimatedTotalTokens}
-**Processing locks:** ${systemStats.processingLocks}`;
-
-  await ctx.reply(statsMessage);
 });
 
 // ============================================================================
@@ -587,34 +555,40 @@ bot.on('text', async (ctx) => {
     return;
   }
 
+  // Check for processing lock
+  if (conversationManager.isLocked(userId)) {
+    await ctx.reply('⏳ Please wait, I\'m still processing your previous message...');
+    return;
+  }
+
+  // Acquire lock
+  if (!conversationManager.acquireLock(userId)) {
+    await ctx.reply('⏳ Please wait, I\'m still processing your previous message...');
+    return;
+  }
+
   try {
-    // Step 1: Check for processing lock to prevent race conditions
-    if (conversationManager.isProcessing(userId)) {
-      await ctx.reply('⏳ Please wait, I\'m still processing your previous message...');
-      return;
-    }
-
-    // Acquire processing lock
-    if (!conversationManager.acquireLock(userId)) {
-      await ctx.reply('⏳ Please wait, I\'m still processing your previous message...');
-      return;
-    }
-
-    // Step 2: Send processing message
+    // Step 1: Send processing message
     const processingMsg = await ctx.reply('🔍 Processing...');
 
-    // Step 3: Get conversation history
-    const conversationHistory = conversationManager.getHistory(userId);
-    const hasHistory = conversationHistory.length > 0;
+    // Step 2: Get conversation history
+    const conversationHistory = conversationManager.getConversation(userId);
 
-    // Step 4: Store user message in conversation
-    conversationManager.addUserMessage(userId, userMessage);
+    // Step 3: Add user message to history (auto-sanitized)
+    conversationManager.addMessage(userId, 'user', userMessage);
 
-    // Step 5: Process with Claude (with conversation history)
+    // Step 4: Process with Claude (with conversation history)
     console.log(`Processing message from user ${userId} (history: ${conversationHistory.length} messages): ${sanitizeForLogging(userMessage)}`);
-    const result = await claudeIntegration.processFoodLog(userMessage, userId, conversationHistory);
 
-    // Step 6: Detect response type and handle accordingly
+    // Convert conversation to Claude API format
+    const messages = conversationHistory.map(msg => ({
+      role: msg.role,
+      content: msg.content
+    }));
+
+    const result = await claudeIntegration.processFoodLog(userMessage, userId, messages);
+
+    // Step 5: Detect response type and handle accordingly
     const responseText = result.responseText || '';
     const detection = responseHandler.detectResponseType(responseText);
 
@@ -622,19 +596,17 @@ bot.on('text', async (ctx) => {
 
     // Store assistant's response in conversation history
     if (responseText) {
-      conversationManager.addAssistantMessage(userId, responseText);
+      conversationManager.addMessage(userId, 'assistant', responseText, false); // Don't sanitize assistant responses
     }
 
-    // Handle based on response type
+    // Handle conversational responses (no logging)
     if (detection.type === responseHandler.ResponseType.CONVERSATIONAL) {
-      // Pure conversational response - no logging to GitHub
       await ctx.telegram.editMessageText(
         ctx.chat.id,
         processingMsg.message_id,
         null,
         `💬 ${responseText}`
       );
-      conversationManager.releaseLock(userId);
       return;
     }
 
@@ -647,7 +619,6 @@ bot.on('text', async (ctx) => {
           null,
           `💬 ${responseText}`
         );
-        conversationManager.releaseLock(userId);
         return;
       }
 
@@ -658,7 +629,6 @@ bot.on('text', async (ctx) => {
         null,
         `❌ Could not process food log. ${result.message || 'Please try again with more details.'}\n\nExample: "200g grilled chicken breast" or "2 scrambled eggs"`
       );
-      conversationManager.releaseLock(userId);
       return;
     }
 
@@ -763,15 +733,13 @@ ${result.source === 'usda' ? '📚 Data source: USDA FoodData Central' : '🤖 D
       null,
       successMessage
     );
-
-    // Release processing lock
-    conversationManager.releaseLock(userId);
   } catch (error) {
     console.error('Error processing text message:', error);
     await ctx.reply(
       `❌ Error logging food: ${sanitizeErrorForUser(error)}\n\nPlease try again or contact support if the issue persists.`
     );
-    // Release lock in case of error
+  } finally {
+    // CRITICAL: Always release lock, even on error
     conversationManager.releaseLock(userId);
   }
 });
@@ -780,13 +748,33 @@ ${result.source === 'usda' ? '📚 Data source: USDA FoodData Central' : '🤖 D
  * Handle photo messages - Process screenshots
  */
 bot.on('photo', async (ctx) => {
+  const userId = ctx.from.id;
+
+  // Validate photo input
+  const photos = ctx.message.photo;
+  if (!Array.isArray(photos) || photos.length === 0) {
+    await ctx.reply('❌ No photo data received. Please try again.');
+    return;
+  }
+
+  // Check for processing lock
+  if (conversationManager.isLocked(userId)) {
+    await ctx.reply('⏳ Please wait, I\'m still processing your previous message...');
+    return;
+  }
+
+  // Acquire lock
+  if (!conversationManager.acquireLock(userId)) {
+    await ctx.reply('⏳ Please wait, I\'m still processing your previous message...');
+    return;
+  }
+
   try {
     // Step 1: Send processing message
     const processingMsg = await ctx.reply('📸 Processing screenshot...');
 
     // Step 2: Download photo
     // Telegram sends multiple photo sizes - get the highest resolution
-    const photos = ctx.message.photo;
     const photo = photos[photos.length - 1]; // Largest size
     const fileId = photo.file_id;
 
@@ -930,6 +918,9 @@ bot.on('photo', async (ctx) => {
     await ctx.reply(
       `❌ Error processing screenshot: ${sanitizeErrorForUser(error)}\n\nPlease try again with a different image or send a text description.`
     );
+  } finally {
+    // CRITICAL: Always release lock, even on error
+    conversationManager.releaseLock(userId);
   }
 });
 
