@@ -34,3 +34,9 @@ yarn-error.log*
 *.swp
 *.swo
 *~
+
+# Auto-generated files (managed by CI)
+# The food bank index is regenerated automatically by CI on the main branch
+# to prevent merge conflicts when multiple branches add dishes in parallel.
+# To regenerate locally: python scripts/generate_index.py
+data/food-data-bank-index.md
