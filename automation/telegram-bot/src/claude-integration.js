@@ -5,6 +5,16 @@ const usdaApi = require('./usda-api');
 
 /**
  * Sanitizes user input to prevent prompt injection attacks
+ *
+ * SECURITY CRITICAL: This function MUST be called on ALL user input before:
+ * 1. Sending to Claude API
+ * 2. Storing in conversation history (if implemented)
+ * 3. Including in any prompt or context
+ *
+ * IMPORTANT: Sanitize ONCE at the entry point, then use the sanitized version
+ * throughout the request lifecycle. Never store both sanitized and unsanitized
+ * versions as this defeats the security measure.
+ *
  * @param {string} input - Raw user input
  * @returns {string} Sanitized input safe for Claude prompts
  */
@@ -12,28 +22,29 @@ const sanitizePromptInput = (input) => {
   if (typeof input !== 'string') {
     return String(input);
   }
-  
+
   // Define patterns that could be used for prompt injection
   const dangerous = [
     /ignore (previous|all|earlier) (instructions|directions|commands)/gi,
     /system:/gi,
     /assistant:/gi,
-    /```json/gi,
+    // Removed /```json/gi - this breaks legitimate JSON code fences that Claude uses
+    // Users saying "```json" in messages is not a security risk
     /<\/?[^>]+(>|$)/gi, // HTML tags
     /\[INST\]/gi, // Instruction markers
     /\[\/INST\]/gi,
     /human:/gi,
     /ai:/gi,
   ];
-  
+
   let sanitized = input;
   dangerous.forEach(pattern => {
     sanitized = sanitized.replace(pattern, '');
   });
-  
+
   // Remove control characters that could be used for injection
   sanitized = sanitized.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '');
-  
+
   // Truncate to prevent context stuffing attacks
   return sanitized.substring(0, 1000);
 };
@@ -94,6 +105,15 @@ When the user asks you to estimate nutrition for a dish:
 - UK/EU labels report available carbs → use directly for carbs_available_g
 - US labels report total carbs → subtract fiber and polyols to get available
 - carbs_total_g = carbs_available_g + fiber_total_g + polyols_g
+
+## Conversation Handling:
+When this is a multi-turn conversation (indicated by conversation history):
+- Handle follow-up questions: If the user is asking for clarification, corrections, or adjustments to previous estimates, provide a conversational response
+- Handle clarifications/corrections: If the user provides additional details (e.g., "actually it was 200g not 150g"), recalculate and provide updated estimates
+- Response types:
+  - Return JSON when: Initial nutrition estimation request, or when user explicitly asks for final/complete data
+  - Return conversational text when: User is asking questions, seeking clarification, making corrections, or discussing options
+- When returning conversational text (no JSON), still be helpful and informative about nutrition, but indicate this is an intermediate response
 
 ## Response Format:
 Return JSON in the following structure:
@@ -223,10 +243,15 @@ class ClaudeIntegration {
    *
    * @param {string} userMessage - User's food description (e.g., "200g chicken breast grilled")
    * @param {string} userId - Telegram user ID (for context/logging)
-   * @returns {Promise<Object>} Processed nutrition data with all 24 fields
+   * @param {Array<Object>} conversationHistory - Optional array of {role, content} message objects for multi-turn conversations
+   * @returns {Promise<Object>} Processed nutrition data with all 24 fields, plus responseText for response type detection
    */
-  async processFoodLog(userMessage, userId) {
+  async processFoodLog(userMessage, userId, conversationHistory = []) {
     try {
+      // SECURITY: Sanitize input immediately at entry point to prevent injection attacks
+      // This sanitized version is used throughout the request lifecycle
+      const sanitizedMessage = sanitizePromptInput(userMessage);
+
       // Step 1: Try USDA quick lookup for generic foods
       // Check for common generic food keywords
       const genericFoodKeywords = [
@@ -236,17 +261,17 @@ class ClaudeIntegration {
         'carrot', 'tomato', 'avocado', 'almond', 'walnut', 'cashew'
       ];
 
-      const lowerMessage = userMessage.toLowerCase();
+      const lowerMessage = sanitizedMessage.toLowerCase();
       // Temporarily disable USDA due to API reliability issues - fallback to Claude for all requests
       const isGenericFood = false; // genericFoodKeywords.some(kw => lowerMessage.includes(kw));
 
       if (isGenericFood) {
         try {
-          console.log(`Attempting USDA lookup for: ${userMessage}`);
-          const usdaResult = await usdaApi.quickLookup(userMessage);
+          console.log(`Attempting USDA lookup for: ${sanitizedMessage}`);
+          const usdaResult = await usdaApi.quickLookup(sanitizedMessage);
 
           if (usdaResult.success) {
-            console.log(`✓ USDA lookup successful for: ${userMessage}`);
+            console.log(`✓ USDA lookup successful for: ${sanitizedMessage}`);
 
             // Transform USDA result to our format
             return {
@@ -269,19 +294,33 @@ class ClaudeIntegration {
       }
 
       // Step 2: Use Claude for estimation (either non-generic or USDA failed)
-      console.log(`Using Claude API for: ${userMessage}`);
+      console.log(`Using Claude API for: ${sanitizedMessage}`);
 
       // Check rate limiting before making API call
       this.checkRateLimit();
 
-      const requestBody = {
-        model: this.model,
-        max_tokens: this.maxTokens,
-        system: SKILL_CONTEXT,
-        messages: [
+      // Prepare system prompt based on whether we have conversation history
+      let systemPrompt = SKILL_CONTEXT;
+      let messages = [];
+
+      if (conversationHistory && conversationHistory.length > 0) {
+        // Multi-turn conversation mode
+        systemPrompt = SKILL_CONTEXT + '\n\nThis is a multi-turn conversation. Previous messages are provided in the conversation history. Handle follow-up questions, clarifications, and corrections naturally.';
+
+        // Use the provided conversation history and append the new user message
+        messages = [
+          ...conversationHistory,
           {
             role: 'user',
-            content: `I just ate: ${sanitizePromptInput(userMessage)}
+            content: sanitizePromptInput(userMessage)
+          }
+        ];
+      } else {
+        // Single-turn mode (original behavior)
+        messages = [
+          {
+            role: 'user',
+            content: `I just ate: ${sanitizedMessage}
 
 Please estimate the complete nutrition data and return it in the JSON format specified in your instructions.
 
@@ -294,7 +333,14 @@ Requirements:
 
 Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
           }
-        ]
+        ];
+      }
+
+      const requestBody = {
+        model: this.model,
+        max_tokens: this.maxTokens,
+        system: systemPrompt,
+        messages: messages
       };
 
       // Add extended thinking if enabled
@@ -340,7 +386,8 @@ Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
           return {
             success: false,
             message: 'Invalid JSON format in Claude response',
-            error: parseError.message
+            error: parseError.message,
+            responseText: claudeText
           };
         }
 
@@ -351,7 +398,8 @@ Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
           return {
             success: false,
             message: 'Invalid nutrition data structure from Claude',
-            errors: validationResult.errors
+            errors: validationResult.errors,
+            responseText: claudeText
           };
         }
 
@@ -380,15 +428,18 @@ Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
         return {
           success: true,
           source: 'claude',
-          data: nutritionData
+          data: nutritionData,
+          responseText: claudeText
         };
       } else {
-        // Claude didn't return properly formatted JSON
-        console.error('Claude response missing JSON block:', claudeText);
+        // Claude didn't return properly formatted JSON - this might be a conversational response
+        console.log('Claude response without JSON block (possibly conversational):', claudeText.substring(0, 200));
         return {
           success: false,
           message: 'Could not parse nutrition data from Claude response',
-          raw_response: claudeText.substring(0, 500) // Truncate for safety
+          raw_response: claudeText.substring(0, 500), // Truncate for safety
+          responseText: claudeText,
+          isConversational: true // Flag to indicate this might be a conversational response
         };
       }
     } catch (error) {
@@ -748,4 +799,11 @@ Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
   }
 }
 
-module.exports = new ClaudeIntegration();
+// Export ClaudeIntegration instance as default export
+const claudeIntegration = new ClaudeIntegration();
+
+// Also export sanitizePromptInput for use in other modules
+// SECURITY: Use this when storing conversation history or processing user input
+claudeIntegration.sanitizePromptInput = sanitizePromptInput;
+
+module.exports = claudeIntegration;
