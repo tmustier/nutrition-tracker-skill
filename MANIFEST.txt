@@ -4,6 +4,12 @@ nutrition-tracker-skill/
   LICENSE
   MANIFEST.txt
   .gitignore
+  research/
+    food-preparation/
+    rda-alignment/
+    implementation-starter-kit/
+    usda-api-research.md
+    nutrient-extension-summary.md
   data/food-data-bank/
     venues/
       simple-health-kitchen/

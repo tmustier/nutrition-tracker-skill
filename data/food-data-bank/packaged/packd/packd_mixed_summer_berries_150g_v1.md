@@ -153,7 +153,7 @@ change_log:
       blackberries have no USDA biotin data. Mixed berries B7 lower than pure blueberries
       due to dilution effect.'},
   {note: 'Chromium and molybdenum: Not routinely analyzed by USDA for any berry
-      components; confirmed 0 per USDA_API_RESEARCH.md'}]
+      components; confirmed 0 per research/usda-api-research.md'}]
 - timestamp: '2025-11-05T20:15:00+00:00'
   updated_by: 'Agent 7: Claude Sonnet 4.5'
   reason: Verification of TRUE zeros for chromium and molybdenum in mixed berries
