@@ -56,8 +56,8 @@ per_portion:  # Schema v2: 52 nutrient fields
   chromium_ug: 1
   molybdenum_ug: 3
   phosphorus_mg: 50
-  chloride_mg: 480
-  sulfur_g: 0.05
+  chloride_mg: 467.0
+  sulfur_g: 0.016
   # Vitamins
   vitamin_a_ug: 34
   vitamin_d_ug: 0.05
@@ -95,5 +95,10 @@ notes:
   - "Vitamin A, D, E, K from butter"
   - "Iron and selenium from enriched flour"
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
   - "2025-11-06: Initial creation with complete 52-nutrient profile based on SHK PDF (page 15) and USDA component analysis"
 ```

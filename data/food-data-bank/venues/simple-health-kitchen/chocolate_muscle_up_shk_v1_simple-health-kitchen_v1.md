@@ -56,8 +56,8 @@ per_portion:  # Schema v2: 52 nutrient fields
   chromium_ug: 2.5
   molybdenum_ug: 12
   phosphorus_mg: 554
-  chloride_mg: 268
-  sulfur_g: 0.48
+  chloride_mg: 265.0
+  sulfur_g: 0.164
   # Vitamins
   vitamin_a_ug: 60
   vitamin_d_ug: 1.6
@@ -107,6 +107,11 @@ notes:
   - "ALA omega-3 from oats (0.044g), banana (0.027g), peanut butter (0.004g), milk (0.004g) = 0.08g"
   - "LA omega-6 primarily from peanut butter (2.82g), oats (0.97g), minimal from other sources = 3.94g"
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
   - timestamp: 2025-11-06T00:00:00+0000
     updated_by: 'LLM: Claude Sonnet 4.5'
     reason: Initial population from SHK PDF with component-based estimation using USDA FoodData Central

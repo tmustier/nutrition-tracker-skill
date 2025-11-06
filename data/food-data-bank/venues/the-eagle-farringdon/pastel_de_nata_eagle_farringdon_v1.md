@@ -54,8 +54,8 @@ per_portion:
   chromium_ug: 1
   molybdenum_ug: 2
   phosphorus_mg: 95
-  chloride_mg: 200
-  sulfur_g: 0.05
+  chloride_mg: 323.0
+  sulfur_g: 0.021
   vitamin_a_ug: 165
   vitamin_k_ug: 1.5
   vitamin_b1_mg: 0.03
@@ -93,6 +93,11 @@ notes:
 - 'Atwater check (available carb basis): 4×5.2 + 9×14.8 + 4×31.2 + 2×1.1 + 2.4×0.0
   = 281 kcal'
 change_log:
+
+  - timestamp: "2025-11-06T23:28:47+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: 2025-11-02T12:00:00+0000
   updated_by: "LLM: GPT-5 Codex"
   reason: Initial estimate for Pastel de Nata dessert at The Eagle

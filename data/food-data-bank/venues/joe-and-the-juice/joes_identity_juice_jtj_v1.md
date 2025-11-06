@@ -49,8 +49,8 @@ per_portion:
   chromium_ug: 3
   molybdenum_ug: 6
   phosphorus_mg: 117
-  chloride_mg: 166
-  sulfur_g: 0.083
+  chloride_mg: 42.0
+  sulfur_g: 0.016
   vitamin_a_ug: 511
   vitamin_d_ug: 0
   vitamin_e_mg: 2.4
@@ -83,6 +83,11 @@ notes:
 - Standard serving size is 12 oz (~355ml)
 - Atwater check (available carb basis): 4×4.0 + 9×2.0 + 4×9.0 + 2×4.0 + 2.4×0.0 = 78 kcal
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: 2025-10-28T18:51:39+0000
   updated_by: 'LLM: GPT-5 Thinking'
   reason: Populate per_portion from user-provided data

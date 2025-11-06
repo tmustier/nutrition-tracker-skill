@@ -61,8 +61,8 @@ per_portion:  # Schema v2: 52 nutrient fields (summed from components)
   chromium_ug: 3.5
   molybdenum_ug: 8
   phosphorus_mg: 380
-  chloride_mg: 1420
-  sulfur_g: 0.38
+  chloride_mg: 1417.0
+  sulfur_g: 0.186
   # Vitamins
   vitamin_a_ug: 295
   vitamin_d_ug: 2.2
@@ -111,6 +111,11 @@ notes:
   - "High satiety breakfast - protein, fiber, and healthy fats support sustained energy"
   - "Referenced files: sourdough_bread_butter_shk_v1.md for toast component"
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
   - timestamp: "2025-11-06T00:00:00+00:00"
     updated_by: "Claude Code (Sonnet 4.5)"
     reason: "Initial creation with complete 52-nutrient profile using component-based estimation per ESTIMATE.md"

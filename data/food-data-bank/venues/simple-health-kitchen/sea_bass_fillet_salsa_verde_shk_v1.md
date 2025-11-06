@@ -53,8 +53,8 @@ per_portion:
   chromium_ug: 0
   molybdenum_ug: 0
   phosphorus_mg: 267
-  chloride_mg: 0
-  sulfur_g: 0.0
+  chloride_mg: 493.0
+  sulfur_g: 0.101
   vitamin_a_ug: 33
   vitamin_k_ug: 0
   vitamin_b1_mg: 0.13
@@ -89,6 +89,11 @@ notes:
   - "Carbs from lemon juice dressing (4g available carbs, minimal fiber)"
   - "Allergens listed in PDF: Fish, Sulphides"
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
   - timestamp: "2025-11-03T12:45:00+00:00"
     updated_by: "LLM: Claude Sonnet 4.5"
     reason: "Initial population from Simple Health Kitchen nutrition PDF"

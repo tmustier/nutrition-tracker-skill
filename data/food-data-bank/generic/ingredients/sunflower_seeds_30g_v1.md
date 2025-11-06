@@ -50,8 +50,8 @@ per_portion:
   chromium_ug: 0
   molybdenum_ug: 0
   phosphorus_mg: 198
-  chloride_mg: 0
-  sulfur_g: 0.0
+  chloride_mg: 5.0
+  sulfur_g: 0.025
   vitamin_a_ug: 1
   vitamin_d_ug: 0
   vitamin_k_ug: 0
@@ -90,6 +90,11 @@ notes:
 - 'Note: Vitamin D, B12, vitamin K, and iodine are naturally absent or trace in plant-based
   seeds'
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: "2025-11-05T16:00:00+00:00"
   updated_by: "Claude Code (Sonnet 4.5)"
   reason: "CRITICAL FIX: Corrected EPA value - plant foods cannot contain marine omega-3s"

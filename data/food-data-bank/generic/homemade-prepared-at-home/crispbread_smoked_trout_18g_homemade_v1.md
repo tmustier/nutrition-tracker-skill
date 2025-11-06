@@ -53,9 +53,9 @@ per_portion:
   omega3_dha_mg: 104.0
   omega3_epa_mg: 52.0
   omega6_la_g: 0.04
-  chloride_mg: 0
+  chloride_mg: 280.0
   phosphorus_mg: 48.7
-  sulfur_g: 0.0
+  sulfur_g: 0.033
   chromium_ug: 0
   molybdenum_ug: 0
   boron_mg: 0
@@ -121,6 +121,11 @@ notes:
 - "Good source of vitamin D (0.5µg) and choline (11.2mg) from trout"
 - "Contains selenium (2.0µg), phosphorus (48.7mg), and iodine (3.2µg)"
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
 - timestamp: "2025-11-05T00:00:00+00:00"
   updated_by: "Claude Code (Sonnet 4.5)"
   reason: "Initial creation of homemade composite recipe - crispbread with smoked trout"

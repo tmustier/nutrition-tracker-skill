@@ -51,8 +51,8 @@ per_portion:
   chromium_ug: 0
   molybdenum_ug: 0
   phosphorus_mg: 40.5
-  chloride_mg: 0
-  sulfur_g: 0.0
+  chloride_mg: 8.0
+  sulfur_g: 0.006
   vitamin_a_ug: 5.25
   vitamin_d_ug: 0
   vitamin_e_mg: 1.48
@@ -91,6 +91,11 @@ notes:
 - Enriched 2025-11-05 using USDA FoodData Central (FDC ID 171706) for California Hass avocados: Added 15 nutrient values (vitamins A, E, K, B1, B2, B3, B6, B9/folate, choline; minerals phosphorus, copper, selenium, manganese). Vitamin D, B12, EPA, and DHA confirmed as 0 (plant source). Iodine not tracked in USDA database.
 - "Second enrichment 2025-11-05: Added pantothenic acid (B5: 1.1mg from 1.46mg/100g USDA), biotin (B7: 4.5μg from 6μg/100g estimated mid-range), omega-3 ALA (0.08g from 0.11g/100g USDA), omega-6 LA (1.25g from 1.67g/100g USDA). Chromium and molybdenum remain 0 (not measured in USDA database for avocados)."
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: '2025-11-05T16:00:00+00:00'
   updated_by: Claude Code (Sonnet 4.5)
   reason: Second enrichment with 4 additional priority nutrients from USDA FoodData Central

@@ -55,7 +55,7 @@ per_portion:
   molybdenum_ug: 10
   phosphorus_mg: 225.0
   chloride_mg: 277
-  sulfur_g: 0.25
+  sulfur_g: 0.084
   vitamin_a_ug: 391.2
   vitamin_d_ug: 2.28
   vitamin_e_mg: 10.13
@@ -91,6 +91,11 @@ notes:
 - Sodium estimated from typical Grenade bar range (0.45g salt = ~180mg sodium)
 - Atwater check (available carb basis): 4×21.0 + 9×10.0 + 4×20.0 + 2×0.9 + 2.4×17.0 = 296.6 kcal
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: 2025-10-30T00:00:00+0000
   updated_by: Claude Code
   reason: Initial entry for Thomas's food diary tracking

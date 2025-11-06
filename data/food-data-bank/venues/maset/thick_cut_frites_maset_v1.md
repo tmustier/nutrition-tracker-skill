@@ -62,8 +62,8 @@ per_portion:  # Schema v2: 52 nutrient fields
   chromium_ug: 3.6
   molybdenum_ug: 14.6
   phosphorus_mg: 207
-  chloride_mg: 864
-  sulfur_g: 0.062
+  chloride_mg: 711.0
+  sulfur_g: 0.031
   # Vitamins
   vitamin_a_ug: 0
   vitamin_d_ug: 0
@@ -117,6 +117,11 @@ notes:
 - "Atwater validation: 4×7.8 + 9×20.3 + 4×61.1 + 2×4.7 + 2.4×0 = 468 kcal (±0.6% vs 465 kcal stated)"
 - "USER ATE 2/3 PORTION: For logging, scale all values by 0.667 (e.g., 465 kcal × 0.667 = 310 kcal)"
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: 2025-11-05T21:55:00+00:00
   updated_by: "LLM: Claude Sonnet 4.5"
   reason: "Initial comprehensive entry for Maset thick-cut frites with complete 52-field nutrition profile using component-based estimation"

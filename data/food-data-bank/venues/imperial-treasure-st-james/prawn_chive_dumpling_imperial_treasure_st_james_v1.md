@@ -56,8 +56,8 @@ per_portion:
   chromium_ug: 0.7
   molybdenum_ug: 1
   phosphorus_mg: 32
-  chloride_mg: 52
-  sulfur_g: 0.028
+  chloride_mg: 477.0
+  sulfur_g: 0.008
   vitamin_a_ug: 5
   vitamin_d_ug: 0.1
   vitamin_e_mg: 0.25
@@ -103,6 +103,11 @@ notes:
 - Imperial Treasure is Michelin Guide listed, upscale Cantonese restaurant at 9 Waterloo Place, St Jamess, London
 - Portion consumed: 1 piece out of a typical serving of 3 pieces per order
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: 2025-11-02
   reason: Initial entry - component-based estimation for dim sum dish
   fields_changed: [all fields]

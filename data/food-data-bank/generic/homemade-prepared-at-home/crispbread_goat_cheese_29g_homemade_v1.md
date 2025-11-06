@@ -56,9 +56,9 @@ per_portion:
   omega3_dha_mg: 0
   omega3_epa_mg: 0
   omega6_la_g: 0.12
-  chloride_mg: 0
+  chloride_mg: 185.0
   phosphorus_mg: 78
-  sulfur_g: 0.0
+  sulfur_g: 0.025
   chromium_ug: 0
   molybdenum_ug: 0
   boron_mg: 0
@@ -104,6 +104,11 @@ notes:
   - ""
   - "**Macronutrient split:** 19% protein, 49% fat, 30% carbs (available carb basis), 2% fiber"
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
   - timestamp: "2025-11-05T10:52:00+00:00"
     updated_by: "Claude Code (Sonnet 4.5)"
     reason: "Initial entry - homemade recipe combining Amisa buckwheat crispbread with Chavroux goat's cheese"

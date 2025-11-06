@@ -59,8 +59,8 @@ per_portion:  # Schema v2: 52 nutrient fields
   chromium_ug: 8
   molybdenum_ug: 12
   phosphorus_mg: 110
-  chloride_mg: 225
-  sulfur_g: 0.03
+  chloride_mg: 223.0
+  sulfur_g: 0.006
   # Vitamins
   vitamin_a_ug: 1150
   vitamin_d_ug: 0
@@ -102,6 +102,11 @@ notes:
 - "Roasting method assumed: vegetables roasted at ~200°C with light oil coating, resulting in caramelization and concentrated sugars."
 - "Atwater validation (adjusted carbs): 4×1.6 + 9×5.0 + 4×21.0 + 2×8.9 = 6.4 + 45.0 + 84.0 + 17.8 = 153.2 kcal (1.2% lower than stated 155 kcal, excellent agreement)"
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: 2025-11-06T00:00:00+0000
   updated_by: "Claude Sonnet 4.5 (Ultrathink estimation)"
   reason: "Complete nutrient estimation from SHK PDF macros + USDA component analysis (FDC 170394, 170009, 172234, 172336)"
