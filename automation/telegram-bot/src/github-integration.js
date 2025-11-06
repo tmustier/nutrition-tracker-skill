@@ -232,7 +232,7 @@ class GitHubIntegration {
    *
    * This method:
    * 1. Fetches the current log file (or creates new structure)
-   * 2. Adds a new entry with timestamp and nutrition data
+   * 2. Adds a new entry with timestamp, user info, and nutrition data
    * 3. Converts to YAML
    * 4. Commits to GitHub with atomic update (using file SHA)
    * 5. Implements retry logic with exponential backoff for race condition handling
@@ -250,6 +250,8 @@ class GitHubIntegration {
    *     notes: string|null         // Optional notes about the meal
    *   }
    * @param {string} [timestamp] - Optional ISO 8601 timestamp. Defaults to current time.
+   * @param {number} [userId] - Telegram user ID for multi-user tracking
+   * @param {string} [userName] - User's display name for multi-user tracking
    * @returns {Promise<Object>} Commit result with structure:
    *   {
    *     success: boolean,
@@ -257,7 +259,7 @@ class GitHubIntegration {
    *     commit_url: string
    *   }
    */
-  async appendLogEntry(nutritionData, timestamp = null) {
+  async appendLogEntry(nutritionData, timestamp = null, userId = null, userName = null) {
     try {
       // Validate required fields
       if (!nutritionData.name) {
@@ -278,6 +280,8 @@ class GitHubIntegration {
         // Create new entry according to SCHEMA.md format
         const newEntry = {
           timestamp: entryTimestamp,
+          user_id: userId,
+          user_name: userName,
           items: [
             {
               name: nutritionData.name,
@@ -374,6 +378,7 @@ class GitHubIntegration {
    * in all entries. Returns aggregated totals for key macros.
    *
    * @param {string} [date] - Optional date string (YYYY-MM-DD). Defaults to today.
+   * @param {number} [userId] - Optional user ID to filter entries by specific user
    * @returns {Promise<Object>} Daily totals with structure:
    *   {
    *     date: string,
@@ -396,7 +401,7 @@ class GitHubIntegration {
    *     vitamin_c_mg: number
    *   }
    */
-  async getTodaysTotals(date = null) {
+  async getTodaysTotals(date = null, userId = null) {
     try {
       const logFile = await this.getOrCreateLogFile(date);
       const targetDate = date || this.getCurrentDate();
@@ -409,7 +414,7 @@ class GitHubIntegration {
       // Initialize totals with all tracked fields
       const totals = {
         date: targetDate,
-        entries: logFile.data.entries.length,
+        entries: 0, // Will count as we iterate
         items: 0,
         energy_kcal: 0,
         protein_g: 0,
@@ -429,11 +434,20 @@ class GitHubIntegration {
       };
 
       // Sum up nutrition from all entries and items
+      // If userId is provided, only count entries for that user
       logFile.data.entries.forEach(entry => {
+        // Filter by user if userId is specified
+        if (userId !== null && entry.user_id !== userId) {
+          return; // Skip entries from other users
+        }
+
         if (!entry.items || !Array.isArray(entry.items)) {
           console.warn('Entry missing items array:', entry);
           return;
         }
+
+        // Count this entry
+        totals.entries++;
 
         entry.items.forEach(item => {
           totals.items++;
