@@ -39,9 +39,10 @@ const { encoding_for_model } = require('tiktoken');
  * These values can be overridden via environment variables for production tuning
  */
 const CONFIG = {
-  // Lock timeout in milliseconds (30 seconds)
-  // Consider increasing for Claude extended thinking mode if timeouts occur
-  LOCK_TIMEOUT_MS: parseInt(process.env.CONVERSATION_LOCK_TIMEOUT_MS) || 30000,
+  // Lock timeout in milliseconds (150 seconds)
+  // CRITICAL: Must be >= Claude API timeout (120s) + processing overhead
+  // Claude API has 120s timeout for extended thinking; we add 30s buffer for GitHub writes
+  LOCK_TIMEOUT_MS: parseInt(process.env.CONVERSATION_LOCK_TIMEOUT_MS) || 150000,
 
   // Maximum number of total conversations stored globally (DoS protection)
   // When exceeded, oldest conversations are evicted (LRU)
@@ -84,6 +85,11 @@ class ConversationManager {
     this.maxConversationAge = CONFIG.MAX_CONVERSATION_AGE_MS;
 
     // Initialize tiktoken encoder for Claude (using GPT-4's encoding as approximation)
+    // ACCURACY NOTE: Claude uses a different tokenizer than GPT-4
+    // - Expected variance: ±10-15% in token counts
+    // - This is acceptable for conversation trimming (not billing-critical)
+    // - MAX_TOKENS_PER_CONVERSATION (20K) provides buffer below Claude's 200K limit
+    // - For precise billing, use Claude API's usage.input_tokens from responses
     // cl100k_base is the encoding used by GPT-4, which is similar to Claude's tokenizer
     try {
       this.tokenEncoder = encoding_for_model('gpt-4');
