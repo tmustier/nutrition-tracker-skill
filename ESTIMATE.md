@@ -9,11 +9,13 @@ When the nutrition tracking system expanded from 24 to 52 nutrient fields (Schem
 **For the 28 nutrients added during v2 migration, `0` does NOT mean "confirmed zero"** - it means **"unknown/not yet researched"**.
 
 #### The 28 "Unknown" Nutrients Requiring Historical Research:
-1. **Trace Minerals (7)**: `copper_mg`, `selenium_ug`, `chromium_ug`, `molybdenum_ug`, `phosphorus_mg`, `chloride_mg`, `sulfur_g`
+1. **Trace Minerals (7)**: `copper_mg`, `selenium_ug`, `chromium_ug`, `molybdenum_ug`, `phosphorus_mg`, `chloride_mg`*, `sulfur_g`*
 2. **B-Complex Vitamins (9)**: `vitamin_b1_mg`, `vitamin_b2_mg`, `vitamin_b3_mg`, `vitamin_b5_mg`, `vitamin_b6_mg`, `vitamin_b7_ug`, `vitamin_b9_ug`, `vitamin_b12_ug`, `choline_mg`
 3. **Fat-Soluble Vitamins (4)**: `vitamin_a_ug`, `vitamin_d_ug`, `vitamin_e_mg`, `vitamin_k_ug`
 4. **Specific Fatty Acids (4)**: `omega3_epa_mg`, `omega3_dha_mg`, `omega3_ala_mg`, `omega6_la_mg`
-5. **Ultra-Trace Minerals (4)**: `boron_ug`, `silicon_mg`, `vanadium_ug`, `nickel_ug`
+5. **Ultra-Trace Minerals (4)**: `boron_mg`, `silicon_mg`, `vanadium_ug`, `nickel_ug` - **NOT TRACKED** (see section below)
+
+*Chloride and sulfur are **derived/calculated** from sodium and protein respectively (see Derived Nutrients section below).
 
 ### 🎯 Research Priority for Historical Records
 
@@ -207,6 +209,62 @@ No estimation needed when value is scientifically zero:
 - B12: unfortified plant foods
 - Fiber: pure animal products
 - Iodine: pure oils/fats
+
+## Ultra-Trace Minerals: NOT TRACKED (Boron, Silicon, Vanadium, Nickel)
+
+**Status**: These 4 nutrients are set to `0` in all food bank entries (meaning **"not tracked"**, not "confirmed zero").
+
+**Nutrients NOT tracked**:
+- `boron_mg` - Bone health research, but no RDA established
+- `silicon_mg` - Connective tissue/cardiovascular interest, but no RDA
+- `vanadium_ug` - Insulin research, but no human requirements
+- `nickel_ug` - Not established as essential in humans
+
+**Why NOT tracked** (Decision: Nov 2025):
+1. **No USDA coverage** - Not analyzed in FoodData Central or any major food database worldwide
+2. **No established RDAs/AIs** - Institute of Medicine (2001): insufficient data for dietary recommendations
+3. **Regional variation 10-100×** - Soil type affects content more than food type; cannot estimate without provenance data
+4. **Deficiency extremely rare** - No confirmed human deficiency syndromes on normal diets
+5. **Industry consensus** - Cronometer, MyFitnessPal, and all major nutrition apps do NOT track these
+6. **High estimation risk** - False deficiency signals could lead to unnecessary supplementation
+
+**For users interested in these nutrients**:
+- **Boron**: Focus on plant-rich diet (nuts, legumes, fruits, vegetables). Typical intake 1-3mg/day is adequate.
+- **Silicon**: Whole grains (oats, barley), green beans, mineral water. Typical intake 20-30mg/day.
+- **Vanadium/Nickel**: No established health requirements; adequate in normal varied diet.
+
+**See also**: `/home/user/nutrition-tracking/research/ultra-trace-minerals-decision.md` for full research analysis.
+
+**Future**: If peer-reviewed RDAs are established and food databases improve coverage, these fields can be populated. Schema already supports them (52-nutrient structure in place).
+
+## Derived Nutrients: Chloride and Sulfur
+
+**Status**: CALCULATED from other nutrients (not directly from USDA).
+
+### Chloride (from Sodium)
+- **Formula**: `chloride_mg = sodium_mg × 1.54`
+- **Rationale**: NaCl mass ratio (Cl: 35.45 g/mol, Na: 22.99 g/mol)
+- **Confidence**: MEDIUM (±10-15%)
+- **Assumption**: Sodium primarily from table salt; other sodium sources (sodium bicarbonate, MSG) would slightly overestimate
+- **When to use**: For any food with sodium >50mg
+
+### Sulfur (from Protein)
+- **Formula**:
+  - Animal products: `sulfur_g = protein_g × 0.01` (1.0% of protein)
+  - Plant products: `sulfur_g = protein_g × 0.004` (0.4% of protein)
+- **Rationale**: Sulfur-containing amino acids (methionine, cysteine) content
+- **Confidence**: MEDIUM (±15-25%)
+- **Variation**: Actual amino acid profile varies by protein source; egg whites are higher (~1.5%), some plant proteins lower
+- **When to use**: For any food with protein >1g
+
+**Documentation**: When using derived nutrients, add note to `change_log`:
+```yaml
+change_log:
+  - timestamp: "2025-11-06T..."
+    updated_by: "LLM: Claude Sonnet 4.5"
+    change: "Added chloride (derived from sodium) and sulfur (derived from protein)"
+    notes: "Chloride = 1.54 × sodium (NaCl ratio). Sulfur = 1% of protein (animal) or 0.4% (plant)."
+```
 
 # Research Documentation: Sources, Evidence, and Venue-Specific Guidelines
 Always write down what was used. Put links/notes under `source.evidence`.
