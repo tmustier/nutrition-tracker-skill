@@ -138,5 +138,5 @@ change_log:
     note: 'USDA cooked ham: B5=0.9mg/100g, LA=2.16g/100g. Scaled to 30g: B5=0.27mg, LA=0.65g'
   - url: 'nutrivore.com/swiss-cheese'
     note: 'Emmental cheese: B5=0.72mg/100g, ALA=0.5g/100g, LA=0.97g/100g. Scaled to 20g: B5=0.14mg, ALA=0.10g, LA=0.19g'
-  methodology: 'Component-based summation for 120g composite: Butter croissant 70g + Ham 30g + Emmental cheese 20g. TOTALS: B5: 0.60+0.27+0.14=1.0mg (excellent source, ham contributes 27%); B7: 1.4+0.3+0.2=2µg (estimated from typical values for pastry, pork, and cheese); ALA: 0.016+0.006+0.10=0.12g (cheese dominant source from grass-fed dairy); LA: 0.55+0.65+0.19=1.4g (ham contributes 46%). Biotin values estimated from literature as USDA often doesn'\''t track B7.'
+  methodology: 'Component-based summation for 120g composite: Butter croissant 70g + Ham 30g + Emmental cheese 20g. TOTALS: B5: 0.60+0.27+0.14=1.0mg (excellent source, ham contributes 27%); B7: 1.4+0.3+0.2=2µg (estimated from typical values for pastry, pork, and cheese); ALA: 0.016+0.006+0.10=0.12g (cheese dominant source from grass-fed dairy); LA: 0.55+0.65+0.19=1.4g (ham contributes 46%). Biotin values estimated from literature as USDA often doesn''t track B7.'
 ```
