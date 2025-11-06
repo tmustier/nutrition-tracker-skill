@@ -528,18 +528,38 @@ bot.command('week', async (ctx) => {
 
 /**
  * /cancel - Cancel current operation and clear conversation
+ * CRITICAL: Must release lock to allow user to continue immediately
  */
 bot.command('cancel', async (ctx) => {
   const userId = ctx.from.id;
+
+  // Release processing lock if held (allows immediate retry)
+  const wasLocked = conversationManager.isLocked(userId);
+  if (wasLocked) {
+    conversationManager.releaseLock(userId);
+  }
+
+  // Clear conversation history
   conversationManager.clearConversation(userId);
-  await ctx.reply('✅ Operation cancelled and conversation cleared. Send me your next meal whenever you\'re ready!');
+
+  const lockMsg = wasLocked
+    ? '🔓 Processing lock released.\n'
+    : '';
+  await ctx.reply(`✅ Operation cancelled and conversation cleared.\n${lockMsg}Send me your next meal whenever you're ready!`);
 });
 
 /**
  * /clear - Clear conversation history
+ * Also releases lock for immediate fresh start
  */
 bot.command('clear', async (ctx) => {
   const userId = ctx.from.id;
+
+  // Release processing lock if held (allows immediate fresh start)
+  if (conversationManager.isLocked(userId)) {
+    conversationManager.releaseLock(userId);
+  }
+
   conversationManager.clearConversation(userId);
   await ctx.reply('🗑️ Conversation history cleared! Starting fresh.');
 });
