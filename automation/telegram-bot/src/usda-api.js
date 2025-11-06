@@ -136,7 +136,8 @@ class UsdaApi {
     // Network-level errors (DNS, connection, timeout issues)
     const retryableNetworkCodes = [
       'ECONNRESET',   // Connection reset by peer
-      'ETIMEDOUT',    // Request timeout
+      'ETIMEDOUT',    // System-level socket timeout
+      'ECONNABORTED', // Axios request timeout (most common timeout case)
       'ENOTFOUND',    // DNS lookup failed
       'ECONNREFUSED', // Connection refused by server
       'ENETUNREACH',  // Network unreachable
@@ -287,26 +288,31 @@ class UsdaApi {
    */
   async searchFoods(query, pageSize = 5) {
     return this.executeWithCircuitBreaker(async () => {
-      // Check rate limiting before making API call
-      this.checkRateLimit();
+      try {
+        // Check rate limiting before making API call
+        this.checkRateLimit();
 
-      // Wrap in retry logic
-      return await this.retryWithBackoff(
-        async () => {
-          const response = await axios.get(`${this.baseUrl}/foods/search`, {
-            params: {
-              api_key: this.apiKey,
-              query: query,
-              dataType: 'Foundation,SR Legacy',
-              pageSize: pageSize,
-            },
-            timeout: 30000 // 30 seconds timeout
-          });
+        // Wrap in retry logic
+        return await this.retryWithBackoff(
+          async () => {
+            const response = await axios.get(`${this.baseUrl}/foods/search`, {
+              params: {
+                api_key: this.apiKey,
+                query: query,
+                dataType: 'Foundation,SR Legacy',
+                pageSize: pageSize,
+              },
+              timeout: 30000 // 30 seconds timeout
+            });
 
-          return response.data.foods || [];
-        },
-        'USDA food search'
-      );
+            return response.data.foods || [];
+          },
+          'USDA food search'
+        );
+      } catch (error) {
+        console.error('USDA API search error:', error.message);
+        throw new Error('Failed to search USDA database');
+      }
     });
   }
 
@@ -316,28 +322,33 @@ class UsdaApi {
    */
   async getFoodDetails(fdcId) {
     return this.executeWithCircuitBreaker(async () => {
-      // Check rate limiting before making API call
-      this.checkRateLimit();
+      try {
+        // Check rate limiting before making API call
+        this.checkRateLimit();
 
-      // Wrap in retry logic
-      return await this.retryWithBackoff(
-        async () => {
-          const response = await axios.get(`${this.baseUrl}/food/${fdcId}`, {
-            params: {
-              api_key: this.apiKey,
-            },
-            timeout: 30000 // 30 seconds timeout
-          });
+        // Wrap in retry logic
+        return await this.retryWithBackoff(
+          async () => {
+            const response = await axios.get(`${this.baseUrl}/food/${fdcId}`, {
+              params: {
+                api_key: this.apiKey,
+              },
+              timeout: 30000 // 30 seconds timeout
+            });
 
-          // Validate response is actual food data, not HTML error page
-          if (!response.data || typeof response.data !== 'object' || !response.data.foodNutrients) {
-            throw new Error('Invalid response from USDA API - missing foodNutrients');
-          }
+            // Validate response is actual food data, not HTML error page
+            if (!response.data || typeof response.data !== 'object' || !response.data.foodNutrients) {
+              throw new Error('Invalid response from USDA API - missing foodNutrients');
+            }
 
-          return response.data;
-        },
-        `USDA food details (FDC ID: ${fdcId})`
-      );
+            return response.data;
+          },
+          `USDA food details (FDC ID: ${fdcId})`
+        );
+      } catch (error) {
+        console.error('USDA API detail error:', error.message);
+        throw new Error('Failed to get food details from USDA');
+      }
     });
   }
 
