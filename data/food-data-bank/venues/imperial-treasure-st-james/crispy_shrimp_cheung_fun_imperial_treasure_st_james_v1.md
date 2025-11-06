@@ -90,18 +90,18 @@ quality:
   - Manganese not calculated
   - Vitamin C minimal/trace
 notes:
-- Component-based estimation (per ESTIMATE.md guidelines): Rice noodle wrapper (30g cooked) + Large shrimp (20g raw→16g cooked) + Golden net crispy coating (8g flour + 5g oil) + Fried dough stick/youtiao (8g) + Additional frying oil (5g) + Sweet soy sauce (5g)
-- Rice noodles: 32 kcal, 0.5g P, 0.1g F, 7.2g C (USDA FDC 168914 scaled)
-- Shrimp (16g cooked): 16 kcal, 3.8g P, 0.2g F, 0g C, plus micronutrients scaled from USDA data (111mg Na, 259mg K, 70mg Ca, 1.6mg Zn per 100g)
-- Golden net coating: Tempura-style batter (8g flour: 29 kcal, 0.8g P, 6.1g C) + Deep fry oil absorption (5g: 44 kcal, 5g F with soybean oil profile: 15% sat, 24% MUFA, 58% PUFA)
-- Youtiao/fried dough stick (8g): 15 kcal, 0.3g P, 0.8g F, 1.8g C (192 kcal/100g reference)
-- Additional frying oil for crispy wrapper (5g): 44 kcal, 5g F (same FA profile as above)
-- Sweet soy sauce (5g): 3 kcal, 0.2g P, 0.5g C, ~300mg Na
-- Finishing salt (0.5% of 75g dish weight): 0.38g salt = 152mg additional sodium
-- Total sodium breakdown: 6mg (rice noodles) + 18mg (shrimp) + 1mg (flour) + 2mg (youtiao) + 300mg (soy sauce) + 152mg (finishing salt) = 479mg
-- Atwater validation: 4×5.6 + 4×15.6 + 9×11.2 = 185.6 kcal ≈ 183 kcal (1.4% difference, within tolerance)
-- Price reference: £10.80 for 6 pieces = £1.80 per piece (premium dim sum)
-- The crispy preparation adds significant calories vs. traditional steamed shrimp cheung fun (~27 kcal/piece steamed vs. ~183 kcal/piece crispy fried)
+- "Component-based estimation (per ESTIMATE.md guidelines): Rice noodle wrapper (30g cooked) + Large shrimp (20g raw→16g cooked) + Golden net crispy coating (8g flour + 5g oil) + Fried dough stick/youtiao (8g) + Additional frying oil (5g) + Sweet soy sauce (5g)"
+- "Rice noodles: 32 kcal, 0.5g P, 0.1g F, 7.2g C (USDA FDC 168914 scaled)"
+- "Shrimp (16g cooked): 16 kcal, 3.8g P, 0.2g F, 0g C, plus micronutrients scaled from USDA data (111mg Na, 259mg K, 70mg Ca, 1.6mg Zn per 100g)"
+- "Golden net coating: Tempura-style batter (8g flour: 29 kcal, 0.8g P, 6.1g C) + Deep fry oil absorption (5g: 44 kcal, 5g F with soybean oil profile: 15% sat, 24% MUFA, 58% PUFA)"
+- "Youtiao/fried dough stick (8g): 15 kcal, 0.3g P, 0.8g F, 1.8g C (192 kcal/100g reference)"
+- "Additional frying oil for crispy wrapper (5g): 44 kcal, 5g F (same FA profile as above)"
+- "Sweet soy sauce (5g): 3 kcal, 0.2g P, 0.5g C, ~300mg Na"
+- "Finishing salt (0.5% of 75g dish weight): 0.38g salt = 152mg additional sodium"
+- "Total sodium breakdown: 6mg (rice noodles) + 18mg (shrimp) + 1mg (flour) + 2mg (youtiao) + 300mg (soy sauce) + 152mg (finishing salt) = 479mg"
+- "Atwater validation: 4×5.6 + 4×15.6 + 9×11.2 = 185.6 kcal ≈ 183 kcal (1.4% difference, within tolerance)"
+- "Price reference: £10.80 for 6 pieces = £1.80 per piece (premium dim sum)"
+- "The crispy preparation adds significant calories vs. traditional steamed shrimp cheung fun (~27 kcal/piece steamed vs. ~183 kcal/piece crispy fried)"
 change_log:
 - timestamp: 2025-11-02T00:00:00+0000
   updated_by: 'LLM: Claude Sonnet 4.5'

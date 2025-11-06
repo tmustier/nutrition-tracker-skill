@@ -89,7 +89,7 @@ notes:
 - Low in sodium, naturally unsalted
 - Atwater check (available carb basis): 4×1.5 + 9×11.0 + 4×1.4 + 2×5.0 + 2.4×0.0 = 120.6 kcal
 - Enriched 2025-11-05 using USDA FoodData Central (FDC ID 171706) for California Hass avocados: Added 15 nutrient values (vitamins A, E, K, B1, B2, B3, B6, B9/folate, choline; minerals phosphorus, copper, selenium, manganese). Vitamin D, B12, EPA, and DHA confirmed as 0 (plant source). Iodine not tracked in USDA database.
-- Second enrichment 2025-11-05: Added pantothenic acid (B5: 1.1mg from 1.46mg/100g USDA), biotin (B7: 4.5μg from 6μg/100g estimated mid-range), omega-3 ALA (0.08g from 0.11g/100g USDA), omega-6 LA (1.25g from 1.67g/100g USDA). Chromium and molybdenum remain 0 (not measured in USDA database for avocados).
+- "Second enrichment 2025-11-05: Added pantothenic acid (B5: 1.1mg from 1.46mg/100g USDA), biotin (B7: 4.5μg from 6μg/100g estimated mid-range), omega-3 ALA (0.08g from 0.11g/100g USDA), omega-6 LA (1.25g from 1.67g/100g USDA). Chromium and molybdenum remain 0 (not measured in USDA database for avocados)."
 change_log:
 - timestamp: '2025-11-05T16:00:00+00:00'
   updated_by: Claude Code (Sonnet 4.5)
