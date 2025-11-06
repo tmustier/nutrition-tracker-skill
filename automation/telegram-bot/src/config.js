@@ -61,6 +61,34 @@ function validateConfig(config) {
       console.warn('⚠️  Security Warning: WEBHOOK_SECRET not configured for production deployment');
       console.warn('   Recommendation: Set WEBHOOK_SECRET environment variable for enhanced security');
     }
+
+    // Validate branch matches environment
+    if (config.github.branch !== 'daily-logs') {
+      console.error('');
+      console.error('🚨 CONFIGURATION ERROR: Production environment with test branch detected');
+      console.error('   NODE_ENV:', process.env.NODE_ENV);
+      console.error('   GITHUB_BRANCH:', config.github.branch);
+      console.error('');
+      console.error('   ⚠️  DANGER: Production bot will commit to TEST branch');
+      console.error('   ⚠️  This will contaminate test data with production logs');
+      console.error('');
+      console.error('   💡 Fix:');
+      console.error('      Set GITHUB_BRANCH=daily-logs in Railway environment variables');
+      console.error('');
+      throw new Error('Production environment must use GITHUB_BRANCH=daily-logs');
+    }
+  }
+
+  // Warn if development environment uses production branch
+  if (process.env.NODE_ENV === 'development' && config.github.branch === 'daily-logs') {
+    console.warn('');
+    console.warn('⚠️  Configuration Warning: Development environment with production branch');
+    console.warn('   NODE_ENV:', process.env.NODE_ENV);
+    console.warn('   GITHUB_BRANCH:', config.github.branch);
+    console.warn('');
+    console.warn('   ⚠️  Test data will be committed to PRODUCTION branch');
+    console.warn('   Recommendation: Set GITHUB_BRANCH=daily-logs-test for testing');
+    console.warn('');
   }
 
   if (missing.length > 0) {
