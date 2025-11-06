@@ -2,8 +2,8 @@
 
 ```yaml
 id: cote_de_boeuf_ex_dairy_30_days_maset_v1
-version: 1
-last_verified: 2025-11-05
+version: 2
+last_verified: 2025-11-06
 source:
   venue: Maset, Marylebone (London)
   menu_page: "https://www.maset.london/"
@@ -30,7 +30,7 @@ assumptions:
   prep: "700g raw ex-dairy ribeye (30-day aged) grilled to medium-rare with 25% cooking loss → 525g cooked; basted with 30g butter, fresh thyme & rosemary, crushed garlic; finished with ~3.5g sea salt"
 per_portion:  # Schema v2: 52 nutrient fields
   # Macronutrients
-  energy_kcal: 1633
+  energy_kcal: 1759
   protein_g: 136.5
   fat_g: 134.7
   sat_fat_g: 60.1
@@ -109,8 +109,8 @@ notes:
 - "Sodium: 315mg natural in beef + 2mg butter + 1400mg finishing salt = 1717mg total"
 - "Chloride: 394mg from beef + 2135mg from salt = 2529mg total"
 - "Fat profile: 45% saturated (ex-dairy + butter), 42% MUFA, 5% PUFA, trace trans (natural ruminant)"
-- "Atwater validation: 4×136.5 + 9×134.7 + 4×0.3 + 2×0.1 + 2.4×0.0 = 1759 kcal (calculated) vs 1633 kcal (estimated)"
-- "Energy discrepancy (~8%): Within acceptable range for high-fat meat; may reflect cooking fat loss to grill"
+- "Atwater validation: 4×136.5 + 9×134.7 + 4×0.3 + 2×0.1 + 2.4×0.0 = 1759 kcal (matches stored energy)"
+- "Energy consistency principle: Energy equals Atwater(macros). Since macros are scaled from USDA 'cooked, grilled' values (which already account for fat dripping), no further adjustment is applied"
 - "Excellent source of: Protein (80% daily target), zinc (29mg), selenium (147µg), B-vitamins (B3, B6, B12)"
 - "USER ATE HALF: For logging purposes, scale all values by 0.5"
 change_log:
@@ -135,4 +135,9 @@ change_log:
     note: "Fatty acid composition of grass-fed beef: omega-3, omega-6 profiles"
   - url: "component_analysis"
     note: "700g raw beef (25% cooking loss) + 30g butter + 5g herbs + 3.5g finishing salt = 565g total dish"
+- timestamp: 2025-11-06T00:00:00+00:00
+  updated_by: "LLM: Claude Sonnet 4.5"
+  reason: "Corrected energy calculation to match Atwater formula. Energy was 1,633 kcal but macros (136.5g P, 134.7g F, 0.3g C, 0.1g fiber) yield 1,759 kcal. Root cause: agent incorrectly applied additional 8% energy reduction for 'fat dripping' after using USDA cooked values - this is double-counting since USDA 'cooked, grilled' already measures meat after fat dripping. Established principle: energy must always equal Atwater(macros) for consistency."
+  fields_changed: ["energy_kcal", "version", "last_verified"]
+  sources: []
 ```
