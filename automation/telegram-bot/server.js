@@ -405,7 +405,8 @@ if (useExpress) {
   });
 
   // Start Express server
-  app.listen(PORT, () => {
+  // Bind to 0.0.0.0 for Railway/cloud platforms (localhost only works locally)
+  app.listen(PORT, '0.0.0.0', () => {
     console.log('\n' + '='.repeat(60));
     console.log('🚀 Nutrition Tracker Telegram Bot Server');
     console.log('='.repeat(60));
@@ -478,7 +479,8 @@ if (useExpress) {
   });
 
   // Start HTTP server
-  server.listen(PORT, () => {
+  // Bind to 0.0.0.0 for Railway/cloud platforms (localhost only works locally)
+  server.listen(PORT, '0.0.0.0', () => {
     console.log('\n' + '='.repeat(60));
     console.log('🚀 Nutrition Tracker Telegram Bot Server');
     console.log('='.repeat(60));
