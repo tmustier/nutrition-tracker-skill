@@ -5,6 +5,7 @@ const crypto = require('crypto');
 const config = require('./config');
 const claudeIntegration = require('./claude-integration');
 const githubIntegration = require('./github-integration');
+const ProfileManager = require('./profile-manager');
 const conversationManager = require('./conversation-manager');
 const responseHandler = require('./response-handler');
 
@@ -36,6 +37,11 @@ const responseHandler = require('./response-handler');
 
 // Initialize Telegraf bot
 const bot = new Telegraf(config.telegram.botToken);
+
+// Initialize ProfileManager and inject dependencies
+const profileManager = new ProfileManager(githubIntegration);
+claudeIntegration.setProfileManager(profileManager);
+console.log('✅ ProfileManager initialized and injected into ClaudeIntegration');
 
 // ============================================================================
 // CONSTANTS
@@ -460,8 +466,8 @@ bot.command('today', async (ctx) => {
     const userId = ctx.from.id;
     const totals = await githubIntegration.getTodaysTotals(null, userId);
 
-    // Get targets from claude-integration (uses health profile)
-    const targets = claudeIntegration.getTargets('rest'); // TODO: Detect training vs rest day
+    // Get targets from claude-integration (uses user-specific health profile)
+    const targets = await claudeIntegration.getTargets('rest', userId); // TODO: Detect training vs rest day
 
     // Calculate remaining macros
     const remaining = {
@@ -717,8 +723,8 @@ bot.on('text', async (ctx) => {
       carbs_total_g: Math.round((currentTotals.carbs_total_g + mealNutrition.carbs_total_g) * NUTRITION_ROUNDING_FACTOR) / NUTRITION_ROUNDING_FACTOR,
       fiber_total_g: Math.round((currentTotals.fiber_total_g + mealNutrition.fiber_total_g) * NUTRITION_ROUNDING_FACTOR) / NUTRITION_ROUNDING_FACTOR,
     };
-    
-    const targets = claudeIntegration.getTargets('rest');
+
+    const targets = await claudeIntegration.getTargets('rest', userId);
 
     const remaining = {
       energy_kcal: Math.max(0, targets.energy_kcal - totals.energy_kcal),
@@ -836,8 +842,8 @@ bot.on('photo', async (ctx) => {
       '🤖 Analyzing image with AI...'
     );
 
-    // Step 4: Process with Claude Vision using detected MIME type
-    const result = await claudeIntegration.processImage(imageBuffer, mimeType);
+    // Step 4: Process with Claude Vision using detected MIME type (with user-specific profile)
+    const result = await claudeIntegration.processImage(imageBuffer, mimeType, userId);
 
     if (!result.success) {
       await ctx.telegram.editMessageText(
@@ -860,8 +866,7 @@ bot.on('photo', async (ctx) => {
       '💾 Logging to database...'
     );
 
-    // Step 7: Extract user information for multi-user tracking
-    const userId = ctx.from.id;
+    // Step 7: Extract user information for multi-user tracking (userId already defined at line 779)
     const userName = [ctx.from.first_name, ctx.from.last_name]
       .filter(Boolean)
       .join(' ') || ctx.from.username || `User ${userId}`;
@@ -889,8 +894,8 @@ bot.on('photo', async (ctx) => {
       fat_g: Math.round((currentTotals.fat_g + mealNutrition.fat_g) * NUTRITION_ROUNDING_FACTOR) / NUTRITION_ROUNDING_FACTOR,
       carbs_total_g: Math.round((currentTotals.carbs_total_g + mealNutrition.carbs_total_g) * NUTRITION_ROUNDING_FACTOR) / NUTRITION_ROUNDING_FACTOR,
     };
-    
-    const targets = claudeIntegration.getTargets('rest');
+
+    const targets = await claudeIntegration.getTargets('rest', userId);
 
     const remaining = {
       energy_kcal: Math.max(0, targets.energy_kcal - totals.energy_kcal),
