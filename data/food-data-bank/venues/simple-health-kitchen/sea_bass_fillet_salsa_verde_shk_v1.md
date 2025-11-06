@@ -2,9 +2,9 @@
 
 ```yaml
 id: sea_bass_fillet_salsa_verde_shk_v1
-version: 1
+version: 2
 schema_version: 2
-last_verified: 2025-11-03
+last_verified: 2025-11-05
 source:
   venue: Simple Health Kitchen, Baker Street (London)
   menu_page: ""
@@ -45,31 +45,31 @@ per_portion:
   iron_mg: 1
   zinc_mg: 1
   vitamin_c_mg: 8
-  manganese_mg: 0
-  copper_mg: 0
+  manganese_mg: 0.02
+  copper_mg: 0.04
   selenium_ug: 49
   vitamin_d_ug: 8
   vitamin_e_mg: 1
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 267
   chloride_mg: 0
-  sulfur_g: 0
-  vitamin_a_ug: 0
+  sulfur_g: 0.0
+  vitamin_a_ug: 33
   vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
-  vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
+  vitamin_b1_mg: 0.13
+  vitamin_b2_mg: 0.04
+  vitamin_b3_mg: 2.7
+  vitamin_b5_mg: 0.9
+  vitamin_b6_mg: 0.37
   vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
-  vitamin_b12_ug: 0
-  choline_mg: 0
-  omega3_epa_mg: 0
-  omega3_dha_mg: 0
+  vitamin_b9_ug: 11
+  vitamin_b12_ug: 4.6
+  choline_mg: 64
+  omega3_epa_mg: 231
+  omega3_dha_mg: 788
   omega3_ala_g: 0
-  omega6_la_g: 0
+  omega6_la_g: 0.1
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -100,4 +100,30 @@ change_log:
     sources:
       - url: "Simple Health Kitchen PDF"
         note: "Page 28 - Sea Bass Fillet with lemon juice dressing"
+  - timestamp: "2025-11-05T20:15:00+00:00"
+    updated_by: "Claude Code Agent 5 (Sonnet 4.5)"
+    reason: "Phase 3 enrichment: Added 15 missing nutrients from USDA sea bass data"
+    fields_changed:
+      - version
+      - last_verified
+      - manganese_mg (0 → 0.02)
+      - copper_mg (0 → 0.04)
+      - phosphorus_mg (0 → 267)
+      - vitamin_a_ug (0 → 33)
+      - vitamin_b1_mg (0 → 0.13)
+      - vitamin_b2_mg (0 → 0.04)
+      - vitamin_b3_mg (0 → 2.7)
+      - vitamin_b5_mg (0 → 0.9)
+      - vitamin_b6_mg (0 → 0.37)
+      - vitamin_b9_ug (0 → 11)
+      - vitamin_b12_ug (0 → 4.6)
+      - choline_mg (0 → 64)
+      - omega3_epa_mg (0 → 231)
+      - omega3_dha_mg (0 → 788)
+      - omega6_la_g (0 → 0.1)
+    sources:
+      - url: "https://foodstruct.com/food/fish-bass-striped-cooked-dryheat"
+        note: "USDA-derived sea bass nutrition per 100g, scaled by 1.05x for ~105g fish portion"
+      - note: "Scaling factor from selenium: 49µg (current) ÷ 47µg/100g (USDA) = 1.04 ≈ 1.05x"
+      - note: "Excellent source of omega-3: EPA 231mg + DHA 788mg = 1019mg total per portion"
 ```

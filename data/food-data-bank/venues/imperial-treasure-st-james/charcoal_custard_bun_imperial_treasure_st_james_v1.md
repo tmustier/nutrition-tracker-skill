@@ -48,37 +48,37 @@ per_portion:
   fiber_soluble_g: 0.2
   fiber_insoluble_g: 0.4
   sodium_mg: 38
-  potassium_mg: 0
+  potassium_mg: 80
   iodine_ug: 14
-  magnesium_mg: 0
+  magnesium_mg: 12
   calcium_mg: 29
   iron_mg: 1.0
-  zinc_mg: 0
+  zinc_mg: 0.5
   vitamin_c_mg: 0
-  manganese_mg: 0
-  copper_mg: 0
+  manganese_mg: 0.2
+  copper_mg: 0.01
   selenium_ug: 16
   vitamin_d_ug: 0.9
-  vitamin_e_mg: 0
+  vitamin_e_mg: 0.2
   polyols_g: 0.0
   carbs_total_g: 23.9
 
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 61
   chloride_mg: 0
-  sulfur_g: 0
-  vitamin_a_ug: 0
-  vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
-  vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
-  vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
-  vitamin_b12_ug: 0
-  choline_mg: 0
+  sulfur_g: 0.0
+  vitamin_a_ug: 56
+  vitamin_k_ug: 0.5
+  vitamin_b1_mg: 0.17
+  vitamin_b2_mg: 0.13
+  vitamin_b3_mg: 1.2
+  vitamin_b5_mg: 0.3
+  vitamin_b6_mg: 0.01
+  vitamin_b7_ug: 2
+  vitamin_b9_ug: 48
+  vitamin_b12_ug: 0.1
+  choline_mg: 47
   omega3_epa_mg: 0
   omega3_dha_mg: 0
   omega3_ala_g: 0
@@ -110,4 +110,30 @@ change_log:
     fields_changed:
       - "all fields"
     evidence: "Detailed component breakdown using USDA data for each ingredient, scaled to estimated weights from dim sum custard bun recipes"
+  - timestamp: "2025-11-05T13:00:00+00:00"
+    updated_by: "LLM: Claude Sonnet 4.5 (Agent 3)"
+    reason: "Schema v2 enrichment: Complete nutrient profile for custard bun (egg yolk 6.5g + butter 5.5g + enriched flour 21g + dairy 11.5g). Added 19 missing nutrients. Vitamin A (56µg from egg yolk + butter), B-vitamins from enriched flour (B1=0.17mg, B3=1.2mg), choline (47mg from egg yolk), phosphorus (61mg)."
+    fields_changed:
+      - per_portion.potassium_mg
+      - per_portion.magnesium_mg
+      - per_portion.zinc_mg
+      - per_portion.manganese_mg
+      - per_portion.copper_mg
+      - per_portion.vitamin_e_mg
+      - per_portion.phosphorus_mg
+      - per_portion.vitamin_a_ug
+      - per_portion.vitamin_k_ug
+      - per_portion.vitamin_b1_mg
+      - per_portion.vitamin_b2_mg
+      - per_portion.vitamin_b3_mg
+      - per_portion.vitamin_b5_mg
+      - per_portion.vitamin_b6_mg
+      - per_portion.vitamin_b7_ug
+      - per_portion.vitamin_b9_ug
+      - per_portion.vitamin_b12_ug
+      - per_portion.choline_mg
+      - version
+    sources:
+      - url: https://fdc.nal.usda.gov/
+        note: "USDA data for components: Egg yolk (6.5g) provides choline=44mg, phosphorus=27mg, vitamin A=18µg, B5=0.2mg, B12=0.1µg. Butter (5.5g) adds vitamin A=38µg, E=0.1mg. Enriched flour (21g) provides B1=0.17mg, B2=0.1mg, B3=1.2mg, B9=48µg, phosphorus=23mg, manganese=0.2mg. Milk/dairy (11.5g) adds phosphorus=10mg. Confidence: HIGH (USDA component data)"
 ```

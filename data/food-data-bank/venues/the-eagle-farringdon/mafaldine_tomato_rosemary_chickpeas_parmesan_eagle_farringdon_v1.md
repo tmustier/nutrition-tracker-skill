@@ -40,40 +40,40 @@ per_portion:
   fiber_insoluble_g: 13.6
   sodium_mg: 807
   potassium_mg: 1108
-  iodine_ug: 0
-  magnesium_mg: 0
-  calcium_mg: 0
-  iron_mg: 0
-  zinc_mg: 0
-  vitamin_c_mg: 0
-  manganese_mg: 0
+  iodine_ug: 8
+  magnesium_mg: 120
+  calcium_mg: 180
+  iron_mg: 6.5
+  zinc_mg: 3.5
+  vitamin_c_mg: 35
+  manganese_mg: 1.8
   polyols_g: 0
   carbs_available_g: 141.3
   carbs_total_g: 161.2
-  copper_mg: 0
-  selenium_ug: 0
+  copper_mg: 0.8
+  selenium_ug: 95
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 420
   chloride_mg: 0
-  sulfur_g: 0
-  vitamin_a_ug: 0
+  sulfur_g: 0.0
+  vitamin_a_ug: 85
   vitamin_d_ug: 0
-  vitamin_e_mg: 0
-  vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
-  vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
+  vitamin_e_mg: 3.2
+  vitamin_k_ug: 18
+  vitamin_b1_mg: 0.9
+  vitamin_b2_mg: 0.4
+  vitamin_b3_mg: 6.5
+  vitamin_b5_mg: 1.2
+  vitamin_b6_mg: 0.6
   vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
-  vitamin_b12_ug: 0
-  choline_mg: 0
+  vitamin_b9_ug: 320
+  vitamin_b12_ug: 0.2
+  choline_mg: 85
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.2
+  omega6_la_g: 2.5
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -127,4 +127,12 @@ change_log:
   minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
   acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
   fields initialized to 0.'
+- timestamp: '2025-11-05T19:15:00+00:00'
+  updated_by: 'Claude Code (Sonnet 4.5) - Agent 1'
+  reason: 'Enriched with nutrient estimates based on pasta dish components: cooked mafaldine (~280g enriched pasta), chickpeas (~150g), crushed tomatoes (~180g), olive oil (~15g), parmesan (~20g). Populated 22 nutrients from 0 to estimated values: magnesium (120 mg from chickpeas/pasta), calcium (180 mg from parmesan), iron (6.5 mg from enriched pasta/chickpeas), zinc (3.5 mg), vitamin C (35 mg from tomatoes), manganese (1.8 mg from chickpeas), copper (0.8 mg), selenium (95 mcg from pasta/chickpeas), phosphorus (420 mg), vitamin A (85 mcg from tomatoes/parmesan), vitamin E (3.2 mg from olive oil), vitamin K (18 mcg), B-vitamins (B1: 0.9 mg enriched pasta, B2: 0.4 mg, B3: 6.5 mg, B5: 1.2 mg, B6: 0.6 mg from chickpeas, B9: 320 mcg from chickpeas/pasta, B12: 0.2 mcg from parmesan), choline (85 mg), iodine (8 mcg), omega-3 ALA (0.2 g), omega-6 LA (2.5 g from olive oil). Confidence: MEDIUM (±20-40% - multi-component pasta dish).'
+  fields_changed: [iodine_ug, magnesium_mg, calcium_mg, iron_mg, zinc_mg, vitamin_c_mg, manganese_mg, copper_mg, selenium_ug, phosphorus_mg, vitamin_a_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_ala_g, omega6_la_g]
+  sources:
+  - note: 'Component-based estimation: enriched pasta, chickpeas, tomatoes, olive oil, parmesan. Based on USDA data for individual ingredients.'
+    url: 'https://fdc.nal.usda.gov/'
+    confidence: 'MEDIUM - multi-component vegetarian pasta dish'
 ```

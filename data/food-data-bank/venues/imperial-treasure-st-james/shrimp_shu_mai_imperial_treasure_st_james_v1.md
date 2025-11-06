@@ -3,8 +3,8 @@
 ```yaml
 id: shrimp_shu_mai_imperial_treasure_st_james_v1
 schema_version: 2
-version: 1
-last_verified: 2025-11-02
+version: 2
+last_verified: 2025-11-05
 source:
   venue: Shrimp Shu Mai (Imperial Treasure St. James)
   menu_page: "https://deliveroo.co.uk/menu/london/st-james's/imperial-treasure-fine-chinese-cuisine"
@@ -55,30 +55,30 @@ per_portion:
   polyols_g: 0
   carbs_available_g: 4.5
   carbs_total_g: 4.8
-  copper_mg: 0
-  selenium_ug: 0
-  chromium_ug: 0
-  molybdenum_ug: 0
-  phosphorus_mg: 0
-  chloride_mg: 0
-  sulfur_g: 0
+  copper_mg: 0.047
+  selenium_ug: 6
+  chromium_ug: 0.7
+  molybdenum_ug: 1
+  phosphorus_mg: 36
+  chloride_mg: 46
+  sulfur_g: 0.028
   vitamin_a_ug: 0
-  vitamin_d_ug: 0
-  vitamin_e_mg: 0
+  vitamin_d_ug: 0.15
+  vitamin_e_mg: 0.11
   vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
-  vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
-  vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
-  vitamin_b12_ug: 0
-  choline_mg: 0
-  omega3_epa_mg: 0
-  omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  vitamin_b1_mg: 0.044
+  vitamin_b2_mg: 0.030
+  vitamin_b3_mg: 0.73
+  vitamin_b5_mg: 0.09
+  vitamin_b6_mg: 0.031
+  vitamin_b7_ug: 1.4
+  vitamin_b9_ug: 5.6
+  vitamin_b12_ug: 0.16
+  choline_mg: 11
+  omega3_epa_mg: 17
+  omega3_dha_mg: 15
+  omega3_ala_g: 0.001
+  omega6_la_g: 0.052
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -108,4 +108,17 @@ change_log:
   minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
   acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
   fields initialized to 0.'
+- timestamp: '2025-11-05T14:50:00+00:00'
+  updated_by: 'Agent 4: Claude Code (Sonnet 4.5)'
+  reason: 'Comprehensive nutrient enrichment for 23g shu mai using component-based USDA data (10g shrimp, 3g pork, 5g wheat wrapper, 2g shiitake, 1.5g water chestnuts, 1.5g seasonings)'
+  fields_changed: [copper_mg, selenium_ug, chromium_ug, molybdenum_ug, phosphorus_mg, chloride_mg, sulfur_mg, vitamin_d_ug, vitamin_e_mg, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_epa_mg, omega3_dha_mg, omega3_ala_g, omega6_la_g, version, last_verified]
+  sources:
+  - note: 'USDA FoodData Central - Shrimp raw (FDC 175179): selenium 38µg/100g, phosphorus 224mg/100g, B12 1.4µg/100g, EPA 171mg/100g, DHA 144mg/100g, choline'
+    url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/175179'
+  - note: 'USDA FoodData Central - Pork ground medium fat: B vitamins, minerals, trace vitamin D'
+    url: 'https://fdc.nal.usda.gov/'
+  - note: 'USDA FoodData Central - Wheat flour wrapper: enriched B vitamins, selenium'
+    url: 'https://fdc.nal.usda.gov/'
+  - note: 'Component aggregation for 23g dumpling. Vitamin A and K remain 0 (no significant plant content). Ultra-trace elements remain 0 (insufficient data).'
+    url: 'component_analysis'
 ```

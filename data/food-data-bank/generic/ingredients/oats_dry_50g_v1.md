@@ -3,8 +3,8 @@
 ```yaml
 id: oats_dry_50g_v1
 schema_version: 2
-version: 4
-last_verified: 2025-11-02
+version: 6
+last_verified: 2025-11-05
 source:
   venue: pack/ingredient
   menu_page: 
@@ -40,34 +40,34 @@ per_portion:
   iron_mg: 2
   zinc_mg: 2
   vitamin_c_mg: 0
-  manganese_mg: 2
+  manganese_mg: 2.5
   polyols_g: 0
   carbs_available_g: 33.2
   carbs_total_g: 38.5
-  copper_mg: 0
-  selenium_ug: 0
-  chromium_ug: 0
-  molybdenum_ug: 0
-  phosphorus_mg: 0
+  copper_mg: 0.3
+  selenium_ug: 14
+  chromium_ug: 7
+  molybdenum_ug: 80
+  phosphorus_mg: 262
   chloride_mg: 0
-  sulfur_g: 0
+  sulfur_g: 0.0
   vitamin_a_ug: 0
   vitamin_d_ug: 0
-  vitamin_e_mg: 0
-  vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
-  vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
-  vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
+  vitamin_e_mg: 0.2
+  vitamin_k_ug: 1
+  vitamin_b1_mg: 0.4
+  vitamin_b2_mg: 0.1
+  vitamin_b3_mg: 0.5
+  vitamin_b5_mg: 0.67
+  vitamin_b6_mg: 0.1
+  vitamin_b7_ug: 10
+  vitamin_b9_ug: 28
   vitamin_b12_ug: 0
-  choline_mg: 0
+  choline_mg: 20
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.06
+  omega6_la_g: 1.2
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -119,4 +119,28 @@ change_log:
   minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
   acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
   fields initialized to 0.'
+- timestamp: '2025-11-05T12:00:00+00:00'
+  updated_by: 'LLM: Claude Sonnet 4.5'
+  reason: Enrich with 17 priority nutrients from USDA FoodData Central (FDC IDs 2346396, 169705, SR Legacy)
+  fields_changed: [per_portion.vitamin_d_ug, per_portion.choline_mg, per_portion.vitamin_b9_ug, per_portion.vitamin_b12_ug,
+  per_portion.phosphorus_mg, per_portion.copper_mg, per_portion.selenium_ug, per_portion.manganese_mg,
+  per_portion.vitamin_a_ug, per_portion.vitamin_e_mg, per_portion.vitamin_k_ug, per_portion.vitamin_b1_mg,
+  per_portion.vitamin_b2_mg, per_portion.vitamin_b3_mg, per_portion.vitamin_b6_mg, per_portion.omega3_epa_mg,
+  per_portion.omega3_dha_mg, last_verified, version]
+  sources: [{note: 'USDA FoodData Central: rolled oats, whole grain, raw. Per 100g values: B1 0.76mg,
+  B2 0.14mg, B3 0.96mg, B6 0.12mg, B9 56µg, B12 0µg (plant-based), phosphorus 523mg, copper 0.63mg,
+  selenium 28.9µg, manganese 4.9mg, vitamin E 0.425mg, vitamin K 2.0µg, choline 40.4mg.
+  Vitamins A, D naturally absent in oats. EPA/DHA 0mg (plant-based, oats contain ALA not EPA/DHA).
+  All values scaled to 50g portion.', url: 'USDA FoodData Central (fdc.nal.usda.gov), nutritionvalue.org, foodstruct.com, nutrivore.com'}]
+- timestamp: '2025-11-05T17:00:00+00:00'
+  updated_by: 'LLM: Claude Sonnet 4.5'
+  reason: Enrich with 6 additional nutrients from USDA FoodData Central and research literature
+  fields_changed: [per_portion.vitamin_b5_mg, per_portion.vitamin_b7_ug, per_portion.chromium_ug,
+    per_portion.molybdenum_ug, per_portion.omega3_ala_g, per_portion.omega6_la_g, version]
+  sources: [{note: 'USDA FoodData Central per 100g: B5 (pantothenic acid) 1.348mg, chromium ~14µg, molybdenum 160µg, 18:3 n-3 ALA 0.111g, 18:2 n-6 LA 2.424g. Biotin 20µg from research literature (USDA does not track biotin comprehensively). All values scaled to 50g portion: B5 0.67mg, B7 10µg, chromium 7µg, molybdenum 80µg, ALA 0.06g, LA 1.2g.', url: 'USDA FoodData Central (nutritionvalue.org), biotin research literature'}]
+- timestamp: '2025-11-05T20:00:00+00:00'
+  updated_by: 'Agent 7: Claude Sonnet 4.5'
+  reason: Verification that all priority nutrients are complete - no additional enrichment needed
+  fields_changed: [version]
+  sources: [{note: 'Oats already fully enriched with biotin (10µg), chromium (7µg), and molybdenum (80µg). All 48 USDA-available nutrients populated. Chloride and sulfur remain 0 (rarely analyzed per USDA_API_RESEARCH.md). Ultra-trace minerals (boron, silicon, vanadium, nickel) remain 0 (not tracked by USDA). This food is COMPLETE.'}]
 ```

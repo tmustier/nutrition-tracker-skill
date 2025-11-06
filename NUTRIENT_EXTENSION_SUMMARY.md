@@ -75,11 +75,11 @@ Successfully extended the nutrition tracking system from 24 to 52 nutrient field
 - Fixed variable scoping bugs
 
 **Updated**: `scripts/new_dish_from_template.py`
-- Template now includes all 51 nutrient fields
+- Template now includes all 52 nutrient fields
 - Ready for creating new databank entries with full schema
 
 **Updated**: `data/logs/SCHEMA.md`
-- Complete 51-field documentation
+- Complete 52-field documentation
 - Organized by 8 categories
 - Examples updated with all fields
 - Backward compatibility notes

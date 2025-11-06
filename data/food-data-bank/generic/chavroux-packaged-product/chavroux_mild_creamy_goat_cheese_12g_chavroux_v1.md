@@ -2,7 +2,8 @@
 
 ```yaml
 id: chavroux_mild_creamy_goat_cheese_12g_chavroux_v1
-version: 1
+version: 2
+schema_version: 2
 last_verified: 2025-11-05
 source:
   venue: Chavroux (Packaged Product)
@@ -26,6 +27,7 @@ assumptions:
   salt_scheme: "packaged"
   oil_type: ""
   prep: "Fresh soft goat cheese, pasteurised goat's milk"
+  nutrient_enrichment: "17 priority nutrients sourced from USDA FoodData Central (FDC ID 173435: Cheese, goat, soft type) and scaled from per-100g to 12g portion. UK dairy iodine content estimated higher than US due to UK cattle feed fortification practices (approximately 2.5x US values for dairy products)."
 per_portion:
   energy_kcal: 18
   protein_g: 1.0
@@ -44,41 +46,41 @@ per_portion:
   polyols_g: 0.0
   sodium_mg: 48
   potassium_mg: 19
-  iodine_ug: 2
+  iodine_ug: 1.8
   magnesium_mg: 3
   calcium_mg: 36
   iron_mg: 0.2
   zinc_mg: 0.1
   vitamin_c_mg: 0.0
-  manganese_mg: 0.0
-  copper_mg: 0.1
-  selenium_ug: 0
-  vitamin_d_ug: 0.1
-  vitamin_e_mg: 0.0
-  omega3_ala_g: 0
+  manganese_mg: 0.01
+  copper_mg: 0.09
+  selenium_ug: 0.3
+  vitamin_d_ug: 0.05
+  vitamin_e_mg: 0.02
+  omega3_ala_g: 0.01
   omega3_dha_mg: 0
   omega3_epa_mg: 0
-  omega6_la_g: 0
+  omega6_la_g: 0.04
   chloride_mg: 0
-  phosphorus_mg: 0
-  sulfur_g: 0
+  phosphorus_mg: 31
+  sulfur_g: 0.0
   chromium_ug: 0
   molybdenum_ug: 0
   boron_mg: 0
   nickel_ug: 0
   silicon_mg: 0
   vanadium_ug: 0
-  vitamin_a_ug: 0
-  vitamin_k_ug: 0
-  choline_mg: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
-  vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
-  vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
-  vitamin_b12_ug: 0
+  vitamin_a_ug: 35
+  vitamin_k_ug: 0.2
+  choline_mg: 1.8
+  vitamin_b1_mg: 0.01
+  vitamin_b2_mg: 0.05
+  vitamin_b3_mg: 0.05
+  vitamin_b5_mg: 0.08
+  vitamin_b6_mg: 0.03
+  vitamin_b7_ug: 0.3
+  vitamin_b9_ug: 1.4
+  vitamin_b12_ug: 0.02
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
@@ -129,4 +131,50 @@ change_log:
         note: "USDA FoodData Central - Cheese, goat, soft type for micronutrient profiles"
       - url: "https://www.tesco.com/groceries/en-GB/products/260644617"
         note: "UK retailer verification - Chavroux Goat's Cheese Log available at Tesco"
+  - timestamp: "2025-11-05T15:45:00+00:00"
+    updated_by: "Claude Code (Sonnet 4.5)"
+    reason: "Enriched with 17 priority nutrients from USDA FoodData Central, scaled to 12g portion"
+    fields_changed:
+      - "vitamin_d_ug: 0.1 → 0.05"
+      - "choline_mg: 0 → 1.8"
+      - "iodine_ug: 2 → 1.8 (refined UK dairy estimate)"
+      - "vitamin_b9_ug: 0 → 1.4"
+      - "vitamin_b12_ug: 0 → 0.02"
+      - "phosphorus_mg: 0 → 31"
+      - "copper_mg: 0.1 → 0.09"
+      - "selenium_ug: 0 → 0.3"
+      - "manganese_mg: 0.0 → 0.01"
+      - "vitamin_a_ug: 0 → 35"
+      - "vitamin_e_mg: 0.0 → 0.02"
+      - "vitamin_k_ug: 0 → 0.2"
+      - "vitamin_b1_mg: 0 → 0.01"
+      - "vitamin_b2_mg: 0 → 0.05"
+      - "vitamin_b3_mg: 0 → 0.05"
+      - "vitamin_b6_mg: 0 → 0.03"
+      - "omega3_epa_mg: confirmed 0"
+      - "omega3_dha_mg: confirmed 0"
+    evidence:
+      - url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/173435/nutrients"
+        note: "USDA FDC ID 173435: Cheese, goat, soft type - all nutrient values scaled from per-100g to 12g portion (multiply by 0.12)"
+  - timestamp: "2025-11-05T18:00:00+00:00"
+    updated_by: "Claude Code (Sonnet 4.5)"
+    reason: "Final enrichment: Added 3 remaining nutrients (B5, ALA, LA) using USDA and goat milk fatty acid research"
+    fields_changed:
+      - "vitamin_b5_mg: 0 → 0.08"
+      - "omega3_ala_g: 0 → 0.01"
+      - "omega6_la_g: 0 → 0.04"
+    evidence:
+      - url: "https://nutrientoptimiser.com/nutritional-value-cheese-goat-soft-type/"
+        note: "Soft goat cheese pantothenic acid (B5): 0.7mg per 100g, scaled to 12g = 0.08mg"
+      - url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6680990/"
+        note: "Goat milk fatty acids research: LA 2.0-3.1% of total fat (used 2.5%), ALA 0.41-0.81% of total fat (used 0.6%). Goat cheese 12% fat: LA=0.3g/100g, ALA=0.072g/100g, scaled to 12g portion"
+    notes: "Chromium and molybdenum remain 0 (not routinely analyzed in cheese per USDA research). Fiber soluble/insoluble remain 0.0 (TRUE ZERO for dairy). All omega-3/6 values now complete."
+  - timestamp: "2025-11-05T23:15:00+00:00"
+    updated_by: "Claude Code (Sonnet 4.5) - Agent 9"
+    reason: "Added biotin (vitamin B7) based on goat milk research data (same source used for goat milk yogurt enrichment)"
+    fields_changed: [version, vitamin_b7_ug]
+    evidence:
+      - url: "JHVMS study"
+        note: "Goat milk contains 2.21µg biotin per 100ml. Soft goat cheese (12% fat, mild variety) estimated at ~2.5µg/100g accounting for concentration during cheese-making process with some biotin loss. Scaled to 12g portion: 2.5µg/100g × 0.12 = 0.3µg"
+    methodology: "Used same goat milk biotin research (JHVMS study) that was applied to goat-milk-yogurt-dollops_st-helens-farm_v1 file. Goat milk baseline: 2.21µg/100ml. For soft fresh cheese with 12% fat content, estimated 2.5µg/100g (accounting for mild concentration and some biotin loss during processing). Conservative estimate for 12g portion = 0.3µg biotin."
 ```

@@ -3,8 +3,8 @@
 ```yaml
 id: pistachios_30g_v1
 schema_version: 2
-version: 3
-last_verified: 2025-11-02
+version: 6
+last_verified: 2025-11-05
 source:
   venue: pack/ingredient
   menu_page: 
@@ -19,7 +19,7 @@ assumptions:
   salt_scheme: normal
   oil_type: 
   prep: 
-  manganese: "Estimated from USDA data for tree nuts (~2.3 mg/100g). 30g × 2.3 mg/100g = 0.69 mg. Confidence: HIGH - nuts are excellent manganese source"
+  manganese: "USDA FoodData Central (ID 170184): 1.2 mg/100g. 30g × 1.2 mg/100g = 0.36 mg. Confidence: HIGH - verified USDA data"
 per_portion:
   energy_kcal: 185.5
   protein_g: 6
@@ -41,34 +41,34 @@ per_portion:
   iron_mg: 1
   zinc_mg: 1
   vitamin_c_mg: 0
-  manganese_mg: 0.69
+  manganese_mg: 0.36
   polyols_g: 0
   carbs_available_g: 8.4
   carbs_total_g: 11.6
-  copper_mg: 0
-  selenium_ug: 0
+  copper_mg: 0.39
+  selenium_ug: 2
   chromium_ug: 0
   molybdenum_ug: 0
-  phosphorus_mg: 0
+  phosphorus_mg: 147
   chloride_mg: 0
-  sulfur_g: 0
-  vitamin_a_ug: 0
+  sulfur_g: 0.0
+  vitamin_a_ug: 7.8
   vitamin_d_ug: 0
-  vitamin_e_mg: 0
-  vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
-  vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
-  vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
+  vitamin_e_mg: 0.86
+  vitamin_k_ug: 4
+  vitamin_b1_mg: 0.26
+  vitamin_b2_mg: 0.05
+  vitamin_b3_mg: 0.39
+  vitamin_b5_mg: 0.16
+  vitamin_b6_mg: 0.51
+  vitamin_b7_ug: 9.6
+  vitamin_b9_ug: 15
   vitamin_b12_ug: 0
-  choline_mg: 0
+  choline_mg: 21
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.09
+  omega6_la_g: 4.23
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -107,4 +107,21 @@ change_log:
   minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
   acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
   fields initialized to 0.'
+- timestamp: '2025-11-05T00:00:00+00:00'
+  updated_by: 'LLM: Claude Sonnet 4.5'
+  reason: Enriched with 17 priority nutrients from USDA FoodData Central (ID 170184)
+  fields_changed: [vitamin_a_ug, vitamin_d_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg,
+    vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b9_ug, vitamin_b12_ug,
+    choline_mg, phosphorus_mg, copper_mg, selenium_ug, manganese_mg, omega3_epa_mg, omega3_dha_mg]
+  sources: [{note: 'USDA FoodData Central - Nuts, pistachio nuts, raw', url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/170184/nutrients'}]
+- timestamp: '2025-11-05T14:00:00+00:00'
+  updated_by: 'LLM: Claude Sonnet 4.5'
+  reason: Enrich with 2 additional omega fatty acids from USDA FoodData Central API (FDC ID 170184)
+  fields_changed: [version, per_portion.omega3_ala_g, per_portion.omega6_la_g]
+  sources: [{note: 'USDA API: ALA/18:3 n-3 (0.289g/100g), LA/18:2 n-6 (14.091g/100g). Biotin, chromium, molybdenum not available in USDA database.', url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/170184/nutrients'}]
+- timestamp: '2025-11-05T19:00:00+00:00'
+  updated_by: 'Agent 7: Claude Sonnet 4.5'
+  reason: Enrichment with biotin (B7) from research literature - not available in standard USDA FoodData Central
+  fields_changed: [version, per_portion.vitamin_b7_ug]
+  sources: [{note: 'Research-based biotin content: Pistachios provide 30% DV per 1oz (28g) = 9 mcg biotin. Calculated for 30g portion: 32 mcg per 100g × 0.30 = 9.6 mcg. Source: Multiple nutrition databases and NIH Office of Dietary Supplements indicate pistachios are excellent source of biotin among nuts.', url: 'https://www.healthline.com/nutrition/biotin-rich-foods'}, {note: 'Chromium and molybdenum: Remain 0. While research studies show trace amounts may exist in nuts, standard nutritional databases do not provide reliable values for pistachios. TRUE zero vs missing data distinction: These nutrients exist at trace levels but are not routinely quantified.'}]
 ```

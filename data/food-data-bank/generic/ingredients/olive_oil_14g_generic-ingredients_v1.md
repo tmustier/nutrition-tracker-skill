@@ -23,6 +23,8 @@ assumptions:
   salt_scheme: unsalted
   oil_type: olive_oil
   prep: raw
+  usda_source: USDA SR Legacy FDC ID 171413 (Oil, olive, salad or cooking)
+  enrichment_note: 'Olive oil is 100% fat - only fat-soluble vitamins E and K present in significant amounts; trace choline (0.04mg). All water-soluble vitamins, minerals, and long-chain omega-3s (EPA/DHA) are 0.'
 per_portion:
   energy_kcal: 123.8
   protein_g: 0
@@ -54,11 +56,11 @@ per_portion:
   molybdenum_ug: 0
   phosphorus_mg: 0
   chloride_mg: 0
-  sulfur_g: 0
+  sulfur_g: 0.0
   vitamin_a_ug: 0
   vitamin_d_ug: 0
-  vitamin_e_mg: 0
-  vitamin_k_ug: 0
+  vitamin_e_mg: 2.01
+  vitamin_k_ug: 8.43
   vitamin_b1_mg: 0
   vitamin_b2_mg: 0
   vitamin_b3_mg: 0
@@ -67,29 +69,29 @@ per_portion:
   vitamin_b7_ug: 0
   vitamin_b9_ug: 0
   vitamin_b12_ug: 0
-  choline_mg: 0
+  choline_mg: 0.04
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  omega3_ala_g: 0.11
+  omega6_la_g: 1.4
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
   nickel_ug: 0
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
-  vitamin_e_mg: 2
 quality:
   confidence: high
-  gaps:
-  - Vitamin E content estimated from typical EVOO composition
+  gaps: []
 notes:
 - Scaled from USDA per 100g values: 884 kcal, 0g P, 100g F (13.8g sat, 72.9g MUFA, 10.5g PUFA), 0g C
+- USDA micronutrients per 100g: Vitamin E (14.35 mg), Vitamin K (60.2 mcg), all others 0 or trace
 - 1 tablespoon = ~13.5g, rounded to 14g for convenience
 - Predominantly monounsaturated fatty acids (74% oleic acid)
 - Rich in polyphenols and vitamin E (antioxidants)
 - Heart-healthy fat, Mediterranean diet staple
-- Zero carbs, zero protein, pure fat
+- Zero carbs, zero protein, pure fat (100% fat)
+- Contains only fat-soluble vitamins E and K in significant amounts; all water-soluble vitamins, minerals (except trace amounts), and long-chain omega-3s (EPA/DHA) are absent
 - Atwater check (available carb basis): 4×0.0 + 9×14.0 + 4×0.0 + 2×0.0 + 2.4×0.0 = 126.0 kcal (≈123.8 accounting for rounding)
 change_log:
 - timestamp: '2025-11-03T10:35:00+00:00'
@@ -109,4 +111,27 @@ change_log:
   minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
   acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
   fields initialized to 0.'
+- timestamp: '2025-11-05T14:30:00+00:00'
+  updated_by: Claude Code (Sonnet 4.5)
+  reason: 'Enriched with 17 priority nutrients from USDA FoodData Central. Updated vitamin E (2.01 mg) and vitamin K (8.43 mcg) from verified USDA data (per 100g: E=14.35mg, K=60.2mcg). Confirmed all other priority nutrients are 0: vitamin D, A, B1, B2, B3, B6, B9, B12, choline, iodine, phosphorus, copper, selenium, manganese, EPA, DHA. Olive oil is 100% fat with only fat-soluble vitamins E and K in significant amounts.'
+  fields_changed: [vitamin_e_mg, vitamin_k_ug]
+  sources:
+  - note: 'USDA nutrient data for olive oil (multiple sources verified)'
+    url: 'https://www.zoeharcombe.com/nutrition-data/olive-oil-nutrition-data/'
+  - note: 'USDA FoodData Central - Oil, olive, salad or cooking (FDC ID: 171413)'
+    url: 'https://fdc.nal.usda.gov/'
+- timestamp: '2025-11-05T16:45:00+00:00'
+  updated_by: Claude Code (Sonnet 4.5)
+  reason: 'Re-verified and enriched 17 priority nutrients from USDA FoodData Central SR Legacy database. Confirmed vitamin E (2.01 mg from 14.35 per 100g) and vitamin K (8.43 mcg from 60.2 per 100g). Updated choline_mg from 0 to 0.04 (from 0.3 per 100g). All other priority nutrients confirmed as 0: vitamin D, A, B1-B12, iodine, phosphorus, copper, selenium, manganese, EPA, DHA. Pure olive oil contains only fat-soluble vitamins E and K in measurable amounts, plus trace choline.'
+  fields_changed: [choline_mg]
+  sources:
+  - note: 'USDA FoodData Central - Oil, olive, salad or cooking'
+    fdc_id: 171413
+    url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/171413/nutrients'
+    data_type: 'SR Legacy'
+- timestamp: '2025-11-05T17:00:00+00:00'
+  updated_by: 'LLM: Claude Sonnet 4.5'
+  reason: Enrich with omega-3 ALA and omega-6 LA from USDA FoodData Central. Confirmed B-vitamins and trace minerals remain 0 (olive oil is 100% fat).
+  fields_changed: [per_portion.omega3_ala_g, per_portion.omega6_la_g, version]
+  sources: [{note: 'USDA FoodData Central per 100g olive oil: 18:3 n-3 ALA 0.76g, 18:2 n-6 LA 9.76g. Scaled to 14g portion: ALA 0.11g, LA 1.4g. All B-vitamins (B5, B7) and trace minerals (chromium, molybdenum) confirmed as 0 - olive oil is pure fat with only fat-soluble vitamins E and K present.', url: 'USDA FoodData Central FDC ID 171413'}]
 ```

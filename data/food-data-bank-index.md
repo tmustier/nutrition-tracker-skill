@@ -193,10 +193,9 @@ Total dishes: 81
 
 *Location: `data/food-data-bank/generic/bakery/`*
 
-**2 dishes:**
+**1 dishes:**
 
 - [Almond Croissant (Generic Bakery)](food-data-bank/generic/bakery/almond_croissant_generic_v1.md) {#almond_croissant_generic_v1}
-- [Ham and Cheese Croissant (Generic Bakery)](food-data-bank/generic/bakery/ham_cheese_croissant_generic_v1.md) {#ham_cheese_croissant_generic_v1}
 
 ## Generic: Bar Restaurant
 
@@ -254,9 +253,8 @@ Total dishes: 81
 
 *Location: `data/food-data-bank/generic/ingredients/`*
 
-**13 dishes:**
+**12 dishes:**
 
-- [Avocado (Fresh, 75g)](food-data-bank/generic/ingredients/avocado_fresh_75g_generic-ingredients_v1.md) {#avocado_fresh_75g_generic-ingredients_v1}
 - [Blueberries - 150 g](food-data-bank/generic/ingredients/blueberries_150g_v1.md) {#blueberries_150g_v1}
 - [Egg, Hard-Boiled (Medium, 44g)](food-data-bank/generic/ingredients/egg_hard_boiled_44g_generic-ingredients_v1.md) {#egg_hard_boiled_44g_generic-ingredients_v1}
 - [Greek Yogurt 0% Fat - 200 g](food-data-bank/generic/ingredients/greek_yogurt_0pct_200g_v1.md) {#greek_yogurt_0pct_200g_v1}

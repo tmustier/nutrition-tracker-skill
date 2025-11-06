@@ -121,7 +121,7 @@ entries:
           magnesium_mg: 27
           phosphorus_mg: 42
           chloride_mg: 0
-          sulfur_g: 0
+          sulfur_g: 0.0
           iron_mg: 0.5
           zinc_mg: 0.1
           copper_mg: 0.1
@@ -192,7 +192,7 @@ entries:
 9. **Schema Version 2 - 52 Nutrient Fields**: As of 2025-11-05, the schema has been expanded from 24 to 52 nutrient fields to provide comprehensive tracking. All 52 fields are organized into 8 categories:
    - **Macros & Energy** (8 fields): energy_kcal, protein_g, fat_g, sat_fat_g, mufa_g, pufa_g, trans_fat_g, cholesterol_mg
    - **Carbohydrates** (7 fields): carbs_total_g, polyols_g, carbs_available_g, sugar_g, fiber_total_g, fiber_soluble_g, fiber_insoluble_g
-   - **Essential Minerals** (7 fields): sodium_mg, potassium_mg, calcium_mg, magnesium_mg, phosphorus_mg, chloride_mg, sulfur_g
+   - **Essential Minerals** (7 fields): sodium_mg, potassium_mg, calcium_mg, magnesium_mg, phosphorus_mg, chloride_mg, sulfur_mg
    - **Trace Minerals** (8 fields): iron_mg, zinc_mg, copper_mg, manganese_mg, selenium_ug, iodine_ug, chromium_ug, molybdenum_ug
    - **Fat-Soluble Vitamins** (4 fields): vitamin_a_ug, vitamin_d_ug, vitamin_e_mg, vitamin_k_ug
    - **B Vitamins** (9 fields): vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug, choline_mg

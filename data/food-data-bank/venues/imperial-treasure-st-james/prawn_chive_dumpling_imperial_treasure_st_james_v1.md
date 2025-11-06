@@ -3,8 +3,8 @@
 ```yaml
 id: prawn_chive_dumpling_imperial_treasure_st_james_v1
 schema_version: 2
-version: 1
-last_verified: 2025-11-02
+version: 2
+last_verified: 2025-11-05
 source:
   venue: Prawn & Chive Dumpling (Imperial Treasure St. James)
   menu_page: "https://www.imperialtreasure.com/uk/"
@@ -51,30 +51,30 @@ per_portion:
   polyols_g: 0
   carbs_available_g: 5.6
   carbs_total_g: 5.6
-  copper_mg: 0
-  selenium_ug: 0
-  chromium_ug: 0
-  molybdenum_ug: 0
-  phosphorus_mg: 0
-  chloride_mg: 0
-  sulfur_g: 0
-  vitamin_a_ug: 0
-  vitamin_d_ug: 0
-  vitamin_e_mg: 0
-  vitamin_k_ug: 0
-  vitamin_b1_mg: 0
-  vitamin_b2_mg: 0
-  vitamin_b3_mg: 0
-  vitamin_b5_mg: 0
-  vitamin_b6_mg: 0
-  vitamin_b7_ug: 0
-  vitamin_b9_ug: 0
-  vitamin_b12_ug: 0
-  choline_mg: 0
-  omega3_epa_mg: 0
-  omega3_dha_mg: 0
-  omega3_ala_g: 0
-  omega6_la_g: 0
+  copper_mg: 0.038
+  selenium_ug: 5
+  chromium_ug: 0.7
+  molybdenum_ug: 1
+  phosphorus_mg: 32
+  chloride_mg: 52
+  sulfur_g: 0.028
+  vitamin_a_ug: 5
+  vitamin_d_ug: 0.1
+  vitamin_e_mg: 0.25
+  vitamin_k_ug: 17
+  vitamin_b1_mg: 0.029
+  vitamin_b2_mg: 0.024
+  vitamin_b3_mg: 0.61
+  vitamin_b5_mg: 0.046
+  vitamin_b6_mg: 0.019
+  vitamin_b7_ug: 1.5
+  vitamin_b9_ug: 8.2
+  vitamin_b12_ug: 0.15
+  choline_mg: 11
+  omega3_epa_mg: 19
+  omega3_dha_mg: 16
+  omega3_ala_g: 0.004
+  omega6_la_g: 0.412
   boron_mg: 0
   silicon_mg: 0
   vanadium_ug: 0
@@ -113,4 +113,17 @@ change_log:
   minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
   acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
   fields initialized to 0.'
+- timestamp: '2025-11-05T14:55:00+00:00'
+  updated_by: 'Agent 4: Claude Code (Sonnet 4.5)'
+  reason: 'Comprehensive nutrient enrichment for 26g dumpling using component-based USDA data (11g prawns, 6g wheat starch wrapper, 2g Chinese chives, 1.3g oil, 1.7g seasonings)'
+  fields_changed: [copper_mg, selenium_ug, chromium_ug, molybdenum_ug, phosphorus_mg, chloride_mg, sulfur_mg, vitamin_a_ug, vitamin_d_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_epa_mg, omega3_dha_mg, omega3_ala_g, omega6_la_g, version, last_verified]
+  sources:
+  - note: 'USDA FoodData Central - Shrimp/prawn raw (FDC 175179): selenium 38µg/100g, phosphorus 224mg/100g, B12, EPA 171mg/100g, DHA 144mg/100g'
+    url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/175179'
+  - note: 'USDA FoodData Central - Chinese chives (Allium tuberosum): vitamin A, K from greens'
+    url: 'https://fdc.nal.usda.gov/'
+  - note: 'USDA FoodData Central - Wheat starch wrapper: enriched B vitamins'
+    url: 'https://fdc.nal.usda.gov/'
+  - note: 'Component aggregation for 26g dumpling. Ultra-trace elements remain 0 (insufficient data). Notable: EPA/DHA present from prawns, vitamin K from chives.'
+    url: 'component_analysis'
 ```
