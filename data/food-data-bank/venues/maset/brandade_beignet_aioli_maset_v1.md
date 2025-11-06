@@ -2,8 +2,8 @@
 
 ```yaml
 id: brandade_beignet_aioli_maset_v1
-version: 1
-last_verified: 2025-11-05
+version: 2
+last_verified: 2025-11-06
 source:
   venue: Maset, Marylebone (London)
   menu_page: "https://www.maset.london/"
@@ -25,71 +25,71 @@ aliases: ["Brandade Fritter with Aioli", "Salt Cod Beignet"]
 category: main
 portion:
   description: "1 piece with aioli"
-  est_weight_g: 60
-  notes: "Golf ball-sized beignet (~50g) with 10g aioli. Brandade is traditional Provençal salt cod preparation."
+  est_weight_g: 40
+  notes: "Bacalao/accra-sized fritter (~35g) with 5g aioli. Brandade is traditional Provençal salt cod preparation."
 assumptions:
   salt_scheme: "normal"
   oil_type: "olive oil"
-  prep: "Components: Brandade filling 28g (cod 14g, olive oil 8g, potato 4g, cream 2g), Batter coating fried 22g (flour 10g, egg 3g, milk 2g, absorbed oil 7g), Aioli 10g (mayo/olive oil 9g, garlic 1g). Deep-fried, oil absorption ~12% of total weight."
+  prep: "Components: Brandade filling 19g (cod 9g, olive oil 5g, potato 3g, cream 2g), Batter coating fried 16g (flour 7g, egg 2g, milk 1g, absorbed oil 6g), Aioli 5g (mayo/olive oil 5g, garlic trace). Deep-fried, oil absorption ~12% of total weight. Smaller street-food size portion."
 per_portion:  # Schema v2: 52 nutrient fields
   # Macronutrients
-  energy_kcal: 285
-  protein_g: 6.8
-  fat_g: 22.5
-  sat_fat_g: 4.2
-  mufa_g: 14.8
-  pufa_g: 2.9
-  trans_fat_g: 0.1
-  cholesterol_mg: 28
+  energy_kcal: 190
+  protein_g: 4.53
+  fat_g: 15.0
+  sat_fat_g: 2.8
+  mufa_g: 9.87
+  pufa_g: 1.93
+  trans_fat_g: 0.07
+  cholesterol_mg: 19
   # Carbohydrates
-  carbs_total_g: 9.8
-  carbs_available_g: 9.0
-  sugar_g: 0.6
-  fiber_total_g: 0.8
-  fiber_soluble_g: 0.3
-  fiber_insoluble_g: 0.5
+  carbs_total_g: 6.53
+  carbs_available_g: 6.0
+  sugar_g: 0.4
+  fiber_total_g: 0.53
+  fiber_soluble_g: 0.2
+  fiber_insoluble_g: 0.33
   polyols_g: 0.0
   # Minerals
-  sodium_mg: 195
-  potassium_mg: 138
-  iodine_ug: 24
-  magnesium_mg: 12
-  calcium_mg: 22
-  iron_mg: 0.7
-  zinc_mg: 0.4
-  vitamin_c_mg: 1.2
-  manganese_mg: 0.2
-  copper_mg: 0.06
-  selenium_ug: 9.2
-  chromium_ug: 2
-  molybdenum_ug: 3
-  phosphorus_mg: 62
-  chloride_mg: 305
-  sulfur_g: 0.12
+  sodium_mg: 130
+  potassium_mg: 92
+  iodine_ug: 16
+  magnesium_mg: 8
+  calcium_mg: 15
+  iron_mg: 0.47
+  zinc_mg: 0.27
+  vitamin_c_mg: 0.8
+  manganese_mg: 0.13
+  copper_mg: 0.04
+  selenium_ug: 6.13
+  chromium_ug: 1.33
+  molybdenum_ug: 2
+  phosphorus_mg: 41
+  chloride_mg: 203
+  sulfur_g: 0.08
   # Vitamins
-  vitamin_a_ug: 28
-  vitamin_d_ug: 0.4
-  vitamin_e_mg: 2.6
-  vitamin_k_ug: 7.2
-  vitamin_b1_mg: 0.12
-  vitamin_b2_mg: 0.08
-  vitamin_b3_mg: 1.1
-  vitamin_b5_mg: 0.14
-  vitamin_b6_mg: 0.10
-  vitamin_b7_ug: 3.5
-  vitamin_b9_ug: 22
-  vitamin_b12_ug: 0.24
-  choline_mg: 20
+  vitamin_a_ug: 19
+  vitamin_d_ug: 0.27
+  vitamin_e_mg: 1.73
+  vitamin_k_ug: 4.8
+  vitamin_b1_mg: 0.08
+  vitamin_b2_mg: 0.05
+  vitamin_b3_mg: 0.73
+  vitamin_b5_mg: 0.09
+  vitamin_b6_mg: 0.07
+  vitamin_b7_ug: 2.33
+  vitamin_b9_ug: 15
+  vitamin_b12_ug: 0.16
+  choline_mg: 13
   # Fatty acids
-  omega3_epa_mg: 5
-  omega3_dha_mg: 22
-  omega3_ala_g: 0.18
-  omega6_la_g: 2.5
+  omega3_epa_mg: 3
+  omega3_dha_mg: 15
+  omega3_ala_g: 0.12
+  omega6_la_g: 1.67
   # Ultra-trace minerals
-  boron_mg: 0.02
-  silicon_mg: 0.8
-  vanadium_ug: 2
-  nickel_ug: 3
+  boron_mg: 0.01
+  silicon_mg: 0.53
+  vanadium_ug: 1.33
+  nickel_ug: 2
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
 quality:
@@ -100,12 +100,13 @@ notes:
   - "Salt cod (bacalao) is desalted by soaking 24-48 hours before use, reducing sodium from ~7000mg to ~80mg per 100g"
   - "Beignet: Light batter (flour, egg, milk) deep-fried until golden; oil absorption estimated at 12% total weight"
   - "Aioli served on the side: Classic Provençal garlic mayonnaise (garlic pounded with olive oil and egg)"
-  - "Portion weight: Beignet 50g + aioli 10g = 60g total"
+  - "Portion weight: Beignet 35g + aioli 5g = 40g total (bacalao/accra street-food size)"
   - "Iodine content variable in cod (range 22-720µg/100g); used conservative estimate of 158µg/100g"
-  - "Energy validation: 4×6.8 + 9×22.5 + 4×9.0 + 2×0.8 = 27.2 + 202.5 + 36.0 + 1.6 = 267 kcal (within 7% of listed 285 kcal, difference from rounding)"
-  - "Fat split validation: SFA 4.2 + MUFA 14.8 + PUFA 2.9 + trans 0.1 = 22.0g (within 0.5g of total fat 22.5g)"
+  - "Energy validation: 4×4.53 + 9×15.0 + 4×6.0 + 2×0.53 = 18.1 + 135.0 + 24.0 + 1.1 = 178 kcal (within 7% of listed 190 kcal, difference from rounding)"
+  - "Fat split validation: SFA 2.8 + MUFA 9.87 + PUFA 1.93 + trans 0.07 = 14.67g (within 0.5g of total fat 15.0g)"
   - "Omega fatty acids: EPA/DHA from cod, ALA from olive oil, LA from flour and mayo PUFA"
   - "Restaurant opened Oct 22, 2025; new venue with limited nutrition data available"
 change_log:
   - "2025-11-05: Initial creation with comprehensive component-based estimation. All 52 nutrient fields populated using USDA FoodData Central data (cod 171956, olive oil 748608, potato 170438, cream 170859, flour 168894, egg 171287). Portion weight 60g (beignet 50g + aioli 10g). Medium confidence due to component-based calculation and estimated portion sizes."
+  - "2025-11-06: User correction - revised portion size from 60g to 40g to reflect bacalao/accra street-food fritter size (smaller than original golf-ball estimate). All nutrition values scaled by 0.667 factor. Portion now: beignet 35g + aioli 5g = 40g total."
 ```
