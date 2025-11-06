@@ -2,12 +2,16 @@
 """Calculate nutrition totals and averages from daily logs.
 
 By default, analyzes the last 7 days (including today).
-Usage: python3 calculate_nutrition_summary.py [days]
-Example: python3 calculate_nutrition_summary.py 14  # Last 14 days
+Usage: python3 calculate_nutrition_summary.py [days] [--exclude-today]
+Examples:
+  python3 calculate_nutrition_summary.py           # Last 7 days including today
+  python3 calculate_nutrition_summary.py 14        # Last 14 days including today
+  python3 calculate_nutrition_summary.py 7 --exclude-today  # Last 7 complete days
 """
 
 import sys
 import yaml
+import argparse
 from pathlib import Path
 from collections import defaultdict
 from datetime import datetime, timedelta
@@ -44,24 +48,51 @@ def load_health_profile_targets():
         sys.exit(1)
 
 
-# Get number of days from command line argument (default: 7)
-num_days_to_analyze = 7
-if len(sys.argv) > 1:
-    try:
-        num_days_to_analyze = int(sys.argv[1])
-        # Validate range (1-365 days)
-        if num_days_to_analyze < 1 or num_days_to_analyze > 365:
-            print(f"Error: Number of days must be between 1 and 365. Got: {num_days_to_analyze}", file=sys.stderr)
-            sys.exit(1)
-    except ValueError:
-        print(f"Error: Invalid number of days '{sys.argv[1]}'. Must be an integer.", file=sys.stderr)
-        sys.exit(1)
+# Parse command line arguments
+parser = argparse.ArgumentParser(
+    description='Calculate nutrition totals and averages from daily logs.',
+    formatter_class=argparse.RawDescriptionHelpFormatter,
+    epilog='''
+Examples:
+  %(prog)s              # Last 7 days including today
+  %(prog)s 14           # Last 14 days including today
+  %(prog)s 7 --exclude-today  # Last 7 complete days (exclude today)
+    '''
+)
+parser.add_argument(
+    'days',
+    type=int,
+    nargs='?',
+    default=7,
+    help='Number of days to analyze (1-365, default: 7)'
+)
+parser.add_argument(
+    '--exclude-today',
+    action='store_true',
+    help='Exclude today from analysis (useful when current day is incomplete)'
+)
+
+args = parser.parse_args()
+num_days_to_analyze = args.days
+
+# Validate range (1-365 days)
+if num_days_to_analyze < 1 or num_days_to_analyze > 365:
+    print(f"Error: Number of days must be between 1 and 365. Got: {num_days_to_analyze}", file=sys.stderr)
+    sys.exit(1)
 
 # Load health profile targets
 targets = load_health_profile_targets()
 
-# Get today's date (including today in analysis)
+# Determine date cutoff based on --exclude-today flag
 today = datetime.now().date()
+if args.exclude_today:
+    # Exclude today - only include complete days
+    cutoff_date = today - timedelta(days=1)
+    include_today_status = False
+else:
+    # Include today (default behavior)
+    cutoff_date = today
+    include_today_status = True
 
 # Find all log files
 log_dir = Path("data/logs")
@@ -78,8 +109,8 @@ for year_month_dir in sorted(log_dir.iterdir()):
             day = log_file.stem  # e.g., "30"
             file_date = datetime.strptime(f"{year_month}-{day}", "%Y-%m-%d").date()
 
-            # Include up to and including today
-            if file_date <= today:
+            # Include up to cutoff date (today or yesterday, depending on flag)
+            if file_date <= cutoff_date:
                 log_files_with_dates.append((file_date, log_file))
         except ValueError:
             continue  # Skip files that don't match expected format
@@ -171,9 +202,16 @@ for key, total in totals.items():
 date_range = f"{dates_processed[0].strftime('%b %d')} - {dates_processed[-1].strftime('%b %d, %Y')}"
 period_label = f"{num_days}-Day"
 
+# Add status indicator for whether today is included
+if include_today_status:
+    completion_status = "Including Today"
+else:
+    completion_status = "Complete Days Only"
+
 # Format and print the table
 print("\n" + "="*80)
 print(f"NUTRITION SUMMARY - {num_days} DAYS ({date_range})")
+print(f"{completion_status}")
 print("="*80)
 print()
 

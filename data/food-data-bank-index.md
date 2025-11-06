@@ -11,7 +11,7 @@ generated: 2025-11-05 18:00:54 UTC
 
 ## Overview
 
-Total dishes: 73
+Total dishes: 76
 
 - **Venues**: 9 categories
 - **Packaged Products**: 7 categories
@@ -73,13 +73,14 @@ Total dishes: 73
 
 *Location: `data/food-data-bank/venues/simple-health-kitchen/`*
 
-**9 dishes:**
+**10 dishes:**
 
 - [Broccoli Stems (Simple Health Kitchen)](food-data-bank/venues/simple-health-kitchen/broccoli_stems_shk_v1.md) {#broccoli_stems_shk_v1}
 - [Carrot Juice (Simple Health Kitchen)](food-data-bank/venues/simple-health-kitchen/carrot_juice_shk_v1.md) {#carrot_juice_shk_v1}
 - [Grilled Salmon Fillet (Simple Health Kitchen)](food-data-bank/venues/simple-health-kitchen/grilled_salmon_fillet_shk_v1.md) {#grilled_salmon_fillet_shk_v1}
 - [Hummus Side Pot (Simple Health Kitchen)](food-data-bank/venues/simple-health-kitchen/hummus_side_pot_shk_v1.md) {#hummus_side_pot_shk_v1}
 - [Lemon & Herb Chicken Breast (Simple Health Kitchen)](food-data-bank/venues/simple-health-kitchen/lemon_herb_chicken_breast_shk_v1.md) {#lemon_herb_chicken_breast_shk_v1}
+- [Protein Granola Yogurt (SHK)](food-data-bank/venues/simple-health-kitchen/protein_granola_yogurt_shk_v1.md) {#protein_granola_yogurt_shk_v1}
 - [Sea Bass Fillet with Salsa Verde (Simple Health Kitchen)](food-data-bank/venues/simple-health-kitchen/sea_bass_fillet_salsa_verde_shk_v1.md) {#sea_bass_fillet_salsa_verde_shk_v1}
 - [Sweet Potato Wedges (Simple Health Kitchen)](food-data-bank/venues/simple-health-kitchen/sweet_potato_wedges_shk_v1.md) {#sweet_potato_wedges_shk_v1}
 - [Whole Wheat Pesto Pasta (Simple Health Kitchen)](food-data-bank/venues/simple-health-kitchen/whole_wheat_pesto_pasta_shk_v1.md) {#whole_wheat_pesto_pasta_shk_v1}
