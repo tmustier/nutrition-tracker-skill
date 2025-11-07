@@ -225,6 +225,86 @@ describe('ProfileManager Security Tests', () => {
       expect(() => profileManager.validateProfile(invalidProfile)).toThrow('rest_day_max must be between 1000 and 10000 kcal');
     });
 
+    test('should reject profile with protein above maximum', () => {
+      const invalidProfile = {
+        meta: { owner: 'Test', timezone: 'UTC' },
+        targets: {
+          energy_kcal: { rest_day_max: 2000, training_day_max: 2400 },
+          protein_g_min: 1500, // 1.5kg protein
+          fat_g_min: 50,
+          carbs_g_min: 150,
+          fiber_g_min: 25,
+          sat_fat_g_max: 15,
+          sodium_mg_max: 2000,
+          potassium_mg_min: 3000,
+          fruit_veg_servings_min: 5
+        },
+        monitoring: {}
+      };
+
+      expect(() => profileManager.validateProfile(invalidProfile)).toThrow('Invalid value for protein_g_min: must be between 0 and 1000 g');
+    });
+
+    test('should reject profile with fat above maximum', () => {
+      const invalidProfile = {
+        meta: { owner: 'Test', timezone: 'UTC' },
+        targets: {
+          energy_kcal: { rest_day_max: 2000, training_day_max: 2400 },
+          protein_g_min: 150,
+          fat_g_min: 1200, // 1.2kg fat
+          carbs_g_min: 150,
+          fiber_g_min: 25,
+          sat_fat_g_max: 15,
+          sodium_mg_max: 2000,
+          potassium_mg_min: 3000,
+          fruit_veg_servings_min: 5
+        },
+        monitoring: {}
+      };
+
+      expect(() => profileManager.validateProfile(invalidProfile)).toThrow('Invalid value for fat_g_min: must be between 0 and 1000 g');
+    });
+
+    test('should reject profile with carbs above maximum', () => {
+      const invalidProfile = {
+        meta: { owner: 'Test', timezone: 'UTC' },
+        targets: {
+          energy_kcal: { rest_day_max: 2000, training_day_max: 2400 },
+          protein_g_min: 150,
+          fat_g_min: 60,
+          carbs_g_min: 1100, // 1.1kg carbs
+          fiber_g_min: 25,
+          sat_fat_g_max: 15,
+          sodium_mg_max: 2000,
+          potassium_mg_min: 3000,
+          fruit_veg_servings_min: 5
+        },
+        monitoring: {}
+      };
+
+      expect(() => profileManager.validateProfile(invalidProfile)).toThrow('Invalid value for carbs_g_min: must be between 0 and 1000 g');
+    });
+
+    test('should reject profile with fiber above maximum', () => {
+      const invalidProfile = {
+        meta: { owner: 'Test', timezone: 'UTC' },
+        targets: {
+          energy_kcal: { rest_day_max: 2000, training_day_max: 2400 },
+          protein_g_min: 150,
+          fat_g_min: 60,
+          carbs_g_min: 200,
+          fiber_g_min: 250, // 250g fiber is absurd
+          sat_fat_g_max: 15,
+          sodium_mg_max: 2000,
+          potassium_mg_min: 3000,
+          fruit_veg_servings_min: 5
+        },
+        monitoring: {}
+      };
+
+      expect(() => profileManager.validateProfile(invalidProfile)).toThrow('Invalid value for fiber_g_min: must be between 0 and 200 g');
+    });
+
     test('should reject profile with negative protein', () => {
       const invalidProfile = {
         meta: { owner: 'Test', timezone: 'UTC' },

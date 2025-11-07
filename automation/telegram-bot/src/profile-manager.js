@@ -386,25 +386,25 @@ class ProfileManager {
       throw new Error('training_day_max must be between 1000 and 10000 kcal');
     }
 
-    // Validate all numeric target fields
-    const requiredNumericFields = [
-      'protein_g_min',
-      'fat_g_min',
-      'carbs_g_min',
-      'fiber_g_min',
-      'sat_fat_g_max',
-      'sodium_mg_max',
-      'potassium_mg_min',
-      'fruit_veg_servings_min'
-    ];
+    // Validate all numeric target fields with field-specific ranges
+    const fieldValidations = {
+      'protein_g_min': { min: 0, max: 1000, unit: 'g' },
+      'fat_g_min': { min: 0, max: 1000, unit: 'g' },
+      'carbs_g_min': { min: 0, max: 1000, unit: 'g' },
+      'fiber_g_min': { min: 0, max: 200, unit: 'g' },
+      'sat_fat_g_max': { min: 0, max: 200, unit: 'g' },
+      'sodium_mg_max': { min: 0, max: 10000, unit: 'mg' },
+      'potassium_mg_min': { min: 0, max: 10000, unit: 'mg' },
+      'fruit_veg_servings_min': { min: 0, max: 20, unit: 'servings' }
+    };
 
-    for (const field of requiredNumericFields) {
+    for (const [field, constraints] of Object.entries(fieldValidations)) {
       if (targets[field] === undefined) {
         throw new Error(`Profile targets must have ${field}`);
       }
       const value = targets[field];
-      if (typeof value !== 'number' || value < 0 || value > 10000) {
-        throw new Error(`Invalid value for ${field}: must be a number between 0 and 10000, got ${value}`);
+      if (typeof value !== 'number' || value < constraints.min || value > constraints.max) {
+        throw new Error(`Invalid value for ${field}: must be between ${constraints.min} and ${constraints.max} ${constraints.unit}, got ${value}`);
       }
     }
 
