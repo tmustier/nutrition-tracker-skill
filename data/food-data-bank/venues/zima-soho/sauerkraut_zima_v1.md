@@ -53,8 +53,8 @@ per_portion:
   chromium_ug: 0
   molybdenum_ug: 0
   phosphorus_mg: 36.0
-  chloride_mg: 0
-  sulfur_g: 0.0
+  chloride_mg: 1663.0
+  sulfur_g: 0.006
   vitamin_a_ug: 1.8
   vitamin_d_ug: 0
   vitamin_e_mg: 0.25
@@ -93,6 +93,11 @@ notes:
 - Provides folate (43.2 μg), choline (18.7 mg), and trace amounts of B-vitamins from fermentation
 - Negligible vitamin D and B12 (plant-based food), no EPA/DHA (not from marine sources)
 change_log:
+
+  - timestamp: "2025-11-06T23:28:47+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: 2025-10-30 12:00:00+00:00
   updated_by: 'LLM: Claude Sonnet 4.5'
   reason: Initial population from user-provided nutrition data for Zima restaurant dish

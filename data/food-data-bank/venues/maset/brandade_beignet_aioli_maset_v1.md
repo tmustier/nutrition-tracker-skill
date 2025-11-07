@@ -64,8 +64,8 @@ per_portion:  # Schema v2: 52 nutrient fields
   chromium_ug: 1.33
   molybdenum_ug: 2
   phosphorus_mg: 41
-  chloride_mg: 203
-  sulfur_g: 0.08
+  chloride_mg: 200.0
+  sulfur_g: 0.018
   # Vitamins
   vitamin_a_ug: 19
   vitamin_d_ug: 0.27
@@ -107,6 +107,11 @@ notes:
   - "Omega fatty acids: EPA/DHA from cod, ALA from olive oil, LA from flour and mayo PUFA"
   - "Restaurant opened Oct 22, 2025; new venue with limited nutrition data available"
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
   - "2025-11-05: Initial creation with comprehensive component-based estimation. All 52 nutrient fields populated using USDA FoodData Central data (cod 171956, olive oil 748608, potato 170438, cream 170859, flour 168894, egg 171287). Portion weight 60g (beignet 50g + aioli 10g). Medium confidence due to component-based calculation and estimated portion sizes."
   - "2025-11-06: User correction - revised portion size from 60g to 40g to reflect bacalao/accra street-food fritter size (smaller than original golf-ball estimate). All nutrition values scaled by 0.667 factor. Portion now: beignet 35g + aioli 5g = 40g total."
 ```

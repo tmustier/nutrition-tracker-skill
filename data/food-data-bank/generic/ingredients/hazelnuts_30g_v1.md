@@ -50,8 +50,8 @@ per_portion:
   chromium_ug: 150
   molybdenum_ug: 5.5
   phosphorus_mg: 87
-  chloride_mg: 0
-  sulfur_g: 0.0
+  chloride_mg: 2.0
+  sulfur_g: 0.018
   vitamin_a_ug: 0
   vitamin_d_ug: 0
   vitamin_k_ug: 4
@@ -87,6 +87,11 @@ notes:
   (0.5 mg per 30g = 56% DV), making them one of the top dietary sources of these
   nutrients.'
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: 2025-10-28T18:51:39+0000
   updated_by: "LLM: GPT-5 Thinking"
   reason: Populate per_portion from user-provided data

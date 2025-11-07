@@ -57,8 +57,8 @@ per_portion:
   chromium_ug: 3.3
   molybdenum_ug: 16
   phosphorus_mg: 197.5
-  chloride_mg: 0
-  sulfur_g: 0.0
+  chloride_mg: 924.0
+  sulfur_g: 0.044
   vitamin_a_ug: 7.5
   vitamin_k_ug: 19.75
   vitamin_b1_mg: 0.73
@@ -90,6 +90,11 @@ notes:
   - "Fatty acid profile estimated for low-fat wheat-based product: MUFA ~30%, PUFA ~53%, trace trans"
   - "Cholesterol minimal (10mg) - most commercial frozen vareniki use eggless dough"
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
   - "2025-11-04: Initial entry. Scaled from 100g label data to 250g portion. Macros from product label: 199 kcal, 4.4g protein, 1.9g fat (0.3g sat), 41g carbs available, 12g sugars, 0.60g salt per 100g. Micronutrients estimated using component analysis (65% wheat dough + 35% cherry filling) with USDA data for comparable ingredients. Fiber adjusted to 1.5g to match energy calculation within 0.5% tolerance."
   - "2025-11-05: Enriched with 17 priority nutrients using USDA FoodData Central (FDC ID: 169779 - Dumpling, potato- or cheese-filled, frozen). Added/updated: vitamin_a_ug (7.5), vitamin_e_mg (2.45), vitamin_k_ug (19.75), vitamin_b1_mg (0.73), vitamin_b2_mg (0.56), vitamin_b3_mg (5.50), vitamin_b6_mg (0.16), vitamin_b9_ug (160), vitamin_b12_ug (0.2), choline_mg (24.0), phosphorus_mg (197.5), copper_mg (0.16), selenium_ug (33.5). Values scaled from USDA per-100g to 250g portion (multiply by 2.5). Omega-3 EPA/DHA confirmed as 0 (no marine sources). Iodine and manganese retained from previous estimates as USDA source lacks these values."
   - timestamp: "2025-11-05T23:00:00+00:00"

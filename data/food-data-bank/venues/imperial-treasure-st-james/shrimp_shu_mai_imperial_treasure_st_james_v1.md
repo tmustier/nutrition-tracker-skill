@@ -60,8 +60,8 @@ per_portion:
   chromium_ug: 0.7
   molybdenum_ug: 1
   phosphorus_mg: 36
-  chloride_mg: 46
-  sulfur_g: 0.028
+  chloride_mg: 216.0
+  sulfur_g: 0.031
   vitamin_a_ug: 0
   vitamin_d_ug: 0.15
   vitamin_e_mg: 0.11
@@ -98,6 +98,11 @@ notes:
 - Sodium includes: 12mg intrinsic from shrimp, 2mg from pork, 18mg from wrapper, 34mg from soy sauce, ~74mg from additional seasoning salt
 - Imperial Treasure is a Michelin-recognized Cantonese fine dining restaurant; their dim sum is noted for quality ingredients and generous filling
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
 - timestamp: 2025-11-02
   reason: Initial entry created using component-based estimation methodology
   fields_changed: [all fields]

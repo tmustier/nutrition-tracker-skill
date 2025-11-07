@@ -55,8 +55,8 @@ per_portion:  # Schema v2: 52 nutrient fields
   chromium_ug: 2
   molybdenum_ug: 95
   phosphorus_mg: 365
-  chloride_mg: 450
-  sulfur_g: 0.14
+  chloride_mg: 1155.0
+  sulfur_g: 0.057
   # Vitamins
   vitamin_a_ug: 12
   vitamin_d_ug: 0
@@ -94,6 +94,11 @@ notes:
   - "Tahini contributes significant omega-6 LA (3.1g) from sesame seeds. Omega-3 ALA from olive oil (80mg)."
   - "Allergens: Sesame (tahini), sulphides (sun-dried tomatoes may contain). Vegan, gluten-free, dairy-free."
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
   - timestamp: "2025-11-06T13:23:00+00:00"
     updated_by: "Script: new_dish_from_template.py"
     reason: "Initial dish file creation"

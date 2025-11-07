@@ -51,8 +51,8 @@ per_portion:
   chromium_ug: 0
   molybdenum_ug: 0
   phosphorus_mg: 124
-  chloride_mg: 0
-  sulfur_g: 0.0
+  chloride_mg: 200.0
+  sulfur_g: 0.036
   vitamin_a_ug: 56
   vitamin_d_ug: 0.3
   vitamin_e_mg: 0.2
@@ -88,6 +88,11 @@ notes:
 - Unsaturated total (MUFA + PUFA) = 4.8g as expected
 - Atwater check (available carb basis): 4×9.0 + 9×5.8 + 4×73.0 + 2×4.0 + 2.4×0.0 = 388.2 kcal
 change_log:
+
+  - timestamp: "2025-11-06T23:28:47+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: 2025-10-30 12:00:00+00:00
   updated_by: 'LLM: Claude Sonnet 4.5'
   reason: Initial creation from user-provided nutrition data for Cherry vareniki from Zima restaurant

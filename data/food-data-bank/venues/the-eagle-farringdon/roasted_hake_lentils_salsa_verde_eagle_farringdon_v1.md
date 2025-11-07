@@ -54,8 +54,8 @@ per_portion:
   chromium_ug: 2
   molybdenum_ug: 88
   phosphorus_mg: 720
-  chloride_mg: 1200
-  sulfur_g: 0.35
+  chloride_mg: 1563.0
+  sulfur_g: 0.226
   vitamin_a_ug: 7
   vitamin_d_ug: 2.3
   vitamin_e_mg: 3.8
@@ -95,6 +95,11 @@ notes:
 - Contains fish and anchovies (allergens: fish)
 - Atwater check (available carb basis): 4×56.5 + 9×21.1 + 4×36.7 + 2×14.5 + 2.4×0.0 = 591.7 kcal
 change_log:
+
+  - timestamp: "2025-11-06T23:28:47+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: 2025-11-01T18:32:00+0000
   updated_by: 'LLM: GPT-5 Codex'
   reason: Initial estimate for roasted hake main at The Eagle

@@ -56,9 +56,9 @@ per_portion:
   omega3_dha_mg: 0
   omega3_epa_mg: 0
   omega6_la_g: 0.45
-  chloride_mg: 0
+  chloride_mg: 163.0
   phosphorus_mg: 30.9
-  sulfur_g: 0.0
+  sulfur_g: 0.004
   chromium_ug: 0
   molybdenum_ug: 0
   boron_mg: 0
@@ -117,6 +117,11 @@ notes:
   - "  • Method: Sum individual component contributions"
   - "  • Notable sources: Avocado rich in vitamin E (0.49mg), vitamin K (5.3µg), folate/B9 (23.8µg), vitamin B6 (0.084mg)"
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
   - timestamp: "2025-11-05T20:15:00+00:00"
     updated_by: "Claude Code (Sonnet 4.5)"
     reason: "Phase 2 enrichment: Added 8 critical nutrients using REAL USDA values from enriched component files. FIXED incomplete mineral summations."

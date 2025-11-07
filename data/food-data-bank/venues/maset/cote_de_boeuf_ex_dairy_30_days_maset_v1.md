@@ -61,8 +61,8 @@ per_portion:  # Schema v2: 52 nutrient fields
   chromium_ug: 11
   molybdenum_ug: 0
   phosphorus_mg: 1057
-  chloride_mg: 2529
-  sulfur_g: 1.31
+  chloride_mg: 2644.0
+  sulfur_g: 1.365
   # Vitamins
   vitamin_a_ug: 219
   vitamin_d_ug: 0.9
@@ -114,6 +114,11 @@ notes:
 - "Excellent source of: Protein (80% daily target), zinc (29mg), selenium (147µg), B-vitamins (B3, B6, B12)"
 - "USER ATE HALF: For logging purposes, scale all values by 0.5"
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
 - timestamp: 2025-11-05T00:00:00+00:00
   updated_by: "LLM: Claude Sonnet 4.5"
   reason: "Initial comprehensive entry for Maset Cote de Boeuf with complete 52-field nutrition profile"

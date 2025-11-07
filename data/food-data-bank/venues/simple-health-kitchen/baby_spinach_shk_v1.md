@@ -56,8 +56,8 @@ per_portion:  # Schema v2: 52 nutrient fields (35g portion)
   chromium_ug: 0.5
   molybdenum_ug: 2.5
   phosphorus_mg: 17
-  chloride_mg: 50
-  sulfur_g: 0.02
+  chloride_mg: 43.0
+  sulfur_g: 0.004
   # Vitamins
   vitamin_a_ug: 164
   vitamin_d_ug: 0.0
@@ -97,6 +97,11 @@ notes:
 - "Carbs adjusted to 0.3g available (vs SHK PDF 1.3g) to match energy validation"
 - "Energy validation: 4×1.0 + 9×0.14 + 4×0.3 + 2×0.8 = 8.06 kcal (±1% of stated 8 kcal)"
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: "2025-11-06T00:00:00+00:00"
   updated_by: "Claude Code (Sonnet 4.5)"
   reason: "Initial creation with complete 52-nutrient profile from SHK PDF and USDA FoodData Central"

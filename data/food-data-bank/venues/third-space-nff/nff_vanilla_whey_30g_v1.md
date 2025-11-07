@@ -54,8 +54,8 @@ per_portion:
   chromium_ug: 1
   molybdenum_ug: 1.5
   phosphorus_mg: 176
-  chloride_mg: 120
-  sulfur_g: 0.18
+  chloride_mg: 60.0
+  sulfur_g: 0.22
   vitamin_a_ug: 0
   vitamin_d_ug: 0.03
   vitamin_e_mg: 0.02
@@ -99,6 +99,11 @@ notes:
 - Sweetened with stevia (zero calorie)
 - Atwater check (available carb basis): 4×22.0 + 9×1.4 + 4×6.5 + 2×0.5 + 2.4×0.0 = 127.6 kcal
 change_log:
+
+  - timestamp: "2025-11-06T23:28:47+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
 - timestamp: 2025-10-31T00:00:00+0000
   updated_by: Claude Code (Sonnet 4.5)
   reason: Initial entry from OpenFoodFacts data with micronutrient estimation from whey concentrate profiles

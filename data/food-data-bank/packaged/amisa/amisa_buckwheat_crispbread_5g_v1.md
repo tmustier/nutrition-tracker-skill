@@ -53,8 +53,8 @@ per_portion:
   chromium_ug: 0.1
   molybdenum_ug: 2.8
   phosphorus_mg: 16.85
-  chloride_mg: 0
-  sulfur_g: 0
+  chloride_mg: 37.0
+  sulfur_g: 0.002
   vitamin_a_ug: 0
   vitamin_d_ug: 0
   vitamin_e_mg: 0.016
@@ -90,6 +90,11 @@ notes:
 - Vegan, organic, gluten-free certified
 - Atwater check (available carb basis): 4×0.5 + 9×0.1 + 4×3.4 + 2×0.4 + 2.4×0.0 = 17.3 kcal
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: 2025-10-30T00:00:00+0000
   updated_by: Claude Code
   reason: Initial entry for Thomas's food diary tracking

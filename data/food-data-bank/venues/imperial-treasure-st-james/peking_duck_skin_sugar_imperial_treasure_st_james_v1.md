@@ -56,8 +56,8 @@ per_portion:
   chromium_ug: 0.03
   molybdenum_ug: 0.01
   phosphorus_mg: 1.2
-  chloride_mg: 2.5
-  sulfur_g: 0.004
+  chloride_mg: 15.0
+  sulfur_g: 0.002
   vitamin_a_ug: 0.8
   vitamin_d_ug: 0.01
   vitamin_e_mg: 0.02
@@ -107,6 +107,11 @@ notes:
 - Very high fat density but small portion size keeps total calories modest
 - Traditional serving: eaten immediately while hot and crispy, skin should shatter when bitten
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
 - timestamp: 2025-11-02T10:00:00+0000
   updated_by: Claude Code (Sonnet 4.5)
   reason: Initial entry with comprehensive component-based estimation following ESTIMATE.md protocol

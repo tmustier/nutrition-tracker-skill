@@ -56,8 +56,8 @@ per_portion:
   chromium_ug: 0
   molybdenum_ug: 0
   phosphorus_mg: 190.7
-  chloride_mg: 0
-  sulfur_g: 0.115
+  chloride_mg: 534.0
+  sulfur_g: 0.041
   vitamin_a_ug: 185.4
   vitamin_d_ug: 0.0
   vitamin_k_ug: 1.6
@@ -102,6 +102,11 @@ notes:
 - Store at room temperature for same day consumption or freeze for longer storage
 - "Atwater check (available carb basis): 4×10.2 + 9×33.0 + 4×38.6 + 2×4.0 = 500.2 kcal ≈ 506 kcal"
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: 2025-11-05T00:00:00+0000
   updated_by: Claude Code (Sonnet 4.5)
   reason: Enriched with 17 priority nutrients from USDA FoodData Central
