@@ -17,6 +17,20 @@
  */
 class CircuitBreaker {
   constructor(config = {}) {
+    // Validate configuration
+    if (config.failureThreshold !== undefined && config.failureThreshold < 1) {
+      throw new Error('CircuitBreaker: failureThreshold must be >= 1');
+    }
+    if (config.successThreshold !== undefined && config.successThreshold < 1) {
+      throw new Error('CircuitBreaker: successThreshold must be >= 1');
+    }
+    if (config.failureWindowMs !== undefined && config.failureWindowMs < 1000) {
+      throw new Error('CircuitBreaker: failureWindowMs must be >= 1000ms');
+    }
+    if (config.recoveryTimeoutMs !== undefined && config.recoveryTimeoutMs < 1000) {
+      throw new Error('CircuitBreaker: recoveryTimeoutMs must be >= 1000ms');
+    }
+
     // Configuration with defaults
     this.config = {
       failureThreshold: config.failureThreshold || 5,      // Open circuit after N failures
@@ -32,6 +46,7 @@ class CircuitBreaker {
     this.consecutiveSuccesses = 0; // Success counter in HALF_OPEN state
     this.openedAt = null;  // Timestamp when circuit was opened
     this.stateChangedAt = Date.now(); // Last state transition timestamp
+    this.isTransitioning = false; // Prevents race condition during OPEN → HALF_OPEN transition
 
     // Comprehensive metrics tracking
     this.metrics = {
@@ -59,22 +74,29 @@ class CircuitBreaker {
   /**
    * Check if circuit is OPEN (requests should be rejected)
    * Automatically transitions OPEN → HALF_OPEN after recovery timeout
+   *
+   * Note: Uses isTransitioning flag to prevent race condition where multiple
+   * concurrent requests could all transition to HALF_OPEN simultaneously.
+   * In Node.js single-threaded environment this is less critical, but still
+   * good practice for consistency and future-proofing.
    */
   isOpen() {
     // Auto-transition from OPEN to HALF_OPEN after recovery timeout
-    if (this.state === 'OPEN') {
+    if (this.state === 'OPEN' && !this.isTransitioning) {
       const now = Date.now();
       const timeSinceOpened = now - this.openedAt;
 
       if (timeSinceOpened >= this.config.recoveryTimeoutMs) {
+        this.isTransitioning = true;
         this.transitionTo('HALF_OPEN');
+        this.isTransitioning = false;
         return false; // Allow request in HALF_OPEN state
       }
 
       return true; // Circuit still OPEN, reject request
     }
 
-    return false; // CLOSED or HALF_OPEN, allow request
+    return this.state === 'OPEN'; // Return true if OPEN, false otherwise
   }
 
   /**
@@ -101,12 +123,12 @@ class CircuitBreaker {
       if (this.consecutiveSuccesses >= this.config.successThreshold) {
         this.transitionTo('CLOSED');
         this.consecutiveSuccesses = 0;
-        this.failures = []; // Clear failure history
+        this.failures = []; // Clear failure history when circuit closes
       }
-    } else if (this.state === 'CLOSED') {
-      // Clear failure history on success in CLOSED state
-      this.failures = [];
     }
+    // Note: We do NOT clear failures on success in CLOSED state
+    // The sliding window filter in recordFailure() is sufficient
+    // This prevents a pattern of (4 failures, 1 success, 4 failures) from never opening the circuit
   }
 
   /**
@@ -176,6 +198,11 @@ class CircuitBreaker {
     };
 
     this.metrics.stateTransitions.push(transition);
+
+    // Prevent memory leak: limit state transition history to last 1000 entries
+    while (this.metrics.stateTransitions.length > 1000) {
+      this.metrics.stateTransitions.shift();
+    }
 
     // Update state-specific counters
     if (newState === 'OPEN') {

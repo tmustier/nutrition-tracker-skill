@@ -63,6 +63,21 @@ class UsdaApi {
   /**
    * Execute an API call with circuit breaker protection
    * Wraps the actual API call and handles circuit breaker logic
+   *
+   * Note on retry behavior:
+   * Retry logic runs INSIDE the circuit breaker. Each retry attempt that fails
+   * is recorded as a separate failure. With 3 attempts (1 initial + 2 retries),
+   * a single failed request counts as 3 failures toward the threshold of 5.
+   *
+   * This is INTENTIONAL behavior:
+   * - Circuit opens after ~2 real failed requests (6 total retry attempts)
+   * - Enables fast-fail on persistent API issues
+   * - Prevents wasting resources on services that are clearly down
+   *
+   * Example: If USDA API is completely down:
+   *   Request 1: fails 3 times (1 initial + 2 retries) = 3 circuit breaker failures
+   *   Request 2: fails 3 times (1 initial + 2 retries) = 6 circuit breaker failures
+   *   Circuit opens (threshold = 5), protecting system from further attempts
    */
   async executeWithCircuitBreaker(apiCall) {
     // Check if circuit is OPEN
@@ -285,13 +300,17 @@ class UsdaApi {
   /**
    * Search for foods by query string
    * Protected by circuit breaker and retry logic
+   *
+   * Note: Rate limit check happens BEFORE circuit breaker to prevent
+   * rate limit errors from counting as API failures and opening the circuit.
    */
   async searchFoods(query, pageSize = 5) {
+    // Check rate limiting BEFORE circuit breaker
+    // Rate limits are client-side issues, not API failures
+    this.checkRateLimit();
+
     return this.executeWithCircuitBreaker(async () => {
       try {
-        // Check rate limiting before making API call
-        this.checkRateLimit();
-
         // Wrap in retry logic
         return await this.retryWithBackoff(
           async () => {
@@ -319,13 +338,17 @@ class UsdaApi {
   /**
    * Get detailed nutrition information for a specific food by FDC ID
    * Protected by circuit breaker and retry logic
+   *
+   * Note: Rate limit check happens BEFORE circuit breaker to prevent
+   * rate limit errors from counting as API failures and opening the circuit.
    */
   async getFoodDetails(fdcId) {
+    // Check rate limiting BEFORE circuit breaker
+    // Rate limits are client-side issues, not API failures
+    this.checkRateLimit();
+
     return this.executeWithCircuitBreaker(async () => {
       try {
-        // Check rate limiting before making API call
-        this.checkRateLimit();
-
         // Wrap in retry logic
         return await this.retryWithBackoff(
           async () => {
