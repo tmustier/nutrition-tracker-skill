@@ -465,6 +465,7 @@ Before deploying to production, ensure:
 - [ ] `NODE_ENV=production` is set
 - [ ] `ALLOWED_USERS` is set with your Telegram user ID (get from @userinfobot)
 - [ ] `WEBHOOK_SECRET` is set (generate with: `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`)
+- [ ] `SETUP_TOKEN` is set (generate with: `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`)
 - [ ] `USDA_API_KEY` is set (get from https://fdc.nal.usda.gov/api-key-signup.html)
 - [ ] `WEBHOOK_URL` uses HTTPS (HTTP rejected in production)
 - [ ] `GITHUB_BRANCH=daily-logs` (not daily-logs-test)

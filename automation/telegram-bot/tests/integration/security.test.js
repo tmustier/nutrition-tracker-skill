@@ -37,10 +37,11 @@ describe('Security Middleware', () => {
         return next();
       }
 
-      if (!userId) {
-        return res.status(401).json({
-          error: 'Authentication failed',
-          message: 'No user ID in request'
+      // Validate userId is a valid positive integer (consistent with rate limiter)
+      if (!userId || !Number.isInteger(userId) || userId <= 0) {
+        return res.status(400).json({
+          error: 'Invalid request format',
+          message: 'Invalid or missing user ID'
         });
       }
 
@@ -106,8 +107,73 @@ describe('Security Middleware', () => {
         .post('/webhook')
         .send(telegramUpdate);
 
-      expect(response.status).toBe(401);
-      expect(response.body.error).toBe('Authentication failed');
+      expect(response.status).toBe(400);
+      expect(response.body.error).toBe('Invalid request format');
+    });
+
+    it('should reject requests with string user ID', async () => {
+      const telegramUpdate = global.mockTelegramUpdate({
+        message: {
+          from: { id: "123456789" }, // String instead of integer
+          text: 'test message'
+        }
+      });
+
+      const response = await request(app)
+        .post('/webhook')
+        .send(telegramUpdate);
+
+      expect(response.status).toBe(400);
+      expect(response.body.error).toBe('Invalid request format');
+      expect(response.body.message).toContain('Invalid or missing user ID');
+    });
+
+    it('should reject requests with negative user ID', async () => {
+      const telegramUpdate = global.mockTelegramUpdate({
+        message: {
+          from: { id: -123456789 }, // Negative integer
+          text: 'test message'
+        }
+      });
+
+      const response = await request(app)
+        .post('/webhook')
+        .send(telegramUpdate);
+
+      expect(response.status).toBe(400);
+      expect(response.body.error).toBe('Invalid request format');
+    });
+
+    it('should reject requests with zero user ID', async () => {
+      const telegramUpdate = global.mockTelegramUpdate({
+        message: {
+          from: { id: 0 }, // Zero
+          text: 'test message'
+        }
+      });
+
+      const response = await request(app)
+        .post('/webhook')
+        .send(telegramUpdate);
+
+      expect(response.status).toBe(400);
+      expect(response.body.error).toBe('Invalid request format');
+    });
+
+    it('should reject requests with float user ID', async () => {
+      const telegramUpdate = global.mockTelegramUpdate({
+        message: {
+          from: { id: 123.456 }, // Float instead of integer
+          text: 'test message'
+        }
+      });
+
+      const response = await request(app)
+        .post('/webhook')
+        .send(telegramUpdate);
+
+      expect(response.status).toBe(400);
+      expect(response.body.error).toBe('Invalid request format');
     });
 
     it('should allow multiple authorized users', async () => {

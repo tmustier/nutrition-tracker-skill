@@ -230,9 +230,11 @@ const authenticateUser = (ctx, next) => {
   }
 
   const userId = ctx.from?.id;
-  if (!userId) {
-    console.warn('Authentication failed: No user ID in request');
-    return ctx.reply('❌ Authentication error. Please try again.');
+
+  // Validate userId is a valid positive integer (consistent with rate limiter)
+  if (!userId || !Number.isInteger(userId) || userId <= 0) {
+    console.warn('Authentication failed: Invalid or missing user ID', { userId, type: typeof userId });
+    return ctx.reply('❌ Invalid request format. Please try again.');
   }
 
   if (!config.telegram.allowedUsers.includes(userId)) {
