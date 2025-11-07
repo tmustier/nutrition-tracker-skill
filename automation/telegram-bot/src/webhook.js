@@ -60,42 +60,33 @@ const MAX_LOG_MESSAGE_LENGTH = 500;
 // Rate limiting warning threshold
 const RATE_LIMIT_WARNING_THRESHOLD = 0.8; // Warn at 80% of limit
 
+// Telegram message formatting options
+const TELEGRAM_PARSE_OPTIONS = { parse_mode: 'Markdown' };
+
 // ============================================================================
 // UTILITY FUNCTIONS
 // ============================================================================
 
 /**
  * Escape special Telegram Markdown characters to prevent parsing errors
- * Markdown special characters: _ * [ ] ( ) ~ ` > # + - = | { } . !
+ * For legacy Markdown mode (not MarkdownV2)
+ * Special characters: _ * ` [
  * @param {string} text - Text to escape
- * @returns {string} Escaped text safe for Telegram Markdown
+ * @returns {string} Escaped text safe for Telegram legacy Markdown
  */
 const escapeMarkdown = (text) => {
   if (typeof text !== 'string') {
     return String(text);
   }
 
-  // Escape all Telegram Markdown special characters
+  // Escape only characters that are special in legacy Markdown mode
+  // Note: Backslash must be escaped first to avoid double-escaping
   return text
-    .replace(/\\/g, '\\\\')   // Backslash must be first
-    .replace(/_/g, '\\_')     // Underscore
-    .replace(/\*/g, '\\*')    // Asterisk
-    .replace(/\[/g, '\\[')    // Left bracket
-    .replace(/\]/g, '\\]')    // Right bracket
-    .replace(/\(/g, '\\(')    // Left parenthesis
-    .replace(/\)/g, '\\)')    // Right parenthesis
-    .replace(/~/g, '\\~')     // Tilde
-    .replace(/`/g, '\\`')     // Backtick
-    .replace(/>/g, '\\>')     // Greater than
-    .replace(/#/g, '\\#')     // Hash
-    .replace(/\+/g, '\\+')    // Plus
-    .replace(/-/g, '\\-')     // Minus
-    .replace(/=/g, '\\=')     // Equals
-    .replace(/\|/g, '\\|')    // Pipe
-    .replace(/\{/g, '\\{')    // Left brace
-    .replace(/\}/g, '\\}')    // Right brace
-    .replace(/\./g, '\\.')    // Period
-    .replace(/!/g, '\\!');    // Exclamation mark
+    .replace(/\\/g, '\\\\')   // Backslash (must be first)
+    .replace(/\*/g, '\\*')    // Asterisk (bold)
+    .replace(/_/g, '\\_')     // Underscore (italic)
+    .replace(/`/g, '\\`')     // Backtick (code)
+    .replace(/\[/g, '\\[');   // Left bracket (link opener)
 };
 
 /**
@@ -233,7 +224,7 @@ const rateLimitMiddleware = (ctx, next) => {
     return ctx.reply(
       `⚠️ Rate limit exceeded. You can make up to ${RATE_LIMIT_REQUESTS_PER_MINUTE} requests per minute.\n\n` +
       `Please wait ${resetTime} seconds before trying again.`,
-      { parse_mode: 'Markdown' }
+      TELEGRAM_PARSE_OPTIONS
     );
   }
 
@@ -275,12 +266,12 @@ const authenticateUser = (ctx, next) => {
   // Validate userId is a valid positive integer (consistent with rate limiter)
   if (!userId || !Number.isInteger(userId) || userId <= 0) {
     console.warn('Authentication failed: Invalid or missing user ID', { userId, type: typeof userId });
-    return ctx.reply('❌ Invalid request format. Please try again.', { parse_mode: 'Markdown' });
+    return ctx.reply('❌ Invalid request format. Please try again.', TELEGRAM_PARSE_OPTIONS);
   }
 
   if (!config.telegram.allowedUsers.includes(userId)) {
     console.warn(`Unauthorized access attempt from user ${userId}`);
-    return ctx.reply('❌ Unauthorized. This bot is restricted to authorized users only.', { parse_mode: 'Markdown' });
+    return ctx.reply('❌ Unauthorized. This bot is restricted to authorized users only.', TELEGRAM_PARSE_OPTIONS);
   }
 
   return next();
@@ -442,7 +433,7 @@ I help you track everything you eat with precise nutrition data.
 
 Let's get started! Tell me what you ate.`;
 
-  await ctx.reply(welcomeMessage, { parse_mode: 'Markdown' });
+  await ctx.reply(welcomeMessage, TELEGRAM_PARSE_OPTIONS);
 });
 
 /**
@@ -498,7 +489,7 @@ I'll extract the data automatically.
 
 Need help? Just ask!`;
 
-  await ctx.reply(helpMessage, { parse_mode: 'Markdown' });
+  await ctx.reply(helpMessage, TELEGRAM_PARSE_OPTIONS);
 });
 
 /**
@@ -507,7 +498,7 @@ Need help? Just ask!`;
 bot.command('today', async (ctx) => {
   try {
     // Send initial processing message
-    const processingMsg = await ctx.reply('📊 Calculating today\'s totals...', { parse_mode: 'Markdown' });
+    const processingMsg = await ctx.reply('📊 Calculating today\'s totals...', TELEGRAM_PARSE_OPTIONS);
 
     // Get totals from GitHub for this specific user
     const userId = ctx.from.id;
@@ -565,11 +556,11 @@ ${proteinPercent >= TARGET_ACHIEVEMENT_THRESHOLDS.PROTEIN_ACHIEVED_PERCENT ? '�
       processingMsg.message_id,
       null,
       summaryMessage,
-      { parse_mode: 'Markdown' }
+      TELEGRAM_PARSE_OPTIONS
     );
   } catch (error) {
     console.error('Error in /today command:', error);
-    await ctx.reply('❌ Error calculating totals. Please try again or contact support.', { parse_mode: 'Markdown' });
+    await ctx.reply('❌ Error calculating totals. Please try again or contact support.', TELEGRAM_PARSE_OPTIONS);
   }
 });
 
@@ -577,7 +568,7 @@ ${proteinPercent >= TARGET_ACHIEVEMENT_THRESHOLDS.PROTEIN_ACHIEVED_PERCENT ? '�
  * /week - Weekly summary (placeholder)
  */
 bot.command('week', async (ctx) => {
-  await ctx.reply('📅 Weekly summary feature coming soon!\n\nFor now, use /today to see daily totals.', { parse_mode: 'Markdown' });
+  await ctx.reply('📅 Weekly summary feature coming soon!\n\nFor now, use /today to see daily totals.', TELEGRAM_PARSE_OPTIONS);
 });
 
 /**
@@ -599,7 +590,7 @@ bot.command('cancel', async (ctx) => {
   const lockMsg = wasLocked
     ? '🔓 Processing lock released.\n'
     : '';
-  await ctx.reply(`✅ Operation cancelled and conversation cleared.\n${lockMsg}Send me your next meal whenever you're ready!`, { parse_mode: 'Markdown' });
+  await ctx.reply(`✅ Operation cancelled and conversation cleared.\n${lockMsg}Send me your next meal whenever you're ready!`, TELEGRAM_PARSE_OPTIONS);
 });
 
 /**
@@ -615,7 +606,7 @@ bot.command('clear', async (ctx) => {
   }
 
   conversationManager.clearConversation(userId);
-  await ctx.reply('🗑️ Conversation history cleared! Starting fresh.', { parse_mode: 'Markdown' });
+  await ctx.reply('🗑️ Conversation history cleared! Starting fresh.', TELEGRAM_PARSE_OPTIONS);
 });
 
 /**
@@ -627,7 +618,7 @@ bot.command('context', async (ctx) => {
   const stats = conversationManager.getStats();
 
   if (conversation.length === 0) {
-    await ctx.reply('💬 No active conversation.\n\nStart chatting to build conversation context!', { parse_mode: 'Markdown' });
+    await ctx.reply('💬 No active conversation.\n\nStart chatting to build conversation context!', TELEGRAM_PARSE_OPTIONS);
     return;
   }
 
@@ -641,7 +632,7 @@ bot.command('context', async (ctx) => {
 
 💡 Use /clear to reset the conversation.`;
 
-  await ctx.reply(contextMessage, { parse_mode: 'Markdown' });
+  await ctx.reply(contextMessage, TELEGRAM_PARSE_OPTIONS);
 });
 
 // ============================================================================
@@ -662,13 +653,13 @@ bot.on('text', async (ctx) => {
 
   // Acquire processing lock (acquireLock already checks if locked internally)
   if (!conversationManager.acquireLock(userId)) {
-    await ctx.reply('⏳ Please wait, I\'m still processing your previous message...', { parse_mode: 'Markdown' });
+    await ctx.reply('⏳ Please wait, I\'m still processing your previous message...', TELEGRAM_PARSE_OPTIONS);
     return;
   }
 
   try {
     // Step 1: Send processing message
-    const processingMsg = await ctx.reply('🔍 Processing...', { parse_mode: 'Markdown' });
+    const processingMsg = await ctx.reply('🔍 Processing...', TELEGRAM_PARSE_OPTIONS);
 
     // Step 2: Get conversation history BEFORE adding current message
     // (processFoodLog will append the current message to the backlog)
@@ -704,8 +695,8 @@ bot.on('text', async (ctx) => {
         ctx.chat.id,
         processingMsg.message_id,
         null,
-        `💬 ${responseText}`,
-        { parse_mode: 'Markdown' }
+        `💬 ${escapeMarkdown(responseText)}`,
+        TELEGRAM_PARSE_OPTIONS
       );
       return;
     }
@@ -717,8 +708,8 @@ bot.on('text', async (ctx) => {
           ctx.chat.id,
           processingMsg.message_id,
           null,
-          `💬 ${responseText}`,
-          { parse_mode: 'Markdown' }
+          `💬 ${escapeMarkdown(responseText)}`,
+          TELEGRAM_PARSE_OPTIONS
         );
         return;
       }
@@ -729,7 +720,7 @@ bot.on('text', async (ctx) => {
         processingMsg.message_id,
         null,
         `❌ Could not process food log. ${escapeMarkdown(result.message || 'Please try again with more details.')}\n\nExample: "200g grilled chicken breast" or "2 scrambled eggs"`,
-        { parse_mode: 'Markdown' }
+        TELEGRAM_PARSE_OPTIONS
       );
       return;
     }
@@ -743,7 +734,7 @@ bot.on('text', async (ctx) => {
       processingMsg.message_id,
       null,
       '💾 Logging to database...',
-      { parse_mode: 'Markdown' }
+      TELEGRAM_PARSE_OPTIONS
     );
 
     // Step 5: Get current totals before committing to avoid race condition (for this user only)
@@ -812,13 +803,13 @@ ${result.source === 'usda' ? '📚 Data source: USDA FoodData Central' : '🤖 D
       processingMsg.message_id,
       null,
       successMessage,
-      { parse_mode: 'Markdown' }
+      TELEGRAM_PARSE_OPTIONS
     );
   } catch (error) {
     console.error('Error processing text message:', error);
     await ctx.reply(
       `❌ Error logging food: ${sanitizeErrorForUser(error)}\n\nPlease try again or contact support if the issue persists.`,
-      { parse_mode: 'Markdown' }
+      TELEGRAM_PARSE_OPTIONS
     );
   } finally {
     // CRITICAL: Always release lock, even on error
@@ -835,19 +826,19 @@ bot.on('photo', async (ctx) => {
   // Validate photo input
   const photos = ctx.message.photo;
   if (!Array.isArray(photos) || photos.length === 0) {
-    await ctx.reply('❌ No photo data received. Please try again.', { parse_mode: 'Markdown' });
+    await ctx.reply('❌ No photo data received. Please try again.', TELEGRAM_PARSE_OPTIONS);
     return;
   }
 
   // Acquire processing lock (acquireLock already checks if locked internally)
   if (!conversationManager.acquireLock(userId)) {
-    await ctx.reply('⏳ Please wait, I\'m still processing your previous message...', { parse_mode: 'Markdown' });
+    await ctx.reply('⏳ Please wait, I\'m still processing your previous message...', TELEGRAM_PARSE_OPTIONS);
     return;
   }
 
   try {
     // Step 1: Send processing message
-    const processingMsg = await ctx.reply('📸 Processing screenshot...', { parse_mode: 'Markdown' });
+    const processingMsg = await ctx.reply('📸 Processing screenshot...', TELEGRAM_PARSE_OPTIONS);
 
     // Step 2: Download photo
     // Telegram sends multiple photo sizes - get the highest resolution
@@ -868,7 +859,7 @@ bot.on('photo', async (ctx) => {
         processingMsg.message_id,
         null,
         `❌ Image too large (${Math.round(fileInfo.file_size / 1024 / 1024)}MB). Please send images under 10MB.`,
-        { parse_mode: 'Markdown' }
+        TELEGRAM_PARSE_OPTIONS
       );
       conversationManager.releaseLock(userId); // CRITICAL: Release lock before return
       return;
@@ -895,7 +886,7 @@ bot.on('photo', async (ctx) => {
       processingMsg.message_id,
       null,
       '🤖 Analyzing image with AI...',
-      { parse_mode: 'Markdown' }
+      TELEGRAM_PARSE_OPTIONS
     );
 
     // Step 4: Process with Claude Vision using detected MIME type (with user-specific profile)
@@ -907,7 +898,7 @@ bot.on('photo', async (ctx) => {
         processingMsg.message_id,
         null,
         `❌ Could not extract nutrition data from image.\n\n${escapeMarkdown(result.message || 'Please try with a clearer photo or send a text description instead.')}`,
-        { parse_mode: 'Markdown' }
+        TELEGRAM_PARSE_OPTIONS
       );
       return;
     }
@@ -921,7 +912,7 @@ bot.on('photo', async (ctx) => {
       processingMsg.message_id,
       null,
       '💾 Logging to database...',
-      { parse_mode: 'Markdown' }
+      TELEGRAM_PARSE_OPTIONS
     );
 
     // Step 7: Extract user information for multi-user tracking (userId already defined at line 779)
@@ -985,13 +976,13 @@ bot.on('photo', async (ctx) => {
       processingMsg.message_id,
       null,
       successMessage,
-      { parse_mode: 'Markdown' }
+      TELEGRAM_PARSE_OPTIONS
     );
   } catch (error) {
     console.error('Error processing photo:', error);
     await ctx.reply(
       `❌ Error processing screenshot: ${sanitizeErrorForUser(error)}\n\nPlease try again with a different image or send a text description.`,
-      { parse_mode: 'Markdown' }
+      TELEGRAM_PARSE_OPTIONS
     );
   } finally {
     // CRITICAL: Always release lock, even on error
@@ -1008,7 +999,7 @@ bot.on('photo', async (ctx) => {
  */
 bot.catch((error, ctx) => {
   console.error('Unhandled bot error:', error);
-  ctx.reply('❌ An unexpected error occurred. Please try again or contact support.', { parse_mode: 'Markdown' }).catch(err => {
+  ctx.reply('❌ An unexpected error occurred. Please try again or contact support.', TELEGRAM_PARSE_OPTIONS).catch(err => {
     console.error('Failed to send error message:', err);
   });
 });
