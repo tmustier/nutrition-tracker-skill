@@ -213,27 +213,26 @@ jobs:
             # Get the newly created PR number
             PR_NUMBER=$(gh pr list --base main --head daily-logs --json number --jq '.[0].number')
 
-            # Ensure the automerge label exists, creating it if necessary
+            # Add automerge label to the newly created PR
             # This label helps identify PRs that should auto-merge after validation
             if [ -n "$PR_NUMBER" ]; then
-              # Check if label exists (cache result to avoid duplicate API calls)
-              LABEL_EXISTS=$(gh label list --json name --jq '.[].name' | grep -qx "automerge:food-log" && echo "true" || echo "false")
+              echo "✅ Created PR #$PR_NUMBER"
 
-              if [ "$LABEL_EXISTS" = "false" ]; then
-                echo "📝 Creating label 'automerge:food-log'..."
-                gh label create "automerge:food-log" \
-                  --description "Auto-merge food log PRs after validation passes" \
-                  --color "0E8A16" \
-                  && { echo "✅ Label created successfully"; LABEL_EXISTS="true"; } \
-                  || echo "⚠️ Failed to create label, will continue without it"
-              fi
+              # Ensure label exists using --force (idempotent: creates if missing, updates if exists)
+              # This is simpler and more robust than checking existence first
+              echo "📝 Ensuring label 'automerge:food-log' exists..."
+              gh label create "automerge:food-log" --force \
+                --description "Auto-merge food log PRs after validation passes" \
+                --color "0E8A16" \
+                && echo "✅ Label ready" \
+                || echo "⚠️ Label operation failed (non-critical, continuing)"
 
-              # Add the label to the PR (non-critical, workflow continues on failure)
-              if [ "$LABEL_EXISTS" = "true" ]; then
-                gh pr edit "$PR_NUMBER" --add-label "automerge:food-log" \
-                  && echo "✅ Label 'automerge:food-log' added to PR" \
-                  || echo "⚠️ Failed to add label to PR, but continuing"
-              fi
+              # Add label to PR (will succeed since we ensured label exists above)
+              gh pr edit "$PR_NUMBER" --add-label "automerge:food-log" \
+                && echo "✅ Label 'automerge:food-log' added to PR #$PR_NUMBER" \
+                || echo "⚠️ Failed to add label to PR (non-critical, continuing)"
+            else
+              echo "⚠️ Could not retrieve PR number"
             fi
           else
             echo "PR #$PR_NUMBER already exists, it will be automatically updated."
