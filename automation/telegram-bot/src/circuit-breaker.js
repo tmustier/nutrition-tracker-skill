@@ -84,12 +84,17 @@ class CircuitBreaker {
     // Auto-transition from OPEN to HALF_OPEN after recovery timeout
     if (this.state === 'OPEN' && !this.isTransitioning) {
       const now = Date.now();
-      const timeSinceOpened = now - this.openedAt;
+      // Use Math.abs() to handle NTP adjustments / clock going backwards
+      const timeSinceOpened = Math.abs(now - this.openedAt);
 
       if (timeSinceOpened >= this.config.recoveryTimeoutMs) {
+        // Use try-finally to prevent deadlock if transitionTo() throws
         this.isTransitioning = true;
-        this.transitionTo('HALF_OPEN');
-        this.isTransitioning = false;
+        try {
+          this.transitionTo('HALF_OPEN');
+        } finally {
+          this.isTransitioning = false;
+        }
         return false; // Allow request in HALF_OPEN state
       }
 
@@ -148,6 +153,12 @@ class CircuitBreaker {
     const cutoff = now - this.config.failureWindowMs;
     this.failures = this.failures.filter(timestamp => timestamp > cutoff);
 
+    // Prevent unbounded growth under extreme load (1000+ concurrent failures)
+    // Use slice() instead of shift() for O(n) performance instead of O(n²)
+    if (this.failures.length > 1000) {
+      this.failures = this.failures.slice(-1000);
+    }
+
     console.log(`[${this.config.name}] Failure recorded: ${this.failures.length}/${this.config.failureThreshold} in window`);
 
     // State-specific handling
@@ -200,8 +211,9 @@ class CircuitBreaker {
     this.metrics.stateTransitions.push(transition);
 
     // Prevent memory leak: limit state transition history to last 1000 entries
-    while (this.metrics.stateTransitions.length > 1000) {
-      this.metrics.stateTransitions.shift();
+    // Use slice() for O(n) performance instead of shift() loop which is O(n²)
+    if (this.metrics.stateTransitions.length > 1000) {
+      this.metrics.stateTransitions = this.metrics.stateTransitions.slice(-1000);
     }
 
     // Update state-specific counters

@@ -46,7 +46,7 @@ class UsdaApi {
 
     // Circuit breaker initialization
     this.circuitBreaker = new CircuitBreaker({
-      failureThreshold: 5,           // Open after 5 failures
+      failureThreshold: 10,          // Open after 10 failures (increased to reduce false positives)
       failureWindowMs: 60000,        // within 60 seconds
       recoveryTimeoutMs: 120000,     // Wait 2 minutes before testing recovery
       successThreshold: 2,           // Require 2 successes to close circuit
@@ -64,20 +64,19 @@ class UsdaApi {
    * Execute an API call with circuit breaker protection
    * Wraps the actual API call and handles circuit breaker logic
    *
-   * Note on retry behavior:
-   * Retry logic runs INSIDE the circuit breaker. Each retry attempt that fails
-   * is recorded as a separate failure. With 3 attempts (1 initial + 2 retries),
-   * a single failed request counts as 3 failures toward the threshold of 5.
+   * IMPORTANT - Retry vs Circuit Breaker Interaction:
+   * Retry logic runs INSIDE the circuit breaker. Each REQUEST that fails (after all
+   * retry attempts) counts as ONE circuit breaker failure, not per retry attempt.
    *
-   * This is INTENTIONAL behavior:
-   * - Circuit opens after ~2 real failed requests (6 total retry attempts)
-   * - Enables fast-fail on persistent API issues
-   * - Prevents wasting resources on services that are clearly down
+   * With 3 total attempts (1 initial + 2 retries) and threshold of 10:
+   * - Each failed request = 1 circuit breaker failure (after all 3 attempts exhausted)
+   * - Circuit opens after 10 failed requests (30 total retry attempts)
+   * - Takes 10 consecutive request failures to open circuit (robust against transient issues)
    *
    * Example: If USDA API is completely down:
-   *   Request 1: fails 3 times (1 initial + 2 retries) = 3 circuit breaker failures
-   *   Request 2: fails 3 times (1 initial + 2 retries) = 6 circuit breaker failures
-   *   Circuit opens (threshold = 5), protecting system from further attempts
+   *   Requests 1-9: Each fails 3 times (1 initial + 2 retries) = 9 circuit breaker failures
+   *   Request 10: Fails 3 times = 10th circuit breaker failure → Circuit OPENS
+   *   Further requests rejected immediately (fast-fail) until recovery timeout
    */
   async executeWithCircuitBreaker(apiCall) {
     // Check if circuit is OPEN
@@ -304,16 +303,28 @@ class UsdaApi {
    * Search for foods by query string
    * Protected by circuit breaker and retry logic
    *
-   * IMPORTANT: Rate limit check happens INSIDE circuit breaker to ensure that
-   * rejected requests (circuit breaker OPEN) don't consume rate limit quota.
-   * Only actual HTTP call attempts should count against the client-side rate limit.
+   * ARCHITECTURE: Rate limit check happens BEFORE circuit breaker to prevent
+   * client-side rate limit errors from being counted as API failures (which would
+   * incorrectly open the circuit). However, we first check if circuit is OPEN to
+   * avoid consuming rate limit quota on rejected requests.
    */
   async searchFoods(query, pageSize = 5) {
-    return this.executeWithCircuitBreaker(async () => {
-      // Check rate limiting AFTER circuit breaker permits the call
-      // This prevents rejected requests from consuming rate limit quota
-      this.checkRateLimit();
+    // Early exit if circuit is OPEN (don't consume rate limit quota)
+    if (this.circuitBreaker.isOpen()) {
+      this.circuitBreaker.recordRejection();
+      const metrics = this.circuitBreaker.getMetrics();
+      throw new Error(
+        `USDA API circuit breaker is OPEN - service temporarily unavailable. ` +
+        `Recovery testing in ${metrics.nextStateChange?.inSeconds || 0} seconds.`
+      );
+    }
 
+    // Circuit is closed - check client-side rate limiting
+    // This runs OUTSIDE circuit breaker so rate limit errors don't count as API failures
+    this.checkRateLimit();
+
+    // Execute with circuit breaker protection
+    return this.executeWithCircuitBreaker(async () => {
       try {
         // Wrap in retry logic
         return await this.retryWithBackoff(
@@ -325,7 +336,7 @@ class UsdaApi {
                 dataType: 'Foundation,SR Legacy',
                 pageSize: pageSize,
               },
-              timeout: 30000 // 30 seconds timeout
+              timeout: 10000 // 10 seconds timeout (reduced from 30s for better UX)
             });
 
             return response.data.foods || [];
@@ -343,16 +354,28 @@ class UsdaApi {
    * Get detailed nutrition information for a specific food by FDC ID
    * Protected by circuit breaker and retry logic
    *
-   * IMPORTANT: Rate limit check happens INSIDE circuit breaker to ensure that
-   * rejected requests (circuit breaker OPEN) don't consume rate limit quota.
-   * Only actual HTTP call attempts should count against the client-side rate limit.
+   * ARCHITECTURE: Rate limit check happens BEFORE circuit breaker to prevent
+   * client-side rate limit errors from being counted as API failures (which would
+   * incorrectly open the circuit). However, we first check if circuit is OPEN to
+   * avoid consuming rate limit quota on rejected requests.
    */
   async getFoodDetails(fdcId) {
-    return this.executeWithCircuitBreaker(async () => {
-      // Check rate limiting AFTER circuit breaker permits the call
-      // This prevents rejected requests from consuming rate limit quota
-      this.checkRateLimit();
+    // Early exit if circuit is OPEN (don't consume rate limit quota)
+    if (this.circuitBreaker.isOpen()) {
+      this.circuitBreaker.recordRejection();
+      const metrics = this.circuitBreaker.getMetrics();
+      throw new Error(
+        `USDA API circuit breaker is OPEN - service temporarily unavailable. ` +
+        `Recovery testing in ${metrics.nextStateChange?.inSeconds || 0} seconds.`
+      );
+    }
 
+    // Circuit is closed - check client-side rate limiting
+    // This runs OUTSIDE circuit breaker so rate limit errors don't count as API failures
+    this.checkRateLimit();
+
+    // Execute with circuit breaker protection
+    return this.executeWithCircuitBreaker(async () => {
       try {
         // Wrap in retry logic
         return await this.retryWithBackoff(
@@ -361,7 +384,7 @@ class UsdaApi {
               params: {
                 api_key: this.apiKey,
               },
-              timeout: 30000 // 30 seconds timeout
+              timeout: 10000 // 10 seconds timeout (reduced from 30s for better UX)
             });
 
             // Validate response is actual food data, not HTML error page
