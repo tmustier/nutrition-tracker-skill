@@ -226,7 +226,6 @@ bot.launch();
 ## Documentation
 
 - **Full details:** `CLAUDE_INTEGRATION_README.md`
-- **Implementation summary:** `../IMPLEMENTATION_SUMMARY.md`
 - **Config usage:** `CONFIG_USAGE.md`
 
 ## Support

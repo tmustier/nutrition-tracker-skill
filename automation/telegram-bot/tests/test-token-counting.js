@@ -10,7 +10,7 @@
  * 5. Stats reporting with token information
  */
 
-const ConversationManager = require('./conversation-manager');
+const ConversationManager = require('../src/conversation-manager');
 
 // Helper function to generate a message of approximately N tokens
 function generateMessage(targetTokens) {

@@ -3,8 +3,8 @@
  * Test script to verify critical security and concurrency fixes
  */
 
-const claudeIntegration = require('./claude-integration');
-const conversationManager = require('./conversation-manager');
+const claudeIntegration = require('../src/claude-integration');
+const conversationManager = require('../src/conversation-manager');
 
 console.log('='.repeat(70));
 console.log('TESTING CRITICAL SECURITY AND CONCURRENCY FIXES');
