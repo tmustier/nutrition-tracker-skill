@@ -63,6 +63,8 @@ const RATE_LIMIT_WARNING_THRESHOLD = 0.8; // Warn at 80% of limit
 /**
  * Telegram message formatting options
  * Uses legacy Markdown mode for consistent rendering across all messages
+ * TODO: Consider migrating to MarkdownV2 (Telegram's recommended mode) in the future.
+ *       Note: MarkdownV2 requires different escaping rules - see Telegram Bot API docs.
  */
 const TELEGRAM_PARSE_OPTIONS = { parse_mode: 'Markdown' };
 
