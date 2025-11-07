@@ -78,10 +78,10 @@ const EASTER_EGG_TYPES = {
 
     // Detection criteria
     detectionCriteria: {
+      scene_type: 'selfie', // Match scene_type from Claude Vision
       has_person: true,
       has_food: false,
-      min_person_confidence: 'high',
-      min_no_food_confidence: 'high', // Must be CERTAIN there's no food
+      min_confidence: 'high', // Overall scene confidence
     },
 
     // Messages (randomly selected)
@@ -111,10 +111,10 @@ const EASTER_EGG_TYPES = {
     blocksNutritionExtraction: true,
 
     detectionCriteria: {
+      scene_type: 'pet_photo', // Match scene_type from Claude Vision
       has_pet: true,
       has_food: false,
-      min_pet_confidence: 'high',
-      min_no_food_confidence: 'high',
+      min_confidence: 'high', // Overall scene confidence
     },
 
     messages: [
@@ -140,10 +140,9 @@ const EASTER_EGG_TYPES = {
     blocksNutritionExtraction: true,
 
     detectionCriteria: {
-      has_empty_plate: true,
+      scene_type: 'empty_plate', // Match scene_type from Claude Vision
       has_food: false,
-      min_empty_plate_confidence: 'high',
-      min_no_food_confidence: 'high',
+      min_confidence: 'high', // Overall scene confidence
     },
 
     messages: [
@@ -169,10 +168,10 @@ const EASTER_EGG_TYPES = {
     blocksNutritionExtraction: true,
 
     detectionCriteria: {
-      has_non_food_item: true,
+      scene_type: 'fake_food', // Match scene_type from Claude Vision
+      is_fake_food: true,
       has_food: false,
-      min_non_food_confidence: 'high',
-      min_no_food_confidence: 'high',
+      min_confidence: 'high', // Overall scene confidence
     },
 
     messages: [
@@ -198,8 +197,9 @@ const EASTER_EGG_TYPES = {
     blocksNutritionExtraction: true,
 
     detectionCriteria: {
+      scene_type: 'shopping', // Match scene_type from Claude Vision
       is_shopping_scene: true,
-      min_shopping_confidence: 'high',
+      min_confidence: 'high', // Overall scene confidence
     },
 
     messages: [
@@ -225,9 +225,9 @@ const EASTER_EGG_TYPES = {
     blocksNutritionExtraction: true,
 
     detectionCriteria: {
-      is_screenshot: true,
-      has_nutrition_label: false, // Don't block if it's a nutrition label screenshot
-      min_screenshot_confidence: 'high',
+      scene_type: 'screenshot', // Match scene_type from Claude Vision
+      is_digital_content: true,
+      min_confidence: 'high', // Overall scene confidence
     },
 
     messages: [
@@ -253,10 +253,10 @@ const EASTER_EGG_TYPES = {
     blocksNutritionExtraction: true,
 
     detectionCriteria: {
-      has_food_packaging: true,
+      scene_type: 'empty_packaging', // Match scene_type from Claude Vision
+      is_empty_packaging: true,
       has_food: false,
-      min_packaging_confidence: 'high',
-      min_no_food_confidence: 'high',
+      min_confidence: 'high', // Overall scene confidence
     },
 
     messages: [
@@ -314,8 +314,10 @@ const EASTER_EGG_TYPES = {
     blocksNutritionExtraction: false, // COMPANION: Cake is food!
 
     detectionCriteria: {
+      scene_type: 'celebration', // Match scene_type from Claude Vision
       is_celebration: true,
-      min_celebration_confidence: 'high',
+      has_food: true, // Celebration food is still food!
+      min_confidence: 'high', // Overall scene confidence
     },
 
     messages: [

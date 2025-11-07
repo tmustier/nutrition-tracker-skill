@@ -85,6 +85,15 @@ const prepareNutritionData = (result, defaultNotes = '') => {
       nutrition: result.data.per_portion,
       notes: result.data.notes || defaultNotes || `Source: ${result.source}`,
     };
+  } else if (result.source === 'claude_vision') {
+    return {
+      name: result.data.name,
+      food_bank_id: result.data.food_bank_id || null,
+      quantity: result.data.quantity || 1,
+      unit: result.data.unit || 'portion',
+      nutrition: result.data.per_portion,
+      notes: result.data.notes || defaultNotes || `Source: ${result.source}`,
+    };
   } else {
     throw new Error(`Unknown result source: ${result.source}`);
   }
@@ -856,32 +865,38 @@ bot.on('photo', async (ctx) => {
     if (result.should_show_easter_egg && result.scene_detection) {
       console.log(`Easter egg candidate detected: ${result.scene_detection.scene_type} (confidence: ${result.scene_detection.confidence})`);
 
-      // Evaluate with easter egg manager (handles cooldowns and message selection)
-      const easterEggResult = easterEggManager.evaluateDetection(result.scene_detection, userId);
+      try {
+        // Evaluate with easter egg manager (handles cooldowns and message selection)
+        const easterEggResult = easterEggManager.evaluateDetection(result.scene_detection, userId);
 
-      if (easterEggResult.shouldTrigger && easterEggResult.canTrigger) {
-        // Show easter egg message
-        const easterEggMessage = easterEggResult.getMessage();
-        await ctx.telegram.editMessageText(
-          ctx.chat.id,
-          processingMsg.message_id,
-          null,
-          easterEggMessage
-        );
+        if (easterEggResult.shouldTrigger && easterEggResult.canTrigger) {
+          // Show easter egg message
+          const easterEggMessage = easterEggResult.getMessage();
+          await ctx.telegram.editMessageText(
+            ctx.chat.id,
+            processingMsg.message_id,
+            null,
+            easterEggMessage
+          );
 
-        // Record trigger for cooldown tracking
-        easterEggResult.recordTrigger();
+          // Record trigger for cooldown tracking
+          easterEggResult.recordTrigger();
 
-        console.log(`Easter egg triggered: ${easterEggResult.easterEggType} for user ${userId}`);
+          console.log(`Easter egg triggered: ${easterEggResult.easterEggType} for user ${userId}`);
 
-        // If this is a BLOCKING easter egg (not companion), don't log nutrition
-        if (easterEggResult.blocksNutritionExtraction) {
-          console.log(`Easter egg blocks extraction, returning early`);
-          return;
+          // If this is a BLOCKING easter egg (not companion), don't log nutrition
+          if (easterEggResult.blocksNutritionExtraction) {
+            console.log(`Easter egg blocks extraction, returning early`);
+            return;
+          }
+          // Companion easter eggs (celebration, midnight_munchies) continue to nutrition logging
+        } else {
+          console.log(`Easter egg ${easterEggResult.shouldTrigger ? 'on cooldown' : 'not triggered'}, proceeding to nutrition`);
         }
-        // Companion easter eggs (celebration, midnight_munchies) continue to nutrition logging
-      } else {
-        console.log(`Easter egg ${easterEggResult.shouldTrigger ? 'on cooldown' : 'not triggered'}, proceeding to nutrition`);
+      } catch (easterEggError) {
+        // Easter egg evaluation failed - gracefully continue to nutrition extraction
+        console.error('Easter egg evaluation failed (continuing to nutrition):', easterEggError);
+        // Don't return - proceed to nutrition extraction for safety
       }
     }
 
@@ -910,7 +925,6 @@ bot.on('photo', async (ctx) => {
     );
 
     // Step 9: Extract user information for multi-user tracking
-    const userId = ctx.from.id;
     const userName = [ctx.from.first_name, ctx.from.last_name]
       .filter(Boolean)
       .join(' ') || ctx.from.username || `User ${userId}`;

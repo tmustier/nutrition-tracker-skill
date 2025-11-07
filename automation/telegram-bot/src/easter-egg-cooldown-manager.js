@@ -99,6 +99,39 @@ class EasterEggCooldownManager {
   }
 
   /**
+   * Validate and sanitize userId input
+   * Prevents prototype pollution and invalid input attacks
+   *
+   * @param {string|number} userId - User ID to validate
+   * @returns {string} Sanitized user ID string
+   * @throws {TypeError} If userId is invalid
+   */
+  _validateUserId(userId) {
+    // Check for null/undefined
+    if (userId == null) {
+      throw new TypeError('userId cannot be null or undefined');
+    }
+
+    // Check for valid types (number or string)
+    if (typeof userId !== 'number' && typeof userId !== 'string') {
+      throw new TypeError(`userId must be a number or string, got ${typeof userId}`);
+    }
+
+    // Convert to string and validate it's not empty
+    const userIdStr = String(userId);
+    if (userIdStr.length === 0) {
+      throw new TypeError('userId cannot be an empty string');
+    }
+
+    // Check for prototype pollution attempts
+    if (userIdStr === '__proto__' || userIdStr === 'constructor' || userIdStr === 'prototype') {
+      throw new TypeError(`userId cannot be a reserved property name: ${userIdStr}`);
+    }
+
+    return userIdStr;
+  }
+
+  /**
    * Check if easter egg is on cooldown for a user (ATOMIC OPERATION)
    *
    * CRITICAL: This operation is atomic to prevent race conditions.
@@ -109,7 +142,7 @@ class EasterEggCooldownManager {
    * @returns {Object} { onCooldown: boolean, remainingMs: number, lastTriggered: Date|null, nextAvailable: Date|null }
    */
   checkEasterEggCooldown(userId, easterEggType) {
-    const userIdStr = String(userId);
+    const userIdStr = this._validateUserId(userId);
     const now = Date.now();
 
     // Update LRU access time (atomic operation)
@@ -179,7 +212,7 @@ class EasterEggCooldownManager {
    * @param {string} easterEggType - Type of easter egg
    */
   recordEasterEggTrigger(userId, easterEggType) {
-    const userIdStr = String(userId);
+    const userIdStr = this._validateUserId(userId);
     const now = Date.now();
 
     // Validate easter egg type
@@ -238,7 +271,7 @@ class EasterEggCooldownManager {
    * @param {string|number} userId - Telegram user ID
    */
   clearUserCooldowns(userId) {
-    const userIdStr = String(userId);
+    const userIdStr = this._validateUserId(userId);
     const hadCooldowns = this.easterEggCooldowns.delete(userIdStr);
     this.cooldownLastAccess.delete(userIdStr);
 
@@ -256,7 +289,7 @@ class EasterEggCooldownManager {
    * @returns {Object} Map of easter egg types to cooldown info
    */
   getUserCooldowns(userId) {
-    const userIdStr = String(userId);
+    const userIdStr = this._validateUserId(userId);
     const userCooldowns = this.easterEggCooldowns.get(userIdStr);
     const now = Date.now();
 

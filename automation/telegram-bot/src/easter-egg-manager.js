@@ -81,8 +81,17 @@ class EasterEggManager {
   /**
    * Check if detection result matches easter egg criteria
    *
+   * IMPORTANT: This method expects a FLAT detection structure from Claude Vision:
+   * {
+   *   has_person: true,
+   *   has_food: false,
+   *   confidence: "high",  // Single string for entire scene
+   *   scene_type: "selfie",
+   *   ...
+   * }
+   *
    * @param {Object} easterEgg - Easter egg configuration
-   * @param {Object} detectionResult - Detection result from image analysis
+   * @param {Object} detectionResult - Detection result from image analysis (flat structure)
    * @returns {boolean} True if criteria match
    */
   _checkDetectionCriteria(easterEgg, detectionResult) {
@@ -90,10 +99,9 @@ class EasterEggManager {
 
     // Check each criterion
     for (const [key, expectedValue] of Object.entries(criteria)) {
-      // Handle confidence thresholds (min_*_confidence)
-      if (key.startsWith('min_') && key.endsWith('_confidence')) {
-        const detectionKey = key.replace('min_', '').replace('_confidence', '');
-        const actualConfidence = detectionResult.confidence?.[detectionKey];
+      // Handle overall confidence threshold (scene-level confidence)
+      if (key === 'min_confidence') {
+        const actualConfidence = detectionResult.confidence;
 
         if (!actualConfidence) {
           return false; // Confidence not available
@@ -115,8 +123,26 @@ class EasterEggManager {
         continue;
       }
 
-      // Handle boolean detection flags
-      const actualValue = detectionResult.detections?.[key];
+      // Handle scene_type matching
+      if (key === 'scene_type') {
+        const actualSceneType = detectionResult.scene_type;
+
+        // Support both single value and array of values
+        if (Array.isArray(expectedValue)) {
+          if (!expectedValue.includes(actualSceneType)) {
+            return false;
+          }
+        } else {
+          if (actualSceneType !== expectedValue) {
+            return false;
+          }
+        }
+        continue;
+      }
+
+      // Handle boolean detection flags (flat structure)
+      // Access directly from detectionResult (not detectionResult.detections)
+      const actualValue = detectionResult[key];
 
       if (actualValue !== expectedValue) {
         return false;
@@ -173,6 +199,7 @@ class EasterEggManager {
 
       // Easter egg info
       easterEggId: easterEgg.id,
+      easterEggType: easterEgg.id, // Alias for compatibility with tests
       easterEggName: easterEgg.displayName,
       priority: easterEgg.priority,
 
