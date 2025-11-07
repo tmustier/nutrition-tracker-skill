@@ -253,9 +253,15 @@ No estimation needed when value is scientifically zero:
   - Animal products: `sulfur_g = protein_g × 0.01` (1.0% of protein)
   - Plant products: `sulfur_g = protein_g × 0.004` (0.4% of protein)
 - **Rationale**: Sulfur-containing amino acids (methionine, cysteine) content
+- **References**:
+  - FAO (1991): *Protein Quality Evaluation* - Methionine+cysteine 2.5-3.5% of animal protein by weight
+  - Sulfur comprises ~30% of methionine+cysteine molecular weight → 0.8-1.2% of protein
+  - Plant proteins: Lower S-amino acid content (1.0-1.5% of protein) → 0.3-0.5% sulfur
+  - Conservative estimates: 1.0% (animal), 0.4% (plant)
 - **Confidence**: MEDIUM (±15-25%)
 - **Variation**: Actual amino acid profile varies by protein source; egg whites are higher (~1.5%), some plant proteins lower
 - **When to use**: For any food with protein >1g
+- **Limitations**: Category inference based on file path keywords; composite dishes (e.g., vegan fish alternatives) may be misclassified as animal vs plant
 
 **Documentation**: When using derived nutrients, add note to `change_log`:
 ```yaml
