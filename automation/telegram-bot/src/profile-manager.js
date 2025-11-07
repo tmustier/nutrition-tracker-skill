@@ -306,7 +306,7 @@ class ProfileManager {
       meta: {
         owner: "New User",
         timezone: "UTC",
-        updated: new Date().toISOString(),
+        updated: "2025-11-06T00:00:00Z", // Static timestamp - this is a template
         notes: "Default profile - customize with your personal targets"
       },
       targets: {
