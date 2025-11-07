@@ -945,6 +945,13 @@ bot.on('photo', async (ctx) => {
           // Validate message exists (fail gracefully if message array is empty)
           if (!easterEggMessage) {
             console.error(`[EasterEgg] No message available for ${easterEggResult.easterEggType}, skipping easter egg`);
+            // Update processing message to indicate continuation
+            await ctx.telegram.editMessageText(
+              ctx.chat.id,
+              processingMsg.message_id,
+              null,
+              '🤖 Analyzing nutrition content...'
+            );
             // Continue to nutrition extraction instead of crashing
           } else {
             await ctx.telegram.editMessageText(

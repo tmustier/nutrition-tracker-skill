@@ -87,7 +87,8 @@ class EasterEggManager {
   /**
    * Check if detection result matches easter egg criteria
    *
-   * IMPORTANT: This method expects a FLAT detection structure from Claude Vision:
+   * IMPORTANT: This method expects the scene_detection object from Claude Vision
+   * (already extracted by webhook.js). The structure is flat:
    * {
    *   has_person: true,
    *   has_food: false,
@@ -96,8 +97,10 @@ class EasterEggManager {
    *   ...
    * }
    *
+   * Note: Webhook passes result.scene_detection, NOT the full Claude Vision response.
+   *
    * @param {Object} easterEgg - Easter egg configuration
-   * @param {Object} detectionResult - Detection result from image analysis (flat structure)
+   * @param {Object} detectionResult - scene_detection object from Claude Vision (flat structure)
    * @returns {boolean} True if criteria match
    */
   _checkDetectionCriteria(easterEgg, detectionResult) {
@@ -170,12 +173,12 @@ class EasterEggManager {
 
     // Validate inputs - fail closed if invalid (don't trigger easter egg)
     if (!actual || typeof actual !== 'string' || !confidenceLevels[actual]) {
-      console.log(`[EasterEggManager] Invalid actual confidence: ${actual}`);
+      console.warn(`[EasterEggManager] Invalid actual confidence: ${actual}`);
       return false;
     }
 
     if (!required || typeof required !== 'string' || !confidenceLevels[required]) {
-      console.log(`[EasterEggManager] Invalid required confidence: ${required}`);
+      console.warn(`[EasterEggManager] Invalid required confidence: ${required}`);
       return false;
     }
 

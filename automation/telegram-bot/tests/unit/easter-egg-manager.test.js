@@ -14,6 +14,11 @@ describe('EasterEggManager', () => {
     });
   });
 
+  afterAll(() => {
+    // Stop cleanup interval to prevent memory leaks
+    cooldownManager.stopCooldownCleanup();
+  });
+
   describe('evaluateDetection', () => {
     test('should trigger person_without_food easter egg for selfie', () => {
       const detection = {

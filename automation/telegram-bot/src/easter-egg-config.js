@@ -249,15 +249,20 @@ const EASTER_EGG_TYPES = {
     }
   },
 
+  // ============================================================================
+  // COMPANION EASTER EGGS (Don't block nutrition extraction)
+  // These add fun messages but still extract nutrition data
+  // ============================================================================
+
   empty_packaging: {
     id: 'empty_packaging',
     displayName: 'Empty Packaging',
-    description: 'User sent photo of empty food wrapper/package',
+    description: 'User sent photo of empty food wrapper/package with visible nutrition label',
 
     enabled: true,
     cooldownDuration: parseInt(process.env.COOLDOWN_EMPTY_PACKAGING) || 2 * DAYS, // 2 days
     priority: 2,
-    blocksNutritionExtraction: false, // Allow extraction when nutrition label visible
+    blocksNutritionExtraction: false, // Companion easter egg - still extracts from nutrition label
 
     detectionCriteria: {
       scene_type: 'empty_packaging', // Match scene_type from Claude Vision
@@ -267,20 +272,15 @@ const EASTER_EGG_TYPES = {
     },
 
     messages: [
-      "📦 Empty wrapper detected! Already ate it? 😋\n\nNext time send the photo BEFORE finishing! 📸",
-      "🗑️ Looks like you enjoyed that! But I need to see the food to track it! 😊\n\nRemember to photograph before eating! 📱"
+      "📦 Already finished? No worries! I can still read the nutrition label! 📋\n\nNext time try to catch it before it's gone! 📸",
+      "🗑️ Empty wrapper spotted! Good news - I can extract nutrition from the label! ✨\n\nBut photos of the actual food are more fun! 😋"
     ],
 
     metadata: {
       category: 'timing',
-      tags: ['empty_packaging', 'wrapper', 'too_late'],
+      tags: ['empty_packaging', 'wrapper', 'nutrition_label', 'companion'],
     }
   },
-
-  // ============================================================================
-  // COMPANION EASTER EGGS (Don't block nutrition extraction)
-  // These add fun messages but still extract nutrition data
-  // ============================================================================
 
   midnight_munchies: {
     id: 'midnight_munchies',
