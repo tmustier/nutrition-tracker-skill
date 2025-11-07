@@ -659,4 +659,159 @@ describe('Webhook Handlers', () => {
       );
     });
   });
+
+  describe('Markdown Formatting', () => {
+    // Import escapeMarkdown function from webhook module
+    const { escapeMarkdown } = webhook;
+
+    describe('escapeMarkdown()', () => {
+      it('should escape asterisks (bold)', () => {
+        expect(escapeMarkdown('test*bold*')).toBe('test\\*bold\\*');
+        expect(escapeMarkdown('**double bold**')).toBe('\\*\\*double bold\\*\\*');
+      });
+
+      it('should escape underscores (italic)', () => {
+        expect(escapeMarkdown('test_italic_')).toBe('test\\_italic\\_');
+        expect(escapeMarkdown('chicken_breast')).toBe('chicken\\_breast');
+      });
+
+      it('should escape backticks (code)', () => {
+        expect(escapeMarkdown('test`code`')).toBe('test\\`code\\`');
+      });
+
+      it('should escape square brackets (links)', () => {
+        expect(escapeMarkdown('test[link]')).toBe('test\\[link\\]');
+        expect(escapeMarkdown('[REDACTED]')).toBe('\\[REDACTED\\]');
+        expect(escapeMarkdown('food[ingredient]')).toBe('food\\[ingredient\\]');
+      });
+
+      it('should escape backslashes', () => {
+        expect(escapeMarkdown('test\\slash')).toBe('test\\\\slash');
+        expect(escapeMarkdown('C:\\Temp\\file.txt')).toBe('C:\\\\Temp\\\\file.txt');
+      });
+
+      it('should handle multiple special characters', () => {
+        const input = 'chicken_breast*bold* \\backslash [link]';
+        const expected = 'chicken\\_breast\\*bold\\* \\\\backslash \\[link\\]';
+        expect(escapeMarkdown(input)).toBe(expected);
+      });
+
+      it('should handle non-string inputs', () => {
+        const warnSpy = jest.spyOn(console, 'warn').mockImplementation();
+
+        expect(escapeMarkdown(123)).toBe('123');
+        expect(escapeMarkdown(null)).toBe('null');
+        expect(escapeMarkdown(undefined)).toBe('undefined');
+        expect(escapeMarkdown(true)).toBe('true');
+
+        expect(warnSpy).toHaveBeenCalledTimes(4);
+        warnSpy.mockRestore();
+      });
+
+      it('should handle empty string', () => {
+        expect(escapeMarkdown('')).toBe('');
+      });
+
+      it('should handle strings without special characters', () => {
+        expect(escapeMarkdown('plain text')).toBe('plain text');
+        expect(escapeMarkdown('123 grilled chicken')).toBe('123 grilled chicken');
+      });
+
+      it('should prevent markdown injection attacks', () => {
+        const maliciousName = 'Hacker*bold*_italic_`code`[link]\\slash';
+        const escaped = escapeMarkdown(maliciousName);
+
+        // Verify no unescaped markdown special characters remain
+        expect(escaped).not.toContain('*bold*');
+        expect(escaped).not.toContain('_italic_');
+        expect(escaped).not.toContain('`code`');
+        expect(escaped).not.toContain('[link]');
+        expect(escaped).toBe('Hacker\\*bold\\*\\_italic\\_\\`code\\`\\[link\\]\\\\slash');
+      });
+
+      it('should handle fractions with backslashes', () => {
+        expect(escapeMarkdown('1/2 cup')).toBe('1/2 cup');
+      });
+    });
+
+    describe('TELEGRAM_PARSE_OPTIONS', () => {
+      it('should be passed to all reply calls', async () => {
+        const ctx = { ...mockCtx };
+        ctx.reply = jest.fn().mockResolvedValue({ message_id: 123 });
+
+        await ctx.reply('test message', { parse_mode: 'Markdown' });
+
+        expect(ctx.reply).toHaveBeenCalledWith(
+          'test message',
+          expect.objectContaining({ parse_mode: 'Markdown' })
+        );
+      });
+
+      it('should be passed to editMessageText calls', async () => {
+        const ctx = { ...mockCtx };
+        ctx.telegram.editMessageText = jest.fn().mockResolvedValue(true);
+
+        await ctx.telegram.editMessageText(
+          123,
+          456,
+          null,
+          'updated message',
+          { parse_mode: 'Markdown' }
+        );
+
+        expect(ctx.telegram.editMessageText).toHaveBeenCalledWith(
+          123,
+          456,
+          null,
+          'updated message',
+          expect.objectContaining({ parse_mode: 'Markdown' })
+        );
+      });
+    });
+
+    describe('Markdown Rendering in Bot Messages', () => {
+      it('should format /start command with markdown', async () => {
+        const ctx = { ...mockCtx };
+        ctx.reply = jest.fn().mockResolvedValue({ message_id: 123 });
+
+        // Simulate /start command
+        await ctx.reply(
+          '👋 Welcome to Nutrition Tracker!\n\n**How to use:**',
+          { parse_mode: 'Markdown' }
+        );
+
+        expect(ctx.reply).toHaveBeenCalledWith(
+          expect.stringContaining('**How to use:**'),
+          { parse_mode: 'Markdown' }
+        );
+      });
+
+      it('should escape user-provided food names in success messages', () => {
+        const foodName = 'chicken_breast*with*sauce';
+        const escaped = escapeMarkdown(foodName);
+        const message = `✅ **Logged: ${escaped}**`;
+
+        expect(message).toContain('chicken\\_breast\\*with\\*sauce');
+        expect(message).not.toContain('chicken_breast*with*sauce');
+      });
+
+      it('should not escape numeric nutrition values', () => {
+        const nutrition = {
+          energy_kcal: 500,
+          protein_g: 30,
+          fat_g: 20,
+        };
+
+        const message = `📊 **This meal:**
+• ${nutrition.energy_kcal} kcal
+• ${nutrition.protein_g}g protein
+• ${nutrition.fat_g}g fat`;
+
+        // Numeric values should appear as-is
+        expect(message).toContain('500 kcal');
+        expect(message).toContain('30g protein');
+        expect(message).toContain('20g fat');
+      });
+    });
+  });
 });
