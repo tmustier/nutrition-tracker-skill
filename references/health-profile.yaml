@@ -16,6 +16,12 @@ targets:
   sodium_mg_max: 2300
   potassium_mg_min: 4000
 monitoring:
+  # Sodium-to-Potassium Ratios:
+  # - Molar ratio (mmol:mmol): WHO recommends ≤1.0 for optimal cardiovascular health
+  #   This measures equal numbers of Na and K molecules/ions, accounting for different atomic weights
+  #   Conversion: Na(mmol) = Na(mg)/22.99, K(mmol) = K(mg)/39.10
+  # - Mass ratio (mg:mg): For reference only, will naturally differ from molar ratio
+  #   Due to K being heavier (39.10 g/mol vs 22.99 g/mol), equal molar amounts means ~1.7g K per 1g Na
   na_k_molar_ratio: true
   na_k_mass_ratio: true
   iodine_ug: true

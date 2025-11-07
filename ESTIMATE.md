@@ -148,6 +148,7 @@ When the nutrition tracking system expanded from 24 to 52 nutrient fields (Schem
 
 - **Energy (Atwater):** `4×protein + 9×fat + 4×carbs_available + 2×fiber + 2.4×polyols` (tolerance ±5-8%)
 - **Fat split:** `sat + MUFA + PUFA + trans ≤ total_fat`
+- **Fat unassigned:** When `(sat + MUFA + PUFA + trans) / total_fat < 0.95` (>5% unassigned), document `fat_unassigned_g` in derived section. Represents glycerol backbone, phospholipids, and other minor lipid fractions not classified as SFA/MUFA/PUFA/trans.
 - **Sodium/salt:** `salt_g = sodium_mg × 2.5 / 1000`
 - **Finishing salt:** `0.5% of total dish weight` (≈ sodium_mg = salt_g × 400)
 
