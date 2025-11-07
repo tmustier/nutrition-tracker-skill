@@ -878,19 +878,17 @@ bot.on('photo', async (ctx) => {
     }
 
     // Step 5: Check for easter egg triggers (before nutrition logging)
-    // Only trigger if: high confidence non-food scene detected
-    if (result.should_show_easter_egg && result.scene_detection) {
-      console.log(`Easter egg candidate detected: ${result.scene_detection.scene_type} (confidence: ${result.scene_detection.confidence})`);
+    // ALWAYS evaluate easter eggs when scene detection is available
+    // This ensures both blocking AND companion easter eggs are checked
+    if (result.scene_detection) {
+      console.log(`Scene detected: ${result.scene_detection.scene_type} (confidence: ${result.scene_detection.confidence})`);
 
       try {
         // Evaluate with easter egg manager (handles cooldowns and message selection)
         const easterEggResult = easterEggManager.evaluateDetection(result.scene_detection, userId);
 
-        if (easterEggResult.shouldTrigger && easterEggResult.canTrigger) {
-          // Record trigger BEFORE sending message to prevent duplicate triggers on failure
-          easterEggResult.recordTrigger();
-
-          // Show easter egg message
+        if (easterEggResult && easterEggResult.shouldTrigger && easterEggResult.canTrigger) {
+          // Show easter egg message first
           const easterEggMessage = easterEggResult.getMessage();
           await ctx.telegram.editMessageText(
             ctx.chat.id,
@@ -898,6 +896,9 @@ bot.on('photo', async (ctx) => {
             null,
             easterEggMessage
           );
+
+          // Record trigger AFTER successful message send (prevents consuming cooldown on failure)
+          easterEggResult.recordTrigger();
 
           console.log(`Easter egg triggered: ${easterEggResult.easterEggType} for user ${userId}`);
 
@@ -907,8 +908,9 @@ bot.on('photo', async (ctx) => {
             return;
           }
           // Companion easter eggs (celebration, midnight_munchies) continue to nutrition logging
-        } else {
-          console.log(`Easter egg ${easterEggResult.shouldTrigger ? 'on cooldown' : 'not triggered'}, proceeding to nutrition`);
+          console.log(`Companion easter egg - continuing to nutrition extraction`);
+        } else if (easterEggResult && easterEggResult.shouldTrigger) {
+          console.log(`Easter egg on cooldown, proceeding to nutrition`);
         }
       } catch (easterEggError) {
         // Easter egg evaluation failed - gracefully continue to nutrition extraction

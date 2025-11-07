@@ -87,6 +87,7 @@ class EasterEggCooldownManager {
     // Load configuration from CONFIG object (supports environment variables)
     this.maxCooldownEntries = CONFIG.MAX_COOLDOWN_ENTRIES;
     this.cleanupInterval = CONFIG.COOLDOWN_CLEANUP_INTERVAL_MS;
+    this.cleanupIntervalId = null; // Will be set when cleanup starts
 
     console.log('[EasterEggCooldownManager] Initialized with config:', {
       maxCooldownEntries: this.maxCooldownEntries,
@@ -319,11 +320,29 @@ class EasterEggCooldownManager {
    * Interval configured via CONFIG.COOLDOWN_CLEANUP_INTERVAL_MS (default: 5 minutes)
    */
   startCooldownCleanup() {
-    setInterval(() => {
+    // Don't start if already running
+    if (this.cleanupIntervalId) {
+      console.log(`[EasterEggCooldownManager] Cleanup already running`);
+      return;
+    }
+
+    this.cleanupIntervalId = setInterval(() => {
       this.cleanupExpiredCooldowns();
     }, this.cleanupInterval);
 
     console.log(`[EasterEggCooldownManager] Started periodic cleanup (interval: ${this.cleanupInterval}ms)`);
+  }
+
+  /**
+   * Stop periodic cleanup of expired cooldowns
+   * Important for graceful shutdown and test cleanup
+   */
+  stopCooldownCleanup() {
+    if (this.cleanupIntervalId) {
+      clearInterval(this.cleanupIntervalId);
+      this.cleanupIntervalId = null;
+      console.log(`[EasterEggCooldownManager] Stopped periodic cleanup`);
+    }
   }
 
   /**

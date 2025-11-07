@@ -345,8 +345,12 @@ const EASTER_EGG_TYPES = {
 // HELPER FUNCTIONS
 // ============================================================================
 
+// Cache for sorted enabled easter eggs (config is static at runtime)
+let enabledEasterEggsCache = null;
+
 /**
  * Get all enabled easter egg types sorted by priority
+ * Cached after first call since configuration is static at runtime
  * @returns {Array} Sorted array of easter egg configurations
  */
 function getEnabledEasterEggs() {
@@ -354,9 +358,17 @@ function getEnabledEasterEggs() {
     return [];
   }
 
-  return Object.values(EASTER_EGG_TYPES)
+  // Return cached result if available
+  if (enabledEasterEggsCache !== null) {
+    return enabledEasterEggsCache;
+  }
+
+  // Compute and cache
+  enabledEasterEggsCache = Object.values(EASTER_EGG_TYPES)
     .filter(egg => egg.enabled)
     .sort((a, b) => b.priority - a.priority); // Higher priority first
+
+  return enabledEasterEggsCache;
 }
 
 /**

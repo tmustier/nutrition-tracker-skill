@@ -41,13 +41,19 @@ class EasterEggManager {
    *
    * @param {Object} detectionResult - Detection result from image analysis
    * @param {number} userId - Telegram user ID
-   * @returns {Object} Evaluation result with trigger decision and helper methods
+   * @returns {Object|null} Evaluation result with trigger decision and helper methods, or null if no easter egg triggered
    */
   evaluateDetection(detectionResult, userId) {
+    // Input validation
+    if (!detectionResult || typeof detectionResult !== 'object') {
+      console.log('[EasterEggManager] Invalid detection result');
+      return null;
+    }
+
     // Quick exit if easter eggs globally disabled
     if (!easterEggConfig.isGloballyEnabled()) {
       console.log('[EasterEggManager] Easter eggs globally disabled');
-      return this._createNullResult('Easter eggs globally disabled');
+      return null;
     }
 
     // Get all enabled easter eggs sorted by priority
@@ -55,7 +61,7 @@ class EasterEggManager {
 
     if (enabledEggs.length === 0) {
       console.log('[EasterEggManager] No easter eggs enabled');
-      return this._createNullResult('No easter eggs enabled');
+      return null;
     }
 
     // Evaluate each easter egg in priority order
@@ -75,7 +81,7 @@ class EasterEggManager {
 
     // No easter egg matched
     console.log('[EasterEggManager] No easter eggs matched detection criteria');
-    return this._createNullResult('No matching easter eggs');
+    return null;
   }
 
   /**
@@ -230,28 +236,6 @@ class EasterEggManager {
     };
   }
 
-  /**
-   * Create null result (no easter egg triggered)
-   *
-   * @param {string} reason - Reason why no easter egg triggered
-   * @returns {Object} Null result object
-   */
-  _createNullResult(reason) {
-    return {
-      shouldTrigger: false,
-      canTrigger: false,
-      blocksNutritionExtraction: false,
-      easterEggId: null,
-      easterEggName: null,
-      reason,
-      getMessage: () => null,
-      recordTrigger: () => {
-        console.warn('[EasterEggManager] Attempted to record trigger for null result');
-      },
-      getMetadata: () => ({}),
-      config: null,
-    };
-  }
 
   /**
    * Get statistics about easter egg configuration
