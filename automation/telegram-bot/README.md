@@ -392,15 +392,11 @@ telegram-bot/
 │       ├── usda-api.test.js          # USDA API integration tests
 │       ├── security.test.js          # Security middleware tests
 │       └── error-handling.test.js    # Error scenarios tests
-├── test/                          # Legacy tests (compatibility)
-│   ├── test-github-integration.js # Integration tests
-│   └── verify-module.js           # Module verification
 ├── .env.example                   # Environment template
 ├── .gitignore
 ├── package.json                   # Dependencies and test scripts
 ├── railway.json                   # Railway deployment config
 ├── vercel.json                    # Vercel deployment config
-├── TESTING_GUIDE.md               # Comprehensive testing documentation
 └── README.md                      # This file
 ```
 
@@ -538,8 +534,6 @@ The test suite includes:
 - **Integration Tests**: Claude API, GitHub API, USDA API integrations
 - **Security Tests**: Authentication, rate limiting, input sanitization
 - **Error Handling**: Network failures, race conditions, API errors
-
-See [TESTING_GUIDE.md](TESTING_GUIDE.md) for detailed testing documentation.
 
 ### Adding Features
 
@@ -924,7 +918,6 @@ node -e "
 1. **Check documentation**
    - `src/CLAUDE_INTEGRATION_README.md`
    - `src/github-integration.README.md`
-   - `GITHUB-INTEGRATION-QUICKSTART.md`
 
 2. **Review logs**
    - Railway/Vercel deployment logs

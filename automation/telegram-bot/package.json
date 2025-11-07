@@ -10,8 +10,7 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:integration": "jest --testPathPattern=integration",
-    "test:unit": "jest --testPathPattern=unit",
-    "test:legacy": "node test/test-github-integration.js && node test/verify-module.js"
+    "test:unit": "jest --testPathPattern=unit"
   },
   "keywords": [
     "telegram",

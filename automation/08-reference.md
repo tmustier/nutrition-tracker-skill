@@ -1,4 +1,4 @@
-[← Operations Guide](07-operations.md) | [↑ Table of Contents](README.md)
+[← Operations Guide](07-operations.md)
 
 ---
 
@@ -173,11 +173,7 @@ For questions or issues during implementation, refer to the Troubleshooting sect
 ## Navigation
 
 - [← Previous: Operations Guide](07-operations.md)
-- [↑ Table of Contents](README.md)
-- [🏠 Back to Start](README.md)
+- [🏠 Back to Start](01-overview-and-planning.md)
 
 **Implementation Guides**:
-- [Phase 1: Foundation](02-phase1-foundation.md)
-- [Phase 2: Telegram Bot Setup](03-phase2-telegram-setup.md)
-- [Phase 2: Code](04-phase2-telegram-code.md)
-- [Phase 2: Deployment](05-phase2-telegram-deployment.md)
+- [Telegram Bot Implementation](../telegram-bot/README.md)

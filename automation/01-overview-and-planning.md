@@ -1,4 +1,4 @@
-[↑ Table of Contents](README.md) | [Next: Phase 1 Foundation →](02-phase1-foundation.md)
+[Next: Phase 3 Enhancements →](06-phase3-enhancements.md)
 
 ---
 
@@ -283,9 +283,7 @@ We will implement three interconnected components:
 
 ## Navigation
 
-- [↑ Table of Contents](README.md)
-- [Next: Phase 1 Foundation →](02-phase1-foundation.md)
+- [Next: Phase 3 Enhancements →](06-phase3-enhancements.md)
 
 **Related Sections**:
-- [Phase 1: USDA Setup](02-phase1-foundation.md#11-usda-fooddata-central-setup)
-- [Phase 2: Telegram Bot](03-phase2-telegram-setup.md)
+- [Telegram Bot Implementation](../telegram-bot/README.md)
