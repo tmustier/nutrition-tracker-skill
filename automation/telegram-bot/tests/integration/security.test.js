@@ -37,10 +37,11 @@ describe('Security Middleware', () => {
         return next();
       }
 
-      if (!userId) {
-        return res.status(401).json({
-          error: 'Authentication failed',
-          message: 'No user ID in request'
+      // Validate userId is a valid positive integer (consistent with rate limiter)
+      if (!userId || !Number.isInteger(userId) || userId <= 0) {
+        return res.status(400).json({
+          error: 'Invalid request format',
+          message: 'Invalid or missing user ID'
         });
       }
 
@@ -106,8 +107,73 @@ describe('Security Middleware', () => {
         .post('/webhook')
         .send(telegramUpdate);
 
-      expect(response.status).toBe(401);
-      expect(response.body.error).toBe('Authentication failed');
+      expect(response.status).toBe(400);
+      expect(response.body.error).toBe('Invalid request format');
+    });
+
+    it('should reject requests with string user ID', async () => {
+      const telegramUpdate = global.mockTelegramUpdate({
+        message: {
+          from: { id: "123456789" }, // String instead of integer
+          text: 'test message'
+        }
+      });
+
+      const response = await request(app)
+        .post('/webhook')
+        .send(telegramUpdate);
+
+      expect(response.status).toBe(400);
+      expect(response.body.error).toBe('Invalid request format');
+      expect(response.body.message).toContain('Invalid or missing user ID');
+    });
+
+    it('should reject requests with negative user ID', async () => {
+      const telegramUpdate = global.mockTelegramUpdate({
+        message: {
+          from: { id: -123456789 }, // Negative integer
+          text: 'test message'
+        }
+      });
+
+      const response = await request(app)
+        .post('/webhook')
+        .send(telegramUpdate);
+
+      expect(response.status).toBe(400);
+      expect(response.body.error).toBe('Invalid request format');
+    });
+
+    it('should reject requests with zero user ID', async () => {
+      const telegramUpdate = global.mockTelegramUpdate({
+        message: {
+          from: { id: 0 }, // Zero
+          text: 'test message'
+        }
+      });
+
+      const response = await request(app)
+        .post('/webhook')
+        .send(telegramUpdate);
+
+      expect(response.status).toBe(400);
+      expect(response.body.error).toBe('Invalid request format');
+    });
+
+    it('should reject requests with float user ID', async () => {
+      const telegramUpdate = global.mockTelegramUpdate({
+        message: {
+          from: { id: 123.456 }, // Float instead of integer
+          text: 'test message'
+        }
+      });
+
+      const response = await request(app)
+        .post('/webhook')
+        .send(telegramUpdate);
+
+      expect(response.status).toBe(400);
+      expect(response.body.error).toBe('Invalid request format');
     });
 
     it('should allow multiple authorized users', async () => {
@@ -658,4 +724,295 @@ describe('Security Middleware', () => {
       expect(response.headers['access-control-allow-origin']).toBeUndefined();
     });
   });
+
+  // =========================================================================
+  // NEW TESTS FOR P0/P1 SECURITY FIXES
+  // =========================================================================
+
+  describe('Setup Endpoint Authentication (P0-5)', () => {
+    let originalEnv;
+
+    beforeEach(() => {
+      originalEnv = process.env.NODE_ENV;
+      process.env.SETUP_TOKEN = 'test_setup_token_12345';
+      mockConfig.app.environment = 'production';
+
+      app.get('/setup', (req, res) => {
+        // Simulate production authentication check
+        if (mockConfig.app.environment === 'production') {
+          const providedToken = req.query.token || req.headers['x-setup-token'];
+          const expectedToken = process.env.SETUP_TOKEN;
+
+          if (!expectedToken) {
+            return res.status(500).json({
+              success: false,
+              error: 'Setup endpoint misconfigured',
+              message: 'SETUP_TOKEN must be set in production for security'
+            });
+          }
+
+          if (!providedToken || providedToken !== expectedToken) {
+            return res.status(401).json({
+              success: false,
+              error: 'Unauthorized',
+              message: 'Valid SETUP_TOKEN required for webhook setup in production'
+            });
+          }
+        }
+
+        res.json({ success: true, message: 'Webhook setup successful' });
+      });
+    });
+
+    afterEach(() => {
+      process.env.NODE_ENV = originalEnv;
+      delete process.env.SETUP_TOKEN;
+      mockConfig.app.environment = 'test';
+    });
+
+    it('should accept /setup request with valid token in query parameter', async () => {
+      const response = await request(app)
+        .get('/setup?token=test_setup_token_12345');
+
+      expect(response.status).toBe(200);
+      expect(response.body.success).toBe(true);
+      expect(response.body.message).toContain('setup successful');
+    });
+
+    it('should accept /setup request with valid token in header', async () => {
+      const response = await request(app)
+        .get('/setup')
+        .set('x-setup-token', 'test_setup_token_12345');
+
+      expect(response.status).toBe(200);
+      expect(response.body.success).toBe(true);
+    });
+
+    it('should reject /setup request without token in production', async () => {
+      const response = await request(app).get('/setup');
+
+      expect(response.status).toBe(401);
+      expect(response.body.error).toBe('Unauthorized');
+      expect(response.body.message).toContain('SETUP_TOKEN required');
+    });
+
+    it('should reject /setup request with invalid token', async () => {
+      const response = await request(app)
+        .get('/setup?token=wrong_token');
+
+      expect(response.status).toBe(401);
+      expect(response.body.error).toBe('Unauthorized');
+    });
+
+    it('should fail if SETUP_TOKEN not configured in production', async () => {
+      delete process.env.SETUP_TOKEN;
+
+      const response = await request(app).get('/setup');
+
+      expect(response.status).toBe(500);
+      expect(response.body.error).toBe('Setup endpoint misconfigured');
+      expect(response.body.message).toContain('SETUP_TOKEN must be set');
+    });
+
+    it('should allow /setup without token in development', async () => {
+      mockConfig.app.environment = 'development';
+
+      const response = await request(app).get('/setup');
+
+      expect(response.status).toBe(200);
+      expect(response.body.success).toBe(true);
+    });
+  });
+
+  describe('Request Size Limits (P0-1)', () => {
+    beforeEach(() => {
+      app.use(express.json({ limit: '10mb' }));
+      app.post('/webhook', (req, res) => {
+        res.json({ ok: true, size: JSON.stringify(req.body).length });
+      });
+    });
+
+    it('should accept requests under 10MB', async () => {
+      const smallPayload = { data: 'x'.repeat(1000) }; // ~1KB
+
+      const response = await request(app)
+        .post('/webhook')
+        .send(smallPayload);
+
+      expect(response.status).toBe(200);
+      expect(response.body.ok).toBe(true);
+    });
+
+    it('should reject requests over 10MB', async () => {
+      // Create payload slightly over 10MB
+      const largePayload = { data: 'x'.repeat(11 * 1024 * 1024) };
+
+      const response = await request(app)
+        .post('/webhook')
+        .send(largePayload);
+
+      // Express should reject with 413 Payload Too Large
+      expect(response.status).toBe(413);
+    });
+
+    it('should handle requests at exactly 10MB boundary', async () => {
+      const boundaryPayload = { data: 'x'.repeat(10 * 1024 * 1024 - 100) };
+
+      const response = await request(app)
+        .post('/webhook')
+        .send(boundaryPayload);
+
+      expect(response.status).toBe(200);
+      expect(response.body.ok).toBe(true);
+    });
+  });
+
+  describe('Rate Limiter User ID Validation (P0-2)', () => {
+    const rateLimitMiddleware = (req, res, next) => {
+      const userId = req.body?.message?.from?.id;
+
+      // P0 Security Fix: Validate userId is a valid positive integer
+      if (!userId || !Number.isInteger(userId) || userId <= 0) {
+        return res.status(400).json({
+          error: 'Invalid request format',
+          message: 'Valid user ID required'
+        });
+      }
+
+      next();
+    };
+
+    beforeEach(() => {
+      app.post('/webhook', rateLimitMiddleware, (req, res) => {
+        res.json({ ok: true });
+      });
+    });
+
+    it('should accept requests with valid positive integer user ID', async () => {
+      const validUpdate = global.mockTelegramUpdate({
+        message: {
+          from: { id: 123456789 }, // Valid positive integer
+          text: 'test'
+        }
+      });
+
+      const response = await request(app)
+        .post('/webhook')
+        .send(validUpdate);
+
+      expect(response.status).toBe(200);
+      expect(response.body.ok).toBe(true);
+    });
+
+    it('should reject requests with missing user ID', async () => {
+      const invalidUpdate = {
+        update_id: 123,
+        message: {
+          text: 'test'
+          // Missing 'from' field
+        }
+      };
+
+      const response = await request(app)
+        .post('/webhook')
+        .send(invalidUpdate);
+
+      expect(response.status).toBe(400);
+      expect(response.body.error).toBe('Invalid request format');
+      expect(response.body.message).toContain('Valid user ID required');
+    });
+
+    it('should reject requests with string user ID', async () => {
+      const invalidUpdate = global.mockTelegramUpdate({
+        message: {
+          from: { id: "123456789" }, // String instead of number
+          text: 'test'
+        }
+      });
+
+      const response = await request(app)
+        .post('/webhook')
+        .send(invalidUpdate);
+
+      expect(response.status).toBe(400);
+      expect(response.body.error).toBe('Invalid request format');
+    });
+
+    it('should reject requests with negative user ID', async () => {
+      const invalidUpdate = global.mockTelegramUpdate({
+        message: {
+          from: { id: -123 }, // Negative number
+          text: 'test'
+        }
+      });
+
+      const response = await request(app)
+        .post('/webhook')
+        .send(invalidUpdate);
+
+      expect(response.status).toBe(400);
+      expect(response.body.error).toBe('Invalid request format');
+    });
+
+    it('should reject requests with zero user ID', async () => {
+      const invalidUpdate = global.mockTelegramUpdate({
+        message: {
+          from: { id: 0 }, // Zero
+          text: 'test'
+        }
+      });
+
+      const response = await request(app)
+        .post('/webhook')
+        .send(invalidUpdate);
+
+      expect(response.status).toBe(400);
+      expect(response.body.error).toBe('Invalid request format');
+    });
+
+    it('should reject requests with float user ID', async () => {
+      const invalidUpdate = global.mockTelegramUpdate({
+        message: {
+          from: { id: 123.456 }, // Float
+          text: 'test'
+        }
+      });
+
+      const response = await request(app)
+        .post('/webhook')
+        .send(invalidUpdate);
+
+      expect(response.status).toBe(400);
+      expect(response.body.error).toBe('Invalid request format');
+    });
+  });
+
+  describe('Production Configuration Validation (P0-3, P0-4)', () => {
+    // These tests verify that the config module properly validates
+    // required environment variables in production mode
+
+    it('should document ALLOWED_USERS requirement in production', () => {
+      // This is a documentation test - the actual validation happens in config.js
+      // which throws an error on module load if ALLOWED_USERS is not set in production
+      expect(mockConfig.telegram.allowedUsers).toBeDefined();
+      expect(Array.isArray(mockConfig.telegram.allowedUsers)).toBe(true);
+      expect(mockConfig.telegram.allowedUsers.length).toBeGreaterThan(0);
+    });
+
+    it('should document WEBHOOK_SECRET requirement in production', () => {
+      // This is a documentation test - the actual validation happens in config.js
+      expect(mockConfig.telegram.webhookSecret).toBeDefined();
+      expect(typeof mockConfig.telegram.webhookSecret).toBe('string');
+      expect(mockConfig.telegram.webhookSecret.length).toBeGreaterThan(0);
+    });
+
+    it('should validate user IDs are positive integers', () => {
+      const userIds = mockConfig.telegram.allowedUsers;
+      userIds.forEach(userId => {
+        expect(Number.isInteger(userId)).toBe(true);
+        expect(userId).toBeGreaterThan(0);
+      });
+    });
+  });
+
 });

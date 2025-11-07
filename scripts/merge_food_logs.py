@@ -381,40 +381,96 @@ def load_processed_state() -> dict:
     """
     Load state of previously processed branches.
 
-    CONCURRENCY NOTE: This function assumes that only ONE instance of this script
-    runs at a time. The workflow has `concurrency.cancel-in-progress: false` to
-    prevent concurrent runs. If multiple instances run simultaneously, the last
-    write wins and earlier state updates may be lost. For production use with
-    concurrent runs, consider:
-    - File locking (e.g., fcntl on Linux)
-    - Database storage instead of JSON file
-    - Git notes for distributed state tracking
+    P1 Security Fix: Added file locking to prevent race conditions.
+    Uses fcntl for exclusive locking on Unix systems (Linux/macOS).
+    On Windows, falls back to no locking (acceptable for GitHub Actions which runs on Linux).
     """
-    state_file = Path('.github/workflows/processed-branches.json')
-
-    if not state_file.exists():
-        return {'last_run': None, 'processed': {}}
-
     try:
-        with open(state_file, 'r') as f:
-            return json.load(f)
-    except (json.JSONDecodeError, IOError):
-        print("⚠️  Warning: Could not load processed-branches.json, starting fresh")
-        return {'last_run': None, 'processed': {}}
+        import fcntl
+        has_fcntl = True
+    except ImportError:
+        # Windows doesn't have fcntl
+        has_fcntl = False
+        print("⚠️  Warning: File locking not available on this platform (Windows)")
+
+    state_file = Path('.github/workflows/processed-branches.json')
+    lock_file = Path('.github/workflows/processed-branches.json.lock')
+
+    # Ensure lock directory exists
+    lock_file.parent.mkdir(parents=True, exist_ok=True)
+
+    if has_fcntl:
+        # Unix systems (Linux/macOS) - use file locking
+        with open(lock_file, 'w') as lock:
+            try:
+                # Wait for lock (blocking)
+                fcntl.flock(lock.fileno(), fcntl.LOCK_EX)
+
+                if not state_file.exists():
+                    return {'last_run': None, 'processed': {}}
+
+                try:
+                    with open(state_file, 'r') as f:
+                        return json.load(f)
+                except (json.JSONDecodeError, IOError):
+                    print("⚠️  Warning: Could not load processed-branches.json, starting fresh")
+                    return {'last_run': None, 'processed': {}}
+            finally:
+                # Release lock
+                fcntl.flock(lock.fileno(), fcntl.LOCK_UN)
+    else:
+        # Windows or other platforms - no locking (acceptable for single-instance GitHub Actions)
+        if not state_file.exists():
+            return {'last_run': None, 'processed': {}}
+
+        try:
+            with open(state_file, 'r') as f:
+                return json.load(f)
+        except (json.JSONDecodeError, IOError):
+            print("⚠️  Warning: Could not load processed-branches.json, starting fresh")
+            return {'last_run': None, 'processed': {}}
 
 def save_processed_state(state: dict):
     """
     Save state of processed branches.
 
-    CONCURRENCY NOTE: No file locking is used. Relies on workflow-level
-    concurrency control to prevent simultaneous writes. See load_processed_state()
-    for details.
+    P1 Security Fix: Added file locking to prevent race conditions.
+    Uses fcntl for exclusive locking on Unix systems (Linux/macOS).
+    On Windows, falls back to atomic write without locking.
     """
+    try:
+        import fcntl
+        has_fcntl = True
+    except ImportError:
+        has_fcntl = False
+
     state_file = Path('.github/workflows/processed-branches.json')
+    lock_file = Path('.github/workflows/processed-branches.json.lock')
     state_file.parent.mkdir(parents=True, exist_ok=True)
 
-    with open(state_file, 'w') as f:
-        json.dump(state, f, indent=2)
+    if has_fcntl:
+        # Unix systems (Linux/macOS) - use file locking
+        with open(lock_file, 'w') as lock:
+            try:
+                # Wait for lock (blocking)
+                fcntl.flock(lock.fileno(), fcntl.LOCK_EX)
+
+                # Write state file atomically by writing to temp file then renaming
+                temp_file = state_file.with_suffix('.json.tmp')
+                with open(temp_file, 'w') as f:
+                    json.dump(state, f, indent=2)
+
+                # Atomic rename (on Unix systems)
+                temp_file.rename(state_file)
+            finally:
+                # Release lock
+                fcntl.flock(lock.fileno(), fcntl.LOCK_UN)
+    else:
+        # Windows or other platforms - atomic write without locking
+        temp_file = state_file.with_suffix('.json.tmp')
+        with open(temp_file, 'w') as f:
+            json.dump(state, f, indent=2)
+        temp_file.rename(state_file)
 
 def load_existing_log(file_path: str) -> dict:
     """

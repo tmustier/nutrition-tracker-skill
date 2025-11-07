@@ -133,8 +133,10 @@ class GitHubIntegration {
       });
 
       // Decode base64 content and parse YAML
+      // P1 Security Fix: Use explicit JSON_SCHEMA for defense in depth against potential YAML injection
+      // Note: js-yaml 4.x defaults to safe loading, but explicit schema is best practice
       const content = Buffer.from(response.data.content, 'base64').toString('utf-8');
-      const logData = yaml.load(content);
+      const logData = yaml.load(content, { schema: yaml.JSON_SCHEMA });
 
       return {
         exists: true,
@@ -267,6 +269,11 @@ class GitHubIntegration {
       }
       if (!nutritionData.nutrition) {
         throw new Error('nutritionData.nutrition is required');
+      }
+
+      // P1 Security Fix: Validate userId is a valid Telegram ID (positive integer or null)
+      if (userId !== null && (!Number.isInteger(userId) || userId <= 0)) {
+        throw new Error(`Invalid userId: must be a positive integer or null, got ${typeof userId}: ${userId}`);
       }
 
       // Generate timestamp if not provided
@@ -435,10 +442,17 @@ class GitHubIntegration {
 
       // Sum up nutrition from all entries and items
       // If userId is provided, only count entries for that user
+      // P1 Security Fix: Validate userId type consistency before filtering
+      if (userId !== null && (!Number.isInteger(userId) || userId <= 0)) {
+        console.error(`Invalid userId for filtering: ${userId} (type: ${typeof userId})`);
+        return this._emptyTotals(targetDate); // Return zeros for invalid userId
+      }
+
       logFile.data.entries.forEach(entry => {
         // Filter by user if userId is specified
         if (userId !== null) {
-          if (entry.user_id == null) {
+          // P1 Security Fix: Use strict equality for both checks to prevent type coercion issues
+          if (entry.user_id === null || entry.user_id === undefined) {
             console.warn(`⚠️  Entry without user_id found (timestamp: ${entry.timestamp}). Skipping for user filtering.`);
             return; // Skip entries without user_id
           }
