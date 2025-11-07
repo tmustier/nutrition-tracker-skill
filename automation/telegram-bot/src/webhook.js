@@ -60,7 +60,10 @@ const MAX_LOG_MESSAGE_LENGTH = 500;
 // Rate limiting warning threshold
 const RATE_LIMIT_WARNING_THRESHOLD = 0.8; // Warn at 80% of limit
 
-// Telegram message formatting options
+/**
+ * Telegram message formatting options
+ * Uses legacy Markdown mode for consistent rendering across all messages
+ */
 const TELEGRAM_PARSE_OPTIONS = { parse_mode: 'Markdown' };
 
 // ============================================================================
@@ -70,13 +73,15 @@ const TELEGRAM_PARSE_OPTIONS = { parse_mode: 'Markdown' };
 /**
  * Escape special Telegram Markdown characters to prevent parsing errors
  * For legacy Markdown mode (not MarkdownV2)
- * Special characters: _ * ` [
+ * Special characters: \ * _ ` [
  * @param {string} text - Text to escape
  * @returns {string} Escaped text safe for Telegram legacy Markdown
  */
 const escapeMarkdown = (text) => {
   if (typeof text !== 'string') {
-    return String(text);
+    const converted = String(text);
+    console.warn(`escapeMarkdown received non-string input (type: ${typeof text}), converted to: "${converted}"`);
+    return converted;
   }
 
   // Escape only characters that are special in legacy Markdown mode
@@ -775,6 +780,8 @@ bot.on('text', async (ctx) => {
     };
 
     // Step 7: Format and send success message
+    // Note: Only user-provided strings (like food names) need markdown escaping.
+    // Numeric values from validated nutrition data are safe and don't require escaping.
     const nutrition = nutritionData.nutrition;
     const successMessage = `✅ **Logged: ${escapeMarkdown(nutritionData.name)}**
 
@@ -952,6 +959,7 @@ bot.on('photo', async (ctx) => {
     };
 
     // Step 9: Send success message
+    // Note: Only user-provided strings need markdown escaping; numeric values are safe.
     const nutrition = nutritionData.nutrition;
     const successMessage = `✅ **Logged from screenshot: ${escapeMarkdown(nutritionData.name)}**
 
