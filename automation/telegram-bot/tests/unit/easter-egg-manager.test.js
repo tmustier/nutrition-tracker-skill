@@ -59,7 +59,7 @@ describe('EasterEggManager', () => {
 
       const result = easterEggManager.evaluateDetection(detection, 'user123');
 
-      expect(result.shouldTrigger).toBe(false);
+      expect(result).toBeNull(); // No easter egg matches = null
     });
 
     test('should NOT trigger for person eating (food present)', () => {
@@ -73,7 +73,7 @@ describe('EasterEggManager', () => {
 
       const result = easterEggManager.evaluateDetection(detection, 'user123');
 
-      expect(result.shouldTrigger).toBe(false);
+      expect(result).toBeNull(); // No easter egg matches = null
     });
 
     test('should NOT trigger for medium confidence', () => {
@@ -87,7 +87,7 @@ describe('EasterEggManager', () => {
 
       const result = easterEggManager.evaluateDetection(detection, 'user123');
 
-      expect(result.shouldTrigger).toBe(false);
+      expect(result).toBeNull(); // No easter egg matches = null (confidence too low)
     });
 
     test('should trigger celebration (companion easter egg)', () => {
@@ -449,7 +449,7 @@ describe('EasterEggManager', () => {
 
       // Should not trigger midnight_munchies (wrong time)
       // Might trigger nothing or a different easter egg
-      if (result.shouldTrigger) {
+      if (result !== null && result.shouldTrigger) {
         expect(result.easterEggType).not.toBe('midnight_munchies');
       }
     });

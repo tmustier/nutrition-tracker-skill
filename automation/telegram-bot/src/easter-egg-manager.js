@@ -167,6 +167,18 @@ class EasterEggManager {
    */
   _meetsConfidenceThreshold(actual, required) {
     const confidenceLevels = { high: 3, medium: 2, low: 1 };
+
+    // Validate inputs - fail closed if invalid (don't trigger easter egg)
+    if (!actual || typeof actual !== 'string' || !confidenceLevels[actual]) {
+      console.log(`[EasterEggManager] Invalid actual confidence: ${actual}`);
+      return false;
+    }
+
+    if (!required || typeof required !== 'string' || !confidenceLevels[required]) {
+      console.log(`[EasterEggManager] Invalid required confidence: ${required}`);
+      return false;
+    }
+
     return confidenceLevels[actual] >= confidenceLevels[required];
   }
 

@@ -890,25 +890,33 @@ bot.on('photo', async (ctx) => {
         if (easterEggResult && easterEggResult.shouldTrigger && easterEggResult.canTrigger) {
           // Show easter egg message first
           const easterEggMessage = easterEggResult.getMessage();
-          await ctx.telegram.editMessageText(
-            ctx.chat.id,
-            processingMsg.message_id,
-            null,
-            easterEggMessage
-          );
 
-          // Record trigger AFTER successful message send (prevents consuming cooldown on failure)
-          easterEggResult.recordTrigger();
+          // Validate message exists (fail gracefully if message array is empty)
+          if (!easterEggMessage) {
+            console.error(`[EasterEgg] No message available for ${easterEggResult.easterEggType}, skipping easter egg`);
+            // Continue to nutrition extraction instead of crashing
+          } else {
+            await ctx.telegram.editMessageText(
+              ctx.chat.id,
+              processingMsg.message_id,
+              null,
+              easterEggMessage
+            );
 
-          console.log(`Easter egg triggered: ${easterEggResult.easterEggType} for user ${userId}`);
+            // Record trigger AFTER successful message send (prevents consuming cooldown on failure)
+            easterEggResult.recordTrigger();
 
-          // If this is a BLOCKING easter egg (not companion), don't log nutrition
-          if (easterEggResult.blocksNutritionExtraction) {
-            console.log(`Easter egg blocks extraction, returning early`);
-            return;
+            console.log(`Easter egg triggered: ${easterEggResult.easterEggType} for user ${userId}`);
+
+            // If this is a BLOCKING easter egg (not companion), don't log nutrition
+            if (easterEggResult.blocksNutritionExtraction) {
+              console.log(`Easter egg blocks extraction, returning early`);
+              conversationManager.releaseLock(userId); // CRITICAL: Release lock before return
+              return;
+            }
+            // Companion easter eggs (celebration, midnight_munchies) continue to nutrition logging
+            console.log(`Companion easter egg - continuing to nutrition extraction`);
           }
-          // Companion easter eggs (celebration, midnight_munchies) continue to nutrition logging
-          console.log(`Companion easter egg - continuing to nutrition extraction`);
         } else if (easterEggResult && easterEggResult.shouldTrigger) {
           console.log(`Easter egg on cooldown, proceeding to nutrition`);
         }
@@ -1157,6 +1165,11 @@ const gracefulShutdown = (signal) => {
   // Cleanup rate limit interval
   if (rateLimitCleanupInterval) {
     clearInterval(rateLimitCleanupInterval);
+  }
+
+  // Cleanup easter egg cooldown manager (stops cleanup interval)
+  if (easterEggCooldownManager) {
+    easterEggCooldownManager.stopCooldownCleanup();
   }
 
   console.log('Cleanup complete, exiting...');
