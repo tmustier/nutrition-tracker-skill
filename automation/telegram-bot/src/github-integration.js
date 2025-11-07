@@ -133,7 +133,8 @@ class GitHubIntegration {
       });
 
       // Decode base64 content and parse YAML
-      // P1 Security Fix: Use safeLoad for defense in depth against potential YAML injection
+      // P1 Security Fix: Use explicit JSON_SCHEMA for defense in depth against potential YAML injection
+      // Note: js-yaml 4.x defaults to safe loading, but explicit schema is best practice
       const content = Buffer.from(response.data.content, 'base64').toString('utf-8');
       const logData = yaml.load(content, { schema: yaml.JSON_SCHEMA });
 
