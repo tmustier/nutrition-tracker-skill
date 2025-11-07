@@ -870,6 +870,9 @@ bot.on('photo', async (ctx) => {
         const easterEggResult = easterEggManager.evaluateDetection(result.scene_detection, userId);
 
         if (easterEggResult.shouldTrigger && easterEggResult.canTrigger) {
+          // Record trigger BEFORE sending message to prevent duplicate triggers on failure
+          easterEggResult.recordTrigger();
+
           // Show easter egg message
           const easterEggMessage = easterEggResult.getMessage();
           await ctx.telegram.editMessageText(
@@ -878,9 +881,6 @@ bot.on('photo', async (ctx) => {
             null,
             easterEggMessage
           );
-
-          // Record trigger for cooldown tracking
-          easterEggResult.recordTrigger();
 
           console.log(`Easter egg triggered: ${easterEggResult.easterEggType} for user ${userId}`);
 

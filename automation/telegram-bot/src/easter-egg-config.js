@@ -20,6 +20,13 @@
  */
 
 // ============================================================================
+// TIME CONSTANTS
+// ============================================================================
+
+const HOURS = 60 * 60 * 1000;  // Milliseconds in one hour
+const DAYS = 24 * HOURS;        // Milliseconds in one day
+
+// ============================================================================
 // GLOBAL CONFIGURATION
 // ============================================================================
 
@@ -28,7 +35,7 @@ const GLOBAL_CONFIG = {
   enabled: process.env.EASTER_EGGS_ENABLED !== 'false', // Default: true (disable with env var)
 
   // Default cooldown for new easter eggs (7 days)
-  defaultCooldownMs: 7 * 24 * 60 * 60 * 1000,
+  defaultCooldownMs: 7 * DAYS,
 
   // Default confidence threshold for triggering easter eggs
   defaultMinConfidence: 'high',
@@ -72,7 +79,7 @@ const EASTER_EGG_TYPES = {
 
     // Configuration
     enabled: true, // Set to false to disable this easter egg
-    cooldownDuration: parseInt(process.env.COOLDOWN_PERSON_WITHOUT_FOOD) || 7 * 24 * 60 * 60 * 1000, // 7 days
+    cooldownDuration: parseInt(process.env.COOLDOWN_PERSON_WITHOUT_FOOD) || 7 * DAYS, // 7 days
     priority: 8, // High priority - common scenario
     blocksNutritionExtraction: true, // Don't try to extract nutrition
 
@@ -106,7 +113,7 @@ const EASTER_EGG_TYPES = {
     description: 'User sent a photo of their pet',
 
     enabled: true,
-    cooldownDuration: parseInt(process.env.COOLDOWN_PET) || 3 * 24 * 60 * 60 * 1000, // 3 days
+    cooldownDuration: parseInt(process.env.COOLDOWN_PET) || 3 * DAYS, // 3 days
     priority: 7,
     blocksNutritionExtraction: true,
 
@@ -135,7 +142,7 @@ const EASTER_EGG_TYPES = {
     description: 'User sent photo of empty plate/bowl',
 
     enabled: true,
-    cooldownDuration: parseInt(process.env.COOLDOWN_EMPTY_PLATE) || 2 * 24 * 60 * 60 * 1000, // 2 days
+    cooldownDuration: parseInt(process.env.COOLDOWN_EMPTY_PLATE) || 2 * DAYS, // 2 days
     priority: 6,
     blocksNutritionExtraction: true,
 
@@ -163,7 +170,7 @@ const EASTER_EGG_TYPES = {
     description: 'User sent photo of non-food item (soap, candle, etc.)',
 
     enabled: true,
-    cooldownDuration: parseInt(process.env.COOLDOWN_NON_FOOD_ITEM) || 7 * 24 * 60 * 60 * 1000, // 7 days
+    cooldownDuration: parseInt(process.env.COOLDOWN_NON_FOOD_ITEM) || 7 * DAYS, // 7 days
     priority: 5,
     blocksNutritionExtraction: true,
 
@@ -192,7 +199,7 @@ const EASTER_EGG_TYPES = {
     description: 'User sent photo of grocery store or restaurant menu',
 
     enabled: true,
-    cooldownDuration: parseInt(process.env.COOLDOWN_SHOPPING_SCENE) || 3 * 24 * 60 * 60 * 1000, // 3 days
+    cooldownDuration: parseInt(process.env.COOLDOWN_SHOPPING_SCENE) || 3 * DAYS, // 3 days
     priority: 4,
     blocksNutritionExtraction: true,
 
@@ -220,7 +227,7 @@ const EASTER_EGG_TYPES = {
     description: 'User sent a screenshot or meme instead of real photo',
 
     enabled: true,
-    cooldownDuration: parseInt(process.env.COOLDOWN_SCREENSHOT) || 2 * 24 * 60 * 60 * 1000, // 2 days
+    cooldownDuration: parseInt(process.env.COOLDOWN_SCREENSHOT) || 2 * DAYS, // 2 days
     priority: 3,
     blocksNutritionExtraction: true,
 
@@ -248,7 +255,7 @@ const EASTER_EGG_TYPES = {
     description: 'User sent photo of empty food wrapper/package',
 
     enabled: true,
-    cooldownDuration: parseInt(process.env.COOLDOWN_EMPTY_PACKAGING) || 2 * 24 * 60 * 60 * 1000, // 2 days
+    cooldownDuration: parseInt(process.env.COOLDOWN_EMPTY_PACKAGING) || 2 * DAYS, // 2 days
     priority: 2,
     blocksNutritionExtraction: false, // Allow extraction when nutrition label visible
 
@@ -281,7 +288,7 @@ const EASTER_EGG_TYPES = {
     description: 'User logged food between 10pm-4am',
 
     enabled: true,
-    cooldownDuration: parseInt(process.env.COOLDOWN_MIDNIGHT_MUNCHIES) || 12 * 60 * 60 * 1000, // 12 hours
+    cooldownDuration: parseInt(process.env.COOLDOWN_MIDNIGHT_MUNCHIES) || 12 * HOURS, // 12 hours
     priority: 9, // Check early, but doesn't block extraction
     blocksNutritionExtraction: false, // COMPANION: Still extract nutrition
 
@@ -309,7 +316,7 @@ const EASTER_EGG_TYPES = {
     description: 'User sent photo of birthday cake or celebration',
 
     enabled: true,
-    cooldownDuration: parseInt(process.env.COOLDOWN_CELEBRATION) || 30 * 24 * 60 * 60 * 1000, // 30 days
+    cooldownDuration: parseInt(process.env.COOLDOWN_CELEBRATION) || 30 * DAYS, // 30 days
     priority: 10, // Highest priority for special occasions
     blocksNutritionExtraction: false, // COMPANION: Cake is food!
 

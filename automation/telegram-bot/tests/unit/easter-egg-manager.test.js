@@ -298,4 +298,180 @@ describe('EasterEggManager', () => {
       expect(easterEggManager._checkDetectionCriteria(easterEgg, missingOne)).toBe(false);
     });
   });
+
+  // =========================================================================
+  // CRITICAL TESTS FROM PR REVIEW
+  // =========================================================================
+
+  describe('Blocking vs Companion Easter Eggs', () => {
+    test('blocking easter egg (person_without_food) should block nutrition extraction', () => {
+      const detection = {
+        scene_type: 'selfie',
+        has_person: true,
+        has_food: false,
+        confidence: 'high'
+      };
+
+      const result = easterEggManager.evaluateDetection(detection, 'user123');
+
+      expect(result.shouldTrigger).toBe(true);
+      expect(result.easterEggType).toBe('person_without_food');
+      expect(result.blocksNutritionExtraction).toBe(true); // BLOCKS
+    });
+
+    test('companion easter egg (celebration) should NOT block nutrition extraction', () => {
+      const detection = {
+        scene_type: 'celebration',
+        is_celebration: true,
+        has_food: true,
+        confidence: 'high'
+      };
+
+      const result = easterEggManager.evaluateDetection(detection, 'user123');
+
+      expect(result.shouldTrigger).toBe(true);
+      expect(result.easterEggType).toBe('celebration');
+      expect(result.blocksNutritionExtraction).toBe(false); // COMPANION - does not block
+    });
+
+    test('empty_packaging should NOT block nutrition extraction (P0 fix validation)', () => {
+      const detection = {
+        scene_type: 'empty_packaging',
+        is_empty_packaging: true,
+        has_food: false,
+        confidence: 'high'
+      };
+
+      const result = easterEggManager.evaluateDetection(detection, 'user123');
+
+      expect(result.shouldTrigger).toBe(true);
+      expect(result.easterEggType).toBe('empty_packaging');
+      expect(result.blocksNutritionExtraction).toBe(false); // P0 FIX: Should not block!
+    });
+
+    test('all blocking easter eggs should have blocksNutritionExtraction: true', () => {
+      const blockingTypes = ['person_without_food', 'pet', 'empty_plate',
+                             'non_food_item', 'shopping_scene', 'screenshot_meme'];
+
+      blockingTypes.forEach(type => {
+        const easterEgg = require('../../src/easter-egg-config').getEasterEggById(type);
+        expect(easterEgg.blocksNutritionExtraction).toBe(true);
+      });
+    });
+
+    test('all companion easter eggs should have blocksNutritionExtraction: false', () => {
+      const companionTypes = ['celebration', 'midnight_munchies', 'empty_packaging'];
+
+      companionTypes.forEach(type => {
+        const easterEgg = require('../../src/easter-egg-config').getEasterEggById(type);
+        expect(easterEgg.blocksNutritionExtraction).toBe(false);
+      });
+    });
+  });
+
+  describe('Time Window Easter Eggs', () => {
+    beforeEach(() => {
+      // Clear any existing cooldowns
+      const allUsers = [];
+      cooldownManager.easterEggCooldowns.forEach((_, userId) => {
+        allUsers.push(userId);
+      });
+      allUsers.forEach(userId => {
+        cooldownManager.clearUserCooldowns(userId);
+      });
+    });
+
+    test('midnight_munchies should trigger between 10pm-4am', () => {
+      const detection = {
+        has_food: true,
+        confidence: 'high'
+      };
+
+      // Mock current hour to 11 PM (23:00)
+      const originalDate = global.Date;
+      global.Date = class extends originalDate {
+        getHours() {
+          return 23; // 11 PM
+        }
+      };
+
+      const result = easterEggManager.evaluateDetection(detection, 'user123');
+
+      // Restore original Date
+      global.Date = originalDate;
+
+      expect(result.shouldTrigger).toBe(true);
+      expect(result.easterEggType).toBe('midnight_munchies');
+      expect(result.blocksNutritionExtraction).toBe(false); // Companion
+    });
+
+    test('midnight_munchies should trigger at 2am (within window)', () => {
+      const detection = {
+        has_food: true,
+        confidence: 'high'
+      };
+
+      // Mock current hour to 2 AM
+      const originalDate = global.Date;
+      global.Date = class extends originalDate {
+        getHours() {
+          return 2; // 2 AM
+        }
+      };
+
+      const result = easterEggManager.evaluateDetection(detection, 'user123');
+
+      // Restore original Date
+      global.Date = originalDate;
+
+      expect(result.shouldTrigger).toBe(true);
+      expect(result.easterEggType).toBe('midnight_munchies');
+    });
+
+    test('midnight_munchies should NOT trigger at 5pm (outside window)', () => {
+      const detection = {
+        has_food: true,
+        confidence: 'high'
+      };
+
+      // Mock current hour to 5 PM (17:00)
+      const originalDate = global.Date;
+      global.Date = class extends originalDate {
+        getHours() {
+          return 17; // 5 PM
+        }
+      };
+
+      const result = easterEggManager.evaluateDetection(detection, 'user123');
+
+      // Restore original Date
+      global.Date = originalDate;
+
+      // Should not trigger midnight_munchies (wrong time)
+      // Might trigger nothing or a different easter egg
+      if (result.shouldTrigger) {
+        expect(result.easterEggType).not.toBe('midnight_munchies');
+      }
+    });
+  });
+
+  describe('Priority System', () => {
+    test('celebration (priority 10) should trigger before person_without_food (priority 8)', () => {
+      // Scene with both person AND celebration indicators
+      const detection = {
+        scene_type: 'celebration',
+        is_celebration: true,
+        has_person: true,
+        has_food: true,
+        confidence: 'high'
+      };
+
+      const result = easterEggManager.evaluateDetection(detection, 'user123');
+
+      // Should trigger celebration (higher priority) not person_without_food
+      expect(result.shouldTrigger).toBe(true);
+      expect(result.easterEggType).toBe('celebration');
+      expect(result.priority).toBe(10);
+    });
+  });
 });
