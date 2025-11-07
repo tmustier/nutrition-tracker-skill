@@ -661,22 +661,8 @@ describe('Webhook Handlers', () => {
   });
 
   describe('Markdown Formatting', () => {
-    // Access internal escapeMarkdown function for testing
-    // Note: In production, this would be exported for testing
-    const escapeMarkdown = (text) => {
-      if (typeof text !== 'string') {
-        const converted = String(text);
-        console.warn(`escapeMarkdown received non-string input (type: ${typeof text}), converted to: "${converted}"`);
-        return converted;
-      }
-
-      return text
-        .replace(/\\/g, '\\\\')
-        .replace(/\*/g, '\\*')
-        .replace(/_/g, '\\_')
-        .replace(/`/g, '\\`')
-        .replace(/\[/g, '\\[');
-    };
+    // Import escapeMarkdown function from webhook module
+    const { escapeMarkdown } = webhook;
 
     describe('escapeMarkdown()', () => {
       it('should escape asterisks (bold)', () => {
@@ -694,8 +680,9 @@ describe('Webhook Handlers', () => {
       });
 
       it('should escape square brackets (links)', () => {
-        expect(escapeMarkdown('test[link]')).toBe('test\\[link]');
-        expect(escapeMarkdown('[REDACTED]')).toBe('\\[REDACTED]');
+        expect(escapeMarkdown('test[link]')).toBe('test\\[link\\]');
+        expect(escapeMarkdown('[REDACTED]')).toBe('\\[REDACTED\\]');
+        expect(escapeMarkdown('food[ingredient]')).toBe('food\\[ingredient\\]');
       });
 
       it('should escape backslashes', () => {
@@ -705,7 +692,7 @@ describe('Webhook Handlers', () => {
 
       it('should handle multiple special characters', () => {
         const input = 'chicken_breast*bold* \\backslash [link]';
-        const expected = 'chicken\\_breast\\*bold\\* \\\\backslash \\[link]';
+        const expected = 'chicken\\_breast\\*bold\\* \\\\backslash \\[link\\]';
         expect(escapeMarkdown(input)).toBe(expected);
       });
 
@@ -739,7 +726,7 @@ describe('Webhook Handlers', () => {
         expect(escaped).not.toContain('_italic_');
         expect(escaped).not.toContain('`code`');
         expect(escaped).not.toContain('[link]');
-        expect(escaped).toBe('Hacker\\*bold\\*\\_italic\\_\\`code\\`\\[link]\\\\slash');
+        expect(escaped).toBe('Hacker\\*bold\\*\\_italic\\_\\`code\\`\\[link\\]\\\\slash');
       });
 
       it('should handle fractions with backslashes', () => {

@@ -73,7 +73,7 @@ const TELEGRAM_PARSE_OPTIONS = { parse_mode: 'Markdown' };
 /**
  * Escape special Telegram Markdown characters to prevent parsing errors
  * For legacy Markdown mode (not MarkdownV2)
- * Special characters: \ * _ ` [
+ * Special characters: \ * _ ` [ ]
  * @param {string} text - Text to escape
  * @returns {string} Escaped text safe for Telegram legacy Markdown
  */
@@ -91,7 +91,8 @@ const escapeMarkdown = (text) => {
     .replace(/\*/g, '\\*')    // Asterisk (bold)
     .replace(/_/g, '\\_')     // Underscore (italic)
     .replace(/`/g, '\\`')     // Backtick (code)
-    .replace(/\[/g, '\\[');   // Left bracket (link opener)
+    .replace(/\[/g, '\\[')    // Left bracket (link opener)
+    .replace(/\]/g, '\\]');   // Right bracket (link closer)
 };
 
 /**
@@ -1165,6 +1166,9 @@ module.exports = {
 
   // Export bot instance for testing
   bot,
+
+  // Export escapeMarkdown for testing
+  escapeMarkdown,
 
   // Health check function
   healthCheck: () => ({
