@@ -226,8 +226,25 @@ async function handleSetup(req, res) {
  * @returns {boolean} True if verification passes or no secret configured
  */
 function verifyWebhookSecret(req) {
-  // If no webhook secret configured, skip verification (for backward compatibility)
+  // If no webhook secret configured, require explicit opt-in for development
   if (!config.telegram.webhookSecret) {
+    if (config.app.environment === 'production') {
+      // Production mode: webhook secret is required (validated by config.js)
+      console.error('❌ CRITICAL: Webhook verification called without secret in production');
+      return false;
+    }
+
+    // Development mode: require explicit opt-in to skip verification
+    if (!process.env.ALLOW_UNVERIFIED_WEBHOOK) {
+      console.error('');
+      console.error('⚠️  SECURITY: WEBHOOK_SECRET not set in development');
+      console.error('   Set ALLOW_UNVERIFIED_WEBHOOK=true to explicitly allow unverified webhooks for testing');
+      console.error('   Or set WEBHOOK_SECRET for proper security even in development');
+      console.error('');
+      return false;
+    }
+
+    console.warn('⚠️  Webhook verification disabled (development only - ALLOW_UNVERIFIED_WEBHOOK=true)');
     return true;
   }
 
