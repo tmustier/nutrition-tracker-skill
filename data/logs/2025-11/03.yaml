@@ -60,7 +60,6 @@ entries:
       omega3_dha_mg: 0
       omega3_ala_g: 0
       omega6_la_g: 0
-  notes: null
 - timestamp: '2025-11-03T08:00:00+00:00'
   items:
   - name: Raspberries
