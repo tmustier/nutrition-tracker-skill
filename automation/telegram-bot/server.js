@@ -4,9 +4,10 @@
 // It integrates with the webhook handler module to process Telegram updates.
 //
 // Endpoints:
-// - GET /         - Health check
-// - GET /setup    - Register webhook with Telegram
-// - POST /webhook - Process Telegram updates
+// - GET /              - Health check
+// - GET /health/usda   - USDA API circuit breaker status
+// - GET /setup         - Register webhook with Telegram
+// - POST /webhook      - Process Telegram updates
 //
 // Compatible with:
 // - Local development with ngrok
@@ -16,6 +17,7 @@
 const crypto = require('crypto');
 const config = require('./src/config');
 const webhook = require('./src/webhook');
+const usdaApi = require('./src/usda-api');
 
 // Try to load Express, fallback to http if not available
 let app;
@@ -95,6 +97,7 @@ function handleHealthCheck(req, res) {
     configuration: health,
     endpoints: {
       health: 'GET /',
+      usda_health: 'GET /health/usda',
       setup: 'GET /setup',
       webhook: 'POST /webhook'
     },
@@ -104,6 +107,35 @@ function handleHealthCheck(req, res) {
       fix: 'Set WEBHOOK_URL or ensure RAILWAY_PUBLIC_DOMAIN is available'
     })
   }, null, 2));
+}
+
+/**
+ * GET /health/usda - USDA API circuit breaker health check
+ * Returns circuit breaker metrics and status
+ */
+function handleUsdaHealth(req, res) {
+  logRequest(req, res);
+
+  try {
+    const metrics = usdaApi.getCircuitBreakerStatus();
+    const summary = usdaApi.getCircuitBreakerSummary();
+
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({
+      status: 'ok',
+      timestamp: new Date().toISOString(),
+      circuit_breaker: metrics,
+      summary: summary.split('\n').map(line => line.trim()).filter(line => line)
+    }, null, 2));
+  } catch (error) {
+    console.error('Error fetching USDA API status:', error);
+    res.writeHead(500, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({
+      status: 'error',
+      message: 'Failed to retrieve circuit breaker status',
+      error: error.message
+    }, null, 2));
+  }
 }
 
 /**
@@ -275,6 +307,7 @@ function handleNotFound(req, res) {
     message: 'Unknown endpoint',
     available_endpoints: {
       health: 'GET /',
+      usda_health: 'GET /health/usda',
       setup: 'GET /setup',
       webhook: 'POST /webhook'
     }
@@ -307,11 +340,34 @@ if (useExpress) {
       configuration: health,
       endpoints: {
         health: 'GET /',
+        usda_health: 'GET /health/usda',
         setup: 'GET /setup',
         webhook: 'POST /webhook'
       },
       webhook_url: WEBHOOK_URL
     });
+  });
+
+  // USDA API circuit breaker health check
+  app.get('/health/usda', (req, res) => {
+    try {
+      const metrics = usdaApi.getCircuitBreakerStatus();
+      const summary = usdaApi.getCircuitBreakerSummary();
+
+      res.json({
+        status: 'ok',
+        timestamp: new Date().toISOString(),
+        circuit_breaker: metrics,
+        summary: summary.split('\n').map(line => line.trim()).filter(line => line)
+      });
+    } catch (error) {
+      console.error('Error fetching USDA API status:', error);
+      res.status(500).json({
+        status: 'error',
+        message: 'Failed to retrieve circuit breaker status',
+        error: error.message
+      });
+    }
   });
 
   // Webhook setup
@@ -469,6 +525,8 @@ if (useExpress) {
     // Route handlers
     if (req.method === 'GET' && req.url === '/') {
       handleHealthCheck(req, res);
+    } else if (req.method === 'GET' && req.url === '/health/usda') {
+      handleUsdaHealth(req, res);
     } else if (req.method === 'GET' && req.url === '/setup') {
       await handleSetup(req, res);
     } else if (req.method === 'POST' && req.url === '/webhook') {

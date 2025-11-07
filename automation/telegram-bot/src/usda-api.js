@@ -285,7 +285,10 @@ class UsdaApi {
       const oldestRequest = Math.min(...this.rateLimitRequests);
       const resetTime = Math.ceil((oldestRequest + this.rateLimitWindow - now) / 1000);
       console.warn(`USDA API rate limit exceeded: ${this.rateLimitRequests.length}/${this.maxRequestsPerMinute} requests per minute`);
-      throw new Error(`USDA API rate limit exceeded. Try again in ${resetTime} seconds.`);
+      throw new Error(
+        `Client-side USDA API rate limit exceeded (${this.maxRequestsPerMinute} req/min throttling to protect quota). ` +
+        `Try again in ${resetTime} seconds.`
+      );
     }
 
     // Add current request timestamp
@@ -301,15 +304,16 @@ class UsdaApi {
    * Search for foods by query string
    * Protected by circuit breaker and retry logic
    *
-   * Note: Rate limit check happens BEFORE circuit breaker to prevent
-   * rate limit errors from counting as API failures and opening the circuit.
+   * IMPORTANT: Rate limit check happens INSIDE circuit breaker to ensure that
+   * rejected requests (circuit breaker OPEN) don't consume rate limit quota.
+   * Only actual HTTP call attempts should count against the client-side rate limit.
    */
   async searchFoods(query, pageSize = 5) {
-    // Check rate limiting BEFORE circuit breaker
-    // Rate limits are client-side issues, not API failures
-    this.checkRateLimit();
-
     return this.executeWithCircuitBreaker(async () => {
+      // Check rate limiting AFTER circuit breaker permits the call
+      // This prevents rejected requests from consuming rate limit quota
+      this.checkRateLimit();
+
       try {
         // Wrap in retry logic
         return await this.retryWithBackoff(
@@ -339,15 +343,16 @@ class UsdaApi {
    * Get detailed nutrition information for a specific food by FDC ID
    * Protected by circuit breaker and retry logic
    *
-   * Note: Rate limit check happens BEFORE circuit breaker to prevent
-   * rate limit errors from counting as API failures and opening the circuit.
+   * IMPORTANT: Rate limit check happens INSIDE circuit breaker to ensure that
+   * rejected requests (circuit breaker OPEN) don't consume rate limit quota.
+   * Only actual HTTP call attempts should count against the client-side rate limit.
    */
   async getFoodDetails(fdcId) {
-    // Check rate limiting BEFORE circuit breaker
-    // Rate limits are client-side issues, not API failures
-    this.checkRateLimit();
-
     return this.executeWithCircuitBreaker(async () => {
+      // Check rate limiting AFTER circuit breaker permits the call
+      // This prevents rejected requests from consuming rate limit quota
+      this.checkRateLimit();
+
       try {
         // Wrap in retry logic
         return await this.retryWithBackoff(
