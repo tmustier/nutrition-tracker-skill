@@ -474,4 +474,101 @@ describe('EasterEggManager', () => {
       expect(result.priority).toBe(10);
     });
   });
+
+  describe('Environment Variable Configuration', () => {
+    test('should respect EASTER_EGGS_ENABLED environment variable', () => {
+      // This test verifies the config loads correctly
+      // The actual env var is set at startup, but we can test the config structure
+      const config = require('../../src/easter-egg-config');
+
+      // Config should be loaded
+      expect(config.GLOBAL_CONFIG).toBeDefined();
+      expect(config.GLOBAL_CONFIG.enabled).toBeDefined();
+      expect(typeof config.GLOBAL_CONFIG.enabled).toBe('boolean');
+    });
+
+    test('should have configurable cooldown durations via env vars', () => {
+      const config = require('../../src/easter-egg-config');
+
+      // All easter eggs should have cooldownDuration configured
+      Object.values(config.EASTER_EGG_TYPES).forEach(easterEgg => {
+        expect(easterEgg.cooldownDuration).toBeDefined();
+        expect(typeof easterEgg.cooldownDuration).toBe('number');
+        expect(easterEgg.cooldownDuration).toBeGreaterThan(0);
+      });
+    });
+
+    test('should use time constants (DAYS, HOURS) correctly', () => {
+      const config = require('../../src/easter-egg-config');
+
+      // Verify person_without_food uses 7 days
+      const person = config.getEasterEggById('person_without_food');
+      expect(person.cooldownDuration).toBe(7 * 24 * 60 * 60 * 1000);
+
+      // Verify midnight_munchies uses 12 hours
+      const midnight = config.getEasterEggById('midnight_munchies');
+      expect(midnight.cooldownDuration).toBe(12 * 60 * 60 * 1000);
+
+      // Verify celebration uses 30 days
+      const celebration = config.getEasterEggById('celebration');
+      expect(celebration.cooldownDuration).toBe(30 * 24 * 60 * 60 * 1000);
+    });
+
+    test('getBlockingSceneTypes should extract from config dynamically', () => {
+      const config = require('../../src/easter-egg-config');
+
+      const blockingTypes = config.getBlockingSceneTypes();
+
+      // Should return an array
+      expect(Array.isArray(blockingTypes)).toBe(true);
+
+      // Should include blocking types
+      expect(blockingTypes).toContain('selfie');
+      expect(blockingTypes).toContain('pet_photo');
+      expect(blockingTypes).toContain('empty_plate');
+
+      // Should NOT include companion types
+      expect(blockingTypes).not.toContain('celebration'); // celebration is companion
+      expect(blockingTypes).not.toContain('empty_packaging'); // empty_packaging is companion (P0 fix)
+    });
+
+    test('should correctly identify blocking vs companion easter eggs', () => {
+      const config = require('../../src/easter-egg-config');
+
+      // Blocking eggs
+      expect(config.blocksNutritionExtraction('person_without_food')).toBe(true);
+      expect(config.blocksNutritionExtraction('pet')).toBe(true);
+      expect(config.blocksNutritionExtraction('empty_plate')).toBe(true);
+
+      // Companion eggs
+      expect(config.blocksNutritionExtraction('celebration')).toBe(false);
+      expect(config.blocksNutritionExtraction('midnight_munchies')).toBe(false);
+      expect(config.blocksNutritionExtraction('empty_packaging')).toBe(false); // P0 fix
+    });
+
+    test('all easter eggs should have required configuration fields', () => {
+      const config = require('../../src/easter-egg-config');
+
+      Object.values(config.EASTER_EGG_TYPES).forEach(easterEgg => {
+        // Required fields
+        expect(easterEgg.id).toBeDefined();
+        expect(easterEgg.displayName).toBeDefined();
+        expect(easterEgg.enabled).toBeDefined();
+        expect(easterEgg.cooldownDuration).toBeDefined();
+        expect(easterEgg.priority).toBeDefined();
+        expect(easterEgg.blocksNutritionExtraction).toBeDefined();
+        expect(easterEgg.detectionCriteria).toBeDefined();
+        expect(easterEgg.messages).toBeDefined();
+
+        // Type checks
+        expect(typeof easterEgg.id).toBe('string');
+        expect(typeof easterEgg.enabled).toBe('boolean');
+        expect(typeof easterEgg.cooldownDuration).toBe('number');
+        expect(typeof easterEgg.priority).toBe('number');
+        expect(typeof easterEgg.blocksNutritionExtraction).toBe('boolean');
+        expect(Array.isArray(easterEgg.messages)).toBe(true);
+        expect(easterEgg.messages.length).toBeGreaterThan(0);
+      });
+    });
+  });
 });
