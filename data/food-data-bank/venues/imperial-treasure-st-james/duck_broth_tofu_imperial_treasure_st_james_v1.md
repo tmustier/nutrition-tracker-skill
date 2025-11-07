@@ -52,8 +52,8 @@ per_portion:
   chromium_ug: 0
   molybdenum_ug: 0
   phosphorus_mg: 44
-  chloride_mg: 0
-  sulfur_g: 0.0
+  chloride_mg: 465.0
+  sulfur_g: 0.043
   vitamin_a_ug: 0
   vitamin_d_ug: 0
   vitamin_e_mg: 0
@@ -100,6 +100,11 @@ notes:
 - Atwater calculation: 4×4.3 + 4×1.0 + 9×2.6 = 44.6 kcal vs 50 kcal estimate. 5.4 kcal gap (~11%) attributed to gelatin/collagen in broth with lower energy conversion.
 - Total dish weight: ~135g (120ml broth + 15g tofu).
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
 - timestamp: '2025-11-02T18:00:00+00:00'
   updated_by: 'LLM: Claude Sonnet 4.5'
   reason: Initial component-based nutrition estimation for duck broth with tofu from Imperial Treasure St. James Peking duck course

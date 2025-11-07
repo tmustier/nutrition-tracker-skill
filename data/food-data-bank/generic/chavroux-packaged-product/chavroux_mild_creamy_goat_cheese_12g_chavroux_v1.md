@@ -61,9 +61,9 @@ per_portion:
   omega3_dha_mg: 0
   omega3_epa_mg: 0
   omega6_la_g: 0.04
-  chloride_mg: 0
+  chloride_mg: 74.0
   phosphorus_mg: 31
-  sulfur_g: 0.0
+  sulfur_g: 0.01
   chromium_ug: 0
   molybdenum_ug: 0
   boron_mg: 0
@@ -119,6 +119,11 @@ notes:
   - "Good source of complete protein with all essential amino acids from goat's milk"
   - "Goat cheese is naturally lower in lactose than cow's cheese and may be better tolerated by some individuals"
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
   - timestamp: "2025-11-05T10:30:00+00:00"
     updated_by: "Claude Code (Sonnet 4.5)"
     reason: "Initial entry - comprehensive research from French nutrition data, UK retailers, and USDA micronutrient profiles"

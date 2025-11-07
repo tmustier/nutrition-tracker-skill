@@ -65,8 +65,8 @@ per_portion:
   chromium_ug: 0
   molybdenum_ug: 0
   phosphorus_mg: 56.8
-  chloride_mg: 0
-  sulfur_g: 0.0
+  chloride_mg: 14.0
+  sulfur_g: 0.011
   vitamin_a_ug: 1.1
   vitamin_k_ug: 1.0
   vitamin_b1_mg: 0.033
@@ -104,6 +104,11 @@ notes:
 - "Plant-based product: 0mg cholesterol, 0µg vitamin D, 0µg iodine, 0mg vitamin C"
 - "Atwater validation: 4×2.7 + 9×10.4 + 4×6.6 + 2×1.4 = 132.8 kcal (within 1% of calculated 131.6 kcal)"
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: "2025-11-04T20:00:00+00:00"
   updated_by: "Claude Code (Sonnet 4.5)"
   reason: "Initial entry - complete nutrition estimation for London's Chocolate Pistachio Praline Bar (half bar, 22g)"

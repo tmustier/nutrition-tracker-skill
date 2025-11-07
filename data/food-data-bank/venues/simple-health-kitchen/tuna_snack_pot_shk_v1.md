@@ -54,8 +54,8 @@ per_portion:  # Schema v2: 52 nutrient fields
   chromium_ug: 1
   molybdenum_ug: 18
   phosphorus_mg: 165
-  chloride_mg: 190
-  sulfur_g: 0.13
+  chloride_mg: 439.0
+  sulfur_g: 0.124
   # Vitamins
   vitamin_a_ug: 9
   vitamin_d_ug: 0.4
@@ -94,6 +94,11 @@ notes:
   - "Fat breakdown: Tahini dressing contributes most fat (sesame MUFA/PUFA), seeds add omega-3 ALA and omega-6 LA, minimal SFA from chickpeas/tuna."
   - "Allergens confirmed: Fish (tuna), Sesame (tahini), possible cross-contamination with Soya, Eggs, Sulphides per SHK labeling."
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
   - timestamp: "2025-11-06T00:00:00+00:00"
     updated_by: "LLM: Claude Sonnet 4.5"
     reason: "Initial creation with complete Schema v2 nutrient profile. Component-based estimation using USDA FoodData Central for tuna (canned in water), chickpeas (cooked), cucumber (raw), omega seed mix (flax/chia), and tahini. Filled all 52 nutrients with documented component analysis."

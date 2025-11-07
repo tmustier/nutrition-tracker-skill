@@ -53,8 +53,8 @@ per_portion:
   chromium_ug: 2
   molybdenum_ug: 1
   phosphorus_mg: 196
-  chloride_mg: 170
-  sulfur_g: 0.24
+  chloride_mg: 326.0
+  sulfur_g: 0.276
   vitamin_a_ug: 4
   vitamin_d_ug: 0.1
   vitamin_e_mg: 0.23
@@ -90,6 +90,11 @@ notes:
 - Plain chicken has zero carbs
 - "Atwater check (available carb basis): 4×27.6 + 9×2.8 + 4×0.0 + 2×0.0 + 2.4×0.0 = 135.6 kcal"
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
 - timestamp: 2025-10-29 12:00:00+00:00
   updated_by: "LLM: Claude Sonnet 4.5"
   reason: Initial population from Deliveroo calorie count + reference macros from Whataburger

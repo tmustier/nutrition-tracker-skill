@@ -58,8 +58,8 @@ per_portion:  # Schema v2: 52 nutrient fields
   chromium_ug: 0.2
   molybdenum_ug: 2
   phosphorus_mg: 174
-  chloride_mg: 320
-  sulfur_g: 0.08
+  chloride_mg: 323.0
+  sulfur_g: 0.026
   # Vitamins
   vitamin_a_ug: 14
   vitamin_d_ug: 0.15
@@ -105,6 +105,11 @@ notes:
 - "Atwater validation: 4×6.4 + 9×18.9 + 4×54.0 + 2×3.5 = 418.7 kcal (within 1 kcal)"
 - "Contains: gluten (wheat flour), eggs, dairy (butter, cream)"
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: 2025-11-05T21:25:00+00:00
   updated_by: "LLM: Claude Code (Sonnet 4.5)"
   reason: "Initial creation with complete 52-nutrient estimation for Maset profiteroles"

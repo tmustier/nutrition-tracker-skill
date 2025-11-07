@@ -55,9 +55,9 @@ per_portion:
   omega3_dha_mg: 17
   omega3_epa_mg: 2
   omega6_la_g: 0.61
-  chloride_mg: 0
+  chloride_mg: 85.0
   phosphorus_mg: 76
-  sulfur_g: 0.085
+  sulfur_g: 0.055
   chromium_ug: 0
   molybdenum_ug: 0
   boron_mg: 0
@@ -97,6 +97,11 @@ notes:
   - "Iodine content: 22µg per egg (49.2µg/100g from USDA study), ~15% DV, varies with hen feed"
   - "Atwater validation: 4×5.5 + 9×4.7 + 4×0.5 + 2×0 + 2.4×0 = 66.3 kcal (within 2.5% of USDA 68 kcal)"
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
   - timestamp: "2025-11-05T18:00:00+00:00"
     updated_by: "Claude Code (Sonnet 4.5)"
     reason: "Enrichment with 8 priority nutrients using REAL USDA FoodData Central values"

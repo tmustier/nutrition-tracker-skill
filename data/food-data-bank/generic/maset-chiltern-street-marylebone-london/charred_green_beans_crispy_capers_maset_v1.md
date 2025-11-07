@@ -59,8 +59,8 @@ per_portion:  # Schema v2: 52 nutrient fields
   chromium_ug: 1
   molybdenum_ug: 5
   phosphorus_mg: 49
-  chloride_mg: 898
-  sulfur_g: 0.07
+  chloride_mg: 913.0
+  sulfur_g: 0.01
   # Vitamins
   vitamin_a_ug: 130
   vitamin_d_ug: 0.2
@@ -111,6 +111,11 @@ notes:
   - "Total weight 142g aligns with restaurant vegetable side standards (100-150g range per ESTIMATE.md)"
   - "BUTTER vs OLIVE OIL: Sat fat +4.4g (+232%), MUFA -7.0g (-74%), cholesterol +26mg, vitamin E -1.4mg, vitamin A +82µg"
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
   - timestamp: 2025-11-05T12:00:00+0000
     updated_by: 'LLM: Claude Sonnet 4.5'
     reason: 'CRITICAL CORRECTION: User confirmed dish was cooked in BUTTER, not olive oil - complete recalculation of all affected nutrients'

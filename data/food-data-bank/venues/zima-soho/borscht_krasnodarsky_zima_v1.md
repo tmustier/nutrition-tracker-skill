@@ -54,8 +54,8 @@ per_portion:
   chromium_ug: 0
   molybdenum_ug: 0
   phosphorus_mg: 150
-  chloride_mg: 0
-  sulfur_g: 0.0
+  chloride_mg: 1434.0
+  sulfur_g: 0.032
   vitamin_a_ug: 180
   vitamin_d_ug: 0.4
   vitamin_e_mg: 2.5
@@ -93,6 +93,11 @@ notes:
 - Borodinsky rye is a dark rye bread with coriander and molasses
 - Atwater check (available carb basis): 4×8.1 + 9×32.5 + 4×33.4 + 2×5.3 + 2.4×0.0 = 469.1 kcal
 change_log:
+
+  - timestamp: "2025-11-06T23:28:47+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: 2025-10-30 00:00:00+00:00
   updated_by: 'LLM: Claude Sonnet 4.5'
   reason: Initial entry for Zima Soho borscht with complete nutrition data from venue analysis

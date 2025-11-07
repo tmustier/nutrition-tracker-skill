@@ -56,10 +56,34 @@ function validateConfig(config) {
       config.telegram.webhookUrl = null;
     }
 
-    // Recommend webhook secret in production
+    // P0 Security Fix: Require WEBHOOK_SECRET in production
     if (!config.telegram.webhookSecret) {
-      console.warn('⚠️  Security Warning: WEBHOOK_SECRET not configured for production deployment');
-      console.warn('   Recommendation: Set WEBHOOK_SECRET environment variable for enhanced security');
+      console.error('');
+      console.error('🚨 SECURITY ERROR: WEBHOOK_SECRET not configured in production');
+      console.error('   Webhook secret verification is REQUIRED for production deployments');
+      console.error('   Without it, anyone can send fake webhook requests to your bot');
+      console.error('');
+      console.error('   💡 To fix:');
+      console.error('      1. Generate a secure secret:');
+      console.error('         node -e "console.log(require(\'crypto\').randomBytes(32).toString(\'hex\'))"');
+      console.error('      2. Set WEBHOOK_SECRET in Railway dashboard or .env file');
+      console.error('');
+      throw new Error('WEBHOOK_SECRET is required in production mode');
+    }
+
+    // P0 Security Fix: Require ALLOWED_USERS in production
+    if (!config.telegram.allowedUsers || config.telegram.allowedUsers.length === 0) {
+      console.error('');
+      console.error('🚨 SECURITY ERROR: ALLOWED_USERS not configured in production');
+      console.error('   User access control is REQUIRED for production deployments');
+      console.error('   Without it, ANY Telegram user can access your bot and modify your data');
+      console.error('');
+      console.error('   💡 To fix:');
+      console.error('      1. Get your Telegram user ID by sending a message to @userinfobot');
+      console.error('      2. Set ALLOWED_USERS in Railway dashboard or .env file');
+      console.error('         Example: ALLOWED_USERS=123456789,987654321');
+      console.error('');
+      throw new Error('ALLOWED_USERS is required in production mode');
     }
 
     // Validate branch matches environment
@@ -76,6 +100,19 @@ function validateConfig(config) {
       console.error('      Set GITHUB_BRANCH=daily-logs in Railway environment variables');
       console.error('');
       throw new Error('Production environment must use GITHUB_BRANCH=daily-logs');
+    }
+
+    // P1 Security Fix: Require USDA_API_KEY in production (or warn loudly)
+    if (!process.env.USDA_API_KEY || process.env.USDA_API_KEY === 'DEMO_KEY') {
+      console.warn('');
+      console.warn('⚠️  PRODUCTION WARNING: Using DEMO_KEY for USDA API');
+      console.warn('   DEMO_KEY has strict rate limits (~1000 requests/hour)');
+      console.warn('   Your bot may experience degraded performance');
+      console.warn('');
+      console.warn('   💡 To fix:');
+      console.warn('      1. Get a free API key from https://fdc.nal.usda.gov/api-key-signup.html');
+      console.warn('      2. Set USDA_API_KEY in Railway dashboard or .env file');
+      console.warn('');
     }
   }
 

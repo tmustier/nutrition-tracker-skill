@@ -55,8 +55,8 @@ per_portion:
   chromium_ug: 0
   molybdenum_ug: 0
   phosphorus_mg: 80
-  chloride_mg: 0
-  sulfur_g: 0.0
+  chloride_mg: 43.0
+  sulfur_g: 0.008
   vitamin_a_ug: 0
   vitamin_d_ug: 0
   vitamin_e_mg: 0
@@ -107,6 +107,11 @@ notes:
 - 'Omega-6 LA: 0.006g per pint (trace amounts from barley, 0.001g/100ml × 5.68)'
 - 'Omega-3 ALA: 0.003g per pint (trace amounts from barley, 0.0005g/100ml × 5.68)'
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: "2025-11-05T16:00:00+00:00"
   updated_by: "Claude Code (Sonnet 4.5)"
   reason: "CRITICAL FIX: Corrected choline scaling error"

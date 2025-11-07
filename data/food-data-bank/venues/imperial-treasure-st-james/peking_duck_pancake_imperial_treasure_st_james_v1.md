@@ -56,8 +56,8 @@ per_portion:
   chromium_ug: 0
   molybdenum_ug: 0
   phosphorus_mg: 79
-  chloride_mg: 0
-  sulfur_g: 0.0
+  chloride_mg: 276.0
+  sulfur_g: 0.076
   vitamin_a_ug: 5
   vitamin_d_ug: 0.1
   vitamin_e_mg: 0.3
@@ -113,6 +113,11 @@ notes:
 - Atwater validation: 4×7.6 + 4×12.0 + 9×13.6 = 200.8 kcal (4.4% discrepancy, within ±5% tolerance)
 - Salt scheme: light (primary sodium from hoisin sauce, 129mg + ~50mg from wrapper = 179mg total)
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
 - timestamp: 2025-11-02
   reason: Initial entry - component-based estimation for Peking duck pancake
   fields_changed: [all fields]

@@ -56,8 +56,8 @@ per_portion:
   chromium_ug: 0.8
   molybdenum_ug: 0.6
   phosphorus_mg: 196
-  chloride_mg: 740
-  sulfur_g: 0
+  chloride_mg: 739.0
+  sulfur_g: 0.174
   vitamin_a_ug: 13.6
   vitamin_d_ug: 3.1
   vitamin_e_mg: 0.16
@@ -112,6 +112,11 @@ notes:
 - May contain bones - check before eating
 - Atwater check (available carb basis): 4×17.4 + 9×10.2 + 4×0.0 + 2×0.0 + 2.4×0.0 = 161.4 kcal
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
 - timestamp: 2025-11-01T09:00:00+0000
   updated_by: Claude Code (Sonnet 4.5)
   reason: Initial entry for Daylesford smoked trout - user consumed on crispbread for breakfast
