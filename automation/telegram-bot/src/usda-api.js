@@ -496,7 +496,8 @@ class UsdaApi {
     );
 
     if (!nutrients.energy_kcal || Math.abs(nutrients.energy_kcal - calculatedEnergy) / calculatedEnergy > ENERGY_TOLERANCE_PERCENT) {
-      console.log(`Adjusting energy: USDA=${nutrients.energy_kcal}, calculated=${calculatedEnergy}`);
+      const diffPercent = nutrients.energy_kcal ? ((Math.abs(nutrients.energy_kcal - calculatedEnergy) / calculatedEnergy) * 100).toFixed(1) : 'N/A';
+      console.log(`Adjusting energy: USDA=${nutrients.energy_kcal}, calculated=${calculatedEnergy} (${diffPercent}% diff)`);
       nutrients.energy_kcal = calculatedEnergy;
     }
 

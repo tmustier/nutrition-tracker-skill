@@ -77,7 +77,7 @@ class CircuitBreaker {
    *
    * Note: Uses isTransitioning flag to prevent race condition where multiple
    * concurrent requests could all transition to HALF_OPEN simultaneously.
-   * In Node.js single-threaded environment this is less critical, but still
+   * In Node.js's single-threaded environment this is less critical, but still
    * good practice for consistency and future-proofing.
    */
   isOpen() {
@@ -85,7 +85,11 @@ class CircuitBreaker {
     if (this.state === 'OPEN' && !this.isTransitioning) {
       const now = Date.now();
       // Use Math.abs() to handle NTP adjustments / clock going backwards
-      const timeSinceOpened = Math.abs(now - this.openedAt);
+      const rawTime = now - this.openedAt;
+      if (rawTime < 0) {
+        console.warn(`[${this.config.name}] Clock went backwards by ${Math.abs(rawTime)}ms (NTP adjustment or DST change)`);
+      }
+      const timeSinceOpened = Math.abs(rawTime);
 
       if (timeSinceOpened >= this.config.recoveryTimeoutMs) {
         // Use try-finally to prevent deadlock if transitionTo() throws
