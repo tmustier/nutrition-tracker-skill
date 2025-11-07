@@ -7,6 +7,7 @@ const claudeIntegration = require('./claude-integration');
 const githubIntegration = require('./github-integration');
 const conversationManager = require('./conversation-manager');
 const responseHandler = require('./response-handler');
+const easterEggManager = require('./easter-egg-manager');
 
 /**
  * Telegram Bot for Nutrition Tracking
@@ -828,34 +829,7 @@ bot.on('photo', async (ctx) => {
     });
     const imageBuffer = Buffer.from(response.data);
 
-    // Step 3: Easter egg - detect if image contains a person without food
-    const detectionResult = await claudeIntegration.detectPersonInImage(imageBuffer, mimeType);
-
-    if (detectionResult.success && detectionResult.has_person && !detectionResult.has_food) {
-      // Easter egg triggered! Person detected but no food
-      const easterEggMessages = [
-        "👀 Looks like an absolute snack, but I'm not sure we have nutrition data for that! 😄\n\nMaybe try sending a photo of some actual food? 🍕",
-        "🙋 I see someone looking great, but where's the food? 😊\n\nI'm here to track meals, not selfies! Send me something delicious instead! 🥗",
-        "👤 Well hello there! You look fantastic, but I need actual food to analyze! 😅\n\nTry sending a meal photo or nutrition label! 🍽️",
-        "😄 That's definitely a person and not a pizza! While you're clearly a snack, I need actual food to track nutrition! 🍔",
-        "🤳 Nice photo! But I'm a nutrition bot, not a photographer! 📸\n\nSend me a meal or nutrition label and I'll help you track it! 🥙"
-      ];
-
-      // Pick a random easter egg message
-      const randomMessage = easterEggMessages[Math.floor(Math.random() * easterEggMessages.length)];
-
-      await ctx.telegram.editMessageText(
-        ctx.chat.id,
-        processingMsg.message_id,
-        null,
-        randomMessage
-      );
-
-      console.log(`Easter egg triggered for user ${userId}: Person detected without food`);
-      return; // Don't process for nutrition
-    }
-
-    // Step 4: Update processing message
+    // Step 3: Update processing message
     await ctx.telegram.editMessageText(
       ctx.chat.id,
       processingMsg.message_id,
@@ -863,7 +837,8 @@ bot.on('photo', async (ctx) => {
       '🤖 Analyzing image with AI...'
     );
 
-    // Step 5: Process with Claude Vision using detected MIME type
+    // Step 4: Process with Claude Vision (enhanced with scene detection)
+    // Single API call now returns BOTH scene detection AND nutrition data
     const result = await claudeIntegration.processImage(imageBuffer, mimeType);
 
     if (!result.success) {
@@ -876,10 +851,57 @@ bot.on('photo', async (ctx) => {
       return;
     }
 
-    // Step 6: Prepare nutrition data using helper function
+    // Step 5: Check for easter egg triggers (before nutrition logging)
+    // Only trigger if: high confidence non-food scene detected
+    if (result.should_show_easter_egg && result.scene_detection) {
+      console.log(`Easter egg candidate detected: ${result.scene_detection.scene_type} (confidence: ${result.scene_detection.confidence})`);
+
+      // Evaluate with easter egg manager (handles cooldowns and message selection)
+      const easterEggResult = easterEggManager.evaluateDetection(result.scene_detection, userId);
+
+      if (easterEggResult.shouldTrigger && easterEggResult.canTrigger) {
+        // Show easter egg message
+        const easterEggMessage = easterEggResult.getMessage();
+        await ctx.telegram.editMessageText(
+          ctx.chat.id,
+          processingMsg.message_id,
+          null,
+          easterEggMessage
+        );
+
+        // Record trigger for cooldown tracking
+        easterEggResult.recordTrigger();
+
+        console.log(`Easter egg triggered: ${easterEggResult.easterEggType} for user ${userId}`);
+
+        // If this is a BLOCKING easter egg (not companion), don't log nutrition
+        if (easterEggResult.blocksNutritionExtraction) {
+          console.log(`Easter egg blocks extraction, returning early`);
+          return;
+        }
+        // Companion easter eggs (celebration, midnight_munchies) continue to nutrition logging
+      } else {
+        console.log(`Easter egg ${easterEggResult.shouldTrigger ? 'on cooldown' : 'not triggered'}, proceeding to nutrition`);
+      }
+    }
+
+    // Step 6: Check if we have nutrition data to log
+    if (!result.data) {
+      // No nutrition data available (easter egg already handled above)
+      console.log('No nutrition data in result, scene was non-food');
+      await ctx.telegram.editMessageText(
+        ctx.chat.id,
+        processingMsg.message_id,
+        null,
+        `❌ Could not extract nutrition data from image.\n\n${result.scene_detection?.details || 'Please try with a clearer photo or send a text description instead.'}`
+      );
+      return;
+    }
+
+    // Step 7: Prepare nutrition data using helper function
     const nutritionData = prepareNutritionData(result, 'Extracted from screenshot');
 
-    // Step 7: Log to GitHub
+    // Step 8: Log to GitHub
     await ctx.telegram.editMessageText(
       ctx.chat.id,
       processingMsg.message_id,
@@ -887,16 +909,16 @@ bot.on('photo', async (ctx) => {
       '💾 Logging to database...'
     );
 
-    // Step 8: Extract user information for multi-user tracking
+    // Step 9: Extract user information for multi-user tracking
     const userId = ctx.from.id;
     const userName = [ctx.from.first_name, ctx.from.last_name]
       .filter(Boolean)
       .join(' ') || ctx.from.username || `User ${userId}`;
 
-    // Step 9: Get current totals before committing to avoid race condition (for this user only)
+    // Step 10: Get current totals before committing to avoid race condition (for this user only)
     const currentTotals = await githubIntegration.getTodaysTotals(null, userId);
 
-    // Step 10: Commit the entry with user information
+    // Step 11: Commit the entry with user information
     const commitResult = await githubIntegration.appendLogEntry(
       nutritionData,
       null, // timestamp (use default)
@@ -924,7 +946,7 @@ bot.on('photo', async (ctx) => {
       protein_g: Math.max(0, targets.protein_g - totals.protein_g),
     };
 
-    // Step 11: Send success message
+    // Step 12: Send success message
     const nutrition = nutritionData.nutrition;
     const successMessage = `✅ **Logged from screenshot: ${nutritionData.name}**
 
