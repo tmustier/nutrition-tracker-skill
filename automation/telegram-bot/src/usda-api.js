@@ -1,12 +1,19 @@
 // src/usda-api.js
 const axios = require('axios');
 const config = require('./config');
+const CircuitBreaker = require('./circuit-breaker');
 
 /**
  * USDA FoodData Central API Integration
  *
  * Provides access to the USDA nutrition database for generic foods.
  * Used as the primary data source before falling back to Claude estimation.
+ *
+ * Features:
+ * - Exponential backoff retry logic for transient failures
+ * - Circuit breaker pattern for sustained failure protection
+ * - Rate limiting to stay within API quotas
+ * - Comprehensive error handling and logging
  *
  * API Documentation: https://fdc.nal.usda.gov/api-guide.html
  */
@@ -31,99 +38,377 @@ class UsdaApi {
   constructor() {
     this.baseUrl = config.usda.baseUrl;
     this.apiKey = config.usda.apiKey;
-    
+
     // Rate limiting for USDA API (3600 requests per hour = 60 per minute)
     this.rateLimitRequests = [];
     this.rateLimitWindow = 60 * 1000; // 1 minute
     this.maxRequestsPerMinute = 50; // Conservative limit
+
+    // Circuit breaker initialization
+    this.circuitBreaker = new CircuitBreaker({
+      failureThreshold: 10,          // Open after 10 failures (increased to reduce false positives)
+      failureWindowMs: 60000,        // within 60 seconds
+      recoveryTimeoutMs: 120000,     // Wait 2 minutes before testing recovery
+      successThreshold: 2,           // Require 2 successes to close circuit
+      name: 'USDA-API',              // Name for logging
+    });
+
+    console.log('✅ USDA API initialized with circuit breaker and retry protection');
+  }
+
+  // ============================================================================
+  // CIRCUIT BREAKER INTEGRATION
+  // ============================================================================
+
+  /**
+   * Execute an API call with circuit breaker protection
+   * Wraps the actual API call and handles circuit breaker logic
+   *
+   * IMPORTANT - Retry vs Circuit Breaker Interaction:
+   * Retry logic runs INSIDE the circuit breaker. Each REQUEST that fails (after all
+   * retry attempts) counts as ONE circuit breaker failure, not per retry attempt.
+   *
+   * With 3 total attempts (1 initial + 2 retries) and threshold of 10:
+   * - Each failed request = 1 circuit breaker failure (after all 3 attempts exhausted)
+   * - Circuit opens after 10 failed requests (30 total retry attempts)
+   * - Takes 10 consecutive request failures to open circuit (robust against transient issues)
+   *
+   * Example: If USDA API is completely down:
+   *   Requests 1-9: Each fails 3 times (1 initial + 2 retries) = 9 circuit breaker failures
+   *   Request 10: Fails 3 times = 10th circuit breaker failure → Circuit OPENS
+   *   Further requests rejected immediately (fast-fail) until recovery timeout
+   */
+  async executeWithCircuitBreaker(apiCall) {
+    // Check if circuit is OPEN
+    if (this.circuitBreaker.isOpen()) {
+      this.circuitBreaker.recordRejection();
+
+      const metrics = this.circuitBreaker.getMetrics();
+      const error = new Error(
+        `USDA API circuit breaker is OPEN - service temporarily unavailable. ` +
+        `Recovery testing in ${metrics.nextStateChange?.inSeconds || 0} seconds.`
+      );
+      error.circuitBreakerOpen = true;
+      error.metrics = metrics;
+
+      console.warn('[USDA-API] Request rejected - circuit breaker is OPEN');
+      throw error;
+    }
+
+    try {
+      // Execute the API call
+      const result = await apiCall();
+
+      // Record success
+      this.circuitBreaker.recordSuccess();
+
+      return result;
+    } catch (error) {
+      // Record failure
+      this.circuitBreaker.recordFailure(error);
+
+      // Log circuit status after failure
+      const state = this.circuitBreaker.getState();
+      if (state === 'OPEN') {
+        console.error('[USDA-API] Circuit breaker opened due to sustained failures');
+        console.log(this.circuitBreaker.getStatusSummary());
+      }
+
+      throw error;
+    }
   }
 
   /**
+   * Get circuit breaker status and metrics
+   */
+  getCircuitBreakerStatus() {
+    return this.circuitBreaker.getMetrics();
+  }
+
+  /**
+   * Get human-readable circuit breaker status summary
+   */
+  getCircuitBreakerSummary() {
+    return this.circuitBreaker.getStatusSummary();
+  }
+
+  /**
+   * Manually reset circuit breaker (use with caution)
+   */
+  resetCircuitBreaker() {
+    this.circuitBreaker.reset();
+  }
+
+  // ============================================================================
+  // RETRY LOGIC WITH EXPONENTIAL BACKOFF
+  // ============================================================================
+
+  /**
+   * Determines if an error should be retried based on error type
+   */
+  isRetryableError(error) {
+    // Network-level errors (DNS, connection, timeout issues)
+    const retryableNetworkCodes = [
+      'ECONNRESET',   // Connection reset by peer
+      'ETIMEDOUT',    // System-level socket timeout
+      'ECONNABORTED', // Axios request timeout (most common timeout case)
+      'ENOTFOUND',    // DNS lookup failed
+      'ECONNREFUSED', // Connection refused by server
+      'ENETUNREACH',  // Network unreachable
+      'EAI_AGAIN',    // DNS temporary failure
+    ];
+
+    // Check for network errors
+    if (error.code && retryableNetworkCodes.includes(error.code)) {
+      console.log(`Retryable network error detected: ${error.code}`);
+      return true;
+    }
+
+    // Check for HTTP 5xx server errors (server-side issues)
+    if (error.response?.status) {
+      const status = error.response.status;
+
+      // 5xx errors are retryable (server errors)
+      if (status >= 500 && status < 600) {
+        console.log(`Retryable HTTP error detected: ${status}`);
+        return true;
+      }
+
+      // 4xx errors are NOT retryable (client errors)
+      if (status >= 400 && status < 500) {
+        console.log(`Non-retryable HTTP error: ${status} (client error)`);
+        return false;
+      }
+    }
+
+    // All other errors are not retryable
+    return false;
+  }
+
+  /**
+   * Calculate backoff delay with exponential growth and jitter
+   * Formula: baseDelay * (2 ^ attempt) * (1 + jitter)
+   */
+  calculateBackoffDelay(attempt) {
+    const baseDelayMs = 1000; // 1 second base delay
+    const jitterPercent = 0.2; // ±20% jitter
+
+    // Exponential backoff: 1s, 2s, 4s
+    const exponentialDelay = baseDelayMs * Math.pow(2, attempt);
+
+    // Add random jitter to prevent thundering herd
+    const jitterMultiplier = 1 + (Math.random() * 2 - 1) * jitterPercent;
+    const delayWithJitter = exponentialDelay * jitterMultiplier;
+
+    return Math.round(delayWithJitter);
+  }
+
+  /**
+   * Retry an async operation with exponential backoff
+   * Only retries on network errors and 5xx HTTP errors
+   */
+  async retryWithBackoff(fn, operationName = 'operation') {
+    const maxRetries = 2; // 2 retries = 3 total attempts
+    let lastError = null;
+
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+      try {
+        if (attempt > 0) {
+          console.log(`[Retry ${attempt}/${maxRetries}] Retrying ${operationName}...`);
+        }
+
+        const result = await fn();
+
+        if (attempt > 0) {
+          console.log(`[Retry ${attempt}/${maxRetries}] ${operationName} succeeded after retry`);
+        }
+
+        return result;
+
+      } catch (error) {
+        lastError = error;
+
+        // Check if this error is retryable
+        const isRetryable = this.isRetryableError(error);
+
+        const errorDetails = {
+          attempt: attempt + 1,
+          total: maxRetries + 1,
+          code: error.code,
+          status: error.response?.status,
+          message: error.message,
+          retryable: isRetryable,
+        };
+
+        console.error(`[Attempt ${attempt + 1}/${maxRetries + 1}] ${operationName} failed:`, errorDetails);
+
+        // If not retryable or out of retries, throw immediately
+        if (!isRetryable) {
+          console.error(`${operationName} failed with non-retryable error. Not retrying.`);
+          throw error;
+        }
+
+        if (attempt >= maxRetries) {
+          console.error(`${operationName} failed after ${maxRetries + 1} attempts. Giving up.`);
+          throw error;
+        }
+
+        // Calculate backoff delay with jitter
+        const delayMs = this.calculateBackoffDelay(attempt);
+        console.log(`[Retry ${attempt + 1}/${maxRetries}] Waiting ${delayMs}ms before retry...`);
+
+        // Wait before retrying
+        await new Promise(resolve => setTimeout(resolve, delayMs));
+      }
+    }
+
+    throw lastError;
+  }
+
+  // ============================================================================
+  // RATE LIMITING
+  // ============================================================================
+
+  /**
    * Check and enforce rate limiting for USDA API
-   * @returns {boolean} True if request is allowed, throws error if rate limited
    */
   checkRateLimit() {
     const now = Date.now();
     const cutoff = now - this.rateLimitWindow;
-    
+
     // Remove old requests outside the window
     this.rateLimitRequests = this.rateLimitRequests.filter(timestamp => timestamp > cutoff);
-    
+
     // Check if we've exceeded the limit
     if (this.rateLimitRequests.length >= this.maxRequestsPerMinute) {
       const oldestRequest = Math.min(...this.rateLimitRequests);
       const resetTime = Math.ceil((oldestRequest + this.rateLimitWindow - now) / 1000);
       console.warn(`USDA API rate limit exceeded: ${this.rateLimitRequests.length}/${this.maxRequestsPerMinute} requests per minute`);
-      throw new Error(`USDA API rate limit exceeded. Try again in ${resetTime} seconds.`);
+      throw new Error(
+        `Client-side USDA API rate limit exceeded (${this.maxRequestsPerMinute} req/min throttling to protect quota). ` +
+        `Try again in ${resetTime} seconds.`
+      );
     }
-    
+
     // Add current request timestamp
     this.rateLimitRequests.push(now);
     return true;
   }
 
+  // ============================================================================
+  // API METHODS WITH PROTECTION
+  // ============================================================================
+
   /**
    * Search for foods by query string
-   * @param {string} query - Search term (e.g., "chicken breast")
-   * @param {number} pageSize - Number of results to return (default: 5)
-   * @returns {Promise<Array>} Array of food items
+   * Protected by circuit breaker and retry logic
+   *
+   * ARCHITECTURE: Rate limit check happens BEFORE circuit breaker to prevent
+   * client-side rate limit errors from being counted as API failures (which would
+   * incorrectly open the circuit). However, we first check if circuit is OPEN to
+   * avoid consuming rate limit quota on rejected requests.
    */
   async searchFoods(query, pageSize = 5) {
-    try {
-      // Check rate limiting before making API call
-      this.checkRateLimit();
-      
-      const response = await axios.get(`${this.baseUrl}/foods/search`, {
-        params: {
-          api_key: this.apiKey,
-          query: query,
-          dataType: 'Foundation,SR Legacy', // Most reliable data types
-          pageSize: pageSize,
-        },
-        timeout: 30000 // 30 seconds timeout
-      });
-
-      return response.data.foods || [];
-    } catch (error) {
-      console.error('USDA API search error:', error.message);
-      throw new Error('Failed to search USDA database');
+    // Early exit if circuit is OPEN (don't consume rate limit quota)
+    if (this.circuitBreaker.isOpen()) {
+      this.circuitBreaker.recordRejection();
+      const metrics = this.circuitBreaker.getMetrics();
+      throw new Error(
+        `USDA API circuit breaker is OPEN - service temporarily unavailable. ` +
+        `Recovery testing in ${metrics.nextStateChange?.inSeconds || 0} seconds.`
+      );
     }
+
+    // Circuit is closed - check client-side rate limiting
+    // This runs OUTSIDE circuit breaker so rate limit errors don't count as API failures
+    this.checkRateLimit();
+
+    // Execute with circuit breaker protection
+    return this.executeWithCircuitBreaker(async () => {
+      try {
+        // Wrap in retry logic
+        return await this.retryWithBackoff(
+          async () => {
+            const response = await axios.get(`${this.baseUrl}/foods/search`, {
+              params: {
+                api_key: this.apiKey,
+                query: query,
+                dataType: 'Foundation,SR Legacy',
+                pageSize: pageSize,
+              },
+              timeout: 10000 // 10 seconds timeout (reduced from 30s for better UX)
+            });
+
+            return response.data.foods || [];
+          },
+          'USDA food search'
+        );
+      } catch (error) {
+        console.error('USDA API search error:', error.message);
+        throw new Error('Failed to search USDA database');
+      }
+    });
   }
 
   /**
    * Get detailed nutrition information for a specific food by FDC ID
-   * @param {number} fdcId - FoodData Central ID
-   * @returns {Promise<Object>} Detailed food information
+   * Protected by circuit breaker and retry logic
+   *
+   * ARCHITECTURE: Rate limit check happens BEFORE circuit breaker to prevent
+   * client-side rate limit errors from being counted as API failures (which would
+   * incorrectly open the circuit). However, we first check if circuit is OPEN to
+   * avoid consuming rate limit quota on rejected requests.
    */
   async getFoodDetails(fdcId) {
-    try {
-      // Check rate limiting before making API call
-      this.checkRateLimit();
-
-      const response = await axios.get(`${this.baseUrl}/food/${fdcId}`, {
-        params: {
-          api_key: this.apiKey,
-        },
-        timeout: 30000 // 30 seconds timeout
-      });
-
-      // Validate response is actual food data, not HTML error page
-      if (!response.data || typeof response.data !== 'object' || !response.data.foodNutrients) {
-        throw new Error('Invalid response from USDA API - missing foodNutrients');
-      }
-
-      return response.data;
-    } catch (error) {
-      console.error('USDA API detail error:', error.message);
-      throw new Error('Failed to get food details from USDA');
+    // Early exit if circuit is OPEN (don't consume rate limit quota)
+    if (this.circuitBreaker.isOpen()) {
+      this.circuitBreaker.recordRejection();
+      const metrics = this.circuitBreaker.getMetrics();
+      throw new Error(
+        `USDA API circuit breaker is OPEN - service temporarily unavailable. ` +
+        `Recovery testing in ${metrics.nextStateChange?.inSeconds || 0} seconds.`
+      );
     }
+
+    // Circuit is closed - check client-side rate limiting
+    // This runs OUTSIDE circuit breaker so rate limit errors don't count as API failures
+    this.checkRateLimit();
+
+    // Execute with circuit breaker protection
+    return this.executeWithCircuitBreaker(async () => {
+      try {
+        // Wrap in retry logic
+        return await this.retryWithBackoff(
+          async () => {
+            const response = await axios.get(`${this.baseUrl}/food/${fdcId}`, {
+              params: {
+                api_key: this.apiKey,
+              },
+              timeout: 10000 // 10 seconds timeout (reduced from 30s for better UX)
+            });
+
+            // Validate response is actual food data, not HTML error page
+            if (!response.data || typeof response.data !== 'object' || !response.data.foodNutrients) {
+              throw new Error('Invalid response from USDA API - missing foodNutrients');
+            }
+
+            return response.data;
+          },
+          `USDA food details (FDC ID: ${fdcId})`
+        );
+      } catch (error) {
+        console.error('USDA API detail error:', error.message);
+        throw new Error('Failed to get food details from USDA');
+      }
+    });
   }
+
+  // ============================================================================
+  // NUTRITION PARSING (unchanged)
+  // ============================================================================
 
   /**
    * Parse USDA nutrition data into our standard 24-field format
-   * @param {Object} usdaFood - USDA food object
-   * @param {number} grams - Serving size in grams
-   * @returns {Object} Standardized nutrition object with all 24 fields
    */
   parseNutrition(usdaFood, grams = 100) {
     const nutrients = {};
@@ -157,10 +442,14 @@ class UsdaApi {
     // Extract nutrients from USDA data
     if (usdaFood.foodNutrients) {
       usdaFood.foodNutrients.forEach(nutrient => {
-        const fieldName = nutrientMapping[nutrient.nutrientId];
-        if (fieldName) {
+        // Handle both old and new API response formats
+        const nutrientId = nutrient.nutrientId || nutrient.nutrient?.id;
+        const nutrientValue = nutrient.value || nutrient.amount;
+
+        const fieldName = nutrientMapping[nutrientId];
+        if (fieldName && nutrientValue !== undefined) {
           // Scale to requested serving size (USDA values are per 100g)
-          const value = (nutrient.value || 0) * (grams / USDA_BASE_SERVING_SIZE_G);
+          const value = nutrientValue * (grams / USDA_BASE_SERVING_SIZE_G);
 
           // Round appropriately
           if (fieldName === 'energy_kcal') {
@@ -174,7 +463,7 @@ class UsdaApi {
       });
     }
 
-    // Fill in missing required fields with 0 (following "never use null" principle)
+    // Fill in missing required fields with 0
     const requiredFields = [
       'energy_kcal', 'protein_g', 'fat_g', 'sat_fat_g', 'mufa_g', 'pufa_g',
       'trans_fat_g', 'cholesterol_mg', 'sugar_g', 'fiber_total_g',
@@ -191,14 +480,13 @@ class UsdaApi {
     });
 
     // Calculate derived fields
-    // carbs_available = carbs_total - fiber - polyols
     if (nutrients.carbs_total_g > 0) {
       nutrients.carbs_available_g = parseFloat(
         Math.max(0, nutrients.carbs_total_g - nutrients.fiber_total_g - nutrients.polyols_g).toFixed(1)
       );
     }
 
-    // Validate energy using Atwater formula: 4P + 9F + 4C + 2Fiber + 2.4Polyols
+    // Validate energy using Atwater formula
     const calculatedEnergy = Math.round(
       ATWATER_FORMULA_CONSTANTS.PROTEIN_KCAL_PER_G * nutrients.protein_g +
       ATWATER_FORMULA_CONSTANTS.FAT_KCAL_PER_G * nutrients.fat_g +
@@ -207,9 +495,9 @@ class UsdaApi {
       ATWATER_FORMULA_CONSTANTS.POLYOLS_KCAL_PER_G * nutrients.polyols_g
     );
 
-    // Use calculated energy if USDA energy is missing or differs by the tolerance threshold
     if (!nutrients.energy_kcal || Math.abs(nutrients.energy_kcal - calculatedEnergy) / calculatedEnergy > ENERGY_TOLERANCE_PERCENT) {
-      console.log(`Adjusting energy: USDA=${nutrients.energy_kcal}, calculated=${calculatedEnergy} (threshold: ${ENERGY_TOLERANCE_PERCENT * 100}%)`);
+      const diffPercent = nutrients.energy_kcal ? ((Math.abs(nutrients.energy_kcal - calculatedEnergy) / calculatedEnergy) * 100).toFixed(1) : 'N/A';
+      console.log(`Adjusting energy: USDA=${nutrients.energy_kcal}, calculated=${calculatedEnergy} (${diffPercent}% diff)`);
       nutrients.energy_kcal = calculatedEnergy;
     }
 
@@ -218,27 +506,24 @@ class UsdaApi {
 
   /**
    * Quick lookup: search and return best match with nutrition data
-   * @param {string} query - Food description (e.g., "200g chicken breast grilled")
-   * @returns {Promise<Object>} Nutrition data and metadata
    */
   async quickLookup(query) {
     // Extract quantity and unit if present
     const quantityMatch = query.match(/(\d+)\s*(g|grams?|oz|ounces?|lb|pounds?)/i);
-    let grams = DEFAULT_SERVING_SIZE_G; // Default serving size
+    let grams = DEFAULT_SERVING_SIZE_G;
 
     if (quantityMatch) {
       const amount = parseInt(quantityMatch[1]);
       const unit = quantityMatch[2].toLowerCase();
 
-      // Validate quantity range to prevent system errors
       const MIN_QUANTITY = 1;
       const MAX_QUANTITY = 10000;
-      
+
       if (isNaN(amount) || amount < MIN_QUANTITY || amount > MAX_QUANTITY) {
         throw new Error(`Invalid quantity: ${amount}. Must be between ${MIN_QUANTITY} and ${MAX_QUANTITY}.`);
       }
 
-      // Convert to grams using standard conversion factors
+      // Convert to grams
       if (unit.startsWith('oz')) {
         grams = amount * UNIT_CONVERSIONS.OZ_TO_GRAMS;
       } else if (unit.startsWith('lb') || unit.startsWith('pound')) {
@@ -247,33 +532,32 @@ class UsdaApi {
         grams = amount;
       }
 
-      // Additional validation for converted grams
-      const MAX_GRAMS = 50000; // 50kg maximum reasonable serving size
+      const MAX_GRAMS = 50000;
       if (grams > MAX_GRAMS) {
         throw new Error(`Converted quantity too large: ${grams}g. Maximum allowed is ${MAX_GRAMS}g.`);
       }
     }
 
-    // Clean up query for search (remove quantity/unit)
+    // Clean up query for search
     let cleanQuery = query;
     if (quantityMatch) {
       cleanQuery = query.replace(quantityMatch[0], '').trim();
     }
 
-    // Search for food
-    const results = await this.searchFoods(cleanQuery, 5);
-
-    if (results.length === 0) {
-      return {
-        success: false,
-        message: 'No USDA data found for this food',
-      };
-    }
-
-    // Get best match (first result is usually most relevant)
-    const bestMatch = results[0];
-
     try {
+      // Search for food
+      const results = await this.searchFoods(cleanQuery, 5);
+
+      if (results.length === 0) {
+        return {
+          success: false,
+          message: 'No USDA data found for this food',
+        };
+      }
+
+      // Get best match
+      const bestMatch = results[0];
+
       const details = await this.getFoodDetails(bestMatch.fdcId);
       const nutrition = this.parseNutrition(details, grams);
 
@@ -287,8 +571,18 @@ class UsdaApi {
         confidence: 'high',
       };
     } catch (error) {
-      // If getFoodDetails fails (timeout, 504, etc), return failure so Claude can take over
-      console.error(`Failed to get details for FDC ID ${bestMatch.fdcId}: ${error.message}`);
+      // Handle circuit breaker open
+      if (error.circuitBreakerOpen) {
+        console.warn('USDA API circuit breaker is open, falling back to Claude');
+        return {
+          success: false,
+          message: 'USDA API temporarily unavailable (circuit breaker open)',
+          circuitBreakerOpen: true,
+        };
+      }
+
+      // Handle other errors
+      console.error(`USDA lookup failed: ${error.message}`);
       return {
         success: false,
         message: `USDA API failed: ${error.message}`,
@@ -297,4 +591,7 @@ class UsdaApi {
   }
 }
 
-module.exports = new UsdaApi();
+// Export both singleton instance and class for testing
+const instance = new UsdaApi();
+module.exports = instance;
+module.exports.UsdaApi = UsdaApi;

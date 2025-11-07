@@ -262,8 +262,8 @@ class ClaudeIntegration {
       ];
 
       const lowerMessage = sanitizedMessage.toLowerCase();
-      // Temporarily disable USDA due to API reliability issues - fallback to Claude for all requests
-      const isGenericFood = false; // genericFoodKeywords.some(kw => lowerMessage.includes(kw));
+      // Re-enabled USDA with circuit breaker and retry protection
+      const isGenericFood = genericFoodKeywords.some(kw => lowerMessage.includes(kw));
 
       if (isGenericFood) {
         try {
