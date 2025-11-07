@@ -250,7 +250,7 @@ const EASTER_EGG_TYPES = {
     enabled: true,
     cooldownDuration: parseInt(process.env.COOLDOWN_EMPTY_PACKAGING) || 2 * 24 * 60 * 60 * 1000, // 2 days
     priority: 2,
-    blocksNutritionExtraction: true,
+    blocksNutritionExtraction: false, // Allow extraction when nutrition label visible
 
     detectionCriteria: {
       scene_type: 'empty_packaging', // Match scene_type from Claude Vision
@@ -442,6 +442,37 @@ function getStats() {
   };
 }
 
+/**
+ * Get all scene types that should trigger easter eggs
+ * Extracts scene types from enabled easter eggs with blocking behavior
+ *
+ * @returns {Array<string>} Array of scene type strings
+ */
+function getBlockingSceneTypes() {
+  if (!GLOBAL_CONFIG.enabled) {
+    return [];
+  }
+
+  const sceneTypes = [];
+
+  Object.values(EASTER_EGG_TYPES)
+    .filter(egg => egg.enabled && egg.blocksNutritionExtraction)
+    .forEach(egg => {
+      const sceneType = egg.detectionCriteria?.scene_type;
+      if (sceneType) {
+        // Handle both string and array scene types
+        if (Array.isArray(sceneType)) {
+          sceneTypes.push(...sceneType);
+        } else if (typeof sceneType === 'string') {
+          sceneTypes.push(sceneType);
+        }
+      }
+    });
+
+  // Return unique scene types
+  return [...new Set(sceneTypes)];
+}
+
 // ============================================================================
 // EXPORTS
 // ============================================================================
@@ -460,4 +491,5 @@ module.exports = {
   getAllCooldownDurations,
   isGloballyEnabled,
   getStats,
+  getBlockingSceneTypes,
 };

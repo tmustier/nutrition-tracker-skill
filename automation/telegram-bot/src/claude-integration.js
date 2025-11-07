@@ -2,6 +2,7 @@
 const axios = require('axios');
 const config = require('./config');
 const usdaApi = require('./usda-api');
+const easterEggConfig = require('./easter-egg-config');
 
 /**
  * Sanitizes user input to prevent prompt injection attacks
@@ -713,11 +714,12 @@ Return response in this EXACT JSON structure:
         // Only trigger easter egg if:
         // 1. High confidence classification
         // 2. Should NOT attempt nutrition extraction
-        // 3. Scene is one of the easter egg types
+        // 3. Scene is one of the blocking easter egg types (dynamically from config)
+        const blockingSceneTypes = easterEggConfig.getBlockingSceneTypes();
         const shouldShowEasterEgg =
           sceneDetection.confidence === 'high' &&
           sceneDetection.should_attempt_nutrition_extraction === false &&
-          ['selfie', 'pet_photo', 'shopping', 'screenshot', 'fake_food', 'empty_plate'].includes(sceneDetection.scene_type);
+          blockingSceneTypes.includes(sceneDetection.scene_type);
 
         return {
           success: true,
