@@ -1,4 +1,4 @@
-[← Phase 3 Enhancements](06-phase3-enhancements.md) | [↑ Table of Contents](README.md) | [Next: Reference Materials →](08-reference.md)
+[← Phase 3 Enhancements](06-phase3-enhancements.md) | [Next: Reference Materials →](08-reference.md)
 
 ---
 
@@ -289,11 +289,9 @@ railway up
 ## Navigation
 
 - [← Previous: Phase 3 Enhancements](06-phase3-enhancements.md) (Optional)
-- [↑ Table of Contents](README.md)
 - [Next: Reference Materials →](08-reference.md)
 
 **Related Sections**:
-- [Phase 1 GitHub Actions](02-phase1-foundation.md#12-daily-batch-pr-automation)
-- [Phase 2 Deployment](05-phase2-telegram-deployment.md)
+- [Telegram Bot Implementation](../telegram-bot/README.md)
 - [API Documentation](08-reference.md#appendix-a-api-documentation-links)
 - [Security Best Practices](08-reference.md#appendix-c-security-best-practices)

@@ -1,4 +1,4 @@
-[← Phase 2 Deployment](05-phase2-telegram-deployment.md) | [↑ Table of Contents](README.md) | [Next: Operations Guide →](07-operations.md)
+[← Overview](01-overview-and-planning.md) | [Next: Operations Guide →](07-operations.md)
 
 ---
 
@@ -243,11 +243,10 @@
 
 ## Navigation
 
-- [← Previous: Phase 2 Deployment](05-phase2-telegram-deployment.md)
-- [↑ Table of Contents](README.md)
+- [← Previous: Overview and Planning](01-overview-and-planning.md)
 - [Next: Operations Guide →](07-operations.md)
 
 **Related Sections**:
-- [Phase 2 Bot Code](04-phase2-telegram-code.md) - Extend this code for enhancements
+- [Telegram Bot Implementation](../telegram-bot/README.md) - Extend this code for enhancements
 - [Cost Calculator](08-reference.md#appendix-b-cost-calculator) - Estimate costs for new features
 - [iMessage Migration Details](08-reference.md#appendix-d-migration-path-from-telegram-to-imessage)
