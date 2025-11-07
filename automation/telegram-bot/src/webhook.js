@@ -302,7 +302,7 @@ const sanitizeForLogging = (input) => {
 /**
  * Sanitize error messages for user-facing responses to prevent information leakage
  * @param {Error|string} error - Error object or error message
- * @returns {string} Safe error message for users (markdown-escaped)
+ * @returns {string} Safe error message for users (pre-defined messages returned as-is; dynamic content is markdown-escaped)
  */
 const sanitizeErrorForUser = (error) => {
   const message = typeof error === 'string' ? error : error.message;
@@ -695,6 +695,10 @@ bot.on('text', async (ctx) => {
     console.log(`Response type detected: ${detection.type} (hasJSON: ${detection.hasJSON}, hasText: ${detection.hasText})`)
 
     // Handle conversational responses (no logging)
+    // Note: We escape Claude's responses for security (defense in depth) even though
+    // Claude is a trusted source. This prevents potential markdown injection if Claude
+    // ever echoes user input. Trade-off: Any intentional markdown formatting from Claude
+    // will also be escaped, but conversational responses are typically plain text.
     if (detection.type === responseHandler.ResponseType.CONVERSATIONAL) {
       await ctx.telegram.editMessageText(
         ctx.chat.id,
@@ -958,8 +962,7 @@ bot.on('photo', async (ctx) => {
       protein_g: Math.max(0, targets.protein_g - totals.protein_g),
     };
 
-    // Step 9: Send success message
-    // Note: Only user-provided strings need markdown escaping; numeric values are safe.
+    // Step 9: Send success message (same escaping strategy as text handler)
     const nutrition = nutritionData.nutrition;
     const successMessage = `✅ **Logged from screenshot: ${escapeMarkdown(nutritionData.name)}**
 
