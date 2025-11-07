@@ -53,8 +53,8 @@ per_portion:
   chromium_ug: 1
   molybdenum_ug: 8
   phosphorus_mg: 140
-  chloride_mg: 150
-  sulfur_g: 0.07
+  chloride_mg: 593.0
+  sulfur_g: 0.028
   vitamin_a_ug: 270
   vitamin_d_ug: 0.7
   vitamin_e_mg: 0.6
@@ -92,6 +92,11 @@ notes:
 - Contains gluten, egg, dairy
 - Atwater check (available carb basis): 4×7.0 + 9×37.0 + 4×66.0 + 2×2.6 + 2.4×0.0 = 630.2 kcal
 change_log:
+
+  - timestamp: "2025-11-06T23:28:47+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: 2025-11-02T12:05:00+0000
   updated_by: 'LLM: GPT-5 Codex'
   reason: Initial estimate for Orange 'Jaffa Cake' slice with crème fraîche at The Eagle

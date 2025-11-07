@@ -56,8 +56,8 @@ per_portion:
   chromium_ug: 4
   molybdenum_ug: 18
   phosphorus_mg: 558
-  chloride_mg: 646
-  sulfur_g: 0.475
+  chloride_mg: 2941.0
+  sulfur_g: 0.278
   vitamin_a_ug: 7
   vitamin_d_ug: 0.2
   vitamin_e_mg: 4.6
@@ -106,6 +106,11 @@ notes:
 - The sauce/reduction is where most extra oil and salt enter the sandwich
 - Atwater check (available carb basis): 4×69.4 + 9×39.5 + 4×53.3 + 2×3.7 + 2.4×0.0 = 853.7 kcal
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: 2025-11-01T08:45:00+0000
   updated_by: Claude Code (Sonnet 4.5)
   reason: Initial entry for The Eagle's signature steak sandwich - user planning visit to venue

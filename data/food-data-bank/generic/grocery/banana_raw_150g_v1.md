@@ -54,8 +54,8 @@ per_portion:
   chromium_ug: 0
   molybdenum_ug: 0
   phosphorus_mg: 33
-  chloride_mg: 0
-  sulfur_g: 0.005
+  chloride_mg: 3.0
+  sulfur_g: 0.006
   vitamin_a_ug: 4.5
   vitamin_d_ug: 0
   vitamin_e_mg: 0.2
@@ -97,6 +97,11 @@ notes:
 - Soluble fiber (~0.9g) mainly pectin, insoluble fiber (~3g) mainly cellulose
 - Atwater check (available carb basis): 4×1.6 + 9×0.5 + 4×34.3 + 2×3.9 + 2.4×0.0 = 155.9 kcal
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: '2025-11-05T16:00:00+00:00'
   updated_by: Claude Code (Sonnet 4.5)
   reason: Second enrichment with 4 additional priority nutrients from USDA FoodData Central

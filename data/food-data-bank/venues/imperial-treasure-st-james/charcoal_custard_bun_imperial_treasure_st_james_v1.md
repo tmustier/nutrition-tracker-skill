@@ -66,8 +66,8 @@ per_portion:
   chromium_ug: 0
   molybdenum_ug: 0
   phosphorus_mg: 61
-  chloride_mg: 0
-  sulfur_g: 0.0
+  chloride_mg: 59.0
+  sulfur_g: 0.015
   vitamin_a_ug: 56
   vitamin_k_ug: 0.5
   vitamin_b1_mg: 0.17
@@ -105,6 +105,11 @@ notes:
   - "Conservative estimate falls within published range (168-200 kcal) for similar dim sum custard buns."
   - "High in saturated fat due to butter and egg yolk content in filling. Moderate sugar from custard and dough."
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
   - timestamp: "2025-11-02"
     reason: "Initial entry - component-based estimation from recipe analysis"
     fields_changed:

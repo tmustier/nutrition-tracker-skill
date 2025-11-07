@@ -54,8 +54,8 @@ per_portion:
   chromium_ug: 2
   molybdenum_ug: 27
   phosphorus_mg: 408
-  chloride_mg: 800
-  sulfur_g: 0.37
+  chloride_mg: 1241.0
+  sulfur_g: 0.372
   vitamin_a_ug: 224
   vitamin_d_ug: 0.3
   vitamin_e_mg: 0.7
@@ -93,6 +93,11 @@ notes:
 - Trans fat likely from dairy (natural ruminant TFAs)
 - Atwater check (available carb basis): 4×37.2 + 9×28.9 + 4×36.7 + 2×4.8 + 2.4×0.0 = 565.3 kcal
 change_log:
+
+  - timestamp: "2025-11-06T23:28:47+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
 - timestamp: 2025-10-30 00:00:00+00:00
   updated_by: 'LLM: Claude Sonnet 4.5'
   reason: Initial entry from user-provided complete nutrition data for Zima Soho Beef Stroganoff

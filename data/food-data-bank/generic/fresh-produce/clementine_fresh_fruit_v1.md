@@ -55,8 +55,8 @@ per_portion:
   chromium_ug: 0
   molybdenum_ug: 0
   phosphorus_mg: 15.5
-  chloride_mg: 0
-  sulfur_g: 0.0
+  chloride_mg: 2.0
+  sulfur_g: 0.002
   vitamin_a_ug: 25.2
   vitamin_d_ug: 0
   vitamin_e_mg: 0.15
@@ -102,6 +102,11 @@ notes:
 - Naturally sodium-free and cholesterol-free
 - Atwater check (available carb basis): 4×0.6 + 9×0.1 + 4×9.0 + 2×1.3 + 2.4×0.0 = 41.9 kcal
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: '2025-11-05T16:00:00+00:00'
   updated_by: Claude Code (Sonnet 4.5)
   reason: Second enrichment with pantothenic acid and estimated trace omega fatty acids

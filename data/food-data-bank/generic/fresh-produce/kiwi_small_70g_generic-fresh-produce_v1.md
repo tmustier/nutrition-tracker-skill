@@ -60,9 +60,9 @@ per_portion:
   omega3_dha_mg: 0
   omega3_epa_mg: 0
   omega6_la_g: 0.17
-  chloride_mg: 0
+  chloride_mg: 3.0
   phosphorus_mg: 23.8
-  sulfur_g: 0
+  sulfur_g: 0.003
   chromium_ug: 0
   molybdenum_ug: 0
   boron_mg: 0
@@ -98,6 +98,11 @@ notes:
 - Can be eaten with skin for maximum fiber and nutrient content
 - 'Carbs: US label reports total carbs (14.7g/100g) = available (11.31g) + fiber (3.39g)'
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: '2025-11-05T16:00:00+00:00'
   updated_by: Claude Code (Sonnet 4.5)
   reason: Second enrichment with 4 additional priority nutrients from USDA FoodData Central

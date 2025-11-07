@@ -56,8 +56,8 @@ per_portion:  # Schema v2: 52 nutrient fields
   chromium_ug: 2
   molybdenum_ug: 11
   phosphorus_mg: 360
-  chloride_mg: 195
-  sulfur_g: 0.42
+  chloride_mg: 192.0
+  sulfur_g: 0.35
   # Vitamins
   vitamin_a_ug: 18
   vitamin_d_ug: 0.6
@@ -103,6 +103,11 @@ notes:
   - "Fiber from chia seeds (3.4g) and oat granola (1.7g) = 5.1g total"
   - "Micronutrients scaled from USDA profiles: soy yogurt plain, pea protein isolate, chia seeds dried, granola oat-based"
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
   - timestamp: 2025-11-05T00:00:00+0000
     updated_by: 'LLM: Claude Sonnet 4.5'
     reason: Initial population from SHK PDF nutrition data with component-based micronutrient estimation

@@ -55,8 +55,8 @@ per_portion:
   chromium_ug: 0
   molybdenum_ug: 0
   phosphorus_mg: 420
-  chloride_mg: 0
-  sulfur_g: 0.0
+  chloride_mg: 1243.0
+  sulfur_g: 0.158
   vitamin_a_ug: 85
   vitamin_d_ug: 0
   vitamin_e_mg: 3.2
@@ -97,6 +97,11 @@ notes:
 - Sodium moderate for a pasta main (~0.8g)
 - Atwater check (available carb basis): 4×39.6 + 9×27.2 + 4×141.3 + 2×19.9 + 2.4×0.0 = 1008.2 kcal
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: 2025-11-01T18:30:00+0000
   updated_by: 'LLM: GPT-5 Codex'
   reason: Initial macro-rich estimate for pasta ordered at The Eagle

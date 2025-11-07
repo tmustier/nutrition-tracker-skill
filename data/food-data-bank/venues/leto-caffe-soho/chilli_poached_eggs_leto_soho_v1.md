@@ -58,8 +58,8 @@ per_portion:
   chromium_ug: 0
   molybdenum_ug: 0
   phosphorus_mg: 400
-  chloride_mg: 0
-  sulfur_g: 0.0
+  chloride_mg: 2376.0
+  sulfur_g: 0.304
   vitamin_a_ug: 709
   vitamin_k_ug: 410
   vitamin_b1_mg: 0.52
@@ -96,6 +96,11 @@ notes:
 - Trans fat from butter (natural ruminant TFAs)
 - "Atwater check (available carb basis): 4×30.4 + 9×34.2 + 4×40.3 + 2×3.4 + 2.4×0.0 = 597.4 kcal"
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
 - timestamp: 2025-10-29 12:15:00+00:00
   updated_by: "LLM: Claude Sonnet 4.5"
   reason: Initial population from Deliveroo calorie count + ingredient-based estimation

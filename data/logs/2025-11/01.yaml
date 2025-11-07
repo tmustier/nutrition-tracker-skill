@@ -60,7 +60,6 @@ entries:
       omega3_dha_mg: 0
       omega3_ala_g: 0
       omega6_la_g: 0
-  notes: ''
 - timestamp: '2025-11-01T09:00:00+00:00'
   items:
   - name: Banana (raw)
@@ -291,9 +290,6 @@ entries:
       omega3_dha_mg: 0
       omega3_ala_g: 0
       omega6_la_g: 0
-  notes: Breakfast smoothie
-- timestamp: '2025-11-01T09:00:00+00:00'
-  items:
   - name: Daylesford Smoked Trout
     food_bank_id: daylesford_smoked_trout_80g_v1
     quantity: 1
@@ -408,7 +404,8 @@ entries:
       omega3_dha_mg: 0
       omega3_ala_g: 0
       omega6_la_g: 0
-  notes: Smoked trout on crispbread
+  notes: Breakfast smoothie | Smoked trout on crispbread | Breakfast smoothie | Smoked
+    trout on crispbread | Breakfast smoothie | Smoked trout on crispbread
 - timestamp: '2025-11-01T11:00:00+00:00'
   items:
   - name: Oat Matcha Latte

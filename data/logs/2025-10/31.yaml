@@ -60,7 +60,6 @@ entries:
       omega3_dha_mg: 0
       omega3_ala_g: 0
       omega6_la_g: 0
-  notes: ''
 - timestamp: '2025-10-31T07:55:00+00:00'
   items:
   - name: Blueberries
@@ -700,7 +699,6 @@ entries:
       omega3_dha_mg: 0
       omega3_ala_g: 0
       omega6_la_g: 0
-  notes: ''
 - timestamp: '2025-10-31T17:50:00+00:00'
   items:
   - name: Guinness Draught
@@ -760,7 +758,6 @@ entries:
       omega3_dha_mg: 0
       omega3_ala_g: 0
       omega6_la_g: 0
-  notes: ''
 - timestamp: '2025-10-31T19:23:00+00:00'
   items:
   - name: ON Gold Standard Whey - Double Rich Chocolate

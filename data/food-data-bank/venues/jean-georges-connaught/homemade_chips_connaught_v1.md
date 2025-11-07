@@ -53,8 +53,8 @@ per_portion:
   chromium_ug: 0
   molybdenum_ug: 0
   phosphorus_mg: 188
-  chloride_mg: 0
-  sulfur_g: 0.0
+  chloride_mg: 494.0
+  sulfur_g: 0.018
   vitamin_a_ug: 0
   vitamin_d_ug: 0
   vitamin_e_mg: 2.6
@@ -90,6 +90,11 @@ notes:
 - 'Atwater check (available carb basis): 4×4.5 + 9×23.2 + 4×57.2 + 2×4.9 + 2.4×0.0
   = 465.4 kcal'
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: 2025-10-28 20:00:00+00:00
   updated_by: "LLM: Claude Sonnet 4.5"
   reason: Initial population from Deliveroo + ChatGPT nutritional analysis

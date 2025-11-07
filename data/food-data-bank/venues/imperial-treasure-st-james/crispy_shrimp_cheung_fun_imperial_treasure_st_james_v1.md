@@ -58,8 +58,8 @@ per_portion:
   chromium_ug: 0
   molybdenum_ug: 0
   phosphorus_mg: 0
-  chloride_mg: 0
-  sulfur_g: 0.0
+  chloride_mg: 123.0
+  sulfur_g: 0.009
   vitamin_a_ug: 0
   vitamin_d_ug: 0
   vitamin_e_mg: 0
@@ -103,6 +103,11 @@ notes:
 - "Price reference: £10.80 for 6 pieces = £1.80 per piece (premium dim sum)"
 - "The crispy preparation adds significant calories vs. traditional steamed shrimp cheung fun (~27 kcal/piece steamed vs. ~183 kcal/piece crispy fried)"
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
 - timestamp: 2025-11-02T00:00:00+0000
   updated_by: 'LLM: Claude Sonnet 4.5'
   reason: Initial component-based estimation for Imperial Treasure St. James crispy shrimp cheung fun

@@ -212,6 +212,189 @@ class ClaudeIntegration {
     this.rateLimitRequests = [];
     this.rateLimitWindow = 60 * 1000; // 1 minute
     this.maxRequestsPerMinute = 50;
+
+    // ProfileManager for per-user health profiles (injected via setProfileManager)
+    this.profileManager = null;
+  }
+
+  /**
+   * Set ProfileManager instance (dependency injection)
+   * MUST be called before using processFoodLog or getTargets with userId
+   * @param {ProfileManager} profileManager - ProfileManager instance
+   */
+  setProfileManager(profileManager) {
+    this.profileManager = profileManager;
+    console.log('[ClaudeIntegration] ProfileManager injected - per-user profiles enabled');
+  }
+
+  /**
+   * Build skill context dynamically from user profile
+   * @private
+   * @param {Object} profile - Health profile object
+   * @returns {string} Skill context string with user-specific targets
+   */
+  _buildSkillContext(profile) {
+    const t = profile.targets;
+    const m = profile.meta;
+
+    return `# Nutrition Tracking
+
+## Overview
+This guide covers general practices for:
+ - A) Estimating precise nutrition from mobile photos or text descriptions
+ - B) Checking day totals and providing macros-based meal suggestions
+
+Below you'll find step-by-step workflows, field definitions, and key nutrient targets.
+
+---
+
+## Workflow
+
+### A) Mobile Photo or Text Estimation
+
+1. **Receive** – A photo or text description from the user (e.g., "200g chicken breast, roasted sweet potato").
+2. **Identify** – What foods/beverages are present and their approximate quantities (in grams or milliliters).
+3. **Estimate** – Use built-in knowledge (USDA SR28, branded databases, or general references) to estimate macros (kcal, protein, fat, carbs) and micronutrients.
+4. **Format** – Return JSON with all 24 fields. Be precise; avoid rounding excessively. Include cooking method, portion size, and brand if known.
+5. **Context** – If user mentions they just ate or are about to eat, confirm the meal name and log accordingly.
+
+### B) Daily Totals & Suggestions
+
+- [ ] Step 1: Confirm a date if the user says "today" or references a different day.
+- [ ] Step 2: Pull the logged items from the Git repository (\`data/logs/YYYY-MM/DD.yaml\`). Sum macros across all entries for that day.
+- [ ] Step 3: Show a compact table and % of daily targets from \`references/health-profile.yaml\`.
+- [ ] Step 4: If user asks for suggestions, recommend remaining macros (e.g., "You need 40g protein, 30g carbs, 500 kcal...").
+
+---
+
+## Daily Targets
+
+**Health Profile:**
+- Owner: ${m.owner}
+- Timezone: ${m.timezone}
+- Notes: ${m.notes}
+
+**Energy & Macros:**
+- Rest day max: ${t.energy_kcal.rest_day_max} kcal
+- Training day max: ${t.energy_kcal.training_day_max} kcal
+- Protein min: ${t.protein_g_min}g
+- Fat min: ${t.fat_g_min}g
+- Carbs min: ${t.carbs_g_min}g
+- Fiber min: ${t.fiber_g_min}g
+- Saturated fat max: ${t.sat_fat_g_max}g
+- Sodium max: ${t.sodium_mg_max}mg
+
+**Additional Targets:**
+- Potassium min: ${t.potassium_mg_min || 3500}mg
+- Fruit/veg servings min: ${t.fruit_veg_servings_min || 5}
+
+**Monitoring:**
+- Track Na:K ratio, iodine intake, and other micronutrients as specified in profile
+
+---
+
+## Field Definitions (All 24 Fields)
+
+### 1. Identification
+- **name**: Descriptive name of the dish or food item
+- **per_portion**: Total grams/ml the nutrition data represents
+
+### 2. Macronutrients
+- **energy_kcal**: Total kilocalories
+- **protein_g**: Protein in grams
+- **fat_g**: Total fat in grams
+- **carbs_g**: Total carbohydrates in grams
+
+### 3. Fats Breakdown
+- **sat_fat_g**: Saturated fat
+- **trans_fat_g**: Trans fat
+- **cholesterol_mg**: Cholesterol in milligrams
+- **mufa_g**: Monounsaturated fatty acids
+- **pufa_g**: Polyunsaturated fatty acids
+- **unsat_total_g**: Total unsaturated fat
+
+### 4. Carbs & Fiber
+- **sugar_g**: Sugars
+- **fiber_g**: Dietary fiber
+- **fiber_soluble_g**: Soluble fiber
+- **fiber_insoluble_g**: Insoluble fiber
+- **starch_g**: Starch
+- **polyols_g**: Sugar alcohols
+
+### 5. Minerals
+- **sodium_mg**: Sodium
+- **potassium_mg**: Potassium
+- **iodine_ug**: Iodine in micrograms
+
+### 6. Optional
+- **notes**: Preparation details, brand, or source notes
+
+---
+
+## Rounding & Assumptions
+
+- **Energy (kcal)**: Round to integer
+- **Grams (macros, fiber)**: Round to 0.1g
+- **Milligrams/Micrograms**: Round to integer
+- **Default salt**: 0.5% by weight (normal scheme)
+- **Default oil**: olive_oil
+
+---
+
+## JSON Output Format
+
+\`\`\`json
+{
+  "name": "Grilled Chicken Breast",
+  "per_portion": 200.0,
+  "energy_kcal": 330,
+  "protein_g": 62.0,
+  "fat_g": 7.0,
+  "carbs_g": 0.0,
+  "sat_fat_g": 2.0,
+  "trans_fat_g": 0.0,
+  "cholesterol_mg": 165,
+  "mufa_g": 2.5,
+  "pufa_g": 1.5,
+  "unsat_total_g": 4.0,
+  "sugar_g": 0.0,
+  "fiber_g": 0.0,
+  "fiber_soluble_g": 0.0,
+  "fiber_insoluble_g": 0.0,
+  "starch_g": 0.0,
+  "sodium_mg": 145,
+  "potassium_mg": 520,
+  "iodine_ug": 12,
+  "polyols_g": 0.0,
+  "notes": "Grilled without oil"
+}
+\`\`\`
+
+---
+
+## Key Principles
+
+1. **Accuracy**: Use USDA or equivalent databases when possible
+2. **Completeness**: Provide all 24 fields, even if some are 0
+3. **Context**: Consider cooking methods and preparation
+4. **User Intent**: Understand if they're logging a meal or asking for advice
+5. **Targets**: Help users meet their ${t.energy_kcal.rest_day_max}-${t.energy_kcal.training_day_max} kcal daily target with proper macro distribution
+
+---
+
+## Repository Context
+
+- **Logs**: \`data/logs/YYYY-MM/DD.yaml\` — Daily nutrition entries with timestamp, items, notes
+- **Food Database**: \`data/food-data-bank/\` — Custom foods and branded items for quick lookup
+- **References**: \`references/health-profile.yaml\` — Daily targets and monitored fields
+
+---
+
+## Summary
+
+- Aggregate logged dishes; compute totals vs **rest** or **training** day targets in \`references/health-profile.yaml\`.
+- For suggestions, recommend meals/snacks that fill the remaining macro needs.
+- In addition to targets, include values the user is monitoring in \`references/health-profile.yaml\`.`;
   }
 
   /**
@@ -253,6 +436,16 @@ class ClaudeIntegration {
       // This sanitized version is used throughout the request lifecycle
       const sanitizedMessage = sanitizePromptInput(userMessage);
 
+      // Step 0: Load user profile (cached) for dynamic skill context
+      const profile = this.profileManager
+        ? await this.profileManager.loadProfile(userId)
+        : HEALTH_PROFILE; // Fallback to hardcoded profile for backward compatibility
+
+      // Build dynamic skill context with user's targets
+      const skillContext = this.profileManager
+        ? this._buildSkillContext(profile)
+        : SKILL_CONTEXT; // Fallback to hardcoded context
+
       // Step 1: Try USDA quick lookup for generic foods
       // Check for common generic food keywords
       const genericFoodKeywords = [
@@ -263,8 +456,8 @@ class ClaudeIntegration {
       ];
 
       const lowerMessage = sanitizedMessage.toLowerCase();
-      // Temporarily disable USDA due to API reliability issues - fallback to Claude for all requests
-      const isGenericFood = false; // genericFoodKeywords.some(kw => lowerMessage.includes(kw));
+      // Re-enabled USDA with circuit breaker and retry protection
+      const isGenericFood = genericFoodKeywords.some(kw => lowerMessage.includes(kw));
 
       if (isGenericFood) {
         try {
@@ -295,18 +488,18 @@ class ClaudeIntegration {
       }
 
       // Step 2: Use Claude for estimation (either non-generic or USDA failed)
-      console.log(`Using Claude API for: ${sanitizedMessage}`);
+      console.log(`Using Claude API for user ${userId || 'unknown'}: ${sanitizedMessage}`);
 
       // Check rate limiting before making API call
       this.checkRateLimit();
 
       // Prepare system prompt based on whether we have conversation history
-      let systemPrompt = SKILL_CONTEXT;
+      let systemPrompt = skillContext;
       let messages = [];
 
       if (conversationHistory && conversationHistory.length > 0) {
         // Multi-turn conversation mode
-        systemPrompt = SKILL_CONTEXT + '\n\nThis is a multi-turn conversation. Previous messages are provided in the conversation history. Handle follow-up questions, clarifications, and corrections naturally.';
+        systemPrompt = skillContext + '\n\nThis is a multi-turn conversation. Previous messages are provided in the conversation history. Handle follow-up questions, clarifications, and corrections naturally.';
 
         // Use the provided conversation history and append the new user message
         messages = [
@@ -487,19 +680,28 @@ Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
    *     should_show_easter_egg: boolean
    *   }
    */
-  async processImage(imageBuffer, mimeType) {
+  async processImage(imageBuffer, mimeType, userId = null) {
     try {
-      console.log(`Processing image with Claude Vision API (${mimeType})`);
+      console.log(`Processing image with Claude Vision API (${mimeType}) for user ${userId || 'unknown'}`);
 
       // Check rate limiting before making API call
       this.checkRateLimit();
+
+      // Load user profile (cached) for dynamic skill context
+      const profile = this.profileManager
+        ? await this.profileManager.loadProfile(userId)
+        : HEALTH_PROFILE;
+
+      const skillContext = this.profileManager
+        ? this._buildSkillContext(profile)
+        : SKILL_CONTEXT;
 
       const base64Image = imageBuffer.toString('base64');
 
       const requestBody = {
         model: this.model,
         max_tokens: this.maxTokens,
-        system: SKILL_CONTEXT,
+        system: skillContext,
         messages: [
           {
             role: 'user',
@@ -778,23 +980,29 @@ Return response in this EXACT JSON structure:
   }
 
   /**
-   * Get health profile targets
+   * Get health profile targets (NOW ASYNC for per-user profiles)
    * Useful for calculating remaining macros in the Telegram bot
    *
    * @param {string} dayType - 'rest' or 'training'
-   * @returns {Object} Target values for the day
+   * @param {number} userId - Telegram user ID (optional, uses default if null)
+   * @returns {Promise<Object>} Target values for the day
    */
-  getTargets(dayType = 'rest') {
+  async getTargets(dayType = 'rest', userId = null) {
+    // Load user profile (cached)
+    const profile = this.profileManager
+      ? await this.profileManager.loadProfile(userId)
+      : HEALTH_PROFILE; // Fallback to hardcoded profile
+
     const energyTarget = dayType === 'training'
-      ? HEALTH_PROFILE.targets.energy_kcal.training_day_max
-      : HEALTH_PROFILE.targets.energy_kcal.rest_day_max;
+      ? profile.targets.energy_kcal.training_day_max
+      : profile.targets.energy_kcal.rest_day_max;
 
     return {
       energy_kcal: energyTarget,
-      protein_g: HEALTH_PROFILE.targets.protein_g_min,
-      fat_g: HEALTH_PROFILE.targets.fat_g_min,
-      carbs_g: HEALTH_PROFILE.targets.carbs_g_min,
-      fiber_g: HEALTH_PROFILE.targets.fiber_g_min
+      protein_g: profile.targets.protein_g_min,
+      fat_g: profile.targets.fat_g_min,
+      carbs_g: profile.targets.carbs_g_min,
+      fiber_g: profile.targets.fiber_g_min
     };
   }
 

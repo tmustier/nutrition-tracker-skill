@@ -60,8 +60,8 @@ per_portion:
   chromium_ug: 0
   molybdenum_ug: 0
   phosphorus_mg: 380
-  chloride_mg: 0
-  sulfur_g: 0.0
+  chloride_mg: 1340.0
+  sulfur_g: 0.33
   vitamin_a_ug: 77
   vitamin_k_ug: 9
   vitamin_b1_mg: 0.28
@@ -96,6 +96,11 @@ notes:
   - "UK comparables validate estimate: Wasabi nigiri 35 kcal/piece × 6 = 210 kcal (vs my 318 kcal - higher due to more generous salmon portions observed at premium delis); Itsu 6-piece roll scaled to 8 pieces ≈ 376 kcal (vs my 371 kcal - very close match)"
   - "Confidence MEDIUM: Component weights estimated from standard sushi portions, photos, and UK comparable data. No direct nutrition info from Panzer's available. Macros cross-validated against Wasabi/Itsu UK chains. Micronutrients from USDA profiles scaled to estimated component weights"
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
   - timestamp: 2025-11-04T20:15:00+00:00
     updated_by: "LLM: Claude Code (Sonnet 4.5)"
     reason: "Initial creation via component-based estimation following ESTIMATE.md protocol"

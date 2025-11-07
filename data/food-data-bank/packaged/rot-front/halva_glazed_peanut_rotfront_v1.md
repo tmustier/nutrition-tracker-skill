@@ -56,8 +56,8 @@ per_portion:
   chromium_ug: 0.5
   molybdenum_ug: 10
   phosphorus_mg: 103
-  chloride_mg: 0
-  sulfur_g: 0
+  chloride_mg: 77.0
+  sulfur_g: 0.014
   vitamin_a_ug: 0
   vitamin_d_ug: 0
   vitamin_e_mg: 0.04
@@ -99,6 +99,11 @@ notes:
 - Ingredients: peanut mass 44%, confectioner's chocolate glaze 30% (varies by batch)
 - Atwater check (available carb basis): 4×3.5 + 9×8.2 + 4×11.0 + 2×1.4 + 2.4×0.0 = 135.1 kcal
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: 2025-10-30T19:35:00+0000
   updated_by: Claude Code (via ChatGPT estimation)
   reason: Initial entry with ChatGPT nutrition analysis cross-checked against multiple databases

@@ -5,6 +5,7 @@ const crypto = require('crypto');
 const config = require('./config');
 const claudeIntegration = require('./claude-integration');
 const githubIntegration = require('./github-integration');
+const ProfileManager = require('./profile-manager');
 const conversationManager = require('./conversation-manager');
 const responseHandler = require('./response-handler');
 const easterEggManager = require('./easter-egg-manager');
@@ -37,6 +38,11 @@ const easterEggManager = require('./easter-egg-manager');
 
 // Initialize Telegraf bot
 const bot = new Telegraf(config.telegram.botToken);
+
+// Initialize ProfileManager and inject dependencies
+const profileManager = new ProfileManager(githubIntegration);
+claudeIntegration.setProfileManager(profileManager);
+console.log('✅ ProfileManager initialized and injected into ClaudeIntegration');
 
 // ============================================================================
 // CONSTANTS
@@ -168,7 +174,7 @@ const cleanupRateLimit = () => {
 };
 
 // Clean up rate limit storage every 5 minutes
-setInterval(cleanupRateLimit, 5 * 60 * 1000);
+const rateLimitCleanupInterval = setInterval(cleanupRateLimit, 5 * 60 * 1000);
 
 /**
  * Rate limiting middleware - Prevents API abuse by limiting requests per user
@@ -177,41 +183,44 @@ setInterval(cleanupRateLimit, 5 * 60 * 1000);
  */
 const rateLimitMiddleware = (ctx, next) => {
   const userId = ctx.from?.id;
-  if (!userId) {
-    return next(); // Skip if no user ID (shouldn't happen after auth middleware)
+
+  // P0 Security Fix: Validate userId is a valid positive integer
+  if (!userId || !Number.isInteger(userId) || userId <= 0) {
+    console.warn('Rate limiter: Invalid or missing user ID, rejecting request', { userId, type: typeof userId });
+    return ctx.reply('❌ Invalid request format. Please try again.');
   }
 
   const now = Date.now();
   const cutoff = now - RATE_LIMIT_WINDOW_MS;
-  
+
   // Get or create user's request history
   let userRequests = rateLimitStorage.get(userId) || [];
-  
+
   // Filter out old requests (sliding window)
   userRequests = userRequests.filter(timestamp => timestamp > cutoff);
-  
+
   // Check if user has exceeded rate limit
   if (userRequests.length >= RATE_LIMIT_REQUESTS_PER_MINUTE) {
     const oldestRequest = Math.min(...userRequests);
     const resetTime = Math.ceil((oldestRequest + RATE_LIMIT_WINDOW_MS - now) / 1000);
-    
+
     console.warn(`Rate limit exceeded for user ${userId}: ${userRequests.length}/${RATE_LIMIT_REQUESTS_PER_MINUTE} requests`);
-    
+
     return ctx.reply(
       `⚠️ Rate limit exceeded. You can make up to ${RATE_LIMIT_REQUESTS_PER_MINUTE} requests per minute.\n\n` +
       `Please wait ${resetTime} seconds before trying again.`
     );
   }
-  
+
   // Add current request timestamp
   userRequests.push(now);
   rateLimitStorage.set(userId, userRequests);
-  
+
   // Log rate limit status for monitoring
   if (userRequests.length > RATE_LIMIT_REQUESTS_PER_MINUTE * RATE_LIMIT_WARNING_THRESHOLD) { // Warn at 80% of limit
     console.warn(`User ${userId} approaching rate limit: ${userRequests.length}/${RATE_LIMIT_REQUESTS_PER_MINUTE} requests`);
   }
-  
+
   return next();
 };
 
@@ -225,15 +234,23 @@ const rateLimitMiddleware = (ctx, next) => {
  * @param {Function} next - Next middleware function
  */
 const authenticateUser = (ctx, next) => {
-  // If no allowedUsers configured, allow all users (backward compatibility)
+  // If no allowedUsers configured, allow all users (development mode only - production requires ALLOWED_USERS)
   if (!config.telegram.allowedUsers || config.telegram.allowedUsers.length === 0) {
+    // This should only happen in development due to config validation
+    if (config.app.environment === 'production') {
+      console.error('🚨 CRITICAL: Bot in production without ALLOWED_USERS - this should not happen!');
+      return ctx.reply('❌ Bot misconfiguration. Please contact administrator.');
+    }
+    console.warn('⚠️  Bot in OPEN MODE - all users can access (development only)');
     return next();
   }
 
   const userId = ctx.from?.id;
-  if (!userId) {
-    console.warn('Authentication failed: No user ID in request');
-    return ctx.reply('❌ Authentication error. Please try again.');
+
+  // Validate userId is a valid positive integer (consistent with rate limiter)
+  if (!userId || !Number.isInteger(userId) || userId <= 0) {
+    console.warn('Authentication failed: Invalid or missing user ID', { userId, type: typeof userId });
+    return ctx.reply('❌ Invalid request format. Please try again.');
   }
 
   if (!config.telegram.allowedUsers.includes(userId)) {
@@ -470,8 +487,8 @@ bot.command('today', async (ctx) => {
     const userId = ctx.from.id;
     const totals = await githubIntegration.getTodaysTotals(null, userId);
 
-    // Get targets from claude-integration (uses health profile)
-    const targets = claudeIntegration.getTargets('rest'); // TODO: Detect training vs rest day
+    // Get targets from claude-integration (uses user-specific health profile)
+    const targets = await claudeIntegration.getTargets('rest', userId); // TODO: Detect training vs rest day
 
     // Calculate remaining macros
     const remaining = {
@@ -727,8 +744,8 @@ bot.on('text', async (ctx) => {
       carbs_total_g: Math.round((currentTotals.carbs_total_g + mealNutrition.carbs_total_g) * NUTRITION_ROUNDING_FACTOR) / NUTRITION_ROUNDING_FACTOR,
       fiber_total_g: Math.round((currentTotals.fiber_total_g + mealNutrition.fiber_total_g) * NUTRITION_ROUNDING_FACTOR) / NUTRITION_ROUNDING_FACTOR,
     };
-    
-    const targets = claudeIntegration.getTargets('rest');
+
+    const targets = await claudeIntegration.getTargets('rest', userId);
 
     const remaining = {
       energy_kcal: Math.max(0, targets.energy_kcal - totals.energy_kcal),
@@ -846,9 +863,9 @@ bot.on('photo', async (ctx) => {
       '🤖 Analyzing image with AI...'
     );
 
-    // Step 4: Process with Claude Vision (enhanced with scene detection)
-    // Single API call now returns BOTH scene detection AND nutrition data
-    const result = await claudeIntegration.processImage(imageBuffer, mimeType);
+    // Step 4: Process with Claude Vision (with user-specific profile and scene detection)
+    // Single API call returns BOTH scene detection AND nutrition data
+    const result = await claudeIntegration.processImage(imageBuffer, mimeType, userId);
 
     if (!result.success) {
       await ctx.telegram.editMessageText(
@@ -924,7 +941,7 @@ bot.on('photo', async (ctx) => {
       '💾 Logging to database...'
     );
 
-    // Step 9: Extract user information for multi-user tracking
+    // Step 9: Extract user information for multi-user tracking (userId already defined at line 800)
     const userName = [ctx.from.first_name, ctx.from.last_name]
       .filter(Boolean)
       .join(' ') || ctx.from.username || `User ${userId}`;
@@ -952,8 +969,8 @@ bot.on('photo', async (ctx) => {
       fat_g: Math.round((currentTotals.fat_g + mealNutrition.fat_g) * NUTRITION_ROUNDING_FACTOR) / NUTRITION_ROUNDING_FACTOR,
       carbs_total_g: Math.round((currentTotals.carbs_total_g + mealNutrition.carbs_total_g) * NUTRITION_ROUNDING_FACTOR) / NUTRITION_ROUNDING_FACTOR,
     };
-    
-    const targets = claudeIntegration.getTargets('rest');
+
+    const targets = await claudeIntegration.getTargets('rest', userId);
 
     const remaining = {
       energy_kcal: Math.max(0, targets.energy_kcal - totals.energy_kcal),
@@ -1113,6 +1130,40 @@ const handler = async (req, res) => {
     });
   }
 };
+
+// ============================================================================
+// GRACEFUL SHUTDOWN
+// ============================================================================
+
+/**
+ * Graceful shutdown handler for production deployments (Railway, etc.)
+ * Ensures clean cleanup of resources when receiving SIGTERM/SIGINT signals
+ */
+let isShuttingDown = false;
+
+const gracefulShutdown = (signal) => {
+  if (isShuttingDown) return;
+  isShuttingDown = true;
+
+  console.log(`\n${signal} received, starting graceful shutdown...`);
+
+  // Cleanup ProfileManager (clears cache, stops cleanup interval)
+  if (profileManager) {
+    profileManager.destroy();
+  }
+
+  // Cleanup rate limit interval
+  if (rateLimitCleanupInterval) {
+    clearInterval(rateLimitCleanupInterval);
+  }
+
+  console.log('Cleanup complete, exiting...');
+  process.exit(0);
+};
+
+// Handle graceful shutdown signals
+process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
+process.on('SIGINT', () => gracefulShutdown('SIGINT')); // For Ctrl+C in development
 
 // ============================================================================
 // EXPORTS

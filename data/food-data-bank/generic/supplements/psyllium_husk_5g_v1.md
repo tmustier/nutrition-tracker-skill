@@ -54,8 +54,8 @@ per_portion:
   chromium_ug: 0
   molybdenum_ug: 0
   phosphorus_mg: 2.05
-  chloride_mg: 1
-  sulfur_g: 0.005
+  chloride_mg: 3.0
+  sulfur_g: 0.001
   vitamin_a_ug: 0
   vitamin_d_ug: 0
   vitamin_e_mg: 0.005
@@ -93,6 +93,11 @@ notes:
 - Fat content minimal, trace PUFA from seed hull
 - Atwater check (available carb basis): 4×0.2 + 9×0.1 + 4×4.5 + 2×4.0 + 2.4×0.0 = 27.7 kcal
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: 2025-10-31T00:00:00+0000
   updated_by: Claude Code (Sonnet 4.5)
   reason: Initial entry for psyllium husk supplement tracking, user requested 5g portion size

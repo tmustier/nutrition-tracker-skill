@@ -58,8 +58,8 @@ per_portion:
   chromium_ug: 0
   molybdenum_ug: 0
   phosphorus_mg: 29
-  chloride_mg: 0
-  sulfur_g: 0.003
+  chloride_mg: 3.0
+  sulfur_g: 0.004
   vitamin_a_ug: 136
   vitamin_k_ug: 4.4
   vitamin_b1_mg: 0.05
@@ -99,6 +99,11 @@ notes:
 - "Fatty acid estimates based on typical fruit profiles: sat ~10%, MUFA ~21%, PUFA ~69% of total fat"
 - "Atwater check (available carb basis): 4×1.0 + 9×0.3 + 4×25.2 + 2×6.0 + 2.4×0.0 = 119.5 kcal (vs 118 kcal from USDA scaling; 1.3% variance, within tolerance)"
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: "2025-11-04T00:00:00+00:00"
   updated_by: "LLM: Claude Sonnet 4.5"
   reason: "Initial population from USDA FoodData Central (FDC ID 169941) scaled to standard 168g medium persimmon portion"

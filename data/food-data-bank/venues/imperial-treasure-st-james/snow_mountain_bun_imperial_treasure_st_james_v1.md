@@ -58,8 +58,8 @@ per_portion:
   chromium_ug: 0
   molybdenum_ug: 0
   phosphorus_mg: 111
-  chloride_mg: 0
-  sulfur_g: 0.0
+  chloride_mg: 490.0
+  sulfur_g: 0.037
   vitamin_a_ug: 49
   vitamin_d_ug: 0.1
   vitamin_e_mg: 0.1
@@ -98,6 +98,11 @@ notes:
 - Fat breakdown validated: 4.4 + 3.9 + 1.1 + 0.1 = 9.5g of 10.0g total (0.5g unassigned)
 - User consumed 1 piece from portion of 3 at Imperial Treasure St. James
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: 2025-11-02
   reason: Initial entry for Snow Mountain Bun using component-based estimation
   fields_changed: [all fields]

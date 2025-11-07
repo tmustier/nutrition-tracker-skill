@@ -58,8 +58,8 @@ per_portion:
   chromium_ug: 0
   molybdenum_ug: 0
   phosphorus_mg: 174
-  chloride_mg: 0
-  sulfur_g: 0.0
+  chloride_mg: 228.0
+  sulfur_g: 0.092
   vitamin_a_ug: 150
   vitamin_k_ug: 5
   vitamin_b1_mg: 0.27
@@ -101,6 +101,11 @@ notes:
 - 'Cholesterol (20mg) from whey protein concentrate'
 - 'Atwater validation: 4×23.0 + 9×4.7 + 4×11.0 + 2×1.1 + 2.4×0.0 = 92 + 42.3 + 44 + 2.2 = 180.5 kcal (user label: 186 kcal, variance +3.0% likely due to rounding and USDA estimation variance)'
 change_log:
+
+  - timestamp: "2025-11-06T23:28:47+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: 2025-11-04T09:30:00+00:00
   updated_by: Claude Code (Sonnet 4.5)
   reason: Initial entry - component-based estimation anchored to user-provided macros

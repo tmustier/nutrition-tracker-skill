@@ -53,8 +53,8 @@ per_portion:
   chromium_ug: 0
   molybdenum_ug: 0
   phosphorus_mg: 6.5
-  chloride_mg: 0
-  sulfur_g: 0.0
+  chloride_mg: 273.0
+  sulfur_g: 0.001
   vitamin_a_ug: 6.5
   vitamin_d_ug: 0
   vitamin_e_mg: 0.4
@@ -86,6 +86,11 @@ notes:
 - If pot was 30g: add ~5 kcal, +1.2g carbs, +35mg sodium
 - Atwater check (available carb basis): 4×0.3 + 9×0.0 + 4×5.8 + 2×0.1 + 2.4×0.0 = 24.6 kcal
 change_log:
+
+  - timestamp: "2025-11-06T23:28:46+00:00"
+    updated_by: "Script: calculate_derived_nutrients.py"
+    change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
+    notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
 - timestamp: 2025-10-28 20:00:00+00:00
   updated_by: 'LLM: Claude Sonnet 4.5'
   reason: Initial population based on Heinz UK ketchup profile scaled to 25g
