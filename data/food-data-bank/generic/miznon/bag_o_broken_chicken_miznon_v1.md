@@ -30,7 +30,7 @@ assumptions:
   prep: "Plancha roasted chicken thigh meat, garlic aioli (mayo-based), za'atar spice blend, spring onions, served in white pita bread"
 per_portion:  # Schema v2: 52 nutrient fields - FOR 1/2 BAG (USER PORTION)
   # Macronutrients
-  energy_kcal: 477
+  energy_kcal: 465
   protein_g: 32.9
   fat_g: 26.4
   sat_fat_g: 5.5
@@ -104,12 +104,18 @@ notes:
   - "Za'atar approximated using sesame seeds (main caloric component of blend; thyme and sumac contribute minimal calories)"
   - "Finishing salt estimated at 0.5% of total weight (1.79g for full bag = 716mg sodium added)"
   - "Total sodium includes: chicken intrinsic (185mg), aioli (217mg), pita (456mg), spring onions (2mg), finishing salt (716mg)"
-  - "Energy validation (1/2 portion): 4×32.9 + 9×26.4 + 4×23.4 + 2×1.3 = 131.6 + 237.6 + 93.6 + 2.6 = 465.4 kcal (vs recorded 477 kcal = 2.4% difference, within ±5% tolerance)"
+  - "Atwater calculation (1/2 portion): 4×32.9 + 9×26.4 + 4×23.4 + 2×1.3 = 131.6 + 237.6 + 93.6 + 2.6 = 465.4 kcal (rounded to 465 kcal)"
+  - "Energy standardization: Per ESTIMATE.md, USDA-based estimates use Atwater formula for consistency"
   - "Omega-3 EPA/DHA from chicken (thigh has trace amounts from feed), ALA from aioli (soybean oil component) and sesame in za'atar"
   - "Omega-6 LA primarily from aioli (high in polyunsaturated fat, predominantly linoleic acid)"
   - "Chloride derived: 788mg sodium × 1.54 = 1213mg"
   - "Sulfur derived: 32.9g protein × 0.01 (animal protein) = 0.33g"
 change_log:
+  - timestamp: "2025-11-07T21:30:00+00:00"
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "PR review improvement: Standardize energy to Atwater calculation for consistency"
+    fields_changed: ["energy_kcal"]
+    notes: "Energy consistency principle from ESTIMATE.md: Since all values are USDA-based estimates (not label data), energy must equal Atwater formula result. Updated from 477 to 465 kcal (Atwater: 4×32.9 + 9×26.4 + 4×23.4 + 2×1.3 = 465.4 kcal)."
   - timestamp: "2025-11-07T15:30:00Z"
     updated_by: "LLM: Claude Sonnet 4.5"
     change: "Initial creation with complete 52-nutrient profile using component-based USDA estimation"

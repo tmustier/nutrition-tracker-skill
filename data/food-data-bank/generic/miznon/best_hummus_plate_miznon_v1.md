@@ -30,7 +30,7 @@ assumptions:
   prep: "Hummus base (83g) made from chickpeas and tahini, topped with warm whole chickpeas (20g), generous olive oil drizzle (8g), fresh tomato ovaries/seeds (13g), spicy green chili salsa (8g). Sodium from hummus (340mg/100g commercial) and minimal from other components. Pita bread served separately - not included in this entry."
 per_portion:  # Schema v2: 52 nutrient fields
   # Macronutrients
-  energy_kcal: 238
+  energy_kcal: 244
   protein_g: 8.7
   fat_g: 16.6
   sat_fat_g: 2.3
@@ -73,7 +73,7 @@ per_portion:  # Schema v2: 52 nutrient fields
   vitamin_b3_mg: 0.4
   vitamin_b5_mg: 0.4
   vitamin_b6_mg: 0.12
-  vitamin_b7_ug: 0
+  vitamin_b7_ug: 4
   vitamin_b9_ug: 110
   vitamin_b12_ug: 0.0
   choline_mg: 46
@@ -94,7 +94,7 @@ derived:
 quality:
   confidence: medium
   gaps:
-  - "Vitamin B7 (biotin) set to 0 - chickpeas contain biotin but USDA data incomplete; estimate 3-5µg"
+  - "Vitamin B7 (biotin) estimated at 4µg (midpoint of 3-5µg range from chickpeas/hummus, USDA data incomplete)"
   - "Iodine set to 0 (trace only) - plant foods have minimal iodine unless grown in iodine-rich soil"
   - "Fiber soluble/insoluble split estimated at 33%/67% based on chickpea fiber profiles"
   - "Molybdenum estimated at 12µg from legume content (chickpeas are rich source)"
@@ -106,8 +106,14 @@ notes:
 - "High MUFA content from olive oil drizzle and tahini in hummus (73% of fat)"
 - "Good source of folate (B9), iron, magnesium, and manganese from chickpeas and tahini"
 - "Zero cholesterol - fully plant-based dish"
-- "Atwater validation: 4×8.7 + 9×16.6 + 4×11.5 + 2×7.0 = 243.6 kcal (238 listed, ±2.4%)"
+- "Atwater calculation: 4×8.7 + 9×16.6 + 4×11.5 + 2×7.0 = 34.8 + 149.4 + 46.0 + 14.0 = 244.2 kcal (rounded to 244 kcal)"
+- "Energy standardization: Per ESTIMATE.md, USDA-based estimates use Atwater formula for consistency"
 change_log:
+- timestamp: "2025-11-07T21:30:00+00:00"
+  updated_by: "LLM: Claude Sonnet 4.5"
+  reason: "PR review improvement: Standardize energy to Atwater calculation and fix vitamin B7 estimate"
+  fields_changed: ["energy_kcal", "vitamin_b7_ug"]
+  notes: "Energy consistency principle from ESTIMATE.md: Since all values are USDA-based estimates (not label data), energy must equal Atwater formula result. Updated from 238 to 244 kcal (Atwater: 4×8.7 + 9×16.6 + 4×11.5 + 2×7.0 = 244.2 kcal). Also updated vitamin B7 from 0 to 4µg (midpoint of 3-5µg estimate for chickpeas/hummus)."
 - timestamp: "2025-11-07T20:00:00+00:00"
   updated_by: "LLM: Claude Sonnet 4.5"
   reason: "CRITICAL FIX: Removed 70g pita that was double-counted (pita logged separately by user)"

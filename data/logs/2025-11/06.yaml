@@ -532,7 +532,7 @@ entries:
     quantity: 1
     unit: portion
     nutrition:
-      energy_kcal: 683
+      energy_kcal: 706
       protein_g: 39.3
       fat_g: 33.2
       sat_fat_g: 10.7
@@ -589,7 +589,7 @@ entries:
     quantity: 0.5
     unit: bag
     nutrition:
-      energy_kcal: 477
+      energy_kcal: 465
       protein_g: 32.9
       fat_g: 26.4
       sat_fat_g: 5.5
@@ -646,7 +646,7 @@ entries:
     quantity: 0.33
     unit: portion
     nutrition:
-      energy_kcal: 79
+      energy_kcal: 81
       protein_g: 2.9
       fat_g: 5.5
       sat_fat_g: 0.8
@@ -703,7 +703,7 @@ entries:
     quantity: 0.33
     unit: pita
     nutrition:
-      energy_kcal: 55
+      energy_kcal: 52
       protein_g: 1.8
       fat_g: 0.2
       sat_fat_g: 0.04
@@ -764,7 +764,7 @@ entries:
     quantity: 0.67
     unit: pita
     nutrition:
-      energy_kcal: 110
+      energy_kcal: 107
       protein_g: 3.7
       fat_g: 0.5
       sat_fat_g: 0.09
