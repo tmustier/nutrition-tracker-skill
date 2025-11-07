@@ -1,0 +1,22 @@
+# Personal health profile — Europe/London
+meta:
+  owner: "Thomas"
+  timezone: "Europe/London"
+  updated: "2025-11-05T11:40:00+00:00"
+  notes: "Maintenance/body recomp; moderately active; 31yo male, 183cm, ~84kg"
+targets:
+  energy_kcal:
+    rest_day_max: 2500
+    training_day_max: 2900
+  protein_g_min: 170
+  fat_g_min: 70
+  carbs_g_min: 250
+  fiber_g_min: 40
+  sat_fat_g_max: 20
+  sodium_mg_max: 2300
+  potassium_mg_min: 4000
+  fruit_veg_servings_min: 5
+monitoring:
+  na_k_molar_ratio: true
+  na_k_mass_ratio: true
+  iodine_ug: true

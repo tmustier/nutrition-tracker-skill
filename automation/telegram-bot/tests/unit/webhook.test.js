@@ -31,7 +31,8 @@ describe('Webhook Handlers', () => {
     // Mock successful API responses
     claudeIntegration.processFoodLog = jest.fn();
     claudeIntegration.processImage = jest.fn();
-    claudeIntegration.getTargets = jest.fn(() => ({
+    // getTargets is now async and accepts (dayType, userId)
+    claudeIntegration.getTargets = jest.fn(async () => ({
       energy_kcal: 2500,
       protein_g: 170,
       fat_g: 70,

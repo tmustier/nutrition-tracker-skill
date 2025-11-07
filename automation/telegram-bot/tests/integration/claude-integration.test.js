@@ -264,8 +264,8 @@ describe('Claude Integration', () => {
   });
 
   describe('getTargets', () => {
-    it('should return rest day targets', () => {
-      const targets = claudeIntegration.getTargets('rest');
+    it('should return rest day targets', async () => {
+      const targets = await claudeIntegration.getTargets('rest');
 
       expect(targets).toMatchObject({
         energy_kcal: 2500,
@@ -276,8 +276,8 @@ describe('Claude Integration', () => {
       });
     });
 
-    it('should return training day targets', () => {
-      const targets = claudeIntegration.getTargets('training');
+    it('should return training day targets', async () => {
+      const targets = await claudeIntegration.getTargets('training');
 
       expect(targets).toMatchObject({
         energy_kcal: 2900,
@@ -288,8 +288,8 @@ describe('Claude Integration', () => {
       });
     });
 
-    it('should default to rest day targets', () => {
-      const targets = claudeIntegration.getTargets();
+    it('should default to rest day targets', async () => {
+      const targets = await claudeIntegration.getTargets();
 
       expect(targets.energy_kcal).toBe(2500); // Rest day value
     });
