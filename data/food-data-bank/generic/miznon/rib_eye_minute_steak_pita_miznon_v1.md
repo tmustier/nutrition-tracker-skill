@@ -90,6 +90,7 @@ per_portion:  # Schema v2: 52 nutrient fields
   nickel_ug: 0
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000"
+  fat_unassigned_g: 2.5
 quality:
   confidence: medium
   gaps:
