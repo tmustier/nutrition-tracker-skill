@@ -137,11 +137,19 @@ class ProfileManager {
       // Validate profile structure
       this.validateProfile(profile);
 
-      // Cache it
-      this.cache.set(userId, {
-        profile,
-        loadedAt: Date.now(),
-      });
+      // CRITICAL: Check if saveProfile() ran concurrently during our load
+      // If the lock is missing, saveProfile() cleared it while we were loading
+      // In this case, don't cache the potentially stale profile
+      if (this.loadingLocks.has(userId)) {
+        // Safe to cache - no concurrent saveProfile()
+        this.cache.set(userId, {
+          profile,
+          loadedAt: Date.now(),
+        });
+      } else {
+        // Lock was cleared - saveProfile() likely ran concurrently
+        console.warn(`[ProfileManager] Not caching user ${userId} - lock missing (concurrent saveProfile?)`);
+      }
 
       console.log(`[ProfileManager] Successfully loaded profile for user ${userId}`);
       return profile;
@@ -151,11 +159,15 @@ class ProfileManager {
       if (error.response?.status === 404) {
         console.info(`[ProfileManager] No profile found for user ${userId}, using default`);
         const defaultProfile = this.getDefaultProfile();
+
         // Cache the default profile too (prevents repeated 404s)
-        this.cache.set(userId, {
-          profile: defaultProfile,
-          loadedAt: Date.now(),
-        });
+        // But only if lock still exists (no concurrent saveProfile)
+        if (this.loadingLocks.has(userId)) {
+          this.cache.set(userId, {
+            profile: defaultProfile,
+            loadedAt: Date.now(),
+          });
+        }
         return defaultProfile;
       }
 

@@ -164,7 +164,7 @@ const cleanupRateLimit = () => {
 };
 
 // Clean up rate limit storage every 5 minutes
-setInterval(cleanupRateLimit, 5 * 60 * 1000);
+const rateLimitCleanupInterval = setInterval(cleanupRateLimit, 5 * 60 * 1000);
 
 /**
  * Rate limiting middleware - Prevents API abuse by limiting requests per user
@@ -1055,6 +1055,40 @@ const handler = async (req, res) => {
     });
   }
 };
+
+// ============================================================================
+// GRACEFUL SHUTDOWN
+// ============================================================================
+
+/**
+ * Graceful shutdown handler for production deployments (Railway, etc.)
+ * Ensures clean cleanup of resources when receiving SIGTERM/SIGINT signals
+ */
+let isShuttingDown = false;
+
+const gracefulShutdown = (signal) => {
+  if (isShuttingDown) return;
+  isShuttingDown = true;
+
+  console.log(`\n${signal} received, starting graceful shutdown...`);
+
+  // Cleanup ProfileManager (clears cache, stops cleanup interval)
+  if (profileManager) {
+    profileManager.destroy();
+  }
+
+  // Cleanup rate limit interval
+  if (rateLimitCleanupInterval) {
+    clearInterval(rateLimitCleanupInterval);
+  }
+
+  console.log('Cleanup complete, exiting...');
+  process.exit(0);
+};
+
+// Handle graceful shutdown signals
+process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
+process.on('SIGINT', () => gracefulShutdown('SIGINT')); // For Ctrl+C in development
 
 // ============================================================================
 // EXPORTS
