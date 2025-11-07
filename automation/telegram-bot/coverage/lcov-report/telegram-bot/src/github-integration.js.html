@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">11.61% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>18/155</span>
+                <span class='fraction'>0/155</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">3.57% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/112</span>
+                <span class='fraction'>0/112</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5.88% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/17</span>
+                <span class='fraction'>0/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">11.84% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>18/152</span>
+                <span class='fraction'>0/152</span>
             </div>
         
             
@@ -662,9 +662,9 @@
 <a name='L597'></a><a href='#L597'>597</a>
 <a name='L598'></a><a href='#L598'>598</a>
 <a name='L599'></a><a href='#L599'>599</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -681,29 +681,29 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1258,11 +1258,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// src/github-integration.js
-const axios = require('axios');
-const yaml = require('js-yaml');
-const config = require('./config');
+const axios = <span class="cstat-no" title="statement not covered" >require('axios');</span>
+const yaml = <span class="cstat-no" title="statement not covered" >require('js-yaml');</span>
+const config = <span class="cstat-no" title="statement not covered" >require('./config');</span>
 &nbsp;
 /**
  * GitHub API Integration for Nutrition Tracking
@@ -1278,29 +1278,29 @@ const config = require('./config');
  * - Calculate daily totals from all logged entries
  */
 class GitHubIntegration {
-  constructor() {
-    this.token = config.github.token;
-    this.owner = config.github.owner;
-    this.repo = config.github.repo;
-    this.branch = config.github.branch;
-    this.apiUrl = 'https://api.github.com';
+<span class="fstat-no" title="function not covered" >  co</span>nstructor() {
+<span class="cstat-no" title="statement not covered" >    this.token = config.github.token;</span>
+<span class="cstat-no" title="statement not covered" >    this.owner = config.github.owner;</span>
+<span class="cstat-no" title="statement not covered" >    this.repo = config.github.repo;</span>
+<span class="cstat-no" title="statement not covered" >    this.branch = config.github.branch;</span>
+<span class="cstat-no" title="statement not covered" >    this.apiUrl = 'https://api.github.com';</span>
 &nbsp;
     // Retry configuration for race condition handling
-    this.MAX_RETRIES = 5;
-    this.INITIAL_RETRY_DELAY_MS = 100;
-    this.MAX_RETRY_DELAY_MS = 2000;
+<span class="cstat-no" title="statement not covered" >    this.MAX_RETRIES = 5;</span>
+<span class="cstat-no" title="statement not covered" >    this.INITIAL_RETRY_DELAY_MS = 100;</span>
+<span class="cstat-no" title="statement not covered" >    this.MAX_RETRY_DELAY_MS = 2000;</span>
     
     // Rate limiting for GitHub API (5000 requests per hour = ~83 per minute)
-    this.rateLimitRequests = [];
-    this.rateLimitWindow = 60 * 1000; // 1 minute
-    this.maxRequestsPerMinute = 80; // Conservative limit
-    this.BACKOFF_MULTIPLIER = 2;
+<span class="cstat-no" title="statement not covered" >    this.rateLimitRequests = [];</span>
+<span class="cstat-no" title="statement not covered" >    this.rateLimitWindow = 60 * 1000; </span>// 1 minute
+<span class="cstat-no" title="statement not covered" >    this.maxRequestsPerMinute = 80; </span>// Conservative limit
+<span class="cstat-no" title="statement not covered" >    this.BACKOFF_MULTIPLIER = 2;</span>
 &nbsp;
     // Validate required configuration
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (!this.token) {
+<span class="cstat-no" title="statement not covered" >    if (!this.token) {</span>
 <span class="cstat-no" title="statement not covered" >      throw new Error('GitHub token is required (GITHUB_TOKEN env var)');</span>
     }
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (!this.owner || !this.repo) {
+<span class="cstat-no" title="statement not covered" >    if (!this.owner || !this.repo) {</span>
 <span class="cstat-no" title="statement not covered" >      throw new Error('GitHub owner and repo are required');</span>
     }
   }
@@ -1856,7 +1856,7 @@ class GitHubIntegration {
 }
 &nbsp;
 // Export singleton instance
-module.exports = new GitHubIntegration();
+<span class="cstat-no" title="statement not covered" >module.exports = new GitHubIntegration();</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -1864,7 +1864,7 @@ module.exports = new GitHubIntegration();
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-11-06T21:41:07.092Z
+                at 2025-11-07T13:23:32.382Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

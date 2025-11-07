@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for telegram-bot/src/response-handler.js</title>
+    <title>Code coverage report for telegram-bot/src/circuit-breaker.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">telegram-bot/src</a> response-handler.js</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">telegram-bot/src</a> circuit-breaker.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/56</span>
+                <span class='fraction'>128/128</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">98.92% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/41</span>
+                <span class='fraction'>92/93</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/52</span>
+                <span class='fraction'>125/125</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -348,7 +348,77 @@
 <a name='L283'></a><a href='#L283'>283</a>
 <a name='L284'></a><a href='#L284'>284</a>
 <a name='L285'></a><a href='#L285'>285</a>
-<a name='L286'></a><a href='#L286'>286</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L286'></a><a href='#L286'>286</a>
+<a name='L287'></a><a href='#L287'>287</a>
+<a name='L288'></a><a href='#L288'>288</a>
+<a name='L289'></a><a href='#L289'>289</a>
+<a name='L290'></a><a href='#L290'>290</a>
+<a name='L291'></a><a href='#L291'>291</a>
+<a name='L292'></a><a href='#L292'>292</a>
+<a name='L293'></a><a href='#L293'>293</a>
+<a name='L294'></a><a href='#L294'>294</a>
+<a name='L295'></a><a href='#L295'>295</a>
+<a name='L296'></a><a href='#L296'>296</a>
+<a name='L297'></a><a href='#L297'>297</a>
+<a name='L298'></a><a href='#L298'>298</a>
+<a name='L299'></a><a href='#L299'>299</a>
+<a name='L300'></a><a href='#L300'>300</a>
+<a name='L301'></a><a href='#L301'>301</a>
+<a name='L302'></a><a href='#L302'>302</a>
+<a name='L303'></a><a href='#L303'>303</a>
+<a name='L304'></a><a href='#L304'>304</a>
+<a name='L305'></a><a href='#L305'>305</a>
+<a name='L306'></a><a href='#L306'>306</a>
+<a name='L307'></a><a href='#L307'>307</a>
+<a name='L308'></a><a href='#L308'>308</a>
+<a name='L309'></a><a href='#L309'>309</a>
+<a name='L310'></a><a href='#L310'>310</a>
+<a name='L311'></a><a href='#L311'>311</a>
+<a name='L312'></a><a href='#L312'>312</a>
+<a name='L313'></a><a href='#L313'>313</a>
+<a name='L314'></a><a href='#L314'>314</a>
+<a name='L315'></a><a href='#L315'>315</a>
+<a name='L316'></a><a href='#L316'>316</a>
+<a name='L317'></a><a href='#L317'>317</a>
+<a name='L318'></a><a href='#L318'>318</a>
+<a name='L319'></a><a href='#L319'>319</a>
+<a name='L320'></a><a href='#L320'>320</a>
+<a name='L321'></a><a href='#L321'>321</a>
+<a name='L322'></a><a href='#L322'>322</a>
+<a name='L323'></a><a href='#L323'>323</a>
+<a name='L324'></a><a href='#L324'>324</a>
+<a name='L325'></a><a href='#L325'>325</a>
+<a name='L326'></a><a href='#L326'>326</a>
+<a name='L327'></a><a href='#L327'>327</a>
+<a name='L328'></a><a href='#L328'>328</a>
+<a name='L329'></a><a href='#L329'>329</a>
+<a name='L330'></a><a href='#L330'>330</a>
+<a name='L331'></a><a href='#L331'>331</a>
+<a name='L332'></a><a href='#L332'>332</a>
+<a name='L333'></a><a href='#L333'>333</a>
+<a name='L334'></a><a href='#L334'>334</a>
+<a name='L335'></a><a href='#L335'>335</a>
+<a name='L336'></a><a href='#L336'>336</a>
+<a name='L337'></a><a href='#L337'>337</a>
+<a name='L338'></a><a href='#L338'>338</a>
+<a name='L339'></a><a href='#L339'>339</a>
+<a name='L340'></a><a href='#L340'>340</a>
+<a name='L341'></a><a href='#L341'>341</a>
+<a name='L342'></a><a href='#L342'>342</a>
+<a name='L343'></a><a href='#L343'>343</a>
+<a name='L344'></a><a href='#L344'>344</a>
+<a name='L345'></a><a href='#L345'>345</a>
+<a name='L346'></a><a href='#L346'>346</a>
+<a name='L347'></a><a href='#L347'>347</a>
+<a name='L348'></a><a href='#L348'>348</a>
+<a name='L349'></a><a href='#L349'>349</a>
+<a name='L350'></a><a href='#L350'>350</a>
+<a name='L351'></a><a href='#L351'>351</a>
+<a name='L352'></a><a href='#L352'>352</a>
+<a name='L353'></a><a href='#L353'>353</a>
+<a name='L354'></a><a href='#L354'>354</a>
+<a name='L355'></a><a href='#L355'>355</a>
+<a name='L356'></a><a href='#L356'>356</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -360,7 +430,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -369,34 +438,40 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">71x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">70x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">69x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">68x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">67x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">67x</span>
+<span class="cline-any cline-yes">67x</span>
+<span class="cline-any cline-yes">67x</span>
+<span class="cline-any cline-yes">67x</span>
+<span class="cline-any cline-yes">67x</span>
+<span class="cline-any cline-yes">67x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">67x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -404,17 +479,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">67x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -424,52 +497,61 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1041x</span>
+<span class="cline-any cline-yes">1036x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1036x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1036x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1033x</span>
+<span class="cline-any cline-yes">1033x</span>
+<span class="cline-any cline-yes">1033x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1033x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1032x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">66x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1049x</span>
+<span class="cline-any cline-yes">1049x</span>
+<span class="cline-any cline-yes">1049x</span>
+<span class="cline-any cline-yes">1049x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1049x</span>
+<span class="cline-any cline-yes">1032x</span>
+<span class="cline-any cline-yes">1032x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1032x</span>
+<span class="cline-any cline-yes">1019x</span>
+<span class="cline-any cline-yes">1019x</span>
+<span class="cline-any cline-yes">1019x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -478,24 +560,41 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4125x</span>
+<span class="cline-any cline-yes">4125x</span>
+<span class="cline-any cline-yes">4125x</span>
+<span class="cline-any cline-yes">4125x</span>
+<span class="cline-any cline-yes">4125x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4125x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4125x</span>
+<span class="cline-any cline-yes">2003215x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4125x</span>
+<span class="cline-any cline-yes">1000x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4125x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4125x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4121x</span>
+<span class="cline-any cline-yes">1053x</span>
+<span class="cline-any cline-yes">1053x</span>
+<span class="cline-any cline-yes">1053x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -503,33 +602,45 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3109x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3108x</span>
+<span class="cline-any cline-yes">3108x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3108x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3108x</span>
+<span class="cline-any cline-yes">3108x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3108x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3108x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3108x</span>
+<span class="cline-any cline-yes">2000x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3108x</span>
+<span class="cline-any cline-yes">1057x</span>
+<span class="cline-any cline-yes">2051x</span>
+<span class="cline-any cline-yes">1019x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -537,40 +648,63 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3113x</span>
+<span class="cline-any cline-yes">1054x</span>
+<span class="cline-any cline-yes">2059x</span>
+<span class="cline-any cline-yes">1033x</span>
+<span class="cline-any cline-yes">1026x</span>
+<span class="cline-any cline-yes">1020x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -579,7 +713,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -587,7 +720,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -597,327 +729,405 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
- * Response Type Handler
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// src/circuit-breaker.js
+&nbsp;
+/**
+ * Circuit Breaker Pattern Implementation
  *
- * Detects and handles different types of Claude responses:
- * - Nutrition JSON data (should be logged to GitHub)
- * - Conversational responses (clarifications, questions, general chat)
- * - Mixed responses (text + JSON)
+ * Protects external services (like USDA API) from cascading failures by automatically
+ * disabling requests when sustained failures are detected, allowing the service time
+ * to recover before retrying.
+ *
+ * STATE MACHINE:
+ * ┌─────────┐  N failures in window  ┌──────┐  timeout elapsed  ┌────────────┐
+ * │ CLOSED  │ ───────────────────────&gt;│ OPEN │ ─────────────────&gt;│ HALF_OPEN  │
+ * │(normal) │                          │(fail)│                   │  (testing) │
+ * └─────────┘&lt;─────────────────────────└──────┘&lt;──────────────────└────────────┘
+ *     ▲      N successes                  ▲          any failure          │
+ *     └──────────────────────────────────────────────────────────────────┘
  */
-&nbsp;
-/**
- * Response types
- */
-const ResponseType = <span class="cstat-no" title="statement not covered" >{</span>
-  NUTRITION_DATA: 'nutrition_data',
-  CONVERSATIONAL: 'conversational',
-  MIXED: 'mixed',
-  ERROR: 'error'
-};
-&nbsp;
-/**
- * Detect the type of Claude's response
- * @param {string} responseText - The full text response from Claude
- * @returns {Object} { type: ResponseType, hasJSON: boolean, hasText: boolean }
- */
-function <span class="fstat-no" title="function not covered" >detectResponseType(</span>responseText) {
-<span class="cstat-no" title="statement not covered" >  if (!responseText || typeof responseText !== 'string') {</span>
-<span class="cstat-no" title="statement not covered" >    return {</span>
-      type: ResponseType.ERROR,
-      hasJSON: false,
-      hasText: false,
-      confidence: 1.0
-    };
-  }
-&nbsp;
-  // Check for JSON code block
-  const jsonMatch = <span class="cstat-no" title="statement not covered" >responseText.match(/```json\n([\s\S]*?)\n```/);</span>
-  const hasJSON = <span class="cstat-no" title="statement not covered" >jsonMatch !== null;</span>
-&nbsp;
-  // Check for substantial text outside JSON block
-  let textOutsideJSON = <span class="cstat-no" title="statement not covered" >responseText;</span>
-<span class="cstat-no" title="statement not covered" >  if (hasJSON) {</span>
-<span class="cstat-no" title="statement not covered" >    textOutsideJSON = responseText.replace(/```json\n[\s\S]*?\n```/g, '').trim();</span>
-  }
-&nbsp;
-  const hasSubstantialText = <span class="cstat-no" title="statement not covered" >textOutsideJSON.length &gt; 20;</span> // More than just a brief intro
-&nbsp;
-  // Classify response type
-<span class="cstat-no" title="statement not covered" >  if (hasJSON &amp;&amp; !hasSubstantialText) {</span>
-<span class="cstat-no" title="statement not covered" >    return {</span>
-      type: ResponseType.NUTRITION_DATA,
-      hasJSON: true,
-      hasText: false,
-      confidence: 1.0
-    };
-  }
-&nbsp;
-<span class="cstat-no" title="statement not covered" >  if (hasJSON &amp;&amp; hasSubstantialText) {</span>
-<span class="cstat-no" title="statement not covered" >    return {</span>
-      type: ResponseType.MIXED,
-      hasJSON: true,
-      hasText: true,
-      confidence: 1.0
-    };
-  }
-&nbsp;
-  // No JSON - check if it looks conversational
-  const conversationalPatterns = <span class="cstat-no" title="statement not covered" >[</span>
-    /\?$/m, // Ends with question
-    /could you (clarify|specify|tell me|provide)/i,
-    /what (did you|do you|type of|kind of)/i,
-    /which (one|item|dish)/i,
-    /can you (provide|give|tell)/i,
-    /(i need|i\'m not sure|unclear|ambiguous)/i,
-    /please (specify|clarify|provide|tell)/i
-  ];
-&nbsp;
-  const looksConversational = <span class="cstat-no" title="statement not covered" >conversationalPatterns.some(<span class="fstat-no" title="function not covered" >pa</span>ttern =&gt;</span>
-<span class="cstat-no" title="statement not covered" >    pattern.test(responseText)</span>
-  );
-&nbsp;
-<span class="cstat-no" title="statement not covered" >  return {</span>
-    type: ResponseType.CONVERSATIONAL,
-    hasJSON: false,
-    hasText: true,
-    confidence: looksConversational ? 0.9 : 0.7
-  };
-}
-&nbsp;
-/**
- * Extract JSON nutrition data from response
- * @param {string} responseText - The full text response
- * @returns {Object|null} Parsed JSON object or null if not found
- */
-function <span class="fstat-no" title="function not covered" >extractJSON(</span>responseText) {
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    const jsonMatch = <span class="cstat-no" title="statement not covered" >responseText.match(/```json\n([\s\S]*?)\n```/);</span>
-<span class="cstat-no" title="statement not covered" >    if (!jsonMatch || !jsonMatch[1]) {</span>
-<span class="cstat-no" title="statement not covered" >      return null;</span>
+class CircuitBreaker {
+  constructor(config = {}) {
+    // Validate configuration
+    if (config.failureThreshold !== undefined &amp;&amp; config.failureThreshold &lt; 1) {
+      throw new Error('CircuitBreaker: failureThreshold must be &gt;= 1');
+    }
+    if (config.successThreshold !== undefined &amp;&amp; config.successThreshold &lt; 1) {
+      throw new Error('CircuitBreaker: successThreshold must be &gt;= 1');
+    }
+    if (config.failureWindowMs !== undefined &amp;&amp; config.failureWindowMs &lt; 1000) {
+      throw new Error('CircuitBreaker: failureWindowMs must be &gt;= 1000ms');
+    }
+    if (config.recoveryTimeoutMs !== undefined &amp;&amp; config.recoveryTimeoutMs &lt; 1000) {
+      throw new Error('CircuitBreaker: recoveryTimeoutMs must be &gt;= 1000ms');
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return JSON.parse(jsonMatch[1]);</span>
-  } catch (error) {
-<span class="cstat-no" title="statement not covered" >    console.error('Failed to extract JSON from response:', error.message);</span>
-<span class="cstat-no" title="statement not covered" >    return null;</span>
+    // Configuration with defaults
+    this.config = {
+      failureThreshold: config.failureThreshold || 5,      // Open circuit after N failures
+      failureWindowMs: config.failureWindowMs || 60000,    // Time window for failure tracking (60s)
+      recoveryTimeoutMs: config.recoveryTimeoutMs || 120000, // Wait time before HALF_OPEN (2 min)
+      successThreshold: config.successThreshold || 2,       // Successes needed to close circuit
+      name: config.name || 'CircuitBreaker',                // Name for logging
+    };
+&nbsp;
+    // State management
+    this.state = 'CLOSED'; // Current state: CLOSED, OPEN, HALF_OPEN
+    this.failures = [];    // Array of failure timestamps (sliding window)
+    this.consecutiveSuccesses = 0; // Success counter in HALF_OPEN state
+    this.openedAt = null;  // Timestamp when circuit was opened
+    this.stateChangedAt = Date.now(); // Last state transition timestamp
+    this.isTransitioning = false; // Prevents race condition during OPEN → HALF_OPEN transition
+&nbsp;
+    // Comprehensive metrics tracking
+    this.metrics = {
+      totalRequests: 0,
+      successCount: 0,
+      failureCount: 0,
+      rejectedCount: 0,
+      stateTransitions: [],
+      circuitOpenedCount: 0,
+      circuitClosedCount: 0,
+      lastFailureTime: null,
+      lastSuccessTime: null,
+      lastFailureError: null,
+      startTime: Date.now(),
+    };
+&nbsp;
+    console.log(`[${this.config.name}] Initialized circuit breaker with config:`, {
+      failureThreshold: this.config.failureThreshold,
+      failureWindowMs: `${this.config.failureWindowMs}ms`,
+      recoveryTimeoutMs: `${this.config.recoveryTimeoutMs}ms`,
+      successThreshold: this.config.successThreshold,
+    });
   }
-}
 &nbsp;
-/**
- * Extract conversational text from response (excluding JSON blocks)
- * @param {string} responseText - The full text response
- * @returns {string} Text with JSON blocks removed
- */
-function <span class="fstat-no" title="function not covered" >extractConversationalText(</span>responseText) {
-<span class="cstat-no" title="statement not covered" >  if (!responseText) <span class="cstat-no" title="statement not covered" >return '';</span></span>
+  /**
+   * Check if circuit is OPEN (requests should be rejected)
+   * Automatically transitions OPEN → HALF_OPEN after recovery timeout
+   *
+   * Note: Uses isTransitioning flag to prevent race condition where multiple
+   * concurrent requests could all transition to HALF_OPEN simultaneously.
+   * In Node.js single-threaded environment this is less critical, but still
+   * good practice for consistency and future-proofing.
+   */
+  isOpen() {
+    // Auto-transition from OPEN to HALF_OPEN after recovery timeout
+    if (this.state === 'OPEN' &amp;&amp; !this.isTransitioning) {
+      const now = Date.now();
+      // Use Math.abs() to handle NTP adjustments / clock going backwards
+      const timeSinceOpened = Math.abs(now - this.openedAt);
 &nbsp;
-  // Remove JSON code blocks
-  let text = <span class="cstat-no" title="statement not covered" >responseText.replace(/```json\n[\s\S]*?\n```/g, '').trim();</span>
+      if (timeSinceOpened &gt;= this.config.recoveryTimeoutMs) {
+        // Use try-finally to prevent deadlock if transitionTo() throws
+        this.isTransitioning = true;
+        try {
+          this.transitionTo('HALF_OPEN');
+        } finally {
+          this.isTransitioning = false;
+        }
+        return false; // Allow request in HALF_OPEN state
+      }
 &nbsp;
-  // Remove any remaining code blocks
-<span class="cstat-no" title="statement not covered" >  text = text.replace(/```[\s\S]*?```/g, '').trim();</span>
+      return true; // Circuit still OPEN, reject request
+    }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return text;</span>
-}
+    return this.state === 'OPEN'; // Return true if OPEN, false otherwise
+  }
 &nbsp;
-/**
- * Format a response for Telegram based on its type
- * @param {Object} detection - Result from detectResponseType()
- * @param {string} responseText - Full response text
- * @param {Object|null} nutritionData - Parsed nutrition data (if any)
- * @returns {Object} { shouldLog: boolean, telegramMessage: string, data: Object }
- */
-function <span class="fstat-no" title="function not covered" >formatResponse(</span>detection, responseText, nutritionData = <span class="branch-0 cbranch-no" title="branch not covered" >null)</span> {
-<span class="cstat-no" title="statement not covered" >  switch (detection.type) {</span>
-    case ResponseType.NUTRITION_DATA:
-      // Pure nutrition data - should be logged
-<span class="cstat-no" title="statement not covered" >      return {</span>
-        shouldLog: true,
-        shouldRespond: true,
-        telegramMessage: null, // Will be generated from nutrition data
-        data: nutritionData,
-        conversationalText: null
+  /**
+   * Get current circuit state
+   */
+  getState() {
+    return this.state;
+  }
+&nbsp;
+  /**
+   * Record a successful request
+   */
+  recordSuccess() {
+    const now = Date.now();
+    this.metrics.totalRequests++;
+    this.metrics.successCount++;
+    this.metrics.lastSuccessTime = now;
+&nbsp;
+    if (this.state === 'HALF_OPEN') {
+      this.consecutiveSuccesses++;
+      console.log(`[${this.config.name}] Success in HALF_OPEN: ${this.consecutiveSuccesses}/${this.config.successThreshold}`);
+&nbsp;
+      // Transition to CLOSED after enough consecutive successes
+      if (this.consecutiveSuccesses &gt;= this.config.successThreshold) {
+        this.transitionTo('CLOSED');
+        this.consecutiveSuccesses = 0;
+        this.failures = []; // Clear failure history when circuit closes
+      }
+    }
+    // Note: We do NOT clear failures on success in CLOSED state
+    // The sliding window filter in recordFailure() is sufficient
+    // This prevents a pattern of (4 failures, 1 success, 4 failures) from never opening the circuit
+  }
+&nbsp;
+  /**
+   * Record a failed request
+   */
+  recordFailure(error) {
+    const now = Date.now();
+    this.metrics.totalRequests++;
+    this.metrics.failureCount++;
+    this.metrics.lastFailureTime = now;
+    this.metrics.lastFailureError = error ? error.message : 'Unknown error';
+&nbsp;
+    // Add failure to sliding window
+    this.failures.push(now);
+&nbsp;
+    // Remove failures outside the time window
+    const cutoff = now - this.config.failureWindowMs;
+    this.failures = this.failures.filter(timestamp =&gt; timestamp &gt; cutoff);
+&nbsp;
+    // Prevent unbounded growth under extreme load (1000+ concurrent failures)
+    // Use slice() instead of shift() for O(n) performance instead of O(n²)
+    if (this.failures.length &gt; 1000) {
+      this.failures = this.failures.slice(-1000);
+    }
+&nbsp;
+    console.log(`[${this.config.name}] Failure recorded: ${this.failures.length}/${this.config.failureThreshold} in window`);
+&nbsp;
+    // State-specific handling
+    if (this.state === 'CLOSED') {
+      // Check if we should open the circuit
+      if (this.failures.length &gt;= this.config.failureThreshold) {
+        console.warn(`[${this.config.name}] Failure threshold reached, opening circuit`);
+        this.transitionTo('OPEN');
+        this.openedAt = now;
+      }
+    } else <span class="missing-if-branch" title="else path not taken" >E</span>if (this.state === 'HALF_OPEN') {
+      // Any failure in HALF_OPEN immediately reopens the circuit
+      console.warn(`[${this.config.name}] Failure in HALF_OPEN state, reopening circuit`);
+      this.transitionTo('OPEN');
+      this.openedAt = now;
+      this.consecutiveSuccesses = 0;
+    }
+  }
+&nbsp;
+  /**
+   * Record a rejected request (circuit was OPEN)
+   */
+  recordRejection() {
+    this.metrics.rejectedCount++;
+  }
+&nbsp;
+  /**
+   * Transition to a new state
+   */
+  transitionTo(newState) {
+    if (this.state === newState) return;
+&nbsp;
+    const now = Date.now();
+    const oldState = this.state;
+&nbsp;
+    console.log(`[${this.config.name}] State transition: ${oldState} → ${newState}`);
+&nbsp;
+    this.state = newState;
+    this.stateChangedAt = now;
+&nbsp;
+    // Record state transition in metrics
+    const transition = {
+      from: oldState,
+      to: newState,
+      timestamp: now,
+      date: new Date(now).toISOString(),
+      reason: this._getTransitionReason(oldState, newState),
+    };
+&nbsp;
+    this.metrics.stateTransitions.push(transition);
+&nbsp;
+    // Prevent memory leak: limit state transition history to last 1000 entries
+    // Use slice() for O(n) performance instead of shift() loop which is O(n²)
+    if (this.metrics.stateTransitions.length &gt; 1000) {
+      this.metrics.stateTransitions = this.metrics.stateTransitions.slice(-1000);
+    }
+&nbsp;
+    // Update state-specific counters
+    if (newState === 'OPEN') {
+      this.metrics.circuitOpenedCount++;
+    } else if (newState === 'CLOSED') {
+      this.metrics.circuitClosedCount++;
+    }
+  }
+&nbsp;
+  /**
+   * Get human-readable reason for state transition
+   */
+  _getTransitionReason(from, to) {
+    if (from === 'CLOSED' &amp;&amp; to === 'OPEN') {
+      return `${this.failures.length} failures in ${this.config.failureWindowMs}ms window`;
+    } else if (from === 'OPEN' &amp;&amp; to === 'HALF_OPEN') {
+      return `Recovery timeout (${this.config.recoveryTimeoutMs}ms) elapsed`;
+    } else if (from === 'HALF_OPEN' &amp;&amp; to === 'CLOSED') {
+      return `${this.config.successThreshold} consecutive successes`;
+    } else if (from === 'HALF_OPEN' &amp;&amp; to === 'OPEN') {
+      return 'Failure during recovery testing';
+    }
+    return 'Unknown';
+  }
+&nbsp;
+  /**
+   * Get comprehensive circuit breaker metrics
+   */
+  getMetrics() {
+    const now = Date.now();
+    const totalTime = now - this.metrics.startTime;
+&nbsp;
+    // Calculate uptime percentage
+    let openTime = 0;
+    for (let i = 0; i &lt; this.metrics.stateTransitions.length; i++) {
+      const transition = this.metrics.stateTransitions[i];
+      if (transition.to === 'OPEN') {
+        const nextTransition = this.metrics.stateTransitions[i + 1];
+        const endTime = nextTransition ? nextTransition.timestamp : now;
+        openTime += endTime - transition.timestamp;
+      }
+    }
+&nbsp;
+    if (this.state === 'OPEN') {
+      openTime += now - this.stateChangedAt;
+    }
+&nbsp;
+    const uptimePercentage = totalTime &gt; 0 ? ((totalTime - openTime) / totalTime) * 100 : 100;
+    const successRate = this.metrics.totalRequests &gt; 0
+      ? (this.metrics.successCount / this.metrics.totalRequests) * 100
+      : 0;
+&nbsp;
+    // Calculate time until next state change
+    let nextStateChange = null;
+    if (this.state === 'OPEN') {
+      const timeRemaining = this.config.recoveryTimeoutMs - (now - this.openedAt);
+      nextStateChange = {
+        state: 'HALF_OPEN',
+        inMs: Math.max(0, timeRemaining),
+        inSeconds: Math.max(0, Math.ceil(timeRemaining / 1000)),
       };
+    }
 &nbsp;
-    case ResponseType.MIXED:
-      // Both text and data - log the data, respond with text + confirmation
-      const conversationalText = <span class="cstat-no" title="statement not covered" >extractConversationalText(responseText);</span>
-<span class="cstat-no" title="statement not covered" >      return {</span>
-        shouldLog: true,
-        shouldRespond: true,
-        telegramMessage: conversationalText, // Will be prepended to nutrition summary
-        data: nutritionData,
-        conversationalText
-      };
+    return {
+      state: this.state,
+      stateChangedAt: new Date(this.stateChangedAt).toISOString(),
+      totalRequests: this.metrics.totalRequests,
+      successCount: this.metrics.successCount,
+      failureCount: this.metrics.failureCount,
+      rejectedCount: this.metrics.rejectedCount,
+      successRate: parseFloat(successRate.toFixed(2)),
+      uptimePercentage: parseFloat(uptimePercentage.toFixed(2)),
+      circuitOpenedCount: this.metrics.circuitOpenedCount,
+      circuitClosedCount: this.metrics.circuitClosedCount,
+      currentFailuresInWindow: this.failures.length,
+      failureThreshold: this.config.failureThreshold,
+      failureWindowMs: this.config.failureWindowMs,
+      consecutiveSuccesses: this.consecutiveSuccesses,
+      successThreshold: this.config.successThreshold,
+      lastFailureTime: this.metrics.lastFailureTime
+        ? new Date(this.metrics.lastFailureTime).toISOString()
+        : null,
+      lastFailureError: this.metrics.lastFailureError,
+      lastSuccessTime: this.metrics.lastSuccessTime
+        ? new Date(this.metrics.lastSuccessTime).toISOString()
+        : null,
+      nextStateChange,
+      recentTransitions: this.metrics.stateTransitions.slice(-10),
+    };
+  }
 &nbsp;
-    case ResponseType.CONVERSATIONAL:
-      // Pure conversation - don't log, just respond
-<span class="cstat-no" title="statement not covered" >      return {</span>
-        shouldLog: false,
-        shouldRespond: true,
-        telegramMessage: responseText,
-        data: null,
-        conversationalText: responseText
-      };
+  /**
+   * Reset circuit breaker to initial state
+   */
+  reset() {
+    console.log(`[${this.config.name}] Manual reset requested`);
 &nbsp;
-    case ResponseType.ERROR:
-<span class="cstat-no" title="statement not covered" >      return {</span>
-        shouldLog: false,
-        shouldRespond: true,
-        telegramMessage: '⚠️ Sorry, I received an invalid response. Please try again.',
-        data: null,
-        conversationalText: null
-      };
+    const oldState = this.state;
+    this.state = 'CLOSED';
+    this.failures = [];
+    this.consecutiveSuccesses = 0;
+    this.openedAt = null;
+    this.stateChangedAt = Date.now();
 &nbsp;
-    default:
-<span class="cstat-no" title="statement not covered" >      return {</span>
-        shouldLog: false,
-        shouldRespond: true,
-        telegramMessage: '⚠️ Something went wrong processing the response.',
-        data: null,
-        conversationalText: null
-      };
+    this.metrics.stateTransitions.push({
+      from: oldState,
+      to: 'CLOSED',
+      timestamp: Date.now(),
+      date: new Date().toISOString(),
+      reason: 'Manual reset',
+    });
+&nbsp;
+    console.log(`[${this.config.name}] Reset complete: ${oldState} → CLOSED`);
+  }
+&nbsp;
+  /**
+   * Get a summary string of current circuit status
+   */
+  getStatusSummary() {
+    const metrics = this.getMetrics();
+    let summary = `Circuit Breaker "${this.config.name}" Status:\n`;
+    summary += `  State: ${metrics.state}\n`;
+    summary += `  Uptime: ${metrics.uptimePercentage}%\n`;
+    summary += `  Success Rate: ${metrics.successRate}%\n`;
+    summary += `  Requests: ${metrics.totalRequests} (${metrics.successCount} success, ${metrics.failureCount} failed, ${metrics.rejectedCount} rejected)\n`;
+    summary += `  Failures in window: ${metrics.currentFailuresInWindow}/${metrics.failureThreshold}\n`;
+&nbsp;
+    if (metrics.state === 'OPEN' &amp;&amp; metrics.nextStateChange) {
+      summary += `  Recovery in: ${metrics.nextStateChange.inSeconds}s\n`;
+    } else if (metrics.state === 'HALF_OPEN') {
+      summary += `  Recovery progress: ${metrics.consecutiveSuccesses}/${metrics.successThreshold} successes\n`;
+    }
+&nbsp;
+    return summary;
   }
 }
 &nbsp;
-/**
- * Check if a user message looks like a clarification or correction
- * @param {string} message - User's message
- * @returns {boolean}
- */
-function <span class="fstat-no" title="function not covered" >isClarification(</span>message) {
-  const clarificationPatterns = <span class="cstat-no" title="statement not covered" >[</span>
-    /^no[,\s]/i,
-    /^actually[,\s]/i,
-    /^wait[,\s]/i,
-    /^correction/i,
-    /^i meant/i,
-    /^sorry,?\s+(i|that)/i,
-    /^not\s+\d+/i, // "not 100g" etc
-    /make that/i,
-    /change (that|it) to/i,
-    /instead of/i
-  ];
-&nbsp;
-<span class="cstat-no" title="statement not covered" >  return clarificationPatterns.some(<span class="fstat-no" title="function not covered" >pa</span>ttern =&gt; <span class="cstat-no" title="statement not covered" >pattern.test(message.trim()))</span>;</span>
-}
-&nbsp;
-/**
- * Check if a user message looks like a question (not food logging)
- * @param {string} message - User's message
- * @returns {boolean}
- */
-function <span class="fstat-no" title="function not covered" >isQuestion(</span>message) {
-  const questionPatterns = <span class="cstat-no" title="statement not covered" >[</span>
-    /^(what|when|where|who|why|how)\s/i,
-    /^(did|do|does|can|could|should|would|will)\s/i,
-    /\?$/,
-    /how (much|many)/i,
-    /what (is|are|was|were)/i,
-    /tell me (about|what)/i,
-    /show me/i
-  ];
-&nbsp;
-<span class="cstat-no" title="statement not covered" >  return questionPatterns.some(<span class="fstat-no" title="function not covered" >pa</span>ttern =&gt; <span class="cstat-no" title="statement not covered" >pattern.test(message.trim()))</span>;</span>
-}
-&nbsp;
-/**
- * Check if a user message looks like a food logging intent
- * @param {string} message - User's message
- * @returns {boolean}
- */
-function <span class="fstat-no" title="function not covered" >isFoodLogging(</span>message) {
-  const foodPatterns = <span class="cstat-no" title="statement not covered" >[</span>
-    /^\d+\s*(g|grams|kg|oz|lb|ml|cup|tbsp|tsp)/i, // Starts with quantity
-    /(ate|had|eating|consumed|drank)/i,
-    /(breakfast|lunch|dinner|snack|meal)/i,
-    /(chicken|beef|fish|rice|pasta|bread|egg|milk|cheese|vegetable|fruit)/i,
-    /^(a|an|the|some)\s+/i, // Starts with article
-  ];
-&nbsp;
-<span class="cstat-no" title="statement not covered" >  return foodPatterns.some(<span class="fstat-no" title="function not covered" >pa</span>ttern =&gt; <span class="cstat-no" title="statement not covered" >pattern.test(message.trim()))</span>;</span>
-}
-&nbsp;
-/**
- * Determine the intent of a user's message
- * @param {string} message - User's message
- * @param {boolean} hasConversationHistory - Whether there's existing conversation
- * @returns {string} Intent: 'food_logging', 'question', 'clarification', 'unknown'
- */
-function <span class="fstat-no" title="function not covered" >detectIntent(</span>message, hasConversationHistory = <span class="branch-0 cbranch-no" title="branch not covered" >false)</span> {
-<span class="cstat-no" title="statement not covered" >  if (!message || typeof message !== 'string') {</span>
-<span class="cstat-no" title="statement not covered" >    return 'unknown';</span>
-  }
-&nbsp;
-  const trimmed = <span class="cstat-no" title="statement not covered" >message.trim();</span>
-&nbsp;
-  // Check for clarification (only relevant if there's conversation history)
-<span class="cstat-no" title="statement not covered" >  if (hasConversationHistory &amp;&amp; isClarification(trimmed)) {</span>
-<span class="cstat-no" title="statement not covered" >    return 'clarification';</span>
-  }
-&nbsp;
-  // Check for question
-<span class="cstat-no" title="statement not covered" >  if (isQuestion(trimmed)) {</span>
-<span class="cstat-no" title="statement not covered" >    return 'question';</span>
-  }
-&nbsp;
-  // Check for food logging
-<span class="cstat-no" title="statement not covered" >  if (isFoodLogging(trimmed)) {</span>
-<span class="cstat-no" title="statement not covered" >    return 'food_logging';</span>
-  }
-&nbsp;
-  // Default to food logging if we're not sure (preserves current behavior)
-<span class="cstat-no" title="statement not covered" >  return 'food_logging';</span>
-}
-&nbsp;
-<span class="cstat-no" title="statement not covered" >module.exports = {</span>
-  ResponseType,
-  detectResponseType,
-  extractJSON,
-  extractConversationalText,
-  formatResponse,
-  detectIntent,
-  isClarification,
-  isQuestion,
-  isFoodLogging
-};
+module.exports = CircuitBreaker;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
