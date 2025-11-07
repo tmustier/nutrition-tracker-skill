@@ -384,4 +384,39 @@ if 'sat_fat_g' in averages:
 if 'sodium_mg' in averages:
     print(f"Sodium: {averages['sodium_mg']:.0f}mg / {targets['sodium_mg_max']}mg max ({averages['sodium_mg'] / targets['sodium_mg_max'] * 100:.0f}%)")
 
+# Potassium
+if 'potassium_mg' in averages:
+    print(f"Potassium: {averages['potassium_mg']:.0f}mg / {targets['potassium_mg_min']}mg min ({averages['potassium_mg'] / targets['potassium_mg_min'] * 100:.0f}%)")
+
+print()
+
+# Na:K Ratios (if both sodium and potassium are present)
+if 'sodium_mg' in averages and 'potassium_mg' in averages:
+    print("SODIUM-TO-POTASSIUM RATIOS")
+    print("-" * 80)
+
+    # Atomic weights for conversion
+    NA_ATOMIC_WEIGHT = 22.99  # g/mol
+    K_ATOMIC_WEIGHT = 39.10   # g/mol
+
+    # Calculate molar amounts (mmol)
+    na_mmol = averages['sodium_mg'] / NA_ATOMIC_WEIGHT
+    k_mmol = averages['potassium_mg'] / K_ATOMIC_WEIGHT
+
+    # Calculate ratios
+    molar_ratio = na_mmol / k_mmol if k_mmol > 0 else 0
+    mass_ratio = averages['sodium_mg'] / averages['potassium_mg'] if averages['potassium_mg'] > 0 else 0
+
+    print(f"Sodium: {averages['sodium_mg']:.0f}mg ({na_mmol:.1f} mmol)")
+    print(f"Potassium: {averages['potassium_mg']:.0f}mg ({k_mmol:.1f} mmol)")
+    print()
+    print(f"Molar Ratio (Na:K mmol): {molar_ratio:.2f} (WHO ideal: ≤1.0)")
+    if molar_ratio > 1.0:
+        print("  ⚠️  OVER IDEAL - Consider increasing potassium-rich foods")
+    else:
+        print("  ✓ Within ideal range")
+    print()
+    print(f"Mass Ratio (Na:K mg): {mass_ratio:.2f} (for reference)")
+    print()
+
 print("="*80)
