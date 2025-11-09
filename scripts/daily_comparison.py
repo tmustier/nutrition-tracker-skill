@@ -22,6 +22,33 @@ PROJECT_ROOT = Path(__file__).parent.parent
 LOGS_DIR = PROJECT_ROOT / "data" / "logs"
 HEALTH_PROFILE = PROJECT_ROOT / "references" / "health-profile.yaml"
 
+# All 52 tracked nutrients
+ALL_NUTRIENTS = [
+    'energy_kcal', 'protein_g', 'fat_g', 'carbs_total_g', 'fiber_total_g',
+    'sat_fat_g', 'mufa_g', 'pufa_g', 'trans_fat_g', 'cholesterol_mg',
+    'carbs_available_g', 'fiber_soluble_g', 'fiber_insoluble_g', 'sugar_g', 'polyols_g',
+    'sodium_mg', 'potassium_mg', 'calcium_mg', 'magnesium_mg', 'phosphorus_mg', 'chloride_mg', 'sulfur_g',
+    'iron_mg', 'zinc_mg', 'copper_mg', 'manganese_mg', 'selenium_ug', 'iodine_ug', 'chromium_ug', 'molybdenum_ug',
+    'boron_mg', 'silicon_mg', 'vanadium_ug', 'nickel_ug',
+    'vitamin_a_ug', 'vitamin_d_ug', 'vitamin_e_mg', 'vitamin_k_ug',
+    'vitamin_c_mg', 'vitamin_b1_mg', 'vitamin_b2_mg', 'vitamin_b3_mg', 'vitamin_b5_mg',
+    'vitamin_b6_mg', 'vitamin_b7_ug', 'vitamin_b9_ug', 'vitamin_b12_ug', 'choline_mg',
+    'omega3_epa_mg', 'omega3_dha_mg', 'omega3_ala_g', 'omega6_la_g'
+]
+
+# Default nutrients for overview (if not in focus mode)
+DEFAULT_DISPLAY_NUTRIENTS = [
+    'energy_kcal', 'protein_g', 'fat_g', 'carbs_total_g', 'fiber_total_g',
+    'sat_fat_g', 'sugar_g', 'sodium_mg', 'potassium_mg'
+]
+
+# Mapping from logged nutrient names to health profile target names
+# Used when nutrient name in logs differs from health profile
+NUTRIENT_TARGET_MAP = {
+    'carbs_total_g': 'carbs_g',
+    'fiber_total_g': 'fiber_g',
+}
+
 
 def load_health_profile() -> Dict:
     """Load health profile with user-defined targets."""
@@ -91,6 +118,50 @@ def calculate_statistics(values: List[float]) -> Optional[Dict]:
     }
 
 
+def get_target_value(nutrient: str, targets: Dict, target_type: str) -> Optional[float]:
+    """
+    Get target value for a nutrient (min or max).
+
+    Handles mapping from logged nutrient names to health profile target names.
+    For example: carbs_total_g → carbs_g_min
+
+    Args:
+        nutrient: Logged nutrient name (e.g., 'carbs_total_g')
+        targets: Target dictionary from health profile
+        target_type: 'min' or 'max'
+
+    Returns:
+        Target value if found, None otherwise
+    """
+    # Special case: energy_kcal has nested structure (rest_day_max, training_day_max)
+    # Skip it since we can't determine target without day_type context
+    if nutrient == 'energy_kcal':
+        return None
+
+    # Map nutrient name if needed (e.g., carbs_total_g → carbs_g)
+    mapped_nutrient = NUTRIENT_TARGET_MAP.get(nutrient, nutrient)
+
+    # Try exact match with suffix: carbs_g_min, protein_g_min
+    key_with_suffix = f"{mapped_nutrient}_{target_type}"
+    if key_with_suffix in targets:
+        return targets[key_with_suffix]
+
+    # Try base key without units: carbs_min, protein_min
+    base_key = mapped_nutrient.replace('_g', '').replace('_mg', '').replace('_ug', '').replace('_kcal', '')
+    base_with_suffix = f"{base_key}_{target_type}"
+    if base_with_suffix in targets:
+        return targets[base_with_suffix]
+
+    # Direct lookup (for special cases)
+    if mapped_nutrient in targets:
+        value = targets[mapped_nutrient]
+        # Make sure it's not a dict (like energy_kcal might be)
+        if isinstance(value, (int, float)):
+            return value
+
+    return None
+
+
 def get_outlier_indicator(value: float, stats: Optional[Dict], targets: Dict, nutrient: str) -> str:
     """
     Get visual indicator for a value based on statistics and optional target.
@@ -115,30 +186,17 @@ def get_outlier_indicator(value: float, stats: Optional[Dict], targets: Dict, nu
     if abs(z_score) >= 2.0:
         return '❌'
 
-    # Check target compliance
-    # Handle energy targets (context-dependent: rest vs training)
-    if nutrient == 'energy_kcal' and 'energy_kcal' in targets:
-        energy_targets = targets['energy_kcal']
-        if isinstance(energy_targets, dict):
-            # Can't check without day_type context, skip target check
-            pass
-    else:
-        # Check min/max targets
-        target_key_min = nutrient + '_min'
-        target_key_max = nutrient + '_max'
-        base_key = nutrient.replace('_g', '').replace('_mg', '').replace('_ug', '').replace('_kcal', '')
+    # Check target compliance using helper function
+    target_min = get_target_value(nutrient, targets, 'min')
+    target_max = get_target_value(nutrient, targets, 'max')
 
-        # Check if under minimum
-        if target_key_min in targets and value < targets[target_key_min]:
-            return '⚠️'
-        if base_key + '_min' in targets and value < targets[base_key + '_min']:
-            return '⚠️'
+    # Check if under minimum
+    if target_min is not None and value < target_min:
+        return '⚠️'
 
-        # Check if over maximum
-        if target_key_max in targets and value > targets[target_key_max]:
-            return '⚠️'
-        if base_key + '_max' in targets and value > targets[base_key + '_max']:
-            return '⚠️'
+    # Check if over maximum
+    if target_max is not None and value > target_max:
+        return '⚠️'
 
     # Check for moderate statistical outliers (±1.5 SD)
     if abs(z_score) >= 1.5:
@@ -188,17 +246,10 @@ def should_display_nutrient(nutrient: str, all_stats: Dict, targets: Dict,
             if cv > 0.15:  # Coefficient of variation > 15%
                 return True
 
-    # Show if has user-defined target
-    target_key_min = nutrient + '_min'
-    target_key_max = nutrient + '_max'
-    base_key = nutrient.replace('_g', '').replace('_mg', '').replace('_ug', '').replace('_kcal', '')
-
-    if (nutrient in targets or
-        target_key_min in targets or
-        target_key_max in targets or
-        base_key + '_min' in targets or
-        base_key + '_max' in targets or
-        base_key in targets):
+    # Show if has user-defined target (using helper function)
+    if get_target_value(nutrient, targets, 'min') is not None:
+        return True
+    if get_target_value(nutrient, targets, 'max') is not None:
         return True
 
     return False
@@ -256,34 +307,16 @@ def print_comparison_table(daily_data: List[Dict], profile: Dict,
 
     targets = profile.get('targets', {})
 
-    # All 52 nutrients to analyze
-    all_nutrients = [
-        'energy_kcal', 'protein_g', 'fat_g', 'carbs_total_g', 'fiber_total_g',
-        'sat_fat_g', 'mufa_g', 'pufa_g', 'trans_fat_g', 'cholesterol_mg',
-        'carbs_available_g', 'fiber_soluble_g', 'fiber_insoluble_g', 'sugar_g', 'polyols_g',
-        'sodium_mg', 'potassium_mg', 'calcium_mg', 'magnesium_mg', 'phosphorus_mg', 'chloride_mg', 'sulfur_g',
-        'iron_mg', 'zinc_mg', 'copper_mg', 'manganese_mg', 'selenium_ug', 'iodine_ug', 'chromium_ug', 'molybdenum_ug',
-        'boron_mg', 'silicon_mg', 'vanadium_ug', 'nickel_ug',
-        'vitamin_a_ug', 'vitamin_d_ug', 'vitamin_e_mg', 'vitamin_k_ug',
-        'vitamin_c_mg', 'vitamin_b1_mg', 'vitamin_b2_mg', 'vitamin_b3_mg', 'vitamin_b5_mg',
-        'vitamin_b6_mg', 'vitamin_b7_ug', 'vitamin_b9_ug', 'vitamin_b12_ug', 'choline_mg',
-        'omega3_epa_mg', 'omega3_dha_mg', 'omega3_ala_g', 'omega6_la_g'
-    ]
-
     # Calculate statistics for all nutrients
     all_stats = {}
-    for nutrient in all_nutrients:
+    for nutrient in ALL_NUTRIENTS:
         values = [day['totals'].get(nutrient, 0) for day in daily_data]
         all_stats[nutrient] = calculate_statistics(values)
 
     # Determine which nutrients to display
     if focus_nutrients is None:
         # Default key nutrients for overview
-        candidate_nutrients = [
-            'energy_kcal', 'protein_g', 'fat_g', 'carbs_total_g', 'fiber_total_g',
-            'sat_fat_g', 'sugar_g', 'sodium_mg', 'potassium_mg'
-        ]
-        display_nutrients = [n for n in candidate_nutrients
+        display_nutrients = [n for n in DEFAULT_DISPLAY_NUTRIENTS
                            if should_display_nutrient(n, all_stats, targets, None)]
     else:
         display_nutrients = focus_nutrients
@@ -351,7 +384,7 @@ def print_comparison_table(daily_data: List[Dict], profile: Dict,
     for day in daily_data:
         day_outliers = []
 
-        for nutrient in all_nutrients:
+        for nutrient in ALL_NUTRIENTS:
             stats = all_stats.get(nutrient)
             if not stats:
                 continue
@@ -367,15 +400,15 @@ def print_comparison_table(daily_data: List[Dict], profile: Dict,
                 z_score = (value - mean) / stdev
 
                 if abs(z_score) >= 1.5:
-                    # Check if has target
+                    # Check if has target using helper function
                     target_str = ""
-                    target_key_min = nutrient + '_min'
-                    target_key_max = nutrient + '_max'
+                    target_min = get_target_value(nutrient, targets, 'min')
+                    target_max = get_target_value(nutrient, targets, 'max')
 
-                    if target_key_min in targets:
-                        target_str = f" | Target min: {targets[target_key_min]}"
-                    elif target_key_max in targets:
-                        target_str = f" | Target max: {targets[target_key_max]}"
+                    if target_min is not None:
+                        target_str = f" | Target min: {target_min}"
+                    elif target_max is not None:
+                        target_str = f" | Target max: {target_max}"
 
                     severity = "❌" if abs(z_score) >= 2.0 else "⚠️"
                     direction = "+" if z_score > 0 else ""
@@ -464,20 +497,20 @@ Examples:
     focus_nutrients = None
     if args.nutrients:
         focus_nutrients = [n.strip() for n in args.nutrients.split(',')]
+
+        # Validate provided nutrients
+        invalid = [n for n in focus_nutrients if n not in ALL_NUTRIENTS]
+        if invalid:
+            print(f"Error: Invalid nutrient names: {', '.join(invalid)}", file=sys.stderr)
+            print(f"\nValid nutrients include:", file=sys.stderr)
+            print(f"  Macros: energy_kcal, protein_g, fat_g, carbs_total_g, fiber_total_g", file=sys.stderr)
+            print(f"  Minerals: sodium_mg, potassium_mg, calcium_mg, magnesium_mg, iron_mg, zinc_mg", file=sys.stderr)
+            print(f"  Vitamins: vitamin_c_mg, vitamin_d_ug, vitamin_b12_ug, etc.", file=sys.stderr)
+            print(f"\nFor full list, use --all flag or see ALL_NUTRIENTS constant in script", file=sys.stderr)
+            sys.exit(1)
     elif args.all:
         # Show all 52 nutrients
-        focus_nutrients = [
-            'energy_kcal', 'protein_g', 'fat_g', 'carbs_total_g', 'fiber_total_g',
-            'sat_fat_g', 'mufa_g', 'pufa_g', 'trans_fat_g', 'cholesterol_mg',
-            'carbs_available_g', 'fiber_soluble_g', 'fiber_insoluble_g', 'sugar_g', 'polyols_g',
-            'sodium_mg', 'potassium_mg', 'calcium_mg', 'magnesium_mg', 'phosphorus_mg', 'chloride_mg', 'sulfur_g',
-            'iron_mg', 'zinc_mg', 'copper_mg', 'manganese_mg', 'selenium_ug', 'iodine_ug', 'chromium_ug', 'molybdenum_ug',
-            'boron_mg', 'silicon_mg', 'vanadium_ug', 'nickel_ug',
-            'vitamin_a_ug', 'vitamin_d_ug', 'vitamin_e_mg', 'vitamin_k_ug',
-            'vitamin_c_mg', 'vitamin_b1_mg', 'vitamin_b2_mg', 'vitamin_b3_mg', 'vitamin_b5_mg',
-            'vitamin_b6_mg', 'vitamin_b7_ug', 'vitamin_b9_ug', 'vitamin_b12_ug', 'choline_mg',
-            'omega3_epa_mg', 'omega3_dha_mg', 'omega3_ala_g', 'omega6_la_g'
-        ]
+        focus_nutrients = ALL_NUTRIENTS
 
     # Load user profile
     profile = load_health_profile()

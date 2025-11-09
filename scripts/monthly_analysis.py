@@ -656,7 +656,7 @@ def _generate_diet_quality_section(analysis: Dict, targets: Dict) -> List[str]:
         quality_rating = "⭐ SIGNIFICANT CHANGES NEEDED"
         quality_desc = "Your current dietary pattern needs substantial improvement across most nutritional areas."
 
-    lines.append(f"**{quality_rating}** ({total_score:.0f}/100)")
+    lines.append(f"**{quality_rating}** ({total_score:.1f}/100)")
     lines.append("")
     lines.append(quality_desc)
     lines.append("")
@@ -1212,7 +1212,7 @@ def generate_markdown_report(analysis: Dict) -> str:
         quality_rating = "⭐ SIGNIFICANT CHANGES NEEDED"
         quality_desc = "Your current dietary pattern needs substantial improvement across most nutritional areas."
 
-    report.append(f"**{quality_rating}** ({total_score:.0f}/100)")
+    report.append(f"**{quality_rating}** ({total_score:.1f}/100)")
     report.append("")
     report.append(quality_desc)
     report.append("")
