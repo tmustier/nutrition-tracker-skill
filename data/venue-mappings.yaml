@@ -1,0 +1,271 @@
+# Venue categorization configuration
+# This file maps venue names to their appropriate categories and folders
+# Last updated: 2025-11-09
+
+# Configuration metadata
+_meta:
+  version: 1
+  last_updated: "2025-11-09"
+  pattern_matching: "case_insensitive_substring"
+  priority: "first_match_wins"
+  notes: "Patterns are matched as case-insensitive substrings. First matching pattern wins."
+
+# Restaurant, cafe, and venue-specific dishes
+venues:
+  simple-health-kitchen:
+    patterns:
+      - "simple health kitchen"
+      - "shk"
+    folder: "simple-health-kitchen"
+    display_name: "Simple Health Kitchen"
+    notes: "Multiple London locations (Baker Street, Paddington, etc.)"
+
+  jean-georges-connaught:
+    patterns:
+      - "connaught"
+      - "jean-georges"
+      - "jean georges"
+    folder: "jean-georges-connaught"
+    display_name: "Jean-Georges at The Connaught"
+
+  leto-caffe-soho:
+    patterns:
+      - "leto"
+      - "l'eto"
+    folder: "leto-caffe-soho"
+    display_name: "L'ETO Caffe Soho"
+
+  zima-soho:
+    patterns:
+      - "zima"
+    folder: "zima-soho"
+    display_name: "Zima, Soho"
+    notes: "Russian restaurant in Soho, London"
+
+  the-eagle-farringdon:
+    patterns:
+      - "eagle farringdon"
+      - "the eagle"
+    folder: "the-eagle-farringdon"
+    display_name: "The Eagle, Farringdon"
+    notes: "Portuguese-influenced pub, Farringdon, London"
+
+  imperial-treasure-st-james:
+    patterns:
+      - "imperial treasure"
+    folder: "imperial-treasure-st-james"
+    display_name: "Imperial Treasure, St James's"
+    notes: "Fine dining dim sum, St James's, London"
+
+  joe-and-the-juice:
+    patterns:
+      - "joe and the juice"
+      - "joe & the juice"
+    folder: "joe-and-the-juice"
+    display_name: "Joe & The Juice"
+
+  third-space-nff:
+    patterns:
+      - "third space"
+      - "natural fitness food"
+      - "nff"
+    folder: "third-space-nff"
+    display_name: "Third Space / Natural Fitness Food"
+    notes: "Gym cafe at Third Space"
+
+  decimo-london:
+    patterns:
+      - "decimo"
+    folder: "decimo-london"
+    display_name: "Decimo"
+    notes: "Spanish-Mexican fusion, The Standard Hotel, Kings Cross"
+
+  miznon:
+    patterns:
+      - "miznon"
+    folder: "miznon"
+    display_name: "Miznon"
+    notes: "Israeli restaurant, Soho, London"
+
+  maset:
+    patterns:
+      - "maset"
+    folder: "maset"
+    display_name: "Maset"
+    notes: "French Mediterranean, Chiltern Street, Marylebone"
+
+  panzers:
+    patterns:
+      - "panzers"
+      - "panzer"
+    folder: "panzers"
+    display_name: "Panzers Deli"
+    notes: "Delicatessen, London"
+
+# Branded packaged products with nutrition labels
+packaged:
+  grenade:
+    patterns:
+      - "grenade"
+    folder: "grenade"
+    display_name: "Grenade"
+    type: "sports_nutrition"
+
+  amisa:
+    patterns:
+      - "amisa"
+    folder: "amisa"
+    display_name: "Amisa"
+    type: "health_food"
+
+  yarden:
+    patterns:
+      - "yarden"
+    folder: "yarden"
+    display_name: "Yarden"
+    type: "mediterranean_food"
+
+  optimum-nutrition:
+    patterns:
+      - "optimum nutrition"
+      - "on whey"
+    folder: "optimum-nutrition"
+    display_name: "Optimum Nutrition"
+    type: "sports_nutrition"
+
+  packd:
+    patterns:
+      - "pack'd"
+      - "packd"
+    folder: "packd"
+    display_name: "Pack'd"
+    type: "frozen_food"
+
+  rot-front:
+    patterns:
+      - "rot front"
+      - "rotfront"
+    folder: "rot-front"
+    display_name: "Rot Front"
+    type: "confectionery"
+
+  daylesford-organic:
+    patterns:
+      - "daylesford"
+    folder: "daylesford-organic"
+    display_name: "Daylesford Organic"
+    type: "premium_packaged"
+
+  lucozade:
+    patterns:
+      - "lucozade"
+    folder: "lucozade"
+    display_name: "Lucozade"
+    type: "sports_drink"
+
+  lindt:
+    patterns:
+      - "lindt"
+    folder: "lindt"
+    display_name: "Lindt"
+    type: "chocolate"
+
+  chavroux:
+    patterns:
+      - "chavroux"
+    folder: "chavroux"
+    display_name: "Chavroux"
+    type: "dairy"
+
+  st-helens-farm:
+    patterns:
+      - "st helens farm"
+      - "st-helens-farm"
+      - "st. helens farm"
+    folder: "st-helens-farm"
+    display_name: "St Helens Farm"
+    type: "dairy"
+
+  londons-chocolate-company:
+    patterns:
+      - "londons chocolate"
+      - "london's chocolate"
+      - "londons chocolate company"
+    folder: "londons-chocolate-company"
+    display_name: "London's Chocolate Company"
+    type: "chocolate"
+
+  germes:
+    patterns:
+      - "germes"
+    folder: "germes"
+    display_name: "Germes"
+    type: "frozen_food"
+
+  zuppe:
+    patterns:
+      - "zuppe"
+    folder: "zuppe"
+    display_name: "Zuppe"
+    type: "prepared_food"
+
+# Generic categories for unbranded items
+generic:
+  ingredients:
+    patterns:
+      - "ingredient"
+      - "pack/ingredient"
+      - "generic"
+    folder: "ingredients"
+    description: "Basic cooking ingredients"
+
+  bakery:
+    patterns:
+      - "bakery"
+    folder: "bakery"
+    description: "Generic bakery items"
+
+  bar-restaurant:
+    patterns:
+      - "bar restaurant"
+      - "bar/restaurant"
+    folder: "bar-restaurant"
+    description: "Generic bar and restaurant items"
+
+  grocery:
+    patterns:
+      - "grocery"
+      - "supermarket"
+    folder: "grocery"
+    description: "Generic grocery items"
+
+  supplements:
+    patterns:
+      - "supplement"
+    folder: "supplements"
+    description: "Generic supplements"
+
+  pub-bar:
+    patterns:
+      - "pub"
+      - "pub bar"
+    folder: "pub-bar"
+    description: "Generic pub items"
+
+  fresh-produce:
+    patterns:
+      - "fresh"
+      - "fruit"
+      - "produce"
+      - "fresh produce"
+    folder: "fresh-produce"
+    description: "Fresh fruits and vegetables"
+
+  home-cooked:
+    patterns:
+      - "home cooked"
+      - "home-cooked"
+      - "homemade"
+      - "prepared at home"
+    folder: "home-cooked"
+    description: "Home-prepared and homemade dishes"

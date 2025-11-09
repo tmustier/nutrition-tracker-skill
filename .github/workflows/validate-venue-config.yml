@@ -1,0 +1,55 @@
+name: Validate Venue Config
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - 'data/venue-mappings.yaml'
+      - 'data/food-data-bank/**'
+      - 'scripts/validate_venue_config.py'
+      - 'scripts/new_dish_from_template.py'
+      - 'scripts/add_venue_to_config.py'
+  pull_request:
+    branches: [main, master]
+    paths:
+      - 'data/venue-mappings.yaml'
+      - 'data/food-data-bank/**'
+      - 'scripts/validate_venue_config.py'
+      - 'scripts/new_dish_from_template.py'
+      - 'scripts/add_venue_to_config.py'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml pytest
+
+      - name: Validate venue configuration
+        run: |
+          python scripts/validate_venue_config.py
+
+      - name: Run unit tests
+        run: |
+          python -m pytest tests/test_categorize_venue.py tests/test_add_venue_to_config.py tests/test_validate_venue_config.py -v
+
+      - name: Validation summary
+        if: success()
+        run: |
+          echo "✅ All validations passed!"
+          echo "  - Venue config structure is valid"
+          echo "  - No duplicate patterns detected"
+          echo "  - All folders exist in filesystem"
+          echo "  - All unit tests passed"
