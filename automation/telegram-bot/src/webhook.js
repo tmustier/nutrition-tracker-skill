@@ -8,6 +8,7 @@ const githubIntegration = require('./github-integration');
 const ProfileManager = require('./profile-manager');
 const conversationManager = require('./conversation-manager');
 const responseHandler = require('./response-handler');
+const easterEggManager = require('./easter-egg-manager');
 
 /**
  * Telegram Bot for Nutrition Tracking
@@ -115,6 +116,15 @@ const prepareNutritionData = (result, defaultNotes = '') => {
       notes: result.data.notes || defaultNotes || `Source: ${result.source}`,
     };
   } else if (result.source === 'claude') {
+    return {
+      name: result.data.name,
+      food_bank_id: result.data.food_bank_id || null,
+      quantity: result.data.quantity || 1,
+      unit: result.data.unit || 'portion',
+      nutrition: result.data.per_portion,
+      notes: result.data.notes || defaultNotes || `Source: ${result.source}`,
+    };
+  } else if (result.source === 'claude_vision') {
     return {
       name: result.data.name,
       food_bank_id: result.data.food_bank_id || null,
@@ -875,8 +885,7 @@ bot.on('photo', async (ctx) => {
         `❌ Image too large (${Math.round(fileInfo.file_size / 1024 / 1024)}MB). Please send images under 10MB.`,
         TELEGRAM_PARSE_OPTIONS
       );
-      conversationManager.releaseLock(userId); // CRITICAL: Release lock before return
-      return;
+      return; // Lock released by finally block
     }
 
     // Detect MIME type from file extension
@@ -903,7 +912,8 @@ bot.on('photo', async (ctx) => {
       TELEGRAM_PARSE_OPTIONS
     );
 
-    // Step 4: Process with Claude Vision using detected MIME type (with user-specific profile)
+    // Step 4: Process with Claude Vision (with user-specific profile and scene detection)
+    // Single API call returns BOTH scene detection AND nutrition data
     const result = await claudeIntegration.processImage(imageBuffer, mimeType, userId);
 
     if (!result.success) {
@@ -917,10 +927,79 @@ bot.on('photo', async (ctx) => {
       return;
     }
 
-    // Step 5: Prepare nutrition data using helper function
+    // Step 5: Check for easter egg triggers (before nutrition logging)
+    // ALWAYS evaluate easter eggs when scene detection is available
+    // This ensures both blocking AND companion easter eggs are checked
+    if (result.scene_detection) {
+      console.log(`Scene detected: ${result.scene_detection.scene_type} (confidence: ${result.scene_detection.confidence})`);
+
+      try {
+        // Evaluate with easter egg manager (handles cooldowns and message selection)
+        const easterEggResult = easterEggManager.evaluateDetection(result.scene_detection, userId);
+
+        if (easterEggResult && easterEggResult.shouldTrigger && easterEggResult.canTrigger) {
+          // Show easter egg message first
+          const easterEggMessage = easterEggResult.getMessage();
+
+          // Validate message exists (fail gracefully if message array is empty)
+          if (!easterEggMessage) {
+            console.error(`[EasterEgg] No message available for ${easterEggResult.easterEggType}, skipping easter egg`);
+            // Update processing message to indicate continuation
+            await ctx.telegram.editMessageText(
+              ctx.chat.id,
+              processingMsg.message_id,
+              null,
+              '🤖 Analyzing nutrition content...'
+            );
+            // Continue to nutrition extraction instead of crashing
+          } else {
+            await ctx.telegram.editMessageText(
+              ctx.chat.id,
+              processingMsg.message_id,
+              null,
+              easterEggMessage
+            );
+
+            // Record trigger AFTER successful message send (prevents consuming cooldown on failure)
+            easterEggResult.recordTrigger();
+
+            console.log(`Easter egg triggered: ${easterEggResult.easterEggType} for user ${userId}`);
+
+            // If this is a BLOCKING easter egg (not companion), don't log nutrition
+            if (easterEggResult.blocksNutritionExtraction) {
+              console.log(`Easter egg blocks extraction, returning early`);
+              return; // Lock released by finally block
+            }
+            // Companion easter eggs (celebration, midnight_munchies) continue to nutrition logging
+            console.log(`Companion easter egg - continuing to nutrition extraction`);
+          }
+        } else if (easterEggResult && easterEggResult.shouldTrigger) {
+          console.log(`Easter egg on cooldown, proceeding to nutrition`);
+        }
+      } catch (easterEggError) {
+        // Easter egg evaluation failed - gracefully continue to nutrition extraction
+        console.error('Easter egg evaluation failed (continuing to nutrition):', easterEggError);
+        // Don't return - proceed to nutrition extraction for safety
+      }
+    }
+
+    // Step 6: Check if we have nutrition data to log
+    if (!result.data) {
+      // No nutrition data available (easter egg already handled above)
+      console.log('No nutrition data in result, scene was non-food');
+      await ctx.telegram.editMessageText(
+        ctx.chat.id,
+        processingMsg.message_id,
+        null,
+        `❌ Could not extract nutrition data from image.\n\n${result.scene_detection?.details || 'Please try with a clearer photo or send a text description instead.'}`
+      );
+      return;
+    }
+
+    // Step 7: Prepare nutrition data using helper function
     const nutritionData = prepareNutritionData(result, 'Extracted from screenshot');
 
-    // Step 6: Log to GitHub
+    // Step 8: Log to GitHub
     await ctx.telegram.editMessageText(
       ctx.chat.id,
       processingMsg.message_id,
@@ -929,15 +1008,15 @@ bot.on('photo', async (ctx) => {
       TELEGRAM_PARSE_OPTIONS
     );
 
-    // Step 7: Extract user information for multi-user tracking (userId already defined at line 779)
+    // Step 9: Extract user information for multi-user tracking (userId already defined at line 800)
     const userName = [ctx.from.first_name, ctx.from.last_name]
       .filter(Boolean)
       .join(' ') || ctx.from.username || `User ${userId}`;
 
-    // Step 8: Get current totals before committing to avoid race condition (for this user only)
+    // Step 10: Get current totals before committing to avoid race condition (for this user only)
     const currentTotals = await githubIntegration.getTodaysTotals(null, userId);
 
-    // Step 9: Commit the entry with user information
+    // Step 11: Commit the entry with user information
     const commitResult = await githubIntegration.appendLogEntry(
       nutritionData,
       null, // timestamp (use default)
@@ -1145,6 +1224,11 @@ const gracefulShutdown = (signal) => {
   // Cleanup rate limit interval
   if (rateLimitCleanupInterval) {
     clearInterval(rateLimitCleanupInterval);
+  }
+
+  // Cleanup easter egg cooldown manager (stops cleanup interval)
+  if (easterEggCooldownManager) {
+    easterEggCooldownManager.stopCooldownCleanup();
   }
 
   console.log('Cleanup complete, exiting...');

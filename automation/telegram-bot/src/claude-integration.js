@@ -2,6 +2,7 @@
 const axios = require('axios');
 const config = require('./config');
 const usdaApi = require('./usda-api');
+const easterEggConfig = require('./easter-egg-config');
 
 /**
  * Sanitizes user input to prevent prompt injection attacks
@@ -651,11 +652,33 @@ Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
 
   /**
    * Process image (screenshot) with Claude Vision API
-   * Use cases: nutrition labels, menu screenshots, meal photos
+   * Enhanced to detect scene type AND extract nutrition in a single API call
+   * Use cases: nutrition labels, menu screenshots, meal photos, easter egg detection
    *
    * @param {Buffer} imageBuffer - Image data
    * @param {string} mimeType - Image MIME type (e.g., 'image/jpeg', 'image/png')
-   * @returns {Promise<Object>} Extracted nutrition data with all 24 fields
+   * @returns {Promise<Object>} Enhanced result with scene detection and nutrition data
+   *   {
+   *     success: boolean,
+   *     source: string,
+   *     scene_detection: {
+   *       has_person: boolean,
+   *       has_food: boolean,
+   *       has_pet: boolean,
+   *       scene_type: string,
+   *       is_celebration: boolean,
+   *       is_shopping_scene: boolean,
+   *       is_digital_content: boolean,
+   *       is_empty_packaging: boolean,
+   *       is_fake_food: boolean,
+   *       should_attempt_nutrition_extraction: boolean,
+   *       confidence: string,
+   *       details: string,
+   *       reasoning: string
+   *     },
+   *     data: object|null,  // Nutrition data (null if no food)
+   *     should_show_easter_egg: boolean
+   *   }
    */
   async processImage(imageBuffer, mimeType, userId = null) {
     try {
@@ -693,24 +716,97 @@ Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
               },
               {
                 type: 'text',
-                text: `This is a screenshot of a menu item, nutrition label, or food photo.
+                text: `Analyze this image comprehensively in two stages:
 
-Please analyze the image and extract/estimate complete nutrition information.
+STAGE 1: Scene Detection (ALWAYS perform first)
+Detect and classify what's in the image:
+- has_person: Is there a human visible? (face, body, limbs, reflection, etc.)
+- has_food: Is there real, consumable food visible?
+- has_pet: Is there a pet/animal visible?
+- scene_type: What type of image is this?
+  • "meal_photo" - food on plate/bowl ready to eat
+  • "nutrition_label" - packaged food with nutrition facts
+  • "menu_item" - restaurant menu or food description
+  • "selfie" - person photo without food
+  • "person_eating" - person with food (eating or holding food)
+  • "pet_photo" - pet without food
+  • "pet_with_food" - pet near food
+  • "empty_plate" - empty plate/bowl (post-meal)
+  • "celebration" - birthday cake, party food with decorations/candles
+  • "shopping" - grocery store aisles, multiple food options, not consumed
+  • "screenshot" - food on TV/screen, social media screenshot, digital content
+  • "fake_food" - soap, candles, decorations that look like food
+  • "empty_packaging" - empty wrapper but nutrition label may be visible
+  • "unclear" - blurry, ambiguous, or unclear image
+- is_celebration: Are there celebration indicators? (birthday candles, party decorations, "Happy Birthday" text)
+- is_shopping_scene: Multiple food options not yet consumed? (grocery aisles, restaurant display cases)
+- is_digital_content: Food displayed on screen/monitor? (visible pixels, UI elements, screen bezel)
+- is_empty_packaging: Empty food wrapper or container?
+- is_fake_food: Non-edible items that look like food? (soap, candles, decorative items)
+- confidence: "high" | "medium" | "low" - How confident are you in this classification?
+- details: Brief description of what you see
+- reasoning: Explain your classification logic
 
-Instructions:
-1. If this is a nutrition label: extract all visible values directly
-2. If this is a menu item: estimate nutrition based on the description and typical portions
-3. If this is a food photo: identify the dish and estimate portions and nutrition
+Decision Logic for should_attempt_nutrition_extraction:
+✅ ALWAYS attempt extraction when:
+  - Real food is visible (meals, snacks, ingredients)
+  - Nutrition labels present (even on empty packaging)
+  - Menu items or food descriptions
+  - Person eating food (food is present)
+  - Pet near food (food is present)
+  - Birthday cakes or celebration food (it's real food!)
+  - confidence is "medium" or "low" (when uncertain, default to extracting)
 
-Requirements:
-- Include ALL 24 required nutrition fields (no nulls)
-- Use visible information from the image as primary source
-- Estimate missing fields using USDA data for similar foods
-- If multiple items are visible, focus on the main dish or ask which one to analyze
-- Validate energy calculation: 4×protein + 9×fat + 4×carbs_available + 2×fiber + 2.4×polyols
-- Document extraction method and confidence in the "notes" field
+❌ NEVER attempt extraction when (ONLY with HIGH confidence):
+  - Pure selfie (person, no food)
+  - Pet photo (pet, no food)
+  - Shopping scene (food not consumed yet)
+  - Screenshot/digital content (not real food)
+  - Fake food (soap, candles, decorations)
+  - Completely empty containers with no visible label
 
-Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
+STAGE 2: Nutrition Extraction (CONDITIONAL)
+If should_attempt_nutrition_extraction=true:
+  ${SKILL_CONTEXT}
+
+  Extract complete nutrition information following all requirements:
+  - Include ALL 24 required nutrition fields (no nulls)
+  - Use visible information from the image as primary source
+  - Estimate missing fields using USDA data for similar foods
+  - Validate energy calculation: 4×protein + 9×fat + 4×carbs_available + 2×fiber + 2.4×polyols
+  - Document extraction method and confidence in the "notes" field
+
+If should_attempt_nutrition_extraction=false:
+  Skip nutrition extraction, return null for nutrition_data
+
+Return response in this EXACT JSON structure:
+\`\`\`json
+{
+  "scene_detection": {
+    "has_person": true/false,
+    "has_food": true/false,
+    "has_pet": true/false,
+    "scene_type": "meal_photo" | "selfie" | "pet_photo" | etc.,
+    "is_celebration": true/false,
+    "is_shopping_scene": true/false,
+    "is_digital_content": true/false,
+    "is_empty_packaging": true/false,
+    "is_fake_food": true/false,
+    "should_attempt_nutrition_extraction": true/false,
+    "confidence": "high" | "medium" | "low",
+    "details": "Brief description of what you see",
+    "reasoning": "Explanation of classification and extraction decision"
+  },
+  "nutrition_data": {
+    "name": "Dish Name",
+    "food_bank_id": null,
+    "quantity": 1,
+    "unit": "portion",
+    "per_portion": { ...all 24 fields... },
+    "notes": "..."
+  } OR null
+}
+\`\`\``
               }
             ]
           }
@@ -751,10 +847,10 @@ Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
       const jsonMatch = claudeText.match(/```json\n([\s\S]*?)\n```/);
 
       if (jsonMatch) {
-        // Validate and parse JSON safely
-        let extractedData;
+        // Validate and parse enhanced JSON with scene detection
+        let parsedResponse;
         try {
-          extractedData = JSON.parse(jsonMatch[1]);
+          parsedResponse = JSON.parse(jsonMatch[1]);
         } catch (parseError) {
           console.error('JSON parsing error from Claude Vision response:', parseError.message);
           return {
@@ -764,43 +860,75 @@ Return ONLY the JSON object, wrapped in \`\`\`json code fence.`
           };
         }
 
-        // Comprehensive validation of nutrition data structure
-        const validationResult = this.validateNutritionData(extractedData);
-        if (!validationResult.valid) {
-          console.error('Nutrition data validation failed for image:', validationResult.errors);
+        // Validate scene_detection is present
+        if (!parsedResponse.scene_detection) {
+          console.error('Missing scene_detection in response');
           return {
             success: false,
-            message: 'Invalid nutrition data structure from Claude Vision',
-            errors: validationResult.errors
+            message: 'Invalid response structure: missing scene_detection'
           };
         }
 
-        // Validate required fields
-        const requiredFields = [
-          'energy_kcal', 'protein_g', 'fat_g', 'sat_fat_g', 'mufa_g', 'pufa_g',
-          'trans_fat_g', 'cholesterol_mg', 'sugar_g', 'fiber_total_g',
-          'fiber_soluble_g', 'fiber_insoluble_g', 'carbs_total_g',
-          'carbs_available_g', 'sodium_mg', 'potassium_mg', 'iodine_ug',
-          'magnesium_mg', 'calcium_mg', 'iron_mg', 'zinc_mg', 'vitamin_c_mg',
-          'manganese_mg', 'polyols_g'
-        ];
+        const sceneDetection = parsedResponse.scene_detection;
+        const nutritionData = parsedResponse.nutrition_data;
 
-        const missingFields = requiredFields.filter(
-          field => !(field in extractedData.per_portion)
-        );
+        // Log scene detection for monitoring
+        console.log('Scene detected:', {
+          scene_type: sceneDetection.scene_type,
+          has_food: sceneDetection.has_food,
+          confidence: sceneDetection.confidence,
+          should_extract: sceneDetection.should_attempt_nutrition_extraction
+        });
 
-        if (missingFields.length > 0) {
-          console.warn(`Missing nutrition fields from image: ${missingFields.join(', ')}`);
-          // Fill missing fields with 0 as fallback
-          missingFields.forEach(field => {
-            extractedData.per_portion[field] = 0;
-          });
+        // Validate nutrition data if present
+        if (nutritionData) {
+          const validationResult = this.validateNutritionData(nutritionData);
+          if (!validationResult.valid) {
+            console.error('Nutrition data validation failed:', validationResult.errors);
+            // If validation fails, treat as if no nutrition data
+            console.warn('Treating as no nutrition data due to validation failure');
+          } else {
+            // Validate required fields
+            const requiredFields = [
+              'energy_kcal', 'protein_g', 'fat_g', 'sat_fat_g', 'mufa_g', 'pufa_g',
+              'trans_fat_g', 'cholesterol_mg', 'sugar_g', 'fiber_total_g',
+              'fiber_soluble_g', 'fiber_insoluble_g', 'carbs_total_g',
+              'carbs_available_g', 'sodium_mg', 'potassium_mg', 'iodine_ug',
+              'magnesium_mg', 'calcium_mg', 'iron_mg', 'zinc_mg', 'vitamin_c_mg',
+              'manganese_mg', 'polyols_g'
+            ];
+
+            const missingFields = requiredFields.filter(
+              field => !(field in nutritionData.per_portion)
+            );
+
+            if (missingFields.length > 0) {
+              console.warn(`Missing nutrition fields from image: ${missingFields.join(', ')}`);
+              // Fill missing fields with 0 as fallback
+              missingFields.forEach(field => {
+                nutritionData.per_portion[field] = 0;
+              });
+            }
+          }
         }
+
+        // Determine if we should show easter egg
+        // Only trigger easter egg if:
+        // 1. High confidence classification
+        // 2. Should NOT attempt nutrition extraction
+        // 3. Scene is one of the blocking easter egg types (dynamically from config)
+        const blockingSceneTypes = easterEggConfig.getBlockingSceneTypes();
+        const shouldShowEasterEgg =
+          sceneDetection.confidence === 'high' &&
+          sceneDetection.should_attempt_nutrition_extraction === false &&
+          blockingSceneTypes.includes(sceneDetection.scene_type);
 
         return {
           success: true,
           source: 'claude_vision',
-          data: extractedData
+          scene_detection: sceneDetection,
+          data: nutritionData,  // null if no food, or nutrition object if food present
+          should_show_easter_egg: shouldShowEasterEgg
         };
       } else {
         return {
