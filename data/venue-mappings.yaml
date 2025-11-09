@@ -265,13 +265,7 @@ generic:
     patterns:
       - "home cooked"
       - "home-cooked"
-    folder: "home-cooked"
-    description: "Home-prepared dishes"
-
-  homemade-prepared-at-home:
-    patterns:
       - "homemade"
       - "prepared at home"
-    folder: "homemade-prepared-at-home"
-    description: "Homemade prepared dishes"
-    notes: "Consider merging with home-cooked"
+    folder: "home-cooked"
+    description: "Home-prepared and homemade dishes"
