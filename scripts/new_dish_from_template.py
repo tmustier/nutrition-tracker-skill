@@ -131,6 +131,12 @@ def categorize_venue(venue_display_name):
         return ('venues', 'joe-and-the-juice')
     elif 'third space' in venue_lower or 'natural fitness food' in venue_lower or 'nff' in venue_lower:
         return ('venues', 'third-space-nff')
+    elif 'decimo' in venue_lower:
+        return ('venues', 'decimo-london')
+    elif 'miznon' in venue_lower:
+        return ('venues', 'miznon')
+    elif 'maset' in venue_lower:
+        return ('venues', 'maset')
 
     # Packaged products
     elif 'grenade' in venue_lower:
@@ -147,6 +153,20 @@ def categorize_venue(venue_display_name):
         return ('packaged', 'rot-front')
     elif 'daylesford' in venue_lower:
         return ('packaged', 'daylesford-organic')
+    elif 'lucozade' in venue_lower:
+        return ('packaged', 'lucozade')
+    elif 'lindt' in venue_lower:
+        return ('packaged', 'lindt')
+    elif 'chavroux' in venue_lower:
+        return ('packaged', 'chavroux')
+    elif 'st helens farm' in venue_lower or 'st-helens-farm' in venue_lower:
+        return ('packaged', 'st-helens-farm')
+    elif 'londons chocolate' in venue_lower or 'london\'s chocolate' in venue_lower:
+        return ('packaged', 'londons-chocolate-company')
+    elif 'germes' in venue_lower:
+        return ('packaged', 'germes')
+    elif 'zuppe' in venue_lower:
+        return ('packaged', 'zuppe')
 
     # Generic categories
     elif 'ingredient' in venue_lower or venue_lower == 'generic':
