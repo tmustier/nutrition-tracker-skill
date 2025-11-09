@@ -7,7 +7,8 @@ Create a new dish file in the appropriate folder based on venue.
 - Sets id, version, last_verified, venue, category, and portion description
 - Auto-regenerates the index file after adding the dish
 """
-import sys, re
+import sys
+import re
 from pathlib import Path
 from datetime import datetime, timezone
 
