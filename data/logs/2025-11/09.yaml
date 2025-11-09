@@ -352,3 +352,63 @@ entries:
       vanadium_ug: 0
       nickel_ug: 0
   notes: "Tennis nutrition - banana and Lucozade Sport Orange during session"
+- timestamp: '2025-11-09T19:30:00+00:00'
+  items:
+  - name: Ground Beef & Buckwheat (Home)
+    food_bank_id: beef_buckwheat_500g_home-cooked_v1
+    quantity: 500
+    unit: g
+    nutrition:
+      energy_kcal: 701
+      protein_g: 48.9
+      fat_g: 29.2
+      sat_fat_g: 6.8
+      mufa_g: 16.9
+      pufa_g: 3.6
+      trans_fat_g: 0.4
+      cholesterol_mg: 108
+      carbs_total_g: 66.4
+      polyols_g: 0.0
+      carbs_available_g: 55.2
+      sugar_g: 5.5
+      fiber_total_g: 11.0
+      fiber_soluble_g: 3.9
+      fiber_insoluble_g: 7.1
+      sodium_mg: 525
+      potassium_mg: 1191
+      calcium_mg: 78
+      magnesium_mg: 232
+      phosphorus_mg: 657
+      chloride_mg: 808
+      sulfur_g: 0.42
+      iron_mg: 7.0
+      zinc_mg: 11.4
+      copper_mg: 0.83
+      manganese_mg: 1.44
+      selenium_ug: 39
+      iodine_ug: 8
+      chromium_ug: 1
+      molybdenum_ug: 2
+      vitamin_a_ug: 451
+      vitamin_d_ug: 0.2
+      vitamin_e_mg: 3.7
+      vitamin_k_ug: 25
+      vitamin_b1_mg: 0.38
+      vitamin_b2_mg: 1.01
+      vitamin_b3_mg: 14.5
+      vitamin_b5_mg: 2.4
+      vitamin_b6_mg: 1.15
+      vitamin_b7_ug: 11
+      vitamin_b9_ug: 74
+      vitamin_b12_ug: 4.7
+      choline_mg: 173
+      vitamin_c_mg: 8.5
+      omega3_epa_mg: 14
+      omega3_dha_mg: 3
+      omega3_ala_g: 0.37
+      omega6_la_g: 3.2
+      boron_mg: 0.0
+      silicon_mg: 0.0
+      vanadium_ug: 0
+      nickel_ug: 0
+  notes: "Dinner - home-cooked ground beef (5% fat) and buckwheat dish with soffrito, olive oil, and condiments"
