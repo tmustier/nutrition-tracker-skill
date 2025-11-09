@@ -122,12 +122,12 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: 2025-11-05T21:55:00+00:00
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: "Initial comprehensive entry for Maset thick-cut frites with complete 52-field nutrition profile using component-based estimation"
-  fields_changed: ["all fields"]
-  sources:
-  - url: "https://www.maset.london/"
+  - timestamp: 2025-11-05T21:55:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Initial comprehensive entry for Maset thick-cut frites with complete 52-field nutrition profile using component-based estimation"
+    fields_changed: ["all fields"]
+    sources:
+    - url: "https://www.maset.london/"
     note: "Maset restaurant website (French Mediterranean, Marylebone)"
   - url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/170027/nutrients"
     note: "USDA FDC 170027: Russet potato, raw, flesh and skin (complete micronutrient profile)"

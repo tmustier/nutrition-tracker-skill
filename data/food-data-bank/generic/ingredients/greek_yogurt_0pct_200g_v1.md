@@ -85,29 +85,29 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
-- timestamp: '2025-11-03T08:00:00+00:00'
-  updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: Initial creation based on USDA and typical 0% fat Greek yogurt nutritional data
-  fields_changed: [all]
-  sources: [{note: 'USDA FoodData Central - Greek yogurt, nonfat, plain. Per 100g: Energy ~59
+  - timestamp: '2025-11-03T08:00:00+00:00'
+    updated_by: 'LLM: Claude Sonnet 4.5'
+    reason: Initial creation based on USDA and typical 0% fat Greek yogurt nutritional data
+    fields_changed: [all]
+    sources: [{note: 'USDA FoodData Central - Greek yogurt, nonfat, plain. Per 100g: Energy ~59
       kcal, Protein ~10.2g, Fat ~0.4g, Carbohydrate ~3.6g (all as sugars from lactose),
       Calcium ~100mg, Potassium ~141mg. Scaled to 200g portion.', url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/170903/nutrients'}]
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
-- timestamp: '2025-11-05T12:00:00+00:00'
-  updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: 'Enrichment with 17 priority nutrients from USDA FoodData Central (nonfat Greek yogurt, FDC ID 170894/170903)'
-  fields_changed: [iodine_ug, phosphorus_mg, copper_mg, selenium_ug, manganese_mg, vitamin_a_ug, vitamin_e_mg, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b6_mg, vitamin_b9_ug, vitamin_b12_ug, choline_mg]
-  sources: [{note: 'USDA FoodData Central via nutritionvalue.org - Nonfat Greek yogurt per 100g: Phosphorus 135mg, Copper 0.018mg, Selenium 9.7µg, Manganese 0.009mg, Vitamin A 1µg, Vitamin E 0.012mg, Vitamin K 0µg, Thiamin 0.023mg, Riboflavin 0.278mg, Niacin 0.208mg, Vitamin B6 0.063mg, Folate 7µg, Vitamin B12 0.75µg, Choline 15.1mg. Scaled to 200g portion.', url: 'https://www.nutritionvalue.org/Yogurt,_nonfat,_plain,_Greek_nutritional_value.html'}, {note: 'Iodine content updated based on research: Greek yogurt contains 30-50µg per serving; nonfat Greek yogurt (3/4 cup/180g) contains 87µg. Estimated 40µg per 100g = 80µg per 200g.', url: 'https://wellwisp.com/how-much-iodine-in-greek-yogurt/'}]
-  notes: 'Vitamin D and K remain 0 (not naturally present in unfortified Greek yogurt). EPA and DHA remain 0 (no fish-derived omega-3s in dairy). B12, phosphorus, and iodine values consistent with dairy being rich in these nutrients.'
-- timestamp: '2025-11-05T16:00:00+00:00'
-  updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: 'Enrichment with 8 additional nutrients using USDA FoodData Central values for nonfat Greek yogurt'
-  fields_changed: [vitamin_b5_mg, omega6_la_g]
-  sources: [{note: 'USDA FoodData Central via nutritionvalue.org - Nonfat Greek yogurt per 100g: Pantothenic acid (B5) 0.331mg, Linoleic acid (18:2 n-6) 0.012g, ALA (18:3 n-3) negligible/0g. Scaled to 200g portion: B5=0.662mg, LA=0.024g, ALA=0g.', url: 'https://www.nutritionvalue.org/Yogurt,_nonfat,_plain,_Greek_nutritional_value.html'}]
-  notes: 'Vitamin B7 (biotin), chromium, and molybdenum remain 0 (not routinely analyzed/reported in USDA FoodData Central for yogurt products per USDA API Research). Omega-3 ALA is TRUE ZERO/negligible in nonfat dairy. Fiber soluble and insoluble remain 0 (TRUE ZERO for pure dairy products).'
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
+  - timestamp: '2025-11-05T12:00:00+00:00'
+    updated_by: 'LLM: Claude Sonnet 4.5'
+    reason: 'Enrichment with 17 priority nutrients from USDA FoodData Central (nonfat Greek yogurt, FDC ID 170894/170903)'
+    fields_changed: [iodine_ug, phosphorus_mg, copper_mg, selenium_ug, manganese_mg, vitamin_a_ug, vitamin_e_mg, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b6_mg, vitamin_b9_ug, vitamin_b12_ug, choline_mg]
+    sources: [{note: 'USDA FoodData Central via nutritionvalue.org - Nonfat Greek yogurt per 100g: Phosphorus 135mg, Copper 0.018mg, Selenium 9.7µg, Manganese 0.009mg, Vitamin A 1µg, Vitamin E 0.012mg, Vitamin K 0µg, Thiamin 0.023mg, Riboflavin 0.278mg, Niacin 0.208mg, Vitamin B6 0.063mg, Folate 7µg, Vitamin B12 0.75µg, Choline 15.1mg. Scaled to 200g portion.', url: 'https://www.nutritionvalue.org/Yogurt,_nonfat,_plain,_Greek_nutritional_value.html'}, {note: 'Iodine content updated based on research: Greek yogurt contains 30-50µg per serving; nonfat Greek yogurt (3/4 cup/180g) contains 87µg. Estimated 40µg per 100g = 80µg per 200g.', url: 'https://wellwisp.com/how-much-iodine-in-greek-yogurt/'}]
+    notes: 'Vitamin D and K remain 0 (not naturally present in unfortified Greek yogurt). EPA and DHA remain 0 (no fish-derived omega-3s in dairy). B12, phosphorus, and iodine values consistent with dairy being rich in these nutrients.'
+  - timestamp: '2025-11-05T16:00:00+00:00'
+    updated_by: 'LLM: Claude Sonnet 4.5'
+    reason: 'Enrichment with 8 additional nutrients using USDA FoodData Central values for nonfat Greek yogurt'
+    fields_changed: [vitamin_b5_mg, omega6_la_g]
+    sources: [{note: 'USDA FoodData Central via nutritionvalue.org - Nonfat Greek yogurt per 100g: Pantothenic acid (B5) 0.331mg, Linoleic acid (18:2 n-6) 0.012g, ALA (18:3 n-3) negligible/0g. Scaled to 200g portion: B5=0.662mg, LA=0.024g, ALA=0g.', url: 'https://www.nutritionvalue.org/Yogurt,_nonfat,_plain,_Greek_nutritional_value.html'}]
+    notes: 'Vitamin B7 (biotin), chromium, and molybdenum remain 0 (not routinely analyzed/reported in USDA FoodData Central for yogurt products per USDA API Research). Omega-3 ALA is TRUE ZERO/negligible in nonfat dairy. Fiber soluble and insoluble remain 0 (TRUE ZERO for pure dairy products).'
 ```

@@ -102,42 +102,42 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: 2025-11-01T18:30:00+0000
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Initial macro-rich estimate for pasta ordered at The Eagle
-  fields_changed: [all fields]
-  sources: [{note: 'User considering Mafaldine with Tomato, Rosemary, Chickpeas & Parmesan on
+  - timestamp: 2025-11-01T18:30:00+0000
+    updated_by: 'LLM: GPT-5 Codex'
+    reason: Initial macro-rich estimate for pasta ordered at The Eagle
+    fields_changed: [all fields]
+    sources: [{note: 'User considering Mafaldine with Tomato, Rosemary, Chickpeas & Parmesan on
       2025-11-01', url: user_request}, {note: GPT-5 Codex component model with 2g
       finishing salt assumption, url: gpt_culinary_estimate}]
-- timestamp: 2025-11-02T10:00:00+0000
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Aligned macros and sodium with refined portion model from user research notes
-  fields_changed: [version, last_verified, portion.est_weight_g, assumptions.salt_scheme, per_portion.energy_kcal,
-  per_portion.protein_g, per_portion.fat_g, per_portion.sat_fat_g, per_portion.mufa_g,
-  per_portion.pufa_g, per_portion.cholesterol_mg, per_portion.carbs_g, per_portion.sugar_g,
-  per_portion.fiber_total_g, per_portion.fiber_soluble_g, per_portion.fiber_insoluble_g,
-  per_portion.sodium_mg, per_portion.potassium_mg, derived.energy_from_macros_kcal,
-  notes]
-  sources: [{note: Portion and macro breakdown supplied by user on 2025-11-02, url: user_provided_best_effort_estimate}]
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed: [derived.energy_from_macros_kcal, last_verified, notes, per_portion.carbs_available_g,
-  per_portion.carbs_g, per_portion.carbs_total_g, per_portion.energy_kcal, per_portion.polyols_g,
-  version]
-  sources: []
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
-- timestamp: '2025-11-05T19:15:00+00:00'
-  updated_by: 'Claude Code (Sonnet 4.5) - Agent 1'
-  reason: 'Enriched with nutrient estimates based on pasta dish components: cooked mafaldine (~280g enriched pasta), chickpeas (~150g), crushed tomatoes (~180g), olive oil (~15g), parmesan (~20g). Populated 22 nutrients from 0 to estimated values: magnesium (120 mg from chickpeas/pasta), calcium (180 mg from parmesan), iron (6.5 mg from enriched pasta/chickpeas), zinc (3.5 mg), vitamin C (35 mg from tomatoes), manganese (1.8 mg from chickpeas), copper (0.8 mg), selenium (95 mcg from pasta/chickpeas), phosphorus (420 mg), vitamin A (85 mcg from tomatoes/parmesan), vitamin E (3.2 mg from olive oil), vitamin K (18 mcg), B-vitamins (B1: 0.9 mg enriched pasta, B2: 0.4 mg, B3: 6.5 mg, B5: 1.2 mg, B6: 0.6 mg from chickpeas, B9: 320 mcg from chickpeas/pasta, B12: 0.2 mcg from parmesan), choline (85 mg), iodine (8 mcg), omega-3 ALA (0.2 g), omega-6 LA (2.5 g from olive oil). Confidence: MEDIUM (±20-40% - multi-component pasta dish).'
-  fields_changed: [iodine_ug, magnesium_mg, calcium_mg, iron_mg, zinc_mg, vitamin_c_mg, manganese_mg, copper_mg, selenium_ug, phosphorus_mg, vitamin_a_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_ala_g, omega6_la_g]
-  sources:
-  - note: 'Component-based estimation: enriched pasta, chickpeas, tomatoes, olive oil, parmesan. Based on USDA data for individual ingredients.'
+  - timestamp: 2025-11-02T10:00:00+0000
+    updated_by: 'LLM: GPT-5 Codex'
+    reason: Aligned macros and sodium with refined portion model from user research notes
+    fields_changed: [version, last_verified, portion.est_weight_g, assumptions.salt_scheme, per_portion.energy_kcal,
+    per_portion.protein_g, per_portion.fat_g, per_portion.sat_fat_g, per_portion.mufa_g,
+    per_portion.pufa_g, per_portion.cholesterol_mg, per_portion.carbs_g, per_portion.sugar_g,
+    per_portion.fiber_total_g, per_portion.fiber_soluble_g, per_portion.fiber_insoluble_g,
+    per_portion.sodium_mg, per_portion.potassium_mg, derived.energy_from_macros_kcal,
+    notes]
+    sources: [{note: Portion and macro breakdown supplied by user on 2025-11-02, url: user_provided_best_effort_estimate}]
+  - timestamp: '2025-11-02T19:20:00+00:00'
+    updated_by: 'LLM: GPT-5 Codex'
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed: [derived.energy_from_macros_kcal, last_verified, notes, per_portion.carbs_available_g,
+    per_portion.carbs_g, per_portion.carbs_total_g, per_portion.energy_kcal, per_portion.polyols_g,
+    version]
+    sources: []
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
+  - timestamp: '2025-11-05T19:15:00+00:00'
+    updated_by: 'Claude Code (Sonnet 4.5) - Agent 1'
+    reason: 'Enriched with nutrient estimates based on pasta dish components: cooked mafaldine (~280g enriched pasta), chickpeas (~150g), crushed tomatoes (~180g), olive oil (~15g), parmesan (~20g). Populated 22 nutrients from 0 to estimated values: magnesium (120 mg from chickpeas/pasta), calcium (180 mg from parmesan), iron (6.5 mg from enriched pasta/chickpeas), zinc (3.5 mg), vitamin C (35 mg from tomatoes), manganese (1.8 mg from chickpeas), copper (0.8 mg), selenium (95 mcg from pasta/chickpeas), phosphorus (420 mg), vitamin A (85 mcg from tomatoes/parmesan), vitamin E (3.2 mg from olive oil), vitamin K (18 mcg), B-vitamins (B1: 0.9 mg enriched pasta, B2: 0.4 mg, B3: 6.5 mg, B5: 1.2 mg, B6: 0.6 mg from chickpeas, B9: 320 mcg from chickpeas/pasta, B12: 0.2 mcg from parmesan), choline (85 mg), iodine (8 mcg), omega-3 ALA (0.2 g), omega-6 LA (2.5 g from olive oil). Confidence: MEDIUM (±20-40% - multi-component pasta dish).'
+    fields_changed: [iodine_ug, magnesium_mg, calcium_mg, iron_mg, zinc_mg, vitamin_c_mg, manganese_mg, copper_mg, selenium_ug, phosphorus_mg, vitamin_a_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_ala_g, omega6_la_g]
+    sources:
+    - note: 'Component-based estimation: enriched pasta, chickpeas, tomatoes, olive oil, parmesan. Based on USDA data for individual ingredients.'
     url: 'https://fdc.nal.usda.gov/'
     confidence: 'MEDIUM - multi-component vegetarian pasta dish'
 ```

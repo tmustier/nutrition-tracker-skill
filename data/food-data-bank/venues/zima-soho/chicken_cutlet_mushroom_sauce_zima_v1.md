@@ -100,31 +100,31 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
-- timestamp: 2025-10-30 00:00:00+00:00
-  updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: Initial population from user-provided nutrition data for Zima restaurant dish
-  fields_changed: [per_portion.energy_kcal, per_portion.protein_g, per_portion.fat_g, per_portion.sat_fat_g,
-  per_portion.mufa_g, per_portion.pufa_g, per_portion.trans_fat_g, per_portion.cholesterol_mg,
-  per_portion.carbs_g, per_portion.sugar_g, per_portion.fiber_total_g, per_portion.fiber_soluble_g,
-  per_portion.fiber_insoluble_g, per_portion.sodium_mg, per_portion.potassium_mg]
-  sources: [{note: 'Complete nutrition data provided by user for Chicken Cutlet with Mushroom
+  - timestamp: 2025-10-30 00:00:00+00:00
+    updated_by: 'LLM: Claude Sonnet 4.5'
+    reason: Initial population from user-provided nutrition data for Zima restaurant dish
+    fields_changed: [per_portion.energy_kcal, per_portion.protein_g, per_portion.fat_g, per_portion.sat_fat_g,
+    per_portion.mufa_g, per_portion.pufa_g, per_portion.trans_fat_g, per_portion.cholesterol_mg,
+    per_portion.carbs_g, per_portion.sugar_g, per_portion.fiber_total_g, per_portion.fiber_soluble_g,
+    per_portion.fiber_insoluble_g, per_portion.sodium_mg, per_portion.potassium_mg]
+    sources: [{note: 'Complete nutrition data provided by user for Chicken Cutlet with Mushroom
       Sauce with buckwheat from Zima restaurant, Soho, London (2025-10-30)', url: user_input}]
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed: [derived.energy_from_macros_kcal, last_verified, notes, per_portion.carbs_available_g,
-  per_portion.carbs_g, per_portion.carbs_total_g, per_portion.energy_kcal, per_portion.polyols_g,
-  version]
-  sources: []
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
-- timestamp: '2025-11-05T16:45:00+00:00'
-  updated_by: 'Agent 2: Claude Code (Sonnet 4.5)'
-  reason: 'Phase 3 enrichment: Added complete USDA nutrient data for 25 migrated fields using component-based calculation'
-  fields_changed: [magnesium_mg, calcium_mg, iron_mg, zinc_mg, vitamin_c_mg, copper_mg, selenium_ug, chromium_ug, molybdenum_ug, phosphorus_mg, chloride_mg, sulfur_mg, vitamin_a_ug, vitamin_d_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_epa_mg, omega3_dha_mg, omega3_ala_g, omega6_la_g, boron_mg, silicon_mg, vanadium_ug, nickel_ug]
-  sources: [{note: 'USDA FDC #171477 (chicken breast cooked): B vitamins (B3 13.7mg/100g, B5 1.26mg/100g), selenium 27.6µg/100g, phosphorus 228mg/100g, choline 85.3mg/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'USDA FDC #172687 (breadcrumbs): B vitamins, selenium 30µg/100g, phosphorus 100mg/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'USDA FDC #170855 (cream): vitamin A 243µg/100g, calcium 116mg/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'USDA FDC #170279 (buckwheat cooked): magnesium 51mg/100g, copper 0.15mg/100g, molybdenum 18µg/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'USDA FDC #169251 (mushrooms cooked): copper 0.50mg/100g, B vitamins', url: 'https://fdc.nal.usda.gov/'}, {note: 'Component-weighted calculation: 150g chicken + 20g breading + 50g cream + 150g buckwheat + 30g mushrooms + 15g oil', url: component_analysis}]
+  - timestamp: '2025-11-02T19:20:00+00:00'
+    updated_by: 'LLM: GPT-5 Codex'
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed: [derived.energy_from_macros_kcal, last_verified, notes, per_portion.carbs_available_g,
+    per_portion.carbs_g, per_portion.carbs_total_g, per_portion.energy_kcal, per_portion.polyols_g,
+    version]
+    sources: []
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
+  - timestamp: '2025-11-05T16:45:00+00:00'
+    updated_by: 'Agent 2: Claude Code (Sonnet 4.5)'
+    reason: 'Phase 3 enrichment: Added complete USDA nutrient data for 25 migrated fields using component-based calculation'
+    fields_changed: [magnesium_mg, calcium_mg, iron_mg, zinc_mg, vitamin_c_mg, copper_mg, selenium_ug, chromium_ug, molybdenum_ug, phosphorus_mg, chloride_mg, sulfur_mg, vitamin_a_ug, vitamin_d_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_epa_mg, omega3_dha_mg, omega3_ala_g, omega6_la_g, boron_mg, silicon_mg, vanadium_ug, nickel_ug]
+    sources: [{note: 'USDA FDC #171477 (chicken breast cooked): B vitamins (B3 13.7mg/100g, B5 1.26mg/100g), selenium 27.6µg/100g, phosphorus 228mg/100g, choline 85.3mg/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'USDA FDC #172687 (breadcrumbs): B vitamins, selenium 30µg/100g, phosphorus 100mg/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'USDA FDC #170855 (cream): vitamin A 243µg/100g, calcium 116mg/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'USDA FDC #170279 (buckwheat cooked): magnesium 51mg/100g, copper 0.15mg/100g, molybdenum 18µg/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'USDA FDC #169251 (mushrooms cooked): copper 0.50mg/100g, B vitamins', url: 'https://fdc.nal.usda.gov/'}, {note: 'Component-weighted calculation: 150g chicken + 20g breading + 50g cream + 150g buckwheat + 30g mushrooms + 15g oil', url: component_analysis}]
 ```

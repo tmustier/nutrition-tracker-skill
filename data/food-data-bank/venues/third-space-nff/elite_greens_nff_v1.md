@@ -100,33 +100,33 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: 2025-10-31T00:00:00+0000
-  updated_by: Claude Code (Sonnet 4.5)
-  reason: Initial entry with component-based triangulation from user-provided macros and confirmed ingredient list
-  fields_changed: [all fields]
-  sources: [{note: 'User-provided core nutrition data: 350 kcal, 8g F, 43g C, 4g Fiber, 25g Protein',
+  - timestamp: 2025-10-31T00:00:00+0000
+    updated_by: Claude Code (Sonnet 4.5)
+    reason: Initial entry with component-based triangulation from user-provided macros and confirmed ingredient list
+    fields_changed: [all fields]
+    sources: [{note: 'User-provided core nutrition data: 350 kcal, 8g F, 43g C, 4g Fiber, 25g Protein',
     url: user_input}, {note: 'Ingredient list: 2Boost juice (Apple, Baby Spinach,
       Cucumber, Parsley, Lemon, Ginger) + vanilla protein + oat milk + banana', url: 'https://www.thirdspace.london/natural-fitness-food/'},
   {note: NFF Vanilla Whey nutrition data for component analysis, url: 'https://uk-ga.openfoodfacts.org/product/5065003325005/whey-protein-vanilla-natural-fitness-food'}]
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed: [derived.energy_from_macros_kcal, last_verified, notes, per_portion.carbs_available_g,
-  per_portion.carbs_g, per_portion.carbs_total_g, per_portion.energy_kcal, per_portion.polyols_g,
-  version]
-  sources: []
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
-- timestamp: '2025-11-05T14:45:00+00:00'
-  updated_by: 'Agent 4: Claude Code (Sonnet 4.5)'
-  reason: 'Comprehensive nutrient enrichment for 370g shake using component-based USDA data (vanilla whey 30g, banana 80g, oat milk 180ml, 2Boost juice 130ml)'
-  fields_changed: [copper_mg, selenium_ug, chromium_ug, molybdenum_ug, phosphorus_mg, chloride_mg, sulfur_mg, vitamin_a_ug, vitamin_d_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_ala_g, omega6_la_g, version, last_verified]
-  sources:
-  - note: 'USDA FoodData Central - Whey protein isolate: phosphorus, selenium, B vitamins (B2, B5, B12), choline from dairy'
+  - timestamp: '2025-11-02T19:20:00+00:00'
+    updated_by: 'LLM: GPT-5 Codex'
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed: [derived.energy_from_macros_kcal, last_verified, notes, per_portion.carbs_available_g,
+    per_portion.carbs_g, per_portion.carbs_total_g, per_portion.energy_kcal, per_portion.polyols_g,
+    version]
+    sources: []
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
+  - timestamp: '2025-11-05T14:45:00+00:00'
+    updated_by: 'Agent 4: Claude Code (Sonnet 4.5)'
+    reason: 'Comprehensive nutrient enrichment for 370g shake using component-based USDA data (vanilla whey 30g, banana 80g, oat milk 180ml, 2Boost juice 130ml)'
+    fields_changed: [copper_mg, selenium_ug, chromium_ug, molybdenum_ug, phosphorus_mg, chloride_mg, sulfur_mg, vitamin_a_ug, vitamin_d_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_ala_g, omega6_la_g, version, last_verified]
+    sources:
+    - note: 'USDA FoodData Central - Whey protein isolate: phosphorus, selenium, B vitamins (B2, B5, B12), choline from dairy'
     url: 'https://fdc.nal.usda.gov/'
   - note: 'USDA FoodData Central - Banana (FDC 173944): vitamin B6 0.37mg/100g, folate, minerals'
     url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/173944'

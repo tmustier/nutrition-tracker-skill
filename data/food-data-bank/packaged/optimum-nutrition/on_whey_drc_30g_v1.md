@@ -93,7 +93,7 @@ change_log:
         url: "https://www.kroger.com/p/optimum-nutrition-gold-standard-whey-double-rich-chocolate-protein-powder/0074892706014"
       - note: "Iron: 0.7mg (4% DV) per scoop from product nutritional information"
         url: "multiple_retail_sources"
-    methodology: "Comprehensive web research across multiple retail sources (Kroger, Ralphs, Baker's, Smith's) confirmed cholesterol content of 30-55mg per scoop, with 35mg being most commonly listed value in 2024-2025 product labels. Iron content of 0.7mg (4% DV) verified from current product data, resolving previous uncertainty about iron values. Confidence upgraded from LOW to MEDIUM based on verification of previously uncertain nutrients."
+        methodology: "Comprehensive web research across multiple retail sources (Kroger, Ralphs, Baker's, Smith's) confirmed cholesterol content of 30-55mg per scoop, with 35mg being most commonly listed value in 2024-2025 product labels. Iron content of 0.7mg (4% DV) verified from current product data, resolving previous uncertainty about iron values. Confidence upgraded from LOW to MEDIUM based on verification of previously uncertain nutrients."
 
   - timestamp: "2025-11-06T23:28:46+00:00"
     updated_by: "Script: calculate_derived_nutrients.py"
@@ -154,7 +154,7 @@ change_log:
       - url: 'https://www.nutritionadvance.com/whey-protein-nutrition-benefits/'
         note: 'Whey protein naturally high in B5, providing 33% DV per scoop'
       - note: 'Biotin in dairy products typically 2-4µg/100g (whey concentrate/isolate blend)'
-    notes: 'Whey is dairy-derived (animal product) but flavored powder contains added cocoa fiber (0.7g total). B5 excellent (1.74mg), biotin present (0.9µg), omega-6 minimal as expected for dairy.'
+        notes: 'Whey is dairy-derived (animal product) but flavored powder contains added cocoa fiber (0.7g total). B5 excellent (1.74mg), biotin present (0.9µg), omega-6 minimal as expected for dairy.'
   - timestamp: '2025-11-05T00:00:00+00:00'
     updated_by: 'LLM: Claude Sonnet 4.5'
     reason: Enrichment with 17 priority nutrients using USDA, scientific literature, and manufacturer data
@@ -174,5 +174,5 @@ change_log:
         url: 'https://pubmed.ncbi.nlm.nih.gov/27981743/'
       - note: 'Vitamins A, D, E, K, EPA, DHA confirmed as 0 - product is NOT fortified with vitamins (naturally occurring minerals only)'
         url: 'multiple_sources'
-    methodology: "Product confirmed as unfortified whey protein blend (isolate + concentrate + hydrolysate). All nutrient values derived from: (1) manufacturer specifications for phosphorus; (2) USDA FoodData Central for generic whey protein; (3) peer-reviewed scientific studies on commercial whey protein composition; (4) conservative estimation for nutrients with limited data. Values scaled to 30g serving. Confidence: MEDIUM for minerals and B vitamins naturally present in dairy; HIGH for nutrients confirmed as zero (not fortified)."
+        methodology: "Product confirmed as unfortified whey protein blend (isolate + concentrate + hydrolysate). All nutrient values derived from: (1) manufacturer specifications for phosphorus; (2) USDA FoodData Central for generic whey protein; (3) peer-reviewed scientific studies on commercial whey protein composition; (4) conservative estimation for nutrients with limited data. Values scaled to 30g serving. Confidence: MEDIUM for minerals and B vitamins naturally present in dairy; HIGH for nutrients confirmed as zero (not fortified)."
 ```

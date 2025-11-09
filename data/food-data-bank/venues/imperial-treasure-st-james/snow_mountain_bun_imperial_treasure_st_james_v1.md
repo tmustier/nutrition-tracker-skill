@@ -103,39 +103,39 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: 2025-11-02
-  reason: Initial entry for Snow Mountain Bun using component-based estimation
-  fields_changed: [all fields]
-  evidence: Research from Imperial Treasure UK social media, recipe sites, and nutrition databases
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
-- timestamp: "2025-11-05T13:05:00+00:00"
-  updated_by: "LLM: Claude Sonnet 4.5 (Agent 3)"
-  reason: "Schema v2 enrichment: Complete nutrient profile for snow mountain bun (BBQ pork 24g + enriched flour dough 47g + butter topping 7g). Added 18 missing nutrients. B-vitamins excellent from pork and enriched flour (B1=0.5mg, B3=4.2mg, B9=87µg). Vitamin A (49µg from butter topping), phosphorus (111mg), choline (24mg from pork), selenium (10µg)."
-  fields_changed:
-  - per_portion.manganese_mg
-  - per_portion.copper_mg
-  - per_portion.selenium_ug
-  - per_portion.phosphorus_mg
-  - per_portion.vitamin_a_ug
-  - per_portion.vitamin_d_ug
-  - per_portion.vitamin_e_mg
-  - per_portion.vitamin_k_ug
-  - per_portion.vitamin_b1_mg
-  - per_portion.vitamin_b2_mg
-  - per_portion.vitamin_b3_mg
-  - per_portion.vitamin_b5_mg
-  - per_portion.vitamin_b6_mg
-  - per_portion.vitamin_b7_ug
-  - per_portion.vitamin_b9_ug
-  - per_portion.vitamin_b12_ug
-  - per_portion.choline_mg
-  - version
-  sources:
-  - url: https://fdc.nal.usda.gov/
+  - timestamp: 2025-11-02
+    reason: Initial entry for Snow Mountain Bun using component-based estimation
+    fields_changed: [all fields]
+    evidence: Research from Imperial Treasure UK social media, recipe sites, and nutrition databases
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
+  - timestamp: "2025-11-05T13:05:00+00:00"
+    updated_by: "LLM: Claude Sonnet 4.5 (Agent 3)"
+    reason: "Schema v2 enrichment: Complete nutrient profile for snow mountain bun (BBQ pork 24g + enriched flour dough 47g + butter topping 7g). Added 18 missing nutrients. B-vitamins excellent from pork and enriched flour (B1=0.5mg, B3=4.2mg, B9=87µg). Vitamin A (49µg from butter topping), phosphorus (111mg), choline (24mg from pork), selenium (10µg)."
+    fields_changed:
+    - per_portion.manganese_mg
+    - per_portion.copper_mg
+    - per_portion.selenium_ug
+    - per_portion.phosphorus_mg
+    - per_portion.vitamin_a_ug
+    - per_portion.vitamin_d_ug
+    - per_portion.vitamin_e_mg
+    - per_portion.vitamin_k_ug
+    - per_portion.vitamin_b1_mg
+    - per_portion.vitamin_b2_mg
+    - per_portion.vitamin_b3_mg
+    - per_portion.vitamin_b5_mg
+    - per_portion.vitamin_b6_mg
+    - per_portion.vitamin_b7_ug
+    - per_portion.vitamin_b9_ug
+    - per_portion.vitamin_b12_ug
+    - per_portion.choline_mg
+    - version
+    sources:
+    - url: https://fdc.nal.usda.gov/
     note: "USDA data for components: Roasted pork (24g) provides B1=0.14mg, B2=0.07mg, B3=1.4mg, B5=0.2mg, B6=0.14mg, B12=0.2µg, phosphorus=60mg, choline=24mg, selenium=10µg, copper=0.02mg. Enriched flour dough (47g) adds B1=0.37mg, B2=0.23mg, B3=2.8mg, B9=86µg, phosphorus=51mg, manganese=0.4mg. Butter topping (7g) contributes vitamin A=48µg. Confidence: HIGH (USDA pork + flour components)"
 ```

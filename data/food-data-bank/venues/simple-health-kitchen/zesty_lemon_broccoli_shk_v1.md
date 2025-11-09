@@ -86,61 +86,61 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: 2025-10-28T18:51:39+0000
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Populate per_portion from user-provided data
-  fields_changed: [per_portion.energy_kcal, per_portion.protein_g, per_portion.fat_g, per_portion.sat_fat_g,
-  per_portion.mufa_g, per_portion.pufa_g, per_portion.carbs_g, per_portion.sugar_g,
-  per_portion.fiber_total_g, per_portion.sodium_mg, per_portion.potassium_mg, per_portion.iodine_ug,
-  per_portion.magnesium_mg, per_portion.calcium_mg, per_portion.iron_mg, per_portion.zinc_mg,
-  per_portion.vitamin_c_mg]
-  sources: [{note: User-supplied values on 2025-10-28, url: user_input}]
-- timestamp: 2025-10-28T18:57:05+0000
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Consistency fix for fat totals/splits
-  fields_changed: [per_portion.fat_g]
-  sources: [{note: Correction approved by user on 2025-10-28, url: user_input}]
-- timestamp: 2025-10-28T19:02:30+0000
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
-  fields_changed: [per_portion.sat_fat_g, per_portion.mufa_g, per_portion.pufa_g, per_portion.iodine_ug,
-  per_portion.magnesium_mg, per_portion.calcium_mg, per_portion.iron_mg, per_portion.zinc_mg]
-  sources: [{note: Automated rounding pass, url: formatting-pass}]
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed: [last_verified, notes, per_portion.carbs_available_g, per_portion.carbs_g, per_portion.carbs_total_g,
-  per_portion.energy_kcal, per_portion.polyols_g, version]
-  sources: []
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
-- timestamp: "2025-11-05T12:45:00+00:00"
-  updated_by: "LLM: Claude Sonnet 4.5 (Agent 3)"
-  reason: "Schema v2 enrichment: Complete nutrient profile with USDA data for broccoli (~180g) with lemon and oil dressing. Added 17 missing nutrients including B-complex vitamins, vitamin K (182µg - excellent source), vitamin E (3.8mg from oil), vitamin A (56µg), phosphorus (118mg)."
-  fields_changed:
-  - per_portion.manganese_mg
-  - per_portion.copper_mg
-  - per_portion.selenium_ug
-  - per_portion.phosphorus_mg
-  - per_portion.vitamin_a_ug
-  - per_portion.vitamin_d_ug
-  - per_portion.vitamin_e_mg
-  - per_portion.vitamin_k_ug
-  - per_portion.vitamin_b1_mg
-  - per_portion.vitamin_b2_mg
-  - per_portion.vitamin_b3_mg
-  - per_portion.vitamin_b5_mg
-  - per_portion.vitamin_b6_mg
-  - per_portion.vitamin_b7_ug
-  - per_portion.vitamin_b9_ug
-  - per_portion.vitamin_b12_ug
-  - per_portion.choline_mg
-  - version
-  sources:
-  - url: https://fdc.nal.usda.gov/
+  - timestamp: 2025-10-28T18:51:39+0000
+    updated_by: 'LLM: GPT-5 Thinking'
+    reason: Populate per_portion from user-provided data
+    fields_changed: [per_portion.energy_kcal, per_portion.protein_g, per_portion.fat_g, per_portion.sat_fat_g,
+    per_portion.mufa_g, per_portion.pufa_g, per_portion.carbs_g, per_portion.sugar_g,
+    per_portion.fiber_total_g, per_portion.sodium_mg, per_portion.potassium_mg, per_portion.iodine_ug,
+    per_portion.magnesium_mg, per_portion.calcium_mg, per_portion.iron_mg, per_portion.zinc_mg,
+    per_portion.vitamin_c_mg]
+    sources: [{note: User-supplied values on 2025-10-28, url: user_input}]
+  - timestamp: 2025-10-28T18:57:05+0000
+    updated_by: 'LLM: GPT-5 Thinking'
+    reason: Consistency fix for fat totals/splits
+    fields_changed: [per_portion.fat_g]
+    sources: [{note: Correction approved by user on 2025-10-28, url: user_input}]
+  - timestamp: 2025-10-28T19:02:30+0000
+    updated_by: 'LLM: GPT-5 Thinking'
+    reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
+    fields_changed: [per_portion.sat_fat_g, per_portion.mufa_g, per_portion.pufa_g, per_portion.iodine_ug,
+    per_portion.magnesium_mg, per_portion.calcium_mg, per_portion.iron_mg, per_portion.zinc_mg]
+    sources: [{note: Automated rounding pass, url: formatting-pass}]
+  - timestamp: '2025-11-02T19:20:00+00:00'
+    updated_by: 'LLM: GPT-5 Codex'
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed: [last_verified, notes, per_portion.carbs_available_g, per_portion.carbs_g, per_portion.carbs_total_g,
+    per_portion.energy_kcal, per_portion.polyols_g, version]
+    sources: []
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
+  - timestamp: "2025-11-05T12:45:00+00:00"
+    updated_by: "LLM: Claude Sonnet 4.5 (Agent 3)"
+    reason: "Schema v2 enrichment: Complete nutrient profile with USDA data for broccoli (~180g) with lemon and oil dressing. Added 17 missing nutrients including B-complex vitamins, vitamin K (182µg - excellent source), vitamin E (3.8mg from oil), vitamin A (56µg), phosphorus (118mg)."
+    fields_changed:
+    - per_portion.manganese_mg
+    - per_portion.copper_mg
+    - per_portion.selenium_ug
+    - per_portion.phosphorus_mg
+    - per_portion.vitamin_a_ug
+    - per_portion.vitamin_d_ug
+    - per_portion.vitamin_e_mg
+    - per_portion.vitamin_k_ug
+    - per_portion.vitamin_b1_mg
+    - per_portion.vitamin_b2_mg
+    - per_portion.vitamin_b3_mg
+    - per_portion.vitamin_b5_mg
+    - per_portion.vitamin_b6_mg
+    - per_portion.vitamin_b7_ug
+    - per_portion.vitamin_b9_ug
+    - per_portion.vitamin_b12_ug
+    - per_portion.choline_mg
+    - version
+    sources:
+    - url: https://fdc.nal.usda.gov/
     note: "USDA broccoli data scaled for ~180g broccoli content. B-vitamins: B1=0.13mg, B2=0.21mg, B3=1.1mg, B5=1.0mg, B6=0.31mg, B9=113µg. Vitamin K=182µg (outstanding source), vitamin A=56µg, E=3.8mg (includes olive oil contribution). Minerals: phosphorus=118mg, manganese=0.4mg, copper=0.09mg, selenium=5µg, choline=34mg. B12=0 (true zero - plant-based). Confidence: HIGH (broccoli portion + oil dressing)"
 ```

@@ -104,41 +104,41 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: 2025-10-30T19:35:00+0000
-  updated_by: Claude Code (via ChatGPT estimation)
-  reason: Initial entry with ChatGPT nutrition analysis cross-checked against multiple databases
-  fields_changed: [all fields]
-  sources: [{note: FatSecret branded and generic halva entries, url: 'https://www.fatsecret.com/calories-nutrition/generic/halva'},
-  {note: Parma.am product page with ingredient breakdown, url: 'https://parma.am/en/product/rot-front-glazed-halva-2/'},
-  {note: FitAudit generic halva mineral composition, url: 'https://fitaudit.ru/food/halva'}]
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed: [last_verified, notes, per_portion.carbs_available_g, per_portion.carbs_g, per_portion.carbs_total_g,
-  per_portion.energy_kcal, per_portion.polyols_g, version]
-  sources: []
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
-- timestamp: '2025-11-05T00:00:00+00:00'
-  updated_by: Claude Code (USDA enrichment)
-  reason: 'Enriched with 14 priority nutrients from USDA FoodData Central'
-  fields_changed: [version, last_verified, per_portion.phosphorus_mg, per_portion.copper_mg, per_portion.selenium_ug, per_portion.manganese_mg, per_portion.vitamin_e_mg, per_portion.vitamin_b1_mg, per_portion.vitamin_b2_mg, per_portion.vitamin_b3_mg, per_portion.vitamin_b6_mg, per_portion.vitamin_b9_ug, per_portion.choline_mg, assumptions.usda_scaling]
-  sources: [{note: 'USDA FoodData Central: Candies, sesame crunch (FDC ID 169588)', url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/169588/nutrients'}]
-  notes: 'Nutrients scaled from per-100g to 25g portion. Not available in USDA data: iodine, vitamin A, vitamin D, vitamin K, vitamin B12, omega-3 EPA, omega-3 DHA (remain at 0).'
-- timestamp: '2025-11-05T22:00:00+00:00'
-  updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: 'USDA enrichment phase 2: Added critical omega-6 LA and vitamin B5 for peanut-based halva'
-  fields_changed: [vitamin_b5_mg, omega6_la_g, omega3_ala_g, version]
-  sources: [{note: 'USDA FoodData Central: Candies, sesame crunch (FDC ID 169588)', url: 'https://nutritionvalue.org/Candies%2C_sesame_crunch_169588_nutritional_value.html'}]
-  methodology: "Scaled USDA per-100g to 25g portion (÷4). Added: vitamin B5/pantothenic acid (0.008 mg from 0.032 mg/100g), omega-6 linoleic acid LA (3.58g from 14.32g/100g - CRITICAL nutrient for peanut-based halva, major source from peanuts), omega-3 ALA (0.06g from 0.25g/100g). Major minerals (calcium, magnesium, potassium, iron, zinc) already enriched in previous update with appropriate values for halva. Biotin/B7 not available in USDA data for sesame candy."
-- timestamp: '2025-11-05T23:00:00+00:00'
-  updated_by: 'LLM: Claude Sonnet 4.5 (Agent 6)'
-  reason: 'CRITICAL CORRECTION: Fixed severely underestimated B5 and added missing B7/biotin based on peanut content (44% peanut base). Added trace minerals chromium and molybdenum from peanut data.'
-  fields_changed: [vitamin_b5_mg, vitamin_b7_ug, chromium_ug, molybdenum_ug, version]
-  sources: [{note: 'USDA FoodData Central - Peanuts, all types, raw (FDC ID 172430): Pantothenic acid/B5 1.767 mg/100g, Biotin/B7 17.5 μg/100g. Molybdenum 40 μg/100g, Chromium 2 μg/100g (conservative estimate from range 0-4 μg).', url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/172430/nutrients'}, {note: 'Research study on biotin content in foods (NIH/USDA funded): Peanuts contain 17.5 mcg biotin per 100g.', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC1450323/'}]
-  methodology: "Product composition: 44% peanut mass. Scaled USDA peanut values to 25g portion assuming peanut contribution: B5 corrected from 0.008mg to 0.44mg (1.767mg/100g × 0.44 × 0.57 dilution factor), B7 added 4.4μg (17.5μg/100g × 0.44 × 0.57), chromium 0.5μg (2μg/100g × 0.44 × 0.57), molybdenum 10μg (40μg/100g × 0.44 × 0.57). Previous B5 value of 0.008mg was based on sesame candy which is NOT peanut-based and was incorrect proxy."
+  - timestamp: 2025-10-30T19:35:00+0000
+    updated_by: Claude Code (via ChatGPT estimation)
+    reason: Initial entry with ChatGPT nutrition analysis cross-checked against multiple databases
+    fields_changed: [all fields]
+    sources: [{note: FatSecret branded and generic halva entries, url: 'https://www.fatsecret.com/calories-nutrition/generic/halva'},
+    {note: Parma.am product page with ingredient breakdown, url: 'https://parma.am/en/product/rot-front-glazed-halva-2/'},
+    {note: FitAudit generic halva mineral composition, url: 'https://fitaudit.ru/food/halva'}]
+  - timestamp: '2025-11-02T19:20:00+00:00'
+    updated_by: 'LLM: GPT-5 Codex'
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed: [last_verified, notes, per_portion.carbs_available_g, per_portion.carbs_g, per_portion.carbs_total_g,
+    per_portion.energy_kcal, per_portion.polyols_g, version]
+    sources: []
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
+  - timestamp: '2025-11-05T00:00:00+00:00'
+    updated_by: Claude Code (USDA enrichment)
+    reason: 'Enriched with 14 priority nutrients from USDA FoodData Central'
+    fields_changed: [version, last_verified, per_portion.phosphorus_mg, per_portion.copper_mg, per_portion.selenium_ug, per_portion.manganese_mg, per_portion.vitamin_e_mg, per_portion.vitamin_b1_mg, per_portion.vitamin_b2_mg, per_portion.vitamin_b3_mg, per_portion.vitamin_b6_mg, per_portion.vitamin_b9_ug, per_portion.choline_mg, assumptions.usda_scaling]
+    sources: [{note: 'USDA FoodData Central: Candies, sesame crunch (FDC ID 169588)', url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/169588/nutrients'}]
+    notes: 'Nutrients scaled from per-100g to 25g portion. Not available in USDA data: iodine, vitamin A, vitamin D, vitamin K, vitamin B12, omega-3 EPA, omega-3 DHA (remain at 0).'
+  - timestamp: '2025-11-05T22:00:00+00:00'
+    updated_by: 'LLM: Claude Sonnet 4.5'
+    reason: 'USDA enrichment phase 2: Added critical omega-6 LA and vitamin B5 for peanut-based halva'
+    fields_changed: [vitamin_b5_mg, omega6_la_g, omega3_ala_g, version]
+    sources: [{note: 'USDA FoodData Central: Candies, sesame crunch (FDC ID 169588)', url: 'https://nutritionvalue.org/Candies%2C_sesame_crunch_169588_nutritional_value.html'}]
+    methodology: "Scaled USDA per-100g to 25g portion (÷4). Added: vitamin B5/pantothenic acid (0.008 mg from 0.032 mg/100g), omega-6 linoleic acid LA (3.58g from 14.32g/100g - CRITICAL nutrient for peanut-based halva, major source from peanuts), omega-3 ALA (0.06g from 0.25g/100g). Major minerals (calcium, magnesium, potassium, iron, zinc) already enriched in previous update with appropriate values for halva. Biotin/B7 not available in USDA data for sesame candy."
+  - timestamp: '2025-11-05T23:00:00+00:00'
+    updated_by: 'LLM: Claude Sonnet 4.5 (Agent 6)'
+    reason: 'CRITICAL CORRECTION: Fixed severely underestimated B5 and added missing B7/biotin based on peanut content (44% peanut base). Added trace minerals chromium and molybdenum from peanut data.'
+    fields_changed: [vitamin_b5_mg, vitamin_b7_ug, chromium_ug, molybdenum_ug, version]
+    sources: [{note: 'USDA FoodData Central - Peanuts, all types, raw (FDC ID 172430): Pantothenic acid/B5 1.767 mg/100g, Biotin/B7 17.5 μg/100g. Molybdenum 40 μg/100g, Chromium 2 μg/100g (conservative estimate from range 0-4 μg).', url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/172430/nutrients'}, {note: 'Research study on biotin content in foods (NIH/USDA funded): Peanuts contain 17.5 mcg biotin per 100g.', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC1450323/'}]
+    methodology: "Product composition: 44% peanut mass. Scaled USDA peanut values to 25g portion assuming peanut contribution: B5 corrected from 0.008mg to 0.44mg (1.767mg/100g × 0.44 × 0.57 dilution factor), B7 added 4.4μg (17.5μg/100g × 0.44 × 0.57), chromium 0.5μg (2μg/100g × 0.44 × 0.57), molybdenum 10μg (40μg/100g × 0.44 × 0.57). Previous B5 value of 0.008mg was based on sesame candy which is NOT peanut-based and was incorrect proxy."
 ```

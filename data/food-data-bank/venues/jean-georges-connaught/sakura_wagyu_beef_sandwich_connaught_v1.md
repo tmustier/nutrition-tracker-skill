@@ -96,72 +96,72 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
-- timestamp: 2025-10-28 20:00:00+00:00
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: Initial population from Deliveroo + ChatGPT nutritional analysis
-  fields_changed:
-  - per_portion.energy_kcal
-  - per_portion.protein_g
-  - per_portion.fat_g
-  - per_portion.sat_fat_g
-  - per_portion.carbs_g
-  - per_portion.fiber_total_g
-  - per_portion.sodium_mg
-  - portion.est_weight_g
-  sources:
-  - url: https://deliveroo.co.uk/menu/london/mayfair/jean-georges-at-the-connaught
+  - timestamp: 2025-10-28 20:00:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: Initial population from Deliveroo + ChatGPT nutritional analysis
+    fields_changed:
+    - per_portion.energy_kcal
+    - per_portion.protein_g
+    - per_portion.fat_g
+    - per_portion.sat_fat_g
+    - per_portion.carbs_g
+    - per_portion.fiber_total_g
+    - per_portion.sodium_mg
+    - portion.est_weight_g
+    sources:
+    - url: https://deliveroo.co.uk/menu/london/mayfair/jean-georges-at-the-connaught
     note: "Deliveroo calorie listing: 879 kcal"
   - url: user_input
     note: ChatGPT nutritional breakdown provided by Thomas on 2025-10-28
-- timestamp: 2025-10-28 20:20:00+00:00
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: Added estimated MUFA/PUFA and micronutrients from ingredient composition
-  fields_changed:
-  - per_portion.mufa_g
-  - per_portion.pufa_g
-  - per_portion.trans_fat_g
-  - per_portion.cholesterol_mg
-  - per_portion.sugar_g
-  - per_portion.potassium_mg
-  - per_portion.iodine_ug
-  - per_portion.magnesium_mg
-  - per_portion.calcium_mg
-  - per_portion.iron_mg
-  - per_portion.zinc_mg
-  - per_portion.vitamin_c_mg
-  sources:
-  - url: ingredient_analysis
+  - timestamp: 2025-10-28 20:20:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: Added estimated MUFA/PUFA and micronutrients from ingredient composition
+    fields_changed:
+    - per_portion.mufa_g
+    - per_portion.pufa_g
+    - per_portion.trans_fat_g
+    - per_portion.cholesterol_mg
+    - per_portion.sugar_g
+    - per_portion.potassium_mg
+    - per_portion.iodine_ug
+    - per_portion.magnesium_mg
+    - per_portion.calcium_mg
+    - per_portion.iron_mg
+    - per_portion.zinc_mg
+    - per_portion.vitamin_c_mg
+    sources:
+    - url: ingredient_analysis
     note: Estimated from typical wagyu beef + pain de mie bread composition
-- timestamp: 2025-10-29 00:00:00+00:00
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: Populate fiber split and manganese from bread composition
-  fields_changed:
-  - per_portion.fiber_soluble_g
-  - per_portion.fiber_insoluble_g
-  - per_portion.manganese_mg
-  sources:
-  - url: nutritional_research
+  - timestamp: 2025-10-29 00:00:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: Populate fiber split and manganese from bread composition
+    fields_changed:
+    - per_portion.fiber_soluble_g
+    - per_portion.fiber_insoluble_g
+    - per_portion.manganese_mg
+    sources:
+    - url: nutritional_research
     note: 'Fiber from pain de mie bread (refined wheat): ~25% soluble, 75% insoluble.
       Manganese trace in white bread and beef, rounded to 0.'
-- timestamp: "2025-11-02T19:20:00+00:00"
-  updated_by: "LLM: GPT-5 Codex"
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed:
-  - last_verified
-  - notes
-  - per_portion.carbs_available_g
-  - per_portion.carbs_g
-  - per_portion.carbs_total_g
-  - per_portion.energy_kcal
-  - per_portion.polyols_g
-  - version
-  sources: []
-- timestamp: '2025-11-05T14:35:00+00:00'
-  updated_by: 'Agent 4: Claude Code (Sonnet 4.5)'
-  reason: 'Comprehensive nutrient enrichment using component-based USDA data for 360g wagyu sandwich (wagyu beef ~130g, pain de mie ~140g, neutral oil ~20g, garnish)'
-  fields_changed: [selenium_ug, chromium_ug, molybdenum_ug, phosphorus_mg, chloride_mg, sulfur_mg, vitamin_a_ug, vitamin_d_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_ala_g, omega6_la_g, version, last_verified]
-  sources:
-  - note: 'USDA FoodData Central - Beef wagyu composition: similar mineral/vitamin profile to regular beef with higher fat content'
+  - timestamp: "2025-11-02T19:20:00+00:00"
+    updated_by: "LLM: GPT-5 Codex"
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed:
+    - last_verified
+    - notes
+    - per_portion.carbs_available_g
+    - per_portion.carbs_g
+    - per_portion.carbs_total_g
+    - per_portion.energy_kcal
+    - per_portion.polyols_g
+    - version
+    sources: []
+  - timestamp: '2025-11-05T14:35:00+00:00'
+    updated_by: 'Agent 4: Claude Code (Sonnet 4.5)'
+    reason: 'Comprehensive nutrient enrichment using component-based USDA data for 360g wagyu sandwich (wagyu beef ~130g, pain de mie ~140g, neutral oil ~20g, garnish)'
+    fields_changed: [selenium_ug, chromium_ug, molybdenum_ug, phosphorus_mg, chloride_mg, sulfur_mg, vitamin_a_ug, vitamin_d_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_ala_g, omega6_la_g, version, last_verified]
+    sources:
+    - note: 'USDA FoodData Central - Beef wagyu composition: similar mineral/vitamin profile to regular beef with higher fat content'
     url: 'https://fdc.nal.usda.gov/'
   - note: 'USDA FoodData Central - White bread enriched (pain de mie): B vitamins, selenium, phosphorus, enriched folate'
     url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/172687'

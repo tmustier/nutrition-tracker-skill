@@ -107,40 +107,40 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
-- timestamp: "2025-11-05T00:00:00+00:00"
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: "Enriched with 17 priority nutrients from USDA FoodData Central whole milk yogurt data"
-  fields_changed:
-  - vitamin_d_ug
-  - choline_mg
-  - iodine_ug
-  - vitamin_b9_ug
-  - vitamin_b12_ug
-  - phosphorus_mg
-  - copper_mg
-  - selenium_ug
-  - manganese_mg
-  - vitamin_a_ug
-  - vitamin_e_mg
-  - vitamin_k_ug
-  - vitamin_b1_mg
-  - vitamin_b2_mg
-  - vitamin_b3_mg
-  - vitamin_b6_mg
-  - omega3_epa_mg
-  - omega3_dha_mg
-  sources:
-  - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/2259793/nutrients
-    note: "USDA FoodData Central Foundation - Yogurt, plain, whole milk (primary source for B vitamins, minerals, vitamin D)"
-  - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/171284/nutrients
-    note: "USDA FoodData Central SR Legacy - Yogurt, plain, whole milk (supplemental source for B12, folate, choline, vitamin A, vitamin E, selenium)"
-- timestamp: "2025-11-04T12:00:00+00:00"
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: "Initial creation using component-based estimation from USDA data and commercial product research"
-  fields_changed:
-  - all
-  sources:
-  - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/1097558/nutrients
+  - timestamp: "2025-11-05T00:00:00+00:00"
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Enriched with 17 priority nutrients from USDA FoodData Central whole milk yogurt data"
+    fields_changed:
+    - vitamin_d_ug
+    - choline_mg
+    - iodine_ug
+    - vitamin_b9_ug
+    - vitamin_b12_ug
+    - phosphorus_mg
+    - copper_mg
+    - selenium_ug
+    - manganese_mg
+    - vitamin_a_ug
+    - vitamin_e_mg
+    - vitamin_k_ug
+    - vitamin_b1_mg
+    - vitamin_b2_mg
+    - vitamin_b3_mg
+    - vitamin_b6_mg
+    - omega3_epa_mg
+    - omega3_dha_mg
+    sources:
+      - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/2259793/nutrients
+        note: "USDA FoodData Central Foundation - Yogurt, plain, whole milk (primary source for B vitamins, minerals, vitamin D)"
+      - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/171284/nutrients
+        note: "USDA FoodData Central SR Legacy - Yogurt, plain, whole milk (supplemental source for B12, folate, choline, vitamin A, vitamin E, selenium)"
+  - timestamp: "2025-11-04T12:00:00+00:00"
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Initial creation using component-based estimation from USDA data and commercial product research"
+    fields_changed:
+    - all
+    sources:
+    - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/1097558/nutrients
     note: "USDA FoodData Central - Yogurt, whole milk, plain"
   - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/169593/nutrients
     note: "USDA FoodData Central - Cocoa powder, unsweetened, dry"
@@ -148,22 +148,22 @@ change_log:
     note: "Light + Fit Tiramisu Greek Yogurt - 80 kcal, 12g protein per 150g"
   - url: https://www.muller.co.uk/our-brands/mullerlight/mullerlight/tiramisu-flavour
     note: "Müller Light Tiramisu - 50 kcal per 100g, fat-free, high protein"
-- timestamp: "2025-11-05T16:00:00+00:00"
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: "Enrichment with 8 additional nutrients using USDA FoodData Central values for whole milk yogurt (155g base) plus cocoa powder contributions"
-  fields_changed: [vitamin_b5_mg, omega3_ala_g, omega6_la_g, version]
-  sources:
-  - url: https://www.nutritionvalue.org/Yogurt,_whole_milk,_plain_nutritional_value.html
-    note: "USDA FoodData Central via nutritionvalue.org - Whole milk yogurt per 100g: Pantothenic acid (B5) 0.389mg, Linoleic acid (18:2 n-6) 0.065g, ALA (18:3 n-3) 0.027g. For 155g yogurt base: B5=0.603mg, LA=0.101g, ALA=0.042g. Added cocoa contributions (2.5g): B5 +~0.025mg, LA +~0.01g. Total 170g portion: B5=0.63mg, LA=0.11g, ALA=0.04g."
-  - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/169593/nutrients
-    note: "USDA FoodData Central - Cocoa powder, unsweetened: B5 ~1mg/100g, LA ~0.4g/100g. Small contributions from 2.5g cocoa included in totals."
-  notes: "Vitamin B7 (biotin), chromium, and molybdenum remain 0 (not routinely analyzed/reported in USDA FoodData Central for yogurt products per USDA API Research). Fiber soluble (0.2g) and insoluble (0.6g) UNCHANGED - these values are from cocoa powder, not dairy. Cocoa powder contains dietary fiber; only PURE dairy has TRUE ZERO fiber."
-- timestamp: "2025-11-05T22:30:00+00:00"
-  updated_by: "Agent 8 - Claude Sonnet 4.5"
-  reason: "Schema compliance fix: Added sulfur_g field (was sulfur_mg). Sulfur estimated from protein content (dairy: ~10.5mg S per g protein)."
-  fields_changed:
-  - per_portion.sulfur_g
-  sources:
-  - note: "Sulfur content estimated at 0.062g based on 5.9g protein × 10.5mg/g coefficient for dairy. Milk proteins (whey, casein) are moderate sources of sulfur-containing amino acids."
-    url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4438303/"
+  - timestamp: "2025-11-05T16:00:00+00:00"
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Enrichment with 8 additional nutrients using USDA FoodData Central values for whole milk yogurt (155g base) plus cocoa powder contributions"
+    fields_changed: [vitamin_b5_mg, omega3_ala_g, omega6_la_g, version]
+    sources:
+      - url: https://www.nutritionvalue.org/Yogurt,_whole_milk,_plain_nutritional_value.html
+        note: "USDA FoodData Central via nutritionvalue.org - Whole milk yogurt per 100g: Pantothenic acid (B5) 0.389mg, Linoleic acid (18:2 n-6) 0.065g, ALA (18:3 n-3) 0.027g. For 155g yogurt base: B5=0.603mg, LA=0.101g, ALA=0.042g. Added cocoa contributions (2.5g): B5 +~0.025mg, LA +~0.01g. Total 170g portion: B5=0.63mg, LA=0.11g, ALA=0.04g."
+      - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/169593/nutrients
+        note: "USDA FoodData Central - Cocoa powder, unsweetened: B5 ~1mg/100g, LA ~0.4g/100g. Small contributions from 2.5g cocoa included in totals."
+    notes: "Vitamin B7 (biotin), chromium, and molybdenum remain 0 (not routinely analyzed/reported in USDA FoodData Central for yogurt products per USDA API Research). Fiber soluble (0.2g) and insoluble (0.6g) UNCHANGED - these values are from cocoa powder, not dairy. Cocoa powder contains dietary fiber; only PURE dairy has TRUE ZERO fiber."
+  - timestamp: "2025-11-05T22:30:00+00:00"
+    updated_by: "Agent 8 - Claude Sonnet 4.5"
+    reason: "Schema compliance fix: Added sulfur_g field (was sulfur_mg). Sulfur estimated from protein content (dairy: ~10.5mg S per g protein)."
+    fields_changed:
+    - per_portion.sulfur_g
+    sources:
+      - note: "Sulfur content estimated at 0.062g based on 5.9g protein × 10.5mg/g coefficient for dairy. Milk proteins (whey, casein) are moderate sources of sulfur-containing amino acids."
+        url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4438303/"
 ```

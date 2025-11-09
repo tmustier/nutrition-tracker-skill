@@ -109,77 +109,77 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: "2025-11-04T20:00:00+00:00"
-  updated_by: "Claude Code (Sonnet 4.5)"
-  reason: "Initial entry - complete nutrition estimation for London's Chocolate Pistachio Praline Bar (half bar, 22g)"
-  fields_changed:
-  - all fields
-  sources:
-  - note: "Pack label data provided by user, scaled from per-100g to 22g"
-  - note: "Micronutrients estimated using USDA FoodData Central: Dark Chocolate 70-85% (FDC 170273) and Pistachios raw (FDC 170184)"
-  - url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/170273/"
+  - timestamp: "2025-11-04T20:00:00+00:00"
+    updated_by: "Claude Code (Sonnet 4.5)"
+    reason: "Initial entry - complete nutrition estimation for London's Chocolate Pistachio Praline Bar (half bar, 22g)"
+    fields_changed:
+    - all fields
+    sources:
+    - note: "Pack label data provided by user, scaled from per-100g to 22g"
+    - note: "Micronutrients estimated using USDA FoodData Central: Dark Chocolate 70-85% (FDC 170273) and Pistachios raw (FDC 170184)"
+    - url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/170273/"
     note: "USDA data for dark chocolate micronutrients"
   - url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/170184/"
     note: "USDA data for pistachio micronutrients"
-- timestamp: "2025-11-04T20:45:00+00:00"
-  updated_by: "Claude Code (Sonnet 4.5)"
-  reason: "CORRECTION: Label nutrition was per 100g, not per 44g bar. Recalculated all values by multiplying per-100g values by 0.22 instead of dividing 44g values by 2. Energy corrected from 299 to 132 kcal for 22g portion."
-  fields_changed:
-  - per_portion.energy_kcal
-  - per_portion.protein_g
-  - per_portion.fat_g
-  - per_portion.sat_fat_g
-  - per_portion.mufa_g
-  - per_portion.pufa_g
-  - per_portion.carbs_total_g
-  - per_portion.carbs_available_g
-  - per_portion.sugar_g
-  - per_portion.fiber_total_g
-  - per_portion.sodium_mg
-  - per_portion.potassium_mg
-  - per_portion.magnesium_mg
-  - per_portion.calcium_mg
-  - per_portion.zinc_mg
-  - per_portion.vitamin_e_mg
-  - per_portion.copper_mg
-  - per_portion.manganese_mg
-  - assumptions
-  - notes
-  sources: []
-- timestamp: "2025-11-05T15:30:00+00:00"
-  updated_by: "Claude Code (Sonnet 4.5)"
-  reason: "Enriched with 17 priority nutrients using component-based estimation from USDA FoodData Central"
-  fields_changed:
-  - phosphorus_mg
-  - vitamin_d_ug
-  - choline_mg
-  - iodine_ug
-  - vitamin_b9_ug
-  - vitamin_b12_ug
-  - copper_mg
-  - selenium_ug
-  - manganese_mg
-  - vitamin_a_ug
-  - vitamin_e_mg
-  - vitamin_k_ug
-  - vitamin_b1_mg
-  - vitamin_b2_mg
-  - vitamin_b3_mg
-  - vitamin_b6_mg
-  - omega3_epa_mg
-  - omega3_dha_mg
-  sources:
-  - url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/170273/nutrients"
+  - timestamp: "2025-11-04T20:45:00+00:00"
+    updated_by: "Claude Code (Sonnet 4.5)"
+    reason: "CORRECTION: Label nutrition was per 100g, not per 44g bar. Recalculated all values by multiplying per-100g values by 0.22 instead of dividing 44g values by 2. Energy corrected from 299 to 132 kcal for 22g portion."
+    fields_changed:
+    - per_portion.energy_kcal
+    - per_portion.protein_g
+    - per_portion.fat_g
+    - per_portion.sat_fat_g
+    - per_portion.mufa_g
+    - per_portion.pufa_g
+    - per_portion.carbs_total_g
+    - per_portion.carbs_available_g
+    - per_portion.sugar_g
+    - per_portion.fiber_total_g
+    - per_portion.sodium_mg
+    - per_portion.potassium_mg
+    - per_portion.magnesium_mg
+    - per_portion.calcium_mg
+    - per_portion.zinc_mg
+    - per_portion.vitamin_e_mg
+    - per_portion.copper_mg
+    - per_portion.manganese_mg
+    - assumptions
+    - notes
+    sources: []
+  - timestamp: "2025-11-05T15:30:00+00:00"
+    updated_by: "Claude Code (Sonnet 4.5)"
+    reason: "Enriched with 17 priority nutrients using component-based estimation from USDA FoodData Central"
+    fields_changed:
+    - phosphorus_mg
+    - vitamin_d_ug
+    - choline_mg
+    - iodine_ug
+    - vitamin_b9_ug
+    - vitamin_b12_ug
+    - copper_mg
+    - selenium_ug
+    - manganese_mg
+    - vitamin_a_ug
+    - vitamin_e_mg
+    - vitamin_k_ug
+    - vitamin_b1_mg
+    - vitamin_b2_mg
+    - vitamin_b3_mg
+    - vitamin_b6_mg
+    - omega3_epa_mg
+    - omega3_dha_mg
+    sources:
+    - url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/170273/nutrients"
     note: "USDA FDC ID 170273: Dark Chocolate 70-85% cacao solids (per 100g nutrient data)"
   - url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/170184/nutrients"
     note: "USDA FDC ID 170184: Raw Pistachios (per 100g nutrient data)"
   - note: "Method: Weighted average (60% chocolate + 15% pistachio) scaled to 22g portion. Plant-based product: vitamin D, B12, choline, iodine, EPA, DHA are 0 or trace."
-- timestamp: "2025-11-05T18:45:00+00:00"
-  updated_by: "Claude Code (Sonnet 4.5)"
-  reason: "Component-based enrichment: B5, B7, choline, omega-6 LA, omega-3 ALA"
-  fields_changed: [version, last_verified, vitamin_b5_mg, vitamin_b7_ug, choline_mg, omega6_la_g, omega3_ala_g]
-  sources:
-  - url: "https://www.nutritionvalue.org/Chocolate%2C_70-85%25_cacao_solids%2C_dark_nutritional_value.html"
+  - timestamp: "2025-11-05T18:45:00+00:00"
+    updated_by: "Claude Code (Sonnet 4.5)"
+    reason: "Component-based enrichment: B5, B7, choline, omega-6 LA, omega-3 ALA"
+    fields_changed: [version, last_verified, vitamin_b5_mg, vitamin_b7_ug, choline_mg, omega6_la_g, omega3_ala_g]
+    sources:
+    - url: "https://www.nutritionvalue.org/Chocolate%2C_70-85%25_cacao_solids%2C_dark_nutritional_value.html"
     note: "USDA dark chocolate 70-85% per 100g: B5=0.42mg, LA=1.20g, ALA=0.035g, choline~15mg"
     component_calculation: "Chocolate (60%×22g=13.2g): B5=0.42×0.132=0.055mg; LA=1.20×0.132=0.158g; ALA=0.035×0.132=0.005g; choline=15×0.132=2.0mg"
   - note: "USDA pistachios per 100g: B5=0.54mg, B7=30µg, LA=16.14g, ALA=0.26g, choline=72mg"
@@ -187,9 +187,9 @@ change_log:
   - note: "Component-based totals for 22g bar (60% chocolate + 15% pistachios + 20% sugar + 5% other)"
     calculation: "B5: 0.055+0.018=0.073≈0.07mg; B7: 0.04+0.99=1.03≈1.0µg; LA: 0.158+0.533=0.691≈0.69g; ALA: 0.005+0.009=0.014≈0.01g; Choline: 2.0+2.4=4.4mg"
   - note: "Pistachios contribute 77% of linoleic acid (0.533g of 0.69g total) and 96% of biotin (0.99µg of 1.0µg total)"
-- timestamp: '2025-11-05T20:25:00+00:00'
-  updated_by: 'Agent 7: Claude Sonnet 4.5'
-  reason: Verification of composite food enrichment - biotin value confirmed accurate
-  fields_changed: [version]
-  sources: [{note: 'Biotin content verified: Existing value of 1.0µg per 22g bar is accurate based on component analysis. Pistachios (15% of bar = 3.3g) contribute 0.99µg biotin (using newly enriched pistachio data: 9.6µg per 30g = 1.06µg per 3.3g). Dark chocolate contributes minimal biotin. Total ~1.0µg is correct.'}, {note: 'Chromium and molybdenum: Remain 0. While dark chocolate and pistachios may contain trace amounts, reliable quantitative data is not available for this composite product. Standard databases do not provide these values for chocolate or pistachio products.'}]
+  - timestamp: '2025-11-05T20:25:00+00:00'
+    updated_by: 'Agent 7: Claude Sonnet 4.5'
+    reason: Verification of composite food enrichment - biotin value confirmed accurate
+    fields_changed: [version]
+    sources: [{note: 'Biotin content verified: Existing value of 1.0µg per 22g bar is accurate based on component analysis. Pistachios (15% of bar = 3.3g) contribute 0.99µg biotin (using newly enriched pistachio data: 9.6µg per 30g = 1.06µg per 3.3g). Dark chocolate contributes minimal biotin. Total ~1.0µg is correct.'}, {note: 'Chromium and molybdenum: Remain 0. While dark chocolate and pistachios may contain trace amounts, reliable quantitative data is not available for this composite product. Standard databases do not provide these values for chocolate or pistachio products.'}]
 ```

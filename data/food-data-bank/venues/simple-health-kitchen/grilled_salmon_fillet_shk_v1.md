@@ -86,105 +86,105 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
-- timestamp: 2025-10-28T18:51:39+0000
-  updated_by: "LLM: GPT-5 Thinking"
-  reason: Populate per_portion from user-provided data
-  fields_changed:
-  - per_portion.energy_kcal
-  - per_portion.protein_g
-  - per_portion.fat_g
-  - per_portion.sat_fat_g
-  - per_portion.mufa_g
-  - per_portion.pufa_g
-  - per_portion.cholesterol_mg
-  - per_portion.carbs_g
-  - per_portion.sodium_mg
-  - per_portion.potassium_mg
-  - per_portion.iodine_ug
-  - per_portion.magnesium_mg
-  - per_portion.calcium_mg
-  - per_portion.iron_mg
-  - per_portion.zinc_mg
-  - per_portion.vitamin_c_mg
-  sources:
-  - url: user_input
+  - timestamp: 2025-10-28T18:51:39+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: Populate per_portion from user-provided data
+    fields_changed:
+    - per_portion.energy_kcal
+    - per_portion.protein_g
+    - per_portion.fat_g
+    - per_portion.sat_fat_g
+    - per_portion.mufa_g
+    - per_portion.pufa_g
+    - per_portion.cholesterol_mg
+    - per_portion.carbs_g
+    - per_portion.sodium_mg
+    - per_portion.potassium_mg
+    - per_portion.iodine_ug
+    - per_portion.magnesium_mg
+    - per_portion.calcium_mg
+    - per_portion.iron_mg
+    - per_portion.zinc_mg
+    - per_portion.vitamin_c_mg
+    sources:
+    - url: user_input
     note: User-supplied values on 2025-10-28
-- timestamp: 2025-10-28T18:57:05+0000
-  updated_by: "LLM: GPT-5 Thinking"
-  reason: Consistency fix for fat totals/splits
-  fields_changed:
-  - per_portion.mufa_g
-  - per_portion.pufa_g
-  sources:
-  - url: user_input
+  - timestamp: 2025-10-28T18:57:05+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: Consistency fix for fat totals/splits
+    fields_changed:
+    - per_portion.mufa_g
+    - per_portion.pufa_g
+    sources:
+    - url: user_input
     note: Correction approved by user on 2025-10-28
-- timestamp: 2025-10-28T19:02:30+0000
-  updated_by: "LLM: GPT-5 Thinking"
-  reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
-  fields_changed:
-  - per_portion.protein_g
-  - per_portion.fat_g
-  - per_portion.sat_fat_g
-  - per_portion.mufa_g
-  - per_portion.pufa_g
-  - per_portion.carbs_g
-  - per_portion.iodine_ug
-  - per_portion.iron_mg
-  - per_portion.zinc_mg
-  - per_portion.vitamin_c_mg
-  sources:
-  - url: formatting-pass
+  - timestamp: 2025-10-28T19:02:30+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
+    fields_changed:
+    - per_portion.protein_g
+    - per_portion.fat_g
+    - per_portion.sat_fat_g
+    - per_portion.mufa_g
+    - per_portion.pufa_g
+    - per_portion.carbs_g
+    - per_portion.iodine_ug
+    - per_portion.iron_mg
+    - per_portion.zinc_mg
+    - per_portion.vitamin_c_mg
+    sources:
+    - url: formatting-pass
     note: Automated rounding pass
-- timestamp: "2025-11-02T19:20:00+00:00"
-  updated_by: "LLM: GPT-5 Codex"
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed:
-  - last_verified
-  - notes
-  - per_portion.carbs_available_g
-  - per_portion.carbs_g
-  - per_portion.carbs_total_g
-  - per_portion.energy_kcal
-  - per_portion.polyols_g
-  - version
-  sources: []
-- timestamp: "2025-11-03T15:44:11+00:00"
-  updated_by: "LLM: Claude Code"
-  reason: Add selenium and vitamin D estimates for salmon (MEDIUM/LOW priority nutrient completion)
-  fields_changed:
-  - last_verified
-  - per_portion.selenium_ug
-  - per_portion.vitamin_d_ug
-  - version
-  sources:
-  - url: https://fdc.nal.usda.gov/
+  - timestamp: "2025-11-02T19:20:00+00:00"
+    updated_by: "LLM: GPT-5 Codex"
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed:
+    - last_verified
+    - notes
+    - per_portion.carbs_available_g
+    - per_portion.carbs_g
+    - per_portion.carbs_total_g
+    - per_portion.energy_kcal
+    - per_portion.polyols_g
+    - version
+    sources: []
+  - timestamp: "2025-11-03T15:44:11+00:00"
+    updated_by: "LLM: Claude Code"
+    reason: Add selenium and vitamin D estimates for salmon (MEDIUM/LOW priority nutrient completion)
+    fields_changed:
+    - last_verified
+    - per_portion.selenium_ug
+    - per_portion.vitamin_d_ug
+    - version
+    sources:
+    - url: https://fdc.nal.usda.gov/
     note: "USDA FoodData Central: Salmon selenium ~50 µg/100g, vitamin D ~13 µg/100g. Estimated 100g portion. Confidence: MEDIUM (selenium), HIGH (vitamin D - fatty fish is one of best natural sources)"
-- timestamp: "2025-11-05T12:30:00+00:00"
-  updated_by: "LLM: Claude Sonnet 4.5 (Agent 3)"
-  reason: "Schema v2 enrichment: Complete nutrient profile with USDA FoodData Central data for farmed Atlantic salmon (100g portion). Added 18 missing nutrients including B-complex vitamins, phosphorus, minerals, and omega-3 fatty acids (EPA 620mg, DHA 800mg)."
-  fields_changed:
-  - per_portion.iron_mg
-  - per_portion.vitamin_e_mg
-  - per_portion.manganese_mg
-  - per_portion.copper_mg
-  - per_portion.phosphorus_mg
-  - per_portion.vitamin_a_ug
-  - per_portion.vitamin_k_ug
-  - per_portion.vitamin_b1_mg
-  - per_portion.vitamin_b2_mg
-  - per_portion.vitamin_b3_mg
-  - per_portion.vitamin_b5_mg
-  - per_portion.vitamin_b6_mg
-  - per_portion.vitamin_b7_ug
-  - per_portion.vitamin_b9_ug
-  - per_portion.vitamin_b12_ug
-  - per_portion.choline_mg
-  - per_portion.omega3_epa_mg
-  - per_portion.omega3_dha_mg
-  - per_portion.omega3_ala_g
-  - per_portion.omega6_la_g
-  - version
-  sources:
-  - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/175167/nutrients
+  - timestamp: "2025-11-05T12:30:00+00:00"
+    updated_by: "LLM: Claude Sonnet 4.5 (Agent 3)"
+    reason: "Schema v2 enrichment: Complete nutrient profile with USDA FoodData Central data for farmed Atlantic salmon (100g portion). Added 18 missing nutrients including B-complex vitamins, phosphorus, minerals, and omega-3 fatty acids (EPA 620mg, DHA 800mg)."
+    fields_changed:
+    - per_portion.iron_mg
+    - per_portion.vitamin_e_mg
+    - per_portion.manganese_mg
+    - per_portion.copper_mg
+    - per_portion.phosphorus_mg
+    - per_portion.vitamin_a_ug
+    - per_portion.vitamin_k_ug
+    - per_portion.vitamin_b1_mg
+    - per_portion.vitamin_b2_mg
+    - per_portion.vitamin_b3_mg
+    - per_portion.vitamin_b5_mg
+    - per_portion.vitamin_b6_mg
+    - per_portion.vitamin_b7_ug
+    - per_portion.vitamin_b9_ug
+    - per_portion.vitamin_b12_ug
+    - per_portion.choline_mg
+    - per_portion.omega3_epa_mg
+    - per_portion.omega3_dha_mg
+    - per_portion.omega3_ala_g
+    - per_portion.omega6_la_g
+    - version
+    sources:
+    - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/175167/nutrients
     note: "USDA FDC 175167 - Farmed Atlantic Salmon, raw. B-vitamins: B1=0.2mg, B2=0.2mg, B3=8.7mg, B5=1.5mg, B6=0.6mg, B12=3.2µg per 100g. Phosphorus=240mg. Omega-3: EPA=620mg, DHA=800mg per 100g. Vitamin A=12µg, E=1.1mg, K=0.4µg. Iron=0.8mg, copper=0.25mg, manganese=0.02mg, choline=75mg. Confidence: HIGH (direct USDA match for salmon fillet)"
 ```

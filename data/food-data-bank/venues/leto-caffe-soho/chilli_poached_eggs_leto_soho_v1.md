@@ -101,35 +101,35 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
-- timestamp: 2025-10-29 12:15:00+00:00
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: Initial population from Deliveroo calorie count + ingredient-based estimation
-  fields_changed:
-  - per_portion.energy_kcal
-  - per_portion.protein_g
-  - per_portion.fat_g
-  - per_portion.sat_fat_g
-  - per_portion.mufa_g
-  - per_portion.pufa_g
-  - per_portion.trans_fat_g
-  - per_portion.cholesterol_mg
-  - per_portion.carbs_g
-  - per_portion.sugar_g
-  - per_portion.fiber_total_g
-  - per_portion.fiber_soluble_g
-  - per_portion.fiber_insoluble_g
-  - per_portion.sodium_mg
-  - per_portion.potassium_mg
-  - per_portion.iodine_ug
-  - per_portion.magnesium_mg
-  - per_portion.calcium_mg
-  - per_portion.iron_mg
-  - per_portion.zinc_mg
-  - per_portion.vitamin_c_mg
-  - per_portion.manganese_mg
-  - portion.est_weight_g
-  sources:
-  - url: https://deliveroo.co.uk/menu/london/soho/l-eto-caffe-soho
+  - timestamp: 2025-10-29 12:15:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: Initial population from Deliveroo calorie count + ingredient-based estimation
+    fields_changed:
+    - per_portion.energy_kcal
+    - per_portion.protein_g
+    - per_portion.fat_g
+    - per_portion.sat_fat_g
+    - per_portion.mufa_g
+    - per_portion.pufa_g
+    - per_portion.trans_fat_g
+    - per_portion.cholesterol_mg
+    - per_portion.carbs_g
+    - per_portion.sugar_g
+    - per_portion.fiber_total_g
+    - per_portion.fiber_soluble_g
+    - per_portion.fiber_insoluble_g
+    - per_portion.sodium_mg
+    - per_portion.potassium_mg
+    - per_portion.iodine_ug
+    - per_portion.magnesium_mg
+    - per_portion.calcium_mg
+    - per_portion.iron_mg
+    - per_portion.zinc_mg
+    - per_portion.vitamin_c_mg
+    - per_portion.manganese_mg
+    - portion.est_weight_g
+    sources:
+    - url: https://deliveroo.co.uk/menu/london/soho/l-eto-caffe-soho
     note: "L'ETO Caffe Soho Deliveroo listing: 592 kcal; ingredients: garlic yoghurt, house sourdough, kale, chilli butter"
   - url: https://www.deliciousmagazine.co.uk/recipes/turkish-style-poached-eggs-with-yogurt-and-chilli-butter/
     note: "Turkish-style poached eggs reference: similar dish structure and macros"
@@ -137,34 +137,34 @@ change_log:
     note: "USDA FoodData Central: component nutrition (eggs 370mg cholesterol, kale vitamin C ~25mg per serving, yogurt calcium ~180mg, bread ~250kcal per 100g)"
   - url: https://www.nutritionix.com/food/grilled-chicken-breast
     note: "Component breakdown estimation method: eggs + yogurt + bread + kale + butter to match 592 kcal target"
-- timestamp: 2025-10-29 12:35:00+00:00
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: Corrected values based on GPT-5 precise component analysis with accurate portion weights and proper salt accounting
-  fields_changed:
-  - version
-  - portion.est_weight_g
-  - per_portion.protein_g
-  - per_portion.fat_g
-  - per_portion.sat_fat_g
-  - per_portion.mufa_g
-  - per_portion.pufa_g
-  - per_portion.trans_fat_g
-  - per_portion.cholesterol_mg
-  - per_portion.carbs_g
-  - per_portion.sugar_g
-  - per_portion.fiber_total_g
-  - per_portion.fiber_soluble_g
-  - per_portion.fiber_insoluble_g
-  - per_portion.sodium_mg
-  - per_portion.potassium_mg
-  - assumptions.prep
-  - derived.energy_from_macros_kcal
-  - derived.fat_unassigned_g
-  - derived.finishing_salt_g
-  - derived.dish_weight_g
-  - quality.confidence
-  sources:
-  - url: https://tools.myfooddata.com/nutrition-facts/172186/wt1
+  - timestamp: 2025-10-29 12:35:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: Corrected values based on GPT-5 precise component analysis with accurate portion weights and proper salt accounting
+    fields_changed:
+    - version
+    - portion.est_weight_g
+    - per_portion.protein_g
+    - per_portion.fat_g
+    - per_portion.sat_fat_g
+    - per_portion.mufa_g
+    - per_portion.pufa_g
+    - per_portion.trans_fat_g
+    - per_portion.cholesterol_mg
+    - per_portion.carbs_g
+    - per_portion.sugar_g
+    - per_portion.fiber_total_g
+    - per_portion.fiber_soluble_g
+    - per_portion.fiber_insoluble_g
+    - per_portion.sodium_mg
+    - per_portion.potassium_mg
+    - assumptions.prep
+    - derived.energy_from_macros_kcal
+    - derived.fat_unassigned_g
+    - derived.finishing_salt_g
+    - derived.dish_weight_g
+    - quality.confidence
+    sources:
+    - url: https://tools.myfooddata.com/nutrition-facts/172186/wt1
     note: Poached egg component profile
   - url: https://tools.myfooddata.com/nutrition-facts/171304/100g
     note: Greek yogurt whole milk profile
@@ -174,46 +174,46 @@ change_log:
     note: Kale cooked - 50g portion
   - url: https://tools.myfooddata.com/nutrition-facts/173410/wt1
     note: Butter salted - 22.2g calculated to close calorie gap
-- timestamp: "2025-11-02T19:20:00+00:00"
-  updated_by: "LLM: GPT-5 Codex"
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed:
-  - derived.energy_from_macros_kcal
-  - last_verified
-  - notes
-  - per_portion.carbs_available_g
-  - per_portion.carbs_g
-  - per_portion.carbs_total_g
-  - per_portion.energy_kcal
-  - per_portion.polyols_g
-  - version
-  sources: []
-- timestamp: "2025-11-05T20:30:00+00:00"
-  updated_by: "Claude Code Agent 5 (Sonnet 4.5)"
-  reason: "Phase 3 enrichment: Added 16 missing nutrients via component-based calculation from USDA data"
-  fields_changed:
-  - version
-  - last_verified
-  - vitamin_e_mg (0 → 1.6)
-  - phosphorus_mg (0 → 400)
-  - vitamin_a_ug (0 → 709)
-  - vitamin_k_ug (0 → 410)
-  - vitamin_b1_mg (0 → 0.52)
-  - vitamin_b2_mg (0 → 1.1)
-  - vitamin_b3_mg (0 → 3.2)
-  - vitamin_b5_mg (0 → 1.8)
-  - vitamin_b6_mg (0 → 0.26)
-  - vitamin_b9_ug (0 → 163)
-  - vitamin_b12_ug (0 → 2.0)
-  - choline_mg (0 → 312)
-  - omega3_ala_g (0 → 0.035)
-  - omega6_la_g (0 → 1.2)
-  sources:
-  - note: "Component-based enrichment from USDA data for 5 ingredients"
-  - note: "Eggs (100g): vitamin A 149µg, B12 1.11µg, choline 294mg, phosphorus 172mg"
-  - note: "Butter (22.2g): vitamin A 152µg, vitamin E 0.52mg, vitamin K 1.55µg"
-  - note: "Kale (50g): vitamin A 408µg, vitamin K 408µg (exceptional source)"
-  - note: "Greek yogurt (120g): B2 0.334mg, B12 0.90mg, phosphorus 162mg"
-  - note: "Sourdough (60g): B1 0.425mg, B3 2.890mg, B9 113µg, phosphorus 63mg"
-  - note: "Excellent source of vitamin A (709µg, ~79% DV) and vitamin K (410µg, ~342% DV)"
+  - timestamp: "2025-11-02T19:20:00+00:00"
+    updated_by: "LLM: GPT-5 Codex"
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed:
+    - derived.energy_from_macros_kcal
+    - last_verified
+    - notes
+    - per_portion.carbs_available_g
+    - per_portion.carbs_g
+    - per_portion.carbs_total_g
+    - per_portion.energy_kcal
+    - per_portion.polyols_g
+    - version
+    sources: []
+  - timestamp: "2025-11-05T20:30:00+00:00"
+    updated_by: "Claude Code Agent 5 (Sonnet 4.5)"
+    reason: "Phase 3 enrichment: Added 16 missing nutrients via component-based calculation from USDA data"
+    fields_changed:
+    - version
+    - last_verified
+    - vitamin_e_mg (0 → 1.6)
+    - phosphorus_mg (0 → 400)
+    - vitamin_a_ug (0 → 709)
+    - vitamin_k_ug (0 → 410)
+    - vitamin_b1_mg (0 → 0.52)
+    - vitamin_b2_mg (0 → 1.1)
+    - vitamin_b3_mg (0 → 3.2)
+    - vitamin_b5_mg (0 → 1.8)
+    - vitamin_b6_mg (0 → 0.26)
+    - vitamin_b9_ug (0 → 163)
+    - vitamin_b12_ug (0 → 2.0)
+    - choline_mg (0 → 312)
+    - omega3_ala_g (0 → 0.035)
+    - omega6_la_g (0 → 1.2)
+    sources:
+    - note: "Component-based enrichment from USDA data for 5 ingredients"
+    - note: "Eggs (100g): vitamin A 149µg, B12 1.11µg, choline 294mg, phosphorus 172mg"
+    - note: "Butter (22.2g): vitamin A 152µg, vitamin E 0.52mg, vitamin K 1.55µg"
+    - note: "Kale (50g): vitamin A 408µg, vitamin K 408µg (exceptional source)"
+    - note: "Greek yogurt (120g): B2 0.334mg, B12 0.90mg, phosphorus 162mg"
+    - note: "Sourdough (60g): B1 0.425mg, B3 2.890mg, B9 113µg, phosphorus 63mg"
+    - note: "Excellent source of vitamin A (709µg, ~79% DV) and vitamin K (410µg, ~342% DV)"
 ```

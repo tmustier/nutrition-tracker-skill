@@ -98,49 +98,54 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: 2025-10-30T00:00:00+0000
-  updated_by: Claude Code
-  reason: Initial entry for Thomas's food diary tracking
-  fields_changed: [all fields]
-  sources: [{note: Yarden Houmous 250g nutrition facts (per 100g), url: 'https://www.tesco.com/groceries/en-GB/products/250438255'}]
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed: [last_verified, notes, per_portion.carbs_available_g, per_portion.carbs_g, per_portion.carbs_total_g,
-  per_portion.energy_kcal, per_portion.polyols_g, version]
-  sources: []
-- timestamp: '2025-11-03T00:00:00+00:00'
-  updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: Phase 2 nutrient estimation - fiber split for chickpea-based houmous
-  fields_changed: [per_portion.fiber_soluble_g, per_portion.fiber_insoluble_g, last_verified, version]
-  sources: [{note: 'Used legumes.chickpeas category (32% soluble, 68% insoluble, HIGH confidence)',
-    url: fiber_split_estimation}]
-  methodology: "Applied chickpea fiber split ratio to total fiber 1.4g: soluble = 1.4 \xD7 0.32 =\
-  \ 0.4g, insoluble = 1.4 \xD7 0.68 = 1.0g. Houmous is chickpea-based, making this\
-  \ category highly appropriate. High confidence estimation based on well-documented\
-  \ chickpea fiber composition (30-35% soluble per USDA data, consistent with Marlett\
-  \ et al. 2002)."
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
-- timestamp: '2025-11-05T00:00:00+00:00'
-  updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: 'USDA FoodData Central enrichment: Added 13 priority nutrients from Foundation database'
-  fields_changed: [vitamin_a_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b6_mg, vitamin_b9_ug, choline_mg, phosphorus_mg, copper_mg, selenium_ug, manganese_mg, last_verified, version]
-  sources: [{note: 'USDA FoodData Central - Hummus, commercial (Foundation)', fdc_id: 321358, url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/321358/nutrients'}]
-  methodology: "Scaled USDA per-100g values to 30g portion (×0.3). Source: FDC ID 321358 'Hummus, commercial' (Foundation). Found 13 of 17 priority nutrients: vitamin A (0.3 µg), vitamin E (0.52 mg), vitamin K (5.2 µg), thiamin/B1 (0.045 mg), riboflavin/B2 (0.035 mg), niacin/B3 (0.28 mg), vitamin B6 (0.043 mg), folate/B9 (11 µg), choline (14 mg), phosphorus (50 mg), copper (0.10 mg), selenium (4.9 µg), manganese (0.32 mg). Missing nutrients kept at 0: vitamin D, vitamin B12, iodine, EPA, and DHA (not naturally present in unfortified plant-based chickpea foods)."
-- timestamp: '2025-11-05T22:00:00+00:00'
-  updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: 'USDA enrichment phase 2: Added 8 critical nutrients including omega-6 LA (critical for tahini-based houmous)'
-  fields_changed: [vitamin_b5_mg, omega6_la_g, omega3_ala_g, calcium_mg, magnesium_mg, potassium_mg, iron_mg, zinc_mg, version]
-  sources: [{note: 'USDA FoodData Central - Hummus, commercial (Foundation)', fdc_id: 321358, url: 'https://nutritionvalue.org/Hummus%2C_commercial_321358_nutritional_value.html'}]
-  methodology: "Scaled USDA per-100g to 30g portion (×0.3). Added: vitamin B5/pantothenic acid (0.10 mg from 0.32 mg/100g), omega-6 linoleic acid LA (2.04g from 6.81g/100g - significant source from sesame tahini), omega-3 ALA (0.20g from 0.65g/100g), calcium (12mg from 41mg/100g), magnesium (21mg from 71mg/100g), potassium (87mg from 289mg/100g), iron (0.73mg from 2.42mg/100g), zinc (0.42mg from 1.39mg/100g). Biotin/B7 not available in USDA data for hummus."
-- timestamp: '2025-11-05T22:30:00+00:00'
-  updated_by: 'Agent 8 - Claude Sonnet 4.5'
-  reason: 'Schema compliance fix: Added sulfur_g field (was sulfur_mg). Sulfur estimated from protein content (legumes: ~13mg S per g protein).'
-  fields_changed: [per_portion.sulfur_g]
-  sources: [{note: 'Sulfur content estimated at 0.026g based on 2.0g protein × 13mg/g coefficient for legumes. Chickpeas and tahini (sesame) are moderate sources of sulfur-containing amino acids.', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4438303/'}]
+  - timestamp: 2025-10-30T00:00:00+0000
+    updated_by: Claude Code
+    reason: Initial entry for Thomas's food diary tracking
+    fields_changed: [all fields]
+    sources: [{note: Yarden Houmous 250g nutrition facts (per 100g), url: 'https://www.tesco.com/groceries/en-GB/products/250438255'}]
+  - timestamp: '2025-11-02T19:20:00+00:00'
+    updated_by: 'LLM: GPT-5 Codex'
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed: [last_verified, notes, per_portion.carbs_available_g, per_portion.carbs_g, per_portion.carbs_total_g,
+    per_portion.energy_kcal, per_portion.polyols_g, version]
+    sources: []
+  - timestamp: '2025-11-03T00:00:00+00:00'
+    updated_by: 'LLM: Claude Sonnet 4.5'
+    reason: Phase 2 nutrient estimation - fiber split for chickpea-based houmous
+    fields_changed: [per_portion.fiber_soluble_g, per_portion.fiber_insoluble_g, last_verified, version]
+    sources:
+      - note: 'Used legumes.chickpeas category (32% soluble, 68% insoluble, HIGH confidence)'
+        url: fiber_split_estimation
+    methodology: "Applied chickpea fiber split ratio to total fiber 1.4g: soluble = 1.4 × 0.32 = 0.4g, insoluble = 1.4 × 0.68 = 1.0g. Houmous is chickpea-based, making this category highly appropriate. High confidence estimation based on well-documented chickpea fiber composition (30-35% soluble per USDA data, consistent with Marlett et al. 2002)."
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
+  - timestamp: '2025-11-05T00:00:00+00:00'
+    updated_by: 'LLM: Claude Sonnet 4.5'
+    reason: 'USDA FoodData Central enrichment: Added 13 priority nutrients from Foundation database'
+    fields_changed: [vitamin_a_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b6_mg, vitamin_b9_ug, choline_mg, phosphorus_mg, copper_mg, selenium_ug, manganese_mg, last_verified, version]
+    sources:
+      - note: 'USDA FoodData Central - Hummus, commercial (Foundation)'
+        fdc_id: 321358
+        url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/321358/nutrients'
+    methodology: "Scaled USDA per-100g values to 30g portion (×0.3). Source: FDC ID 321358 'Hummus, commercial' (Foundation). Found 13 of 17 priority nutrients: vitamin A (0.3 µg), vitamin E (0.52 mg), vitamin K (5.2 µg), thiamin/B1 (0.045 mg), riboflavin/B2 (0.035 mg), niacin/B3 (0.28 mg), vitamin B6 (0.043 mg), folate/B9 (11 µg), choline (14 mg), phosphorus (50 mg), copper (0.10 mg), selenium (4.9 µg), manganese (0.32 mg). Missing nutrients kept at 0: vitamin D, vitamin B12, iodine, EPA, and DHA (not naturally present in unfortified plant-based chickpea foods)."
+  - timestamp: '2025-11-05T22:00:00+00:00'
+    updated_by: 'LLM: Claude Sonnet 4.5'
+    reason: 'USDA enrichment phase 2: Added 8 critical nutrients including omega-6 LA (critical for tahini-based houmous)'
+    fields_changed: [vitamin_b5_mg, omega6_la_g, omega3_ala_g, calcium_mg, magnesium_mg, potassium_mg, iron_mg, zinc_mg, version]
+    sources:
+      - note: 'USDA FoodData Central - Hummus, commercial (Foundation)'
+        fdc_id: 321358
+        url: 'https://nutritionvalue.org/Hummus%2C_commercial_321358_nutritional_value.html'
+    methodology: "Scaled USDA per-100g to 30g portion (×0.3). Added: vitamin B5/pantothenic acid (0.10 mg from 0.32 mg/100g), omega-6 linoleic acid LA (2.04g from 6.81g/100g - significant source from sesame tahini), omega-3 ALA (0.20g from 0.65g/100g), calcium (12mg from 41mg/100g), magnesium (21mg from 71mg/100g), potassium (87mg from 289mg/100g), iron (0.73mg from 2.42mg/100g), zinc (0.42mg from 1.39mg/100g). Biotin/B7 not available in USDA data for hummus."
+  - timestamp: '2025-11-05T22:30:00+00:00'
+    updated_by: 'Agent 8 - Claude Sonnet 4.5'
+    reason: 'Schema compliance fix: Added sulfur_g field (was sulfur_mg). Sulfur estimated from protein content (legumes: ~13mg S per g protein).'
+    fields_changed: [per_portion.sulfur_g]
+    sources:
+      - note: 'Sulfur content estimated at 0.026g based on 2.0g protein × 13mg/g coefficient for legumes. Chickpeas and tahini (sesame) are moderate sources of sulfur-containing amino acids.'
+        url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4438303/'
 ```

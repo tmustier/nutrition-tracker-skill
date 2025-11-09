@@ -119,12 +119,12 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
-- timestamp: 2025-11-05T00:00:00+00:00
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: "Initial comprehensive entry for Maset Cote de Boeuf with complete 52-field nutrition profile"
-  fields_changed: ["all fields"]
-  sources:
-  - url: "https://www.maset.london/"
+  - timestamp: 2025-11-05T00:00:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Initial comprehensive entry for Maset Cote de Boeuf with complete 52-field nutrition profile"
+    fields_changed: ["all fields"]
+    sources:
+    - url: "https://www.maset.london/"
     note: "Maset restaurant website (French Mediterranean, Occitan cuisine, opened Oct 2025)"
   - url: "https://www.tesco.com/groceries/en-GB/products/322052405"
     note: "Tesco Cote de Boeuf 600-800g sharing steak (UK market standard)"
@@ -140,9 +140,9 @@ change_log:
     note: "Fatty acid composition of grass-fed beef: omega-3, omega-6 profiles"
   - url: "component_analysis"
     note: "700g raw beef (25% cooking loss) + 30g butter + 5g herbs + 3.5g finishing salt = 565g total dish"
-- timestamp: 2025-11-06T00:00:00+00:00
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: "Corrected energy calculation to match Atwater formula. Energy was 1,633 kcal but macros (136.5g P, 134.7g F, 0.3g C, 0.1g fiber) yield 1,759 kcal. Root cause: agent incorrectly applied additional 8% energy reduction for 'fat dripping' after using USDA cooked values - this is double-counting since USDA 'cooked, grilled' already measures meat after fat dripping. Established principle: energy must always equal Atwater(macros) for consistency."
-  fields_changed: ["energy_kcal", "version", "last_verified"]
-  sources: []
+  - timestamp: 2025-11-06T00:00:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Corrected energy calculation to match Atwater formula. Energy was 1,633 kcal but macros (136.5g P, 134.7g F, 0.3g C, 0.1g fiber) yield 1,759 kcal. Root cause: agent incorrectly applied additional 8% energy reduction for 'fat dripping' after using USDA cooked values - this is double-counting since USDA 'cooked, grilled' already measures meat after fat dripping. Established principle: energy must always equal Atwater(macros) for consistency."
+    fields_changed: ["energy_kcal", "version", "last_verified"]
+    sources: []
 ```

@@ -100,97 +100,92 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: 2025-10-28 20:15:00+00:00
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: Initial population from Deliveroo calorie count + estimated macros/micros
-  fields_changed:
-  - per_portion.energy_kcal
-  - per_portion.protein_g
-  - per_portion.fat_g
-  - per_portion.sat_fat_g
-  - per_portion.carbs_g
-  - per_portion.sugar_g
-  - per_portion.fiber_total_g
-  - per_portion.sodium_mg
-  - per_portion.potassium_mg
-  - per_portion.magnesium_mg
-  - per_portion.calcium_mg
-  - per_portion.iron_mg
-  - per_portion.zinc_mg
-  - per_portion.vitamin_c_mg
-  - portion.est_weight_g
-  sources:
-  - url: https://deliveroo.co.uk/menu/london/mayfair/jean-georges-at-the-connaught
-    note: 'Deliveroo calorie listing: 110 kcal; description: Coconut & lime froth,
-      coriander'
-  - url: user_input
-    note: Calorie count provided by Thomas on 2025-10-28
-- timestamp: 2025-10-28 21:00:00+00:00
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: Added missing fatty acid breakdown and micronutrients based on coconut milk
-    composition
-  fields_changed:
-  - per_portion.mufa_g
-  - per_portion.pufa_g
-  - per_portion.trans_fat_g
-  - per_portion.cholesterol_mg
-  - per_portion.iodine_ug
-  - version
-  sources:
-  - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/171904/nutrients
-    note: 'USDA FoodData Central: Coconut milk (canned) - fat composition ~83% saturated,
-      ~6% MUFA, ~2% PUFA'
-  - url: research_analysis
-    note: 'Applied coconut fat ratios to 6.5g total fat: MUFA=0.4g (6%), PUFA=0.1g
-      (2%), trans=trace. Cholesterol=0mg (plant-based). Iodine=2ug (trace from broccoli
-      ~1-2ug/100g)'
-- timestamp: 2025-10-29 00:00:00+00:00
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: Populate fiber split and manganese from broccoli composition
-  fields_changed:
-  - per_portion.fiber_soluble_g
-  - per_portion.fiber_insoluble_g
-  - per_portion.manganese_mg
-  sources:
-  - url: nutritional_research
+  - timestamp: 2025-10-28 20:15:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: Initial population from Deliveroo calorie count + estimated macros/micros
+    fields_changed:
+    - per_portion.energy_kcal
+    - per_portion.protein_g
+    - per_portion.fat_g
+    - per_portion.sat_fat_g
+    - per_portion.carbs_g
+    - per_portion.sugar_g
+    - per_portion.fiber_total_g
+    - per_portion.sodium_mg
+    - per_portion.potassium_mg
+    - per_portion.magnesium_mg
+    - per_portion.calcium_mg
+    - per_portion.iron_mg
+    - per_portion.zinc_mg
+    - per_portion.vitamin_c_mg
+    - portion.est_weight_g
+    sources:
+      - url: https://deliveroo.co.uk/menu/london/mayfair/jean-georges-at-the-connaught
+        note: 'Deliveroo calorie listing: 110 kcal; description: Coconut & lime froth, coriander'
+      - url: user_input
+        note: Calorie count provided by Thomas on 2025-10-28
+  - timestamp: 2025-10-28 21:00:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: Added missing fatty acid breakdown and micronutrients based on coconut milk composition
+    fields_changed:
+      - per_portion.mufa_g
+      - per_portion.pufa_g
+      - per_portion.trans_fat_g
+      - per_portion.cholesterol_mg
+      - per_portion.iodine_ug
+      - version
+    sources:
+      - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/171904/nutrients
+        note: 'USDA FoodData Central: Coconut milk (canned) - fat composition ~83% saturated, ~6% MUFA, ~2% PUFA'
+      - url: research_analysis
+        note: 'Applied coconut fat ratios to 6.5g total fat: MUFA=0.4g (6%), PUFA=0.1g (2%), trans=trace. Cholesterol=0mg (plant-based). Iodine=2ug (trace from broccoli ~1-2ug/100g)'
+  - timestamp: 2025-10-29 00:00:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: Populate fiber split and manganese from broccoli composition
+    fields_changed:
+    - per_portion.fiber_soluble_g
+    - per_portion.fiber_insoluble_g
+    - per_portion.manganese_mg
+    sources:
+    - url: nutritional_research
     note: 'Broccoli fiber: ~9% soluble, 91% insoluble. Estimated 0.3g soluble, 3.2g
       insoluble for soup. Manganese diluted by coconut base, rounded to 0.'
-- timestamp: "2025-11-02T19:20:00+00:00"
-  updated_by: "LLM: GPT-5 Codex"
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed:
-  - last_verified
-  - notes
-  - per_portion.carbs_available_g
-  - per_portion.carbs_g
-  - per_portion.carbs_total_g
-  - per_portion.energy_kcal
-  - per_portion.polyols_g
-  - version
-  sources: []
-- timestamp: "2025-11-05T12:40:00+00:00"
-  updated_by: "LLM: Claude Sonnet 4.5 (Agent 3)"
-  reason: "Schema v2 enrichment: Complete nutrient profile with USDA data for broccoli (~150g in 300g soup). Added 17 missing nutrients including B-complex vitamins, vitamin K (152µg), vitamin A (47µg), phosphorus (99mg), and minerals."
-  fields_changed:
-  - per_portion.zinc_mg
-  - per_portion.manganese_mg
-  - per_portion.selenium_ug
-  - per_portion.phosphorus_mg
-  - per_portion.vitamin_a_ug
-  - per_portion.vitamin_d_ug
-  - per_portion.vitamin_e_mg
-  - per_portion.vitamin_k_ug
-  - per_portion.vitamin_b1_mg
-  - per_portion.vitamin_b2_mg
-  - per_portion.vitamin_b3_mg
-  - per_portion.vitamin_b5_mg
-  - per_portion.vitamin_b6_mg
-  - per_portion.vitamin_b7_ug
-  - per_portion.vitamin_b9_ug
-  - per_portion.vitamin_b12_ug
-  - per_portion.choline_mg
-  - version
-  sources:
-  - url: https://fdc.nal.usda.gov/
-    note: "USDA broccoli data scaled for ~150g broccoli content in 300g soup. B-vitamins: B1=0.1mg, B2=0.18mg, B3=1.0mg, B5=0.9mg, B6=0.26mg, B9=95µg. Vitamin K=152µg (excellent source), vitamin A=47µg, E=1.2mg. Minerals: phosphorus=99mg, manganese=0.3mg, selenium=4µg, zinc=0.5mg, choline=29mg. B12=0 (true zero - plant-based soup). Confidence: MEDIUM-HIGH (broccoli content estimated from portion size)"
+  - timestamp: "2025-11-02T19:20:00+00:00"
+    updated_by: "LLM: GPT-5 Codex"
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed:
+    - last_verified
+    - notes
+    - per_portion.carbs_available_g
+    - per_portion.carbs_g
+    - per_portion.carbs_total_g
+    - per_portion.energy_kcal
+    - per_portion.polyols_g
+    - version
+    sources: []
+  - timestamp: "2025-11-05T12:40:00+00:00"
+    updated_by: "LLM: Claude Sonnet 4.5 (Agent 3)"
+    reason: "Schema v2 enrichment: Complete nutrient profile with USDA data for broccoli (~150g in 300g soup). Added 17 missing nutrients including B-complex vitamins, vitamin K (152µg), vitamin A (47µg), phosphorus (99mg), and minerals."
+    fields_changed:
+    - per_portion.zinc_mg
+    - per_portion.manganese_mg
+    - per_portion.selenium_ug
+    - per_portion.phosphorus_mg
+    - per_portion.vitamin_a_ug
+    - per_portion.vitamin_d_ug
+    - per_portion.vitamin_e_mg
+    - per_portion.vitamin_k_ug
+    - per_portion.vitamin_b1_mg
+    - per_portion.vitamin_b2_mg
+    - per_portion.vitamin_b3_mg
+    - per_portion.vitamin_b5_mg
+    - per_portion.vitamin_b6_mg
+    - per_portion.vitamin_b7_ug
+    - per_portion.vitamin_b9_ug
+    - per_portion.vitamin_b12_ug
+    - per_portion.choline_mg
+    - version
+    sources:
+      - url: https://fdc.nal.usda.gov/
+        note: "USDA broccoli data scaled for ~150g broccoli content in 300g soup. B-vitamins: B1=0.1mg, B2=0.18mg, B3=1.0mg, B5=0.9mg, B6=0.26mg, B9=95µg. Vitamin K=152µg (excellent source), vitamin A=47µg, E=1.2mg. Minerals: phosphorus=99mg, manganese=0.3mg, selenium=4µg, zinc=0.5mg, choline=29mg. B12=0 (true zero - plant-based soup). Confidence: MEDIUM-HIGH (broccoli content estimated from portion size)"
 ```

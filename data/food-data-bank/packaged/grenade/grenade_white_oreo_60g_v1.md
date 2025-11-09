@@ -96,53 +96,53 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: 2025-10-30T00:00:00+0000
-  updated_by: Claude Code
-  reason: Initial entry for Thomas's food diary tracking
-  fields_changed: [all fields]
-  sources: [{note: Grenade White Oreo bar nutrition facts, url: 'https://www.healthyplanetcanada.com/grenade-high-protein-bar-oreo-60g.html'}]
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed: [last_verified, notes, per_portion.carbs_available_g, per_portion.carbs_g, per_portion.carbs_total_g,
-  per_portion.energy_kcal, per_portion.polyols_g, version]
-  sources: []
-- timestamp: '2025-11-02T22:00:00+00:00'
-  updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: Correct polyol data to match notes - was incorrectly set to 0.0 instead of 17.0g
-  fields_changed: [per_portion.polyols_g, per_portion.carbs_total_g, per_portion.energy_kcal, notes]
-  sources: []
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
-- timestamp: '2025-11-05T00:00:00+00:00'
-  updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: Enrich with 17 priority nutrients from USDA FoodData Central
-  fields_changed: [vitamin_d_ug, choline_mg, vitamin_b9_ug, vitamin_b12_ug, phosphorus_mg,
+  - timestamp: 2025-10-30T00:00:00+0000
+    updated_by: Claude Code
+    reason: Initial entry for Thomas's food diary tracking
+    fields_changed: [all fields]
+    sources: [{note: Grenade White Oreo bar nutrition facts, url: 'https://www.healthyplanetcanada.com/grenade-high-protein-bar-oreo-60g.html'}]
+  - timestamp: '2025-11-02T19:20:00+00:00'
+    updated_by: 'LLM: GPT-5 Codex'
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed: [last_verified, notes, per_portion.carbs_available_g, per_portion.carbs_g, per_portion.carbs_total_g,
+    per_portion.energy_kcal, per_portion.polyols_g, version]
+    sources: []
+  - timestamp: '2025-11-02T22:00:00+00:00'
+    updated_by: 'LLM: Claude Sonnet 4.5'
+    reason: Correct polyol data to match notes - was incorrectly set to 0.0 instead of 17.0g
+    fields_changed: [per_portion.polyols_g, per_portion.carbs_total_g, per_portion.energy_kcal, notes]
+    sources: []
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
+  - timestamp: '2025-11-05T00:00:00+00:00'
+    updated_by: 'LLM: Claude Sonnet 4.5'
+    reason: Enrich with 17 priority nutrients from USDA FoodData Central
+    fields_changed: [vitamin_d_ug, choline_mg, vitamin_b9_ug, vitamin_b12_ug, phosphorus_mg,
     copper_mg, selenium_ug, manganese_mg, vitamin_a_ug, vitamin_e_mg, vitamin_k_ug,
     vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b6_mg, assumptions.usda_proxy,
     assumptions.manganese]
-  sources:
-  - note: 'USDA FoodData Central: SNICKERS MARATHON Protein Performance Bar (whey protein bar proxy)'
-    fdc_id: 174786
-    url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/174786/nutrients'
-    scaling: 'Per-100g values scaled to 60g portion (multiply by 0.6)'
-- timestamp: '2025-11-05T22:00:00+00:00'
-  updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: 'Enrichment phase 2: Added 8+ critical nutrients for fortified whey protein bar'
-  fields_changed: [vitamin_b5_mg, vitamin_b7_ug, omega6_la_g, omega3_ala_g, calcium_mg, magnesium_mg, potassium_mg, iron_mg, zinc_mg, version, last_verified]
-  sources:
-  - note: 'Typical fortified protein bar composition and whey protein isolate nutrient profile'
-    reference: 'Whey protein isolate contains ~5.8mg B5 per 100g (USDA data)'
-  methodology: "Estimated values for fortified whey protein bar (60g portion): vitamin B5/pantothenic acid (2.5mg - typical fortification provides 40-50% DV), vitamin B7/biotin (20µg - fortified, note: biotin data limited in databases per NIH), omega-6 linoleic acid LA (1.8g from milk/whey ingredients and trace nuts), omega-3 ALA (0.2g minimal amount), calcium (170mg from milk protein concentrate), magnesium (48mg), potassium (180mg), iron (2.4mg - fortified to ~15% DV), zinc (2.0mg - fortified). Vitamin C kept at 0 (not typically added to protein bars). Confidence: MEDIUM - based on typical fortified protein bar composition with whey protein base."
-- timestamp: '2025-11-05T23:30:00+00:00'
-  updated_by: 'LLM: Claude Sonnet 4.5 (Agent 10)'
-  reason: 'Final enrichment phase: Added 5 remaining trace nutrients to complete 48-nutrient profile'
-  fields_changed: [iodine_ug, chromium_ug, molybdenum_ug, chloride_mg, sulfur_mg, version]
-  sources:
-  - note: 'Calculated from macronutrient composition and dairy protein source'
-  methodology: "Enriched final 5 trace nutrients for 60g whey protein bar: iodine (8µg from dairy/whey protein source, typical ~10-30µg/100g in whey), chloride (277mg calculated from 180mg sodium using NaCl molar ratio 1.541), sulfur (250mg from 21g protein at ~1.2% sulfur content in methionine/cysteine amino acids), chromium (2.5µg trace from protein and grain ingredients), molybdenum (10µg from protein and grain ingredients). TRUE zeros maintained for: vitamin C (not added to protein bars), EPA/DHA (no fish source), boron/silicon/vanadium/nickel (ultra-trace minerals with insignificant amounts). Energy validation: 4×21 + 9×10 + 4×20 + 2×0.9 + 2.4×17 = 296.6 kcal ✓"
+    sources:
+      - note: 'USDA FoodData Central: SNICKERS MARATHON Protein Performance Bar (whey protein bar proxy)'
+        fdc_id: 174786
+        url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/174786/nutrients'
+        scaling: 'Per-100g values scaled to 60g portion (multiply by 0.6)'
+  - timestamp: '2025-11-05T22:00:00+00:00'
+    updated_by: 'LLM: Claude Sonnet 4.5'
+    reason: 'Enrichment phase 2: Added 8+ critical nutrients for fortified whey protein bar'
+    fields_changed: [vitamin_b5_mg, vitamin_b7_ug, omega6_la_g, omega3_ala_g, calcium_mg, magnesium_mg, potassium_mg, iron_mg, zinc_mg, version, last_verified]
+    sources:
+      - note: 'Typical fortified protein bar composition and whey protein isolate nutrient profile'
+        reference: 'Whey protein isolate contains ~5.8mg B5 per 100g (USDA data)'
+    methodology: "Estimated values for fortified whey protein bar (60g portion): vitamin B5/pantothenic acid (2.5mg - typical fortification provides 40-50% DV), vitamin B7/biotin (20µg - fortified, note: biotin data limited in databases per NIH), omega-6 linoleic acid LA (1.8g from milk/whey ingredients and trace nuts), omega-3 ALA (0.2g minimal amount), calcium (170mg from milk protein concentrate), magnesium (48mg), potassium (180mg), iron (2.4mg - fortified to ~15% DV), zinc (2.0mg - fortified). Vitamin C kept at 0 (not typically added to protein bars). Confidence: MEDIUM - based on typical fortified protein bar composition with whey protein base."
+  - timestamp: '2025-11-05T23:30:00+00:00'
+    updated_by: 'LLM: Claude Sonnet 4.5 (Agent 10)'
+    reason: 'Final enrichment phase: Added 5 remaining trace nutrients to complete 48-nutrient profile'
+    fields_changed: [iodine_ug, chromium_ug, molybdenum_ug, chloride_mg, sulfur_mg, version]
+    sources:
+    - note: 'Calculated from macronutrient composition and dairy protein source'
+    methodology: "Enriched final 5 trace nutrients for 60g whey protein bar: iodine (8µg from dairy/whey protein source, typical ~10-30µg/100g in whey), chloride (277mg calculated from 180mg sodium using NaCl molar ratio 1.541), sulfur (250mg from 21g protein at ~1.2% sulfur content in methionine/cysteine amino acids), chromium (2.5µg trace from protein and grain ingredients), molybdenum (10µg from protein and grain ingredients). TRUE zeros maintained for: vitamin C (not added to protein bars), EPA/DHA (no fish source), boron/silicon/vanadium/nickel (ultra-trace minerals with insignificant amounts). Energy validation: 4×21 + 9×10 + 4×20 + 2×0.9 + 2.4×17 = 296.6 kcal ✓"
 ```

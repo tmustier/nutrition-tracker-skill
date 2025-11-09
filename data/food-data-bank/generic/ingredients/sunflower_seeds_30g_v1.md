@@ -95,109 +95,108 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: "2025-11-05T16:00:00+00:00"
-  updated_by: "Claude Code (Sonnet 4.5)"
-  reason: "CRITICAL FIX: Corrected EPA value - plant foods cannot contain marine omega-3s"
-  fields_changed:
+  - timestamp: "2025-11-05T16:00:00+00:00"
+    updated_by: "Claude Code (Sonnet 4.5)"
+    reason: "CRITICAL FIX: Corrected EPA value - plant foods cannot contain marine omega-3s"
+    fields_changed:
     - "omega3_epa_mg: 4 → 0 (EPA is a marine omega-3 found only in fish/algae, not in plant seeds)"
-  notes: "Sunflower seeds contain ALA (plant omega-3), not EPA/DHA. The 4mg value was biologically impossible and has been corrected to 0."
-- timestamp: 2025-10-28T18:51:39+0000
-  updated_by: "LLM: GPT-5 Thinking"
-  reason: Populate per_portion from user-provided data
-  fields_changed:
-  - per_portion.energy_kcal
-  - per_portion.protein_g
-  - per_portion.fat_g
-  - per_portion.sat_fat_g
-  - per_portion.mufa_g
-  - per_portion.pufa_g
-  - per_portion.carbs_g
-  - per_portion.sugar_g
-  - per_portion.fiber_total_g
-  - per_portion.sodium_mg
-  - per_portion.potassium_mg
-  - per_portion.magnesium_mg
-  - per_portion.calcium_mg
-  - per_portion.iron_mg
-  - per_portion.zinc_mg
-  - per_portion.vitamin_c_mg
-  sources:
-  - url: user_input
+  - timestamp: 2025-10-28T18:51:39+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: Populate per_portion from user-provided data
+    fields_changed:
+    - per_portion.energy_kcal
+    - per_portion.protein_g
+    - per_portion.fat_g
+    - per_portion.sat_fat_g
+    - per_portion.mufa_g
+    - per_portion.pufa_g
+    - per_portion.carbs_g
+    - per_portion.sugar_g
+    - per_portion.fiber_total_g
+    - per_portion.sodium_mg
+    - per_portion.potassium_mg
+    - per_portion.magnesium_mg
+    - per_portion.calcium_mg
+    - per_portion.iron_mg
+    - per_portion.zinc_mg
+    - per_portion.vitamin_c_mg
+    sources:
+    - url: user_input
     note: User-supplied values on 2025-10-28
-- timestamp: 2025-10-28T19:02:30+0000
-  updated_by: "LLM: GPT-5 Thinking"
-  reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
-  fields_changed:
-  - per_portion.mufa_g
-  - per_portion.carbs_g
-  - per_portion.iron_mg
-  - per_portion.zinc_mg
-  - per_portion.vitamin_c_mg
-  sources:
-  - url: formatting-pass
+  - timestamp: 2025-10-28T19:02:30+0000
+    updated_by: "LLM: GPT-5 Thinking"
+    reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
+    fields_changed:
+    - per_portion.mufa_g
+    - per_portion.carbs_g
+    - per_portion.iron_mg
+    - per_portion.zinc_mg
+    - per_portion.vitamin_c_mg
+    sources:
+    - url: formatting-pass
     note: Automated rounding pass
-- timestamp: "2025-11-02T19:20:00+00:00"
-  updated_by: "LLM: GPT-5 Codex"
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed:
-  - last_verified
-  - notes
-  - per_portion.carbs_available_g
-  - per_portion.carbs_g
-  - per_portion.carbs_total_g
-  - per_portion.energy_kcal
-  - per_portion.polyols_g
-  - version
-  sources: []
-- timestamp: "2025-11-05T00:00:00+00:00"
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: Enrich with 17 priority nutrients from USDA FoodData Central (FDC ID 170562)
-  fields_changed:
-  - version
-  - last_verified
-  - notes
-  - per_portion.vitamin_d_ug
-  - per_portion.choline_mg
-  - per_portion.vitamin_b9_ug
-  - per_portion.vitamin_b12_ug
-  - per_portion.phosphorus_mg
-  - per_portion.copper_mg
-  - per_portion.selenium_ug
-  - per_portion.manganese_mg
-  - per_portion.vitamin_a_ug
-  - per_portion.vitamin_e_mg
-  - per_portion.vitamin_k_ug
-  - per_portion.vitamin_b1_mg
-  - per_portion.vitamin_b2_mg
-  - per_portion.vitamin_b3_mg
-  - per_portion.vitamin_b6_mg
-  - per_portion.omega3_epa_mg
-  - per_portion.omega3_dha_mg
-  sources:
-  - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/170562/nutrients
+  - timestamp: "2025-11-02T19:20:00+00:00"
+    updated_by: "LLM: GPT-5 Codex"
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed:
+    - last_verified
+    - notes
+    - per_portion.carbs_available_g
+    - per_portion.carbs_g
+    - per_portion.carbs_total_g
+    - per_portion.energy_kcal
+    - per_portion.polyols_g
+    - version
+    sources: []
+  - timestamp: "2025-11-05T00:00:00+00:00"
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: Enrich with 17 priority nutrients from USDA FoodData Central (FDC ID 170562)
+    fields_changed:
+    - version
+    - last_verified
+    - notes
+    - per_portion.vitamin_d_ug
+    - per_portion.choline_mg
+    - per_portion.vitamin_b9_ug
+    - per_portion.vitamin_b12_ug
+    - per_portion.phosphorus_mg
+    - per_portion.copper_mg
+    - per_portion.selenium_ug
+    - per_portion.manganese_mg
+    - per_portion.vitamin_a_ug
+    - per_portion.vitamin_e_mg
+    - per_portion.vitamin_k_ug
+    - per_portion.vitamin_b1_mg
+    - per_portion.vitamin_b2_mg
+    - per_portion.vitamin_b3_mg
+    - per_portion.vitamin_b6_mg
+    - per_portion.omega3_epa_mg
+    - per_portion.omega3_dha_mg
+    sources:
+    - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/170562/nutrients
     note: 'USDA FoodData Central - Seeds, sunflower seed kernels, dried (FDC ID:
       170562)'
   - url: https://www.nutritionvalue.org/Seeds%2C_dried%2C_sunflower_seed_kernels_nutritional_value.html
     note: USDA nutrient data verification source
-- timestamp: "2025-11-05T14:00:00+00:00"
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: Enrich with 3 additional nutrients from USDA FoodData Central API (FDC ID 170562)
-  fields_changed:
-  - version
-  - per_portion.vitamin_b5_mg
-  - per_portion.omega3_ala_g
-  - per_portion.omega6_la_g
-  sources:
-  - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/170562/nutrients
+  - timestamp: "2025-11-05T14:00:00+00:00"
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: Enrich with 3 additional nutrients from USDA FoodData Central API (FDC ID 170562)
+    fields_changed:
+    - version
+    - per_portion.vitamin_b5_mg
+    - per_portion.omega3_ala_g
+    - per_portion.omega6_la_g
+    sources:
+    - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/170562/nutrients
     note: "USDA API: Pantothenic acid (1.13mg/100g), ALA/18:3 n-3 (0.06g/100g), LA/18:2 n-6 (23.05g/100g). Biotin, chromium, molybdenum not available in USDA database."
-- timestamp: "2025-11-05T19:30:00+00:00"
-  updated_by: "Agent 7: Claude Sonnet 4.5"
-  reason: Enrichment with biotin (B7) from NIH/USDA-funded research study
-  fields_changed:
-  - version
-  - per_portion.vitamin_b7_ug
-  sources:
-  - url: https://www.nutritionadvance.com/foods-high-in-biotin/
+  - timestamp: "2025-11-05T19:30:00+00:00"
+    updated_by: "Agent 7: Claude Sonnet 4.5"
+    reason: Enrichment with biotin (B7) from NIH/USDA-funded research study
+    fields_changed:
+    - version
+    - per_portion.vitamin_b7_ug
+    sources:
+    - url: https://www.nutritionadvance.com/foods-high-in-biotin/
     note: "Research-based biotin content: Most commonly cited value is 7.8 mcg per 100g from Journal of Food Composition and Analysis 2004 study (NIH/USDA funded). Alternative sources cite 13 mcg per 100g (from 2.6 mcg per 20g serving = 9% DV). Using conservative estimate of 10 mcg per 100g, scaled to 30g = 3.0 mcg."
   - note: "Chromium and molybdenum: Remain 0. Standard nutritional databases do not provide values for sunflower seeds. Unlike hazelnuts which have published research with specific values, sunflower seed trace mineral data is not reliably available."
 ```

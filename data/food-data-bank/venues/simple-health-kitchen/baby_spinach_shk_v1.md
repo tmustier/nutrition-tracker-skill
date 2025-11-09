@@ -102,12 +102,12 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: "2025-11-06T00:00:00+00:00"
-  updated_by: "Claude Code (Sonnet 4.5)"
-  reason: "Initial creation with complete 52-nutrient profile from SHK PDF and USDA FoodData Central"
-  fields_changed: ["all fields"]
-  sources:
-  - note: "SHK Calories PDF page 38: 8 kcal, 1g P, 1.3g C, 0.14g F; Fresh baby spinach leaves, VE/DF/GF"
+  - timestamp: "2025-11-06T00:00:00+00:00"
+    updated_by: "Claude Code (Sonnet 4.5)"
+    reason: "Initial creation with complete 52-nutrient profile from SHK PDF and USDA FoodData Central"
+    fields_changed: ["all fields"]
+    sources:
+    - note: "SHK Calories PDF page 38: 8 kcal, 1g P, 1.3g C, 0.14g F; Fresh baby spinach leaves, VE/DF/GF"
     url: "shk_nutrition_pdf"
   - note: "USDA FoodData Central - Spinach, raw (FDC ID 168462): Complete nutrient profile per 100g scaled to 35g portion"
     url: "https://fdc.nal.usda.gov/fdc-app.html#/food-details/168462"

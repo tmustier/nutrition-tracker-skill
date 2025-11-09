@@ -95,95 +95,92 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: 2025-10-28 20:00:00+00:00
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: Initial population from Deliveroo + ChatGPT nutritional analysis
-  fields_changed:
-  - per_portion.energy_kcal
-  - per_portion.protein_g
-  - per_portion.fat_g
-  - per_portion.sat_fat_g
-  - per_portion.carbs_g
-  - per_portion.fiber_total_g
-  - per_portion.sodium_mg
-  sources:
-  - url: https://deliveroo.co.uk/menu/london/mayfair/jean-georges-at-the-connaught
-    note: "Deliveroo calorie listing: 459 kcal"
-  - url: user_input
-    note: ChatGPT nutritional breakdown provided by Thomas on 2025-10-28
-- timestamp: 2025-10-28 22:30:00+00:00
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: Research and populate missing nutrition data based on USDA database and
-    UK food composition tables
-  fields_changed:
-  - per_portion.mufa_g
-  - per_portion.pufa_g
-  - per_portion.trans_fat_g
-  - per_portion.cholesterol_mg
-  - per_portion.sugar_g
-  - per_portion.potassium_mg
-  - per_portion.iodine_ug
-  - per_portion.magnesium_mg
-  - per_portion.calcium_mg
-  - per_portion.iron_mg
-  - per_portion.zinc_mg
-  - per_portion.vitamin_c_mg
-  sources:
-  - url: https://www.nutridex.org.uk/foods/2aehdsc/potato-chips-homemade-fried-in-rapeseed-oil
-    note: 'UK food composition data: potassium 812mg/100g, magnesium 39mg/100g, calcium
-      15mg/100g, iron 0.64mg/100g, zinc 0.6mg/100g, vitamin C 11mg/100g'
-  - url: research
-    note: 'MUFA/PUFA calculated from typical vegetable frying oil composition (sunflower/soybean
-      blend: ~27% MUFA, ~63% PUFA of total fat)'
+  - timestamp: 2025-10-28 20:00:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: Initial population from Deliveroo + ChatGPT nutritional analysis
+    fields_changed:
+    - per_portion.energy_kcal
+    - per_portion.protein_g
+    - per_portion.fat_g
+    - per_portion.sat_fat_g
+    - per_portion.carbs_g
+    - per_portion.fiber_total_g
+    - per_portion.sodium_mg
+    sources:
+      - url: https://deliveroo.co.uk/menu/london/mayfair/jean-georges-at-the-connaught
+        note: "Deliveroo calorie listing: 459 kcal"
+      - url: user_input
+        note: ChatGPT nutritional breakdown provided by Thomas on 2025-10-28
+  - timestamp: 2025-10-28 22:30:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: Research and populate missing nutrition data based on USDA database and UK food composition tables
+    fields_changed:
+      - per_portion.mufa_g
+      - per_portion.pufa_g
+      - per_portion.trans_fat_g
+      - per_portion.cholesterol_mg
+      - per_portion.sugar_g
+      - per_portion.potassium_mg
+      - per_portion.iodine_ug
+      - per_portion.magnesium_mg
+      - per_portion.calcium_mg
+      - per_portion.iron_mg
+      - per_portion.zinc_mg
+      - per_portion.vitamin_c_mg
+    sources:
+      - url: https://www.nutridex.org.uk/foods/2aehdsc/potato-chips-homemade-fried-in-rapeseed-oil
+        note: 'UK food composition data: potassium 812mg/100g, magnesium 39mg/100g, calcium 15mg/100g, iron 0.64mg/100g, zinc 0.6mg/100g, vitamin C 11mg/100g'
+      - url: research
+        note: 'MUFA/PUFA calculated from typical vegetable frying oil composition (sunflower/soybean blend: ~27% MUFA, ~63% PUFA of total fat)'
   - url: research
     note: Sugar 0.21g/100g from McDonald's french fries data; cholesterol 0mg (vegetable
       oil); trans fat 0.1g (modern vegetable oils); iodine 1-2mcg/100g (potato is
       very low in iodine)
-- timestamp: 2025-10-29 00:00:00+00:00
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: Populate fiber split and manganese from potato composition
-  fields_changed:
-  - per_portion.fiber_soluble_g
-  - per_portion.fiber_insoluble_g
-  - per_portion.manganese_mg
-  sources:
-  - url: nutritional_research
+  - timestamp: 2025-10-29 00:00:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: Populate fiber split and manganese from potato composition
+    fields_changed:
+    - per_portion.fiber_soluble_g
+    - per_portion.fiber_insoluble_g
+    - per_portion.manganese_mg
+    sources:
+    - url: nutritional_research
     note: 'Potato fiber: ~26% soluble, 74% insoluble. Manganese ~0.4mg/100g in french
       fries; estimated 1mg for ~150g portion.'
-- timestamp: "2025-11-02T19:20:00+00:00"
-  updated_by: "LLM: GPT-5 Codex"
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed:
-  - last_verified
-  - notes
-  - per_portion.carbs_available_g
-  - per_portion.carbs_g
-  - per_portion.carbs_total_g
-  - per_portion.energy_kcal
-  - per_portion.polyols_g
-  - version
-  sources: []
-- timestamp: "2025-11-05T20:00:00+00:00"
-  updated_by: "Claude Code Agent 5 (Sonnet 4.5)"
-  reason: "Phase 3 enrichment: Added 13 missing nutrients from USDA FoodData Central french fries data"
-  fields_changed:
-  - version
-  - last_verified
-  - selenium_ug (0 → 1.4)
-  - phosphorus_mg (0 → 188)
-  - vitamin_e_mg (0 → 2.6)
-  - vitamin_k_ug (0 → 17)
-  - vitamin_b1_mg (0 → 0.26)
-  - vitamin_b2_mg (0 → 0.06)
-  - vitamin_b3_mg (0 → 4.5)
-  - vitamin_b5_mg (0 → 0.9)
-  - vitamin_b6_mg (0 → 0.56)
-  - vitamin_b9_ug (0 → 45)
-  - choline_mg (0 → 56)
-  - omega3_ala_g (0 → 0.6)
-  - omega6_la_g (0 → 7.4)
-  sources:
-  - url: "https://foodstruct.com/food/french-fries"
-    note: "USDA-derived french fries nutrition data per 100g, scaled by 1.5x for ~150g portion"
-  - note: "Scaling factor calculated from energy: 465.4 kcal ÷ 312 kcal/100g = 1.49 ≈ 1.5"
+  - timestamp: "2025-11-02T19:20:00+00:00"
+    updated_by: "LLM: GPT-5 Codex"
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed:
+    - last_verified
+    - notes
+    - per_portion.carbs_available_g
+    - per_portion.carbs_g
+    - per_portion.carbs_total_g
+    - per_portion.energy_kcal
+    - per_portion.polyols_g
+    - version
+    sources: []
+  - timestamp: "2025-11-05T20:00:00+00:00"
+    updated_by: "Claude Code Agent 5 (Sonnet 4.5)"
+    reason: "Phase 3 enrichment: Added 13 missing nutrients from USDA FoodData Central french fries data"
+    fields_changed:
+    - version
+    - last_verified
+    - selenium_ug (0 → 1.4)
+    - phosphorus_mg (0 → 188)
+    - vitamin_e_mg (0 → 2.6)
+    - vitamin_k_ug (0 → 17)
+    - vitamin_b1_mg (0 → 0.26)
+    - vitamin_b2_mg (0 → 0.06)
+    - vitamin_b3_mg (0 → 4.5)
+    - vitamin_b5_mg (0 → 0.9)
+    - vitamin_b6_mg (0 → 0.56)
+    - vitamin_b9_ug (0 → 45)
+    - choline_mg (0 → 56)
+    - omega3_ala_g (0 → 0.6)
+    - omega6_la_g (0 → 7.4)
+    sources:
+      - url: "https://foodstruct.com/food/french-fries"
+        note: "USDA-derived french fries nutrition data per 100g, scaled by 1.5x for ~150g portion"
+      - note: "Scaling factor calculated from energy: 465.4 kcal ÷ 312 kcal/100g = 1.49 ≈ 1.5"
 ```

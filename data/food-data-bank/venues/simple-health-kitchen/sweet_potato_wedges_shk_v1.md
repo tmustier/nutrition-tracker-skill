@@ -86,54 +86,54 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: 2025-10-28T18:51:39+0000
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Populate per_portion from user-provided data
-  fields_changed: [per_portion.energy_kcal, per_portion.protein_g, per_portion.fat_g, per_portion.sat_fat_g,
-  per_portion.mufa_g, per_portion.pufa_g, per_portion.trans_fat_g, per_portion.carbs_g,
-  per_portion.sugar_g, per_portion.fiber_total_g, per_portion.sodium_mg, per_portion.potassium_mg,
-  per_portion.iodine_ug, per_portion.magnesium_mg, per_portion.calcium_mg, per_portion.iron_mg,
-  per_portion.zinc_mg, per_portion.vitamin_c_mg]
-  sources: [{note: User-supplied values on 2025-10-28, url: user_input}]
-- timestamp: 2025-10-28T18:57:05+0000
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Consistency fix for fat totals/splits
-  fields_changed: [per_portion.fat_g]
-  sources: [{note: Correction approved by user on 2025-10-28, url: user_input}]
-- timestamp: 2025-10-28T19:02:30+0000
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
-  fields_changed: [per_portion.protein_g, per_portion.sat_fat_g, per_portion.pufa_g, per_portion.trans_fat_g,
-  per_portion.carbs_g, per_portion.sugar_g, per_portion.iodine_ug, per_portion.iron_mg,
-  per_portion.zinc_mg, per_portion.vitamin_c_mg]
-  sources: [{note: Automated rounding pass, url: formatting-pass}]
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed: [last_verified, notes, per_portion.carbs_available_g, per_portion.carbs_g, per_portion.carbs_total_g,
-  per_portion.energy_kcal, per_portion.polyols_g, version]
-  sources: []
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
-- timestamp: '2025-11-05T15:30:00+00:00'
-  updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: 'Enriched 17 priority nutrients using USDA FoodData Central (FDC 168483: Sweet potato, cooked, baked in skin, flesh, without salt)'
-  fields_changed: [version, last_verified, per_portion.vitamin_a_ug, per_portion.vitamin_e_mg, per_portion.vitamin_k_ug, per_portion.vitamin_b1_mg, per_portion.vitamin_b2_mg, per_portion.vitamin_b3_mg, per_portion.vitamin_b6_mg, per_portion.vitamin_b9_ug, per_portion.choline_mg, per_portion.phosphorus_mg, per_portion.copper_mg, per_portion.manganese_mg]
-  sources: [{note: 'USDA FoodData Central FDC ID 168483, scaled from 100g to 181g portion (1.814x factor based on energy match: 163.3 kcal ÷ 90 kcal/100g)', url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/168483/nutrients'}]
-  notes: 'Vitamin A is exceptionally high (1744 mcg RAE) as expected for sweet potatoes. Selenium (0.4 mcg scaled) rounds to 0. Iodine unchanged (not in USDA dataset). Vitamin D, B12, EPA, DHA remain 0 (plant source). Portion calculation assumes ~181g baked sweet potato with minimal added oil for roasting.'
-- timestamp: '2025-11-05T18:00:00+0000'
-  updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: 'Enriched with 8 additional nutrients: B5 (pantothenic acid), B7 (biotin), chromium, molybdenum. Sweet potato is an EXCELLENT source of B5 (1.6mg, 32% DV) and chromium (36µg, 103% DV). Omega fatty acids remain 0 (negligible in tubers).'
-  fields_changed: [version, per_portion.vitamin_b5_mg, per_portion.vitamin_b7_ug, per_portion.chromium_ug, per_portion.molybdenum_ug]
-  sources: [{note: 'USDA FoodData Central (FDC 168483) and research literature. Sweet potato provides 21% DV for B5 per cup and ~41µg chromium per cup (USDA National Nutrient Database). Biotin content from analytical research on cooked sweet potato.', url: 'https://fdc.nal.usda.gov/'}]
-- timestamp: '2025-11-05T23:30:00+0000'
-  updated_by: 'LLM: Claude Sonnet 4.5 (Agent 6)'
-  reason: 'Added missing zinc and selenium based on USDA FoodData Central values for baked sweet potato'
-  fields_changed: [zinc_mg, selenium_ug, version]
-  sources: [{note: 'USDA FoodData Central - Sweet potato, cooked, baked in skin (FDC ID 168483): Zinc 0.32 mg/100g, Selenium 0.2 μg/100g. Scaled to 181g portion (based on energy match): zinc 0.58mg rounded to 0.6mg, selenium 0.36μg rounded to 0.4μg.', url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/168483/nutrients'}]
-  methodology: "USDA values per 100g scaled to estimated 181g portion (factor 1.81): Zinc 0.32×1.81=0.58mg→0.6mg, Selenium 0.2×1.81=0.36μg→0.4μg. Sweet potatoes are a modest source of zinc and very low source of selenium."
+  - timestamp: 2025-10-28T18:51:39+0000
+    updated_by: 'LLM: GPT-5 Thinking'
+    reason: Populate per_portion from user-provided data
+    fields_changed: [per_portion.energy_kcal, per_portion.protein_g, per_portion.fat_g, per_portion.sat_fat_g,
+    per_portion.mufa_g, per_portion.pufa_g, per_portion.trans_fat_g, per_portion.carbs_g,
+    per_portion.sugar_g, per_portion.fiber_total_g, per_portion.sodium_mg, per_portion.potassium_mg,
+    per_portion.iodine_ug, per_portion.magnesium_mg, per_portion.calcium_mg, per_portion.iron_mg,
+    per_portion.zinc_mg, per_portion.vitamin_c_mg]
+    sources: [{note: User-supplied values on 2025-10-28, url: user_input}]
+  - timestamp: 2025-10-28T18:57:05+0000
+    updated_by: 'LLM: GPT-5 Thinking'
+    reason: Consistency fix for fat totals/splits
+    fields_changed: [per_portion.fat_g]
+    sources: [{note: Correction approved by user on 2025-10-28, url: user_input}]
+  - timestamp: 2025-10-28T19:02:30+0000
+    updated_by: 'LLM: GPT-5 Thinking'
+    reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
+    fields_changed: [per_portion.protein_g, per_portion.sat_fat_g, per_portion.pufa_g, per_portion.trans_fat_g,
+    per_portion.carbs_g, per_portion.sugar_g, per_portion.iodine_ug, per_portion.iron_mg,
+    per_portion.zinc_mg, per_portion.vitamin_c_mg]
+    sources: [{note: Automated rounding pass, url: formatting-pass}]
+  - timestamp: '2025-11-02T19:20:00+00:00'
+    updated_by: 'LLM: GPT-5 Codex'
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed: [last_verified, notes, per_portion.carbs_available_g, per_portion.carbs_g, per_portion.carbs_total_g,
+    per_portion.energy_kcal, per_portion.polyols_g, version]
+    sources: []
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
+  - timestamp: '2025-11-05T15:30:00+00:00'
+    updated_by: 'LLM: Claude Sonnet 4.5'
+    reason: 'Enriched 17 priority nutrients using USDA FoodData Central (FDC 168483: Sweet potato, cooked, baked in skin, flesh, without salt)'
+    fields_changed: [version, last_verified, per_portion.vitamin_a_ug, per_portion.vitamin_e_mg, per_portion.vitamin_k_ug, per_portion.vitamin_b1_mg, per_portion.vitamin_b2_mg, per_portion.vitamin_b3_mg, per_portion.vitamin_b6_mg, per_portion.vitamin_b9_ug, per_portion.choline_mg, per_portion.phosphorus_mg, per_portion.copper_mg, per_portion.manganese_mg]
+    sources: [{note: 'USDA FoodData Central FDC ID 168483, scaled from 100g to 181g portion (1.814x factor based on energy match: 163.3 kcal ÷ 90 kcal/100g)', url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/168483/nutrients'}]
+    notes: 'Vitamin A is exceptionally high (1744 mcg RAE) as expected for sweet potatoes. Selenium (0.4 mcg scaled) rounds to 0. Iodine unchanged (not in USDA dataset). Vitamin D, B12, EPA, DHA remain 0 (plant source). Portion calculation assumes ~181g baked sweet potato with minimal added oil for roasting.'
+  - timestamp: '2025-11-05T18:00:00+0000'
+    updated_by: 'LLM: Claude Sonnet 4.5'
+    reason: 'Enriched with 8 additional nutrients: B5 (pantothenic acid), B7 (biotin), chromium, molybdenum. Sweet potato is an EXCELLENT source of B5 (1.6mg, 32% DV) and chromium (36µg, 103% DV). Omega fatty acids remain 0 (negligible in tubers).'
+    fields_changed: [version, per_portion.vitamin_b5_mg, per_portion.vitamin_b7_ug, per_portion.chromium_ug, per_portion.molybdenum_ug]
+    sources: [{note: 'USDA FoodData Central (FDC 168483) and research literature. Sweet potato provides 21% DV for B5 per cup and ~41µg chromium per cup (USDA National Nutrient Database). Biotin content from analytical research on cooked sweet potato.', url: 'https://fdc.nal.usda.gov/'}]
+  - timestamp: '2025-11-05T23:30:00+0000'
+    updated_by: 'LLM: Claude Sonnet 4.5 (Agent 6)'
+    reason: 'Added missing zinc and selenium based on USDA FoodData Central values for baked sweet potato'
+    fields_changed: [zinc_mg, selenium_ug, version]
+    sources: [{note: 'USDA FoodData Central - Sweet potato, cooked, baked in skin (FDC ID 168483): Zinc 0.32 mg/100g, Selenium 0.2 μg/100g. Scaled to 181g portion (based on energy match): zinc 0.58mg rounded to 0.6mg, selenium 0.36μg rounded to 0.4μg.', url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/168483/nutrients'}]
+    methodology: "USDA values per 100g scaled to estimated 181g portion (factor 1.81): Zinc 0.32×1.81=0.58mg→0.6mg, Selenium 0.2×1.81=0.36μg→0.4μg. Sweet potatoes are a modest source of zinc and very low source of selenium."
 ```

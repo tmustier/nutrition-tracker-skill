@@ -105,47 +105,47 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
-- timestamp: '2025-11-02T18:00:00+00:00'
-  updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: Initial component-based nutrition estimation for duck broth with tofu from Imperial Treasure St. James Peking duck course
-  fields_changed: [all nutrition fields]
-  sources: [{note: Hank Shaw duck stock recipe - 13 kcal baseline, url: 'https://honest-food.net/duck-stock-recipe/'},
-  {note: Homemade duck broth nutrition - 43 kcal per 100ml for richer version, url: 'https://thematbakh.com/duck-stock-recipe-instant-pot-duck-broth/'},
-  {note: USDA FDC 172475 - Firm tofu with calcium sulfate complete nutrition profile,
+  - timestamp: '2025-11-02T18:00:00+00:00'
+    updated_by: 'LLM: Claude Sonnet 4.5'
+    reason: Initial component-based nutrition estimation for duck broth with tofu from Imperial Treasure St. James Peking duck course
+    fields_changed: [all nutrition fields]
+    sources: [{note: Hank Shaw duck stock recipe - 13 kcal baseline, url: 'https://honest-food.net/duck-stock-recipe/'},
+    {note: Homemade duck broth nutrition - 43 kcal per 100ml for richer version, url: 'https://thematbakh.com/duck-stock-recipe-instant-pot-duck-broth/'},
+    {note: USDA FDC 172475 - Firm tofu with calcium sulfate complete nutrition profile,
     url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/172475/nutrients'},
   {note: 'Duck fat composition: 49.4% MUFA, 33.27% sat, 12.93% PUFA', url: 'https://theconsciouslife.com/foods/duck-fat-04574.htm'}]
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
-- timestamp: "2025-11-05T12:50:00+00:00"
-  updated_by: "LLM: Claude Sonnet 4.5 (Agent 3)"
-  reason: "Schema v2 enrichment: Complete nutrient profile for duck broth (120ml) + firm tofu (15g). Added 19 missing nutrients primarily from tofu component. B-vitamins from tofu, trace amounts from broth collagen. Phosphorus (44mg), omega-6 from tofu (0.44g)."
-  fields_changed:
-  - per_portion.zinc_mg
-  - per_portion.manganese_mg
-  - per_portion.copper_mg
-  - per_portion.selenium_ug
-  - per_portion.phosphorus_mg
-  - per_portion.vitamin_a_ug
-  - per_portion.vitamin_d_ug
-  - per_portion.vitamin_e_mg
-  - per_portion.vitamin_k_ug
-  - per_portion.vitamin_b1_mg
-  - per_portion.vitamin_b2_mg
-  - per_portion.vitamin_b3_mg
-  - per_portion.vitamin_b5_mg
-  - per_portion.vitamin_b6_mg
-  - per_portion.vitamin_b7_ug
-  - per_portion.vitamin_b9_ug
-  - per_portion.vitamin_b12_ug
-  - per_portion.choline_mg
-  - per_portion.omega3_ala_g
-  - per_portion.omega6_la_g
-  - version
-  sources:
-  - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/172475/nutrients
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
+  - timestamp: "2025-11-05T12:50:00+00:00"
+    updated_by: "LLM: Claude Sonnet 4.5 (Agent 3)"
+    reason: "Schema v2 enrichment: Complete nutrient profile for duck broth (120ml) + firm tofu (15g). Added 19 missing nutrients primarily from tofu component. B-vitamins from tofu, trace amounts from broth collagen. Phosphorus (44mg), omega-6 from tofu (0.44g)."
+    fields_changed:
+    - per_portion.zinc_mg
+    - per_portion.manganese_mg
+    - per_portion.copper_mg
+    - per_portion.selenium_ug
+    - per_portion.phosphorus_mg
+    - per_portion.vitamin_a_ug
+    - per_portion.vitamin_d_ug
+    - per_portion.vitamin_e_mg
+    - per_portion.vitamin_k_ug
+    - per_portion.vitamin_b1_mg
+    - per_portion.vitamin_b2_mg
+    - per_portion.vitamin_b3_mg
+    - per_portion.vitamin_b5_mg
+    - per_portion.vitamin_b6_mg
+    - per_portion.vitamin_b7_ug
+    - per_portion.vitamin_b9_ug
+    - per_portion.vitamin_b12_ug
+    - per_portion.choline_mg
+    - per_portion.omega3_ala_g
+    - per_portion.omega6_la_g
+    - version
+    sources:
+    - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/172475/nutrients
     note: "USDA FDC 172475 - Firm tofu with calcium sulfate (15g portion). Tofu provides: B1=0.03mg, B2=0.02mg, B3=0.06mg, B5=0.02mg, B6=0.02mg, B9=2µg, phosphorus=29mg, selenium=3µg, copper=0.03mg, zinc=0.1mg, manganese=0.1mg, choline=4mg, omega-3 ALA=0.09g, omega-6 LA=0.44g. Duck broth (120ml) adds trace B-vitamins and minerals from collagen. Vitamins A/D/E/K=0 (true zeros for plant-based tofu + clear broth). B12=0.1µg trace from broth. Confidence: HIGH (tofu), MEDIUM (broth estimates)"
 ```

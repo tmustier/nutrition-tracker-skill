@@ -117,33 +117,33 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
-- timestamp: 2025-11-01T09:00:00+0000
-  updated_by: Claude Code (Sonnet 4.5)
-  reason: Initial entry for Daylesford smoked trout - user consumed on crispbread for breakfast
-  fields_changed: [all fields]
-  sources: [{note: Daylesford Smoked Trout product listing, url: 'https://www.ocado.com/products/daylesford-smoked-trout-619556011'},
-  {note: USDA FoodData Central smoked trout baseline values, url: 'https://fdc.nal.usda.gov/'},
-  {note: 'User consumed 80g (2 slices) Daylesford smoked trout on 2025-11-01 at 09:00',
+  - timestamp: 2025-11-01T09:00:00+0000
+    updated_by: Claude Code (Sonnet 4.5)
+    reason: Initial entry for Daylesford smoked trout - user consumed on crispbread for breakfast
+    fields_changed: [all fields]
+    sources: [{note: Daylesford Smoked Trout product listing, url: 'https://www.ocado.com/products/daylesford-smoked-trout-619556011'},
+    {note: USDA FoodData Central smoked trout baseline values, url: 'https://fdc.nal.usda.gov/'},
+    {note: 'User consumed 80g (2 slices) Daylesford smoked trout on 2025-11-01 at 09:00',
     url: user_request}]
-- timestamp: 2025-11-01T09:30:00+0000
-  updated_by: Claude Code (Sonnet 4.5)
-  reason: Updated with actual product label nutrition facts - corrected major underestimation of calories and fat
-  fields_changed: [version, per_portion.energy_kcal, per_portion.protein_g, per_portion.fat_g, per_portion.sat_fat_g,
-  per_portion.mufa_g, per_portion.pufa_g, per_portion.carbs_g, per_portion.sugar_g,
-  per_portion.sodium_mg, derived.omega_3_total_g, derived.epa_g, derived.dha_g, quality.confidence,
-  quality.gaps]
-  sources: [{note: 'Daylesford Smoked Trout 200g pack label: 202 kcal, 21.8g protein, 12.8g fat
+  - timestamp: 2025-11-01T09:30:00+0000
+    updated_by: Claude Code (Sonnet 4.5)
+    reason: Updated with actual product label nutrition facts - corrected major underestimation of calories and fat
+    fields_changed: [version, per_portion.energy_kcal, per_portion.protein_g, per_portion.fat_g, per_portion.sat_fat_g,
+    per_portion.mufa_g, per_portion.pufa_g, per_portion.carbs_g, per_portion.sugar_g,
+    per_portion.sodium_mg, derived.omega_3_total_g, derived.epa_g, derived.dha_g, quality.confidence,
+    quality.gaps]
+    sources: [{note: 'Daylesford Smoked Trout 200g pack label: 202 kcal, 21.8g protein, 12.8g fat
       (2.3g sat), <0.1g carbs per 100g. Batch 6997, use by 12.11.25', url: product_label}]
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed: [last_verified, notes, per_portion.carbs_available_g, per_portion.carbs_g, per_portion.carbs_total_g,
-  per_portion.energy_kcal, per_portion.polyols_g, version]
-  sources: []
-- timestamp: '2025-11-05T18:00:00+00:00'
-  updated_by: 'Claude Code (Sonnet 4.5)'
-  reason: 'Enrichment with 8 priority nutrients using REAL USDA values for rainbow trout'
-  fields_changed:
+  - timestamp: '2025-11-02T19:20:00+00:00'
+    updated_by: 'LLM: GPT-5 Codex'
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed: [last_verified, notes, per_portion.carbs_available_g, per_portion.carbs_g, per_portion.carbs_total_g,
+    per_portion.energy_kcal, per_portion.polyols_g, version]
+    sources: []
+  - timestamp: '2025-11-05T18:00:00+00:00'
+    updated_by: 'Claude Code (Sonnet 4.5)'
+    reason: 'Enrichment with 8 priority nutrients using REAL USDA values for rainbow trout'
+    fields_changed:
     - "vitamin_b5_mg: 0 → 1.28 (USDA 1170: 1.6mg/100g scaled to 80g)"
     - "vitamin_b7_ug: 0 → 5.6 (USDA 1176: ~7µg/100g scaled, based on fish biotin data)"
     - "omega3_ala_g: 0 → 0.01 (USDA 1404: minimal in fish)"
@@ -152,37 +152,39 @@ change_log:
     - "molybdenum_ug: confirmed 0 (trace amounts in fish)"
     - "fiber_soluble_g: confirmed 0 (TRUE ZERO for animal products)"
     - "fiber_insoluble_g: confirmed 0 (TRUE ZERO for animal products)"
-  sources:
-    - url: 'https://tools.myfooddata.com/nutrition-facts/173718/wt1'
-      note: 'USDA rainbow trout data: B5 = 2.0mg/100g cooked (conservative 1.6mg for smoked)'
-    - url: 'https://nutrivore.com/foods/trout-nutrients/'
-      note: 'Trout provides 45% DV of B5 per 115g serving'
-    - note: 'Fish biotin typically ~5-8µg/100g (salmon reference), scaled to 7µg/100g for trout'
-  notes: 'Animal protein source - TRUE ZERO fiber. B5 excellent (1.28mg), biotin good (5.6µg), omega-6 minimal as expected for fish.'
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
-- timestamp: '2025-11-05T15:00:00+00:00'
-  updated_by: 'Claude Code (Sonnet 4.5)'
-  reason: 'Enriched with 17 priority nutrients from USDA FoodData Central rainbow trout data (scaled to 80g portion)'
-  fields_changed: [version, omega3_epa_mg, omega3_dha_mg, vitamin_d_ug, vitamin_b12_ug,
+    sources:
+      - url: 'https://tools.myfooddata.com/nutrition-facts/173718/wt1'
+        note: 'USDA rainbow trout data: B5 = 2.0mg/100g cooked (conservative 1.6mg for smoked)'
+      - url: 'https://nutrivore.com/foods/trout-nutrients/'
+        note: 'Trout provides 45% DV of B5 per 115g serving'
+      - note: 'Fish biotin typically ~5-8µg/100g (salmon reference), scaled to 7µg/100g for trout'
+    notes: 'Animal protein source - TRUE ZERO fiber. B5 excellent (1.28mg), biotin good (5.6µg), omega-6 minimal as expected for fish.'
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
+  - timestamp: '2025-11-05T15:00:00+00:00'
+    updated_by: 'Claude Code (Sonnet 4.5)'
+    reason: 'Enriched with 17 priority nutrients from USDA FoodData Central rainbow trout data (scaled to 80g portion)'
+    fields_changed: [version, omega3_epa_mg, omega3_dha_mg, vitamin_d_ug, vitamin_b12_ug,
     choline_mg, iodine_ug, vitamin_b9_ug, phosphorus_mg, copper_mg, selenium_ug, manganese_mg,
     vitamin_a_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg,
     vitamin_b6_mg, quality.gaps, notes]
-  sources:
-  - note: 'USDA FoodData Central - Rainbow trout (Oncorhynchus mykiss) nutrient profile'
-    url: 'https://fdc.nal.usda.gov/'
-  - note: 'Nutrivore comprehensive trout nutrient database (raw, mixed species per 100g)'
-    url: 'https://nutrivore.com/foods/trout-nutrients/'
-  - note: 'Omega-3 values (EPA 320mg, DHA 640mg) based on farmed rainbow trout composition typical of high-fat Scottish farmed trout'
-    url: 'derived_from_file_estimates'
-- timestamp: '2025-11-06T00:15:00+00:00'
-  updated_by: 'LLM: Claude Sonnet 4.5 (Agent 6)'
-  reason: 'Added chloride (from salt brining), chromium, and molybdenum trace minerals'
-  fields_changed: [chloride_mg, chromium_ug, molybdenum_ug, version]
-  sources: [{note: 'Chloride calculated from sodium content: 480mg sodium from 1.2g salt (NaCl). Salt composition: ~40% sodium, ~60% chloride by weight. 480mg Na / 0.4 = 1200mg salt total → chloride = 1200mg - 480mg = 720mg (rounded to 740mg accounting for natural fish chloride). Chromium and molybdenum: trace amounts in fish tissue (~1 μg/100g each).', url: 'https://pubmed.ncbi.nlm.nih.gov/18807917/'}]
-  methodology: "Chloride: Calculated from salt content using stoichiometric ratio of NaCl (sodium:chloride = 40:60). Product is dry salted & cold smoked with significant salt content (480mg Na/80g). Chromium ~1 μg/100g × 0.8 = 0.8μg. Molybdenum ~0.7 μg/100g × 0.8 = 0.6μg (trace amounts typical in fish). Research confirms smoked fish contains chromium, selenium, fluorine, iodine, and other trace minerals."
+    sources:
+      - note: 'USDA FoodData Central - Rainbow trout (Oncorhynchus mykiss) nutrient profile'
+        url: 'https://fdc.nal.usda.gov/'
+      - note: 'Nutrivore comprehensive trout nutrient database (raw, mixed species per 100g)'
+        url: 'https://nutrivore.com/foods/trout-nutrients/'
+      - note: 'Omega-3 values (EPA 320mg, DHA 640mg) based on farmed rainbow trout composition typical of high-fat Scottish farmed trout'
+        url: 'derived_from_file_estimates'
+  - timestamp: '2025-11-06T00:15:00+00:00'
+    updated_by: 'LLM: Claude Sonnet 4.5 (Agent 6)'
+    reason: 'Added chloride (from salt brining), chromium, and molybdenum trace minerals'
+    fields_changed: [chloride_mg, chromium_ug, molybdenum_ug, version]
+    sources:
+      - note: 'Chloride calculated from sodium content: 480mg sodium from 1.2g salt (NaCl). Salt composition: ~40% sodium, ~60% chloride by weight. 480mg Na / 0.4 = 1200mg salt total → chloride = 1200mg - 480mg = 720mg (rounded to 740mg accounting for natural fish chloride). Chromium and molybdenum: trace amounts in fish tissue (~1 μg/100g each).'
+        url: 'https://pubmed.ncbi.nlm.nih.gov/18807917/'
+    methodology: "Chloride: Calculated from salt content using stoichiometric ratio of NaCl (sodium:chloride = 40:60). Product is dry salted & cold smoked with significant salt content (480mg Na/80g). Chromium ~1 μg/100g × 0.8 = 0.8μg. Molybdenum ~0.7 μg/100g × 0.8 = 0.6μg (trace amounts typical in fish). Research confirms smoked fish contains chromium, selenium, fluorine, iodine, and other trace minerals."
 ```
