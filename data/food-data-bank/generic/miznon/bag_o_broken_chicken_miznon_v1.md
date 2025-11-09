@@ -43,8 +43,8 @@ per_portion:  # Schema v2: 52 nutrient fields - FOR 1/2 BAG (USER PORTION)
   carbs_available_g: 23.4
   sugar_g: 1.0
   fiber_total_g: 1.3
-  fiber_soluble_g: 0.0
-  fiber_insoluble_g: 0.0
+  fiber_soluble_g: 0.4
+  fiber_insoluble_g: 0.9
   polyols_g: 0.0
   # Minerals
   sodium_mg: 788
@@ -92,7 +92,7 @@ derived:
 quality:
   confidence: medium
   gaps:
-    - "Fiber soluble/insoluble breakdown not available in USDA data for all components"
+    - "Fiber soluble/insoluble split estimated at 30%/70% ratio (typical for mixed grain/vegetable sources)"
     - "Iodine estimated conservatively (chicken 3μg, pita 2μg per half portion)"
     - "Vitamin D estimated from chicken only (0.3μg per half portion)"
     - "Chromium and molybdenum estimated from grain and protein content"

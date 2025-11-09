@@ -23,10 +23,13 @@ except Exception as e:
 #   macronutrient values and natural variation in Atwater factors (4-4-9 rule)
 # - CARB_TOL_G: 0.2g tolerance for carbohydrate totals to allow for rounding errors
 #   when summing available carbs, fiber, and polyols
+# - FIBER_TOL_G: 0.1g tolerance for fiber split (soluble + insoluble = total)
+#   to account for rounding in measurements (fiber measured to 0.1g precision)
 # - FIBER_KCAL_PER_G: UK/EU convention for fiber energy content (2 kcal/g)
 # - POLYOL_KCAL_PER_G: Standard energy value for sugar alcohols/polyols (2.4 kcal/g)
 TOL_ENERGY_PCT = 0.08
 CARB_TOL_G = 0.2
+FIBER_TOL_G = 0.1
 FIBER_KCAL_PER_G = 2.0
 POLYOL_KCAL_PER_G = 2.4
 OMEGA_PUFA_TOL_G = 0.05  # 50mg tolerance for omega fatty acid vs PUFA coherence
@@ -272,6 +275,40 @@ def check_block(y, filepath):
         if fibre is None:
             missing_bits.append("fiber_total_g")
         warnings.append(f"carbs_total_g present but missing {', '.join(missing_bits)} to reconcile totals.")
+
+    # Fiber split validation: soluble + insoluble should equal total
+    fiber_soluble = pp.get("fiber_soluble_g")
+    fiber_insoluble = pp.get("fiber_insoluble_g")
+
+    if fibre is not None and isinstance(fibre, (int, float)):
+        if fiber_soluble is not None and isinstance(fiber_soluble, (int, float)) and \
+           fiber_insoluble is not None and isinstance(fiber_insoluble, (int, float)):
+            fiber_split_sum = fiber_soluble + fiber_insoluble
+            if not approx_equal(fiber_split_sum, fibre, FIBER_TOL_G):
+                warnings.append(
+                    f"Fiber split mismatch: soluble ({fiber_soluble:.1f}g) + insoluble ({fiber_insoluble:.1f}g) "
+                    f"= {fiber_split_sum:.1f}g, but fiber_total_g is {fibre:.1f}g. "
+                    f"Difference: {abs(fiber_split_sum - fibre):.2f}g."
+                )
+            else:
+                passes.append(f"Fiber split coherent: {fiber_soluble:.1f}g soluble + {fiber_insoluble:.1f}g insoluble = {fibre:.1f}g total.")
+        elif (fiber_soluble is not None and isinstance(fiber_soluble, (int, float))) or \
+             (fiber_insoluble is not None and isinstance(fiber_insoluble, (int, float))):
+            # One component is present but not the other
+            missing_fiber = []
+            if fiber_soluble is None or not isinstance(fiber_soluble, (int, float)):
+                missing_fiber.append("fiber_soluble_g")
+            if fiber_insoluble is None or not isinstance(fiber_insoluble, (int, float)):
+                missing_fiber.append("fiber_insoluble_g")
+            warnings.append(
+                f"Fiber total present ({fibre:.1f}g) but missing {', '.join(missing_fiber)} for complete split."
+            )
+        elif fibre > 0:
+            # Warn when fiber_total > 0 but both splits are completely missing
+            warnings.append(
+                f"Fiber total present ({fibre:.1f}g) but both fiber_soluble_g and "
+                f"fiber_insoluble_g are missing. Consider adding fiber split data."
+            )
 
     if carbs_avail is None:
         issues.append("Missing carbs_available_g; cannot compute available-carb energy.")
