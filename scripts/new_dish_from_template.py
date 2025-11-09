@@ -11,6 +11,13 @@ import sys, re
 from pathlib import Path
 from datetime import datetime, timezone
 
+try:
+    import yaml
+except ImportError:
+    yaml = None
+    print("Warning: PyYAML not installed. Config file loading disabled.")
+    print("  Install with: pip install pyyaml")
+
 
 SCHEMA_TEMPLATE = """id: {stable_id}
 version: 1
@@ -107,85 +114,109 @@ def slugify(text):
     return slug
 
 
-def categorize_venue(venue_display_name):
+def load_venue_mappings():
+    """Load venue categorization config from YAML file.
+
+    Returns:
+        dict: Venue mappings, or None if file not found or YAML not available
+    """
+    if yaml is None:
+        return None
+
+    config_path = Path(__file__).parent.parent / 'data' / 'venue-mappings.yaml'
+    if not config_path.exists():
+        return None
+
+    try:
+        with open(config_path) as f:
+            return yaml.safe_load(f)
+    except Exception as e:
+        print(f"Warning: Failed to load venue config: {e}")
+        return None
+
+
+def categorize_venue(venue_display_name, override_category_type=None, override_folder_name=None):
     """Determine the category and folder for a venue.
 
-    Returns: (category, folder_name) tuple
+    Uses 3-tier strategy:
+    1. Explicit overrides (if provided via CLI flags)
+    2. Config file lookup (primary mechanism for known venues)
+    3. Heuristic fallback (pattern matching for unknown venues)
+
+    Args:
+        venue_display_name: User-provided venue name
+        override_category_type: Optional explicit category (venues|packaged|generic)
+        override_folder_name: Optional explicit folder name
+
+    Returns:
+        (category_type, folder_name) tuple
     """
+
+    # Tier 1: Explicit overrides
+    if override_category_type:
+        folder_name = override_folder_name or slugify(venue_display_name)
+        return (override_category_type, folder_name)
+
+    # Tier 2: Config file lookup
+    mappings = load_venue_mappings()
+    if mappings:
+        venue_lower = venue_display_name.lower()
+
+        for category_type in ['venues', 'packaged', 'generic']:
+            for venue_key, venue_config in mappings.get(category_type, {}).items():
+                # Skip metadata entries
+                if venue_key.startswith('_'):
+                    continue
+
+                # Ensure venue_config is a dict
+                if not isinstance(venue_config, dict):
+                    continue
+
+                patterns = venue_config.get('patterns', [])
+                for pattern in patterns:
+                    if pattern.lower() in venue_lower:
+                        return (category_type, venue_config['folder'])
+
+    # Tier 3: Heuristic fallback
     venue_lower = venue_display_name.lower()
 
-    # Restaurant venues
-    if 'simple health kitchen' in venue_lower:
-        return ('venues', 'simple-health-kitchen')
-    elif 'connaught' in venue_lower or 'jean-georges' in venue_lower:
-        return ('venues', 'jean-georges-connaught')
-    elif 'leto' in venue_lower or "l'eto" in venue_lower:
-        return ('venues', 'leto-caffe-soho')
-    elif 'zima' in venue_lower:
-        return ('venues', 'zima-soho')
-    elif 'eagle' in venue_lower and 'farringdon' in venue_lower:
-        return ('venues', 'the-eagle-farringdon')
-    elif 'imperial treasure' in venue_lower:
-        return ('venues', 'imperial-treasure-st-james')
-    elif 'joe' in venue_lower and 'juice' in venue_lower:
-        return ('venues', 'joe-and-the-juice')
-    elif 'third space' in venue_lower or 'natural fitness food' in venue_lower or 'nff' in venue_lower:
-        return ('venues', 'third-space-nff')
-    elif 'decimo' in venue_lower:
-        return ('venues', 'decimo-london')
-    elif 'miznon' in venue_lower:
-        return ('venues', 'miznon')
-    elif 'maset' in venue_lower:
-        return ('venues', 'maset')
+    # Packaged product indicators
+    if '(packaged product)' in venue_lower or '(pack/ingredient)' in venue_lower:
+        return ('packaged', slugify(venue_display_name))
 
-    # Packaged products
-    elif 'grenade' in venue_lower:
-        return ('packaged', 'grenade')
-    elif 'amisa' in venue_lower:
-        return ('packaged', 'amisa')
-    elif 'yarden' in venue_lower:
-        return ('packaged', 'yarden')
-    elif 'optimum nutrition' in venue_lower:
-        return ('packaged', 'optimum-nutrition')
-    elif "pack'd" in venue_lower or 'packd' in venue_lower:
-        return ('packaged', 'packd')
-    elif 'rot front' in venue_lower or 'rotfront' in venue_lower:
-        return ('packaged', 'rot-front')
-    elif 'daylesford' in venue_lower:
-        return ('packaged', 'daylesford-organic')
-    elif 'lucozade' in venue_lower:
-        return ('packaged', 'lucozade')
-    elif 'lindt' in venue_lower:
-        return ('packaged', 'lindt')
-    elif 'chavroux' in venue_lower:
-        return ('packaged', 'chavroux')
-    elif 'st helens farm' in venue_lower or 'st-helens-farm' in venue_lower:
-        return ('packaged', 'st-helens-farm')
-    elif 'londons chocolate' in venue_lower or 'london\'s chocolate' in venue_lower:
-        return ('packaged', 'londons-chocolate-company')
-    elif 'germes' in venue_lower:
-        return ('packaged', 'germes')
-    elif 'zuppe' in venue_lower:
-        return ('packaged', 'zuppe')
+    # Generic category keywords
+    if any(kw in venue_lower for kw in ['ingredient', 'generic', 'homemade', 'bakery', 'grocery', 'supplement']):
+        # Try to map to specific generic folder
+        if 'bakery' in venue_lower:
+            return ('generic', 'bakery')
+        elif 'ingredient' in venue_lower or venue_lower == 'generic':
+            return ('generic', 'ingredients')
+        elif 'homemade' in venue_lower or 'home' in venue_lower:
+            return ('generic', 'home-cooked')
+        elif 'grocery' in venue_lower:
+            return ('generic', 'grocery')
+        elif 'supplement' in venue_lower:
+            return ('generic', 'supplements')
+        elif 'pub' in venue_lower:
+            return ('generic', 'pub-bar')
+        elif 'fresh' in venue_lower or 'fruit' in venue_lower or 'produce' in venue_lower:
+            return ('generic', 'fresh-produce')
+        else:
+            return ('generic', 'ingredients')
 
-    # Generic categories
-    elif 'ingredient' in venue_lower or venue_lower == 'generic':
-        return ('generic', 'ingredients')
-    elif 'bakery' in venue_lower:
-        return ('generic', 'bakery')
-    elif 'bar' in venue_lower or 'restaurant' in venue_lower:
-        return ('generic', 'bar-restaurant')
-    elif 'grocery' in venue_lower or 'supermarket' in venue_lower:
-        return ('generic', 'grocery')
-    elif 'supplement' in venue_lower:
-        return ('generic', 'supplements')
-    elif 'pub' in venue_lower:
-        return ('generic', 'pub-bar')
-    elif 'fresh' in venue_lower or 'fruit' in venue_lower or 'produce' in venue_lower:
-        return ('generic', 'fresh-produce')
+    # UK location indicators → probably a venue
+    uk_locations = ['london', 'manchester', 'birmingham', 'soho', 'mayfair', 'shoreditch',
+                    'farringdon', 'marylebone', 'kings cross', 'covent garden']
+    if any(loc in venue_lower for loc in uk_locations):
+        print(f"Info: '{venue_display_name}' contains location indicator, classifying as venue")
+        return ('venues', slugify(venue_display_name))
 
-    # Default: create a new folder based on slugified venue name
-    print(f"Warning: Unknown venue category for '{venue_display_name}', using generic categorization")
+    # Tier 4: Generic fallback with helpful message
+    print(f"\n⚠️  Warning: Unknown venue '{venue_display_name}', using generic categorization")
+    print(f"    To fix this for future use:")
+    print(f"    1. Add to data/venue-mappings.yaml, OR")
+    print(f"    2. Use --category-type flag to override")
+    print()
     return ('generic', slugify(venue_display_name))
 
 
@@ -250,7 +281,22 @@ def regenerate_index():
 def main():
     import argparse
     ap = argparse.ArgumentParser(
-        description="Create a new dish file in the appropriate venue/category folder"
+        description="Create a new dish file in the appropriate venue/category folder",
+        epilog="""
+Examples:
+  # Known venue (automatic categorization)
+  %(prog)s --dish_slug grilled_salmon --venue_slug shk \\
+    --venue_name "Simple Health Kitchen" --display_name "Grilled Salmon (SHK)" --category main
+
+  # New venue (with explicit category)
+  %(prog)s --dish_slug tuna_poke --venue_slug poke_house --venue_name "Poke House, Soho" \\
+    --display_name "Tuna Poke (Poke House)" --category main --category-type venues
+
+  # Packaged product
+  %(prog)s --dish_slug chocolate_bar --venue_slug lindt --venue_name "Lindt" \\
+    --display_name "Lindt Dark Chocolate 85%%" --category ingredient --category-type packaged
+        """,
+        formatter_class=argparse.RawDescriptionHelpFormatter
     )
     ap.add_argument("--dish_slug", required=True, help="Dish slug (e.g., 'grilled_salmon_fillet')")
     ap.add_argument("--venue_slug", required=True, help="Venue slug (e.g., 'shk')")
@@ -258,6 +304,14 @@ def main():
     ap.add_argument("--display_name", required=True, help="Display name for header (e.g., 'Grilled Salmon Fillet (SHK)')")
     ap.add_argument("--category", required=True, choices=["main","side","ingredient","drink","dessert"])
     ap.add_argument("--portion_desc", default="restaurant portion", help="Portion description")
+
+    # NEW: Optional override flags
+    ap.add_argument("--category-type",
+                    choices=["venues", "packaged", "generic"],
+                    help="Override automatic categorization (for new/ambiguous venues)")
+    ap.add_argument("--folder-name",
+                    help="Override automatic folder name (use with --category-type)")
+
     args = ap.parse_args()
 
     # Determine output directory
@@ -265,8 +319,12 @@ def main():
     project_root = script_dir.parent
     data_bank_base = project_root / 'data' / 'food-data-bank'
 
-    # Categorize venue and get folder
-    category_type, folder_name = categorize_venue(args.venue_name)
+    # Categorize venue and get folder (with optional overrides)
+    category_type, folder_name = categorize_venue(
+        args.venue_name,
+        override_category_type=args.category_type,
+        override_folder_name=args.folder_name
+    )
     output_dir = data_bank_base / category_type / folder_name
 
     # Create directory if it doesn't exist
