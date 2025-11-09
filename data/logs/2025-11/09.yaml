@@ -1,5 +1,5 @@
 date: 2025-11-09
-day_type: rest
+day_type: training
 entries:
 - timestamp: '2025-11-09T09:00:00+00:00'
   items:
@@ -118,3 +118,120 @@ entries:
       vanadium_ug: 0
       nickel_ug: 0
   notes: "Breakfast smoothie (raspberries + whey protein)"
+- timestamp: '2025-11-09T11:00:00+00:00'
+  items:
+  - name: Black Rice with Coconut Milk & Honey
+    food_bank_id: black_rice_coconut_milk_honey_350g_home-cooked_v1
+    quantity: 350
+    unit: g
+    nutrition:
+      energy_kcal: 828
+      protein_g: 13.5
+      fat_g: 39.5
+      sat_fat_g: 32.6
+      mufa_g: 3.3
+      pufa_g: 1.8
+      trans_fat_g: 0.0
+      cholesterol_mg: 0
+      carbs_total_g: 109.0
+      polyols_g: 0.0
+      carbs_available_g: 100.4
+      sugar_g: 14.8
+      fiber_total_g: 8.6
+      fiber_soluble_g: 3.0
+      fiber_insoluble_g: 5.6
+      sodium_mg: 29
+      potassium_mg: 715
+      calcium_mg: 52
+      magnesium_mg: 223
+      phosphorus_mg: 541
+      chloride_mg: 45
+      sulfur_g: 0.054
+      iron_mg: 7.9
+      zinc_mg: 3.3
+      copper_mg: 0.74
+      manganese_mg: 5.7
+      selenium_ug: 36
+      iodine_ug: 2
+      chromium_ug: 2
+      molybdenum_ug: 15
+      vitamin_a_ug: 0.0
+      vitamin_d_ug: 0.0
+      vitamin_e_mg: 1.6
+      vitamin_k_ug: 2.3
+      vitamin_b1_mg: 0.51
+      vitamin_b2_mg: 0.12
+      vitamin_b3_mg: 7.2
+      vitamin_b5_mg: 2.0
+      vitamin_b6_mg: 0.65
+      vitamin_b7_ug: 5
+      vitamin_b9_ug: 44
+      vitamin_b12_ug: 0.0
+      choline_mg: 47.8
+      vitamin_c_mg: 4.3
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0.02
+      omega6_la_g: 1.55
+      boron_mg: 0.0
+      silicon_mg: 0.0
+      vanadium_ug: 0
+      nickel_ug: 0
+  - name: Mango, fresh
+    food_bank_id: mango_fresh_100g_fresh-produce_v1
+    quantity: 100
+    unit: g
+    nutrition:
+      energy_kcal: 60
+      protein_g: 0.82
+      fat_g: 0.38
+      sat_fat_g: 0.09
+      mufa_g: 0.14
+      pufa_g: 0.07
+      trans_fat_g: 0.0
+      cholesterol_mg: 0
+      carbs_total_g: 15.0
+      polyols_g: 0.0
+      carbs_available_g: 13.4
+      sugar_g: 13.7
+      fiber_total_g: 1.6
+      fiber_soluble_g: 0.5
+      fiber_insoluble_g: 1.1
+      sodium_mg: 2
+      potassium_mg: 168
+      calcium_mg: 11
+      magnesium_mg: 10
+      phosphorus_mg: 14
+      chloride_mg: 3.1
+      sulfur_g: 0.003
+      iron_mg: 0.16
+      zinc_mg: 0.08
+      copper_mg: 0.12
+      manganese_mg: 0.06
+      selenium_ug: 0.1
+      iodine_ug: 0.0
+      chromium_ug: 0
+      molybdenum_ug: 0
+      vitamin_a_ug: 54
+      vitamin_d_ug: 0.0
+      vitamin_e_mg: 0.92
+      vitamin_k_ug: 4.4
+      vitamin_b1_mg: 0.03
+      vitamin_b2_mg: 0.04
+      vitamin_b3_mg: 0.67
+      vitamin_b5_mg: 0.16
+      vitamin_b6_mg: 0.12
+      vitamin_b7_ug: 1.5
+      vitamin_b9_ug: 43
+      vitamin_b12_ug: 0.0
+      choline_mg: 7.0
+      vitamin_c_mg: 36.4
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0.006
+      omega6_la_g: 0.06
+      boron_mg: 0.0
+      silicon_mg: 0.0
+      vanadium_ug: 0
+      nickel_ug: 0
+  notes: "Black rice bowl cooked with coconut milk and honey + fresh mango"
