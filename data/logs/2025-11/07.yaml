@@ -412,285 +412,285 @@ entries:
   items:
   - name: British Artisan Cheese Plate
     food_bank_id: british_artisan_cheese_plate_295g_v1
-    quantity: 1
+    quantity: 0.39
     unit: portion
     nutrition:
-      energy_kcal: 975
-      protein_g: 48.0
-      fat_g: 66.6
-      sat_fat_g: 43.7
-      mufa_g: 15.0
-      pufa_g: 5.0
-      trans_fat_g: 0.5
-      cholesterol_mg: 180
-      sugar_g: 9.3
-      fiber_total_g: 3.5
-      fiber_soluble_g: 0.8
-      fiber_insoluble_g: 2.7
-      sodium_mg: 3270
-      potassium_mg: 350
-      iodine_ug: 35
-      magnesium_mg: 60
-      calcium_mg: 850
-      iron_mg: 2.5
-      zinc_mg: 5.5
-      vitamin_c_mg: 2
-      manganese_mg: 0.8
+      energy_kcal: 380
+      protein_g: 18.72
+      fat_g: 25.97
+      sat_fat_g: 17.04
+      mufa_g: 5.85
+      pufa_g: 1.95
+      trans_fat_g: 0.2
+      cholesterol_mg: 70
+      sugar_g: 3.63
+      fiber_total_g: 1.37
+      fiber_soluble_g: 0.31
+      fiber_insoluble_g: 1.05
+      sodium_mg: 1275
+      potassium_mg: 137
+      iodine_ug: 14
+      magnesium_mg: 23
+      calcium_mg: 332
+      iron_mg: 0.98
+      zinc_mg: 2.15
+      vitamin_c_mg: 0.78
+      manganese_mg: 0.31
       polyols_g: 0
-      carbs_available_g: 36.7
-      carbs_total_g: 40.2
-      copper_mg: 0.25
-      selenium_ug: 25
-      chromium_ug: 8
-      molybdenum_ug: 35
-      phosphorus_mg: 650
-      chloride_mg: 5036
-      sulfur_g: 0.38
-      vitamin_a_ug: 420
-      vitamin_d_ug: 1.2
-      vitamin_e_mg: 1.5
-      vitamin_k_ug: 2.5
-      vitamin_b1_mg: 0.25
-      vitamin_b2_mg: 0.85
-      vitamin_b3_mg: 1.8
-      vitamin_b5_mg: 1.4
-      vitamin_b6_mg: 0.35
-      vitamin_b7_ug: 8
-      vitamin_b9_ug: 65
-      vitamin_b12_ug: 2.2
-      choline_mg: 45
+      carbs_available_g: 14.31
+      carbs_total_g: 15.68
+      copper_mg: 0.1
+      selenium_ug: 9.75
+      chromium_ug: 3.12
+      molybdenum_ug: 13.65
+      phosphorus_mg: 254
+      chloride_mg: 1964
+      sulfur_g: 0.15
+      vitamin_a_ug: 164
+      vitamin_d_ug: 0.47
+      vitamin_e_mg: 0.59
+      vitamin_k_ug: 0.98
+      vitamin_b1_mg: 0.1
+      vitamin_b2_mg: 0.33
+      vitamin_b3_mg: 0.7
+      vitamin_b5_mg: 0.55
+      vitamin_b6_mg: 0.14
+      vitamin_b7_ug: 3.12
+      vitamin_b9_ug: 25.35
+      vitamin_b12_ug: 0.86
+      choline_mg: 17.55
       omega3_epa_mg: 0
       omega3_dha_mg: 0
-      omega3_ala_g: 0.3
-      omega6_la_g: 3.5
+      omega3_ala_g: 0.12
+      omega6_la_g: 1.37
       boron_mg: 0
       silicon_mg: 0
       vanadium_ug: 0
       nickel_ug: 0
   - name: Fried Rice (Bowl)
     food_bank_id: fried_rice_bowl_300g_v1
-    quantity: 1
+    quantity: 0.53
     unit: portion
     nutrition:
-      energy_kcal: 507
-      protein_g: 10.8
-      fat_g: 23.1
-      sat_fat_g: 3.5
-      mufa_g: 9.5
-      pufa_g: 8.8
-      trans_fat_g: 0.1
-      cholesterol_mg: 124
-      sugar_g: 2.1
-      fiber_total_g: 1.8
-      fiber_soluble_g: 0.3
-      fiber_insoluble_g: 1.5
-      sodium_mg: 1170
-      potassium_mg: 165
-      iodine_ug: 12
-      magnesium_mg: 30
-      calcium_mg: 36
-      iron_mg: 1.8
-      zinc_mg: 1.2
-      vitamin_c_mg: 3
-      manganese_mg: 0.72
+      energy_kcal: 269
+      protein_g: 5.72
+      fat_g: 12.24
+      sat_fat_g: 1.86
+      mufa_g: 5.04
+      pufa_g: 4.66
+      trans_fat_g: 0.05
+      cholesterol_mg: 66
+      sugar_g: 1.11
+      fiber_total_g: 0.95
+      fiber_soluble_g: 0.16
+      fiber_insoluble_g: 0.8
+      sodium_mg: 620
+      potassium_mg: 87
+      iodine_ug: 6.36
+      magnesium_mg: 15.9
+      calcium_mg: 19.08
+      iron_mg: 0.95
+      zinc_mg: 0.64
+      vitamin_c_mg: 1.59
+      manganese_mg: 0.38
       polyols_g: 0
-      carbs_available_g: 60.9
-      carbs_total_g: 62.7
-      copper_mg: 0.18
-      selenium_ug: 19.5
-      chromium_ug: 2
-      molybdenum_ug: 15
-      phosphorus_mg: 147
-      chloride_mg: 1802
-      sulfur_g: 0.043
-      vitamin_a_ug: 62
-      vitamin_d_ug: 0.9
-      vitamin_e_mg: 3.3
-      vitamin_k_ug: 12
-      vitamin_b1_mg: 0.21
-      vitamin_b2_mg: 0.24
-      vitamin_b3_mg: 2.4
-      vitamin_b5_mg: 0.84
-      vitamin_b6_mg: 0.21
-      vitamin_b7_ug: 12
-      vitamin_b9_ug: 54
-      vitamin_b12_ug: 0.48
-      choline_mg: 102
+      carbs_available_g: 32.28
+      carbs_total_g: 33.23
+      copper_mg: 0.1
+      selenium_ug: 10.34
+      chromium_ug: 1.06
+      molybdenum_ug: 7.95
+      phosphorus_mg: 77.91
+      chloride_mg: 955
+      sulfur_g: 0.02
+      vitamin_a_ug: 32.86
+      vitamin_d_ug: 0.48
+      vitamin_e_mg: 1.75
+      vitamin_k_ug: 6.36
+      vitamin_b1_mg: 0.11
+      vitamin_b2_mg: 0.13
+      vitamin_b3_mg: 1.27
+      vitamin_b5_mg: 0.45
+      vitamin_b6_mg: 0.11
+      vitamin_b7_ug: 6.36
+      vitamin_b9_ug: 28.62
+      vitamin_b12_ug: 0.25
+      choline_mg: 54.06
       omega3_epa_mg: 0
       omega3_dha_mg: 0
-      omega3_ala_g: 0.9
-      omega6_la_g: 7.8
+      omega3_ala_g: 0.48
+      omega6_la_g: 4.13
       boron_mg: 0
       silicon_mg: 0
       vanadium_ug: 0
       nickel_ug: 0
   - name: Mapo Tofu with Ground Meat
     food_bank_id: mapo_tofu_ground_meat_300g_v1
-    quantity: 1
+    quantity: 0.45
     unit: portion
     nutrition:
-      energy_kcal: 543
-      protein_g: 28.8
-      fat_g: 44.1
-      sat_fat_g: 11.5
-      mufa_g: 19.8
-      pufa_g: 10.8
-      trans_fat_g: 0.3
-      cholesterol_mg: 72
-      sugar_g: 1.2
-      fiber_total_g: 3.0
-      fiber_soluble_g: 0.6
-      fiber_insoluble_g: 2.4
-      sodium_mg: 2356
-      potassium_mg: 465
-      iodine_ug: 8
-      magnesium_mg: 123
-      calcium_mg: 423
-      iron_mg: 5.1
-      zinc_mg: 3.9
-      vitamin_c_mg: 2
-      manganese_mg: 1.23
+      energy_kcal: 244
+      protein_g: 12.96
+      fat_g: 19.85
+      sat_fat_g: 5.18
+      mufa_g: 8.91
+      pufa_g: 4.86
+      trans_fat_g: 0.14
+      cholesterol_mg: 32
+      sugar_g: 0.54
+      fiber_total_g: 1.35
+      fiber_soluble_g: 0.27
+      fiber_insoluble_g: 1.08
+      sodium_mg: 1060
+      potassium_mg: 209
+      iodine_ug: 3.6
+      magnesium_mg: 55.35
+      calcium_mg: 190.35
+      iron_mg: 2.3
+      zinc_mg: 1.76
+      vitamin_c_mg: 0.9
+      manganese_mg: 0.55
       polyols_g: 0
-      carbs_available_g: 5.0
-      carbs_total_g: 8.0
-      copper_mg: 0.54
-      selenium_ug: 27
-      chromium_ug: 3
-      molybdenum_ug: 45
-      phosphorus_mg: 345
-      chloride_mg: 3628
-      sulfur_g: 0.115
-      vitamin_a_ug: 12
-      vitamin_d_ug: 0.3
-      vitamin_e_mg: 4.2
-      vitamin_k_ug: 15
-      vitamin_b1_mg: 0.45
-      vitamin_b2_mg: 0.21
-      vitamin_b3_mg: 6.6
-      vitamin_b5_mg: 0.81
-      vitamin_b6_mg: 0.48
-      vitamin_b7_ug: 9
-      vitamin_b9_ug: 45
-      vitamin_b12_ug: 1.8
-      choline_mg: 135
+      carbs_available_g: 2.25
+      carbs_total_g: 3.6
+      copper_mg: 0.24
+      selenium_ug: 12.15
+      chromium_ug: 1.35
+      molybdenum_ug: 20.25
+      phosphorus_mg: 155.25
+      chloride_mg: 1633
+      sulfur_g: 0.05
+      vitamin_a_ug: 5.4
+      vitamin_d_ug: 0.14
+      vitamin_e_mg: 1.89
+      vitamin_k_ug: 6.75
+      vitamin_b1_mg: 0.2
+      vitamin_b2_mg: 0.09
+      vitamin_b3_mg: 2.97
+      vitamin_b5_mg: 0.36
+      vitamin_b6_mg: 0.22
+      vitamin_b7_ug: 4.05
+      vitamin_b9_ug: 20.25
+      vitamin_b12_ug: 0.81
+      choline_mg: 60.75
       omega3_epa_mg: 0
       omega3_dha_mg: 0
-      omega3_ala_g: 1.2
-      omega6_la_g: 9.3
+      omega3_ala_g: 0.54
+      omega6_la_g: 4.19
       boron_mg: 0
       silicon_mg: 0
       vanadium_ug: 0
       nickel_ug: 0
   - name: Pork Belly Stir-Fried with Onions
     food_bank_id: pork_belly_stir_fry_onions_270g_v1
-    quantity: 1
+    quantity: 0.5
     unit: portion
     nutrition:
-      energy_kcal: 725
-      protein_g: 22.6
-      fat_g: 66.9
-      sat_fat_g: 23.2
-      mufa_g: 30.6
-      pufa_g: 10.8
-      trans_fat_g: 0.2
-      cholesterol_mg: 135
-      sugar_g: 3.6
-      fiber_total_g: 1.8
-      fiber_soluble_g: 0.4
-      fiber_insoluble_g: 1.4
-      sodium_mg: 810
-      potassium_mg: 540
-      iodine_ug: 6
-      magnesium_mg: 36
-      calcium_mg: 45
-      iron_mg: 1.8
-      zinc_mg: 3.5
-      vitamin_c_mg: 12
-      manganese_mg: 0.27
+      energy_kcal: 363
+      protein_g: 11.3
+      fat_g: 33.45
+      sat_fat_g: 11.6
+      mufa_g: 15.3
+      pufa_g: 5.4
+      trans_fat_g: 0.1
+      cholesterol_mg: 68
+      sugar_g: 1.8
+      fiber_total_g: 0.9
+      fiber_soluble_g: 0.2
+      fiber_insoluble_g: 0.7
+      sodium_mg: 405
+      potassium_mg: 270
+      iodine_ug: 3
+      magnesium_mg: 18
+      calcium_mg: 22.5
+      iron_mg: 0.9
+      zinc_mg: 1.75
+      vitamin_c_mg: 6
+      manganese_mg: 0.14
       polyols_g: 0
-      carbs_available_g: 5.5
-      carbs_total_g: 7.3
-      copper_mg: 0.18
-      selenium_ug: 45
-      chromium_ug: 4
-      molybdenum_ug: 12
-      phosphorus_mg: 270
-      chloride_mg: 1247
-      sulfur_g: 0.090
-      vitamin_a_ug: 6
-      vitamin_d_ug: 0.8
-      vitamin_e_mg: 2.7
-      vitamin_k_ug: 9
-      vitamin_b1_mg: 0.72
-      vitamin_b2_mg: 0.27
-      vitamin_b3_mg: 6.5
-      vitamin_b5_mg: 1.08
-      vitamin_b6_mg: 0.54
-      vitamin_b7_ug: 8
-      vitamin_b9_ug: 27
-      vitamin_b12_ug: 0.9
-      choline_mg: 108
+      carbs_available_g: 2.75
+      carbs_total_g: 3.65
+      copper_mg: 0.09
+      selenium_ug: 22.5
+      chromium_ug: 2
+      molybdenum_ug: 6
+      phosphorus_mg: 135
+      chloride_mg: 624
+      sulfur_g: 0.05
+      vitamin_a_ug: 3
+      vitamin_d_ug: 0.4
+      vitamin_e_mg: 1.35
+      vitamin_k_ug: 4.5
+      vitamin_b1_mg: 0.36
+      vitamin_b2_mg: 0.14
+      vitamin_b3_mg: 3.25
+      vitamin_b5_mg: 0.54
+      vitamin_b6_mg: 0.27
+      vitamin_b7_ug: 4
+      vitamin_b9_ug: 13.5
+      vitamin_b12_ug: 0.45
+      choline_mg: 54
       omega3_epa_mg: 0
       omega3_dha_mg: 0
-      omega3_ala_g: 1.05
-      omega6_la_g: 9.45
+      omega3_ala_g: 0.53
+      omega6_la_g: 4.73
       boron_mg: 0
       silicon_mg: 0
       vanadium_ug: 0
       nickel_ug: 0
   - name: Banana Cake
     food_bank_id: banana_cake_slice_95g_v1
-    quantity: 3
+    quantity: 1.42
     unit: slice
     nutrition:
-      energy_kcal: 999
-      protein_g: 13.2
-      fat_g: 35.4
-      sat_fat_g: 7.8
-      mufa_g: 15.9
-      pufa_g: 10.2
-      trans_fat_g: 0.3
-      cholesterol_mg: 132
-      sugar_g: 108.0
-      fiber_total_g: 3.45
-      fiber_soluble_g: 0.51
-      fiber_insoluble_g: 2.94
-      sodium_mg: 927
-      potassium_mg: 432
-      iodine_ug: 33
-      magnesium_mg: 45
-      calcium_mg: 87
-      iron_mg: 4.5
-      zinc_mg: 1.2
-      vitamin_c_mg: 5.25
-      manganese_mg: 0.66
+      energy_kcal: 473
+      protein_g: 6.25
+      fat_g: 16.78
+      sat_fat_g: 3.7
+      mufa_g: 7.54
+      pufa_g: 4.83
+      trans_fat_g: 0.14
+      cholesterol_mg: 63
+      sugar_g: 51.19
+      fiber_total_g: 1.64
+      fiber_soluble_g: 0.24
+      fiber_insoluble_g: 1.39
+      sodium_mg: 440
+      potassium_mg: 205
+      iodine_ug: 15.65
+      magnesium_mg: 21.34
+      calcium_mg: 41.25
+      iron_mg: 2.13
+      zinc_mg: 0.57
+      vitamin_c_mg: 2.49
+      manganese_mg: 0.31
       polyols_g: 0
-      carbs_available_g: 160.5
-      carbs_total_g: 164.1
-      copper_mg: 0.24
-      selenium_ug: 38.4
-      chromium_ug: 5.76
-      molybdenum_ug: 30
-      phosphorus_mg: 210
-      chloride_mg: 1428
-      sulfur_g: 0.132
-      vitamin_a_ug: 321
-      vitamin_d_ug: 2.4
-      vitamin_e_mg: 2.64
-      vitamin_k_ug: 3.9
-      vitamin_b1_mg: 0.54
-      vitamin_b2_mg: 0.63
-      vitamin_b3_mg: 4.41
-      vitamin_b5_mg: 0.90
-      vitamin_b6_mg: 0.48
-      vitamin_b7_ug: 18
-      vitamin_b9_ug: 102
-      vitamin_b12_ug: 0.33
-      choline_mg: 51
+      carbs_available_g: 76.12
+      carbs_total_g: 77.76
+      copper_mg: 0.11
+      selenium_ug: 18.21
+      chromium_ug: 2.73
+      molybdenum_ug: 14.23
+      phosphorus_mg: 99.58
+      chloride_mg: 677
+      sulfur_g: 0.06
+      vitamin_a_ug: 152.21
+      vitamin_d_ug: 1.14
+      vitamin_e_mg: 1.25
+      vitamin_k_ug: 1.85
+      vitamin_b1_mg: 0.26
+      vitamin_b2_mg: 0.3
+      vitamin_b3_mg: 2.09
+      vitamin_b5_mg: 0.43
+      vitamin_b6_mg: 0.23
+      vitamin_b7_ug: 8.53
+      vitamin_b9_ug: 48.35
+      vitamin_b12_ug: 0.16
+      choline_mg: 24.18
       omega3_epa_mg: 0
       omega3_dha_mg: 0
-      omega3_ala_g: 0.36
-      omega6_la_g: 9.3
+      omega3_ala_g: 0.17
+      omega6_la_g: 4.41
       boron_mg: 0
       silicon_mg: 0
       vanadium_ug: 0
@@ -923,4 +923,4 @@ entries:
       silicon_mg: 0
       vanadium_ug: 0
       nickel_ug: 0
-  notes: 'Dinner - Cheese plate (Neal''s Yard Dairy: Harbourne Blue, Baron Bigod, Durrus, Yr Afr, Tinto, Riseley with Sheridan''s crackers and red onion marmalade), fried rice, mapo tofu, pork belly stir-fry, 3 slices banana cake. Drinks: 2 champagne, 3 white wine, 1 sweet muscat, 1 negroni'
+  notes: 'Dinner - Cheese plate (Neal''s Yard Dairy: Harbourne Blue, Baron Bigod, Durrus, Yr Afr, Tinto, Riseley with Sheridan''s crackers and red onion marmalade), fried rice, mapo tofu, pork belly stir-fry, banana cake. Drinks: 2 champagne, 3 white wine, 1 sweet muscat, 1 negroni. Portions adjusted to realistic amounts based on fullness calibration (~2,600 kcal total).'
