@@ -885,8 +885,7 @@ bot.on('photo', async (ctx) => {
         `❌ Image too large (${Math.round(fileInfo.file_size / 1024 / 1024)}MB). Please send images under 10MB.`,
         TELEGRAM_PARSE_OPTIONS
       );
-      conversationManager.releaseLock(userId); // CRITICAL: Release lock before return
-      return;
+      return; // Lock released by finally block
     }
 
     // Detect MIME type from file extension
@@ -969,8 +968,7 @@ bot.on('photo', async (ctx) => {
             // If this is a BLOCKING easter egg (not companion), don't log nutrition
             if (easterEggResult.blocksNutritionExtraction) {
               console.log(`Easter egg blocks extraction, returning early`);
-              conversationManager.releaseLock(userId); // CRITICAL: Release lock before return
-              return;
+              return; // Lock released by finally block
             }
             // Companion easter eggs (celebration, midnight_munchies) continue to nutrition logging
             console.log(`Companion easter egg - continuing to nutrition extraction`);

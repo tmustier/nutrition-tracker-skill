@@ -351,16 +351,16 @@ let enabledEasterEggsCache = null;
 /**
  * Get all enabled easter egg types sorted by priority
  * Cached after first call since configuration is static at runtime
- * @returns {Array} Sorted array of easter egg configurations
+ * @returns {Array} Sorted array of easter egg configurations (defensive copy)
  */
 function getEnabledEasterEggs() {
   if (!GLOBAL_CONFIG.enabled) {
     return [];
   }
 
-  // Return cached result if available
+  // Return cached result if available (defensive copy to prevent mutation)
   if (enabledEasterEggsCache !== null) {
-    return enabledEasterEggsCache;
+    return [...enabledEasterEggsCache];
   }
 
   // Compute and cache
@@ -368,7 +368,7 @@ function getEnabledEasterEggs() {
     .filter(egg => egg.enabled)
     .sort((a, b) => b.priority - a.priority); // Higher priority first
 
-  return enabledEasterEggsCache;
+  return [...enabledEasterEggsCache];
 }
 
 /**
