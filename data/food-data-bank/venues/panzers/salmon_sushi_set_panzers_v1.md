@@ -41,8 +41,8 @@ per_portion:
   carbs_available_g: 58.0
   sugar_g: 3.0
   fiber_total_g: 2.8
-  fiber_soluble_g: 0
-  fiber_insoluble_g: 0
+  fiber_soluble_g: 0.9
+  fiber_insoluble_g: 1.9
   polyols_g: 0.0
   sodium_mg: 870
   potassium_mg: 250
