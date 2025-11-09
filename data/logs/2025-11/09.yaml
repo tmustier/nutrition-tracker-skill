@@ -125,54 +125,54 @@ entries:
     quantity: 350
     unit: g
     nutrition:
-      energy_kcal: 764
-      protein_g: 13.6
-      fat_g: 36.5
+      energy_kcal: 571
+      protein_g: 8.6
+      fat_g: 35.2
       sat_fat_g: 30.0
-      mufa_g: 3.0
-      pufa_g: 1.7
+      mufa_g: 2.7
+      pufa_g: 1.3
       trans_fat_g: 0.0
       cholesterol_mg: 0
-      carbs_total_g: 99.5
+      carbs_total_g: 56.6
       polyols_g: 0.0
-      carbs_available_g: 90.8
-      sugar_g: 15.0
-      fiber_total_g: 8.7
-      fiber_soluble_g: 3.0
-      fiber_insoluble_g: 5.7
-      sodium_mg: 189
-      potassium_mg: 621
-      calcium_mg: 48
-      magnesium_mg: 215
-      phosphorus_mg: 521
-      chloride_mg: 291
-      sulfur_g: 0.054
-      iron_mg: 6.5
-      zinc_mg: 3.3
-      copper_mg: 0.69
-      manganese_mg: 5.6
-      selenium_ug: 36
-      iodine_ug: 2
-      chromium_ug: 2
+      carbs_available_g: 53.4
+      sugar_g: 5.3
+      fiber_total_g: 3.2
+      fiber_soluble_g: 1.1
+      fiber_insoluble_g: 2.1
+      sodium_mg: 184
+      potassium_mg: 503
+      calcium_mg: 34
+      magnesium_mg: 145
+      phosphorus_mg: 346
+      chloride_mg: 283
+      sulfur_g: 0.034
+      iron_mg: 7.2
+      zinc_mg: 2.2
+      copper_mg: 0.53
+      manganese_mg: 3.0
+      selenium_ug: 11
+      iodine_ug: 1
+      chromium_ug: 1
       molybdenum_ug: 15
       vitamin_a_ug: 0.0
       vitamin_d_ug: 0.0
-      vitamin_e_mg: 1.6
-      vitamin_k_ug: 2.2
-      vitamin_b1_mg: 0.46
-      vitamin_b2_mg: 0.11
-      vitamin_b3_mg: 5.9
-      vitamin_b5_mg: 2.0
-      vitamin_b6_mg: 0.59
-      vitamin_b7_ug: 5
-      vitamin_b9_ug: 23
+      vitamin_e_mg: 0.38
+      vitamin_k_ug: 0.4
+      vitamin_b1_mg: 0.37
+      vitamin_b2_mg: 0.07
+      vitamin_b3_mg: 5.1
+      vitamin_b5_mg: 0.93
+      vitamin_b6_mg: 0.35
+      vitamin_b7_ug: 4
+      vitamin_b9_ug: 36
       vitamin_b12_ug: 0.0
-      choline_mg: 48.8
-      vitamin_c_mg: 3.9
+      choline_mg: 13.6
+      vitamin_c_mg: 1.6
       omega3_epa_mg: 0
       omega3_dha_mg: 0
-      omega3_ala_g: 0.01
-      omega6_la_g: 1.43
+      omega3_ala_g: 0.02
+      omega6_la_g: 0.97
       boron_mg: 0.0
       silicon_mg: 0.0
       vanadium_ug: 0
