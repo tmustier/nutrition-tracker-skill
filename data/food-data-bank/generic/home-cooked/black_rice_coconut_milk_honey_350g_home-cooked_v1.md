@@ -2,7 +2,7 @@
 
 ```yaml
 id: black_rice_coconut_milk_honey_350g_home-cooked_v1
-version: 1
+version: 2
 last_verified: 2025-11-09
 source:
   venue: Home Cooked
@@ -21,9 +21,9 @@ category: main
 portion:
   description: "350g cooked bowl (black rice cooked with coconut milk and honey)"
   est_weight_g: 350
-  notes: "117g dry black rice + 150g coconut milk + 12g honey + 71g water. Rice absorbs liquid during cooking, incorporating coconut milk fats and honey sugars into final dish."
+  notes: "117g dry black rice + 150g coconut milk + 12g honey + 71g water + pinch of salt (~0.4g). Rice absorbs liquid during cooking, incorporating coconut milk fats and honey sugars into final dish."
 assumptions:
-  salt_scheme: "unsalted"
+  salt_scheme: "lightly salted (pinch added)"
   oil_type: "coconut fat (from coconut milk)"
   prep: "boiled/simmered - rice absorbs coconut milk-water mixture with honey"
 per_portion:  # Schema v2: 52 nutrient fields
@@ -45,7 +45,7 @@ per_portion:  # Schema v2: 52 nutrient fields
   fiber_insoluble_g: 5.6
   polyols_g: 0.0
   # Minerals
-  sodium_mg: 29
+  sodium_mg: 189
   potassium_mg: 715
   iodine_ug: 2
   magnesium_mg: 223
@@ -59,7 +59,7 @@ per_portion:  # Schema v2: 52 nutrient fields
   chromium_ug: 2
   molybdenum_ug: 15
   phosphorus_mg: 541
-  chloride_mg: 45
+  chloride_mg: 291
   sulfur_g: 0.054
   # Vitamins
   vitamin_a_ug: 0
@@ -113,6 +113,10 @@ notes:
   - "Black rice cooked with coconut milk creates creamy texture; honey adds subtle sweetness (~3.4% of total weight)"
   - "Component weight estimation rationale: Standard rice cooking absorbs 2-2.5× its weight in liquid; 117g rice + 233g liquid = 350g total"
 change_log:
+  - timestamp: "2025-11-09T12:00:00Z"
+    updated_by: "LLM: Claude Sonnet 4.5"
+    change: "Added pinch of salt (~0.4g) to reflect actual preparation"
+    notes: "Sodium updated from 29mg to 189mg (+160mg from ~0.4g added salt). Chloride recalculated: 189 × 1.54 = 291mg. Salt scheme changed from 'unsalted' to 'lightly salted (pinch added)'."
   - timestamp: "2025-11-09T00:00:00Z"
     updated_by: "LLM: Claude Sonnet 4.5"
     change: "Initial creation with complete 52-nutrient profile from component-based estimation"
