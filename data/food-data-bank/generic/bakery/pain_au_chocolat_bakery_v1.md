@@ -95,7 +95,7 @@ quality:
     - "Vitamin B7 (biotin) estimated from flour and egg components (MEDIUM confidence)"
     - "Iodine estimated from small milk content (LOW confidence)"
 notes:
-  - "Energy calculated: 4×5.5 + 9×15.5 + 4×32.0 + 2×2.0 = 305 kcal (matches UK bakery data)"
+  - "Energy: 305 kcal from UK bakery data. Atwater formula: 4×5.5 + 9×15.5 + 4×32.0 + 2×2.0 = 294 kcal. Variance: +3.8% (within ±5-8% tolerance)"
   - "Macros anchored to UK bakery averages: Greggs (309 kcal, 79g) and Pret (300 kcal, 82g)"
   - "High saturated fat from butter lamination (~51% of total fat)"
   - "Sugar from dark chocolate filling (~8g) plus dough (~4g)"

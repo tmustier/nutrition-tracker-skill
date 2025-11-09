@@ -78,8 +78,8 @@ per_portion:  # Schema v2: 52 nutrient fields
   # Fatty acids
   omega3_epa_mg: 0
   omega3_dha_mg: 0
-  omega3_ala_g: 0.20
-  omega6_la_g: 0.38
+  omega3_ala_g: 0.19
+  omega6_la_g: 0.37
   # Ultra-trace minerals
   boron_mg: 0
   silicon_mg: 0

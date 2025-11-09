@@ -42,8 +42,8 @@ per_portion:  # Schema v2: 52 nutrient fields
   carbs_available_g: 32.5
   sugar_g: 11.5
   fiber_total_g: 7.5
-  fiber_soluble_g: 0
-  fiber_insoluble_g: 0
+  fiber_soluble_g: 2.6
+  fiber_insoluble_g: 4.9
   polyols_g: 0.0
   # Minerals
   sodium_mg: 1720
