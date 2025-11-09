@@ -9,10 +9,55 @@ import yaml
 from pathlib import Path
 from datetime import datetime
 import sys
+import re
+import tempfile
+import shutil
+
+
+def validate_folder_name(folder_name):
+    """Validate folder name is safe and follows conventions."""
+    if not re.match(r'^[a-z0-9][a-z0-9-]*[a-z0-9]$', folder_name):
+        raise ValueError(
+            f"Invalid folder name '{folder_name}'. "
+            "Must be lowercase letters, numbers, and hyphens only "
+            "(starting and ending with alphanumeric)."
+        )
+    # Prevent path traversal
+    if '..' in folder_name or '/' in folder_name or '\\' in folder_name:
+        raise ValueError(f"Folder name contains invalid path characters")
+    return True
+
+
+def atomic_write_yaml(filepath, data):
+    """Write YAML atomically using temp file + rename to prevent corruption."""
+    filepath = Path(filepath)
+    with tempfile.NamedTemporaryFile(
+        mode='w',
+        dir=filepath.parent,
+        delete=False,
+        prefix=f'.{filepath.name}.',
+        suffix='.tmp'
+    ) as tmp:
+        tmp_path = Path(tmp.name)
+        try:
+            yaml.dump(data, tmp, default_flow_style=False, sort_keys=False, allow_unicode=True)
+            tmp.flush()
+            # Ensure data is written to disk
+            import os
+            os.fsync(tmp.fileno())
+        except Exception:
+            tmp_path.unlink(missing_ok=True)
+            raise
+
+    # Atomic rename (POSIX guarantees atomicity)
+    shutil.move(str(tmp_path), str(filepath))
 
 
 def add_venue(category_type, folder_name, patterns, display_name="", notes="", venue_type=""):
     """Add a new venue to the configuration file."""
+    # Validate folder name format
+    validate_folder_name(folder_name)
+
     config_path = Path(__file__).parent.parent / 'data' / 'venue-mappings.yaml'
 
     if not config_path.exists():
@@ -51,9 +96,8 @@ def add_venue(category_type, folder_name, patterns, display_name="", notes="", v
         config['_meta'] = {}
     config['_meta']['last_updated'] = datetime.now().strftime('%Y-%m-%d')
 
-    # Write back (preserve order)
-    with open(config_path, 'w') as f:
-        yaml.dump(config, f, default_flow_style=False, sort_keys=False)
+    # Write back atomically to prevent corruption
+    atomic_write_yaml(config_path, config)
 
     print(f"✓ Added '{folder_name}' to {category_type}")
     print(f"  Patterns: {', '.join(patterns)}")

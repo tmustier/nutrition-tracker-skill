@@ -12,6 +12,7 @@ Checks:
 import yaml
 from pathlib import Path
 import sys
+import re
 
 
 def validate_config():
@@ -61,16 +62,28 @@ def validate_config():
             folder = venue_config['folder']
             folder_path = data_bank / category_type / folder
 
+            # Validate folder name format
+            if not re.match(r'^[a-z0-9][a-z0-9-]*[a-z0-9]$', folder):
+                errors.append(
+                    f"Invalid folder name '{folder}' in {category_type}/{venue_key}. "
+                    "Must be lowercase letters, numbers, and hyphens only "
+                    "(starting and ending with alphanumeric)."
+                )
+
             if not folder_path.exists():
                 errors.append(f"Config references non-existent folder: {category_type}/{folder}")
 
-            # Check for duplicate patterns
+            # Check for duplicate patterns (now an error, not warning)
             patterns = venue_config.get('patterns', [])
             for pattern in patterns:
                 pattern_lower = pattern.lower()
                 if pattern_lower in pattern_to_venue:
                     other_venue = pattern_to_venue[pattern_lower]
-                    warnings.append(f"Duplicate pattern '{pattern}' in {category_type}/{venue_key} and {other_venue}")
+                    errors.append(
+                        f"Duplicate pattern '{pattern}' found in:\n"
+                        f"    1. {other_venue}\n"
+                        f"    2. {category_type}/{venue_key}"
+                    )
                 else:
                     pattern_to_venue[pattern_lower] = f"{category_type}/{venue_key}"
 
