@@ -19,8 +19,8 @@ This analysis calculates the exact nutritional outcome if you follow the Weekly 
 - **Carbs**: 295.6g/day (↓7% from current 317.4g)
 - **Fiber**: 51.0g/day (↑28% from current 40.0g) ✅
 - **Sodium**: 820mg/day (↓77% from current 3,532mg) 🎯🎯🎯
-- **Potassium**: 5,744mg/day (↑33% from current 4,335mg) ✅
-- **Na:K Molar Ratio**: 0.24 (↓82% from current 1.39) 🎯🎯🎯
+- **Potassium**: 5,292mg/day (↑22% from current 4,335mg) ✅
+- **Na:K Molar Ratio**: 0.26 (↓81% from current 1.39) 🎯🎯🎯
 
 ### 🏆 Target Achievement
 
@@ -30,10 +30,10 @@ This analysis calculates the exact nutritional outcome if you follow the Weekly 
 |--------|---------|------|-------------|
 | **Saturated Fat ≤20g** | 41.3g ❌ | 12.2g ✅ | **Excellent** |
 | **Sodium ≤2,300mg** | 3,532mg ❌ | 820mg ✅ | **Outstanding** |
-| **Na:K Ratio ≤1.0** | 1.39 ❌ | 0.24 ✅ | **Outstanding** |
+| **Na:K Ratio ≤1.0** | 1.39 ❌ | 0.26 ✅ | **Outstanding** |
 | **Protein ≥170g** | 166.8g ⚠️ | 172.1g ✅ | **Met** |
 | **Fiber ≥40g** | 40.0g ✅ | 51.0g ✅ | **Exceeded** |
-| **Potassium ≥4,000mg** | 4,335mg ✅ | 5,744mg ✅ | **Exceeded** |
+| **Potassium ≥4,000mg** | 4,335mg ✅ | 5,292mg ✅ | **Exceeded** |
 
 ---
 
@@ -42,8 +42,8 @@ This analysis calculates the exact nutritional outcome if you follow the Weekly 
 ### Training Days (Monday-Friday)
 
 #### Monday (Training)
-**Total**: 2,375 kcal | 166.3g protein | 53.9g fat (11.3g sat) | 327.6g carbs | 55.2g fiber | 1,116mg Na | 5,840mg K
-**Na:K Ratio**: 0.33 ✅
+**Total**: 2,375 kcal | 166.3g protein | 53.9g fat (11.3g sat) | 327.6g carbs | 55.2g fiber | 1,116mg Na | 5,333mg K
+**Na:K Ratio**: 0.36 ✅
 **Target Compliance**: 6/8 (75%)
 
 **Meals**:
@@ -57,8 +57,8 @@ This analysis calculates the exact nutritional outcome if you follow the Weekly 
 ---
 
 #### Tuesday (Training)
-**Total**: 2,613 kcal | 167.2g protein | 77.2g fat (15.3g sat) | 338.7g carbs | 52.7g fiber | 782mg Na | 5,383mg K
-**Na:K Ratio**: 0.25 ✅
+**Total**: 2,613 kcal | 167.2g protein | 77.2g fat (15.3g sat) | 338.7g carbs | 52.7g fiber | 782mg Na | 4,876mg K
+**Na:K Ratio**: 0.27 ✅
 **Target Compliance**: 7/8 (88%)
 
 **Meals**:
@@ -72,8 +72,8 @@ This analysis calculates the exact nutritional outcome if you follow the Weekly 
 ---
 
 #### Wednesday (Training)
-**Total**: 2,488 kcal | 191.6g protein | 57.1g fat (9.9g sat) | 320.1g carbs | 59.4g fiber | 587mg Na | 5,383mg K
-**Na:K Ratio**: 0.19 ✅ (Best cardiovascular profile!)
+**Total**: 2,488 kcal | 191.6g protein | 57.1g fat (9.9g sat) | 320.1g carbs | 59.4g fiber | 587mg Na | 4,876mg K
+**Na:K Ratio**: 0.20 ✅ (Best cardiovascular profile!)
 **Target Compliance**: 7/8 (88%)
 
 **Meals**:
@@ -89,8 +89,8 @@ This analysis calculates the exact nutritional outcome if you follow the Weekly 
 ---
 
 #### Thursday (Training)
-**Total**: 2,284 kcal | 146.2g protein | 54.6g fat (9.8g sat) | 332.3g carbs | 47.4g fiber | 1,200mg Na | 6,570mg K
-**Na:K Ratio**: 0.31 ✅
+**Total**: 2,284 kcal | 146.2g protein | 54.6g fat (9.8g sat) | 332.3g carbs | 47.4g fiber | 1,200mg Na | 6,063mg K
+**Na:K Ratio**: 0.34 ✅
 **Target Compliance**: 6/8 (75%)
 
 **Meals**:
@@ -101,13 +101,13 @@ This analysis calculates the exact nutritional outcome if you follow the Weekly 
 - Dinner: Fish & Chips (Healthy Version) (782 kcal)
 - Evening: Berries (86 kcal)
 
-**Notes**: Highest potassium day (6,570mg) - exceptional for cardiovascular health
+**Notes**: Highest potassium day 6,063mg - exceptional for cardiovascular health
 
 ---
 
 #### Friday (Training)
-**Total**: 2,308 kcal | 186.7g protein | 68.1g fat (14.4g sat) | 263.4g carbs | 49.2g fiber | 791mg Na | 5,815mg K
-**Na:K Ratio**: 0.23 ✅
+**Total**: 2,308 kcal | 186.7g protein | 68.1g fat (14.4g sat) | 263.4g carbs | 49.2g fiber | 791mg Na | 5,308mg K
+**Na:K Ratio**: 0.25 ✅
 **Target Compliance**: 7/8 (88%)
 
 **Meals**:
@@ -125,8 +125,8 @@ This analysis calculates the exact nutritional outcome if you follow the Weekly 
 ### Rest Days (Saturday-Sunday)
 
 #### Saturday (Rest)
-**Total**: 2,176 kcal | 187.5g protein | 59.8g fat (12.1g sat) | 236.6g carbs | 45.2g fiber | 637mg Na | 4,803mg K
-**Na:K Ratio**: 0.23 ✅
+**Total**: 2,176 kcal | 187.5g protein | 59.8g fat (12.1g sat) | 236.6g carbs | 45.2g fiber | 637mg Na | 4,680mg K
+**Na:K Ratio**: 0.25 ✅
 **Target Compliance**: 6/8 (75%)
 
 **Meals**:
@@ -142,8 +142,8 @@ This analysis calculates the exact nutritional outcome if you follow the Weekly 
 ---
 
 #### Sunday (Rest)
-**Total**: 2,226 kcal | 159.1g protein | 63.2g fat (12.3g sat) | 250.6g carbs | 47.9g fiber | 630mg Na | 6,416mg K
-**Na:K Ratio**: 0.17 ✅ (Lowest all week!)
+**Total**: 2,226 kcal | 159.1g protein | 63.2g fat (12.3g sat) | 250.6g carbs | 47.9g fiber | 630mg Na | 5,909mg K
+**Na:K Ratio**: 0.18 ✅ (Lowest all week!)
 **Target Compliance**: 6/8 (75%)
 
 **Meals**:
@@ -222,7 +222,7 @@ This analysis calculates the exact nutritional outcome if you follow the Weekly 
 ## Health Impact Analysis
 
 ### 🫀 Cardiovascular Health
-**Na:K Molar Ratio: 1.39 → 0.24 (↓82%)**
+**Na:K Molar Ratio: 1.39 → 0.26 (↓81%)**
 
 - **Current**: 1.39 (above WHO ideal of ≤1.0)
 - **Plan**: 0.24 (well below ideal)
@@ -321,11 +321,11 @@ This analysis calculates the exact nutritional outcome if you follow the Weekly 
 ---
 
 ### 🍌 Potassium Enhancement
-**4,335mg → 5,744mg (↑33%)**
+**4,335mg → 5,292mg (↑22%)**
 
 - **Current**: 108% of target (just above 4,000mg minimum)
 - **Plan**: 144% of target (well above minimum)
-- **Highest day**: Thursday (6,570mg) - fish & chips day!
+- **Highest day**: Thursday 6,063mg - fish & chips day!
 
 **Health Benefits**:
 - Counteracts sodium effects on blood pressure

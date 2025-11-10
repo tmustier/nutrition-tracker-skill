@@ -9,7 +9,7 @@ Calculate weekly nutrition totals for the Weekly Menu Plan (November 2025)
 breakfast = {
     "name": "High-Protein Oat Bowl",
     "kcal": 520, "protein": 37.2, "fat": 11.8, "sat_fat": 2.1,
-    "carbs": 75.0, "fiber": 11.6, "sodium": 98, "potassium": 1200
+    "carbs": 75.0, "fiber": 11.6, "sodium": 98, "potassium": 693
 }
 
 morning_snack_full = {
@@ -120,7 +120,7 @@ dinner_friday = {
 dinner_saturday = {
     "name": "Chicken Stir-Fry",
     "kcal": 821, "protein": 56.3, "fat": 22.1, "sat_fat": 4.2,
-    "carbs": 111.8, "fiber": 14.0, "sodium": 382, "potassium": 1800
+    "carbs": 111.8, "fiber": 14.0, "sodium": 382, "potassium": 2184
 }
 
 dinner_sunday = {
@@ -133,7 +133,7 @@ dinner_sunday = {
 dinner_saturday_rest = {
     "name": "Chicken Stir-Fry (rest day)",
     "kcal": 710, "protein": 56.3, "fat": 17.7, "sat_fat": 4.2,
-    "carbs": 78.3, "fiber": 14.0, "sodium": 382, "potassium": 1800
+    "carbs": 78.3, "fiber": 14.0, "sodium": 382, "potassium": 2184
 }
 
 dinner_sunday_rest = {

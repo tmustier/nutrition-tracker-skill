@@ -1,7 +1,7 @@
 ## Salmon Power Bowl (Home)
 
 ```yaml
-id: salmon_power_bowl_665g_home-cooked_v1
+id: salmon_power_bowl_530g_home-cooked_v1
 schema_version: 2
 version: 1
 last_verified: 2025-11-10
