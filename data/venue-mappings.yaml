@@ -1,11 +1,11 @@
 # Venue categorization configuration
 # This file maps venue names to their appropriate categories and folders
-# Last updated: 2025-11-09
+# Last updated: 2025-11-10
 
 # Configuration metadata
 _meta:
   version: 1
-  last_updated: "2025-11-09"
+  last_updated: "2025-11-10"
   pattern_matching: "case_insensitive_substring"
   priority: "first_match_wins"
   notes: "Patterns are matched as case-insensitive substrings. First matching pattern wins."
@@ -101,6 +101,16 @@ venues:
     folder: "panzers"
     display_name: "Panzers Deli"
     notes: "Delicatessen, London"
+
+  le-relais-de-venise:
+    patterns:
+      - "le relais de venise"
+      - "relais de venise"
+      - "l'entrecote"
+      - "entrecote"
+    folder: "le-relais-de-venise"
+    display_name: "Le Relais De Venise L'Entrecôte"
+    notes: "French steakhouse, famous for fixed menu: steak + secret sauce + fries + salad. London location."
 
 # Branded packaged products with nutrition labels
 packaged:
