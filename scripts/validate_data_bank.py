@@ -32,6 +32,7 @@ CARB_TOL_G = 0.2
 FIBER_TOL_G = 0.1
 FIBER_KCAL_PER_G = 2.0
 POLYOL_KCAL_PER_G = 2.4
+ALCOHOL_KCAL_PER_G = 7.0  # Alcohol energy content (7 kcal/g)
 OMEGA_PUFA_TOL_G = 0.05  # 50mg tolerance for omega fatty acid vs PUFA coherence
 
 # Required nutrient fields in per_portion - ALL dishes must have these fields
@@ -178,14 +179,15 @@ def scan_data_bank(data_bank_dir):
     return blocks
 
 
-def available_energy_kcal(protein, fat, carbs_available, fibre, polyols):
-    """Compute energy using UK/EU convention (available carbs + fibre/polyol factors)."""
+def available_energy_kcal(protein, fat, carbs_available, fibre, polyols, alcohol=None):
+    """Compute energy using UK/EU convention (available carbs + fibre/polyol factors + alcohol)."""
     if protein is None or fat is None or carbs_available is None:
         return None
     fibre_term = 0.0 if fibre is None else FIBER_KCAL_PER_G * fibre
     polyol_term = 0.0 if polyols is None else POLYOL_KCAL_PER_G * polyols
+    alcohol_term = 0.0 if alcohol is None else ALCOHOL_KCAL_PER_G * alcohol
     try:
-        return 4 * protein + 9 * fat + 4 * carbs_available + fibre_term + polyol_term
+        return 4 * protein + 9 * fat + 4 * carbs_available + fibre_term + polyol_term + alcohol_term
     except Exception:
         return None
 
@@ -242,6 +244,7 @@ def check_block(y, filepath):
     polyols = pp.get("polyols_g")
     carbs_avail = pp.get("carbs_available_g")
     carbs_total = pp.get("carbs_total_g")
+    alcohol = derived.get("alcohol_g")  # Extract alcohol from derived section
 
     # Cross-check polyol mentions in notes against polyols_g field
     if polyol_mentions:
@@ -319,6 +322,7 @@ def check_block(y, filepath):
         carbs_avail if isinstance(carbs_avail, (int, float)) else None,
         fibre if isinstance(fibre, (int, float)) else None,
         polyols if isinstance(polyols, (int, float)) else None,
+        alcohol if isinstance(alcohol, (int, float)) else None,
     )
     if kcal_est is not None and isinstance(kcal, (int, float)):
         if kcal == 0:
@@ -326,12 +330,14 @@ def check_block(y, filepath):
         else:
             diff = abs(kcal_est - kcal)
             if diff > TOL_ENERGY_PCT * max(kcal, 1):
+                formula_type = "available carb + alcohol formula" if alcohol else "available carb formula"
                 issues.append(
                     f"Available-carb energy mismatch: stored {kcal} vs est {kcal_est:.1f} "
-                    f"(diff {diff:.1f}, {100*diff/max(kcal,1):.1f}%)."
+                    f"(diff {diff:.1f}, {100*diff/max(kcal,1):.1f}%). Formula: {formula_type}"
                 )
             else:
-                passes.append("Energy within tolerance (available carb formula).")
+                formula_type = "available carb + alcohol formula" if alcohol else "available carb formula"
+                passes.append(f"Energy within tolerance ({formula_type}).")
     elif isinstance(kcal, (int, float)) and carbs_avail is not None:
         issues.append("Unable to compute energy: missing protein, fat, or fibre/polyol inputs.")
 

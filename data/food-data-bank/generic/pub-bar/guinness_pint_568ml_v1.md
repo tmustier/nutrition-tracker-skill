@@ -26,7 +26,7 @@ assumptions:
   oil_type: 
   prep: Draught beer, nitrogen widget pour
 per_portion:
-  energy_kcal: 79.6
+  energy_kcal: 212.6
   protein_g: 1.9
   fat_g: 0
   sat_fat_g: 0
