@@ -17,10 +17,28 @@ from validate_data_bank import (
     check_block,
     FIBER_KCAL_PER_G,
     POLYOL_KCAL_PER_G,
+    ALCOHOL_KCAL_PER_G,
     TOL_ENERGY_PCT,
     CARB_TOL_G,
     REQUIRED_NUTRIENTS,
 )
+
+# Mock filepath for testing
+TEST_FILEPATH = Path("test_file.md")
+
+
+def create_complete_per_portion(**overrides):
+    """Helper to create a complete per_portion dict with all required fields.
+
+    Args:
+        **overrides: Fields to override from the default (0.0)
+
+    Returns:
+        dict with all REQUIRED_NUTRIENTS fields initialized to 0.0, then overridden
+    """
+    per_portion = {field: 0.0 for field in REQUIRED_NUTRIENTS}
+    per_portion.update(overrides)
+    return per_portion
 
 
 class TestEnergyCalculation:
@@ -96,7 +114,7 @@ class TestCarbValidation:
             "derived": {},
             "quality": {},
         }
-        result = check_block(block)
+        result = check_block(block, TEST_FILEPATH)
         # Should not have carb-related warnings
         carb_warnings = [w for w in result["warnings"] if "carbs_total_g" in w]
         assert len(carb_warnings) == 0
@@ -117,7 +135,7 @@ class TestCarbValidation:
             "derived": {},
             "quality": {},
         }
-        result = check_block(block)
+        result = check_block(block, TEST_FILEPATH)
         # Should have carb mismatch warning
         carb_warnings = [w for w in result["warnings"] if "carbs_total_g mismatch" in w]
         assert len(carb_warnings) == 1
@@ -139,7 +157,7 @@ class TestCarbValidation:
             "derived": {},
             "quality": {},
         }
-        result = check_block(block)
+        result = check_block(block, TEST_FILEPATH)
         # Should not have carb-related warnings
         carb_warnings = [w for w in result["warnings"] if "carbs_total_g" in w]
         assert len(carb_warnings) == 0
@@ -165,7 +183,7 @@ class TestPolyolCrossCheck:
             "quality": {},
             "notes": ["Contains 17g sugar alcohols/polyols (maltitol)"],
         }
-        result = check_block(block)
+        result = check_block(block, TEST_FILEPATH)
         # Should have polyol cross-check warning
         polyol_warnings = [w for w in result["warnings"] if "polyol" in w.lower()]
         assert len(polyol_warnings) >= 1
@@ -188,7 +206,7 @@ class TestPolyolCrossCheck:
             "quality": {},
             "notes": ["Contains 17g maltitol"],
         }
-        result = check_block(block)
+        result = check_block(block, TEST_FILEPATH)
         # Should have pass message
         polyol_passes = [p for p in result["passes"] if "polyol" in p.lower()]
         assert len(polyol_passes) >= 1
@@ -216,7 +234,7 @@ class TestFatSplitValidation:
             "derived": {},
             "quality": {},
         }
-        result = check_block(block)
+        result = check_block(block, TEST_FILEPATH)
         fat_warnings = [w for w in result["warnings"] if "Fat split" in w and "exceeds" in w]
         assert len(fat_warnings) == 1
 
@@ -237,7 +255,7 @@ class TestFatSplitValidation:
             "derived": {},
             "quality": {},
         }
-        result = check_block(block)
+        result = check_block(block, TEST_FILEPATH)
         fat_warnings = [w for w in result["warnings"] if "Fat split incomplete" in w]
         assert len(fat_warnings) == 1
         assert "missing 7.0" in fat_warnings[0]
@@ -261,7 +279,7 @@ class TestFatSplitValidation:
             "derived": {},
             "quality": {},
         }
-        result = check_block(block)
+        result = check_block(block, TEST_FILEPATH)
         fat_passes = [p for p in result["passes"] if "Fat split coherent" in p]
         assert len(fat_passes) == 1
 
@@ -285,7 +303,7 @@ class TestEnergyValidation:
             "derived": {},
             "quality": {},
         }
-        result = check_block(block)
+        result = check_block(block, TEST_FILEPATH)
         energy_issues = [i for i in result["issues"] if "energy mismatch" in i.lower()]
         assert len(energy_issues) == 0
 
@@ -305,7 +323,7 @@ class TestEnergyValidation:
             "derived": {},
             "quality": {},
         }
-        result = check_block(block)
+        result = check_block(block, TEST_FILEPATH)
         energy_issues = [i for i in result["issues"] if "energy mismatch" in i.lower()]
         assert len(energy_issues) == 1
 
@@ -329,7 +347,7 @@ class TestZeroVsUnknownValidation:
             "derived": {},
             "quality": {},
         }
-        result = check_block(block)
+        result = check_block(block, TEST_FILEPATH)
         zero_warnings = [w for w in result["warnings"] if "0.0 but carbs_available_g is null" in w]
         assert len(zero_warnings) == 1
 
@@ -340,14 +358,14 @@ class TestEdgeCases:
     def test_missing_id(self):
         """Test handling of block without id."""
         block = {"per_portion": {}, "derived": {}, "quality": {}}
-        result = check_block(block)
+        result = check_block(block, TEST_FILEPATH)
         assert result["id"] is None
         assert len(result["issues"]) > 0
 
     def test_missing_sections(self):
         """Test warning for missing required sections."""
         block = {"id": "test_missing_sections"}
-        result = check_block(block)
+        result = check_block(block, TEST_FILEPATH)
         assert any("Missing section" in i for i in result["issues"])
 
     def test_negative_values(self):
@@ -363,7 +381,7 @@ class TestEdgeCases:
             "derived": {},
             "quality": {},
         }
-        result = check_block(block)
+        result = check_block(block, TEST_FILEPATH)
         negative_issues = [i for i in result["issues"] if "Negative" in i]
         assert len(negative_issues) == 1
 
@@ -382,7 +400,7 @@ class TestTypeValidation:
             "derived": {},
             "quality": {},
         }
-        result = check_block(block)
+        result = check_block(block, TEST_FILEPATH)
         type_issues = [i for i in result["issues"] if "Invalid type" in i and "protein_g" in i]
         assert len(type_issues) == 1
         assert "expected number" in type_issues[0]
@@ -400,7 +418,7 @@ class TestTypeValidation:
             "derived": {},
             "quality": {},
         }
-        result = check_block(block)
+        result = check_block(block, TEST_FILEPATH)
         type_issues = [i for i in result["issues"] if "Invalid type" in i]
         assert len(type_issues) == 0
 
@@ -420,7 +438,7 @@ class TestMissingRequiredFields:
             "derived": {},
             "quality": {},
         }
-        result = check_block(block)
+        result = check_block(block, TEST_FILEPATH)
         missing_issues = [i for i in result["issues"] if "Missing required field" in i and "iodine_ug" in i]
         assert len(missing_issues) == 1
         assert "iodine_ug" in missing_issues[0]
@@ -438,7 +456,7 @@ class TestMissingRequiredFields:
             "derived": {},
             "quality": {},
         }
-        result = check_block(block)
+        result = check_block(block, TEST_FILEPATH)
         missing_issues = [i for i in result["issues"] if "Missing required field" in i]
         # Should have multiple missing field issues
         assert len(missing_issues) > 5
@@ -458,7 +476,7 @@ class TestMissingRequiredFields:
             "derived": {},
             "quality": {},
         }
-        result = check_block(block)
+        result = check_block(block, TEST_FILEPATH)
         missing_issues = [i for i in result["issues"] if "Missing required field" in i]
         assert len(missing_issues) == 0
 
@@ -474,7 +492,7 @@ class TestMissingRequiredFields:
             "derived": {},
             "quality": {},
         }
-        result = check_block(block)
+        result = check_block(block, TEST_FILEPATH)
 
         # Should have one issue for missing field
         missing_issues = [i for i in result["issues"] if "Missing required field" in i and "iodine_ug" in i]
@@ -492,36 +510,26 @@ class TestIntegration:
         """Test validation of a zero-carb dish (chicken breast)."""
         block = {
             "id": "test_chicken",
-            "per_portion": {
-                "energy_kcal": 135.6,
-                "protein_g": 27.6,
-                "fat_g": 2.8,
-                "sat_fat_g": 0.9,
-                "mufa_g": 1.1,
-                "pufa_g": 0.7,
-                "trans_fat_g": 0.0,
-                "cholesterol_mg": 75.0,
-                "sugar_g": 0.0,
-                "fiber_total_g": 0.0,
-                "fiber_soluble_g": 0.0,
-                "fiber_insoluble_g": 0.0,
-                "carbs_available_g": 0.0,
-                "carbs_total_g": 0.0,
-                "polyols_g": 0.0,
-                "sodium_mg": 212.0,
-                "potassium_mg": 300.0,
-                "iodine_ug": 5.0,
-                "magnesium_mg": 25.0,
-                "calcium_mg": 10.0,
-                "iron_mg": 0.5,
-                "zinc_mg": 1.0,
-                "vitamin_c_mg": 0.0,
-                "manganese_mg": 0.0,
-            },
+            "per_portion": create_complete_per_portion(
+                energy_kcal=135.6,
+                protein_g=27.6,
+                fat_g=2.8,
+                sat_fat_g=0.9,
+                mufa_g=1.1,
+                pufa_g=0.7,
+                cholesterol_mg=75.0,
+                sodium_mg=212.0,
+                potassium_mg=300.0,
+                iodine_ug=5.0,
+                magnesium_mg=25.0,
+                calcium_mg=10.0,
+                iron_mg=0.5,
+                zinc_mg=1.0,
+            ),
             "derived": {},
             "quality": {},
         }
-        result = check_block(block)
+        result = check_block(block, TEST_FILEPATH)
         assert len(result["issues"]) == 0
         assert any("Energy within tolerance" in p for p in result["passes"])
 
@@ -529,36 +537,31 @@ class TestIntegration:
         """Test validation of a dish with carbs (oats)."""
         block = {
             "id": "test_oats",
-            "per_portion": {
-                "energy_kcal": 208.9,
-                "protein_g": 8.5,
-                "fat_g": 3.5,
-                "sat_fat_g": 0.6,
-                "mufa_g": 1.2,
-                "pufa_g": 1.4,
-                "trans_fat_g": 0.0,
-                "cholesterol_mg": 0.0,
-                "sugar_g": 1.0,
-                "fiber_total_g": 5.3,
-                "fiber_soluble_g": 2.0,
-                "fiber_insoluble_g": 3.3,
-                "carbs_available_g": 33.2,
-                "carbs_total_g": 38.5,
-                "polyols_g": 0.0,
-                "sodium_mg": 4.0,
-                "potassium_mg": 200.0,
-                "iodine_ug": 0.0,
-                "magnesium_mg": 80.0,
-                "calcium_mg": 30.0,
-                "iron_mg": 2.5,
-                "zinc_mg": 2.0,
-                "vitamin_c_mg": 0.0,
-                "manganese_mg": 2.0,
-            },
+            "per_portion": create_complete_per_portion(
+                energy_kcal=208.9,
+                protein_g=8.5,
+                fat_g=3.5,
+                sat_fat_g=0.6,
+                mufa_g=1.2,
+                pufa_g=1.4,
+                sugar_g=1.0,
+                fiber_total_g=5.3,
+                fiber_soluble_g=2.0,
+                fiber_insoluble_g=3.3,
+                carbs_available_g=33.2,
+                carbs_total_g=38.5,
+                sodium_mg=4.0,
+                potassium_mg=200.0,
+                magnesium_mg=80.0,
+                calcium_mg=30.0,
+                iron_mg=2.5,
+                zinc_mg=2.0,
+                manganese_mg=2.0,
+            ),
             "derived": {},
             "quality": {},
         }
-        result = check_block(block)
+        result = check_block(block, TEST_FILEPATH)
         assert len(result["issues"]) == 0
         assert any("Energy within tolerance" in p for p in result["passes"])
 
@@ -566,37 +569,36 @@ class TestIntegration:
         """Test validation of a dish with polyols (Grenade bar)."""
         block = {
             "id": "test_grenade",
-            "per_portion": {
-                "energy_kcal": 296.6,
-                "protein_g": 21.0,
-                "fat_g": 10.0,
-                "sat_fat_g": 4.5,
-                "mufa_g": 3.0,
-                "pufa_g": 2.0,
-                "trans_fat_g": 0.0,
-                "cholesterol_mg": 10.0,
-                "sugar_g": 2.0,
-                "fiber_total_g": 0.9,
-                "fiber_soluble_g": 0.3,
-                "fiber_insoluble_g": 0.6,
-                "carbs_available_g": 20.0,
-                "carbs_total_g": 37.9,
-                "polyols_g": 17.0,
-                "sodium_mg": 100.0,
-                "potassium_mg": 150.0,
-                "iodine_ug": 15.0,
-                "magnesium_mg": 40.0,
-                "calcium_mg": 200.0,
-                "iron_mg": 3.0,
-                "zinc_mg": 2.0,
-                "vitamin_c_mg": 20.0,
-                "manganese_mg": 0.5,
-            },
+            "per_portion": create_complete_per_portion(
+                energy_kcal=296.6,
+                protein_g=21.0,
+                fat_g=10.0,
+                sat_fat_g=4.5,
+                mufa_g=3.0,
+                pufa_g=2.0,
+                cholesterol_mg=10.0,
+                sugar_g=2.0,
+                fiber_total_g=0.9,
+                fiber_soluble_g=0.3,
+                fiber_insoluble_g=0.6,
+                carbs_available_g=20.0,
+                carbs_total_g=37.9,
+                polyols_g=17.0,
+                sodium_mg=100.0,
+                potassium_mg=150.0,
+                iodine_ug=15.0,
+                magnesium_mg=40.0,
+                calcium_mg=200.0,
+                iron_mg=3.0,
+                zinc_mg=2.0,
+                vitamin_c_mg=20.0,
+                manganese_mg=0.5,
+            ),
             "derived": {},
             "quality": {},
             "notes": ["Contains 17g maltitol polyols"]
         }
-        result = check_block(block)
+        result = check_block(block, TEST_FILEPATH)
         assert len(result["issues"]) == 0
         assert any("Energy within tolerance" in p for p in result["passes"])
         assert any("Polyol mentions in notes match" in p for p in result["passes"])
@@ -622,7 +624,7 @@ class TestIntegration:
             "derived": {},
             "quality": {},
         }
-        result = check_block(block)
+        result = check_block(block, TEST_FILEPATH)
         assert any("Missing carbs_available_g" in i or "Missing required field" in i for i in result["issues"])
 
     def test_validate_carb_relationship_mismatch(self):
@@ -644,7 +646,7 @@ class TestIntegration:
             "derived": {},
             "quality": {},
         }
-        result = check_block(block)
+        result = check_block(block, TEST_FILEPATH)
         assert any("carbs_total_g mismatch" in w for w in result["warnings"])
 
     def test_validate_polyol_note_without_field(self):
@@ -667,7 +669,7 @@ class TestIntegration:
             "quality": {},
             "notes": ["Contains 16g erythritol"]
         }
-        result = check_block(block)
+        result = check_block(block, TEST_FILEPATH)
         assert any("Notes mention polyols" in w for w in result["warnings"])
 
 

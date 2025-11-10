@@ -27,7 +27,7 @@ assumptions:
   prep: Mixed cocktail, served with or without salt rim
   nutrient_source: USDA FoodData Central FDC ID 168753 (Alcoholic beverage, tequila sunrise, canned) - closest available match for tequila-based cocktails
 per_portion:
-  energy_kcal: 52.6
+  energy_kcal: 220.6
   protein_g: 0.1
   fat_g: 0
   sat_fat_g: 0
