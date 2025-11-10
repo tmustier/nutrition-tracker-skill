@@ -101,42 +101,42 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: 2025-11-01T18:34:00+0000
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Initial estimate for minestrone bowl at The Eagle
-  fields_changed: [all fields]
-  sources: [{note: 'User considering Minestrone with Cannellini Beans, Fennel, Cabbage, Potato
+  - timestamp: 2025-11-01T18:34:00+0000
+    updated_by: 'LLM: GPT-5 Codex'
+    reason: Initial estimate for minestrone bowl at The Eagle
+    fields_changed: [all fields]
+    sources: [{note: 'User considering Minestrone with Cannellini Beans, Fennel, Cabbage, Potato
       & Parmesan on 2025-11-01', url: user_request}, {note: 'GPT-5 Codex component
       model using 200g beans, 15g olive oil, 10g parmesan', url: gpt_culinary_estimate}]
-- timestamp: 2025-11-02T10:00:00+0000
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Updated soup macros to match user-supplied estimate with broth sodium detail
-  fields_changed: [version, last_verified, portion.est_weight_g, assumptions.salt_scheme, per_portion.energy_kcal,
-  per_portion.protein_g, per_portion.fat_g, per_portion.sat_fat_g, per_portion.mufa_g,
-  per_portion.pufa_g, per_portion.cholesterol_mg, per_portion.carbs_g, per_portion.sugar_g,
-  per_portion.fiber_total_g, per_portion.fiber_soluble_g, per_portion.fiber_insoluble_g,
-  per_portion.sodium_mg, per_portion.potassium_mg, derived.energy_from_macros_kcal,
-  notes]
-  sources: [{note: Detailed macro table shared by user on 2025-11-02, url: user_provided_best_effort_estimate}]
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed: [derived.energy_from_macros_kcal, last_verified, notes, per_portion.carbs_available_g,
-  per_portion.carbs_g, per_portion.carbs_total_g, per_portion.energy_kcal, per_portion.polyols_g,
-  version]
-  sources: []
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
-- timestamp: '2025-11-05T19:30:00+00:00'
-  updated_by: 'Claude Code (Sonnet 4.5) - Agent 1'
-  reason: 'Enriched with nutrient estimates based on minestrone components: cannellini beans (~120g), potato (~100g), fennel (~50g), cabbage (~80g), tomatoes (~150g), olive oil (~10g), parmesan (~15g), vegetable broth. Populated 22 nutrients from 0 to estimated values: magnesium (95 mg from beans/vegetables), calcium (160 mg from parmesan/greens), iron (5.5 mg from beans), zinc (2.8 mg), vitamin C (45 mg from cabbage/tomatoes), manganese (1.2 mg), copper (0.6 mg from beans), selenium (70 mcg), phosphorus (280 mg from beans), vitamin A (120 mcg from vegetables), vitamin E (2.8 mg from olive oil), vitamin K (85 mcg from cabbage), B-vitamins (B1: 0.5 mg, B2: 0.25 mg, B3: 3.5 mg, B5: 0.9 mg, B6: 0.5 mg from beans/vegetables, B9: 280 mcg from beans/greens, B12: 0.15 mcg from parmesan), choline (65 mg), iodine (6 mcg), omega-3 ALA (0.1 g), omega-6 LA (1.5 g from olive oil). Confidence: MEDIUM (±20-40% - multi-component vegetable soup).'
-  fields_changed: [iodine_ug, magnesium_mg, calcium_mg, iron_mg, zinc_mg, vitamin_c_mg, manganese_mg, copper_mg, selenium_ug, phosphorus_mg, vitamin_a_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_ala_g, omega6_la_g]
-  sources:
-  - note: 'Component-based estimation: cannellini beans, potato, fennel, cabbage, tomatoes, olive oil, parmesan. Based on USDA data for individual ingredients.'
+  - timestamp: 2025-11-02T10:00:00+0000
+    updated_by: 'LLM: GPT-5 Codex'
+    reason: Updated soup macros to match user-supplied estimate with broth sodium detail
+    fields_changed: [version, last_verified, portion.est_weight_g, assumptions.salt_scheme, per_portion.energy_kcal,
+    per_portion.protein_g, per_portion.fat_g, per_portion.sat_fat_g, per_portion.mufa_g,
+    per_portion.pufa_g, per_portion.cholesterol_mg, per_portion.carbs_g, per_portion.sugar_g,
+    per_portion.fiber_total_g, per_portion.fiber_soluble_g, per_portion.fiber_insoluble_g,
+    per_portion.sodium_mg, per_portion.potassium_mg, derived.energy_from_macros_kcal,
+    notes]
+    sources: [{note: Detailed macro table shared by user on 2025-11-02, url: user_provided_best_effort_estimate}]
+  - timestamp: '2025-11-02T19:20:00+00:00'
+    updated_by: 'LLM: GPT-5 Codex'
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed: [derived.energy_from_macros_kcal, last_verified, notes, per_portion.carbs_available_g,
+    per_portion.carbs_g, per_portion.carbs_total_g, per_portion.energy_kcal, per_portion.polyols_g,
+    version]
+    sources: []
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
+  - timestamp: '2025-11-05T19:30:00+00:00'
+    updated_by: 'Claude Code (Sonnet 4.5) - Agent 1'
+    reason: 'Enriched with nutrient estimates based on minestrone components: cannellini beans (~120g), potato (~100g), fennel (~50g), cabbage (~80g), tomatoes (~150g), olive oil (~10g), parmesan (~15g), vegetable broth. Populated 22 nutrients from 0 to estimated values: magnesium (95 mg from beans/vegetables), calcium (160 mg from parmesan/greens), iron (5.5 mg from beans), zinc (2.8 mg), vitamin C (45 mg from cabbage/tomatoes), manganese (1.2 mg), copper (0.6 mg from beans), selenium (70 mcg), phosphorus (280 mg from beans), vitamin A (120 mcg from vegetables), vitamin E (2.8 mg from olive oil), vitamin K (85 mcg from cabbage), B-vitamins (B1: 0.5 mg, B2: 0.25 mg, B3: 3.5 mg, B5: 0.9 mg, B6: 0.5 mg from beans/vegetables, B9: 280 mcg from beans/greens, B12: 0.15 mcg from parmesan), choline (65 mg), iodine (6 mcg), omega-3 ALA (0.1 g), omega-6 LA (1.5 g from olive oil). Confidence: MEDIUM (±20-40% - multi-component vegetable soup).'
+    fields_changed: [iodine_ug, magnesium_mg, calcium_mg, iron_mg, zinc_mg, vitamin_c_mg, manganese_mg, copper_mg, selenium_ug, phosphorus_mg, vitamin_a_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_ala_g, omega6_la_g]
+    sources:
+    - note: 'Component-based estimation: cannellini beans, potato, fennel, cabbage, tomatoes, olive oil, parmesan. Based on USDA data for individual ingredients.'
     url: 'https://fdc.nal.usda.gov/'
     confidence: 'MEDIUM - multi-component vegetable soup'
 ```

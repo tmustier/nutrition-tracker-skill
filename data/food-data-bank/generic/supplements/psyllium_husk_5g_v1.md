@@ -98,46 +98,46 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: 2025-10-31T00:00:00+0000
-  updated_by: Claude Code (Sonnet 4.5)
-  reason: Initial entry for psyllium husk supplement tracking, user requested 5g portion size
-  fields_changed: [all fields]
-  sources: [{note: USDA FoodData Central reference values for psyllium seed husk, url: 'https://fdc.nal.usda.gov/'},
-  {note: User specified 5g portion size, url: user_request}]
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed: [derived.energy_from_macros_kcal, last_verified, notes, per_portion.carbs_available_g,
-  per_portion.carbs_g, per_portion.carbs_total_g, per_portion.energy_kcal, per_portion.polyols_g,
-  version]
-  sources: []
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
-- timestamp: '2025-11-05T00:00:00+00:00'
-  updated_by: 'Claude Code (Sonnet 4.5)'
-  reason: 'Enriched 17 priority nutrients with USDA/research data for 5g portion. Most values remain 0 as expected for pure fiber supplement; updated non-zero values: phosphorus (2.05mg), vitamin B1 (0.002mg), B3 (0.02mg), B6 (0.005mg), B9 (2.9µg), and vitamin E (0.005mg). Copper, manganese, selenium, iodine, and all other priority nutrients confirmed as 0 or trace.'
-  fields_changed: [per_portion.phosphorus_mg, per_portion.vitamin_b1_mg, per_portion.vitamin_b3_mg,
+  - timestamp: 2025-10-31T00:00:00+0000
+    updated_by: Claude Code (Sonnet 4.5)
+    reason: Initial entry for psyllium husk supplement tracking, user requested 5g portion size
+    fields_changed: [all fields]
+    sources: [{note: USDA FoodData Central reference values for psyllium seed husk, url: 'https://fdc.nal.usda.gov/'},
+    {note: User specified 5g portion size, url: user_request}]
+  - timestamp: '2025-11-02T19:20:00+00:00'
+    updated_by: 'LLM: GPT-5 Codex'
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed: [derived.energy_from_macros_kcal, last_verified, notes, per_portion.carbs_available_g,
+    per_portion.carbs_g, per_portion.carbs_total_g, per_portion.energy_kcal, per_portion.polyols_g,
+    version]
+    sources: []
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
+  - timestamp: '2025-11-05T00:00:00+00:00'
+    updated_by: 'Claude Code (Sonnet 4.5)'
+    reason: 'Enriched 17 priority nutrients with USDA/research data for 5g portion. Most values remain 0 as expected for pure fiber supplement; updated non-zero values: phosphorus (2.05mg), vitamin B1 (0.002mg), B3 (0.02mg), B6 (0.005mg), B9 (2.9µg), and vitamin E (0.005mg). Copper, manganese, selenium, iodine, and all other priority nutrients confirmed as 0 or trace.'
+    fields_changed: [per_portion.phosphorus_mg, per_portion.vitamin_b1_mg, per_portion.vitamin_b3_mg,
     per_portion.vitamin_b6_mg, per_portion.vitamin_b9_ug, per_portion.vitamin_e_mg]
-  sources:
+    sources:
   - note: 'Norwegian Food Composition Database (Matvaretabellen.no) - psyllium husk per 100g, converted to 5g portion'
     url: 'https://www.matvaretabellen.no/en/psyllium-husk/'
   - note: 'Scientific literature on Plantago ovata mineral composition for trace element verification'
     url: 'https://www.researchgate.net/publication/346525992'
-- timestamp: '2025-11-05T17:00:00+00:00'
-  updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: Verified 6 additional nutrients remain 0 - psyllium husk is pure fiber with negligible fat content
-  fields_changed: []
-  sources: [{note: 'Norwegian Food Composition Database (Matvaretabellen.no) per 100g psyllium husk: total fat 0.5g with omega-3 and omega-6 both 0g. B5 (pantothenic acid), B7 (biotin), chromium, and molybdenum not listed (trace/absent in pure fiber supplement). Confirmed all target nutrients remain 0 for 5g portion.', url: 'https://www.matvaretabellen.no/en/psyllium-husk/'}]
-- timestamp: '2025-11-05T15:05:00+00:00'
-  updated_by: 'Agent 4: Claude Code (Sonnet 4.5)'
-  reason: 'Final enrichment pass: Added trace amounts of copper, selenium, chloride, sulfur, vitamin B2, and choline for 5g psyllium husk portion based on Plantago ovata composition'
-  fields_changed: [copper_mg, selenium_ug, chloride_mg, sulfur_mg, vitamin_b2_mg, choline_mg, version]
-  sources:
-  - note: 'Research on Plantago ovata seed husk composition: copper ~0.2mg/100g, selenium ~6µg/100g, trace minerals from plant cell walls'
+  - timestamp: '2025-11-05T17:00:00+00:00'
+    updated_by: 'LLM: Claude Sonnet 4.5'
+    reason: Verified 6 additional nutrients remain 0 - psyllium husk is pure fiber with negligible fat content
+    fields_changed: []
+    sources: [{note: 'Norwegian Food Composition Database (Matvaretabellen.no) per 100g psyllium husk: total fat 0.5g with omega-3 and omega-6 both 0g. B5 (pantothenic acid), B7 (biotin), chromium, and molybdenum not listed (trace/absent in pure fiber supplement). Confirmed all target nutrients remain 0 for 5g portion.', url: 'https://www.matvaretabellen.no/en/psyllium-husk/'}]
+  - timestamp: '2025-11-05T15:05:00+00:00'
+    updated_by: 'Agent 4: Claude Code (Sonnet 4.5)'
+    reason: 'Final enrichment pass: Added trace amounts of copper, selenium, chloride, sulfur, vitamin B2, and choline for 5g psyllium husk portion based on Plantago ovata composition'
+    fields_changed: [copper_mg, selenium_ug, chloride_mg, sulfur_mg, vitamin_b2_mg, choline_mg, version]
+    sources:
+    - note: 'Research on Plantago ovata seed husk composition: copper ~0.2mg/100g, selenium ~6µg/100g, trace minerals from plant cell walls'
     url: 'https://www.researchgate.net/publication/346525992'
   - note: 'Sulfur content from sulfated polysaccharides in fiber matrix (~100mg/100g). Chloride trace from natural plant salts (~20mg/100g).'
     url: 'scientific_literature'

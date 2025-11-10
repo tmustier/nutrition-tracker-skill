@@ -108,22 +108,22 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: 2025-11-02
-  reason: Initial entry - component-based estimation for dim sum dish
-  fields_changed: [all fields]
-  evidence: Comprehensive research using Ping Pong London benchmark, USDA component data, recipe analysis, and upscale venue adjustment
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
-- timestamp: '2025-11-05T14:55:00+00:00'
-  updated_by: 'Agent 4: Claude Code (Sonnet 4.5)'
-  reason: 'Comprehensive nutrient enrichment for 26g dumpling using component-based USDA data (11g prawns, 6g wheat starch wrapper, 2g Chinese chives, 1.3g oil, 1.7g seasonings)'
-  fields_changed: [copper_mg, selenium_ug, chromium_ug, molybdenum_ug, phosphorus_mg, chloride_mg, sulfur_mg, vitamin_a_ug, vitamin_d_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_epa_mg, omega3_dha_mg, omega3_ala_g, omega6_la_g, version, last_verified]
-  sources:
-  - note: 'USDA FoodData Central - Shrimp/prawn raw (FDC 175179): selenium 38µg/100g, phosphorus 224mg/100g, B12, EPA 171mg/100g, DHA 144mg/100g'
+  - timestamp: 2025-11-02
+    reason: Initial entry - component-based estimation for dim sum dish
+    fields_changed: [all fields]
+    evidence: Comprehensive research using Ping Pong London benchmark, USDA component data, recipe analysis, and upscale venue adjustment
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
+  - timestamp: '2025-11-05T14:55:00+00:00'
+    updated_by: 'Agent 4: Claude Code (Sonnet 4.5)'
+    reason: 'Comprehensive nutrient enrichment for 26g dumpling using component-based USDA data (11g prawns, 6g wheat starch wrapper, 2g Chinese chives, 1.3g oil, 1.7g seasonings)'
+    fields_changed: [copper_mg, selenium_ug, chromium_ug, molybdenum_ug, phosphorus_mg, chloride_mg, sulfur_mg, vitamin_a_ug, vitamin_d_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_epa_mg, omega3_dha_mg, omega3_ala_g, omega6_la_g, version, last_verified]
+    sources:
+    - note: 'USDA FoodData Central - Shrimp/prawn raw (FDC 175179): selenium 38µg/100g, phosphorus 224mg/100g, B12, EPA 171mg/100g, DHA 144mg/100g'
     url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/175179'
   - note: 'USDA FoodData Central - Chinese chives (Allium tuberosum): vitamin A, K from greens'
     url: 'https://fdc.nal.usda.gov/'

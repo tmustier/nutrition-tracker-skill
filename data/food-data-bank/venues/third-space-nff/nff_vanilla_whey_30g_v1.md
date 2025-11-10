@@ -104,30 +104,30 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
-- timestamp: 2025-10-31T00:00:00+0000
-  updated_by: Claude Code (Sonnet 4.5)
-  reason: Initial entry from OpenFoodFacts data with micronutrient estimation from whey concentrate profiles
-  fields_changed: [all fields]
-  sources: [{note: 'Complete macronutrient data: 125 kcal, 22g P, 6.5g C (3.4g sugar), 1.4g F
+  - timestamp: 2025-10-31T00:00:00+0000
+    updated_by: Claude Code (Sonnet 4.5)
+    reason: Initial entry from OpenFoodFacts data with micronutrient estimation from whey concentrate profiles
+    fields_changed: [all fields]
+    sources: [{note: 'Complete macronutrient data: 125 kcal, 22g P, 6.5g C (3.4g sugar), 1.4g F
       (1g sat), 0.5g fiber, 39mg Na', url: 'https://uk-ga.openfoodfacts.org/product/5065003325005/whey-protein-vanilla-natural-fitness-food'},
   {note: 'User-provided ingredient list: Whey Protein Concentrate (87%), Natural Flavouring
       (7%), Xanthan Gum, Steviol Glycosides, Sunflower Lecithin', url: user_input}]
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed: [derived.energy_from_macros_kcal, last_verified, notes, per_portion.carbs_available_g,
-  per_portion.carbs_g, per_portion.carbs_total_g, per_portion.energy_kcal, per_portion.polyols_g,
-  version]
-  sources: []
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
-- timestamp: '2025-11-05T17:45:00+00:00'
-  updated_by: 'Agent 2: Claude Code (Sonnet 4.5)'
-  reason: 'Phase 3 enrichment: Added complete USDA nutrient data for 21 migrated fields from whey protein concentrate'
-  fields_changed: [iron_mg, manganese_mg, copper_mg, selenium_ug, chromium_ug, molybdenum_ug, phosphorus_mg, chloride_mg, sulfur_mg, vitamin_a_ug, vitamin_d_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_epa_mg, omega3_dha_mg, omega3_ala_g, omega6_la_g, boron_mg, silicon_mg, vanadium_ug, nickel_ug]
-  sources: [{note: 'USDA FDC #171284 (whey protein concentrate): B vitamins (B1 0.38mg/100g, B2 1.44mg/100g, B5 2.65mg/100g, B12 1.2µg/100g), selenium 10.5µg/100g, phosphorus 585mg/100g, choline 18.5mg/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'Values scaled to 30g scoop: 87% whey protein concentrate with xanthan gum, stevia, sunflower lecithin', url: component_analysis}, {note: 'High sulfur content (180mg) typical of whey due to sulfur-containing amino acids (cysteine, methionine)', url: amino_acid_profile}]
+  - timestamp: '2025-11-02T19:20:00+00:00'
+    updated_by: 'LLM: GPT-5 Codex'
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed: [derived.energy_from_macros_kcal, last_verified, notes, per_portion.carbs_available_g,
+    per_portion.carbs_g, per_portion.carbs_total_g, per_portion.energy_kcal, per_portion.polyols_g,
+    version]
+    sources: []
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
+  - timestamp: '2025-11-05T17:45:00+00:00'
+    updated_by: 'Agent 2: Claude Code (Sonnet 4.5)'
+    reason: 'Phase 3 enrichment: Added complete USDA nutrient data for 21 migrated fields from whey protein concentrate'
+    fields_changed: [iron_mg, manganese_mg, copper_mg, selenium_ug, chromium_ug, molybdenum_ug, phosphorus_mg, chloride_mg, sulfur_mg, vitamin_a_ug, vitamin_d_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_epa_mg, omega3_dha_mg, omega3_ala_g, omega6_la_g, boron_mg, silicon_mg, vanadium_ug, nickel_ug]
+    sources: [{note: 'USDA FDC #171284 (whey protein concentrate): B vitamins (B1 0.38mg/100g, B2 1.44mg/100g, B5 2.65mg/100g, B12 1.2µg/100g), selenium 10.5µg/100g, phosphorus 585mg/100g, choline 18.5mg/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'Values scaled to 30g scoop: 87% whey protein concentrate with xanthan gum, stevia, sunflower lecithin', url: component_analysis}, {note: 'High sulfur content (180mg) typical of whey due to sulfur-containing amino acids (cysteine, methionine)', url: amino_acid_profile}]
 ```

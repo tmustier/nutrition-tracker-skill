@@ -104,33 +104,33 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: "2025-11-04T00:00:00+00:00"
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: "Initial population from USDA FoodData Central (FDC ID 169941) scaled to standard 168g medium persimmon portion"
-  fields_changed:
-  - all fields
-  sources:
-  - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/169941/nutrients
+  - timestamp: "2025-11-04T00:00:00+00:00"
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Initial population from USDA FoodData Central (FDC ID 169941) scaled to standard 168g medium persimmon portion"
+    fields_changed:
+    - all fields
+    sources:
+    - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/169941/nutrients
     note: "Primary USDA source for Japanese persimmons, raw"
   - note: "Magnesium: 9mg/100g, zinc: 0.11mg/100g, selenium: 0.6µg/100g, vitamin E: 0.73mg/100g, copper: 0.113mg/100g, manganese: 0.355mg/100g from USDA FDC 169941"
   - note: "Vitamin A: 81µg RAE/100g from USDA (gap in current schema)"
   - note: "Fiber soluble/insoluble split based on research: PMC8615262 showing persimmon SDF/IDF ratio of 1:3 to 1:6"
   - note: "MUFA 0.04g/100g confirmed from comparative nutrition data"
-- timestamp: "2025-11-05T00:00:00+00:00"
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: "Enrichment with 17 priority nutrients from USDA FoodData Central (FDC ID 169941)"
-  fields_changed:
-  - vitamin_a_ug (0 → 136)
-  - vitamin_k_ug (0 → 4.4)
-  - vitamin_b1_mg (0 → 0.05)
-  - vitamin_b2_mg (0 → 0.03)
-  - vitamin_b3_mg (0 → 0.17)
-  - vitamin_b6_mg (0 → 0.17)
-  - vitamin_b9_ug (0 → 13)
-  - choline_mg (0 → 12.8)
-  - phosphorus_mg (0 → 29)
-  sources:
-  - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/169941/nutrients
+  - timestamp: "2025-11-05T00:00:00+00:00"
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Enrichment with 17 priority nutrients from USDA FoodData Central (FDC ID 169941)"
+    fields_changed:
+    - vitamin_a_ug (0 → 136)
+    - vitamin_k_ug (0 → 4.4)
+    - vitamin_b1_mg (0 → 0.05)
+    - vitamin_b2_mg (0 → 0.03)
+    - vitamin_b3_mg (0 → 0.17)
+    - vitamin_b6_mg (0 → 0.17)
+    - vitamin_b9_ug (0 → 13)
+    - choline_mg (0 → 12.8)
+    - phosphorus_mg (0 → 29)
+    sources:
+    - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/169941/nutrients
     note: "Primary USDA source: Persimmons, japanese, raw (FDC ID 169941)"
   - url: https://nutrivore.com/foods/japanese-persimmon-nutrients/
     note: "Cross-validation source with USDA FDC 169941 data per 100g"
@@ -140,28 +140,28 @@ change_log:
   - note: "All values scaled from per-100g to 168g portion (scale factor: 1.68)"
   - note: "Confirmed zero values: vitamin D, B12, iodine, omega-3 EPA/DHA (as expected for plant foods)"
   - note: "Vitamin A content primarily from beta-carotene; persimmons are exceptionally rich in provitamin A carotenoids"
-- timestamp: "2025-11-05T12:00:00+00:00"
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: "Enrichment with 4 additional nutrients (B5, B7, omega-3 ALA, omega-6 LA) from USDA and nutrivore sources"
-  fields_changed:
-  - vitamin_b5_mg (0 → 0.15)
-  - vitamin_b7_ug (0 → 3.4)
-  - omega3_ala_g (0 → 0.007)
-  - omega6_la_g (0 → 0.10)
-  sources:
-  - url: https://nutrivore.com/foods/japanese-persimmon-nutrients/
+  - timestamp: "2025-11-05T12:00:00+00:00"
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Enrichment with 4 additional nutrients (B5, B7, omega-3 ALA, omega-6 LA) from USDA and nutrivore sources"
+    fields_changed:
+    - vitamin_b5_mg (0 → 0.15)
+    - vitamin_b7_ug (0 → 3.4)
+    - omega3_ala_g (0 → 0.007)
+    - omega6_la_g (0 → 0.10)
+    sources:
+    - url: https://nutrivore.com/foods/japanese-persimmon-nutrients/
     note: "Per 168g serving: biotin 3.4µg (11% DV), omega-3 ALA 6.7mg, omega-6 LA 0.1g. Pantothenic acid not significant in persimmons."
   - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/169941/nutrients
     note: "USDA FDC 169941 confirms low/trace B5 in Japanese persimmons. Estimated 0.09mg per 100g scaled to 0.15mg per 168g."
   - note: "Fatty acids: ALA 6.7mg per 168g = 0.007g; LA 0.1g per 168g (from nutrivore/USDA composite data)"
   - note: "Chromium and molybdenum: Not routinely analyzed by USDA for fruits; confirmed 0 per research/usda-api-research.md"
   - note: "Fiber soluble (0.9g) and insoluble (5.1g) already populated in previous enrichment"
-- timestamp: "2025-11-05T22:30:00+00:00"
-  updated_by: "Agent 8 - Claude Sonnet 4.5"
-  reason: "Schema compliance fix: Added sulfur_g field (was sulfur_mg). Sulfur estimated from protein content (fruit: ~3mg S per g protein)."
-  fields_changed:
-  - per_portion.sulfur_g
-  sources:
-  - note: "Sulfur content estimated at 0.003g based on 1.0g protein × 3mg/g coefficient for fruits. Fruits are very low in sulfur-containing amino acids."
+  - timestamp: "2025-11-05T22:30:00+00:00"
+    updated_by: "Agent 8 - Claude Sonnet 4.5"
+    reason: "Schema compliance fix: Added sulfur_g field (was sulfur_mg). Sulfur estimated from protein content (fruit: ~3mg S per g protein)."
+    fields_changed:
+    - per_portion.sulfur_g
+    sources:
+    - note: "Sulfur content estimated at 0.003g based on 1.0g protein × 3mg/g coefficient for fruits. Fruits are very low in sulfur-containing amino acids."
     url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4438303/"
 ```

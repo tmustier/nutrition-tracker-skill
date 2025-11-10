@@ -112,37 +112,36 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: "2025-11-05T16:00:00+00:00"
-  updated_by: "Claude Code (Sonnet 4.5)"
-  reason: "CRITICAL FIX: Corrected choline scaling error"
-  fields_changed:
+  - timestamp: "2025-11-05T16:00:00+00:00"
+    updated_by: "Claude Code (Sonnet 4.5)"
+    reason: "CRITICAL FIX: Corrected choline scaling error"
+    fields_changed:
     - "choline_mg: 57 → 12 (corrected from 3-4× overestimate; typical beer contains 10-15mg/pint)"
-  notes: "Previous value of 57mg was inconsistent with typical beer choline content. Corrected to ~12mg based on USDA data for regular beer (~10mg/pint) scaled to Guinness portion."
-- timestamp: 2025-10-31T17:00:00+0000
-  updated_by: Claude Code (Sonnet 4.5)
-  reason: Initial entry for tracking Guinness consumption
-  fields_changed: [all fields]
-  sources: [{note: 'Official Guinness nutrition data: 210 kcal, 1.9g protein, 18g carbs per pint',
+  - timestamp: 2025-10-31T17:00:00+0000
+    updated_by: Claude Code (Sonnet 4.5)
+    reason: Initial entry for tracking Guinness consumption
+    fields_changed: [all fields]
+    sources: [{note: 'Official Guinness nutrition data: 210 kcal, 1.9g protein, 18g carbs per pint',
     url: 'https://www.guinness.com'}, {note: 'User tracking two pints consumed at
       17:20 and 17:50', url: user_request}]
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed: [derived.energy_from_macros_kcal, last_verified, notes, per_portion.carbs_available_g,
-  per_portion.carbs_g, per_portion.carbs_total_g, per_portion.energy_kcal, per_portion.polyols_g,
-  version]
-  sources: []
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
-- timestamp: '2025-11-05T12:00:00+00:00'
-  updated_by: 'Claude Code (Sonnet 4.5)'
-  reason: 'Enriched 17 priority nutrients using USDA FoodData Central data'
-  fields_changed: [version, last_verified, iodine_ug, phosphorus_mg, copper_mg, selenium_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b6_mg, vitamin_b9_ug, vitamin_b12_ug, choline_mg, notes]
-  sources:
+  - timestamp: '2025-11-02T19:20:00+00:00'
+    updated_by: 'LLM: GPT-5 Codex'
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed: [derived.energy_from_macros_kcal, last_verified, notes, per_portion.carbs_available_g,
+    per_portion.carbs_g, per_portion.carbs_total_g, per_portion.energy_kcal, per_portion.polyols_g,
+    version]
+    sources: []
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
+  - timestamp: '2025-11-05T12:00:00+00:00'
+    updated_by: 'Claude Code (Sonnet 4.5)'
+    reason: 'Enriched 17 priority nutrients using USDA FoodData Central data'
+    fields_changed: [version, last_verified, iodine_ug, phosphorus_mg, copper_mg, selenium_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b6_mg, vitamin_b9_ug, vitamin_b12_ug, choline_mg, notes]
+    sources:
     - note: 'USDA FoodData Central #168746 - Alcoholic beverage, beer, regular, all'
       url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/168746/nutrients'
     - note: 'Foodstruct.com beer nutrition data (USDA-derived) per 100g'
@@ -151,11 +150,11 @@ change_log:
       url: 'https://www.ars.usda.gov/ARSUSERFILES/80400535/DATA/IODINE/'
     - note: 'Values scaled from per 100ml/100g to 568ml pint (multiplier: 5.68x)'
       calculation: 'Example: B3 (niacin) 0.51mg/100ml × 5.68 = 2.9mg per pint'
-- timestamp: '2025-11-05T18:00:00+00:00'
-  updated_by: 'Claude Code (Sonnet 4.5)'
-  reason: 'Additional nutrient enrichment: B5, B7, omega-6 LA, omega-3 ALA with USDA values'
-  fields_changed: [version, vitamin_b5_mg, vitamin_b7_ug, omega6_la_g, omega3_ala_g, notes]
-  sources:
+  - timestamp: '2025-11-05T18:00:00+00:00'
+    updated_by: 'Claude Code (Sonnet 4.5)'
+    reason: 'Additional nutrient enrichment: B5, B7, omega-6 LA, omega-3 ALA with USDA values'
+    fields_changed: [version, vitamin_b5_mg, vitamin_b7_ug, omega6_la_g, omega3_ala_g, notes]
+    sources:
     - note: 'USDA FoodData Central #168746 - Regular beer nutrient data'
       url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/168746/nutrients'
     - note: 'Foodstruct.com beer nutrition (USDA-derived): B5=0.04mg/100ml, choline=10mg/100ml'

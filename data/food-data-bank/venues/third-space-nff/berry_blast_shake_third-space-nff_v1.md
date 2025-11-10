@@ -106,39 +106,39 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: 2025-11-04T09:30:00+00:00
-  updated_by: Claude Code (Sonnet 4.5)
-  reason: Initial entry - component-based estimation anchored to user-provided macros
-  fields_changed:
-  - all fields
-  sources:
-  - url: user_input
+  - timestamp: 2025-11-04T09:30:00+00:00
+    updated_by: Claude Code (Sonnet 4.5)
+    reason: Initial entry - component-based estimation anchored to user-provided macros
+    fields_changed:
+    - all fields
+    sources:
+    - url: user_input
     note: 'User-provided macros: 186 kcal, 23g P, 11g C, 4.7g F'
   - url: /data/food-data-bank/venues/third-space-nff/nff_vanilla_whey_30g_v1.md
     note: 'Third Space vanilla whey protein 30g component data'
   - url: https://fdc.nal.usda.gov/
     note: 'USDA FoodData Central for mixed berries and almond milk micronutrient profiles'
-- timestamp: "2025-11-05T21:00:00+00:00"
-  updated_by: "Claude Code Agent 5 (Sonnet 4.5)"
-  reason: "Phase 3 enrichment: Added 14 missing nutrients from USDA component data (whey protein, almond milk, berries)"
-  fields_changed:
-  - version
-  - last_verified
-  - phosphorus_mg (0 → 174)
-  - vitamin_a_ug (0 → 150)
-  - vitamin_k_ug (0 → 5)
-  - vitamin_b1_mg (0 → 0.27)
-  - vitamin_b2_mg (0 → 0.3)
-  - vitamin_b3_mg (0 → 3.5)
-  - vitamin_b5_mg (0 → 1.7)
-  - vitamin_b6_mg (0 → 0.36)
-  - vitamin_b9_ug (0 → 20)
-  - vitamin_b12_ug (0 → 1.0)
-  - choline_mg (0 → 68)
-  - omega3_ala_g (0 → 0.01)
-  - omega6_la_g (0 → 0.03)
-  sources:
-  - note: "USDA whey protein isolate data scaled for 30g: phosphorus 174mg, choline 68mg, B vitamins"
-  - note: "Fortified almond milk (270ml) contributes vitamin A 150µg"
-  - note: "Whey protein provides majority of B vitamins: B3 3.5mg, B5 1.7mg, B12 1.0µg"
+  - timestamp: "2025-11-05T21:00:00+00:00"
+    updated_by: "Claude Code Agent 5 (Sonnet 4.5)"
+    reason: "Phase 3 enrichment: Added 14 missing nutrients from USDA component data (whey protein, almond milk, berries)"
+    fields_changed:
+    - version
+    - last_verified
+    - phosphorus_mg (0 → 174)
+    - vitamin_a_ug (0 → 150)
+    - vitamin_k_ug (0 → 5)
+    - vitamin_b1_mg (0 → 0.27)
+    - vitamin_b2_mg (0 → 0.3)
+    - vitamin_b3_mg (0 → 3.5)
+    - vitamin_b5_mg (0 → 1.7)
+    - vitamin_b6_mg (0 → 0.36)
+    - vitamin_b9_ug (0 → 20)
+    - vitamin_b12_ug (0 → 1.0)
+    - choline_mg (0 → 68)
+    - omega3_ala_g (0 → 0.01)
+    - omega6_la_g (0 → 0.03)
+    sources:
+    - note: "USDA whey protein isolate data scaled for 30g: phosphorus 174mg, choline 68mg, B vitamins"
+    - note: "Fortified almond milk (270ml) contributes vitamin A 150µg"
+    - note: "Whey protein provides majority of B vitamins: B3 3.5mg, B5 1.7mg, B12 1.0µg"
 ```

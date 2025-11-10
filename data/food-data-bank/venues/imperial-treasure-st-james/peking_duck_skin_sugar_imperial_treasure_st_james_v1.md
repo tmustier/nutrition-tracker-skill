@@ -112,14 +112,14 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
-- timestamp: 2025-11-02T10:00:00+0000
-  updated_by: Claude Code (Sonnet 4.5)
-  reason: Initial entry with comprehensive component-based estimation following ESTIMATE.md protocol
-  fields_changed: [version, source.menu_page, source.evidence, aliases, portion.est_weight_g, portion.notes,
-  assumptions.salt_scheme, assumptions.oil_type, assumptions.prep, all per_portion
+  - timestamp: 2025-11-02T10:00:00+0000
+    updated_by: Claude Code (Sonnet 4.5)
+    reason: Initial entry with comprehensive component-based estimation following ESTIMATE.md protocol
+    fields_changed: [version, source.menu_page, source.evidence, aliases, portion.est_weight_g, portion.notes,
+    assumptions.salt_scheme, assumptions.oil_type, assumptions.prep, all per_portion
     fields, derived.omega_3_total_g, derived.omega_6_g, quality.confidence, quality.gaps,
   notes]
-  sources: [{note: Imperial Treasure official website - traditional Peking duck preparation method,
+    sources: [{note: Imperial Treasure official website - traditional Peking duck preparation method,
     url: 'https://www.imperialtreasure.com/restaurant/ImperialTreasureSuperPekingDuck-2'},
   {note: 'Scientific research: Duck fat fatty acid composition (MUFA 49.4%, PUFA 12.9%,
       SFA 33.3%)', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC9816803/'}, {note: Roasted
@@ -127,25 +127,25 @@ change_log:
   {note: 'USDA FoodData Central - duck meat and skin roasted composition, micronutrients',
     url: 'https://fdc.nal.usda.gov/'}, {note: 'User consumed 2 small squares (24g
       total) on 2025-11-02, Imperial Treasure St. James venue', url: user_request}]
-- timestamp: 2025-11-02T21:00:00+0000
-  updated_by: Claude Code (Sonnet 4.5)
-  reason: "v3: Corrected portion weight based on ChatGPT 5-Pro analysis and user feedback. Original\
-  \ estimate of 12g was too high; actual 1\xD71 inch squares are \u22482.5g. Added\
-  \ new carb schema (carbs_available_g, carbs_total_g, polyols_g) per ESTIMATE.md\
-  \ updates."
-  fields_changed: [version, portion.est_weight_g, portion.notes, source.evidence, all per_portion nutrition
+  - timestamp: 2025-11-02T21:00:00+0000
+    updated_by: Claude Code (Sonnet 4.5)
+    reason: "v3: Corrected portion weight based on ChatGPT 5-Pro analysis and user feedback. Original\
+    \ estimate of 12g was too high; actual 1\xD71 inch squares are \u22482.5g. Added\
+    \ new carb schema (carbs_available_g, carbs_total_g, polyols_g) per ESTIMATE.md\
+    \ updates."
+    fields_changed: [version, portion.est_weight_g, portion.notes, source.evidence, all per_portion nutrition
     values, per_portion.carbs_available_g, per_portion.polyols_g, per_portion.carbs_total_g]
-  sources: [{note: "ChatGPT 5-Pro analysis confirmed 1\xD71 inch squares with light sugar dabbing\
+    sources: [{note: "ChatGPT 5-Pro analysis confirmed 1\xD71 inch squares with light sugar dabbing\
       \ are ~20 kcal/2.5g each (not 50 kcal/12g)", url: user_feedback}]
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
-- timestamp: '2025-11-05T17:15:00+00:00'
-  updated_by: 'Agent 2: Claude Code (Sonnet 4.5)'
-  reason: 'Phase 3 enrichment: Added complete USDA nutrient data for 24 migrated fields scaled to tiny 2.5g portion'
-  fields_changed: [iodine_ug, magnesium_mg, calcium_mg, manganese_mg, copper_mg, selenium_ug, chromium_ug, molybdenum_ug, phosphorus_mg, chloride_mg, sulfur_mg, vitamin_a_ug, vitamin_d_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_epa_mg, omega3_dha_mg, omega3_ala_g, omega6_la_g, boron_mg, silicon_mg, vanadium_ug, nickel_ug]
-  sources: [{note: 'USDA FDC #174575 (duck skin roasted): B vitamins (B2 0.22mg/100g, B3 4.21mg/100g), selenium 14.4µg/100g, phosphorus 47mg/100g, omega-6 LA 2.1g/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'Values scaled to 2.5g portion: 2.5g ultra-crispy roasted duck skin (much fat rendered out) + trace sugar dabbing', url: component_analysis}, {note: 'Duck fat fatty acid composition per PMC9816803: MUFA 49.4%, PUFA 12.9% (omega-3 ~6%, omega-6 ~94% of PUFA)', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC9816803/'}]
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
+  - timestamp: '2025-11-05T17:15:00+00:00'
+    updated_by: 'Agent 2: Claude Code (Sonnet 4.5)'
+    reason: 'Phase 3 enrichment: Added complete USDA nutrient data for 24 migrated fields scaled to tiny 2.5g portion'
+    fields_changed: [iodine_ug, magnesium_mg, calcium_mg, manganese_mg, copper_mg, selenium_ug, chromium_ug, molybdenum_ug, phosphorus_mg, chloride_mg, sulfur_mg, vitamin_a_ug, vitamin_d_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_epa_mg, omega3_dha_mg, omega3_ala_g, omega6_la_g, boron_mg, silicon_mg, vanadium_ug, nickel_ug]
+    sources: [{note: 'USDA FDC #174575 (duck skin roasted): B vitamins (B2 0.22mg/100g, B3 4.21mg/100g), selenium 14.4µg/100g, phosphorus 47mg/100g, omega-6 LA 2.1g/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'Values scaled to 2.5g portion: 2.5g ultra-crispy roasted duck skin (much fat rendered out) + trace sugar dabbing', url: component_analysis}, {note: 'Duck fat fatty acid composition per PMC9816803: MUFA 49.4%, PUFA 12.9% (omega-3 ~6%, omega-6 ~94% of PUFA)', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC9816803/'}]
 ```

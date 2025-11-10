@@ -100,23 +100,23 @@ quality:
     method: Total fiber 0.6g from mushrooms, cabbage, and wheat wrapper. Split using general_plant_foods ratio (70% insoluble). 0.6g × 70% = 0.42g, rounded to 0.4g
 notes:
 - Component-based estimation for 1 piece (35g) vegetarian mushroom dumpling
-- Wrapper (13g cooked from ~11g raw wheat flour): 40 kcal, 1.1g P, 0.1g F, 8.4g C
-- Shiitake mushrooms (13g cooked): 7.3 kcal, 0.2g P, 0.03g F, 1.9g C
-- Napa cabbage (4g cooked): 0.5 kcal, sesame oil (3g): 26.5 kcal
-- Soy sauce (1.5g): 0.8 kcal, 0.12g P, 90mg Na, aromatics (0.5g): trace
-- Atwater validation: 4×1.5 + 4×10.5 + 9×3.1 = 75.9 kcal (within 1%)
+- "Wrapper (13g cooked from ~11g raw wheat flour): 40 kcal, 1.1g P, 0.1g F, 8.4g C"
+- "Shiitake mushrooms (13g cooked): 7.3 kcal, 0.2g P, 0.03g F, 1.9g C"
+- "Napa cabbage (4g cooked): 0.5 kcal, sesame oil (3g): 26.5 kcal"
+- "Soy sauce (1.5g): 0.8 kcal, 0.12g P, 90mg Na, aromatics (0.5g): trace"
+- "Atwater validation: 4×1.5 + 4×10.5 + 9×3.1 = 75.9 kcal (within 1%)"
 change_log:
-- timestamp: 2025-11-02
-  reason: Initial entry - component-based estimation from USDA FoodData Central
-  fields_changed: [all fields]
-  evidence: Comprehensive component analysis using USDA nutrition data for wheat flour, shiitake mushrooms, napa cabbage, sesame oil, and soy sauce
-  methodology: 'Component-based per ESTIMATE.md: Wrapper 13g (40 kcal), Shiitake 13g (7.3 kcal),
-  Cabbage 4g (0.5 kcal), Sesame oil 3g (26.5 kcal), Soy sauce 1.5g (0.8 kcal), Aromatics
-  0.5g (trace). Total 35g.'
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
+  - timestamp: 2025-11-02
+    reason: Initial entry - component-based estimation from USDA FoodData Central
+    fields_changed: [all fields]
+    evidence: Comprehensive component analysis using USDA nutrition data for wheat flour, shiitake mushrooms, napa cabbage, sesame oil, and soy sauce
+    methodology: 'Component-based per ESTIMATE.md: Wrapper 13g (40 kcal), Shiitake 13g (7.3 kcal),
+    Cabbage 4g (0.5 kcal), Sesame oil 3g (26.5 kcal), Soy sauce 1.5g (0.8 kcal), Aromatics
+    0.5g (trace). Total 35g.'
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
 ```

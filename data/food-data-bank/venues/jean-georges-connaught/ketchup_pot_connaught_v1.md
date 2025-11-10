@@ -91,55 +91,55 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: 2025-10-28 20:00:00+00:00
-  updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: Initial population based on Heinz UK ketchup profile scaled to 25g
-  fields_changed: [per_100g.energy_kcal, per_100g.protein_g, per_100g.fat_g, per_100g.sat_fat_g, per_100g.carbs_g,
-  per_100g.fiber_total_g, per_100g.sodium_mg, per_portion.energy_kcal, per_portion.protein_g,
-  per_portion.fat_g, per_portion.sat_fat_g, per_portion.carbs_g, per_portion.fiber_total_g,
-  per_portion.sodium_mg, portion.est_weight_g]
-  sources: [{note: 'ChatGPT nutritional breakdown provided by Thomas on 2025-10-28, based on
+  - timestamp: 2025-10-28 20:00:00+00:00
+    updated_by: 'LLM: Claude Sonnet 4.5'
+    reason: Initial population based on Heinz UK ketchup profile scaled to 25g
+    fields_changed: [per_100g.energy_kcal, per_100g.protein_g, per_100g.fat_g, per_100g.sat_fat_g, per_100g.carbs_g,
+    per_100g.fiber_total_g, per_100g.sodium_mg, per_portion.energy_kcal, per_portion.protein_g,
+    per_portion.fat_g, per_portion.sat_fat_g, per_portion.carbs_g, per_portion.fiber_total_g,
+    per_portion.sodium_mg, portion.est_weight_g]
+    sources: [{note: 'ChatGPT nutritional breakdown provided by Thomas on 2025-10-28, based on
       Heinz UK', url: user_input}]
-- timestamp: 2025-10-28 21:30:00+00:00
-  updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: Complete missing nutrition data with research-backed values
-  fields_changed: [per_100g.mufa_g, per_100g.pufa_g, per_100g.trans_fat_g, per_100g.cholesterol_mg,
-  per_100g.sugar_g, per_100g.potassium_mg, per_100g.iodine_ug, per_100g.magnesium_mg,
-  per_100g.calcium_mg, per_100g.iron_mg, per_100g.zinc_mg, per_100g.vitamin_c_mg,
-  per_portion.mufa_g, per_portion.pufa_g, per_portion.trans_fat_g, per_portion.cholesterol_mg,
-  per_portion.sugar_g, per_portion.potassium_mg, per_portion.iodine_ug, per_portion.magnesium_mg,
-  per_portion.calcium_mg, per_portion.iron_mg, per_portion.zinc_mg, per_portion.vitamin_c_mg]
-  sources: [{note: 'Heinz UK tomato ketchup: 22.8g sugar per 100g', url: 'https://www.sainsburys.co.uk/gol-ui/product/heinz-tomato-ketchup-910g'},
-  {note: 'USDA FoodData Central FDC 168556: micronutrients (potassium 281mg, calcium
+  - timestamp: 2025-10-28 21:30:00+00:00
+    updated_by: 'LLM: Claude Sonnet 4.5'
+    reason: Complete missing nutrition data with research-backed values
+    fields_changed: [per_100g.mufa_g, per_100g.pufa_g, per_100g.trans_fat_g, per_100g.cholesterol_mg,
+    per_100g.sugar_g, per_100g.potassium_mg, per_100g.iodine_ug, per_100g.magnesium_mg,
+    per_100g.calcium_mg, per_100g.iron_mg, per_100g.zinc_mg, per_100g.vitamin_c_mg,
+    per_portion.mufa_g, per_portion.pufa_g, per_portion.trans_fat_g, per_portion.cholesterol_mg,
+    per_portion.sugar_g, per_portion.potassium_mg, per_portion.iodine_ug, per_portion.magnesium_mg,
+    per_portion.calcium_mg, per_portion.iron_mg, per_portion.zinc_mg, per_portion.vitamin_c_mg]
+    sources: [{note: 'Heinz UK tomato ketchup: 22.8g sugar per 100g', url: 'https://www.sainsburys.co.uk/gol-ui/product/heinz-tomato-ketchup-910g'},
+    {note: 'USDA FoodData Central FDC 168556: micronutrients (potassium 281mg, calcium
       15mg, iron 0.35mg, magnesium 13mg, zinc 0.17mg, vitamin C 4.1mg per 100g)',
     url: 'https://fdc.nal.usda.gov/food-details/168556/nutrients'}, {note: 'USDA iodine
       database: ~1.2 mcg per 100g ketchup', url: 'https://www.ars.usda.gov/ARSUSERFILES/80400535/DATA/IODINE/'},
   {note: 'Fatty acid profile: MUFA 0.01g, PUFA 0.04g, trans fat 0g, cholesterol 0mg
       per 100g', url: various USDA sources}]
-- timestamp: 2025-10-29 00:00:00+00:00
-  updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: Populate fiber split and manganese for minimal fiber content
-  fields_changed: [per_portion.fiber_soluble_g, per_portion.fiber_insoluble_g, per_portion.manganese_mg]
-  sources: [{note: 'Tomato fiber is predominantly insoluble. With 0.1g total, split as 0.0g soluble
+  - timestamp: 2025-10-29 00:00:00+00:00
+    updated_by: 'LLM: Claude Sonnet 4.5'
+    reason: Populate fiber split and manganese for minimal fiber content
+    fields_changed: [per_portion.fiber_soluble_g, per_portion.fiber_insoluble_g, per_portion.manganese_mg]
+    sources: [{note: 'Tomato fiber is predominantly insoluble. With 0.1g total, split as 0.0g soluble
       (rounded from ~0.03g), 0.1g insoluble. Manganese trace, rounded to 0.', url: nutritional_research}]
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed: [last_verified, notes, per_portion.carbs_available_g, per_portion.carbs_g, per_portion.carbs_total_g,
-  per_portion.energy_kcal, per_portion.polyols_g, version]
-  sources: []
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
-- timestamp: '2025-11-05T18:00:00+00:00'
-  updated_by: 'Claude Code (Sonnet 4.5) - Agent 1'
-  reason: 'Enriched with complete USDA nutrient data from FDC 168556 (Catsup). Added 11 nutrients from 0 to measured values: vitamin A (6.5 mcg), vitamin E (0.4 mg), vitamin K (0.7 mcg), vitamin B2 (0.04 mg), vitamin B3 (0.4 mg), vitamin B6 (0.04 mg), vitamin B9 (2 mcg), choline (3.1 mg), phosphorus (6.5 mg), copper (0.02 mg), selenium (0.2 mcg), omega-6 LA (0.01 g). Confirmed TRUE zeros: vitamin D, B12 (plant-based), EPA/DHA (no fish), chromium, molybdenum, chloride, sulfur, biotin (not measured in USDA). Vitamin B1 and B5 are trace (<0.01 mg per 25g portion).'
-  fields_changed: [vitamin_a_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b2_mg, vitamin_b3_mg, vitamin_b6_mg, vitamin_b9_ug, choline_mg, phosphorus_mg, copper_mg, selenium_ug, omega6_la_g]
-  sources:
-  - note: 'USDA FoodData Central - Catsup (FDC ID 168556)'
+  - timestamp: '2025-11-02T19:20:00+00:00'
+    updated_by: 'LLM: GPT-5 Codex'
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed: [last_verified, notes, per_portion.carbs_available_g, per_portion.carbs_g, per_portion.carbs_total_g,
+    per_portion.energy_kcal, per_portion.polyols_g, version]
+    sources: []
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
+  - timestamp: '2025-11-05T18:00:00+00:00'
+    updated_by: 'Claude Code (Sonnet 4.5) - Agent 1'
+    reason: 'Enriched with complete USDA nutrient data from FDC 168556 (Catsup). Added 11 nutrients from 0 to measured values: vitamin A (6.5 mcg), vitamin E (0.4 mg), vitamin K (0.7 mcg), vitamin B2 (0.04 mg), vitamin B3 (0.4 mg), vitamin B6 (0.04 mg), vitamin B9 (2 mcg), choline (3.1 mg), phosphorus (6.5 mg), copper (0.02 mg), selenium (0.2 mcg), omega-6 LA (0.01 g). Confirmed TRUE zeros: vitamin D, B12 (plant-based), EPA/DHA (no fish), chromium, molybdenum, chloride, sulfur, biotin (not measured in USDA). Vitamin B1 and B5 are trace (<0.01 mg per 25g portion).'
+    fields_changed: [vitamin_a_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b2_mg, vitamin_b3_mg, vitamin_b6_mg, vitamin_b9_ug, choline_mg, phosphorus_mg, copper_mg, selenium_ug, omega6_la_g]
+    sources:
+    - note: 'USDA FoodData Central - Catsup (FDC ID 168556)'
     url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/168556/nutrients'
     data_source: 'SR Legacy'
   - note: 'Nutritionvalue.org comprehensive nutrient breakdown'

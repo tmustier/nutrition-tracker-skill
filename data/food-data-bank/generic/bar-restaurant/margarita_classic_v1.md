@@ -109,36 +109,36 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: 2025-11-01T00:09:00+0000
-  updated_by: Claude Code (Sonnet 4.5)
-  reason: Initial entry for tracking margarita consumption
-  fields_changed: [all fields]
-  sources: [{note: USDA FoodData Central component values, url: 'https://fdc.nal.usda.gov/'},
-  {note: User consumed margarita on 2025-11-01, url: user_request}]
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed: [derived.energy_from_macros_kcal, last_verified, notes, per_portion.carbs_available_g,
-  per_portion.carbs_g, per_portion.carbs_total_g, per_portion.energy_kcal, per_portion.polyols_g,
-  version]
-  sources: []
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
-- timestamp: '2025-11-05T00:00:00+00:00'
-  updated_by: 'Claude Code (Sonnet 4.5)'
-  reason: Enriched with 17 priority nutrients from USDA FoodData Central
-  fields_changed: [phosphorus_mg, copper_mg, selenium_ug, manganese_mg, vitamin_a_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b6_mg, vitamin_b9_ug, vitamin_b12_ug, version, last_verified]
-  sources: [{note: 'USDA FoodData Central - FDC ID 168753 (Alcoholic beverage, tequila sunrise, canned)', url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/168753/nutrients'}]
-  details: 'Added 10 non-zero nutrients from USDA tequila sunrise data (closest available match): phosphorus (12.0mg), copper (0.05mg), manganese (0.02mg), vitamin A (6.0µg), B1/thiamin (0.046mg), B2/riboflavin (0.019mg), B3/niacin (0.23mg), B6 (0.06mg), B9/folate (13.2µg). Values scaled from USDA per-100ml to 120ml portion. Nutrients not present in USDA data remain at 0: vitamin D, E, K, B12, choline, iodine, omega-3 EPA/DHA.'
-- timestamp: '2025-11-05T18:15:00+00:00'
-  updated_by: 'Claude Code (Sonnet 4.5)'
-  reason: 'Additional nutrient enrichment: B5, B7, choline, omega-6 LA, omega-3 ALA from lime juice component'
-  fields_changed: [version, vitamin_b5_mg, vitamin_b7_ug, choline_mg, omega6_la_g, omega3_ala_g, notes]
-  sources:
+  - timestamp: 2025-11-01T00:09:00+0000
+    updated_by: Claude Code (Sonnet 4.5)
+    reason: Initial entry for tracking margarita consumption
+    fields_changed: [all fields]
+    sources: [{note: USDA FoodData Central component values, url: 'https://fdc.nal.usda.gov/'},
+    {note: User consumed margarita on 2025-11-01, url: user_request}]
+  - timestamp: '2025-11-02T19:20:00+00:00'
+    updated_by: 'LLM: GPT-5 Codex'
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed: [derived.energy_from_macros_kcal, last_verified, notes, per_portion.carbs_available_g,
+    per_portion.carbs_g, per_portion.carbs_total_g, per_portion.energy_kcal, per_portion.polyols_g,
+    version]
+    sources: []
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
+  - timestamp: '2025-11-05T00:00:00+00:00'
+    updated_by: 'Claude Code (Sonnet 4.5)'
+    reason: Enriched with 17 priority nutrients from USDA FoodData Central
+    fields_changed: [phosphorus_mg, copper_mg, selenium_ug, manganese_mg, vitamin_a_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b6_mg, vitamin_b9_ug, vitamin_b12_ug, version, last_verified]
+    sources: [{note: 'USDA FoodData Central - FDC ID 168753 (Alcoholic beverage, tequila sunrise, canned)', url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/168753/nutrients'}]
+    details: 'Added 10 non-zero nutrients from USDA tequila sunrise data (closest available match): phosphorus (12.0mg), copper (0.05mg), manganese (0.02mg), vitamin A (6.0µg), B1/thiamin (0.046mg), B2/riboflavin (0.019mg), B3/niacin (0.23mg), B6 (0.06mg), B9/folate (13.2µg). Values scaled from USDA per-100ml to 120ml portion. Nutrients not present in USDA data remain at 0: vitamin D, E, K, B12, choline, iodine, omega-3 EPA/DHA.'
+  - timestamp: '2025-11-05T18:15:00+00:00'
+    updated_by: 'Claude Code (Sonnet 4.5)'
+    reason: 'Additional nutrient enrichment: B5, B7, choline, omega-6 LA, omega-3 ALA from lime juice component'
+    fields_changed: [version, vitamin_b5_mg, vitamin_b7_ug, choline_mg, omega6_la_g, omega3_ala_g, notes]
+    sources:
     - note: 'USDA FoodData Central #167747 - Lime juice, raw'
       url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/167747/nutrients'
     - note: 'Margarita recipe: 45ml tequila + 30ml triple sec + 30ml fresh lime juice (+ 15ml simple syrup)'

@@ -96,37 +96,37 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: 2025-10-29T00:00:00+0000
-  updated_by: Claude Code
-  reason: Initial entry for Simple Health Kitchen carrot juice using USDA nutrition data
-  fields_changed: [all fields]
-  sources: [{note: Carrot juice nutrition data scaled from per 100g to 250mL serving, url: 'USDA
+  - timestamp: 2025-10-29T00:00:00+0000
+    updated_by: Claude Code
+    reason: Initial entry for Simple Health Kitchen carrot juice using USDA nutrition data
+    fields_changed: [all fields]
+    sources: [{note: Carrot juice nutrition data scaled from per 100g to 250mL serving, url: 'USDA
       FoodData Central FDC #170491'}]
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed: [last_verified, notes, per_portion.carbs_available_g, per_portion.carbs_g, per_portion.carbs_total_g,
-  per_portion.energy_kcal, per_portion.polyols_g, version]
-  sources: []
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
-- timestamp: '2025-11-05T00:00:00+00:00'
-  updated_by: 'Claude Code (Ultrathink enrichment)'
-  reason: 'Enriched with 17 priority nutrients from USDA FDC #170491 (carrot juice, canned)'
-  fields_changed: [vitamin_a_ug, vitamin_d_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b6_mg, vitamin_b9_ug, vitamin_b12_ug, choline_mg, phosphorus_mg, copper_mg, selenium_ug, manganese_mg, omega3_epa_mg, omega3_dha_mg, quality.confidence, quality.gaps, notes]
-  sources: [{note: 'USDA FoodData Central FDC #170491 nutrient data (per 100g) scaled to 250mL serving', url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/170491/nutrients'}, {note: 'Comprehensive nutrient profile verified via foodstruct.com USDA aggregator', url: 'https://foodstruct.com/food/carrot-juice'}]
-- timestamp: '2025-11-05T18:00:00+0000'
-  updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: 'Enriched with 8 additional nutrients: B5 (pantothenic acid), B7 (biotin), chromium, molybdenum, omega-3 ALA, omega-6 LA. Carrot juice provides modest amounts of trace minerals and B vitamins.'
-  fields_changed: [version, per_portion.vitamin_b5_mg, per_portion.vitamin_b7_ug, per_portion.chromium_ug, per_portion.molybdenum_ug, per_portion.omega3_ala_g, per_portion.omega6_la_g]
-  sources: [{note: 'USDA FoodData Central (FDC 170491) for B5, omega fatty acids; research literature for biotin (7% DV per serving). Carrot juice has minimal fiber (already documented) and trace chromium/molybdenum.', url: 'https://fdc.nal.usda.gov/'}]
-- timestamp: '2025-11-05T22:00:00+0000'
-  updated_by: 'Agent 8 - Claude Sonnet 4.5'
-  reason: 'Schema compliance fix: Added sulfur_g field (was sulfur_mg). Sulfur estimated from protein content (vegetables: ~3mg S per g protein).'
-  fields_changed: [per_portion.sulfur_g]
-  sources: [{note: 'Sulfur content estimated at 0.008g based on 2.4g protein × 3mg/g coefficient for vegetables. Sulfur primarily from sulfur-containing amino acids (methionine, cysteine).', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4438303/'}]
+  - timestamp: '2025-11-02T19:20:00+00:00'
+    updated_by: 'LLM: GPT-5 Codex'
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed: [last_verified, notes, per_portion.carbs_available_g, per_portion.carbs_g, per_portion.carbs_total_g,
+    per_portion.energy_kcal, per_portion.polyols_g, version]
+    sources: []
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
+  - timestamp: '2025-11-05T00:00:00+00:00'
+    updated_by: 'Claude Code (Ultrathink enrichment)'
+    reason: 'Enriched with 17 priority nutrients from USDA FDC #170491 (carrot juice, canned)'
+    fields_changed: [vitamin_a_ug, vitamin_d_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b6_mg, vitamin_b9_ug, vitamin_b12_ug, choline_mg, phosphorus_mg, copper_mg, selenium_ug, manganese_mg, omega3_epa_mg, omega3_dha_mg, quality.confidence, quality.gaps, notes]
+    sources: [{note: 'USDA FoodData Central FDC #170491 nutrient data (per 100g) scaled to 250mL serving', url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/170491/nutrients'}, {note: 'Comprehensive nutrient profile verified via foodstruct.com USDA aggregator', url: 'https://foodstruct.com/food/carrot-juice'}]
+  - timestamp: '2025-11-05T18:00:00+0000'
+    updated_by: 'LLM: Claude Sonnet 4.5'
+    reason: 'Enriched with 8 additional nutrients: B5 (pantothenic acid), B7 (biotin), chromium, molybdenum, omega-3 ALA, omega-6 LA. Carrot juice provides modest amounts of trace minerals and B vitamins.'
+    fields_changed: [version, per_portion.vitamin_b5_mg, per_portion.vitamin_b7_ug, per_portion.chromium_ug, per_portion.molybdenum_ug, per_portion.omega3_ala_g, per_portion.omega6_la_g]
+    sources: [{note: 'USDA FoodData Central (FDC 170491) for B5, omega fatty acids; research literature for biotin (7% DV per serving). Carrot juice has minimal fiber (already documented) and trace chromium/molybdenum.', url: 'https://fdc.nal.usda.gov/'}]
+  - timestamp: '2025-11-05T22:00:00+0000'
+    updated_by: 'Agent 8 - Claude Sonnet 4.5'
+    reason: 'Schema compliance fix: Added sulfur_g field (was sulfur_mg). Sulfur estimated from protein content (vegetables: ~3mg S per g protein).'
+    fields_changed: [per_portion.sulfur_g]
+    sources: [{note: 'Sulfur content estimated at 0.008g based on 2.4g protein × 3mg/g coefficient for vegetables. Sulfur primarily from sulfur-containing amino acids (methionine, cysteine).', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4438303/'}]
 ```

@@ -90,33 +90,33 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: 2025-10-30 00:00:00+00:00
-  updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: Initial entry from user-provided nutrition data for Zima restaurant dish
-  fields_changed: [per_portion.energy_kcal, per_portion.protein_g, per_portion.fat_g, per_portion.sat_fat_g,
-  per_portion.mufa_g, per_portion.pufa_g, per_portion.trans_fat_g, per_portion.cholesterol_mg,
-  per_portion.carbs_g, per_portion.sugar_g, per_portion.fiber_total_g, per_portion.fiber_soluble_g,
-  per_portion.fiber_insoluble_g, per_portion.sodium_mg, per_portion.potassium_mg]
-  sources: [{note: 'Complete nutrition data provided by Thomas on 2025-10-30 for Vinegret with
+  - timestamp: 2025-10-30 00:00:00+00:00
+    updated_by: 'LLM: Claude Sonnet 4.5'
+    reason: Initial entry from user-provided nutrition data for Zima restaurant dish
+    fields_changed: [per_portion.energy_kcal, per_portion.protein_g, per_portion.fat_g, per_portion.sat_fat_g,
+    per_portion.mufa_g, per_portion.pufa_g, per_portion.trans_fat_g, per_portion.cholesterol_mg,
+    per_portion.carbs_g, per_portion.sugar_g, per_portion.fiber_total_g, per_portion.fiber_soluble_g,
+    per_portion.fiber_insoluble_g, per_portion.sodium_mg, per_portion.potassium_mg]
+    sources: [{note: 'Complete nutrition data provided by Thomas on 2025-10-30 for Vinegret with
       1 slice rye from Zima, Soho, London', url: user_input}]
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed: [last_verified, notes, per_portion.carbs_available_g, per_portion.carbs_g, per_portion.carbs_total_g,
-  per_portion.energy_kcal, per_portion.polyols_g, version]
-  sources: []
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
-- timestamp: '2025-11-05T18:45:00+00:00'
-  updated_by: 'Claude Code (Sonnet 4.5) - Agent 1'
-  reason: 'Enriched with nutrient estimates based on typical vinegret components: beetroot, potatoes, carrots, rye bread (~32g), vegetable oil dressing (~10g). Populated 22 nutrients from 0 to estimated values: magnesium (45 mg), calcium (40 mg), iron (2.5 mg), zinc (1.0 mg), vitamin C (12 mg from vegetables), manganese (0.5 mg), copper (0.2 mg), selenium (15 mcg), phosphorus (90 mg), vitamin A (450 mcg from carrots/beetroot), vitamin E (1.5 mg from oil), vitamin K (8 mcg), B-vitamins (B1: 0.2 mg, B2: 0.1 mg, B3: 1.5 mg, B5: 0.5 mg, B6: 0.3 mg, B9: 80 mcg), choline (25 mg), iodine (5 mcg), omega-3 ALA (0.3 g from vegetable oil), omega-6 LA (2.5 g from vegetable oil). Confidence: MEDIUM (±20-40% - component-based estimation for multi-ingredient salad).'
-  fields_changed: [iodine_ug, magnesium_mg, calcium_mg, iron_mg, zinc_mg, vitamin_c_mg, manganese_mg, copper_mg, selenium_ug, phosphorus_mg, vitamin_a_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b9_ug, choline_mg, omega3_ala_g, omega6_la_g]
-  sources:
-  - note: 'Component-based estimation: beetroot, potatoes, carrots, rye bread, vegetable oil. Based on USDA data for individual ingredients.'
+  - timestamp: '2025-11-02T19:20:00+00:00'
+    updated_by: 'LLM: GPT-5 Codex'
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed: [last_verified, notes, per_portion.carbs_available_g, per_portion.carbs_g, per_portion.carbs_total_g,
+    per_portion.energy_kcal, per_portion.polyols_g, version]
+    sources: []
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
+  - timestamp: '2025-11-05T18:45:00+00:00'
+    updated_by: 'Claude Code (Sonnet 4.5) - Agent 1'
+    reason: 'Enriched with nutrient estimates based on typical vinegret components: beetroot, potatoes, carrots, rye bread (~32g), vegetable oil dressing (~10g). Populated 22 nutrients from 0 to estimated values: magnesium (45 mg), calcium (40 mg), iron (2.5 mg), zinc (1.0 mg), vitamin C (12 mg from vegetables), manganese (0.5 mg), copper (0.2 mg), selenium (15 mcg), phosphorus (90 mg), vitamin A (450 mcg from carrots/beetroot), vitamin E (1.5 mg from oil), vitamin K (8 mcg), B-vitamins (B1: 0.2 mg, B2: 0.1 mg, B3: 1.5 mg, B5: 0.5 mg, B6: 0.3 mg, B9: 80 mcg), choline (25 mg), iodine (5 mcg), omega-3 ALA (0.3 g from vegetable oil), omega-6 LA (2.5 g from vegetable oil). Confidence: MEDIUM (±20-40% - component-based estimation for multi-ingredient salad).'
+    fields_changed: [iodine_ug, magnesium_mg, calcium_mg, iron_mg, zinc_mg, vitamin_c_mg, manganese_mg, copper_mg, selenium_ug, phosphorus_mg, vitamin_a_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b9_ug, choline_mg, omega3_ala_g, omega6_la_g]
+    sources:
+    - note: 'Component-based estimation: beetroot, potatoes, carrots, rye bread, vegetable oil. Based on USDA data for individual ingredients.'
     url: 'https://fdc.nal.usda.gov/'
     confidence: 'MEDIUM - multi-component vegetable salad estimation'
 ```

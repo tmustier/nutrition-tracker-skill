@@ -95,81 +95,81 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
-- timestamp: 2025-10-29 12:00:00+00:00
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: Initial population from Deliveroo calorie count + reference macros from Whataburger
-  fields_changed:
-  - per_portion.energy_kcal
-  - per_portion.protein_g
-  - per_portion.fat_g
-  - per_portion.sat_fat_g
-  - per_portion.mufa_g
-  - per_portion.pufa_g
-  - per_portion.trans_fat_g
-  - per_portion.cholesterol_mg
-  - per_portion.carbs_g
-  - per_portion.sugar_g
-  - per_portion.fiber_total_g
-  - per_portion.fiber_soluble_g
-  - per_portion.fiber_insoluble_g
-  - per_portion.sodium_mg
-  - per_portion.potassium_mg
-  - per_portion.iodine_ug
-  - per_portion.magnesium_mg
-  - per_portion.calcium_mg
-  - per_portion.iron_mg
-  - per_portion.zinc_mg
-  - per_portion.vitamin_c_mg
-  - per_portion.manganese_mg
-  - portion.est_weight_g
-  sources:
-  - url: https://deliveroo.co.uk/menu/london/soho/l-eto-caffe-soho
+  - timestamp: 2025-10-29 12:00:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: Initial population from Deliveroo calorie count + reference macros from Whataburger
+    fields_changed:
+    - per_portion.energy_kcal
+    - per_portion.protein_g
+    - per_portion.fat_g
+    - per_portion.sat_fat_g
+    - per_portion.mufa_g
+    - per_portion.pufa_g
+    - per_portion.trans_fat_g
+    - per_portion.cholesterol_mg
+    - per_portion.carbs_g
+    - per_portion.sugar_g
+    - per_portion.fiber_total_g
+    - per_portion.fiber_soluble_g
+    - per_portion.fiber_insoluble_g
+    - per_portion.sodium_mg
+    - per_portion.potassium_mg
+    - per_portion.iodine_ug
+    - per_portion.magnesium_mg
+    - per_portion.calcium_mg
+    - per_portion.iron_mg
+    - per_portion.zinc_mg
+    - per_portion.vitamin_c_mg
+    - per_portion.manganese_mg
+    - portion.est_weight_g
+    sources:
+    - url: https://deliveroo.co.uk/menu/london/soho/l-eto-caffe-soho
     note: "L'ETO Caffe Soho Deliveroo listing: 135 kcal"
   - url: https://www.mynetdiary.com/food/calories-in-grilled-chicken-breast-by-whataburger-serving-34958765-0.html
     note: "Whataburger grilled chicken breast: 135 kcal, 24g protein, 2g carbs, 2.5g fat"
   - url: https://fdc.nal.usda.gov/
     note: "USDA FoodData Central: chicken breast micronutrients (potassium 320mg, magnesium 27mg, zinc 1mg, iron 1mg, cholesterol ~70mg per 100g)"
-- timestamp: 2025-10-29 12:30:00+00:00
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: Corrected values based on GPT-5 component analysis with precise portion weight (86g) and proper salt accounting
-  fields_changed:
-  - version
-  - portion.est_weight_g
-  - per_portion.protein_g
-  - per_portion.fat_g
-  - per_portion.sat_fat_g
-  - per_portion.mufa_g
-  - per_portion.pufa_g
-  - per_portion.cholesterol_mg
-  - per_portion.carbs_g
-  - per_portion.sodium_mg
-  - per_portion.potassium_mg
-  - assumptions.salt_scheme
-  - assumptions.prep
-  - derived.energy_from_macros_kcal
-  - derived.finishing_salt_g
-  - derived.fat_unassigned_g
-  - quality.confidence
-  sources:
-  - url: https://tools.myfooddata.com/nutrition-facts/100009715/100g
+  - timestamp: 2025-10-29 12:30:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: Corrected values based on GPT-5 component analysis with precise portion weight (86g) and proper salt accounting
+    fields_changed:
+    - version
+    - portion.est_weight_g
+    - per_portion.protein_g
+    - per_portion.fat_g
+    - per_portion.sat_fat_g
+    - per_portion.mufa_g
+    - per_portion.pufa_g
+    - per_portion.cholesterol_mg
+    - per_portion.carbs_g
+    - per_portion.sodium_mg
+    - per_portion.potassium_mg
+    - assumptions.salt_scheme
+    - assumptions.prep
+    - derived.energy_from_macros_kcal
+    - derived.finishing_salt_g
+    - derived.fat_unassigned_g
+    - quality.confidence
+    sources:
+    - url: https://tools.myfooddata.com/nutrition-facts/100009715/100g
     note: "MyFoodData chicken breast cooked: scaled to 86g to match 135 kcal anchor"
-- timestamp: "2025-11-02T19:20:00+00:00"
-  updated_by: "LLM: GPT-5 Codex"
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed:
-  - derived.energy_from_macros_kcal
-  - last_verified
-  - notes
-  - per_portion.carbs_available_g
-  - per_portion.carbs_g
-  - per_portion.carbs_total_g
-  - per_portion.energy_kcal
-  - per_portion.polyols_g
-  - version
-  sources: []
-- timestamp: '2025-11-05T17:00:00+00:00'
-  updated_by: 'Agent 2: Claude Code (Sonnet 4.5)'
-  reason: 'Phase 3 enrichment: Added complete USDA nutrient data for 21 migrated fields'
-  fields_changed: [selenium_ug, chromium_ug, molybdenum_ug, phosphorus_mg, chloride_mg, sulfur_mg, vitamin_a_ug, vitamin_d_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_epa_mg, omega3_dha_mg, omega3_ala_g, omega6_la_g, boron_mg, silicon_mg, vanadium_ug, nickel_ug]
-  sources: [{note: 'USDA FDC #171477 (chicken breast cooked): B vitamins (B3 13.7mg/100g, B5 1.26mg/100g, B6 0.64mg/100g, B12 0.34µg/100g), selenium 27.6µg/100g, phosphorus 228mg/100g, choline 85.3mg/100g, vitamin E 0.27mg/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'Values scaled to 86g portion: plain grilled chicken breast with minimal oil and finishing salt (0.43g salt = 172mg sodium)', url: component_analysis}]
+  - timestamp: "2025-11-02T19:20:00+00:00"
+    updated_by: "LLM: GPT-5 Codex"
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed:
+    - derived.energy_from_macros_kcal
+    - last_verified
+    - notes
+    - per_portion.carbs_available_g
+    - per_portion.carbs_g
+    - per_portion.carbs_total_g
+    - per_portion.energy_kcal
+    - per_portion.polyols_g
+    - version
+    sources: []
+  - timestamp: '2025-11-05T17:00:00+00:00'
+    updated_by: 'Agent 2: Claude Code (Sonnet 4.5)'
+    reason: 'Phase 3 enrichment: Added complete USDA nutrient data for 21 migrated fields'
+    fields_changed: [selenium_ug, chromium_ug, molybdenum_ug, phosphorus_mg, chloride_mg, sulfur_mg, vitamin_a_ug, vitamin_d_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_epa_mg, omega3_dha_mg, omega3_ala_g, omega6_la_g, boron_mg, silicon_mg, vanadium_ug, nickel_ug]
+    sources: [{note: 'USDA FDC #171477 (chicken breast cooked): B vitamins (B3 13.7mg/100g, B5 1.26mg/100g, B6 0.64mg/100g, B12 0.34µg/100g), selenium 27.6µg/100g, phosphorus 228mg/100g, choline 85.3mg/100g, vitamin E 0.27mg/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'Values scaled to 86g portion: plain grilled chicken breast with minimal oil and finishing salt (0.43g salt = 172mg sodium)', url: component_analysis}]
 ```

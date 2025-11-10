@@ -85,83 +85,84 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: 2025-10-28T18:51:39+0000
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Populate per_portion from user-provided data
-  fields_changed: [per_portion.energy_kcal, per_portion.protein_g, per_portion.fat_g, per_portion.carbs_g,
-  per_portion.sugar_g, per_portion.fiber_total_g, per_portion.potassium_mg, per_portion.magnesium_mg,
-  per_portion.calcium_mg, per_portion.iron_mg, per_portion.zinc_mg, per_portion.vitamin_c_mg]
-  sources: [{note: User-supplied values on 2025-10-28, url: user_input}]
-- timestamp: 2025-10-28T19:02:30+0000
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
-  fields_changed: [per_portion.protein_g, per_portion.fiber_total_g, per_portion.iron_mg, per_portion.zinc_mg]
-  sources: [{note: Automated rounding pass, url: formatting-pass}]
-- timestamp: 2025-10-28T20:00:00+0000
-  updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: Research and fill missing fat breakdown, cholesterol, and iodine data
-  fields_changed: [per_portion.mufa_g, per_portion.pufa_g, per_portion.trans_fat_g, per_portion.cholesterol_mg,
-  per_portion.iodine_ug]
-  sources: [{note: 'USDA data: Raspberries MUFA 0.06g, PUFA 0.38g per 100g', url: 'https://foodstruct.com/food/raspberry'},
-  {note: 'USDA data: Strawberries MUFA 0.04g, PUFA 0.16g per 100g', url: 'https://foodstruct.com/food/strawberries'},
-  {note: 'USDA data: Blackberries MUFA 0.047g, PUFA 0.28g per 100g; cholesterol 0mg,
-      trans fat 0g', url: 'https://foodstruct.com/food/blackberry'}, {note: 'Confirmed
-      berries are plant-based with 0mg cholesterol, 0g trans fat', url: 'https://www.nutritionvalue.org/Blackberries%2C_raw_nutritional_value.html'},
-  {note: Strawberries ~13mcg per cup (150g); berries generally low in iodine, url: 'https://kitchenscity.com/iodine-rich-fruits/'}]
-  methodology: Calculated weighted average based on PACK'D mix (36% raspberries, 34% blueberries, 30% blackberries) from USDA berry data, scaled to match product's 0.3g total fat per 150g. PUFA higher than MUFA consistent with berry profiles (omega-3 from seeds). Trans fat and cholesterol = 0 (plant-based). Iodine = 1 mcg (trace, very low in berries).
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed: [last_verified, notes, per_portion.carbs_available_g, per_portion.carbs_g, per_portion.carbs_total_g,
-  per_portion.energy_kcal, per_portion.polyols_g, version]
-  sources: []
-- timestamp: '2025-11-03T00:00:00+00:00'
-  updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: Phase 2 nutrient estimation - fiber split for mixed berries
-  fields_changed: [per_portion.fiber_soluble_g, per_portion.fiber_insoluble_g, last_verified, version]
-  sources: [{note: 'Used fruits.berries category (35% soluble, 65% insoluble, HIGH confidence)',
-    url: fiber_split_estimation}]
-  methodology: "Applied berries fiber split ratio to total fiber 4.4g: soluble = 4.4 \xD7 0.35 =\
-  \ 1.5g, insoluble = 4.4 \xD7 0.65 = 2.9g. Mixed berry composition (36% raspberries,\
+  - timestamp: 2025-10-28T18:51:39+0000
+    updated_by: 'LLM: GPT-5 Thinking'
+    reason: Populate per_portion from user-provided data
+    fields_changed: [per_portion.energy_kcal, per_portion.protein_g, per_portion.fat_g, per_portion.carbs_g,
+    per_portion.sugar_g, per_portion.fiber_total_g, per_portion.potassium_mg, per_portion.magnesium_mg,
+    per_portion.calcium_mg, per_portion.iron_mg, per_portion.zinc_mg, per_portion.vitamin_c_mg]
+    sources: [{note: User-supplied values on 2025-10-28, url: user_input}]
+  - timestamp: 2025-10-28T19:02:30+0000
+    updated_by: 'LLM: GPT-5 Thinking'
+    reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
+    fields_changed: [per_portion.protein_g, per_portion.fiber_total_g, per_portion.iron_mg, per_portion.zinc_mg]
+    sources: [{note: Automated rounding pass, url: formatting-pass}]
+  - timestamp: 2025-10-28T20:00:00+0000
+    updated_by: 'LLM: Claude Sonnet 4.5'
+    reason: Research and fill missing fat breakdown, cholesterol, and iodine data
+    fields_changed: [per_portion.mufa_g, per_portion.pufa_g, per_portion.trans_fat_g, per_portion.cholesterol_mg,
+    per_portion.iodine_ug]
+    sources:
+      - note: 'USDA data: Raspberries MUFA 0.06g, PUFA 0.38g per 100g'
+        url: 'https://foodstruct.com/food/raspberry'
+      - note: 'USDA data: Strawberries MUFA 0.04g, PUFA 0.16g per 100g'
+        url: 'https://foodstruct.com/food/strawberries'
+      - note: 'USDA data: Blackberries MUFA 0.047g, PUFA 0.28g per 100g; cholesterol 0mg, trans fat 0g'
+        url: 'https://foodstruct.com/food/blackberry'
+      - note: 'Confirmed berries are plant-based with 0mg cholesterol, 0g trans fat'
+        url: 'https://www.nutritionvalue.org/Blackberries%2C_raw_nutritional_value.html'
+      - note: 'Strawberries ~13mcg per cup (150g); berries generally low in iodine'
+        url: 'https://kitchenscity.com/iodine-rich-fruits/'
+    methodology: Calculated weighted average based on PACK'D mix (36% raspberries, 34% blueberries, 30% blackberries) from USDA berry data, scaled to match product's 0.3g total fat per 150g. PUFA higher than MUFA consistent with berry profiles (omega-3 from seeds). Trans fat and cholesterol = 0 (plant-based). Iodine = 1 mcg (trace, very low in berries).
+  - timestamp: '2025-11-02T19:20:00+00:00'
+    updated_by: 'LLM: GPT-5 Codex'
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed: [last_verified, notes, per_portion.carbs_available_g, per_portion.carbs_g, per_portion.carbs_total_g,
+    per_portion.energy_kcal, per_portion.polyols_g, version]
+    sources: []
+  - timestamp: '2025-11-03T00:00:00+00:00'
+    updated_by: 'LLM: Claude Sonnet 4.5'
+    reason: Phase 2 nutrient estimation - fiber split for mixed berries
+    fields_changed: [per_portion.fiber_soluble_g, per_portion.fiber_insoluble_g, last_verified, version]
+    sources:
+      - note: 'Used fruits.berries category (35% soluble, 65% insoluble, HIGH confidence)'
+        url: fiber_split_estimation
+    methodology: "Applied berries fiber split ratio to total fiber 4.4g: soluble = 4.4 × 0.35 = 1.5g, insoluble = 4.4 × 0.65 = 2.9g. Mixed berry composition (36% raspberries,
   \ 34% blueberries, 30% blackberries) confirmed from previous research. High confidence\
   \ estimation based on well-documented berry fiber profiles."
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
-- timestamp: '2025-11-05T12:00:00+00:00'
-  updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: Priority nutrient enrichment - Phase 3 expansion of 17 critical nutrients from USDA data
-  fields_changed: [version, last_verified, per_portion.vitamin_d_ug, per_portion.choline_mg, per_portion.iodine_ug, per_portion.vitamin_b9_ug, per_portion.vitamin_b12_ug, per_portion.phosphorus_mg, per_portion.copper_mg, per_portion.selenium_ug, per_portion.manganese_mg, per_portion.vitamin_a_ug, per_portion.vitamin_e_mg, per_portion.vitamin_k_ug, per_portion.vitamin_b1_mg, per_portion.vitamin_b2_mg, per_portion.vitamin_b3_mg, per_portion.vitamin_b6_mg, per_portion.omega3_epa_mg, per_portion.omega3_dha_mg]
-  sources: [{note: 'USDA FoodData Central - Raspberries, raw (FDC ID: 167755)', url: 'https://www.nutritionvalue.org/Raspberries%2C_raw_nutritional_value.html'},
-    {note: 'USDA FoodData Central - Blueberries, raw (FDC ID: 171711)', url: 'USDA SR Legacy standard reference'},
-    {note: 'USDA FoodData Central - Blackberries, raw (FDC ID: 173946)', url: 'https://www.nutritionvalue.org/Blackberries%2C_raw_nutritional_value.html'}]
-  methodology: "Calculated weighted average from USDA data for all three berry components (36% raspberries, 34% blueberries, 30% blackberries) based on documented mix composition from previous research. Enriched 17 priority nutrients: Critical nutrients (vitamin D, choline, iodine, folate/B9, B12), Minerals (phosphorus, copper, selenium, manganese), Fat-soluble vitamins (A, E, K), B-complex vitamins (B1, B2, B3, B6), Omega-3 fatty acids (EPA, DHA). Per 100g weighted averages calculated then scaled to 150g portion. Rounding applied per schema conventions: µg values rounded to nearest integer if ≥1 or 0.1 if <1; mg values to 2-3 decimal places for small values (<1mg), 1 decimal place for mid-range. Plant-based berries naturally contain 0 vitamin D, B12, EPA, and DHA. Iodine updated from 1 µg to 0.3 µg based on more precise berry data. All calculations verified against USDA FoodData Central standards."
-- timestamp: '2025-11-05T15:00:00+00:00'
-  updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: 'Enrichment with 4 additional nutrients (B5, B7, omega-3 ALA, omega-6 LA) using weighted average of berry components'
-  fields_changed: [per_portion.vitamin_b5_mg, per_portion.vitamin_b7_ug, per_portion.omega3_ala_g,
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
+  - timestamp: '2025-11-05T12:00:00+00:00'
+    updated_by: 'LLM: Claude Sonnet 4.5'
+    reason: Priority nutrient enrichment - Phase 3 expansion of 17 critical nutrients from USDA data
+    fields_changed: [version, last_verified, per_portion.vitamin_d_ug, per_portion.choline_mg, per_portion.iodine_ug, per_portion.vitamin_b9_ug, per_portion.vitamin_b12_ug, per_portion.phosphorus_mg, per_portion.copper_mg, per_portion.selenium_ug, per_portion.manganese_mg, per_portion.vitamin_a_ug, per_portion.vitamin_e_mg, per_portion.vitamin_k_ug, per_portion.vitamin_b1_mg, per_portion.vitamin_b2_mg, per_portion.vitamin_b3_mg, per_portion.vitamin_b6_mg, per_portion.omega3_epa_mg, per_portion.omega3_dha_mg]
+    sources:
+      - note: 'USDA FoodData Central - Raspberries, raw (FDC ID: 167755)'
+        url: 'https://www.nutritionvalue.org/Raspberries%2C_raw_nutritional_value.html'
+      - note: 'USDA FoodData Central - Blueberries, raw (FDC ID: 171711)'
+        url: 'USDA SR Legacy standard reference'
+      - note: 'USDA FoodData Central - Blackberries, raw (FDC ID: 173946)'
+        url: 'https://www.nutritionvalue.org/Blackberries%2C_raw_nutritional_value.html'
+    methodology: "Calculated weighted average from USDA data for all three berry components (36% raspberries, 34% blueberries, 30% blackberries) based on documented mix composition from previous research. Enriched 17 priority nutrients: Critical nutrients (vitamin D, choline, iodine, folate/B9, B12), Minerals (phosphorus, copper, selenium, manganese), Fat-soluble vitamins (A, E, K), B-complex vitamins (B1, B2, B3, B6), Omega-3 fatty acids (EPA, DHA). Per 100g weighted averages calculated then scaled to 150g portion. Rounding applied per schema conventions: µg values rounded to nearest integer if ≥1 or 0.1 if <1; mg values to 2-3 decimal places for small values (<1mg), 1 decimal place for mid-range. Plant-based berries naturally contain 0 vitamin D, B12, EPA, and DHA. Iodine updated from 1 µg to 0.3 µg based on more precise berry data. All calculations verified against USDA FoodData Central standards."
+  - timestamp: '2025-11-05T15:00:00+00:00'
+    updated_by: 'LLM: Claude Sonnet 4.5'
+    reason: 'Enrichment with 4 additional nutrients (B5, B7, omega-3 ALA, omega-6 LA) using weighted average of berry components'
+    fields_changed: [per_portion.vitamin_b5_mg, per_portion.vitamin_b7_ug, per_portion.omega3_ala_g,
     per_portion.omega6_la_g]
-  sources: [{note: 'USDA FoodData Central - Component values per 100g: Raspberries
-      (FDC 167755) B5 0.329mg, B7 0µg, ALA 0.126g, LA 0.249g; Blueberries (FDC 171711)
-      B5 0.124mg, B7 2.43µg, ALA 0.058g, LA 0.088g; Blackberries (FDC 173946) B5
-      0.276mg, B7 0µg, ALA 0.094g, LA 0.186g.'},
-  {note: 'Weighted average calculation (36% raspberries, 34% blueberries, 30% blackberries)
-      per 100g: B5 = (0.329×0.36)+(0.124×0.34)+(0.276×0.30) = 0.243mg; B7 = (0×0.36)+(2.43×0.34)+(0×0.30)
-      = 0.826µg; ALA = (0.126×0.36)+(0.058×0.34)+(0.094×0.30) = 0.093g; LA = (0.249×0.36)+(0.088×0.34)+(0.186×0.30)
-      = 0.176g'},
-  {note: 'Scaled to 150g portion: B5 0.243×1.5 = 0.36mg, B7 0.826×1.5 = 1.2µg, ALA
-      0.093×1.5 = 0.14g, LA 0.176×1.5 = 0.26g'},
-  {note: 'Biotin (B7) derived primarily from blueberry component; raspberries and
-      blackberries have no USDA biotin data. Mixed berries B7 lower than pure blueberries
-      due to dilution effect.'},
-  {note: 'Chromium and molybdenum: Not routinely analyzed by USDA for any berry
-      components; confirmed 0 per research/usda-api-research.md'}]
-- timestamp: '2025-11-05T20:15:00+00:00'
-  updated_by: 'Agent 7: Claude Sonnet 4.5'
-  reason: Verification of TRUE zeros for chromium and molybdenum in mixed berries
-  fields_changed: [version]
-  sources: [{note: 'Like individual berry components (raspberries, blueberries, blackberries), mixed berries contain trace/negligible amounts of chromium and molybdenum. Research literature confirms berries are not significant sources of these trace minerals. Values remain 0 as TRUE zeros (not measurable quantities) rather than missing data.'}]
+    sources:
+      - note: 'USDA FoodData Central - Component values per 100g: Raspberries (FDC 167755) B5 0.329mg, B7 0µg, ALA 0.126g, LA 0.249g; Blueberries (FDC 171711) B5 0.124mg, B7 2.43µg, ALA 0.058g, LA 0.088g; Blackberries (FDC 173946) B5 0.276mg, B7 0µg, ALA 0.094g, LA 0.186g.'
+      - note: 'Weighted average calculation (36% raspberries, 34% blueberries, 30% blackberries) per 100g: B5 = (0.329×0.36)+(0.124×0.34)+(0.276×0.30) = 0.243mg; B7 = (0×0.36)+(2.43×0.34)+(0×0.30) = 0.826µg; ALA = (0.126×0.36)+(0.058×0.34)+(0.094×0.30) = 0.093g; LA = (0.249×0.36)+(0.088×0.34)+(0.186×0.30) = 0.176g'
+      - note: 'Scaled to 150g portion: B5 0.243×1.5 = 0.36mg, B7 0.826×1.5 = 1.2µg, ALA 0.093×1.5 = 0.14g, LA 0.176×1.5 = 0.26g'
+      - note: 'Biotin (B7) derived primarily from blueberry component; raspberries and blackberries have no USDA biotin data. Mixed berries B7 lower than pure blueberries due to dilution effect.'
+      - note: 'Chromium and molybdenum: Not routinely analyzed by USDA for any berry components; confirmed 0 per research/usda-api-research.md'
+  - timestamp: '2025-11-05T20:15:00+00:00'
+    updated_by: 'Agent 7: Claude Sonnet 4.5'
+    reason: Verification of TRUE zeros for chromium and molybdenum in mixed berries
+    fields_changed: [version]
+    sources:
+      - note: 'Like individual berry components (raspberries, blueberries, blackberries), mixed berries contain trace/negligible amounts of chromium and molybdenum. Research literature confirms berries are not significant sources of these trace minerals. Values remain 0 as TRUE zeros (not measurable quantities) rather than missing data.'
 ```

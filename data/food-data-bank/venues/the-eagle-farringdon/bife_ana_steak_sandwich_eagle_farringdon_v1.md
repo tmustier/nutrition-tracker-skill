@@ -111,53 +111,53 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: 2025-11-01T08:45:00+0000
-  updated_by: Claude Code (Sonnet 4.5)
-  reason: Initial entry for The Eagle's signature steak sandwich - user planning visit to venue
-  fields_changed: [all fields]
-  sources: [{note: Official venue website, url: 'https://theeaglefarringdon.co.uk/'}, {note: Portuguese
+  - timestamp: 2025-11-01T08:45:00+0000
+    updated_by: Claude Code (Sonnet 4.5)
+    reason: Initial entry for The Eagle's signature steak sandwich - user planning visit to venue
+    fields_changed: [all fields]
+    sources: [{note: Official venue website, url: 'https://theeaglefarringdon.co.uk/'}, {note: Portuguese
       steak sandwich nutritional baseline (~715 kcal), url: 'https://gastroportugal.com/prego-no-pao/'},
   {note: 'USDA FoodData Central for rump steak, bread, olive oil component values',
     url: 'https://fdc.nal.usda.gov/'}, {note: User researching for upcoming visit
       on 2025-11-01, url: user_request}]
-- timestamp: 2025-11-01T09:35:00+0000
-  updated_by: Claude Code (Sonnet 4.5)
-  reason: Updated with GPT-5 Pro detailed analysis - significantly more accurate than initial estimate
-  fields_changed: [version, per_portion.energy_kcal, per_portion.protein_g, per_portion.fat_g, per_portion.sat_fat_g,
-  per_portion.mufa_g, per_portion.pufa_g, per_portion.carbs_g, per_portion.sugar_g,
-  per_portion.fiber_total_g, per_portion.fiber_soluble_g, per_portion.fiber_insoluble_g,
-  per_portion.sodium_mg, per_portion.potassium_mg, per_portion.cholesterol_mg, per_portion.trans_fat_g,
-  quality.confidence, quality.gaps, portion.est_weight_g, assumptions.prep]
-  sources: [{note: 'Guardian published Eagle cookbook recipe: 500g steak for 2 sandwiches', url: 'https://www.theguardian.com/lifeandstyle/2010/sep/25/portuguese-steak-sandwich-recipe'},
-  {note: 'USDA cooking yields: 80% for grilled sirloin', url: 'https://www.ars.usda.gov/ARSUserFiles/80400525/Data/retn/retn06.pdf'},
-  {note: "GPT-5 Pro component-based analysis: 200g cooked sirloin + 90g roll + 2 Tbsp\
+  - timestamp: 2025-11-01T09:35:00+0000
+    updated_by: Claude Code (Sonnet 4.5)
+    reason: Updated with GPT-5 Pro detailed analysis - significantly more accurate than initial estimate
+    fields_changed: [version, per_portion.energy_kcal, per_portion.protein_g, per_portion.fat_g, per_portion.sat_fat_g,
+    per_portion.mufa_g, per_portion.pufa_g, per_portion.carbs_g, per_portion.sugar_g,
+    per_portion.fiber_total_g, per_portion.fiber_soluble_g, per_portion.fiber_insoluble_g,
+    per_portion.sodium_mg, per_portion.potassium_mg, per_portion.cholesterol_mg, per_portion.trans_fat_g,
+    quality.confidence, quality.gaps, portion.est_weight_g, assumptions.prep]
+    sources: [{note: 'Guardian published Eagle cookbook recipe: 500g steak for 2 sandwiches', url: 'https://www.theguardian.com/lifeandstyle/2010/sep/25/portuguese-steak-sandwich-recipe'},
+    {note: 'USDA cooking yields: 80% for grilled sirloin', url: 'https://www.ars.usda.gov/ARSUserFiles/80400525/Data/retn/retn06.pdf'},
+    {note: "GPT-5 Pro component-based analysis: 200g cooked sirloin + 90g roll + 2 Tbsp\
       \ oil + onion/lettuce + restaurant salt seasoning. Major corrections: calories\
       \ 750\u2192866, sodium 650\u21921,910mg, protein 55\u219269.4g", url: gpt5_pro_analysis}]
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed: [last_verified, notes, per_portion.carbs_available_g, per_portion.carbs_g, per_portion.carbs_total_g,
-  per_portion.energy_kcal, per_portion.polyols_g, version]
-  sources: []
-- timestamp: '2025-11-03T15:44:11+00:00'
-  updated_by: 'LLM: Claude Code'
-  reason: Add iodine estimate from beef (LOW priority nutrient completion)
-  fields_changed: [last_verified, per_portion.iodine_ug, version]
-  sources: [{note: "USDA FoodData Central: Beef typically ~5 \xB5g/100g. Estimated 360g sandwich\
+  - timestamp: '2025-11-02T19:20:00+00:00'
+    updated_by: 'LLM: GPT-5 Codex'
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed: [last_verified, notes, per_portion.carbs_available_g, per_portion.carbs_g, per_portion.carbs_total_g,
+    per_portion.energy_kcal, per_portion.polyols_g, version]
+    sources: []
+  - timestamp: '2025-11-03T15:44:11+00:00'
+    updated_by: 'LLM: Claude Code'
+    reason: Add iodine estimate from beef (LOW priority nutrient completion)
+    fields_changed: [last_verified, per_portion.iodine_ug, version]
+    sources: [{note: "USDA FoodData Central: Beef typically ~5 \xB5g/100g. Estimated 360g sandwich\
       \ with 200g cooked rump = 18\xB5g. Confidence: LOW-MEDIUM (meat is minor iodine\
       \ source)", url: 'https://fdc.nal.usda.gov/'}]
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
-- timestamp: '2025-11-05T14:30:00+00:00'
-  updated_by: 'Agent 4: Claude Code (Sonnet 4.5)'
-  reason: 'Comprehensive nutrient enrichment using component-based USDA data aggregation for 360g sandwich (200g cooked beef, 90g roll, 27g olive oil, 60g onion, 10g lettuce)'
-  fields_changed: [copper_mg, selenium_ug, chromium_ug, molybdenum_ug, phosphorus_mg, chloride_mg, sulfur_mg, vitamin_a_ug, vitamin_d_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_ala_g, omega6_la_g, version]
-  sources:
-  - note: 'USDA FoodData Central - Beef sirloin cooked (FDC 174032): phosphorus 225mg/100g, selenium 26µg/100g, B12 2.1µg/100g, B vitamins, choline'
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
+  - timestamp: '2025-11-05T14:30:00+00:00'
+    updated_by: 'Agent 4: Claude Code (Sonnet 4.5)'
+    reason: 'Comprehensive nutrient enrichment using component-based USDA data aggregation for 360g sandwich (200g cooked beef, 90g roll, 27g olive oil, 60g onion, 10g lettuce)'
+    fields_changed: [copper_mg, selenium_ug, chromium_ug, molybdenum_ug, phosphorus_mg, chloride_mg, sulfur_mg, vitamin_a_ug, vitamin_d_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_ala_g, omega6_la_g, version]
+    sources:
+    - note: 'USDA FoodData Central - Beef sirloin cooked (FDC 174032): phosphorus 225mg/100g, selenium 26µg/100g, B12 2.1µg/100g, B vitamins, choline'
     url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/174032'
   - note: 'USDA FoodData Central - White bread enriched (FDC 172687): B vitamins (enriched flour), selenium, phosphorus, folate 90µg/100g'
     url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/172687'

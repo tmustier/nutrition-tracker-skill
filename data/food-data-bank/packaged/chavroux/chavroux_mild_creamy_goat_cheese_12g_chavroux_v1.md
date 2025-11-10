@@ -173,7 +173,7 @@ change_log:
         note: "Soft goat cheese pantothenic acid (B5): 0.7mg per 100g, scaled to 12g = 0.08mg"
       - url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6680990/"
         note: "Goat milk fatty acids research: LA 2.0-3.1% of total fat (used 2.5%), ALA 0.41-0.81% of total fat (used 0.6%). Goat cheese 12% fat: LA=0.3g/100g, ALA=0.072g/100g, scaled to 12g portion"
-    notes: "Chromium and molybdenum remain 0 (not routinely analyzed in cheese per USDA research). Fiber soluble/insoluble remain 0.0 (TRUE ZERO for dairy). All omega-3/6 values now complete."
+        notes: "Chromium and molybdenum remain 0 (not routinely analyzed in cheese per USDA research). Fiber soluble/insoluble remain 0.0 (TRUE ZERO for dairy). All omega-3/6 values now complete."
   - timestamp: "2025-11-05T23:15:00+00:00"
     updated_by: "Claude Code (Sonnet 4.5) - Agent 9"
     reason: "Added biotin (vitamin B7) based on goat milk research data (same source used for goat milk yogurt enrichment)"
@@ -181,5 +181,5 @@ change_log:
     evidence:
       - url: "JHVMS study"
         note: "Goat milk contains 2.21µg biotin per 100ml. Soft goat cheese (12% fat, mild variety) estimated at ~2.5µg/100g accounting for concentration during cheese-making process with some biotin loss. Scaled to 12g portion: 2.5µg/100g × 0.12 = 0.3µg"
-    methodology: "Used same goat milk biotin research (JHVMS study) that was applied to goat-milk-yogurt-dollops_st-helens-farm_v1 file. Goat milk baseline: 2.21µg/100ml. For soft fresh cheese with 12% fat content, estimated 2.5µg/100g (accounting for mild concentration and some biotin loss during processing). Conservative estimate for 12g portion = 0.3µg biotin."
+        methodology: "Used same goat milk biotin research (JHVMS study) that was applied to goat-milk-yogurt-dollops_st-helens-farm_v1 file. Goat milk baseline: 2.21µg/100ml. For soft fresh cheese with 12% fat content, estimated 2.5µg/100g (accounting for mild concentration and some biotin loss during processing). Conservative estimate for 12g portion = 0.3µg biotin."
 ```

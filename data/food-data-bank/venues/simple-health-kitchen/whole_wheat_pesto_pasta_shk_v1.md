@@ -98,45 +98,45 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: 2025-10-28T18:51:39+0000
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Populate per_portion from user-provided data
-  fields_changed: [per_portion.energy_kcal, per_portion.protein_g, per_portion.fat_g, per_portion.sat_fat_g,
-  per_portion.mufa_g, per_portion.pufa_g, per_portion.trans_fat_g, per_portion.carbs_g,
-  per_portion.sugar_g, per_portion.fiber_total_g, per_portion.sodium_mg, per_portion.potassium_mg,
-  per_portion.magnesium_mg, per_portion.calcium_mg, per_portion.iron_mg, per_portion.zinc_mg,
-  per_portion.vitamin_c_mg]
-  sources: [{note: User-supplied values on 2025-10-28, url: user_input}]
-- timestamp: 2025-10-28T18:57:05+0000
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Consistency fix for fat totals/splits
-  fields_changed: [per_portion.mufa_g, per_portion.pufa_g]
-  sources: [{note: Correction approved by user on 2025-10-28, url: user_input}]
-- timestamp: 2025-10-28T19:02:30+0000
-  updated_by: 'LLM: GPT-5 Thinking'
-  reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
-  fields_changed: [per_portion.mufa_g, per_portion.pufa_g, per_portion.trans_fat_g, per_portion.carbs_g,
-  per_portion.sugar_g, per_portion.fiber_total_g, per_portion.iron_mg, per_portion.zinc_mg,
-  per_portion.vitamin_c_mg]
-  sources: [{note: Automated rounding pass, url: formatting-pass}]
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed: [last_verified, notes, per_portion.carbs_available_g, per_portion.carbs_g, per_portion.carbs_total_g,
-  per_portion.energy_kcal, per_portion.polyols_g, version]
-  sources: []
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
-- timestamp: '2025-11-05T15:00:00+00:00'
-  updated_by: 'Agent 4: Claude Code (Sonnet 4.5)'
-  reason: 'Comprehensive nutrient enrichment for whole wheat pesto pasta side using component-based USDA data (whole wheat pasta ~100g, pesto ~20g with basil, pine nuts, parmesan, olive oil)'
-  fields_changed: [copper_mg, selenium_ug, chromium_ug, molybdenum_ug, phosphorus_mg, chloride_mg, sulfur_mg, vitamin_a_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_ala_g, omega6_la_g, version, last_verified]
-  sources:
-  - note: 'USDA FoodData Central - Whole wheat pasta cooked (FDC 168890): selenium 26µg/100g, copper 0.17mg/100g, molybdenum 27µg/100g, phosphorus, B vitamins'
+  - timestamp: 2025-10-28T18:51:39+0000
+    updated_by: 'LLM: GPT-5 Thinking'
+    reason: Populate per_portion from user-provided data
+    fields_changed: [per_portion.energy_kcal, per_portion.protein_g, per_portion.fat_g, per_portion.sat_fat_g,
+    per_portion.mufa_g, per_portion.pufa_g, per_portion.trans_fat_g, per_portion.carbs_g,
+    per_portion.sugar_g, per_portion.fiber_total_g, per_portion.sodium_mg, per_portion.potassium_mg,
+    per_portion.magnesium_mg, per_portion.calcium_mg, per_portion.iron_mg, per_portion.zinc_mg,
+    per_portion.vitamin_c_mg]
+    sources: [{note: User-supplied values on 2025-10-28, url: user_input}]
+  - timestamp: 2025-10-28T18:57:05+0000
+    updated_by: 'LLM: GPT-5 Thinking'
+    reason: Consistency fix for fat totals/splits
+    fields_changed: [per_portion.mufa_g, per_portion.pufa_g]
+    sources: [{note: Correction approved by user on 2025-10-28, url: user_input}]
+  - timestamp: 2025-10-28T19:02:30+0000
+    updated_by: 'LLM: GPT-5 Thinking'
+    reason: Standardised rounding (kcal int; g 0.1; mg/ug int) and fat_total coherence
+    fields_changed: [per_portion.mufa_g, per_portion.pufa_g, per_portion.trans_fat_g, per_portion.carbs_g,
+    per_portion.sugar_g, per_portion.fiber_total_g, per_portion.iron_mg, per_portion.zinc_mg,
+    per_portion.vitamin_c_mg]
+    sources: [{note: Automated rounding pass, url: formatting-pass}]
+  - timestamp: '2025-11-02T19:20:00+00:00'
+    updated_by: 'LLM: GPT-5 Codex'
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed: [last_verified, notes, per_portion.carbs_available_g, per_portion.carbs_g, per_portion.carbs_total_g,
+    per_portion.energy_kcal, per_portion.polyols_g, version]
+    sources: []
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
+  - timestamp: '2025-11-05T15:00:00+00:00'
+    updated_by: 'Agent 4: Claude Code (Sonnet 4.5)'
+    reason: 'Comprehensive nutrient enrichment for whole wheat pesto pasta side using component-based USDA data (whole wheat pasta ~100g, pesto ~20g with basil, pine nuts, parmesan, olive oil)'
+    fields_changed: [copper_mg, selenium_ug, chromium_ug, molybdenum_ug, phosphorus_mg, chloride_mg, sulfur_mg, vitamin_a_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_ala_g, omega6_la_g, version, last_verified]
+    sources:
+    - note: 'USDA FoodData Central - Whole wheat pasta cooked (FDC 168890): selenium 26µg/100g, copper 0.17mg/100g, molybdenum 27µg/100g, phosphorus, B vitamins'
     url: 'https://fdc.nal.usda.gov/fdc-app.html#/food-details/168890'
   - note: 'USDA FoodData Central - Basil fresh: vitamin K 415µg/100g, vitamin A'
     url: 'https://fdc.nal.usda.gov/'

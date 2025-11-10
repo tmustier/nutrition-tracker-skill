@@ -108,18 +108,18 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
-- timestamp: 2025-11-02T00:00:00+0000
-  updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: Initial component-based estimation for Imperial Treasure St. James crispy shrimp cheung fun
-  fields_changed: [all fields populated from component analysis]
-  sources: [{note: 'USDA rice noodles (cooked): 108 kcal/100g, 1.79g P, 0.2g F, 24g C', url: 'https://foods.fatsecret.com/calories-nutrition/usda/rice-noodles-(cooked)'},
-  {note: 'USDA cooked shrimp: 99 kcal/100g, 24g P, 1g F, micronutrients', url: 'https://tools.myfooddata.com/nutrition-facts/171971/wt1'},
-  {note: 'Youtiao: 192 kcal/100g, 4g P, 10g F, 22g C', url: 'https://www.snapcalorie.com/nutrition/fried_dough_sticks_nutrition.html'},
-  {note: 'Soybean oil FA profile: 15% sat, 24% MUFA, 58% PUFA', url: 'https://www.nutrition-and-you.com/soybean-oil.html'}]
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
+  - timestamp: 2025-11-02T00:00:00+0000
+    updated_by: 'LLM: Claude Sonnet 4.5'
+    reason: Initial component-based estimation for Imperial Treasure St. James crispy shrimp cheung fun
+    fields_changed: [all fields populated from component analysis]
+    sources: [{note: 'USDA rice noodles (cooked): 108 kcal/100g, 1.79g P, 0.2g F, 24g C', url: 'https://foods.fatsecret.com/calories-nutrition/usda/rice-noodles-(cooked)'},
+    {note: 'USDA cooked shrimp: 99 kcal/100g, 24g P, 1g F, micronutrients', url: 'https://tools.myfooddata.com/nutrition-facts/171971/wt1'},
+    {note: 'Youtiao: 192 kcal/100g, 4g P, 10g F, 22g C', url: 'https://www.snapcalorie.com/nutrition/fried_dough_sticks_nutrition.html'},
+    {note: 'Soybean oil FA profile: 15% sat, 24% MUFA, 58% PUFA', url: 'https://www.nutrition-and-you.com/soybean-oil.html'}]
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
 ```

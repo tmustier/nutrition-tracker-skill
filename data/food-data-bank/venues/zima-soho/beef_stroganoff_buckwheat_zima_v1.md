@@ -98,31 +98,31 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
-- timestamp: 2025-10-30 00:00:00+00:00
-  updated_by: 'LLM: Claude Sonnet 4.5'
-  reason: Initial entry from user-provided complete nutrition data for Zima Soho Beef Stroganoff
-  fields_changed: [per_portion.energy_kcal, per_portion.protein_g, per_portion.fat_g, per_portion.sat_fat_g,
-  per_portion.mufa_g, per_portion.pufa_g, per_portion.trans_fat_g, per_portion.cholesterol_mg,
-  per_portion.carbs_g, per_portion.sugar_g, per_portion.fiber_total_g, per_portion.fiber_soluble_g,
-  per_portion.fiber_insoluble_g, per_portion.sodium_mg, per_portion.potassium_mg]
-  sources: [{note: User-provided nutrition data for Zima Soho Beef Stroganoff with buckwheat
+  - timestamp: 2025-10-30 00:00:00+00:00
+    updated_by: 'LLM: Claude Sonnet 4.5'
+    reason: Initial entry from user-provided complete nutrition data for Zima Soho Beef Stroganoff
+    fields_changed: [per_portion.energy_kcal, per_portion.protein_g, per_portion.fat_g, per_portion.sat_fat_g,
+    per_portion.mufa_g, per_portion.pufa_g, per_portion.trans_fat_g, per_portion.cholesterol_mg,
+    per_portion.carbs_g, per_portion.sugar_g, per_portion.fiber_total_g, per_portion.fiber_soluble_g,
+    per_portion.fiber_insoluble_g, per_portion.sodium_mg, per_portion.potassium_mg]
+    sources: [{note: User-provided nutrition data for Zima Soho Beef Stroganoff with buckwheat
       on 2025-10-30, url: user_input}]
-- timestamp: '2025-11-02T19:20:00+00:00'
-  updated_by: 'LLM: GPT-5 Codex'
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed: [derived.energy_from_macros_kcal, last_verified, notes, per_portion.carbs_available_g,
-  per_portion.carbs_g, per_portion.carbs_total_g, per_portion.energy_kcal, per_portion.polyols_g,
-  version]
-  sources: []
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
-- timestamp: '2025-11-05T16:30:00+00:00'
-  updated_by: 'Agent 2: Claude Code (Sonnet 4.5)'
-  reason: 'Phase 3 enrichment: Added complete USDA nutrient data for 25 migrated fields using component-based calculation'
-  fields_changed: [magnesium_mg, calcium_mg, iron_mg, zinc_mg, vitamin_c_mg, copper_mg, selenium_ug, chromium_ug, molybdenum_ug, phosphorus_mg, chloride_mg, sulfur_mg, vitamin_a_ug, vitamin_d_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_epa_mg, omega3_dha_mg, omega3_ala_g, omega6_la_g, boron_mg, silicon_mg, vanadium_ug, nickel_ug]
-  sources: [{note: 'USDA FDC #174032 (beef loin cooked): B vitamins (B12 2.64µg/100g), selenium 26.5µg/100g, phosphorus 213mg/100g, zinc 4.5mg/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'USDA FDC #170855 (sour cream): vitamin A 243µg/100g, calcium 116mg/100g, B2, B5, B12', url: 'https://fdc.nal.usda.gov/'}, {note: 'USDA FDC #170279 (buckwheat cooked): magnesium 51mg/100g, copper 0.15mg/100g, molybdenum 18µg/100g, phosphorus 70mg/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'USDA FDC #169251 (mushrooms cooked): B vitamins, copper 0.50mg/100g, selenium 12.3µg/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'Component-weighted calculation: 120g beef + 50g sour cream + 150g buckwheat + 30g mushrooms + 15g butter', url: component_analysis}]
+  - timestamp: '2025-11-02T19:20:00+00:00'
+    updated_by: 'LLM: GPT-5 Codex'
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed: [derived.energy_from_macros_kcal, last_verified, notes, per_portion.carbs_available_g,
+    per_portion.carbs_g, per_portion.carbs_total_g, per_portion.energy_kcal, per_portion.polyols_g,
+    version]
+    sources: []
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
+  - timestamp: '2025-11-05T16:30:00+00:00'
+    updated_by: 'Agent 2: Claude Code (Sonnet 4.5)'
+    reason: 'Phase 3 enrichment: Added complete USDA nutrient data for 25 migrated fields using component-based calculation'
+    fields_changed: [magnesium_mg, calcium_mg, iron_mg, zinc_mg, vitamin_c_mg, copper_mg, selenium_ug, chromium_ug, molybdenum_ug, phosphorus_mg, chloride_mg, sulfur_mg, vitamin_a_ug, vitamin_d_ug, vitamin_e_mg, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_epa_mg, omega3_dha_mg, omega3_ala_g, omega6_la_g, boron_mg, silicon_mg, vanadium_ug, nickel_ug]
+    sources: [{note: 'USDA FDC #174032 (beef loin cooked): B vitamins (B12 2.64µg/100g), selenium 26.5µg/100g, phosphorus 213mg/100g, zinc 4.5mg/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'USDA FDC #170855 (sour cream): vitamin A 243µg/100g, calcium 116mg/100g, B2, B5, B12', url: 'https://fdc.nal.usda.gov/'}, {note: 'USDA FDC #170279 (buckwheat cooked): magnesium 51mg/100g, copper 0.15mg/100g, molybdenum 18µg/100g, phosphorus 70mg/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'USDA FDC #169251 (mushrooms cooked): B vitamins, copper 0.50mg/100g, selenium 12.3µg/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'Component-weighted calculation: 120g beef + 50g sour cream + 150g buckwheat + 30g mushrooms + 15g butter', url: component_analysis}]
 ```

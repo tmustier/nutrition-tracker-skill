@@ -118,42 +118,42 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.01 (animal)."
-- timestamp: 2025-11-02
-  reason: Initial entry - component-based estimation for Peking duck pancake
-  fields_changed: [all fields]
-  evidence: Complete USDA-based analysis of all components with detailed fatty acid breakdown
-- date: 2025-11-05
-  updated_by: automated_migration_v1_to_v2
-  change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
-  minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
-  acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
-  fields initialized to 0.'
-- timestamp: "2025-11-05T12:55:00+00:00"
-  updated_by: "LLM: Claude Sonnet 4.5 (Agent 3)"
-  reason: "Schema v2 enrichment: Complete nutrient profile for Peking duck pancake (35g duck + 15g pancake + condiments). Added 19 missing nutrients from duck meat and enriched flour. B-vitamins rich from duck (B3=2.0mg, B5=0.5mg). Corrected cholesterol to 30mg (duck contains cholesterol). Phosphorus (79mg), choline (20mg)."
-  fields_changed:
-  - per_portion.cholesterol_mg
-  - per_portion.potassium_mg
-  - per_portion.magnesium_mg
-  - per_portion.manganese_mg
-  - per_portion.copper_mg
-  - per_portion.selenium_ug
-  - per_portion.phosphorus_mg
-  - per_portion.vitamin_a_ug
-  - per_portion.vitamin_d_ug
-  - per_portion.vitamin_e_mg
-  - per_portion.vitamin_k_ug
-  - per_portion.vitamin_b1_mg
-  - per_portion.vitamin_b2_mg
-  - per_portion.vitamin_b3_mg
-  - per_portion.vitamin_b5_mg
-  - per_portion.vitamin_b6_mg
-  - per_portion.vitamin_b7_ug
-  - per_portion.vitamin_b9_ug
-  - per_portion.vitamin_b12_ug
-  - per_portion.choline_mg
-  - version
-  sources:
-  - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/172409/nutrients
+  - timestamp: 2025-11-02
+    reason: Initial entry - component-based estimation for Peking duck pancake
+    fields_changed: [all fields]
+    evidence: Complete USDA-based analysis of all components with detailed fatty acid breakdown
+  - date: 2025-11-05
+    updated_by: automated_migration_v1_to_v2
+    change: 'Schema migration: Added 27 new nutrient fields (vitamins B1-B12, A, D, E, K, choline;
+    minerals copper, selenium, chromium, molybdenum, phosphorus, chloride, sulfur; fatty
+    acids EPA, DHA, ALA, LA; ultra-trace boron, silicon, vanadium, nickel). All new
+    fields initialized to 0.'
+  - timestamp: "2025-11-05T12:55:00+00:00"
+    updated_by: "LLM: Claude Sonnet 4.5 (Agent 3)"
+    reason: "Schema v2 enrichment: Complete nutrient profile for Peking duck pancake (35g duck + 15g pancake + condiments). Added 19 missing nutrients from duck meat and enriched flour. B-vitamins rich from duck (B3=2.0mg, B5=0.5mg). Corrected cholesterol to 30mg (duck contains cholesterol). Phosphorus (79mg), choline (20mg)."
+    fields_changed:
+    - per_portion.cholesterol_mg
+    - per_portion.potassium_mg
+    - per_portion.magnesium_mg
+    - per_portion.manganese_mg
+    - per_portion.copper_mg
+    - per_portion.selenium_ug
+    - per_portion.phosphorus_mg
+    - per_portion.vitamin_a_ug
+    - per_portion.vitamin_d_ug
+    - per_portion.vitamin_e_mg
+    - per_portion.vitamin_k_ug
+    - per_portion.vitamin_b1_mg
+    - per_portion.vitamin_b2_mg
+    - per_portion.vitamin_b3_mg
+    - per_portion.vitamin_b5_mg
+    - per_portion.vitamin_b6_mg
+    - per_portion.vitamin_b7_ug
+    - per_portion.vitamin_b9_ug
+    - per_portion.vitamin_b12_ug
+    - per_portion.choline_mg
+    - version
+    sources:
+    - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/172409/nutrients
     note: "USDA FDC 172409 - Duck, domesticated, meat and skin, cooked, roasted (35g). Duck provides: B1=0.06mg, B2=0.1mg, B3=1.7mg, B5=0.4mg, B6=0.06mg, B12=0.1µg, phosphorus=55mg, choline=18mg, selenium=5µg, copper=0.08mg, vitamin A=5µg, D=0.1µg, E=0.2mg, K=1µg, potassium=77mg, magnesium=6mg, cholesterol=30mg. Pancake (15g enriched flour) adds: B1=0.03mg, B2=0.05mg, B3=0.24mg, B9=6µg, phosphorus=24mg. Confidence: HIGH (USDA duck + pancake components)"
 ```

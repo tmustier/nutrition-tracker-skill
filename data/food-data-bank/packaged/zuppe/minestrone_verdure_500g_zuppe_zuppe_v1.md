@@ -157,5 +157,5 @@ change_log:
         note: "USDA Cabbage, savoy, cooked - vitamin K, folate, calcium"
       - url: "component_analysis"
         note: "Applied ingredient-based estimation: identified all components from label, scaled USDA micronutrient profiles by component contribution, validated macros against label, calculated derived nutrients (chloride from sodium, sulfur from protein)"
-    confidence_summary: "MEDIUM confidence overall. HIGH for macros (product label), MEDIUM for most vitamins/minerals (USDA vegetable soup + component scaling), LOW for iodine/chromium (soil-dependent). UK label handling: available carbs confirmed, fiber estimated at 1.5g/100g from USDA soup profiles."
+        confidence_summary: "MEDIUM confidence overall. HIGH for macros (product label), MEDIUM for most vitamins/minerals (USDA vegetable soup + component scaling), LOW for iodine/chromium (soil-dependent). UK label handling: available carbs confirmed, fiber estimated at 1.5g/100g from USDA soup profiles."
 ```

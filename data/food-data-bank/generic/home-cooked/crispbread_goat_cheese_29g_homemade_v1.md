@@ -156,7 +156,7 @@ change_log:
         note: "Goat cheese component now enriched with biotin: 0.3µg per 12g slice. This recipe uses 24g cheese (2 slices): 0.3µg × 2 = 0.6µg biotin"
       - url: "amisa_buckwheat_crispbread_5g_v1"
         note: "Buckwheat crispbread contributes 0µg biotin (negligible in buckwheat)"
-    methodology: "Component-based inheritance: Chavroux cheese component was enriched with biotin (0.3µg per 12g) based on goat milk research. This composite food contains 24g cheese (2 × 12g slices), therefore inherits 0.6µg biotin from cheese component."
+        methodology: "Component-based inheritance: Chavroux cheese component was enriched with biotin (0.3µg per 12g) based on goat milk research. This composite food contains 24g cheese (2 × 12g slices), therefore inherits 0.6µg biotin from cheese component."
   - timestamp: "2025-11-05T20:30:00+00:00"
     updated_by: "Claude Code (Sonnet 4.5)"
     reason: "Phase 2 enrichment: Added 8 critical nutrients using REAL USDA values from enriched component files. FIXED incomplete mineral summations."
@@ -175,5 +175,5 @@ change_log:
         note: "Crispbread 5g: B5=0.022mg, B7=0µg, ALA=0.004g, LA=0.035g, Ca=2mg, Mg=13mg, K=29mg, Fe=0.20mg, Zn=0.16mg"
       - url: "chavroux_mild_creamy_goat_cheese_12g_chavroux_v1"
         note: "Goat cheese 24g (2 × 12g slices): B5=0.16mg, B7=0µg, ALA=0.02g, LA=0.08g, Ca=72mg, Mg=6mg, K=38mg, Fe=0.4mg, Zn=0.2mg"
-    methodology: "Component-based summation: Buckwheat (5g) + Goat cheese (24g = 2 slices). Calculations: B5: 0.022+0.16=0.18mg; B7: remains 0 (not measured in USDA cheese data); ALA: 0.004+0.02=0.02g; LA: 0.035+0.08=0.12g; Ca: 2+72=74mg; Mg: 13+6=19mg; K: 29+38=67mg; Fe: 0.20+0.4=0.6mg; Zn: 0.16+0.2=0.36mg. Previous enrichment had incomplete mineral summations - now corrected."
+        methodology: "Component-based summation: Buckwheat (5g) + Goat cheese (24g = 2 slices). Calculations: B5: 0.022+0.16=0.18mg; B7: remains 0 (not measured in USDA cheese data); ALA: 0.004+0.02=0.02g; LA: 0.035+0.08=0.12g; Ca: 2+72=74mg; Mg: 13+6=19mg; K: 29+38=67mg; Fe: 0.20+0.4=0.6mg; Zn: 0.16+0.2=0.36mg. Previous enrichment had incomplete mineral summations - now corrected."
 ```

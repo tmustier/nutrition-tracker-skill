@@ -103,87 +103,87 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: '2025-11-05T16:00:00+00:00'
-  updated_by: Claude Code (Sonnet 4.5)
-  reason: Second enrichment with 4 additional priority nutrients from USDA FoodData Central
-  fields_changed: [vitamin_b5_mg, vitamin_b7_ug, omega3_ala_g, omega6_la_g]
-  sources:
-  - note: 'USDA FoodData Central - Kiwifruit, green, raw (FDC ID 168153): Pantothenic acid 0.183mg/100g, ALA 0.042g/100g, LA 0.246g/100g'
-    url: 'https://www.nutritionvalue.org/Kiwifruit%2C_raw%2C_green_nutritional_value.html'
-  - note: 'Biotin content: ~1.55μg/100g (calculated from 1.4μg per 90g edible portion)'
-    url: 'https://wholefoodcatalog.info/nutrient/vitamin_b7(biotin)/fruits/'
-  data_notes: 'Scaled from per-100g to 70g portion. Chromium and molybdenum remain 0 (not measured/reported in USDA database for kiwifruit).'
-- timestamp: 2025-11-05T12:00:00+00:00
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: Initial population from USDA FoodData Central (FDC ID 168153) scaled to standard 70g small kiwifruit portion
-  fields_changed:
-  - portion.description
-  - portion.est_weight_g
-  - portion.notes
-  - assumptions.salt_scheme
-  - assumptions.prep
-  - per_portion.energy_kcal
-  - per_portion.protein_g
-  - per_portion.fat_g
-  - per_portion.sat_fat_g
-  - per_portion.mufa_g
-  - per_portion.pufa_g
-  - per_portion.trans_fat_g
-  - per_portion.cholesterol_mg
-  - per_portion.carbs_total_g
-  - per_portion.carbs_available_g
-  - per_portion.sugar_g
-  - per_portion.fiber_total_g
-  - per_portion.fiber_soluble_g
-  - per_portion.fiber_insoluble_g
-  - per_portion.polyols_g
-  - per_portion.sodium_mg
-  - per_portion.potassium_mg
-  - per_portion.iodine_ug
-  - per_portion.magnesium_mg
-  - per_portion.calcium_mg
-  - per_portion.iron_mg
-  - per_portion.zinc_mg
-  - per_portion.manganese_mg
-  - per_portion.copper_mg
-  - per_portion.selenium_ug
-  - per_portion.vitamin_c_mg
-  - per_portion.vitamin_d_ug
-  - per_portion.vitamin_e_mg
-  - derived.fat_unassigned_g
-  - quality.confidence
-  - notes
-  sources:
-  - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/168153/nutrients
+  - timestamp: '2025-11-05T16:00:00+00:00'
+    updated_by: Claude Code (Sonnet 4.5)
+    reason: Second enrichment with 4 additional priority nutrients from USDA FoodData Central
+    fields_changed: [vitamin_b5_mg, vitamin_b7_ug, omega3_ala_g, omega6_la_g]
+    sources:
+      - note: 'USDA FoodData Central - Kiwifruit, green, raw (FDC ID 168153): Pantothenic acid 0.183mg/100g, ALA 0.042g/100g, LA 0.246g/100g'
+        url: 'https://www.nutritionvalue.org/Kiwifruit%2C_raw%2C_green_nutritional_value.html'
+      - note: 'Biotin content: ~1.55μg/100g (calculated from 1.4μg per 90g edible portion)'
+        url: 'https://wholefoodcatalog.info/nutrient/vitamin_b7(biotin)/fruits/'
+    data_notes: 'Scaled from per-100g to 70g portion. Chromium and molybdenum remain 0 (not measured/reported in USDA database for kiwifruit).'
+  - timestamp: 2025-11-05T12:00:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: Initial population from USDA FoodData Central (FDC ID 168153) scaled to standard 70g small kiwifruit portion
+    fields_changed:
+    - portion.description
+    - portion.est_weight_g
+    - portion.notes
+    - assumptions.salt_scheme
+    - assumptions.prep
+    - per_portion.energy_kcal
+    - per_portion.protein_g
+    - per_portion.fat_g
+    - per_portion.sat_fat_g
+    - per_portion.mufa_g
+    - per_portion.pufa_g
+    - per_portion.trans_fat_g
+    - per_portion.cholesterol_mg
+    - per_portion.carbs_total_g
+    - per_portion.carbs_available_g
+    - per_portion.sugar_g
+    - per_portion.fiber_total_g
+    - per_portion.fiber_soluble_g
+    - per_portion.fiber_insoluble_g
+    - per_portion.polyols_g
+    - per_portion.sodium_mg
+    - per_portion.potassium_mg
+    - per_portion.iodine_ug
+    - per_portion.magnesium_mg
+    - per_portion.calcium_mg
+    - per_portion.iron_mg
+    - per_portion.zinc_mg
+    - per_portion.manganese_mg
+    - per_portion.copper_mg
+    - per_portion.selenium_ug
+    - per_portion.vitamin_c_mg
+    - per_portion.vitamin_d_ug
+    - per_portion.vitamin_e_mg
+    - derived.fat_unassigned_g
+    - quality.confidence
+    - notes
+    sources:
+    - url: https://fdc.nal.usda.gov/fdc-app.html#/food-details/168153/nutrients
     note: USDA FoodData Central primary source for green kiwifruit, raw
   - url: https://www.nutritionvalue.org/Kiwifruit,_raw,_green_nutritional_value.html
     note: USDA data aggregator with complete micronutrient profile
   - url: https://pmc.ncbi.nlm.nih.gov/articles/PMC6267416/
     note: 'Peer-reviewed research: The nutritional and health attributes of kiwifruit'
-- timestamp: 2025-11-05T14:00:00+00:00
-  updated_by: "LLM: Claude Sonnet 4.5"
-  reason: "Enrichment: Added 17 priority nutrients from USDA FoodData Central (FDC ID 168153) via nutritionvalue.org aggregator"
-  fields_changed:
-  - per_portion.phosphorus_mg (0 → 23.8)
-  - per_portion.copper_mg (0.1 → 0.09, refined from 0.128/100g)
-  - per_portion.selenium_ug (0.1 → 0.14, refined from 0.2/100g)
-  - per_portion.manganese_mg (0.1 → 0.07, refined from 0.098/100g)
-  - per_portion.vitamin_a_ug (0 → 2.8)
-  - per_portion.vitamin_k_ug (0 → 28.2)
-  - per_portion.choline_mg (0 → 5.4)
-  - per_portion.vitamin_b1_mg (0 → 0.02)
-  - per_portion.vitamin_b2_mg (0 → 0.02)
-  - per_portion.vitamin_b3_mg (0 → 0.24)
-  - per_portion.vitamin_b6_mg (0 → 0.04)
-  - per_portion.vitamin_b9_ug (0 → 17.5)
-  - notes (updated micronutrient summary)
-  sources:
-  - url: https://www.nutritionvalue.org/Kiwifruit,_raw,_green_nutritional_value.html
-    note: "Complete USDA nutrient profile including B-vitamins, vitamin A, vitamin K, choline, phosphorus per 100g"
-  nutrients_confirmed:
-  - "vitamin_d_ug: 0 (kiwi contains no vitamin D)"
-  - "vitamin_b12_ug: 0 (plant foods do not contain B12)"
-  - "iodine_ug: 0 (not reported in USDA database for kiwi)"
-  - "omega3_epa_mg: 0 (confirmed, no marine omega-3s in plant foods)"
-  - "omega3_dha_mg: 0 (confirmed, no marine omega-3s in plant foods)"
+  - timestamp: 2025-11-05T14:00:00+00:00
+    updated_by: "LLM: Claude Sonnet 4.5"
+    reason: "Enrichment: Added 17 priority nutrients from USDA FoodData Central (FDC ID 168153) via nutritionvalue.org aggregator"
+    fields_changed:
+    - per_portion.phosphorus_mg (0 → 23.8)
+    - per_portion.copper_mg (0.1 → 0.09, refined from 0.128/100g)
+    - per_portion.selenium_ug (0.1 → 0.14, refined from 0.2/100g)
+    - per_portion.manganese_mg (0.1 → 0.07, refined from 0.098/100g)
+    - per_portion.vitamin_a_ug (0 → 2.8)
+    - per_portion.vitamin_k_ug (0 → 28.2)
+    - per_portion.choline_mg (0 → 5.4)
+    - per_portion.vitamin_b1_mg (0 → 0.02)
+    - per_portion.vitamin_b2_mg (0 → 0.02)
+    - per_portion.vitamin_b3_mg (0 → 0.24)
+    - per_portion.vitamin_b6_mg (0 → 0.04)
+    - per_portion.vitamin_b9_ug (0 → 17.5)
+    - notes (updated micronutrient summary)
+    sources:
+      - url: https://www.nutritionvalue.org/Kiwifruit,_raw,_green_nutritional_value.html
+        note: "Complete USDA nutrient profile including B-vitamins, vitamin A, vitamin K, choline, phosphorus per 100g"
+    nutrients_confirmed:
+      - "vitamin_d_ug: 0 (kiwi contains no vitamin D)"
+      - "vitamin_b12_ug: 0 (plant foods do not contain B12)"
+      - "iodine_ug: 0 (not reported in USDA database for kiwi)"
+      - "omega3_epa_mg: 0 (confirmed, no marine omega-3s in plant foods)"
+      - "omega3_dha_mg: 0 (confirmed, no marine omega-3s in plant foods)"
 ```

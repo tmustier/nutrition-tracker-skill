@@ -98,45 +98,45 @@ change_log:
     updated_by: "Script: calculate_derived_nutrients.py"
     change: "Calculated derived nutrients (chloride from sodium, sulfur from protein)"
     notes: "Chloride = sodium × 1.54 (NaCl ratio). Sulfur = protein × 0.004 (plant)."
-- timestamp: 2025-11-02T12:00:00+0000
-  updated_by: "LLM: GPT-5 Codex"
-  reason: Initial estimate for Pastel de Nata dessert at The Eagle
-  fields_changed:
-  - all fields
-  sources:
-  - url: user_request
+  - timestamp: 2025-11-02T12:00:00+0000
+    updated_by: "LLM: GPT-5 Codex"
+    reason: Initial estimate for Pastel de Nata dessert at The Eagle
+    fields_changed:
+    - all fields
+    sources:
+    - url: user_request
     note: User asked to add Pastel de Nata from The Eagle to food bank
   - url: gpt_component_estimate
     note: Component model using puff pastry and custard nutrition references
-- timestamp: "2025-11-02T19:20:00+00:00"
-  updated_by: "LLM: GPT-5 Codex"
-  reason: Standardise carbohydrate fields and recompute available-carb energy
-  fields_changed:
-  - derived.energy_from_macros_kcal
-  - last_verified
-  - notes
-  - per_portion.carbs_available_g
-  - per_portion.carbs_g
-  - per_portion.carbs_total_g
-  - per_portion.energy_kcal
-  - per_portion.polyols_g
-  - version
-  sources: []
-- timestamp: "2025-11-03T15:44:11+00:00"
-  updated_by: "LLM: Claude Code"
-  reason: Add iodine, selenium and vitamin D estimates from egg custard (MEDIUM priority nutrient completion)
-  fields_changed:
-  - last_verified
-  - per_portion.iodine_ug
-  - per_portion.selenium_ug
-  - per_portion.vitamin_d_ug
-  - version
-  sources:
-  - url: https://fdc.nal.usda.gov/
+  - timestamp: "2025-11-02T19:20:00+00:00"
+    updated_by: "LLM: GPT-5 Codex"
+    reason: Standardise carbohydrate fields and recompute available-carb energy
+    fields_changed:
+    - derived.energy_from_macros_kcal
+    - last_verified
+    - notes
+    - per_portion.carbs_available_g
+    - per_portion.carbs_g
+    - per_portion.carbs_total_g
+    - per_portion.energy_kcal
+    - per_portion.polyols_g
+    - version
+    sources: []
+  - timestamp: "2025-11-03T15:44:11+00:00"
+    updated_by: "LLM: Claude Code"
+    reason: Add iodine, selenium and vitamin D estimates from egg custard (MEDIUM priority nutrient completion)
+    fields_changed:
+    - last_verified
+    - per_portion.iodine_ug
+    - per_portion.selenium_ug
+    - per_portion.vitamin_d_ug
+    - version
+    sources:
+    - url: https://fdc.nal.usda.gov/
     note: "USDA FoodData Central: Eggs ~26 µg/100g iodine, ~31 µg/100g selenium, ~1.8 µg/100g vitamin D. 25g custard estimated at 65% eggs. Confidence: MEDIUM (egg-based estimates well-documented)"
-- timestamp: '2025-11-05T17:30:00+00:00'
-  updated_by: 'Agent 2: Claude Code (Sonnet 4.5)'
-  reason: 'Phase 3 enrichment: Added complete USDA nutrient data for 23 remaining migrated fields'
-  fields_changed: [magnesium_mg, calcium_mg, iron_mg, zinc_mg, vitamin_c_mg, vitamin_e_mg, manganese_mg, copper_mg, chromium_ug, molybdenum_ug, phosphorus_mg, chloride_mg, sulfur_mg, vitamin_a_ug, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_epa_mg, omega3_dha_mg, omega3_ala_g, omega6_la_g, boron_mg, silicon_mg, vanadium_ug, nickel_ug]
-  sources: [{note: 'USDA FDC #173424 (eggs): B vitamins, choline 251mg/100g, vitamin A 160µg/100g, vitamin E 1.03mg/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'USDA FDC #173430 (butter): vitamin A 684µg/100g, vitamin E 2.32mg/100g, vitamin K 7µg/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'USDA FDC #171265 (milk): B vitamins, calcium 113mg/100g, phosphorus 93mg/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'USDA FDC #169762 (flour): B vitamins, selenium 33.9µg/100g, phosphorus 108mg/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'Component-weighted calculation: 15g flour + 20g butter + 15g eggs + 10g milk + 5g sugar in 65g tart', url: component_analysis}]
+  - timestamp: '2025-11-05T17:30:00+00:00'
+    updated_by: 'Agent 2: Claude Code (Sonnet 4.5)'
+    reason: 'Phase 3 enrichment: Added complete USDA nutrient data for 23 remaining migrated fields'
+    fields_changed: [magnesium_mg, calcium_mg, iron_mg, zinc_mg, vitamin_c_mg, vitamin_e_mg, manganese_mg, copper_mg, chromium_ug, molybdenum_ug, phosphorus_mg, chloride_mg, sulfur_mg, vitamin_a_ug, vitamin_k_ug, vitamin_b1_mg, vitamin_b2_mg, vitamin_b3_mg, vitamin_b5_mg, vitamin_b6_mg, vitamin_b7_ug, vitamin_b9_ug, vitamin_b12_ug, choline_mg, omega3_epa_mg, omega3_dha_mg, omega3_ala_g, omega6_la_g, boron_mg, silicon_mg, vanadium_ug, nickel_ug]
+    sources: [{note: 'USDA FDC #173424 (eggs): B vitamins, choline 251mg/100g, vitamin A 160µg/100g, vitamin E 1.03mg/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'USDA FDC #173430 (butter): vitamin A 684µg/100g, vitamin E 2.32mg/100g, vitamin K 7µg/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'USDA FDC #171265 (milk): B vitamins, calcium 113mg/100g, phosphorus 93mg/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'USDA FDC #169762 (flour): B vitamins, selenium 33.9µg/100g, phosphorus 108mg/100g', url: 'https://fdc.nal.usda.gov/'}, {note: 'Component-weighted calculation: 15g flour + 20g butter + 15g eggs + 10g milk + 5g sugar in 65g tart', url: component_analysis}]
 ```
