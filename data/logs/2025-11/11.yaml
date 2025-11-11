@@ -701,54 +701,54 @@ entries:
     quantity: 1
     unit: portion
     nutrition:
-      energy_kcal: 139.5
-      protein_g: 1.4
-      fat_g: 8.3
-      sat_fat_g: 5.5
-      mufa_g: 2.0
-      pufa_g: 0.6
-      trans_fat_g: 0.05
-      cholesterol_mg: 2.3
-      carbs_total_g: 14.9
+      energy_kcal: 312
+      protein_g: 3.1
+      fat_g: 18.6
+      sat_fat_g: 12.3
+      mufa_g: 4.5
+      pufa_g: 1.3
+      trans_fat_g: 0.11
+      cholesterol_mg: 5
+      carbs_total_g: 33.4
       polyols_g: 0.0
-      carbs_available_g: 13.9
-      sugar_g: 7.2
-      fiber_total_g: 1.0
-      fiber_soluble_g: 0.4
-      fiber_insoluble_g: 0.6
-      sodium_mg: 9
-      potassium_mg: 115
-      calcium_mg: 47
-      magnesium_mg: 24
-      phosphorus_mg: 66
-      chloride_mg: 14
-      sulfur_g: 0.01
-      iron_mg: 0.7
-      zinc_mg: 0.7
-      copper_mg: 0.16
-      manganese_mg: 0.18
-      selenium_ug: 1.0
-      iodine_ug: 1.5
-      chromium_ug: 0.8
-      molybdenum_ug: 1.0
-      vitamin_a_ug: 13
-      vitamin_d_ug: 0.2
-      vitamin_e_mg: 1.2
-      vitamin_k_ug: 1.0
-      vitamin_b1_mg: 0.07
-      vitamin_b2_mg: 0.08
-      vitamin_b3_mg: 0.5
-      vitamin_b5_mg: 0.1
-      vitamin_b6_mg: 0.02
-      vitamin_b7_ug: 2.5
-      vitamin_b9_ug: 5
-      vitamin_b12_ug: 0.16
-      choline_mg: 9
+      carbs_available_g: 31.1
+      sugar_g: 16.1
+      fiber_total_g: 2.2
+      fiber_soluble_g: 0.9
+      fiber_insoluble_g: 1.3
+      sodium_mg: 20
+      potassium_mg: 258
+      calcium_mg: 105
+      magnesium_mg: 54
+      phosphorus_mg: 148
+      chloride_mg: 31
+      sulfur_g: 0.022
+      iron_mg: 1.6
+      zinc_mg: 1.6
+      copper_mg: 0.36
+      manganese_mg: 0.4
+      selenium_ug: 2
+      iodine_ug: 3
+      chromium_ug: 2
+      molybdenum_ug: 2
+      vitamin_a_ug: 29
+      vitamin_d_ug: 0.4
+      vitamin_e_mg: 2.7
+      vitamin_k_ug: 2
+      vitamin_b1_mg: 0.16
+      vitamin_b2_mg: 0.18
+      vitamin_b3_mg: 1.1
+      vitamin_b5_mg: 0.22
+      vitamin_b6_mg: 0.04
+      vitamin_b7_ug: 6
+      vitamin_b9_ug: 11
+      vitamin_b12_ug: 0.36
+      choline_mg: 20
       vitamin_c_mg: 0.0
       omega3_epa_mg: 0
       omega3_dha_mg: 0
-      omega3_ala_g: 0.002
-      omega6_la_g: 0.5
+      omega3_ala_g: 0.004
+      omega6_la_g: 1.1
       boron_mg: 0
       silicon_mg: 0
       vanadium_ug: 0
