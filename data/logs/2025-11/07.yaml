@@ -336,7 +336,7 @@ entries:
       vitamin_b2_mg: 0.21
       vitamin_b3_mg: 3.0
       vitamin_b5_mg: 1.2
-      vitamin_b6_mg: 0.30
+      vitamin_b6_mg: 0.3
       vitamin_b7_ug: 12
       vitamin_b9_ug: 265
       vitamin_b12_ug: 0
@@ -406,8 +406,7 @@ entries:
       silicon_mg: 0
       vanadium_ug: 0
       nickel_ug: 0
-  notes: 'Lunch from Simple Health Kitchen - Chicken breast, greek lentils, zesty
-    broccoli'
+  notes: Lunch from Simple Health Kitchen - Chicken breast, greek lentils, zesty broccoli
 - timestamp: '2025-11-07T23:00:00+00:00'
   items:
   - name: British Artisan Cheese Plate
@@ -738,8 +737,8 @@ entries:
       vitamin_b1_mg: 0.02
       vitamin_b2_mg: 0.08
       vitamin_b3_mg: 0.26
-      vitamin_b5_mg: 0.10
-      vitamin_b6_mg: 0.10
+      vitamin_b5_mg: 0.1
+      vitamin_b6_mg: 0.1
       vitamin_b7_ug: 1.0
       vitamin_b9_ug: 2.5
       vitamin_b12_ug: 0
@@ -923,4 +922,8 @@ entries:
       silicon_mg: 0
       vanadium_ug: 0
       nickel_ug: 0
-  notes: 'Dinner - Cheese plate (Neal''s Yard Dairy: Harbourne Blue, Baron Bigod, Durrus, Yr Afr, Tinto, Riseley with Sheridan''s crackers and red onion marmalade), fried rice, mapo tofu, pork belly stir-fry, banana cake. Drinks: 2 champagne, 3 white wine, 1 sweet muscat, 1 negroni. Portions adjusted to realistic amounts based on fullness calibration (~2,600 kcal total).'
+  notes: 'Dinner - Cheese plate (Neal''s Yard Dairy: Harbourne Blue, Baron Bigod,
+    Durrus, Yr Afr, Tinto, Riseley with Sheridan''s crackers and red onion marmalade),
+    fried rice, mapo tofu, pork belly stir-fry, banana cake. Drinks: 2 champagne,
+    3 white wine, 1 sweet muscat, 1 negroni. Portions adjusted to realistic amounts
+    based on fullness calibration (~2,600 kcal total).'
