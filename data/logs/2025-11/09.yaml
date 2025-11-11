@@ -117,7 +117,7 @@ entries:
       silicon_mg: 0.0
       vanadium_ug: 0
       nickel_ug: 0
-  notes: "Breakfast smoothie (raspberries + whey protein)"
+  notes: Breakfast smoothie (raspberries + whey protein)
 - timestamp: '2025-11-09T11:00:00+00:00'
   items:
   - name: Black Rice with Coconut Milk & Honey
@@ -234,7 +234,7 @@ entries:
       silicon_mg: 0.0
       vanadium_ug: 0
       nickel_ug: 0
-  notes: "Black rice bowl cooked with coconut milk and honey + fresh mango"
+  notes: Black rice bowl cooked with coconut milk and honey + fresh mango
 - timestamp: '2025-11-09T15:00:00+00:00'
   items:
   - name: Banana
@@ -279,7 +279,7 @@ entries:
       vitamin_b1_mg: 0.05
       vitamin_b2_mg: 0.11
       vitamin_b3_mg: 1.0
-      vitamin_b5_mg: 0.50
+      vitamin_b5_mg: 0.5
       vitamin_b6_mg: 0.6
       vitamin_b7_ug: 0.3
       vitamin_b9_ug: 30
@@ -351,7 +351,7 @@ entries:
       silicon_mg: 0
       vanadium_ug: 0
       nickel_ug: 0
-  notes: "Tennis nutrition - banana and Lucozade Sport Orange during session"
+  notes: Tennis nutrition - banana and Lucozade Sport Orange during session
 - timestamp: '2025-11-09T19:30:00+00:00'
   items:
   - name: Ground Beef & Buckwheat (Home)
@@ -411,4 +411,5 @@ entries:
       silicon_mg: 0.0
       vanadium_ug: 0
       nickel_ug: 0
-  notes: "Dinner - home-cooked ground beef (5% fat) and buckwheat dish with soffrito, olive oil, and condiments"
+  notes: Dinner - home-cooked ground beef (5% fat) and buckwheat dish with soffrito,
+    olive oil, and condiments

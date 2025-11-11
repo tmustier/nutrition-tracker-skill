@@ -556,7 +556,7 @@ entries:
       zinc_mg: 7
       vitamin_c_mg: 7
       manganese_mg: 0.68
-      copper_mg: 0.50
+      copper_mg: 0.5
       selenium_ug: 50
       chromium_ug: 1
       molybdenum_ug: 2
@@ -571,7 +571,7 @@ entries:
       vitamin_b2_mg: 0.27
       vitamin_b3_mg: 9.8
       vitamin_b5_mg: 1.05
-      vitamin_b6_mg: 0.60
+      vitamin_b6_mg: 0.6
       vitamin_b7_ug: 4
       vitamin_b9_ug: 88
       vitamin_b12_ug: 2.2
@@ -738,7 +738,7 @@ entries:
       vitamin_d_ug: 0.0
       vitamin_e_mg: 0.03
       vitamin_k_ug: 0
-      vitamin_b1_mg: 0.10
+      vitamin_b1_mg: 0.1
       vitamin_b2_mg: 0.06
       vitamin_b3_mg: 0.8
       vitamin_b5_mg: 0.06
@@ -755,8 +755,8 @@ entries:
       silicon_mg: 0.0
       vanadium_ug: 0
       nickel_ug: 0
-  notes: Dinner from Miznon Soho - rib eye steak pita, half bag broken chicken,
-    1/3 hummus plate, 1/3 pita
+  notes: Dinner from Miznon Soho - rib eye steak pita, half bag broken chicken, 1/3
+    hummus plate, 1/3 pita
 - timestamp: '2025-11-06T22:00:00+00:00'
   items:
   - name: Pita
@@ -799,7 +799,7 @@ entries:
       vitamin_d_ug: 0.0
       vitamin_e_mg: 0.07
       vitamin_k_ug: 0
-      vitamin_b1_mg: 0.20
+      vitamin_b1_mg: 0.2
       vitamin_b2_mg: 0.12
       vitamin_b3_mg: 1.6
       vitamin_b5_mg: 0.12
@@ -858,9 +858,9 @@ entries:
       vitamin_k_ug: 5
       vitamin_b1_mg: 0.23
       vitamin_b2_mg: 0.27
-      vitamin_b3_mg: 0.70
+      vitamin_b3_mg: 0.7
       vitamin_b5_mg: 0.48
-      vitamin_b6_mg: 0.30
+      vitamin_b6_mg: 0.3
       vitamin_b7_ug: 5
       vitamin_b9_ug: 17
       vitamin_b12_ug: 0.56

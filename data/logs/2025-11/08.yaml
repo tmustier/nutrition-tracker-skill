@@ -157,7 +157,7 @@ entries:
       vitamin_e_mg: 0.7
       vitamin_k_ug: 3
       vitamin_b1_mg: 0.32
-      vitamin_b2_mg: 0.20
+      vitamin_b2_mg: 0.2
       vitamin_b3_mg: 1.5
       vitamin_b5_mg: 0.35
       vitamin_b6_mg: 0.08
@@ -174,7 +174,7 @@ entries:
       silicon_mg: 0.0
       vanadium_ug: 0
       nickel_ug: 0
-  notes: "Breakfast smoothie (raspberries + whey protein) and pain au chocolat"
+  notes: Breakfast smoothie (raspberries + whey protein) and pain au chocolat
 - timestamp: '2025-11-08T16:00:00+00:00'
   items:
   - name: Minestrone di Verdure (Zuppe)
@@ -291,7 +291,7 @@ entries:
       silicon_mg: 0.0
       vanadium_ug: 0
       nickel_ug: 0
-  notes: "Half pack (500g) Zuppe minestrone + a few slivers dried mango"
+  notes: Half pack (500g) Zuppe minestrone + a few slivers dried mango
 - timestamp: '2025-11-08T22:00:00+00:00'
   items:
   - name: Crab Empanada
@@ -921,7 +921,7 @@ entries:
       silicon_mg: 0.0
       vanadium_ug: 0.0
       nickel_ug: 0.0
-  notes: "Dinner at Decimo London (Spanish-Mexican tapas)"
+  notes: Dinner at Decimo London (Spanish-Mexican tapas)
 - timestamp: '2025-11-08T23:00:00+00:00'
   items:
   - name: Lindt Dubai chocolate
@@ -1007,7 +1007,7 @@ entries:
       phosphorus_mg: 16.85
       chloride_mg: 37.0
       sulfur_g: 0.002
-      iron_mg: 0.20
+      iron_mg: 0.2
       zinc_mg: 0.16
       copper_mg: 0.026
       manganese_mg: 0.102
@@ -1020,7 +1020,7 @@ entries:
       vitamin_e_mg: 0.016
       vitamin_k_ug: 0.35
       vitamin_b1_mg: 0.021
-      vitamin_b2_mg: 0.010
+      vitamin_b2_mg: 0.01
       vitamin_b3_mg: 0.308
       vitamin_b5_mg: 0.022
       vitamin_b6_mg: 0.029
@@ -1038,4 +1038,4 @@ entries:
       vanadium_ug: 0
       nickel_ug: 0
       polyols_g: 0
-  notes: "Late snack"
+  notes: Late snack
