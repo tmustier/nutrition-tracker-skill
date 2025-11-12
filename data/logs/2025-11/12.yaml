@@ -4,9 +4,9 @@ entries:
 - timestamp: '2025-11-12T09:00:00+00:00'
   items:
   - name: Frozen Spinach
-    food_bank_id: null
-    quantity: 150
-    unit: g
+    food_bank_id: spinach_frozen_150g_v1
+    quantity: 1
+    unit: portion
     nutrition:
       energy_kcal: 44
       protein_g: 5.4
@@ -118,9 +118,9 @@ entries:
       vanadium_ug: 0
       nickel_ug: 0
   - name: Almonds - raw
-    food_bank_id: null
-    quantity: 30
-    unit: g
+    food_bank_id: almonds_raw_30g_v1
+    quantity: 1
+    unit: portion
     nutrition:
       energy_kcal: 174
       protein_g: 6.3
