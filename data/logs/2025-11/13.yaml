@@ -403,3 +403,63 @@ entries:
       vanadium_ug: 0
       nickel_ug: 0
   notes: Breakfast smoothie + hardboiled egg with crispbread
+- timestamp: '2025-11-13T11:00:00+00:00'
+  items:
+  - name: Berry Blast Shake (Third Space NFF)
+    food_bank_id: berry_blast_shake_third-space-nff_v1
+    quantity: 1
+    unit: portion
+    nutrition:
+      energy_kcal: 186
+      protein_g: 23.0
+      fat_g: 4.7
+      sat_fat_g: 1.3
+      mufa_g: 2.4
+      pufa_g: 1.0
+      trans_fat_g: 0.0
+      cholesterol_mg: 20
+      carbs_total_g: 12.1
+      polyols_g: 0.0
+      carbs_available_g: 11.0
+      sugar_g: 6.6
+      fiber_total_g: 1.1
+      fiber_soluble_g: 0.8
+      fiber_insoluble_g: 0.3
+      sodium_mg: 148
+      potassium_mg: 429
+      calcium_mg: 478
+      magnesium_mg: 53
+      phosphorus_mg: 174
+      chloride_mg: 228.0
+      sulfur_g: 0.092
+      iron_mg: 0.8
+      zinc_mg: 1.9
+      copper_mg: 0.1
+      manganese_mg: 0.2
+      selenium_ug: 3
+      iodine_ug: 5
+      chromium_ug: 0
+      molybdenum_ug: 0
+      vitamin_a_ug: 150
+      vitamin_d_ug: 2.0
+      vitamin_e_mg: 8.4
+      vitamin_k_ug: 5
+      vitamin_b1_mg: 0.27
+      vitamin_b2_mg: 0.3
+      vitamin_b3_mg: 3.5
+      vitamin_b5_mg: 1.7
+      vitamin_b6_mg: 0.36
+      vitamin_b7_ug: 0
+      vitamin_b9_ug: 20
+      vitamin_b12_ug: 1.0
+      choline_mg: 68
+      vitamin_c_mg: 6.8
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0.01
+      omega6_la_g: 0.03
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+  notes: Post-workout shake at Third Space
