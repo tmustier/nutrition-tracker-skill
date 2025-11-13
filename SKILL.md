@@ -38,14 +38,14 @@ When the user has eaten a dish and you have completed **A) Estimating**:
      - Include quantity and unit.
      - Add optional notes if user provided context.
    - **IMPORTANT - Git Workflow**: Commit food logs to your current Claude feature branch (`claude/*`). The daily automation workflow will automatically aggregate logs from all Claude branches at 4am UTC, create a PR from `daily-logs` to `main`, and auto-merge after validation. You can also create PRs immediately if needed.
-   - Proceed to **C) Daily Analysis** without asking the user.
+   - Proceed to **C) Daily Summary** without asking the user.
 
-**After logging:** Show updated daily totals and gaps: "Logged ✓. Today: X/Y kcal, X/Y protein. Still need Z." Remember that if the user asks you for lunch recommendations, they likely also want to have dinner later, so don't try to meet all targets with that single meal.
+**After logging:** Show updated daily totals and gaps: "Logged ✓. Today: X/Y kcal, X/Y protein, [add other nutrition data]. Still need Z." Remember that if the user asks you for lunch recommendations, they likely also want to have dinner later, so don't try to meet all targets with that single meal.
 
 ## C) DAILY SUMMARY
 - Aggregate logged dishes; compute totals vs **rest** or **training** day targets in `references/health-profile.yaml`.
 - In addition to targets, include values the user is monitoring in `references/health-profile.yaml`.
-- Offer next‑food suggestions to close gaps without blowing limits.
+- Offer next‑meal suggestions to close gaps without blowing limits.
 
 ## D) AD HOC ANALYSIS
 The user may sometimes ask for custom analyses. The main data sources for these are:
