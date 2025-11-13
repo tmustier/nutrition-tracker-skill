@@ -2,9 +2,9 @@
 
 ```yaml
 id: persimmon_half_japanese_v1
-version: 1
+version: 2
 schema_version: 2
-last_verified: "2025-11-10"
+last_verified: "2025-11-13"
 
 source:
   venue: Generic fresh produce
@@ -99,11 +99,16 @@ notes:
   - "Good source of manganese (0.27mg, 13% DV) and vitamin C (5.6mg, 9% DV)"
   - "Contains unique polyphenols (shibuol, tannins) with antioxidant properties"
   - "Very low fat (<0.2g), low sodium (<1mg), naturally sweet from glucose and fructose"
-  - "Fiber breakdown estimated: ~25% soluble, ~75% insoluble based on typical fruit ratios"
+  - "Fiber split estimated (25% soluble, 75% insoluble): USDA FDC 169941 provides only total fiber data (3.6g/100g)"
   - "No biotin (B7) data available in USDA for persimmons - set to 0"
   - "Boron content estimated at 0.08mg per 75g based on fruit average"
 
 change_log:
+  - timestamp: "2025-11-13T19:25:00+00:00"
+    updated_by: "LLM: Claude Sonnet 4"
+    reason: "Documentation improvement: Clarified that fiber split is estimated due to USDA data limitations (only total fiber available in FDC 169941)"
+    fields_changed: []
+    sources: []
   - timestamp: "2025-11-10T14:15:00+00:00"
     updated_by: "LLM: Claude Sonnet 4.5"
     reason: "Initial creation based on USDA FoodData Central data for Japanese persimmon"
