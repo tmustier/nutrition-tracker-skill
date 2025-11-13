@@ -24,8 +24,8 @@ portion:
   notes: Approximately 30g serving, typical amount spread on premium smash burger. Mayonnaise-based sauce with truffle paste and garlic/mustard flavorings.
 assumptions:
   sauce_composition: "87% premium mayonnaise (Hellmann's-equivalent), 5% truffle paste (black truffle), 8% Dijon mustard/garlic/lemon juice/salt"
-  mayo_type: "Premium egg-based mayonnaise with canola/soybean oil blend"
-  oil_type: "Canola/soybean oil (60% PUFA, 20% MUFA, 8% SFA, 2% trans, 10% unassigned glycerol/phospholipids)"
+  mayo_type: "Premium egg-based mayonnaise with canola-dominant oil blend"
+  oil_type: "Canola oil (~7% SFA, 64% MUFA, 21% PUFA) or canola-soybean blend. Mayo contains ~70-80% oil + 10-15% egg yolks + 5-10% water/stabilizers"
   truffle_source: "French black truffle (Tuber melanosporum) or Perigord truffle"
   salt_scheme: "Moderate salt in mayo (635mg/100g) plus additional from Dijon mustard and salt addition for truffle seasoning"
   confidence: "HIGH for macros (±5-10%) - direct USDA mayo data. MEDIUM for vitamins/minerals (±15-25%) - component-scaled from USDA egg/oil profiles. Some variation expected based on exact mayo brand and truffle paste type used by Junk."
@@ -33,9 +33,9 @@ per_portion:
   energy_kcal: 182.1
   protein_g: 0.3
   fat_g: 19.7
-  sat_fat_g: 3.1
-  mufa_g: 6.5
-  pufa_g: 8.1
+  sat_fat_g: 2.8
+  mufa_g: 8.6
+  pufa_g: 4.2
   trans_fat_g: 0.2
   cholesterol_mg: 10.9
   sugar_g: 0.0
@@ -76,15 +76,15 @@ per_portion:
   choline_mg: 0.4
   omega3_epa_mg: 0.0
   omega3_dha_mg: 0.0
-  omega3_ala_g: 0.0005
-  omega6_la_g: 8.1
+  omega3_ala_g: 0.0003
+  omega6_la_g: 4.1
   boron_mg: 0.0
   silicon_mg: 0.0
   vanadium_ug: 0.0
   nickel_ug: 0.0
 derived:
   salt_g_from_sodium: "= per_portion.sodium_mg * 2.5 / 1000 = 0.5625g"
-  fat_unassigned_g: 2.0
+  fat_unassigned_g: 3.9
 quality:
   confidence: high
   gaps:
@@ -95,17 +95,17 @@ quality:
 notes:
 - "COMPONENT-BASED ESTIMATION: 26g mayonnaise (USDA FDC #169649: 685 kcal/100g) + 1.5g black truffle paste (~130 kcal/100g) + 2.5g Dijon mustard/garlic/lemon seasonings (~60 kcal/100g)"
 - "Energy validation (Atwater): 4×0.3 + 9×19.7 + 4×0.5 + 2×0.0 + 2.4×0.0 = 1.2 + 177.3 + 2.0 + 0 = 180.5 kcal ≈ 182 kcal (within ±1%)"
-- "Fat split: sat(3.1) + MUFA(6.5) + PUFA(8.1) + trans(0.2) = 17.9g; total 19.7g = 2.0g unassigned (glycerol backbone ~10.2% typical for mayo emulsion)"
-- "Saturated fat from: 50% dairy (egg lecithin), 50% oil (minor in canola blend)"
-- "MUFA/PUFA from canola/soybean oil typical ratios: canola ~60% PUFA, 20% MUFA, 8% SFA"
+- "Fat split: sat(2.8) + MUFA(8.6) + PUFA(4.2) + trans(0.2) = 15.8g; total 19.7g = 3.9g unassigned (glycerol backbone and phospholipids ~20% typical for mayo emulsion)"
+- "Saturated fat from: egg yolk lipids and trace from canola oil (7% SFA)"
+- "MUFA predominant from canola oil (64% MUFA), with PUFA at 21% of canola oil. Final ratio accounts for dilution by egg yolks and water."
 - "Sodium: 165mg from mayo + ~30mg each from truffle paste and Dijon mustard + assumed finishing salt ~5mg"
 - "Cholesterol exclusively from egg yolks in mayo (42mg/100g × 26g = 10.9mg)"
 - "Carbohydrates minimal (0.5g): trace from Dijon mustard and truffle paste, virtually none from mayo itself"
 - "Zero fiber: pure fat/oil emulsion condiment, no plant material or dietary fiber"
 - "Vitamins & minerals from three sources: (1) Egg yolks in mayo - choline, B12, vitamin A, vitamin D; (2) Oil - vitamin E, minimal vitamin K; (3) Truffle paste - trace copper and selenium; (4) Seasonings - minimal vitamin C from lemon"
 - "Iodine at 2µg (LOW confidence): estimated from egg yolks (~2-3µg per large egg equivalent in 26g mayo)"
-- "Omega-3 ALA (0.5mg = 0.0005g): from canola/soybean oil in mayonnaise; no EPA/DHA (non-fish source)"
-- "Omega-6 LA (8.1g): predominant from canola/soybean oil PUFA content, representing ~100% of PUFA in mayonnaise base"
+- "Omega-3 ALA (0.3mg = 0.0003g): trace amount from canola/soybean oil in mayonnaise; no EPA/DHA (non-fish source)"
+- "Omega-6 LA (4.1g): predominant from canola/soybean oil PUFA content, representing ~98% of total PUFA (4.2g) in sauce base"
 - "Premium restaurant context: Junk Soho is a Michelin-adjacent smash burger restaurant in London (France-based brand), suggests high-quality ingredients. Truffle sauce consistent with signature menu items requiring homemade preparation."
 
 change_log:

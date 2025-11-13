@@ -123,7 +123,7 @@ notes:
   - "Iron profile (5.4mg, 68% of adult male RDA): beef contributes 2.6mg (highly bioavailable heme iron), bun 2.6mg (less bioavailable non-heme iron); vitamin C from jalapeños aids non-heme iron absorption"
   - "Choline (87.1mg): distributed across beef (71mg), bun (12.65mg), and mayo (3mg, from egg yolk); important for cognitive function and homocysteine metabolism"
   - "Cholesterol 97mg: all from beef (77mg) and mayo/egg (20mg); negligible from other sources"
-  - "Polyols 0g: no sugar alcohols or artificial sweeteners used"
+  - "Sugar alcohols: None present in burger components; no artificial sweeteners used (polyols_g = 0.0 confirmed)"
   - "Derived nutrients: Chloride calculated from sodium using NaCl ratio (1.54×). Sulfur calculated from protein using 1.0% of animal protein (methionine+cysteine amino acid content)."
 change_log:
   - timestamp: "2025-11-13T15:30:00+00:00"
