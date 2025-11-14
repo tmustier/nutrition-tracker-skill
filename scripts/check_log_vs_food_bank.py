@@ -185,7 +185,10 @@ def scale_factor(quantity: Decimal, unit: str, portion_weight: Optional[float]) 
     if unit in MASS_UNITS:
         if not portion_weight:
             raise ValueError("Portion weight missing for gram-based unit.")
-        return quantity / Decimal(str(portion_weight))
+        portion_decimal = Decimal(str(portion_weight))
+        if portion_decimal.is_zero():
+            raise ValueError("Portion weight cannot be zero for gram-based unit.")
+        return quantity / portion_decimal
     return quantity
 
 
@@ -208,14 +211,14 @@ def find_discrepancies(
                 quantity_raw = item.get("quantity", 0)
                 try:
                     quantity = Decimal(str(quantity_raw))
-                except Exception:
+                except (ValueError, TypeError, ArithmeticError):
                     quantity = Decimal("0")
                 unit = str(item.get("unit", "")).lower()
                 food_id = item.get("food_bank_id")
                 if food_id:
                     try:
                         fb_entry = food_bank.get(food_id)
-                    except Exception as exc:
+                    except (KeyError, ValueError, FileNotFoundError) as exc:
                         discrepancy_rows.append(
                             Discrepancy(
                                 log_file,

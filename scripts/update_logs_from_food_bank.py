@@ -169,7 +169,10 @@ def scale_factor(quantity: Decimal, unit: str, portion_weight: Optional[float]) 
     if unit in MASS_UNITS:
         if not portion_weight:
             raise ValueError("portion est_weight_g missing for gram-based unit")
-        return quantity / Decimal(str(portion_weight))
+        portion_decimal = Decimal(str(portion_weight))
+        if portion_decimal.is_zero():
+            raise ValueError("portion est_weight_g cannot be zero for gram-based unit")
+        return quantity / portion_decimal
     return quantity
 
 
@@ -214,11 +217,13 @@ def zero_fields(nutrition: dict) -> List[str]:
     return fields
 
 
-def iter_log_files(paths: List[Path]) -> Iterable[Path]:
+def iter_log_files(paths: List[Path], logs_dir: Path) -> Iterable[Path]:
     if not paths:
-        yield from sorted(Path("data/logs").rglob("*.yaml"))
+        yield from sorted(logs_dir.rglob("*.yaml"))
         return
     for path in paths:
+        if not path.exists():
+            continue
         if path.is_dir():
             yield from sorted(path.rglob("*.yaml"))
         elif path.suffix in {".yaml", ".yml"}:
@@ -247,7 +252,7 @@ def process_file(
             unit = str(item.get("unit", "")).lower()
             try:
                 quantity = Decimal(str(quantity_raw))
-            except Exception:
+            except (ValueError, TypeError, ArithmeticError):
                 quantity = Decimal("0")
             food_id = item.get("food_bank_id")
             if not food_id:
@@ -265,7 +270,7 @@ def process_file(
                 continue
             try:
                 fb_entry = food_bank.get(food_id)
-            except Exception as exc:
+            except (KeyError, ValueError, FileNotFoundError) as exc:
                 file_changes.append(
                     ItemChange(
                         timestamp=timestamp,
@@ -303,6 +308,7 @@ def process_file(
                 handle,
                 sort_keys=False,
                 allow_unicode=True,
+                default_flow_style=False,
             )
     return file_changes, manual_items
 
@@ -362,12 +368,18 @@ def main() -> None:
         action="store_true",
         help="Skip writing .bak backups when --apply is used",
     )
+    parser.add_argument(
+        "--logs-dir",
+        default="data/logs",
+        type=Path,
+        help="Root directory of log files (default: data/logs)",
+    )
     args = parser.parse_args()
 
     food_bank = FoodBankIndex(args.food_bank_dir)
     changes_by_file: Dict[Path, List[ItemChange]] = defaultdict(list)
     manual_items: List[ManualItem] = []
-    for log_path in iter_log_files([p for p in args.paths]):
+    for log_path in iter_log_files([p for p in args.paths], args.logs_dir):
         file_changes, manual = process_file(
             log_path,
             food_bank,
