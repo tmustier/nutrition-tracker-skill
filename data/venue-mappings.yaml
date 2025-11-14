@@ -279,3 +279,12 @@ generic:
       - "prepared at home"
     folder: "home-cooked"
     description: "Home-prepared and homemade dishes"
+
+  packaged-confections:
+    patterns:
+      - "confection"
+      - "candy"
+      - "sweet"
+      - "packaged confection"
+    folder: "packaged-confections"
+    description: "Generic packaged confections and candies"
