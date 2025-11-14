@@ -9,15 +9,59 @@ Creates two CSV files:
 
 import argparse
 import csv
+import logging
 import sys
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Set, Tuple
 
 import yaml
 
-PROJECT_ROOT = Path(__file__).parent.parent
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+MAX_DAYS = 3650  # ~10 years
+MAX_LOG_FILE_BYTES = 10 * 1024 * 1024  # 10 MB
+INTERNAL_DATE_KEY = '_log_date'
+
+logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
+LOGGER = logging.getLogger("healthkit_export")
+MISSING_FIELDS_REPORTED: Set[str] = set()
+NON_NUMERIC_KEYS = {'timestamp', 'food name', 'food id', INTERNAL_DATE_KEY}
+
+
+def _resolve_user_path(path: Path) -> Path:
+    """Resolve user-provided paths relative to PROJECT_ROOT when necessary."""
+    expanded = path.expanduser()
+    if expanded.is_absolute():
+        return expanded.resolve()
+    return (PROJECT_ROOT / expanded).resolve()
+
+
+def ensure_safe_directory(path: Path, *, name: str, must_exist: bool) -> Path:
+    """
+    Ensure a user-supplied directory path stays inside PROJECT_ROOT and isn't a symlink.
+
+    Args:
+        path: Raw user-supplied path
+        name: Argument name (for error messaging)
+        must_exist: Whether the directory must already exist
+    """
+    resolved = _resolve_user_path(path)
+
+    try:
+        resolved.relative_to(PROJECT_ROOT)
+    except ValueError:
+        raise ValueError(f"{name} must be within {PROJECT_ROOT}. Got: {resolved}")
+
+    if resolved.exists():
+        if not resolved.is_dir():
+            raise ValueError(f"{name} must be a directory. Got: {resolved}")
+        if resolved.is_symlink():
+            raise ValueError(f"{name} cannot be a symlink. Got: {resolved}")
+    elif must_exist:
+        raise ValueError(f"{name} does not exist: {resolved}")
+
+    return resolved
 
 
 def parse_date(value: str) -> date:
@@ -56,7 +100,10 @@ def parse_args() -> argparse.Namespace:
         "--days",
         type=int,
         default=7,
-        help="Number of past days to export when no explicit range is provided (default: 7).",
+        help=(
+            "Number of past days to export when no explicit range is provided "
+            "(default: 7, ending yesterday)."
+        ),
     )
     parser.add_argument(
         "--logs-dir",
@@ -81,6 +128,8 @@ def parse_args() -> argparse.Namespace:
 
     if args.days < 1:
         parser.error("--days must be at least 1.")
+    if args.days > MAX_DAYS:
+        parser.error(f"--days cannot exceed {MAX_DAYS}.")
 
     return args
 
@@ -88,10 +137,17 @@ def parse_args() -> argparse.Namespace:
 def resolve_date_range(args: argparse.Namespace) -> Tuple[date, date]:
     """Determine the date range to export."""
     if args.start_date and args.end_date:
-        return args.start_date, args.end_date
+        start_date, end_date = args.start_date, args.end_date
+    else:
+        end_date = date.today() - timedelta(days=1)
+        start_date = end_date - timedelta(days=args.days - 1)
 
-    end_date = date.today() - timedelta(days=1)
-    start_date = end_date - timedelta(days=args.days - 1)
+    total_days = (end_date - start_date).days + 1
+    if total_days > MAX_DAYS:
+        raise ValueError(
+            f"Date range is too large ({total_days} days). Maximum supported is {MAX_DAYS} days."
+        )
+
     return start_date, end_date
 
 
@@ -104,7 +160,14 @@ def locate_log_files(logs_dir: Path, start_date: date, end_date: date) -> List[P
         month_dir = logs_dir / current_date.strftime("%Y-%m")
         log_path = month_dir / f"{current_date.strftime('%d')}.yaml"
 
-        if log_path.exists():
+        if not log_path.exists():
+            missing_dates.append(str(current_date))
+            continue
+
+        if log_path.is_symlink():
+            raise ValueError(f"Refusing to follow symlinked log file: {log_path}")
+
+        if log_path.is_file():
             log_files.append(log_path)
         else:
             missing_dates.append(str(current_date))
@@ -166,7 +229,41 @@ NUTRIENT_COLUMNS: List[NutrientColumn] = [
 ]
 
 
-def convert_nutrition_to_healthkit(nutrition: Dict[str, Any]) -> Dict[str, float]:
+def load_log_yaml(log_path: Path) -> Dict[str, Any]:
+    """Load a YAML log file with basic safety checks."""
+    size_bytes = log_path.stat().st_size
+    if size_bytes > MAX_LOG_FILE_BYTES:
+        raise ValueError(
+            f"{log_path} is {size_bytes:,} bytes which exceeds the {MAX_LOG_FILE_BYTES:,} byte limit."
+        )
+
+    with open(log_path, 'r', encoding='utf-8') as f:
+        data = yaml.safe_load(f)
+
+    if data is None:
+        raise ValueError(f"{log_path} is empty or contains only comments.")
+
+    if not isinstance(data, dict):
+        raise ValueError(f"{log_path} must contain a YAML object at the top level.")
+
+    return data
+
+
+def set_file_permissions(path: Path) -> None:
+    """Apply restrictive permissions to exported CSV files where possible."""
+    try:
+        path.chmod(0o640)
+    except PermissionError:
+        LOGGER.warning("Insufficient permissions to set mode 640 on %s.", path)
+    except OSError as exc:
+        LOGGER.warning("Unable to adjust permissions on %s: %s", path, exc)
+
+
+def convert_nutrition_to_healthkit(
+    nutrition: Dict[str, Any],
+    *,
+    source: str,
+) -> Dict[str, float]:
     """
     Convert nutrition data from YAML format to HealthKit CSV format.
 
@@ -185,10 +282,37 @@ def convert_nutrition_to_healthkit(nutrition: Dict[str, Any]) -> Dict[str, float
         if column.field is None:
             value = 0
         else:
-            value = nutrition.get(column.field, 0) * column.multiplier
+            if column.field not in nutrition:
+                if column.field not in MISSING_FIELDS_REPORTED:
+                    LOGGER.warning(
+                        "Missing nutrient '%s' in %s; defaulting to 0.",
+                        column.field,
+                        source,
+                    )
+                    MISSING_FIELDS_REPORTED.add(column.field)
+                value = 0
+            else:
+                value = nutrition[column.field] * column.multiplier
         result[column.header] = value
 
     return result
+
+
+def normalize_timestamp(value: Any, *, log_path: Path) -> Tuple[str, str]:
+    """Validate and normalize ISO8601 timestamps and return (timestamp, date)."""
+    if not isinstance(value, str) or not value.strip():
+        raise ValueError(f"{log_path} contains an entry with a missing timestamp.")
+
+    cleaned = value.strip()
+    if cleaned.endswith('Z'):
+        cleaned = f"{cleaned[:-1]}+00:00"
+
+    try:
+        parsed = datetime.fromisoformat(cleaned)
+    except ValueError as exc:
+        raise ValueError(f"{log_path} contains invalid timestamp '{value}'.") from exc
+
+    return parsed.isoformat(), parsed.date().isoformat()
 
 
 def get_healthkit_columns() -> List[str]:
@@ -206,23 +330,39 @@ def process_log_file(log_path: Path) -> List[Dict[str, Any]]:
     Returns:
         List of dictionaries, each containing an item's data
     """
-    with open(log_path, 'r') as f:
-        log_data = yaml.safe_load(f)
+    log_data = load_log_yaml(log_path)
+    entries = log_data.get('entries', [])
+    if not isinstance(entries, list):
+        raise ValueError(f"{log_path} has malformed 'entries'; expected a list.")
 
-    items_data = []
+    items_data: List[Dict[str, Any]] = []
 
-    for entry in log_data.get('entries', []):
-        timestamp = entry.get('timestamp', '')
+    for entry in entries:
+        if not isinstance(entry, dict):
+            raise ValueError(f"{log_path} contains a non-object entry.")
 
-        for item in entry.get('items', []):
-            # Convert nutrition to HealthKit format
-            healthkit_nutrition = convert_nutrition_to_healthkit(item.get('nutrition', {}))
+        timestamp, entry_date = normalize_timestamp(entry.get('timestamp'), log_path=log_path)
 
-            # Create row with metadata + nutrition
-            row = {
+        items = entry.get('items', [])
+        if not isinstance(items, list):
+            raise ValueError(f"{log_path} has an entry with malformed 'items'; expected a list.")
+
+        for item in items:
+            if not isinstance(item, dict):
+                raise ValueError(f"{log_path} contains a non-object item entry.")
+
+            nutrition = item.get('nutrition', {})
+            if not isinstance(nutrition, dict):
+                raise ValueError(f"{log_path} contains an item with malformed 'nutrition'.")
+
+            context = f"{log_path.name}:{item.get('name', 'unknown item')}"
+            healthkit_nutrition = convert_nutrition_to_healthkit(nutrition, source=context)
+
+            row: Dict[str, Any] = {
                 'timestamp': timestamp,
-                'food name': item.get('name', ''),
-                'food id': item.get('food_bank_id', '') or '',  # Convert None to empty string
+                'food name': str(item.get('name', '') or ''),
+                'food id': item.get('food_bank_id', '') or '',
+                INTERNAL_DATE_KEY: entry_date,
             }
             row.update(healthkit_nutrition)
 
@@ -244,9 +384,9 @@ def create_per_day_totals(per_item_data: List[Dict[str, Any]]) -> List[Dict[str,
     daily_totals = {}
 
     for item in per_item_data:
-        # Extract date from timestamp
-        timestamp = item['timestamp']
-        date = timestamp.split('T')[0]  # Get YYYY-MM-DD
+        date = item.get(INTERNAL_DATE_KEY)
+        if not isinstance(date, str):
+            raise ValueError("Per-item data missing internal date key.")
 
         if date not in daily_totals:
             # Initialize with zeros
@@ -262,8 +402,11 @@ def create_per_day_totals(per_item_data: List[Dict[str, Any]]) -> List[Dict[str,
 
         # Sum up all nutrition fields
         for key, value in item.items():
-            if key not in ['timestamp', 'food name', 'food id']:
-                daily_totals[date][key] += value
+            if key in NON_NUMERIC_KEYS:
+                continue
+            if key not in daily_totals[date]:
+                daily_totals[date][key] = 0
+            daily_totals[date][key] += value
 
     # Convert to sorted list
     return [daily_totals[date] for date in sorted(daily_totals.keys())]
@@ -273,17 +416,30 @@ def main():
     """Main execution function."""
 
     args = parse_args()
-    start_date, end_date = resolve_date_range(args)
+    try:
+        start_date, end_date = resolve_date_range(args)
+    except ValueError as exc:
+        print(f"Error: {exc}")
+        sys.exit(2)
 
-    logs_dir = args.logs_dir
-    output_dir = args.output_dir
-    output_dir.mkdir(exist_ok=True)
+    try:
+        logs_dir = ensure_safe_directory(args.logs_dir, name="--logs-dir", must_exist=True)
+        output_dir = ensure_safe_directory(args.output_dir, name="--output-dir", must_exist=False)
+    except ValueError as exc:
+        print(f"Error: {exc}")
+        sys.exit(2)
+
+    output_dir.mkdir(parents=True, exist_ok=True)
 
     print(f"Processing logs from: {logs_dir}")
     print(f"Date range: {start_date} → {end_date}")
     print(f"Output directory: {output_dir}")
 
-    log_files = locate_log_files(logs_dir, start_date, end_date)
+    try:
+        log_files = locate_log_files(logs_dir, start_date, end_date)
+    except ValueError as exc:
+        print(f"Error: {exc}")
+        sys.exit(2)
 
     if not log_files:
         print("No log files found in the requested range. Nothing to export.")
@@ -295,7 +451,11 @@ def main():
     all_items = []
     for log_file in log_files:
         print(f"Processing: {log_file.relative_to(logs_dir)}")
-        items = process_log_file(log_file)
+        try:
+            items = process_log_file(log_file)
+        except ValueError as exc:
+            print(f"Error while processing {log_file}: {exc}")
+            sys.exit(2)
         all_items.extend(items)
 
     print(f"Extracted {len(all_items)} items total")
@@ -305,10 +465,11 @@ def main():
 
     # Write per-item CSV
     per_item_csv = output_dir / 'per_item_nutrition.csv'
-    with open(per_item_csv, 'w', newline='') as f:
-        writer = csv.DictWriter(f, fieldnames=columns)
+    with open(per_item_csv, 'w', encoding='utf-8', newline='') as f:
+        writer = csv.DictWriter(f, fieldnames=columns, extrasaction='ignore')
         writer.writeheader()
         writer.writerows(all_items)
+    set_file_permissions(per_item_csv)
 
     print(f"✓ Created: {per_item_csv}")
     print(f"  {len(all_items)} rows")
@@ -318,10 +479,11 @@ def main():
 
     # Write per-day CSV
     per_day_csv = output_dir / 'per_day_nutrition.csv'
-    with open(per_day_csv, 'w', newline='') as f:
-        writer = csv.DictWriter(f, fieldnames=columns)
+    with open(per_day_csv, 'w', encoding='utf-8', newline='') as f:
+        writer = csv.DictWriter(f, fieldnames=columns, extrasaction='ignore')
         writer.writeheader()
         writer.writerows(daily_totals)
+    set_file_permissions(per_day_csv)
 
     print(f"✓ Created: {per_day_csv}")
     print(f"  {len(daily_totals)} rows")
