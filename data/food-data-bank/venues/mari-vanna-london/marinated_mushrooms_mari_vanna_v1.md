@@ -16,8 +16,8 @@ aliases:
 category: side
 portion:
   description: "Family-style plate of marinated wild mushrooms"
-  est_weight_g:
-  notes: "Served as sharable starter; weight not recorded."
+  est_weight_g: 250
+  notes: "Estimated 250g portion; served as sharable starter with oil marinade."
 assumptions:
   salt_scheme: normal
   oil_type: sunflower oil

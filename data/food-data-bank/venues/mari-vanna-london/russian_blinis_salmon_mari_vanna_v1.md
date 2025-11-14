@@ -17,8 +17,8 @@ aliases:
 category: appetizer
 portion:
   description: "Restaurant portion (stack of buckwheat blinis topped with smoked salmon and sour cream)"
-  est_weight_g:
-  notes: "Weight not provided; nutrient profile derived directly from user-tracked data scaled to a full portion."
+  est_weight_g: 335
+  notes: "Estimated 335g portion (4 buckwheat blinis with toppings); nutrient profile derived from user-tracked data scaled to full portion."
 assumptions:
   salt_scheme: normal
   oil_type: butter

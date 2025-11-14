@@ -15,8 +15,8 @@ aliases:
 category: main
 portion:
   description: "Restaurant portion of Chicken Kiev served over mashed potatoes with mushroom sauce"
-  est_weight_g:
-  notes: "Weight not provided; nutrient profile reflects full plated portion."
+  est_weight_g: 490
+  notes: "Estimated 490g portion including chicken, mashed potatoes, and mushroom sauce."
 assumptions:
   salt_scheme: normal
   oil_type: butter

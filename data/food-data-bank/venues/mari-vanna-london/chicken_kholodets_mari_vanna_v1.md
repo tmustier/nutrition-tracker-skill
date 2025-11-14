@@ -17,8 +17,8 @@ aliases:
 category: appetizer
 portion:
   description: "Restaurant portion of chicken kholodets with mustard and horseradish"
-  est_weight_g:
-  notes: "Gelatinous terrine served cold; portion weight not recorded."
+  est_weight_g: 185
+  notes: "Estimated 185g portion; gelatinous terrine served cold with condiments."
 assumptions:
   salt_scheme: normal
   oil_type:
