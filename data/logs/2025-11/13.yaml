@@ -815,7 +815,7 @@ entries:
       silicon_mg: 0
       vanadium_ug: 0
       nickel_ug: 0
-    notes: 10g portion (2× standard 5g serving)
+    notes: "10g portion (2× standard 5g serving)"
 - timestamp: '2025-11-13T22:30:00+00:00'
   items:
   - name: Negroni (Classic Cocktail)
@@ -875,7 +875,7 @@ entries:
       silicon_mg: 0
       vanadium_ug: 0
       nickel_ug: 0
-    notes: Half negroni
+    notes: "Half negroni"
   - name: Sparkling Tea, Non-Alcoholic
     food_bank_id: sparkling_tea_nonalcoholic_generic_v1
     quantity: 125
@@ -933,8 +933,8 @@ entries:
       silicon_mg: 0
       vanadium_ug: 0
       nickel_ug: 0
-    notes: Half glass (125ml)
-  notes: 'Mixed drink: half negroni + half non-alcoholic sparkling tea'
+    notes: "Half glass (125ml)"
+  notes: "Mixed drink: half negroni + half non-alcoholic sparkling tea"
 - timestamp: '2025-11-13T23:50:00+00:00'
   items:
   - name: Mezcalita
@@ -994,4 +994,4 @@ entries:
       silicon_mg: 0
       vanadium_ug: 0
       nickel_ug: 0
-    notes: Full mezcalita cocktail
+    notes: "Full mezcalita cocktail"
