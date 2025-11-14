@@ -811,5 +811,123 @@ entries:
       silicon_mg: 0
       vanadium_ug: 0
       nickel_ug: 0
+  - name: Chicken Kholodets (1/2 portion leftovers, Mari Vanna London)
+    food_bank_id: chicken_kholodets_mari_vanna_v1
+    quantity: 0.5
+    unit: portion
+    nutrition:
+      energy_kcal: 87.5
+      protein_g: 14.1
+      fat_g: 3.15
+      sat_fat_g: 0.7
+      mufa_g: 1.4
+      pufa_g: 0.6
+      trans_fat_g: 0
+      cholesterol_mg: 22
+      carbs_total_g: 2.1
+      polyols_g: 0.0
+      carbs_available_g: 1.95
+      sugar_g: 0.1
+      fiber_total_g: 0.15
+      fiber_soluble_g: 0.05
+      fiber_insoluble_g: 0.1
+      sodium_mg: 255
+      potassium_mg: 142.5
+      calcium_mg: 6
+      magnesium_mg: 10
+      phosphorus_mg: 77.5
+      chloride_mg: 392.5
+      sulfur_g: 0.141
+      iron_mg: 0.2
+      zinc_mg: 0.25
+      copper_mg: 0.02
+      manganese_mg: 0.005
+      selenium_ug: 11.5
+      iodine_ug: 1
+      chromium_ug: 0.1
+      molybdenum_ug: 0.05
+      vitamin_a_ug: 3.5
+      vitamin_d_ug: 0.04
+      vitamin_e_mg: 0.08
+      vitamin_k_ug: 0.08
+      vitamin_b1_mg: 0.045
+      vitamin_b2_mg: 0.065
+      vitamin_b3_mg: 3.75
+      vitamin_b5_mg: 0.55
+      vitamin_b6_mg: 0.275
+      vitamin_b7_ug: 0.9
+      vitamin_b9_ug: 1.5
+      vitamin_b12_ug: 0.08
+      choline_mg: 8
+      vitamin_c_mg: 0.45
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0.15
+      omega3_ala_g: 0.01
+      omega6_la_g: 0.25
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
+  - name: Marinated Mushrooms (1/2 portion leftovers, Mari Vanna London)
+    food_bank_id: marinated_mushrooms_mari_vanna_v1
+    quantity: 0.5
+    unit: portion
+    nutrition:
+      energy_kcal: 122.5
+      protein_g: 3.05
+      fat_g: 10.45
+      sat_fat_g: 1.55
+      mufa_g: 7.45
+      pufa_g: 1.25
+      trans_fat_g: 0.1
+      cholesterol_mg: 0
+      carbs_total_g: 5.5
+      polyols_g: 0.0
+      carbs_available_g: 2.75
+      sugar_g: 2.1
+      fiber_total_g: 2.8
+      fiber_soluble_g: 0.9
+      fiber_insoluble_g: 1.9
+      sodium_mg: 507
+      potassium_mg: 451.5
+      calcium_mg: 5.5
+      magnesium_mg: 13
+      phosphorus_mg: 89.5
+      chloride_mg: 780.5
+      sulfur_g: 0.012
+      iron_mg: 1.1
+      zinc_mg: 0.45
+      copper_mg: 0.42
+      manganese_mg: 0.15
+      selenium_ug: 14
+      iodine_ug: 11
+      chromium_ug: 0
+      molybdenum_ug: 0
+      vitamin_a_ug: 7.5
+      vitamin_d_ug: 0.35
+      vitamin_e_mg: 1.45
+      vitamin_k_ug: 6
+      vitamin_b1_mg: 0.1
+      vitamin_b2_mg: 0.5
+      vitamin_b3_mg: 5.0
+      vitamin_b5_mg: 1.95
+      vitamin_b6_mg: 0.15
+      vitamin_b7_ug: 2.1
+      vitamin_b9_ug: 23.5
+      vitamin_b12_ug: 0
+      choline_mg: 22.5
+      vitamin_c_mg: 2.8
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0.005
+      omega6_la_g: 1.1
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
   notes: 'Dinner at home: 180g beef/buckwheat mix + 2 eggs, 100g black rice with coconut,
-    50g mango, 1 ptashyne moloko candy, 7 durian chocolate almonds, 4 buckwheat crispbreads'
+    50g mango, 1 ptashyne moloko candy, 7 durian chocolate almonds, 4 buckwheat crispbreads.
+    Plus Mari Vanna leftovers from Monday 10th: 1/2 chicken kholodets and 1/2 marinated
+    mushrooms | Dinner at home: 180g beef/buckwheat mix + 2 eggs, 100g black rice
+    with coconut, 50g mango, 1 ptashyne moloko candy, 7 durian chocolate almonds,
+    4 buckwheat crispbreads'
