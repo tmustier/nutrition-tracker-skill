@@ -15,7 +15,7 @@ aliases:
 category: main
 portion:
   description: restaurant serving with 1 slice rye bread
-  est_weight_g:
+  est_weight_g: 283
   notes: Traditional Russian beetroot and vegetable salad dressed with oil; includes 1 slice rye bread (~32g)
 assumptions:
   salt_scheme: normal
