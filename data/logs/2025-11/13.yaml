@@ -215,7 +215,7 @@ entries:
       vitamin_k_ug: 23
       vitamin_b1_mg: 0.05
       vitamin_b2_mg: 0.05
-      vitamin_b3_mg: 0.50
+      vitamin_b3_mg: 0.5
       vitamin_b5_mg: 0.15
       vitamin_b6_mg: 0.06
       vitamin_b7_ug: 2.9
@@ -226,7 +226,7 @@ entries:
       omega3_epa_mg: 0
       omega3_dha_mg: 0
       omega3_ala_g: 0.07
-      omega6_la_g: 0.10
+      omega6_la_g: 0.1
       boron_mg: 0
       silicon_mg: 0
       vanadium_ug: 0
@@ -385,7 +385,7 @@ entries:
       vitamin_e_mg: 0.016
       vitamin_k_ug: 0.35
       vitamin_b1_mg: 0.021
-      vitamin_b2_mg: 0.010
+      vitamin_b2_mg: 0.01
       vitamin_b3_mg: 0.308
       vitamin_b5_mg: 0.022
       vitamin_b6_mg: 0.029
@@ -500,7 +500,7 @@ entries:
       molybdenum_ug: 10.7
       phosphorus_mg: 290
       chloride_mg: 1572
-      sulfur_g: 0.30
+      sulfur_g: 0.3
       vitamin_a_ug: 0.6
       vitamin_d_ug: 2.1
       vitamin_e_mg: 4.2
@@ -522,7 +522,7 @@ entries:
       silicon_mg: 0
       vanadium_ug: 0
       nickel_ug: 0
-    notes: "240g weighed, with jalapeno and pickle slices"
+    notes: 240g weighed, with jalapeno and pickle slices
   - name: Classic Fries
     food_bank_id: classic_fries_junk_soho_v1
     quantity: 1
@@ -552,7 +552,7 @@ entries:
       zinc_mg: 0.8
       vitamin_c_mg: 25.0
       manganese_mg: 0.42
-      copper_mg: 0.30
+      copper_mg: 0.3
       selenium_ug: 0.8
       chromium_ug: 2.7
       molybdenum_ug: 11.0
@@ -580,7 +580,7 @@ entries:
       silicon_mg: 0
       vanadium_ug: 0
       nickel_ug: 0
-    notes: "150g weighed"
+    notes: 150g weighed
   - name: Truffle Sauce
     food_bank_id: truffle_sauce_junk_soho_v1
     quantity: 1
@@ -638,7 +638,7 @@ entries:
       silicon_mg: 0.0
       vanadium_ug: 0.0
       nickel_ug: 0.0
-    notes: "30g weighed"
+    notes: 30g weighed
   - name: White Chocolate Matcha Cookie
     food_bank_id: white_chocolate_matcha_cookie_puffy_v1
     quantity: 0.5
@@ -691,12 +691,12 @@ entries:
       omega3_epa_mg: 0
       omega3_dha_mg: 0
       omega3_ala_g: 0.018
-      omega6_la_g: 0.330
+      omega6_la_g: 0.33
       boron_mg: 0
       silicon_mg: 0
       vanadium_ug: 0
       nickel_ug: 0
-    notes: "Half of 120g cookie"
+    notes: Half of 120g cookie
   - name: Apple, Small
     food_bank_id: apple_small_130g_generic-fresh-produce_v1
     quantity: 1
@@ -754,7 +754,7 @@ entries:
       vitamin_b7_ug: 0.1
       vitamin_b9_ug: 3.9
       vitamin_b12_ug: 0
-    notes: "130g small apple"
+    notes: 130g small apple
   notes: Dinner from Junk Soho and Puffy Soho
 - timestamp: '2025-11-13T19:10:00+00:00'
   items:
