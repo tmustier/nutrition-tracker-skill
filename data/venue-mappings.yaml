@@ -112,6 +112,38 @@ venues:
     display_name: "Le Relais De Venise L'Entrecôte"
     notes: "French steakhouse, famous for fixed menu: steak + secret sauce + fries + salad. London location."
 
+  mari-vanna-london:
+    patterns:
+      - "mari vanna"
+      - "marivanna"
+    folder: "mari-vanna-london"
+    display_name: "Mari Vanna London"
+    notes: "Russian restaurant, Knightsbridge, London"
+
+  diba-persian-marylebone:
+    patterns:
+      - "diba"
+      - "diba persian"
+    folder: "diba-persian-marylebone"
+    display_name: "Diba Persian, Marylebone"
+    notes: "Persian restaurant, Marylebone, London"
+
+  junk-soho:
+    patterns:
+      - "junk"
+      - "junk soho"
+    folder: "junk-soho"
+    display_name: "Junk, Soho"
+    notes: "Burger restaurant, Soho, London"
+
+  puffy-soho:
+    patterns:
+      - "puffy"
+      - "puffy soho"
+    folder: "puffy-soho"
+    display_name: "Puffy, Soho"
+    notes: "Cookie shop, Soho, London"
+
 # Branded packaged products with nutrition labels
 packaged:
   grenade:
@@ -288,3 +320,11 @@ generic:
       - "packaged confection"
     folder: "packaged-confections"
     description: "Generic packaged confections and candies"
+
+  generic:
+    patterns:
+      - "generic item"
+      - "misc"
+      - "miscellaneous"
+    folder: "generic"
+    description: "Generic items not fitting other categories"
