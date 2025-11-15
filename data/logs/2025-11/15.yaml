@@ -646,3 +646,63 @@ entries:
       nickel_ug: 0.0
     notes: "100g fresh mango"
   notes: "Crispbreads with avocado and soft-boiled eggs (seasoned with salt, pepper, olive oil), plus fresh mango"
+- timestamp: '2025-11-15T10:30:00+00:00'
+  items:
+  - name: Pain au Chocolat
+    food_bank_id: pain_au_chocolat_bakery_v1
+    quantity: 1
+    unit: portion
+    nutrition:
+      energy_kcal: 305.0
+      protein_g: 5.5
+      fat_g: 15.5
+      sat_fat_g: 9.0
+      mufa_g: 4.5
+      pufa_g: 1.5
+      trans_fat_g: 0.4
+      cholesterol_mg: 40.0
+      carbs_total_g: 34.0
+      carbs_available_g: 32.0
+      sugar_g: 12.0
+      fiber_total_g: 2.0
+      fiber_soluble_g: 0.6
+      fiber_insoluble_g: 1.4
+      polyols_g: 0.0
+      sodium_mg: 300.0
+      potassium_mg: 120.0
+      iodine_ug: 3.0
+      magnesium_mg: 20.0
+      calcium_mg: 35.0
+      iron_mg: 1.8
+      zinc_mg: 0.6
+      vitamin_c_mg: 0.0
+      manganese_mg: 0.3
+      copper_mg: 0.15
+      selenium_ug: 8.0
+      chromium_ug: 2.0
+      molybdenum_ug: 5.0
+      phosphorus_mg: 75.0
+      chloride_mg: 462.0
+      sulfur_g: 0.044
+      vitamin_a_ug: 165.0
+      vitamin_d_ug: 0.15
+      vitamin_e_mg: 0.7
+      vitamin_k_ug: 3.0
+      vitamin_b1_mg: 0.32
+      vitamin_b2_mg: 0.2
+      vitamin_b3_mg: 1.5
+      vitamin_b5_mg: 0.35
+      vitamin_b6_mg: 0.08
+      vitamin_b7_ug: 3.0
+      vitamin_b9_ug: 35.0
+      vitamin_b12_ug: 0.08
+      choline_mg: 18.0
+      omega3_epa_mg: 0.0
+      omega3_dha_mg: 0.0
+      omega3_ala_g: 0.05
+      omega6_la_g: 0.4
+      boron_mg: 0.0
+      silicon_mg: 0.0
+      vanadium_ug: 0.0
+      nickel_ug: 0.0
+    notes: "Pain au chocolat - mid-morning snack"
