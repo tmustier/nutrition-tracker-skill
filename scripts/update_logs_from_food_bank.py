@@ -304,13 +304,14 @@ def process_file(
                 file_changes.append(ItemChange(timestamp=timestamp, name=name, fields_changed=diffs))
                 if apply_changes:
                     item["nutrition"] = updated_nutrition
-                    # If alcohol present in the food bank, carry it over too.
+                    # If alcohol present in the food bank, carry it over scaled by the same factor.
                     alcohol_value = per_portion.get("alcohol_g")
                     if (alcohol_value is None or alcohol_value == 0) and fb_entry.get("derived"):
                         alcohol_value = fb_entry["derived"].get("alcohol_g")
                     if alcohol_value is not None:
                         try:
-                            item.setdefault("nutrition", {})["alcohol_g"] = float(alcohol_value)
+                            scaled_alcohol = decimal_value(alcohol_value) * factor
+                            item.setdefault("nutrition", {})["alcohol_g"] = quantize_value(scaled_alcohol)
                         except (TypeError, ValueError):
                             pass
                     alcohol_energy = per_portion.get("alcohol_energy_kcal")
@@ -318,7 +319,8 @@ def process_file(
                         alcohol_energy = fb_entry["derived"].get("alcohol_energy_kcal")
                     if alcohol_energy is not None:
                         try:
-                            item.setdefault("nutrition", {})["alcohol_energy_kcal"] = float(alcohol_energy)
+                            scaled_alcohol_energy = decimal_value(alcohol_energy) * factor
+                            item.setdefault("nutrition", {})["alcohol_energy_kcal"] = quantize_value(scaled_alcohol_energy)
                         except (TypeError, ValueError):
                             pass
     if apply_changes and file_changes:

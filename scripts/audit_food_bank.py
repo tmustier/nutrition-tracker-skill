@@ -5,7 +5,7 @@ Audit food-bank entries for nutrition completeness and Atwater alignment.
 Checks every Markdown entry in data/food-data-bank/, ensuring:
   * All 52 schema fields exist (and are numeric) inside `per_portion`.
   * Energy values match the available-carb Atwater formula:
-        energy = 4P + 9F + 4*carbs_available + 2*fiber_total + 2.4*polyols
+        energy = 4P + 9F + 4*carbs_available + 2*fiber_total + 2.4*polyols + 7*alcohol
 
 Usage:
     python3 scripts/audit_food_bank.py [--root data/food-data-bank]
@@ -106,7 +106,7 @@ class AtwaterIssue:
 
 
 def extract_yaml_block(path: Path) -> dict:
-    text = path.read_text()
+    text = path.read_text(encoding='utf-8')
     match = re.search(r"```yaml\s*(.*?)```", text, flags=re.S)
     if not match:
         raise ValueError(f"No yaml block in {path}")
@@ -115,11 +115,11 @@ def extract_yaml_block(path: Path) -> dict:
 
 def is_number(value) -> bool:
     if isinstance(value, (int, float)):
-        return True
+        return math.isfinite(value)
     if isinstance(value, str):
         try:
-            float(value)
-            return True
+            num = float(value)
+            return math.isfinite(num)
         except ValueError:
             return False
     return False
@@ -131,10 +131,10 @@ def compute_atwater(per: Dict[str, float], derived: Dict[str, float] | None = No
     carbs_available = float(per.get("carbs_available_g", 0) or 0)
     fiber = float(per.get("fiber_total_g", 0) or 0)
     polyols = float(per.get("polyols_g", 0) or 0)
-    alcohol_source = per.get("alcohol_g", 0)
-    if not alcohol_source and derived:
-        alcohol_source = derived.get("alcohol_g", 0)
-    alcohol = float(alcohol_source or 0)
+    alcohol_g = per.get("alcohol_g")
+    if alcohol_g is None and derived:
+        alcohol_g = derived.get("alcohol_g")
+    alcohol = float(alcohol_g or 0)
     return (
         4 * protein
         + 9 * fat
@@ -148,12 +148,18 @@ def compute_atwater(per: Dict[str, float], derived: Dict[str, float] | None = No
 def audit_food_bank(root: Path, tolerance: float = 5.0):
     missing_reports: List[MissingFields] = []
     atwater_reports: List[AtwaterIssue] = []
+    skipped_files = 0
 
     for md_file in sorted(root.rglob("*.md")):
         try:
             data = extract_yaml_block(md_file)
-        except Exception as exc:
+        except (ValueError, yaml.YAMLError) as exc:
             print(f"[WARN] Skipping {md_file}: {exc}")
+            skipped_files += 1
+            continue
+        except Exception as exc:
+            print(f"[ERROR] Unexpected error in {md_file}: {exc}")
+            skipped_files += 1
             continue
 
         entry_id = data.get("id", md_file.stem)
@@ -187,6 +193,9 @@ def audit_food_bank(root: Path, tolerance: float = 5.0):
                         recorded_value - computed_energy,
                     )
                 )
+
+    if skipped_files > 0:
+        print(f"\n[INFO] Skipped {skipped_files} files due to errors")
 
     return missing_reports, atwater_reports
 

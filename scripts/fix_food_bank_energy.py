@@ -14,6 +14,7 @@ from __future__ import annotations
 import argparse
 import math
 import re
+import tempfile
 from pathlib import Path
 from typing import Dict
 
@@ -21,7 +22,7 @@ import yaml
 
 
 def extract_yaml_block(path: Path) -> dict:
-    text = path.read_text()
+    text = path.read_text(encoding='utf-8')
     match = re.search(r"```yaml\s*(.*?)```", text, flags=re.S)
     if not match:
         raise ValueError(f"No yaml block in {path}")
@@ -38,10 +39,10 @@ def compute_energy(per: Dict[str, float], derived: Dict[str, float] | None = Non
     fiber = num(per.get("fiber_total_g"))
     polyols = num(per.get("polyols_g"))
 
-    alcohol_source = per.get("alcohol_g", 0)
-    if not alcohol_source and derived:
-        alcohol_source = derived.get("alcohol_g", 0)
-    alcohol = num(alcohol_source)
+    alcohol_g = per.get("alcohol_g")
+    if alcohol_g is None and derived:
+        alcohol_g = derived.get("alcohol_g")
+    alcohol = num(alcohol_g)
 
     return (
         4 * protein
@@ -58,6 +59,32 @@ def format_kcal(value: float) -> str:
     if math.isclose(value, round(value)):
         return str(int(round(value)))
     return f"{value:.1f}".rstrip("0").rstrip(".")
+
+
+def atomic_write_file(file_path: Path, content: str) -> None:
+    """Write content to file atomically using temp file + rename."""
+    temp_file = None
+    try:
+        # Create temp file in same directory to ensure atomic move
+        with tempfile.NamedTemporaryFile(
+            mode='w', 
+            dir=file_path.parent, 
+            delete=False,
+            encoding='utf-8',
+            suffix='.tmp'
+        ) as f:
+            f.write(content)
+            temp_file = Path(f.name)
+        
+        # Atomic move
+        temp_file.rename(file_path)
+        temp_file = None
+        
+    except Exception as e:
+        # Clean up temp file on error
+        if temp_file and temp_file.exists():
+            temp_file.unlink()
+        raise RuntimeError(f"Failed to write {file_path}: {e}") from e
 
 
 def main():
@@ -77,10 +104,17 @@ def main():
     args = parser.parse_args()
 
     updated = 0
+    skipped = 0
     for md_file in sorted(args.root.rglob("*.md")):
         try:
             data = extract_yaml_block(md_file)
-        except Exception:
+        except (ValueError, yaml.YAMLError) as e:
+            print(f"[WARN] Skipping {md_file}: {e}")
+            skipped += 1
+            continue
+        except Exception as e:
+            print(f"[ERROR] Unexpected error reading {md_file}: {e}")
+            skipped += 1
             continue
 
         per = data.get("per_portion")
@@ -104,21 +138,30 @@ def main():
             continue
 
         new_value = format_kcal(computed)
-        text = md_file.read_text()
-        new_text, count = re.subn(
-            r"(energy_kcal:\s*)([-+]?\d*\.?\d+)",
-            r"\g<1>" + new_value,
-            text,
-            count=1,
-        )
-        if count != 1:
-            print(f"[WARN] Could not update {md_file} (energy line not found).")
+        try:
+            text = md_file.read_text(encoding='utf-8')
+            # Anchor the regex to ensure we're matching the field name, not comments
+            new_text, count = re.subn(
+                r"(\benergy_kcal:\s*)([-+]?\d*\.?\d+)",
+                r"\g<1>" + new_value,
+                text,
+                count=1,
+            )
+            if count != 1:
+                print(f"[WARN] Could not update {md_file} (energy_kcal field not found).")
+                continue
+            
+            # Use atomic write
+            atomic_write_file(md_file, new_text)
+            updated += 1
+            print(f"Updated {md_file}: {recorded_val:.2f} -> {new_value}")
+        except Exception as e:
+            print(f"[ERROR] Failed to update {md_file}: {e}")
             continue
-        md_file.write_text(new_text)
-        updated += 1
-        print(f"Updated {md_file}: {recorded_val:.2f} -> {new_value}")
 
     print(f"\nTotal entries updated: {updated}")
+    if skipped > 0:
+        print(f"Skipped files (errors): {skipped}")
 
 
 if __name__ == "__main__":
