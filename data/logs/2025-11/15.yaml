@@ -766,6 +766,125 @@ entries:
       vanadium_ug: 0.0
       nickel_ug: 0.0
     notes: "Erbology sea buckthorn shot from White Pine - 50mL, exceptionally high vitamin C (220mg)"
+- timestamp: '2025-11-15T13:00:00+00:00'
+  items:
+  - name: Parsnip and Honey Soup (Beaverbrook)
+    food_bank_id: parsnip_honey_soup_beaverbrook_v1
+    quantity: 0.5
+    unit: portion
+    nutrition:
+      energy_kcal: 185.0
+      protein_g: 1.5
+      fat_g: 13.4
+      sat_fat_g: 6.3
+      mufa_g: 5.5
+      pufa_g: 0.8
+      trans_fat_g: 0.1
+      cholesterol_mg: 20.0
+      carbs_total_g: 15.9
+      carbs_available_g: 13.3
+      sugar_g: 6.0
+      fiber_total_g: 2.65
+      fiber_soluble_g: 0.9
+      fiber_insoluble_g: 1.75
+      polyols_g: 0.0
+      sodium_mg: 434.5
+      potassium_mg: 262.5
+      iodine_ug: 1.3
+      magnesium_mg: 15.0
+      calcium_mg: 32.5
+      iron_mg: 0.325
+      zinc_mg: 0.2
+      vitamin_c_mg: 6.0
+      manganese_mg: 0.27
+      copper_mg: 0.06
+      selenium_ug: 0.8
+      chromium_ug: 0.5
+      molybdenum_ug: 1.0
+      phosphorus_mg: 44.0
+      chloride_mg: 669.0
+      sulfur_g: 0.015
+      vitamin_a_ug: 97.5
+      vitamin_d_ug: 0.42
+      vitamin_e_mg: 1.25
+      vitamin_k_ug: 4.8
+      vitamin_b1_mg: 0.07
+      vitamin_b2_mg: 0.065
+      vitamin_b3_mg: 0.385
+      vitamin_b5_mg: 0.405
+      vitamin_b6_mg: 0.07
+      vitamin_b7_ug: 0.35
+      vitamin_b9_ug: 27.5
+      vitamin_b12_ug: 0.04
+      choline_mg: 8.5
+      omega3_epa_mg: 0.0
+      omega3_dha_mg: 0.0
+      omega3_ala_g: 0.06
+      omega6_la_g: 0.61
+      boron_mg: 0.0
+      silicon_mg: 0.0
+      vanadium_ug: 0.0
+      nickel_ug: 0.0
+    notes: "1/2 bowl parsnip & honey soup with olive oil - Coach House Deli, Beaverbrook Hotel"
+  - name: Caramelised Onion Flatbread (Beaverbrook)
+    food_bank_id: caramelised_onion_flatbread_beaverbrook_v1
+    quantity: 0.625
+    unit: portion
+    nutrition:
+      energy_kcal: 460.0
+      protein_g: 16.1
+      fat_g: 19.6
+      sat_fat_g: 7.0
+      mufa_g: 9.2
+      pufa_g: 2.44
+      trans_fat_g: 0.062
+      cholesterol_mg: 26.2
+      carbs_total_g: 56.0
+      carbs_available_g: 51.5
+      sugar_g: 14.2
+      fiber_total_g: 4.5
+      fiber_soluble_g: 1.31
+      fiber_insoluble_g: 3.19
+      polyols_g: 0.0
+      sodium_mg: 342.5
+      potassium_mg: 386.2
+      iodine_ug: 7.5
+      magnesium_mg: 40.0
+      calcium_mg: 142.5
+      iron_mg: 2.62
+      zinc_mg: 1.75
+      vitamin_c_mg: 5.25
+      manganese_mg: 0.425
+      copper_mg: 0.2
+      selenium_ug: 11.6
+      chromium_ug: 7.5
+      molybdenum_ug: 8.8
+      phosphorus_mg: 202.5
+      chloride_mg: 527.5
+      sulfur_g: 0.225
+      vitamin_a_ug: 105.0
+      vitamin_d_ug: 0.75
+      vitamin_e_mg: 1.75
+      vitamin_k_ug: 26.2
+      vitamin_b1_mg: 0.237
+      vitamin_b2_mg: 0.275
+      vitamin_b3_mg: 2.38
+      vitamin_b5_mg: 0.7
+      vitamin_b6_mg: 0.163
+      vitamin_b7_ug: 2.62
+      vitamin_b9_ug: 48.8
+      vitamin_b12_ug: 0.075
+      choline_mg: 23.8
+      omega3_epa_mg: 0.0
+      omega3_dha_mg: 0.0
+      omega3_ala_g: 0.112
+      omega6_la_g: 2.25
+      boron_mg: 0.0
+      silicon_mg: 0.0
+      vanadium_ug: 0.0
+      nickel_ug: 0.0
+    notes: "5/8 flatbread with caramelised onions, Rosary ash goat's cheese, figs, wild rocket - Coach House Deli, Beaverbrook Hotel"
+  notes: "Lunch at Coach House Deli, Beaverbrook Hotel"
 - timestamp: '2025-11-15T14:00:00+00:00'
   items:
   - name: Dark Chocolate with Maldon Sea Salt (70%)
