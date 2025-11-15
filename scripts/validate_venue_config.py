@@ -4,15 +4,21 @@ Validate venue-mappings.yaml against actual folder structure.
 
 Checks:
 1. All folders in config exist in the filesystem
-2. All folders in filesystem are represented in config
+2. All folders in filesystem are either in config OR can be auto-categorized correctly
 3. No duplicate patterns across different venues
 4. YAML is well-formed
+
+Dynamic categorization:
+- Packaged brands MUST be in config (need patterns for matching)
+- Venues/generic folders can exist without config if they're correctly auto-categorized
+- This allows dynamic venue creation without requiring config updates
 """
 
 import yaml
 from pathlib import Path
 import sys
 import re
+from venue_categorization import can_auto_categorize
 
 
 def validate_config():
@@ -87,7 +93,7 @@ def validate_config():
                 else:
                     pattern_to_venue[pattern_lower] = f"{category_type}/{venue_key}"
 
-    # Check actual folders are in config
+    # Check actual folders are in config OR can be auto-categorized
     for category_type in ['venues', 'packaged', 'generic']:
         category_path = data_bank / category_type
 
@@ -102,14 +108,35 @@ def validate_config():
             folder_name = folder_path.name
 
             # Check if folder is in config
-            found = False
+            found_in_config = False
             for venue_config in config.get(category_type, {}).values():
                 if isinstance(venue_config, dict) and venue_config.get('folder') == folder_name:
-                    found = True
+                    found_in_config = True
                     break
 
-            if not found:
-                errors.append(f"Folder exists but not in config: {category_type}/{folder_name}")
+            if not found_in_config:
+                # Not in config - check if it can be auto-categorized
+                if category_type == 'packaged':
+                    # Packaged brands MUST be in config (they need patterns for matching)
+                    errors.append(
+                        f"Packaged brand folder exists but not in config: {category_type}/{folder_name}\n"
+                        f"    Packaged brands must be added to venue-mappings.yaml with patterns.\n"
+                        f"    Run: python scripts/add_venue_to_config.py packaged {folder_name} --patterns \"pattern1\" \"pattern2\""
+                    )
+                elif can_auto_categorize(folder_name, category_type):
+                    # Can be auto-categorized correctly - this is fine!
+                    # Dynamic categorization allows venues/generic to exist without config
+                    pass
+                else:
+                    # Cannot be auto-categorized to the correct category
+                    errors.append(
+                        f"Folder exists but cannot be auto-categorized: {category_type}/{folder_name}\n"
+                        f"    The folder is in '{category_type}' but auto-categorization would place it elsewhere.\n"
+                        f"    Either:\n"
+                        f"    1. Move it to the correct category, OR\n"
+                        f"    2. Add it to venue-mappings.yaml to override auto-categorization:\n"
+                        f"       python scripts/add_venue_to_config.py {category_type} {folder_name} --patterns \"pattern1\""
+                    )
 
     # Print results
     if errors:
@@ -124,9 +151,32 @@ def validate_config():
 
     if not errors and not warnings:
         print("✓ Config validation passed")
-        print(f"  Venues: {len([k for k in config.get('venues', {}).keys() if not k.startswith('_')])}")
-        print(f"  Packaged: {len([k for k in config.get('packaged', {}).keys() if not k.startswith('_')])}")
-        print(f"  Generic: {len([k for k in config.get('generic', {}).keys() if not k.startswith('_')])}")
+
+        # Count folders in config
+        config_counts = {
+            'venues': len([k for k in config.get('venues', {}).keys() if not k.startswith('_')]),
+            'packaged': len([k for k in config.get('packaged', {}).keys() if not k.startswith('_')]),
+            'generic': len([k for k in config.get('generic', {}).keys() if not k.startswith('_')])
+        }
+
+        # Count folders in filesystem
+        fs_counts = {}
+        for category_type in ['venues', 'packaged', 'generic']:
+            category_path = data_bank / category_type
+            if category_path.exists():
+                fs_counts[category_type] = len([p for p in category_path.iterdir() if p.is_dir()])
+            else:
+                fs_counts[category_type] = 0
+
+        # Calculate auto-categorized counts
+        auto_counts = {
+            cat: fs_counts[cat] - config_counts[cat]
+            for cat in ['venues', 'packaged', 'generic']
+        }
+
+        print(f"  Venues: {config_counts['venues']} in config + {auto_counts['venues']} auto-categorized = {fs_counts['venues']} total")
+        print(f"  Packaged: {config_counts['packaged']} in config (all packaged must be in config)")
+        print(f"  Generic: {config_counts['generic']} in config + {auto_counts['generic']} auto-categorized = {fs_counts['generic']} total")
         return True
 
     if not errors:

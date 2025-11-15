@@ -76,7 +76,16 @@ class TestValidateConfig:
                         f"Folder doesn't exist: {category}/{venue_config['folder']}"
 
     def test_all_existing_folders_in_config(self):
-        """Test that all existing folders are represented in config."""
+        """Test that all existing folders are either in config OR can be auto-categorized.
+
+        This supports dynamic categorization where:
+        - Packaged brands MUST be in config (need patterns)
+        - Venues/generic CAN be auto-categorized without config entry
+        """
+        import sys
+        sys.path.insert(0, str(Path(__file__).parent.parent / 'scripts'))
+        from venue_categorization import can_auto_categorize
+
         config_path = Path(__file__).parent.parent / 'data' / 'venue-mappings.yaml'
         data_bank = Path(__file__).parent.parent / 'data' / 'food-data-bank'
 
@@ -93,15 +102,24 @@ class TestValidateConfig:
                     continue
 
                 # Check folder is in config
-                found = False
+                found_in_config = False
                 for venue_config in config[category].values():
                     if isinstance(venue_config, dict) and \
                        venue_config.get('folder') == folder_path.name:
-                        found = True
+                        found_in_config = True
                         break
 
-                assert found, \
-                    f"Folder {category}/{folder_path.name} not in config"
+                if not found_in_config:
+                    # Not in config - check if it can be auto-categorized
+                    if category == 'packaged':
+                        # Packaged brands MUST be in config
+                        assert False, \
+                            f"Packaged brand folder {category}/{folder_path.name} not in config. " \
+                            f"Packaged brands must be added with patterns."
+                    else:
+                        # Venues/generic can be auto-categorized
+                        assert can_auto_categorize(folder_path.name, category), \
+                            f"Folder {category}/{folder_path.name} not in config and cannot be auto-categorized correctly"
 
     def test_folder_names_follow_convention(self):
         """Test that all folder names in config follow naming convention."""

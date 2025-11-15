@@ -11,6 +11,7 @@ import sys
 import re
 from pathlib import Path
 from datetime import datetime, timezone
+from venue_categorization import categorize_venue as heuristic_categorize_venue, slugify
 
 try:
     import yaml
@@ -106,15 +107,6 @@ change_log: []
 """
 
 
-def slugify(text):
-    """Convert text to a filesystem-safe slug."""
-    slug = text.lower()
-    slug = re.sub(r'[^\w\s-]', '', slug)
-    slug = re.sub(r'[-\s]+', '-', slug)
-    slug = slug.strip('-')
-    return slug
-
-
 def load_venue_mappings():
     """Load venue categorization config from YAML file.
 
@@ -178,47 +170,8 @@ def categorize_venue(venue_display_name, override_category_type=None, override_f
                     if pattern.lower() in venue_lower:
                         return (category_type, venue_config['folder'])
 
-    # Tier 3: Heuristic fallback
-    venue_lower = venue_display_name.lower()
-
-    # Packaged product indicators
-    if '(packaged product)' in venue_lower or '(pack/ingredient)' in venue_lower:
-        return ('packaged', slugify(venue_display_name))
-
-    # Generic category keywords
-    if any(kw in venue_lower for kw in ['ingredient', 'generic', 'homemade', 'bakery', 'grocery', 'supplement']):
-        # Try to map to specific generic folder
-        if 'bakery' in venue_lower:
-            return ('generic', 'bakery')
-        elif 'ingredient' in venue_lower or venue_lower == 'generic':
-            return ('generic', 'ingredients')
-        elif 'homemade' in venue_lower or 'home' in venue_lower:
-            return ('generic', 'home-cooked')
-        elif 'grocery' in venue_lower:
-            return ('generic', 'grocery')
-        elif 'supplement' in venue_lower:
-            return ('generic', 'supplements')
-        elif 'pub' in venue_lower:
-            return ('generic', 'pub-bar')
-        elif 'fresh' in venue_lower or 'fruit' in venue_lower or 'produce' in venue_lower:
-            return ('generic', 'fresh-produce')
-        else:
-            return ('generic', 'ingredients')
-
-    # UK location indicators → probably a venue
-    uk_locations = ['london', 'manchester', 'birmingham', 'soho', 'mayfair', 'shoreditch',
-                    'farringdon', 'marylebone', 'kings cross', 'covent garden']
-    if any(loc in venue_lower for loc in uk_locations):
-        print(f"Info: '{venue_display_name}' contains location indicator, classifying as venue")
-        return ('venues', slugify(venue_display_name))
-
-    # Tier 4: Generic fallback with helpful message
-    print(f"\n⚠️  Warning: Unknown venue '{venue_display_name}', using generic categorization")
-    print(f"    To fix this for future use:")
-    print(f"    1. Add to data/venue-mappings.yaml, OR")
-    print(f"    2. Use --category-type flag to override")
-    print()
-    return ('generic', slugify(venue_display_name))
+    # Tier 3: Heuristic fallback using shared categorization logic
+    return heuristic_categorize_venue(venue_display_name)
 
 
 def create_dish_file(dish_id, venue_name, display_name, category, portion_desc, output_dir):

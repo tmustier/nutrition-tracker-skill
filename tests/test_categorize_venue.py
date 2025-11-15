@@ -237,7 +237,15 @@ class TestIntegration:
     """Integration tests combining multiple components."""
 
     def test_config_covers_all_actual_venues(self):
-        """Test that all actual venue folders are in config."""
+        """Test that all actual venue folders are either in config OR can be auto-categorized.
+
+        This supports dynamic categorization where venues can be auto-categorized
+        based on intelligent pattern matching without requiring config entries.
+        """
+        import sys
+        sys.path.insert(0, str(Path(__file__).parent.parent / 'scripts'))
+        from venue_categorization import can_auto_categorize
+
         mappings = load_venue_mappings()
         data_bank = Path(__file__).parent.parent / 'data' / 'food-data-bank'
 
@@ -247,12 +255,16 @@ class TestIntegration:
             for venue_folder in venues_dir.iterdir():
                 if venue_folder.is_dir():
                     # Check this folder is in config
-                    found = False
+                    found_in_config = False
                     for venue_config in mappings['venues'].values():
                         if isinstance(venue_config, dict) and venue_config.get('folder') == venue_folder.name:
-                            found = True
+                            found_in_config = True
                             break
-                    assert found, f"Venue folder {venue_folder.name} not found in config"
+
+                    if not found_in_config:
+                        # Not in config - check if it can be auto-categorized correctly
+                        assert can_auto_categorize(venue_folder.name, 'venues'), \
+                            f"Venue folder {venue_folder.name} not in config and cannot be auto-categorized correctly"
 
     def test_no_duplicate_folders_across_categories(self):
         """Test that no folder name appears in multiple categories."""
