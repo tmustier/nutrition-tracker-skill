@@ -33,7 +33,7 @@ assumptions:
   prep: "Components: Brandade filling 19g (cod 9g, olive oil 5g, potato 3g, cream 2g), Batter coating fried 16g (flour 7g, egg 2g, milk 1g, absorbed oil 6g), Aioli 5g (mayo/olive oil 5g, garlic trace). Deep-fried, oil absorption ~12% of total weight. Smaller street-food size portion."
 per_portion:  # Schema v2: 52 nutrient fields
   # Macronutrients
-  energy_kcal: 190
+  energy_kcal: 178.2
   protein_g: 4.53
   fat_g: 15.0
   sat_fat_g: 2.8

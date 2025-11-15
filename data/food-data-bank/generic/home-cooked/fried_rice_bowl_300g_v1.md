@@ -26,7 +26,7 @@ assumptions:
   oil_type: vegetable
   prep: Wok-fried with oil, includes cooked rice, scrambled egg, vegetables, soy sauce
 per_portion:
-  energy_kcal: 507
+  energy_kcal: 498.3
   protein_g: 10.8
   fat_g: 23.1
   sat_fat_g: 3.5

@@ -26,7 +26,7 @@ assumptions:
   oil_type: vegetable
   prep: Wok-fried pork belly with sliced onions, spring onions, soy sauce
 per_portion:
-  energy_kcal: 725
+  energy_kcal: 718.1
   protein_g: 22.6
   fat_g: 66.9
   sat_fat_g: 23.2

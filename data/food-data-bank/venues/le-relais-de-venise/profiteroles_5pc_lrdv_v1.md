@@ -32,7 +32,7 @@ assumptions:
   prep: "Choux baked; ice cream commercial; fudge sauce heated"
 
 per_portion:
-  energy_kcal: 672
+  energy_kcal: 662.2
   protein_g: 11.6
   fat_g: 42.6
   sat_fat_g: 21.9

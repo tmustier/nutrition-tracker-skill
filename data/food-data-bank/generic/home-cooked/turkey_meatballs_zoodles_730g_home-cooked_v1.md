@@ -29,7 +29,7 @@ assumptions:
   prep: "150g ground turkey (99% lean, modeled as 93/7 USDA data scaled down) formed into meatballs with egg white binder, baked at 190°C for 20 min. 300g zucchini spiralized and sautéed 3 min. 250g fresh tomato sauce made from fresh tomatoes, garlic, basil (simmer 20 min). 30g grated parmesan. Finishing salt minimal due to parmesan sodium content."
 per_portion:  # Schema v2: 52 nutrient fields
   # Macronutrients
-  energy_kcal: 577
+  energy_kcal: 560.1
   protein_g: 51.8
   fat_g: 17.9
   sat_fat_g: 6.2

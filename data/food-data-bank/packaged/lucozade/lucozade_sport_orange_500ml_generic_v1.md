@@ -27,7 +27,7 @@ assumptions:
   usda_proxy: "Micronutrients estimated using typical isotonic sports drink composition and ingredient list. Ascorbic acid (antioxidant, not primary fortification): 15mg estimated. Beta carotene (colour): ~600µg providing ~50µg vitamin A RAE. Acacia gum (stabiliser): minimal fiber ~0.2g. Trace minerals from water and ingredients estimated at minimal levels. B-vitamin fortification confirmed from label (B3, B5, B6, B12). Confidence: HIGH for labeled nutrients (macros, B vitamins, electrolytes), MEDIUM for vitamin C and A (ingredient-based), LOW for trace minerals."
 per_portion:  # Schema v2: 52 nutrient fields
   # Macronutrients
-  energy_kcal: 140
+  energy_kcal: 131.7
   protein_g: 0.1
   fat_g: 0.1
   sat_fat_g: 0

@@ -33,7 +33,7 @@ assumptions:
   prep: "Ground beef browned, vegetables sautéed, simmered 30 min with no-salt-added crushed tomatoes. Beef retains ~90% weight when cooked (minimal fat loss with 95% lean). Pasta and lentils weights are cooked. No added salt. Finishing salt from natural sodium only."
 per_portion:  # Schema v2: 52 nutrient fields
   # Macronutrients
-  energy_kcal: 882
+  energy_kcal: 846
   protein_g: 58.3
   fat_g: 20.4
   sat_fat_g: 5.2

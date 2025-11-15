@@ -29,7 +29,7 @@ assumptions:
   prep: "Fresh soup, unheated. Contains cooked pasta and vegetables in tomato-vegetable broth base with EVOO"
 per_portion:  # Schema v2: 52 nutrient fields
   # Macronutrients
-  energy_kcal: 210
+  energy_kcal: 225.5
   protein_g: 10.0
   fat_g: 4.5
   sat_fat_g: 1.0

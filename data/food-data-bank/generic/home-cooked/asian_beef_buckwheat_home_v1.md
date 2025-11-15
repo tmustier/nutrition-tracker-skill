@@ -32,7 +32,7 @@ assumptions:
   prep: "Ground beef (93/7) browned and drained, vegetables stir-fried briefly to retain nutrients, buckwheat cooked separately. Coconut aminos added for flavor (lower sodium than soy sauce). Fresh ginger and garlic for aromatics. Sesame seeds for garnish."
 per_portion:  # Schema v2: 52 nutrient fields
   # Macronutrients
-  energy_kcal: 856
+  energy_kcal: 846.4
   protein_g: 54.2
   fat_g: 28.4
   sat_fat_g: 7.8

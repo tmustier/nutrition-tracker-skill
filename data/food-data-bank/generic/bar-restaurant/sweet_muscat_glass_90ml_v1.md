@@ -27,7 +27,7 @@ assumptions:
   oil_type:
   prep: Chilled sweet muscat, 15% ABV, high residual sugar
 per_portion:
-  energy_kcal: 135
+  energy_kcal: 129.6
   protein_g: 0.18
   fat_g: 0
   sat_fat_g: 0

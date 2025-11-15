@@ -32,7 +32,7 @@ assumptions:
   prep: "180g chicken breast cubed and stir-fried in 5g sesame oil with ginger and garlic (very hot pan, 5-6 min). 250g mixed Asian vegetables (100g broccoli, 75g snap peas, 50g carrots, 25g bok choy) stir-fried 3-4 min. Served over 150g cooked brown rice. Seasoned with 15ml coconut aminos. Topped with 15g raw cashews and scallions."
 per_portion:  # Schema v2: 52 nutrient fields
   # Macronutrients
-  energy_kcal: 821
+  energy_kcal: 843.3
   protein_g: 56.3
   fat_g: 22.1
   sat_fat_g: 4.2

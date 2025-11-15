@@ -31,7 +31,7 @@ assumptions:
   prep: "180g chicken breast grilled with paprika, garlic powder, and oregano (no salt), 150g cooked quinoa, 150g Brussels sprouts roasted at 200°C for 20 minutes, 50g fresh avocado, low-sodium tahini dressing (15g tahini + 10g lemon juice + water)"
 per_portion:  # Schema v2: 52 nutrient fields
   # Macronutrients
-  energy_kcal: 702
+  energy_kcal: 687.1
   protein_g: 69.9
   fat_g: 25.7
   sat_fat_g: 4.5
