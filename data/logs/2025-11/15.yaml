@@ -519,8 +519,8 @@ entries:
       vitamin_b12_ug: 1.2
       choline_mg: 294
       vitamin_c_mg: 0.0
-      omega3_epa_mg: 0.0
-      omega3_dha_mg: 0.0
+      omega3_epa_mg: 4.0
+      omega3_dha_mg: 34.0
       omega3_ala_g: 0.068
       omega6_la_g: 1.22
       boron_mg: 0.0
@@ -613,7 +613,6 @@ entries:
       calcium_mg: 11.0
       iron_mg: 0.16
       zinc_mg: 0.08
-      vitamin_c_mg: 36.4
       manganese_mg: 0.06
       copper_mg: 0.12
       selenium_ug: 0.1
