@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import re
 import shutil
+import tempfile
 from collections import defaultdict
 from dataclasses import dataclass
 from decimal import Decimal, getcontext
@@ -185,19 +186,71 @@ def quantize_value(value: Decimal) -> float | int:
     return float(q.normalize())
 
 
-def build_scaled_nutrition(per_portion: dict, factor: Decimal) -> Dict[str, float | int]:
+def atomic_write_yaml(file_path: Path, data: dict) -> None:
+    """Write YAML data to file atomically using temp file + rename."""
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode='w', 
+            dir=file_path.parent, 
+            delete=False, 
+            encoding='utf-8'
+        ) as temp_file:
+            yaml.safe_dump(
+                data,
+                temp_file,
+                sort_keys=False,
+                allow_unicode=True,
+                default_flow_style=False,
+            )
+            temp_path = Path(temp_file.name)
+        
+        # Atomic rename (POSIX guarantees atomicity)
+        temp_path.rename(file_path)
+        
+    except Exception as exc:
+        # Clean up temp file if it exists
+        temp_path = Path(tempfile.gettempdir()) / f"tmp{hash(file_path)}"
+        if temp_path.exists():
+            try:
+                temp_path.unlink()
+            except OSError:
+                pass
+        raise RuntimeError(f"Failed to write {file_path}: {exc}") from exc
+
+
+def build_scaled_nutrition(per_portion: dict, derived: dict, factor: Decimal) -> Dict[str, float | int]:
+    """Build scaled nutrition including optional alcohol fields."""
     result: Dict[str, float | int] = {}
+    
+    # Scale all expected fields
     for field in EXPECTED_FIELDS:
         scaled = decimal_value(per_portion.get(field)) * factor
         result[field] = quantize_value(scaled)
+    
+    # Scale optional alcohol fields if present
+    alcohol_g = per_portion.get("alcohol_g")
+    if alcohol_g is None and derived:
+        alcohol_g = derived.get("alcohol_g")
+    if alcohol_g is not None:
+        scaled_alcohol = decimal_value(alcohol_g) * factor
+        result["alcohol_g"] = quantize_value(scaled_alcohol)
+    
+    alcohol_energy = per_portion.get("alcohol_energy_kcal")
+    if alcohol_energy is None and derived:
+        alcohol_energy = derived.get("alcohol_energy_kcal")
+    if alcohol_energy is not None:
+        scaled_alcohol_energy = decimal_value(alcohol_energy) * factor
+        result["alcohol_energy_kcal"] = quantize_value(scaled_alcohol_energy)
+    
     return result
 
 
 def diff_fields(current: dict, updated: dict) -> List[str]:
+    """Compare current and updated nutrition, including optional alcohol fields."""
     diffs: List[str] = []
+    
+    # Check expected fields
     for field in EXPECTED_FIELDS:
-        if field in OPTIONAL_FIELDS:
-            continue
         cur_val = decimal_value(current.get(field))
         new_val = decimal_value(updated.get(field))
         if current.get(field) is None:
@@ -206,10 +259,25 @@ def diff_fields(current: dict, updated: dict) -> List[str]:
             continue
         if (cur_val - new_val).copy_abs() > DISCREPANCY_THRESHOLD:
             diffs.append(field)
+    
+    # Check optional alcohol fields
+    for field in OPTIONAL_FIELDS:
+        if field in updated:  # Only check if present in updated nutrition
+            cur_val = decimal_value(current.get(field))
+            new_val = decimal_value(updated.get(field))
+            if current.get(field) is None:
+                if new_val.copy_abs() > DISCREPANCY_THRESHOLD:
+                    diffs.append(field)
+                continue
+            if (cur_val - new_val).copy_abs() > DISCREPANCY_THRESHOLD:
+                diffs.append(field)
+    
+    # Check for missing expected fields
     missing_fields = [f for f in EXPECTED_FIELDS if f not in current]
     for field in missing_fields:
         if field not in diffs:
             diffs.append(field)
+    
     return diffs
 
 
@@ -286,6 +354,7 @@ def process_file(
                 )
                 continue
             per_portion = fb_entry.get("per_portion", {})
+            derived = fb_entry.get("derived", {})
             portion_weight = fb_entry.get("portion", {}).get("est_weight_g")
             try:
                 factor = scale_factor(quantity, unit, portion_weight)
@@ -298,43 +367,33 @@ def process_file(
                     )
                 )
                 continue
-            updated_nutrition = build_scaled_nutrition(per_portion, factor)
+            
+            # Build updated nutrition including alcohol fields
+            updated_nutrition = build_scaled_nutrition(per_portion, derived, factor)
             diffs = diff_fields(nutrition, updated_nutrition)
+            
             if diffs:
                 file_changes.append(ItemChange(timestamp=timestamp, name=name, fields_changed=diffs))
                 if apply_changes:
                     item["nutrition"] = updated_nutrition
-                    # If alcohol present in the food bank, carry it over scaled by the same factor.
-                    alcohol_value = per_portion.get("alcohol_g")
-                    if (alcohol_value is None or alcohol_value == 0) and fb_entry.get("derived"):
-                        alcohol_value = fb_entry["derived"].get("alcohol_g")
-                    if alcohol_value is not None:
-                        try:
-                            scaled_alcohol = decimal_value(alcohol_value) * factor
-                            item.setdefault("nutrition", {})["alcohol_g"] = quantize_value(scaled_alcohol)
-                        except (TypeError, ValueError):
-                            pass
-                    alcohol_energy = per_portion.get("alcohol_energy_kcal")
-                    if (alcohol_energy is None or alcohol_energy == 0) and fb_entry.get("derived"):
-                        alcohol_energy = fb_entry["derived"].get("alcohol_energy_kcal")
-                    if alcohol_energy is not None:
-                        try:
-                            scaled_alcohol_energy = decimal_value(alcohol_energy) * factor
-                            item.setdefault("nutrition", {})["alcohol_energy_kcal"] = quantize_value(scaled_alcohol_energy)
-                        except (TypeError, ValueError):
-                            pass
     if apply_changes and file_changes:
         if create_backup:
             backup_path = log_path.with_suffix(log_path.suffix + ".bak")
             shutil.copy2(log_path, backup_path)
-        with log_path.open("w") as handle:
-            yaml.safe_dump(
-                data,
-                handle,
-                sort_keys=False,
-                allow_unicode=True,
-                default_flow_style=False,
-            )
+        
+        # Use atomic write to prevent file corruption
+        try:
+            atomic_write_yaml(log_path, data)
+        except RuntimeError as exc:
+            print(f"[ERROR] Failed to write {log_path}: {exc}")
+            # If backup exists, restore it
+            if create_backup and backup_path.exists():
+                try:
+                    shutil.copy2(backup_path, log_path)
+                    print(f"[INFO] Restored {log_path} from backup")
+                except Exception as restore_exc:
+                    print(f"[ERROR] Failed to restore backup: {restore_exc}")
+            raise
     return file_changes, manual_items
 
 

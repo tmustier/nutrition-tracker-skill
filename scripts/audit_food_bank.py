@@ -154,11 +154,19 @@ def audit_food_bank(root: Path, tolerance: float = 5.0):
         try:
             data = extract_yaml_block(md_file)
         except (ValueError, yaml.YAMLError) as exc:
-            print(f"[WARN] Skipping {md_file}: {exc}")
+            print(f"[WARN] Skipping {md_file}: YAML parsing failed - {exc}")
+            skipped_files += 1
+            continue
+        except FileNotFoundError:
+            print(f"[WARN] Skipping {md_file}: File not found")
+            skipped_files += 1
+            continue
+        except PermissionError:
+            print(f"[ERROR] Skipping {md_file}: Permission denied")
             skipped_files += 1
             continue
         except Exception as exc:
-            print(f"[ERROR] Unexpected error in {md_file}: {exc}")
+            print(f"[ERROR] Unexpected error in {md_file}: {type(exc).__name__}: {exc}")
             skipped_files += 1
             continue
 
