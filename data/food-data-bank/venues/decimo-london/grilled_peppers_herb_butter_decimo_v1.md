@@ -26,7 +26,7 @@ assumptions:
   prep: "Mixed bell peppers charred/grilled until soft, served with melted herb butter (butter, parsley, garlic, lemon)"
 per_portion:  # Schema v2: 52 nutrient fields
   # Macronutrients
-  energy_kcal: 465
+  energy_kcal: 486.8
   protein_g: 5.0
   fat_g: 40.0
   sat_fat_g: 25.2

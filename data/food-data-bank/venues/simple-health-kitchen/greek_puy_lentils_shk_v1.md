@@ -24,7 +24,7 @@ assumptions:
   prep: "Lentils cooked, mixed with chopped sun-dried tomatoes, kalamata olives, diced red onion, dressed with tahini-olive oil-lemon dressing"
 per_portion:  # Schema v2: 52 nutrient fields
   # Macronutrients
-  energy_kcal: 338
+  energy_kcal: 362.2
   protein_g: 14.3
   fat_g: 16.4
   sat_fat_g: 2.3

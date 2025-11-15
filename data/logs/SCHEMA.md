@@ -152,6 +152,8 @@ entries:
           silicon_mg: 0
           vanadium_ug: 0
           nickel_ug: 0
+          alcohol_g: 0          # optional; present when food-bank entry tracks alcohol explicitly
+          alcohol_energy_kcal: 0  # optional derived value (7 kcal/g alcohol). Keep for reference only.
 
     notes: "breakfast at home"  # optional context
 
@@ -181,7 +183,7 @@ entries:
 
 4. **Flexible items**: Each entry (meal) can have multiple items. Track quantity and unit for each.
 
-5. **Energy derived from nutrients**: Store `energy_kcal` as the available-carb Atwater result (`4P + 9F + 4*carbs_available + 2*fibre + 2.4*polyols`) to stay aligned with the food bank.
+5. **Energy derived from nutrients**: Store `energy_kcal` as the available-carb Atwater result (`4P + 9F + 4*carbs_available + 2*fibre + 2.4*polyols`), plus `7 * alcohol_g` when alcohol is present. If `alcohol_g` is tracked in the food bank, copy it into the log alongside energy.
 
 6. **Timestamping**: One timestamp per entry (meal level), not per item.
 
@@ -190,7 +192,7 @@ entries:
 8. **Notes**: Optional context at entry level (location, how you felt, etc.).
 
 9. **Schema Version 2 - 52 Nutrient Fields**: As of 2025-11-05, the schema has been expanded from 24 to 52 nutrient fields to provide comprehensive tracking. All 52 fields are organized into 8 categories:
-   - **Macros & Energy** (8 fields): energy_kcal, protein_g, fat_g, sat_fat_g, mufa_g, pufa_g, trans_fat_g, cholesterol_mg
+   - **Macros & Energy** (8+ optional alcohol fields): energy_kcal, protein_g, fat_g, sat_fat_g, mufa_g, pufa_g, trans_fat_g, cholesterol_mg (optionally `alcohol_g` and `alcohol_energy_kcal` for alcoholic drinks)
    - **Carbohydrates** (7 fields): carbs_total_g, polyols_g, carbs_available_g, sugar_g, fiber_total_g, fiber_soluble_g, fiber_insoluble_g
    - **Essential Minerals** (7 fields): sodium_mg, potassium_mg, calcium_mg, magnesium_mg, phosphorus_mg, chloride_mg, sulfur_mg
    - **Trace Minerals** (8 fields): iron_mg, zinc_mg, copper_mg, manganese_mg, selenium_ug, iodine_ug, chromium_ug, molybdenum_ug

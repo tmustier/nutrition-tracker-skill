@@ -29,7 +29,7 @@ assumptions:
   prep: "180g cod fillet baked with herbs (lemon, parsley, garlic) at 180°C for 15 min. 250g potato wedges (from ~255g raw potatoes) roasted with 5g olive oil and paprika at 200°C for 35 min. 150g mushy peas (frozen peas cooked and lightly mashed with mint and lemon). Finishing salt: 0.5% of dish weight."
 per_portion:  # Schema v2: 52 nutrient fields
   # Macronutrients
-  energy_kcal: 782
+  energy_kcal: 813.3
   protein_g: 50.2
   fat_g: 12.1
   sat_fat_g: 2.0

@@ -29,7 +29,7 @@ assumptions:
   oil_type: "mayonnaise (soybean oil base for yuzu mayo)"
   prep: "Nigiri: hand-formed sushi rice with raw salmon slices. Roll: sushi rice with raw salmon, avocado, yuzu mayonnaise, wrapped in nori seaweed"
 per_portion:
-  energy_kcal: 670
+  energy_kcal: 657.6
   protein_g: 33.0
   fat_g: 32.0
   sat_fat_g: 5.3

@@ -31,7 +31,7 @@ assumptions:
   prep: "150g turkey breast roasted with herbs (no salt), 200g Greek puy lentils cooked without salt, 100g fresh cucumber and tomato salad (50g each) with lemon juice, 30g home-prepared hummus"
 per_portion:  # Schema v2: 52 nutrient fields
   # Macronutrients
-  energy_kcal: 541
+  energy_kcal: 502
   protein_g: 66.2
   fat_g: 8.4
   sat_fat_g: 2.1

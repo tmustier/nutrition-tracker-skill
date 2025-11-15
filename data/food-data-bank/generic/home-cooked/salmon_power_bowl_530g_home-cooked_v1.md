@@ -33,7 +33,7 @@ assumptions:
   prep: "150g wild Atlantic salmon grilled with lemon and herbs, 200g cooked quinoa, 150g roasted vegetables (50g bell peppers, 50g zucchini, 50g carrots) at 200°C for 25 minutes, 15g olive oil-lemon dressing, fresh cilantro and parsley"
 per_portion:  # Schema v2: 52 nutrient fields
   # Macronutrients
-  energy_kcal: 728
+  energy_kcal: 699.3
   protein_g: 48.0
   fat_g: 24.3
   sat_fat_g: 3.8

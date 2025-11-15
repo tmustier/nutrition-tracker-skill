@@ -27,7 +27,7 @@ assumptions:
   prep: "Raw unsalted pistachios (20g) served with fresh Japanese persimmon (168g, approximately 1 medium fruit). No added ingredients."
 per_portion:  # Schema v2: 52 nutrient fields
   # Macronutrients
-  energy_kcal: 235
+  energy_kcal: 245.2
   protein_g: 7.3
   fat_g: 11.6
   sat_fat_g: 1.4

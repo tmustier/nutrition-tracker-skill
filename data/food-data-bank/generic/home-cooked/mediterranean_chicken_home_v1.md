@@ -32,7 +32,7 @@ assumptions:
   prep: "Chicken breast grilled with oregano, thyme, and garlic powder (no salt). Sweet potato cubed and roasted at 200°C for 30 minutes. Vegetables roasted separately with minimal oil. Chickpeas from no-salt-added can. Lemon-herb dressing made fresh with 1 tbsp olive oil, lemon juice, and oregano."
 per_portion:  # Schema v2: 52 nutrient fields
   # Macronutrients
-  energy_kcal: 918
+  energy_kcal: 872.6
   protein_g: 60.4
   fat_g: 24.2
   sat_fat_g: 4.1

@@ -28,7 +28,7 @@ assumptions:
   prep: "Laminated croissant dough (enriched wheat flour, butter 20-25%, milk, egg, sugar, salt, yeast) with dark chocolate bars (cocoa solids, sugar, cocoa butter). Component analysis: ~65g dough + ~15g dark chocolate"
 per_portion:  # Schema v2: 52 nutrient fields
   # Macronutrients
-  energy_kcal: 305
+  energy_kcal: 293.5
   protein_g: 5.5
   fat_g: 15.5
   sat_fat_g: 9.0

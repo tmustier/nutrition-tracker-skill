@@ -27,7 +27,7 @@ assumptions:
   oil_type:
   prep: Cheese plate served at room temperature with crackers and condiment
 per_portion:
-  energy_kcal: 975
+  energy_kcal: 945.2
   protein_g: 48.0
   fat_g: 66.6
   sat_fat_g: 43.7

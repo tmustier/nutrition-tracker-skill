@@ -27,7 +27,7 @@ assumptions:
   prep: "0% fat Greek yogurt (170g) served with fresh banana (100g, approximately 1 small banana). No added ingredients."
 per_portion:  # Schema v2: 52 nutrient fields
   # Macronutrients
-  energy_kcal: 188
+  energy_kcal: 201.8
   protein_g: 19.4
   fat_g: 0.6
   sat_fat_g: 0.2

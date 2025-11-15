@@ -25,7 +25,7 @@ assumptions:
   oil_type:
   prep: Stirred cocktail with ice, served over ice with orange peel garnish
 per_portion:
-  energy_kcal: 186
+  energy_kcal: 200.2
   protein_g: 0.06
   fat_g: 0
   sat_fat_g: 0

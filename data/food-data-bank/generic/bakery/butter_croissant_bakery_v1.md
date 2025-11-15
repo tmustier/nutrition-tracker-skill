@@ -24,7 +24,7 @@ assumptions:
   oil_type: butter
   prep: "Laminated wheat dough enriched with butter, milk, eggs, sugar, yeast, and salt."
 per_portion:
-  energy_kcal: 284
+  energy_kcal: 272.3
   protein_g: 5.7
   fat_g: 14.7
   sat_fat_g: 8.4

@@ -28,7 +28,7 @@ assumptions:
   prep: "273g raw russet potatoes, cut into medium-cut batons (~8mm width), deep-fried in 170-180°C oil, resulting in 45% water loss and absorbing ~10% (15g) vegetable oil, finished with 0.75g sea salt"
 per_portion:  # Schema v2: 52 nutrient fields
   # Macronutrients
-  energy_kcal: 360
+  energy_kcal: 352.7
   protein_g: 5.5
   fat_g: 15.3
   sat_fat_g: 1.8

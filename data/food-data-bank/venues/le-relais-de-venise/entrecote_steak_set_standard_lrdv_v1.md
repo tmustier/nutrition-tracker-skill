@@ -31,7 +31,7 @@ assumptions:
   prep: "steak grilled medium; fries deep-fried; salad tossed with mustard vinaigrette"
 
 per_portion:
-  energy_kcal: 1194
+  energy_kcal: 1211.4
   protein_g: 67.7
   fat_g: 76.4
   sat_fat_g: 22.8

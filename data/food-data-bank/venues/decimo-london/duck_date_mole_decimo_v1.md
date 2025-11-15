@@ -26,7 +26,7 @@ assumptions:
   prep: "Duck breast roasted with skin, served with traditional Mexican mole sauce enriched with dates and almonds"
 per_portion:  # Schema v2: 52 nutrient fields
   # Macronutrients
-  energy_kcal: 523
+  energy_kcal: 560.4
   protein_g: 44.0
   fat_g: 36.0
   sat_fat_g: 9.2

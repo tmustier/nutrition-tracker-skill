@@ -26,7 +26,7 @@ assumptions:
   prep: butter croissant filled with almond frangipane paste and topped with sliced almonds
   nutrient_sources: Component-based calculation using USDA FDC #174987 (butter croissant) and #170567 (almonds) scaled to 90g croissant + 20g almonds
 per_portion:
-  energy_kcal: 506
+  energy_kcal: 500.2
   protein_g: 10.2
   fat_g: 33.0
   sat_fat_g: 15.0

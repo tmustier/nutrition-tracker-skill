@@ -27,7 +27,7 @@ assumptions:
   oil_type: "n/a (shake/beverage)"
   prep: "Blended protein shake with frozen berries and fortified almond milk. Component weights estimated to match user-provided macros."
 per_portion:
-  energy_kcal: 186
+  energy_kcal: 180.5
   protein_g: 23.0
   fat_g: 4.7
   sat_fat_g: 1.3

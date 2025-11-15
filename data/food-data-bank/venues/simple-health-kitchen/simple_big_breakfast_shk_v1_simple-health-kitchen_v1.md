@@ -30,7 +30,7 @@ assumptions:
   prep: "3 eggs hard-boiled or poached, lean chicken sausages grilled, spinach wilted/sautéed, sourdough toasted with butter, fresh avocado"
 per_portion:  # Schema v2: 52 nutrient fields (summed from components)
   # Macronutrients
-  energy_kcal: 595
+  energy_kcal: 610
   protein_g: 46.5
   fat_g: 30.0
   sat_fat_g: 10.5

@@ -24,7 +24,7 @@ assumptions:
   oil_type:
   prep: "Slow-cooked chicken in gelatin-rich broth, chilled with vegetables and aromatics."
 per_portion:
-  energy_kcal: 175
+  energy_kcal: 185.7
   protein_g: 28.2
   fat_g: 6.3
   sat_fat_g: 1.4

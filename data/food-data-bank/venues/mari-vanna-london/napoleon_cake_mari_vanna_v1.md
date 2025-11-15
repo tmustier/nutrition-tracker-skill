@@ -26,7 +26,7 @@ assumptions:
   prep: "Sixteen layers of puff pastry alternating with homemade vanilla custard cream (pastry cream), topped with fresh strawberry garnish and light icing sugar dusting"
 per_portion:  # Schema v2: 52 nutrient fields
   # Macronutrients
-  energy_kcal: 541
+  energy_kcal: 533.3
   protein_g: 8.1
   fat_g: 33.0
   sat_fat_g: 16.8

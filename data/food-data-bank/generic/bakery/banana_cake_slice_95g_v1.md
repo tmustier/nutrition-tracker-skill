@@ -26,7 +26,7 @@ assumptions:
   oil_type: mixed
   prep: Baked cake with flour, sugar, mashed banana, butter/oil, eggs
 per_portion:
-  energy_kcal: 333
+  energy_kcal: 340.1
   protein_g: 4.4
   fat_g: 11.8
   sat_fat_g: 2.6

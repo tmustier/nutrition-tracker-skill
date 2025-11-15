@@ -30,7 +30,7 @@ assumptions:
   prep: "Oats (80g dry) cooked with unsweetened almond milk (250ml), mixed with ON Whey protein powder (30g Double Rich Chocolate), topped with fresh blueberries (150g), pistachios (15g), and cinnamon (1g). Total portions create ~525g serving."
 per_portion:  # Schema v2: 52 nutrient fields
   # Macronutrients
-  energy_kcal: 520
+  energy_kcal: 531.8
   protein_g: 37.2
   fat_g: 11.8
   sat_fat_g: 2.1

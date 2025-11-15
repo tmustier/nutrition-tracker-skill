@@ -31,7 +31,7 @@ assumptions:
   prep: "deep-fried, salted"
 
 per_portion:
-  energy_kcal: 468
+  energy_kcal: 456.7
   protein_g: 5.1
   fat_g: 22.1
   sat_fat_g: 3.5

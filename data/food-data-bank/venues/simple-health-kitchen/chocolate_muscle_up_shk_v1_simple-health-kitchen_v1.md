@@ -25,7 +25,7 @@ assumptions:
   prep: "blended cold; all ingredients raw except oats (rolled)"
 per_portion:  # Schema v2: 52 nutrient fields
   # Macronutrients
-  energy_kcal: 558.0
+  energy_kcal: 575.9
   protein_g: 41.0
   fat_g: 20.7
   sat_fat_g: 7.5

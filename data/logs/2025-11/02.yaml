@@ -695,7 +695,7 @@ entries:
     quantity: 3
     unit: portion
     nutrition:
-      energy_kcal: 630
+      energy_kcal: 603
       protein_g: 22.8
       fat_g: 40.8
       sat_fat_g: 12.6
@@ -870,7 +870,7 @@ entries:
     quantity: 415
     unit: g
     nutrition:
-      energy_kcal: 344.3368
+      energy_kcal: 330.2822
       protein_g: 22.7606
       fat_g: 7.9643
       sat_fat_g: 2.0301
@@ -931,7 +931,7 @@ entries:
     quantity: 180
     unit: g
     nutrition:
-      energy_kcal: 149.3509
+      energy_kcal: 143.2549
       protein_g: 9.8721
       fat_g: 3.4544
       sat_fat_g: 0.8805

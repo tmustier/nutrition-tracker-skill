@@ -27,7 +27,7 @@ assumptions:
   oil_type: sesame oil
   prep: "Component-based estimation: 35g roasted duck meat and skin, 15g mandarin pancake wrapper, 8g hoisin sauce, 5g cucumber, 3g spring onion, 2g sesame oil for cooking wrapper"
 per_portion:
-  energy_kcal: 210
+  energy_kcal: 201
   protein_g: 7.6
   fat_g: 13.6
   sat_fat_g: 4.2

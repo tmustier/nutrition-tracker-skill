@@ -22,7 +22,7 @@ assumptions:
   oil_type: "butter and vegetable oil"
   prep: "Traditional Persian rice preparation with tahdig (butter/oil), boiled chicken, tomato sauce"
 per_portion:
-  energy_kcal: 785
+  energy_kcal: 790.6
   protein_g: 48.0
   fat_g: 25.0
   sat_fat_g: 11.5
