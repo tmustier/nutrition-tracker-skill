@@ -76,6 +76,8 @@ EXPECTED_FIELDS: Sequence[str] = [
     "nickel_ug",
 ]
 
+OPTIONAL_FIELDS = {"alcohol_g", "alcohol_energy_kcal"}
+
 MASS_UNITS = {
     "g",
     "gram",
@@ -194,6 +196,8 @@ def build_scaled_nutrition(per_portion: dict, factor: Decimal) -> Dict[str, floa
 def diff_fields(current: dict, updated: dict) -> List[str]:
     diffs: List[str] = []
     for field in EXPECTED_FIELDS:
+        if field in OPTIONAL_FIELDS:
+            continue
         cur_val = decimal_value(current.get(field))
         new_val = decimal_value(updated.get(field))
         if current.get(field) is None:
@@ -212,6 +216,8 @@ def diff_fields(current: dict, updated: dict) -> List[str]:
 def zero_fields(nutrition: dict) -> List[str]:
     fields: List[str] = []
     for field in EXPECTED_FIELDS:
+        if field in OPTIONAL_FIELDS:
+            continue
         if decimal_value(nutrition.get(field)).is_zero():
             fields.append(field)
     return fields
@@ -298,6 +304,23 @@ def process_file(
                 file_changes.append(ItemChange(timestamp=timestamp, name=name, fields_changed=diffs))
                 if apply_changes:
                     item["nutrition"] = updated_nutrition
+                    # If alcohol present in the food bank, carry it over too.
+                    alcohol_value = per_portion.get("alcohol_g")
+                    if (alcohol_value is None or alcohol_value == 0) and fb_entry.get("derived"):
+                        alcohol_value = fb_entry["derived"].get("alcohol_g")
+                    if alcohol_value is not None:
+                        try:
+                            item.setdefault("nutrition", {})["alcohol_g"] = float(alcohol_value)
+                        except (TypeError, ValueError):
+                            pass
+                    alcohol_energy = per_portion.get("alcohol_energy_kcal")
+                    if (alcohol_energy is None or alcohol_energy == 0) and fb_entry.get("derived"):
+                        alcohol_energy = fb_entry["derived"].get("alcohol_energy_kcal")
+                    if alcohol_energy is not None:
+                        try:
+                            item.setdefault("nutrition", {})["alcohol_energy_kcal"] = float(alcohol_energy)
+                        except (TypeError, ValueError):
+                            pass
     if apply_changes and file_changes:
         if create_backup:
             backup_path = log_path.with_suffix(log_path.suffix + ".bak")

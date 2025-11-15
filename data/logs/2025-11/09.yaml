@@ -299,7 +299,7 @@ entries:
     quantity: 500
     unit: ml
     nutrition:
-      energy_kcal: 140
+      energy_kcal: 131.7
       protein_g: 0.1
       fat_g: 0.1
       sat_fat_g: 0
@@ -308,12 +308,12 @@ entries:
       trans_fat_g: 0
       cholesterol_mg: 0
       carbs_total_g: 32.7
-      polyols_g: 0.0
       carbs_available_g: 32.5
-      sugar_g: 18.0
+      sugar_g: 18
       fiber_total_g: 0.2
       fiber_soluble_g: 0.15
       fiber_insoluble_g: 0.05
+      polyols_g: 0
       sodium_mg: 250
       potassium_mg: 380
       calcium_mg: 10

@@ -85,7 +85,12 @@ EXPECTED_FIELDS: Sequence[str] = [
     "silicon_mg",
     "vanadium_ug",
     "nickel_ug",
+    # Alcohol (optional)
+    "alcohol_g",
+    "alcohol_energy_kcal",
 ]
+
+OPTIONAL_FIELDS = {"alcohol_g", "alcohol_energy_kcal"}
 
 MASS_UNITS = {
     "g",
@@ -248,6 +253,8 @@ def find_discrepancies(
                         )
                         continue
                     for field in EXPECTED_FIELDS:
+                        if field in OPTIONAL_FIELDS:
+                            continue
                         log_raw = nutrition.get(field)
                         log_val = decimal_value(log_raw)
                         bank_val = decimal_value(per_portion.get(field)) * factor
@@ -268,7 +275,8 @@ def find_discrepancies(
                     zero_fields = [
                         field
                         for field in EXPECTED_FIELDS
-                        if decimal_value(nutrition.get(field)).is_zero()
+                        if field not in OPTIONAL_FIELDS
+                        and decimal_value(nutrition.get(field)).is_zero()
                     ]
                     manual_rows.append(
                         ManualItem(
