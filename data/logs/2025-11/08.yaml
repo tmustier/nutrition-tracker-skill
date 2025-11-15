@@ -305,52 +305,52 @@ entries:
       sat_fat_g: 3.9
       mufa_g: 4.8
       pufa_g: 1.6
-      trans_fat_g: 0.1
-      cholesterol_mg: 31.0
+      trans_fat_g: 0.05
+      cholesterol_mg: 31
       carbs_total_g: 12.4
-      polyols_g: 0.0
-      carbs_available_g: 11.7
-      sugar_g: 0.6
-      fiber_total_g: 0.8
-      fiber_soluble_g: 0.2
+      carbs_available_g: 11.65
+      sugar_g: 0.55
+      fiber_total_g: 0.75
+      fiber_soluble_g: 0.25
       fiber_insoluble_g: 0.5
-      sodium_mg: 291.0
-      potassium_mg: 56.0
+      polyols_g: 0
+      sodium_mg: 291
+      potassium_mg: 56
       calcium_mg: 17.5
-      magnesium_mg: 6.0
-      phosphorus_mg: 49.0
-      chloride_mg: 448.0
-      sulfur_g: 0.0
+      magnesium_mg: 6
+      phosphorus_mg: 49
+      chloride_mg: 448
+      sulfur_g: 0.045
       iron_mg: 0.9
-      zinc_mg: 0.9
-      copper_mg: 0.1
-      manganese_mg: 0.1
+      zinc_mg: 0.95
+      copper_mg: 0.09
+      manganese_mg: 0.07
       selenium_ug: 7.1
-      iodine_ug: 6.0
+      iodine_ug: 6
       chromium_ug: 0.9
       molybdenum_ug: 2.1
-      vitamin_a_ug: 61.0
+      vitamin_a_ug: 61
       vitamin_d_ug: 0.2
       vitamin_e_mg: 0.9
-      vitamin_k_ug: 1.1
-      vitamin_b1_mg: 0.1
-      vitamin_b2_mg: 0.0
+      vitamin_k_ug: 1.05
+      vitamin_b1_mg: 0.055
+      vitamin_b2_mg: 0.045
       vitamin_b3_mg: 0.9
-      vitamin_b5_mg: 0.2
-      vitamin_b6_mg: 0.0
-      vitamin_b7_ug: 1.1
-      vitamin_b9_ug: 11.0
+      vitamin_b5_mg: 0.155
+      vitamin_b6_mg: 0.04
+      vitamin_b7_ug: 1.15
+      vitamin_b9_ug: 11
       vitamin_b12_ug: 0.6
-      choline_mg: 19.0
+      choline_mg: 19
       vitamin_c_mg: 0.4
-      omega3_epa_mg: 4.0
-      omega3_dha_mg: 2.0
-      omega3_ala_g: 0.0
-      omega6_la_g: 1.1
-      boron_mg: 0.0
-      silicon_mg: 0.0
-      vanadium_ug: 0.0
-      nickel_ug: 0.0
+      omega3_epa_mg: 4
+      omega3_dha_mg: 2
+      omega3_ala_g: 0.025
+      omega6_la_g: 1.05
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
   - name: Gilda
     food_bank_id: gilda_decimo_v1
     quantity: 2
@@ -360,41 +360,41 @@ entries:
       protein_g: 3.8
       fat_g: 3.2
       sat_fat_g: 0.6
-      mufa_g: 2.0
+      mufa_g: 2
       pufa_g: 0.6
-      trans_fat_g: 0.0
+      trans_fat_g: 0
       cholesterol_mg: 16
       carbs_total_g: 1.8
-      polyols_g: 0.0
       carbs_available_g: 1.4
       sugar_g: 0.4
       fiber_total_g: 0.4
       fiber_soluble_g: 0.2
       fiber_insoluble_g: 0.2
+      polyols_g: 0
       sodium_mg: 1368
       potassium_mg: 36
       calcium_mg: 38
       magnesium_mg: 4.2
       phosphorus_mg: 34
       chloride_mg: 2106
-      sulfur_g: 0.0
-      iron_mg: 0.6
-      zinc_mg: 0.3
-      copper_mg: 0.0
-      manganese_mg: 0.0
+      sulfur_g: 0.038
+      iron_mg: 0.62
+      zinc_mg: 0.26
+      copper_mg: 0.04
+      manganese_mg: 0.02
       selenium_ug: 5.8
       iodine_ug: 6.4
       chromium_ug: 0.2
       molybdenum_ug: 0.4
       vitamin_a_ug: 6.2
       vitamin_d_ug: 0.8
-      vitamin_e_mg: 0.3
+      vitamin_e_mg: 0.26
       vitamin_k_ug: 1.8
-      vitamin_b1_mg: 0.0
-      vitamin_b2_mg: 0.0
+      vitamin_b1_mg: 0.02
+      vitamin_b2_mg: 0.04
       vitamin_b3_mg: 2.4
       vitamin_b5_mg: 0.1
-      vitamin_b6_mg: 0.0
+      vitamin_b6_mg: 0.02
       vitamin_b7_ug: 0.4
       vitamin_b9_ug: 1.2
       vitamin_b12_ug: 0.1
@@ -402,8 +402,8 @@ entries:
       vitamin_c_mg: 1.2
       omega3_epa_mg: 146
       omega3_dha_mg: 178
-      omega3_ala_g: 0.0
-      omega6_la_g: 0.2
+      omega3_ala_g: 0.02
+      omega6_la_g: 0.16
       boron_mg: 0
       silicon_mg: 0
       vanadium_ug: 0
@@ -413,58 +413,58 @@ entries:
     quantity: 0.5
     unit: portion
     nutrition:
-      energy_kcal: 50
-      protein_g: 4.5
-      fat_g: 2.0
-      sat_fat_g: 0.3
+      energy_kcal: 50.5
+      protein_g: 4.45
+      fat_g: 2
+      sat_fat_g: 0.35
       mufa_g: 0.9
       pufa_g: 0.7
-      trans_fat_g: 0.0
+      trans_fat_g: 0
       cholesterol_mg: 7.5
-      carbs_total_g: 4.0
-      polyols_g: 0.0
+      carbs_total_g: 3.95
       carbs_available_g: 3.6
       sugar_g: 0.2
-      fiber_total_g: 0.3
+      fiber_total_g: 0.35
       fiber_soluble_g: 0.1
-      fiber_insoluble_g: 0.2
-      sodium_mg: 84.0
-      potassium_mg: 82.0
-      calcium_mg: 9.0
+      fiber_insoluble_g: 0.25
+      polyols_g: 0
+      sodium_mg: 84
+      potassium_mg: 82
+      calcium_mg: 9
       magnesium_mg: 6.5
       phosphorus_mg: 51.5
       chloride_mg: 129.5
-      sulfur_g: 0.0
-      iron_mg: 0.4
-      zinc_mg: 0.2
-      copper_mg: 0.0
-      manganese_mg: 0.0
+      sulfur_g: 0.045
+      iron_mg: 0.36
+      zinc_mg: 0.21
+      copper_mg: 0.04
+      manganese_mg: 0.045
       selenium_ug: 6.6
-      iodine_ug: 1.1
-      chromium_ug: 0.5
+      iodine_ug: 1.05
+      chromium_ug: 0.45
       molybdenum_ug: 0.9
       vitamin_a_ug: 1.4
       vitamin_d_ug: 0.8
-      vitamin_e_mg: 0.2
+      vitamin_e_mg: 0.155
       vitamin_k_ug: 0.2
-      vitamin_b1_mg: 0.0
-      vitamin_b2_mg: 0.0
+      vitamin_b1_mg: 0.03
+      vitamin_b2_mg: 0.015
       vitamin_b3_mg: 1.5
-      vitamin_b5_mg: 0.1
-      vitamin_b6_mg: 0.1
-      vitamin_b7_ug: 0.1
-      vitamin_b9_ug: 0.8
+      vitamin_b5_mg: 0.055
+      vitamin_b6_mg: 0.075
+      vitamin_b7_ug: 0.15
+      vitamin_b9_ug: 0.85
       vitamin_b12_ug: 0.3
-      choline_mg: 7.0
-      vitamin_c_mg: 1.1
-      omega3_epa_mg: 4.0
-      omega3_dha_mg: 13.0
-      omega3_ala_g: 0.0
-      omega6_la_g: 0.6
-      boron_mg: 0.0
-      silicon_mg: 0.0
-      vanadium_ug: 0.0
-      nickel_ug: 0.0
+      choline_mg: 7
+      vitamin_c_mg: 1.15
+      omega3_epa_mg: 4
+      omega3_dha_mg: 13
+      omega3_ala_g: 0.01
+      omega6_la_g: 0.55
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
   - name: Taco — Suckling Pig Carnitas
     food_bank_id: taco_suckling_pig_carnitas_decimo_v1
     quantity: 1
@@ -479,23 +479,23 @@ entries:
       trans_fat_g: 0.1
       cholesterol_mg: 58
       carbs_total_g: 6.9
-      polyols_g: 0.0
-      carbs_available_g: 6.0
+      carbs_available_g: 6
       sugar_g: 0.8
       fiber_total_g: 0.9
       fiber_soluble_g: 0.2
       fiber_insoluble_g: 0.7
+      polyols_g: 0
       sodium_mg: 485
       potassium_mg: 298
       calcium_mg: 28
       magnesium_mg: 22
       phosphorus_mg: 184
       chloride_mg: 747
-      sulfur_g: 0.2
+      sulfur_g: 0.19
       iron_mg: 1.3
       zinc_mg: 2.8
-      copper_mg: 0.1
-      manganese_mg: 0.1
+      copper_mg: 0.12
+      manganese_mg: 0.15
       selenium_ug: 28.4
       iodine_ug: 2
       chromium_ug: 1
@@ -504,11 +504,11 @@ entries:
       vitamin_d_ug: 0.8
       vitamin_e_mg: 0.4
       vitamin_k_ug: 2.1
-      vitamin_b1_mg: 0.6
-      vitamin_b2_mg: 0.2
+      vitamin_b1_mg: 0.58
+      vitamin_b2_mg: 0.21
       vitamin_b3_mg: 5.6
-      vitamin_b5_mg: 0.8
-      vitamin_b6_mg: 0.4
+      vitamin_b5_mg: 0.82
+      vitamin_b6_mg: 0.38
       vitamin_b7_ug: 3.2
       vitamin_b9_ug: 12
       vitamin_b12_ug: 0.7
@@ -516,7 +516,7 @@ entries:
       vitamin_c_mg: 3.2
       omega3_epa_mg: 4
       omega3_dha_mg: 1
-      omega3_ala_g: 0.2
+      omega3_ala_g: 0.21
       omega6_la_g: 2.4
       boron_mg: 0
       silicon_mg: 0
@@ -533,26 +533,26 @@ entries:
       sat_fat_g: 2.1
       mufa_g: 3.8
       pufa_g: 2.2
-      trans_fat_g: 0.1
+      trans_fat_g: 0.05
       cholesterol_mg: 38
       carbs_total_g: 11.3
-      polyols_g: 0.0
       carbs_available_g: 9.4
       sugar_g: 1.4
       fiber_total_g: 1.9
       fiber_soluble_g: 0.4
       fiber_insoluble_g: 1.5
+      polyols_g: 0
       sodium_mg: 368
       potassium_mg: 284
       calcium_mg: 48
       magnesium_mg: 28
       phosphorus_mg: 168
       chloride_mg: 567
-      sulfur_g: 0.1
+      sulfur_g: 0.12
       iron_mg: 0.7
       zinc_mg: 0.6
-      copper_mg: 0.1
-      manganese_mg: 0.2
+      copper_mg: 0.08
+      manganese_mg: 0.18
       selenium_ug: 26.8
       iodine_ug: 92
       chromium_ug: 1
@@ -561,11 +561,11 @@ entries:
       vitamin_d_ug: 0.7
       vitamin_e_mg: 1.2
       vitamin_k_ug: 12.4
-      vitamin_b1_mg: 0.1
-      vitamin_b2_mg: 0.1
+      vitamin_b1_mg: 0.08
+      vitamin_b2_mg: 0.09
       vitamin_b3_mg: 2.3
-      vitamin_b5_mg: 0.3
-      vitamin_b6_mg: 0.2
+      vitamin_b5_mg: 0.28
+      vitamin_b6_mg: 0.18
       vitamin_b7_ug: 2.8
       vitamin_b9_ug: 18
       vitamin_b12_ug: 0.9
@@ -573,7 +573,7 @@ entries:
       vitamin_c_mg: 8.4
       omega3_epa_mg: 48
       omega3_dha_mg: 98
-      omega3_ala_g: 0.2
+      omega3_ala_g: 0.18
       omega6_la_g: 1.8
       boron_mg: 0
       silicon_mg: 0
@@ -584,167 +584,167 @@ entries:
     quantity: 0.667
     unit: portion
     nutrition:
-      energy_kcal: 349
-      protein_g: 29.3
-      fat_g: 24.0
-      sat_fat_g: 6.1
-      mufa_g: 12.3
-      pufa_g: 4.5
-      trans_fat_g: 0.1
-      cholesterol_mg: 112.1
-      carbs_total_g: 12.1
-      polyols_g: 0.0
-      carbs_available_g: 8.0
-      sugar_g: 6.5
-      fiber_total_g: 4.1
-      fiber_soluble_g: 1.2
-      fiber_insoluble_g: 2.9
-      sodium_mg: 285.5
-      potassium_mg: 478.9
-      calcium_mg: 82.7
-      magnesium_mg: 65.4
-      phosphorus_mg: 324.2
-      chloride_mg: 439.6
-      sulfur_g: 0.3
-      iron_mg: 4.5
-      zinc_mg: 2.8
-      copper_mg: 0.5
-      manganese_mg: 0.6
-      selenium_ug: 28.4
-      iodine_ug: 2.7
-      chromium_ug: 1.3
-      molybdenum_ug: 2.0
-      vitamin_a_ug: 25.3
-      vitamin_d_ug: 0.8
-      vitamin_e_mg: 5.2
-      vitamin_k_ug: 3.6
-      vitamin_b1_mg: 0.3
-      vitamin_b2_mg: 0.4
-      vitamin_b3_mg: 5.6
-      vitamin_b5_mg: 1.5
-      vitamin_b6_mg: 0.4
-      vitamin_b7_ug: 5.6
-      vitamin_b9_ug: 28.0
-      vitamin_b12_ug: 1.2
-      choline_mg: 85.4
-      vitamin_c_mg: 1.9
-      omega3_epa_mg: 5.3
-      omega3_dha_mg: 8.0
-      omega3_ala_g: 0.0
-      omega6_la_g: 4.1
-      boron_mg: 0.0
-      silicon_mg: 0.0
-      vanadium_ug: 0.0
-      nickel_ug: 0.0
+      energy_kcal: 348.841
+      protein_g: 29.348
+      fat_g: 24.012
+      sat_fat_g: 6.1364
+      mufa_g: 12.2728
+      pufa_g: 4.5356
+      trans_fat_g: 0.0667
+      cholesterol_mg: 112.056
+      carbs_total_g: 12.1394
+      carbs_available_g: 8.004
+      sugar_g: 6.5366
+      fiber_total_g: 4.1354
+      fiber_soluble_g: 1.2006
+      fiber_insoluble_g: 2.9348
+      polyols_g: 0
+      sodium_mg: 285.476
+      potassium_mg: 478.906
+      calcium_mg: 82.708
+      magnesium_mg: 65.366
+      phosphorus_mg: 324.162
+      chloride_mg: 439.553
+      sulfur_g: 0.2935
+      iron_mg: 4.5356
+      zinc_mg: 2.8014
+      copper_mg: 0.4536
+      manganese_mg: 0.6136
+      selenium_ug: 28.4142
+      iodine_ug: 2.668
+      chromium_ug: 1.334
+      molybdenum_ug: 2.001
+      vitamin_a_ug: 25.346
+      vitamin_d_ug: 0.8004
+      vitamin_e_mg: 5.2026
+      vitamin_k_ug: 3.6018
+      vitamin_b1_mg: 0.2801
+      vitamin_b2_mg: 0.3735
+      vitamin_b3_mg: 5.6028
+      vitamin_b5_mg: 1.4541
+      vitamin_b6_mg: 0.3869
+      vitamin_b7_ug: 5.6028
+      vitamin_b9_ug: 28.014
+      vitamin_b12_ug: 1.2006
+      choline_mg: 85.376
+      vitamin_c_mg: 1.8676
+      omega3_epa_mg: 5.336
+      omega3_dha_mg: 8.004
+      omega3_ala_g: 0.0267
+      omega6_la_g: 4.1354
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
   - name: Grilled Peppers with Herb Butter
     food_bank_id: grilled_peppers_herb_butter_decimo_v1
     quantity: 0.667
     unit: portion
     nutrition:
-      energy_kcal: 310
-      protein_g: 3.3
-      fat_g: 26.7
-      sat_fat_g: 16.8
-      mufa_g: 7.7
-      pufa_g: 1.2
-      trans_fat_g: 0.8
-      cholesterol_mg: 81.4
-      carbs_total_g: 18.9
-      polyols_g: 0.0
-      carbs_available_g: 16.7
-      sugar_g: 12.4
-      fiber_total_g: 2.3
-      fiber_soluble_g: 0.5
-      fiber_insoluble_g: 1.7
-      sodium_mg: 341.5
-      potassium_mg: 349.5
-      calcium_mg: 28.0
-      magnesium_mg: 21.3
-      phosphorus_mg: 52.0
-      chloride_mg: 525.6
-      sulfur_g: 0.0
-      iron_mg: 0.9
-      zinc_mg: 0.5
-      copper_mg: 0.1
-      manganese_mg: 0.2
-      selenium_ug: 1.6
-      iodine_ug: 5.3
-      chromium_ug: 1.3
-      molybdenum_ug: 1.3
-      vitamin_a_ug: 378.9
-      vitamin_d_ug: 0.5
-      vitamin_e_mg: 3.9
-      vitamin_k_ug: 9.5
-      vitamin_b1_mg: 0.1
-      vitamin_b2_mg: 0.1
-      vitamin_b3_mg: 1.2
-      vitamin_b5_mg: 0.4
-      vitamin_b6_mg: 0.4
-      vitamin_b7_ug: 2.1
-      vitamin_b9_ug: 61.4
-      vitamin_b12_ug: 0.1
-      choline_mg: 16.0
-      vitamin_c_mg: 189.4
-      omega3_epa_mg: 1.3
-      omega3_dha_mg: 0.7
-      omega3_ala_g: 0.2
-      omega6_la_g: 0.9
-      boron_mg: 0.0
-      silicon_mg: 0.0
-      vanadium_ug: 0.0
-      nickel_ug: 0.0
+      energy_kcal: 310.155
+      protein_g: 3.335
+      fat_g: 26.68
+      sat_fat_g: 16.8084
+      mufa_g: 7.7372
+      pufa_g: 1.2006
+      trans_fat_g: 0.8004
+      cholesterol_mg: 81.374
+      carbs_total_g: 18.9428
+      carbs_available_g: 16.675
+      sugar_g: 12.4062
+      fiber_total_g: 2.2678
+      fiber_soluble_g: 0.5336
+      fiber_insoluble_g: 1.7342
+      polyols_g: 0
+      sodium_mg: 341.504
+      potassium_mg: 349.508
+      calcium_mg: 28.014
+      magnesium_mg: 21.344
+      phosphorus_mg: 52.026
+      chloride_mg: 525.596
+      sulfur_g: 0.0334
+      iron_mg: 0.9338
+      zinc_mg: 0.5336
+      copper_mg: 0.1201
+      manganese_mg: 0.1868
+      selenium_ug: 1.6008
+      iodine_ug: 5.336
+      chromium_ug: 1.334
+      molybdenum_ug: 1.334
+      vitamin_a_ug: 378.856
+      vitamin_d_ug: 0.5336
+      vitamin_e_mg: 3.8686
+      vitamin_k_ug: 9.4714
+      vitamin_b1_mg: 0.0934
+      vitamin_b2_mg: 0.1201
+      vitamin_b3_mg: 1.2006
+      vitamin_b5_mg: 0.4135
+      vitamin_b6_mg: 0.3869
+      vitamin_b7_ug: 2.1344
+      vitamin_b9_ug: 61.364
+      vitamin_b12_ug: 0.0667
+      choline_mg: 16.008
+      vitamin_c_mg: 189.428
+      omega3_epa_mg: 1.334
+      omega3_dha_mg: 0.667
+      omega3_ala_g: 0.2134
+      omega6_la_g: 0.8671
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
   - name: Burnt Leek with Romesco
     food_bank_id: burnt_leek_romesco_decimo_v1
     quantity: 1
     unit: portion
     nutrition:
       energy_kcal: 498
-      protein_g: 11.0
-      fat_g: 35.0
+      protein_g: 11
+      fat_g: 35
       sat_fat_g: 3.8
       mufa_g: 23.2
       pufa_g: 6.8
-      trans_fat_g: 0.0
+      trans_fat_g: 0.02
       cholesterol_mg: 0
-      carbs_total_g: 42.0
-      polyols_g: 0.0
-      carbs_available_g: 28.0
+      carbs_total_g: 42
+      carbs_available_g: 28
       sugar_g: 8.4
-      fiber_total_g: 14.0
+      fiber_total_g: 14
       fiber_soluble_g: 4.2
       fiber_insoluble_g: 9.8
+      polyols_g: 0
       sodium_mg: 368
       potassium_mg: 684
       calcium_mg: 158
       magnesium_mg: 124
       phosphorus_mg: 268
       chloride_mg: 567
-      sulfur_g: 0.1
+      sulfur_g: 0.11
       iron_mg: 3.8
       zinc_mg: 1.8
-      copper_mg: 0.8
-      manganese_mg: 1.2
+      copper_mg: 0.82
+      manganese_mg: 1.24
       selenium_ug: 4.8
       iodine_ug: 3
       chromium_ug: 3
       molybdenum_ug: 4
-      vitamin_a_ug: 186.0
-      vitamin_d_ug: 0.0
+      vitamin_a_ug: 186
+      vitamin_d_ug: 0
       vitamin_e_mg: 9.8
-      vitamin_k_ug: 284.0
-      vitamin_b1_mg: 0.3
-      vitamin_b2_mg: 0.3
+      vitamin_k_ug: 284
+      vitamin_b1_mg: 0.28
+      vitamin_b2_mg: 0.32
       vitamin_b3_mg: 2.4
-      vitamin_b5_mg: 0.9
-      vitamin_b6_mg: 0.6
+      vitamin_b5_mg: 0.86
+      vitamin_b6_mg: 0.62
       vitamin_b7_ug: 6.8
-      vitamin_b9_ug: 268.0
-      vitamin_b12_ug: 0.0
+      vitamin_b9_ug: 268
+      vitamin_b12_ug: 0
       choline_mg: 34
-      vitamin_c_mg: 48.0
+      vitamin_c_mg: 48
       omega3_epa_mg: 0
       omega3_dha_mg: 0
-      omega3_ala_g: 0.4
+      omega3_ala_g: 0.42
       omega6_la_g: 6.1
       boron_mg: 0
       silicon_mg: 0
@@ -755,172 +755,172 @@ entries:
     quantity: 0.85
     unit: portion
     nutrition:
-      energy_kcal: 462
+      energy_kcal: 462.4
       protein_g: 5.1
       fat_g: 20.4
-      sat_fat_g: 2.7
-      mufa_g: 11.7
-      pufa_g: 5.4
-      trans_fat_g: 0.1
+      sat_fat_g: 2.72
+      mufa_g: 11.73
+      pufa_g: 5.44
+      trans_fat_g: 0.068
       cholesterol_mg: 11.9
-      carbs_total_g: 66.8
-      polyols_g: 0.0
-      carbs_available_g: 62.0
-      sugar_g: 3.2
-      fiber_total_g: 4.8
-      fiber_soluble_g: 1.0
-      fiber_insoluble_g: 3.7
+      carbs_total_g: 66.81
+      carbs_available_g: 62.05
+      sugar_g: 3.23
+      fiber_total_g: 4.76
+      fiber_soluble_g: 1.02
+      fiber_insoluble_g: 3.74
+      polyols_g: 0
       sodium_mg: 644.3
       potassium_mg: 1060.8
       calcium_mg: 35.7
       magnesium_mg: 57.8
       phosphorus_mg: 156.4
-      chloride_mg: 991.9
-      sulfur_g: 0.1
-      iron_mg: 1.5
-      zinc_mg: 0.8
-      copper_mg: 0.2
-      manganese_mg: 0.3
-      selenium_ug: 2.7
+      chloride_mg: 991.95
+      sulfur_g: 0.051
+      iron_mg: 1.53
+      zinc_mg: 0.765
+      copper_mg: 0.238
+      manganese_mg: 0.323
+      selenium_ug: 2.72
       iodine_ug: 3.4
       chromium_ug: 3.4
-      molybdenum_ug: 4.2
+      molybdenum_ug: 4.25
       vitamin_a_ug: 23.8
-      vitamin_d_ug: 0.2
-      vitamin_e_mg: 3.6
-      vitamin_k_ug: 7.1
-      vitamin_b1_mg: 0.2
-      vitamin_b2_mg: 0.1
-      vitamin_b3_mg: 2.7
-      vitamin_b5_mg: 0.7
-      vitamin_b6_mg: 0.6
-      vitamin_b7_ug: 2.4
+      vitamin_d_ug: 0.17
+      vitamin_e_mg: 3.57
+      vitamin_k_ug: 7.14
+      vitamin_b1_mg: 0.204
+      vitamin_b2_mg: 0.102
+      vitamin_b3_mg: 2.72
+      vitamin_b5_mg: 0.697
+      vitamin_b6_mg: 0.578
+      vitamin_b7_ug: 2.38
       vitamin_b9_ug: 40.8
-      vitamin_b12_ug: 0.0
+      vitamin_b12_ug: 0.0425
       choline_mg: 27.2
-      vitamin_c_mg: 27.9
-      omega3_epa_mg: 0.0
-      omega3_dha_mg: 0.0
-      omega3_ala_g: 0.7
-      omega6_la_g: 4.4
-      boron_mg: 0.0
-      silicon_mg: 0.0
-      vanadium_ug: 0.0
-      nickel_ug: 0.0
+      vitamin_c_mg: 27.88
+      omega3_epa_mg: 0
+      omega3_dha_mg: 0
+      omega3_ala_g: 0.714
+      omega6_la_g: 4.42
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
   - name: Masa Ice Cream
     food_bank_id: masa_ice_cream_decimo_v1
     quantity: 0.5
     unit: portion
     nutrition:
       energy_kcal: 67
-      protein_g: 1.1
+      protein_g: 1.15
       fat_g: 3.4
       sat_fat_g: 2.1
       mufa_g: 0.9
-      pufa_g: 0.1
+      pufa_g: 0.15
       trans_fat_g: 0.1
-      cholesterol_mg: 14.0
-      carbs_total_g: 8.4
-      polyols_g: 0.0
-      carbs_available_g: 8.2
+      cholesterol_mg: 14
+      carbs_total_g: 8.45
+      carbs_available_g: 8.25
       sugar_g: 6.9
       fiber_total_g: 0.2
-      fiber_soluble_g: 0.1
-      fiber_insoluble_g: 0.1
-      sodium_mg: 29.0
-      potassium_mg: 64.0
-      calcium_mg: 49.0
-      magnesium_mg: 6.0
-      phosphorus_mg: 41.0
+      fiber_soluble_g: 0.05
+      fiber_insoluble_g: 0.15
+      polyols_g: 0
+      sodium_mg: 29
+      potassium_mg: 64
+      calcium_mg: 49
+      magnesium_mg: 6
+      phosphorus_mg: 41
       chloride_mg: 44.5
-      sulfur_g: 0.0
+      sulfur_g: 0.01
       iron_mg: 0.4
       zinc_mg: 0.2
-      copper_mg: 0.0
-      manganese_mg: 0.0
+      copper_mg: 0.01
+      manganese_mg: 0.02
       selenium_ug: 0.9
-      iodine_ug: 6.0
+      iodine_ug: 6
       chromium_ug: 0.5
       molybdenum_ug: 0.5
-      vitamin_a_ug: 34.0
-      vitamin_d_ug: 0.1
+      vitamin_a_ug: 34
+      vitamin_d_ug: 0.15
       vitamin_e_mg: 0.1
       vitamin_k_ug: 0.2
-      vitamin_b1_mg: 0.1
-      vitamin_b2_mg: 0.1
-      vitamin_b3_mg: 0.5
-      vitamin_b5_mg: 0.2
-      vitamin_b6_mg: 0.0
+      vitamin_b1_mg: 0.09
+      vitamin_b2_mg: 0.08
+      vitamin_b3_mg: 0.45
+      vitamin_b5_mg: 0.16
+      vitamin_b6_mg: 0.02
       vitamin_b7_ug: 1.2
-      vitamin_b9_ug: 9.0
-      vitamin_b12_ug: 0.1
-      choline_mg: 9.0
+      vitamin_b9_ug: 9
+      vitamin_b12_ug: 0.15
+      choline_mg: 9
       vitamin_c_mg: 0.2
       omega3_epa_mg: 0.5
       omega3_dha_mg: 0.5
-      omega3_ala_g: 0.0
+      omega3_ala_g: 0.04
       omega6_la_g: 0.1
-      boron_mg: 0.0
-      silicon_mg: 0.0
-      vanadium_ug: 0.0
-      nickel_ug: 0.0
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
   - name: Mexican Vanilla Ice Cream
     food_bank_id: mexican_vanilla_ice_cream_decimo_v1
     quantity: 0.667
     unit: portion
     nutrition:
-      energy_kcal: 93
-      protein_g: 1.6
-      fat_g: 4.9
-      sat_fat_g: 3.1
-      mufa_g: 1.3
-      pufa_g: 0.2
-      trans_fat_g: 0.1
-      cholesterol_mg: 21.3
-      carbs_total_g: 10.8
-      polyols_g: 0.0
-      carbs_available_g: 10.6
-      sugar_g: 9.5
-      fiber_total_g: 0.2
-      fiber_soluble_g: 0.1
-      fiber_insoluble_g: 0.1
-      sodium_mg: 36.0
-      potassium_mg: 90.7
-      calcium_mg: 68.0
-      magnesium_mg: 7.3
-      phosphorus_mg: 57.4
-      chloride_mg: 55.4
-      sulfur_g: 0.0
-      iron_mg: 0.1
-      zinc_mg: 0.3
-      copper_mg: 0.0
-      manganese_mg: 0.0
-      selenium_ug: 1.4
-      iodine_ug: 9.3
-      chromium_ug: 0.7
-      molybdenum_ug: 0.7
-      vitamin_a_ug: 56.0
-      vitamin_d_ug: 0.3
-      vitamin_e_mg: 0.2
-      vitamin_k_ug: 0.3
-      vitamin_b1_mg: 0.0
-      vitamin_b2_mg: 0.1
-      vitamin_b3_mg: 0.1
-      vitamin_b5_mg: 0.2
-      vitamin_b6_mg: 0.0
-      vitamin_b7_ug: 1.7
-      vitamin_b9_ug: 2.7
-      vitamin_b12_ug: 0.2
-      choline_mg: 14.7
-      vitamin_c_mg: 0.3
-      omega3_epa_mg: 0.7
-      omega3_dha_mg: 0.7
-      omega3_ala_g: 0.1
-      omega6_la_g: 0.1
-      boron_mg: 0.0
-      silicon_mg: 0.0
-      vanadium_ug: 0.0
-      nickel_ug: 0.0
+      energy_kcal: 93.38
+      protein_g: 1.6008
+      fat_g: 4.9358
+      sat_fat_g: 3.0682
+      mufa_g: 1.334
+      pufa_g: 0.2001
+      trans_fat_g: 0.1334
+      cholesterol_mg: 21.344
+      carbs_total_g: 10.8054
+      carbs_available_g: 10.6053
+      sugar_g: 9.4714
+      fiber_total_g: 0.2001
+      fiber_soluble_g: 0.0667
+      fiber_insoluble_g: 0.1334
+      polyols_g: 0
+      sodium_mg: 36.018
+      potassium_mg: 90.712
+      calcium_mg: 68.034
+      magnesium_mg: 7.337
+      phosphorus_mg: 57.362
+      chloride_mg: 55.361
+      sulfur_g: 0.0133
+      iron_mg: 0.1334
+      zinc_mg: 0.2668
+      copper_mg: 0.0133
+      manganese_mg: 0.0133
+      selenium_ug: 1.4007
+      iodine_ug: 9.338
+      chromium_ug: 0.667
+      molybdenum_ug: 0.667
+      vitamin_a_ug: 56.028
+      vitamin_d_ug: 0.2668
+      vitamin_e_mg: 0.2001
+      vitamin_k_ug: 0.3335
+      vitamin_b1_mg: 0.02
+      vitamin_b2_mg: 0.1201
+      vitamin_b3_mg: 0.0667
+      vitamin_b5_mg: 0.2268
+      vitamin_b6_mg: 0.0267
+      vitamin_b7_ug: 1.7342
+      vitamin_b9_ug: 2.668
+      vitamin_b12_ug: 0.2001
+      choline_mg: 14.674
+      vitamin_c_mg: 0.3335
+      omega3_epa_mg: 0.667
+      omega3_dha_mg: 0.667
+      omega3_ala_g: 0.06
+      omega6_la_g: 0.1334
+      boron_mg: 0
+      silicon_mg: 0
+      vanadium_ug: 0
+      nickel_ug: 0
   notes: Dinner at Decimo London (Spanish-Mexican tapas)
 - timestamp: '2025-11-08T23:00:00+00:00'
   items:
@@ -929,58 +929,58 @@ entries:
     quantity: 15
     unit: g
     nutrition:
-      energy_kcal: 84.46
-      protein_g: 1.24
+      energy_kcal: 84.4552
+      protein_g: 1.2414
       fat_g: 5.4
-      sat_fat_g: 2.86
-      mufa_g: 1.6
-      pufa_g: 0.89
-      trans_fat_g: 0.052
-      cholesterol_mg: 3.41
-      carbs_total_g: 8.06
+      sat_fat_g: 2.8552
+      mufa_g: 1.6034
+      pufa_g: 0.8897
+      trans_fat_g: 0.0517
+      cholesterol_mg: 3.4138
+      carbs_total_g: 8.0586
       carbs_available_g: 7.5
       sugar_g: 6.9
-      fiber_total_g: 0.56
-      fiber_soluble_g: 0.23
-      fiber_insoluble_g: 0.33
-      sodium_mg: 18.31
-      potassium_mg: 52.03
-      calcium_mg: 19.03
-      magnesium_mg: 7.86
-      phosphorus_mg: 27.62
-      chloride_mg: 28.24
-      sulfur_g: 0.012
-      iron_mg: 0.31
-      zinc_mg: 0.26
-      copper_mg: 0.062
-      manganese_mg: 0.064
+      fiber_total_g: 0.5586
+      fiber_soluble_g: 0.2276
+      fiber_insoluble_g: 0.331
+      polyols_g: 0
+      sodium_mg: 18.3103
+      potassium_mg: 52.0345
+      calcium_mg: 19.0345
+      magnesium_mg: 7.8621
+      phosphorus_mg: 27.6207
+      chloride_mg: 28.2414
+      sulfur_g: 0.0124
+      iron_mg: 0.3052
+      zinc_mg: 0.2607
+      copper_mg: 0.0621
+      manganese_mg: 0.0641
       selenium_ug: 0.6
-      iodine_ug: 1.24
-      chromium_ug: 0.52
-      molybdenum_ug: 0.83
-      vitamin_a_ug: 5.38
-      vitamin_d_ug: 0.083
-      vitamin_e_mg: 0.49
-      vitamin_k_ug: 0.52
-      vitamin_b1_mg: 0.027
+      iodine_ug: 1.2414
+      chromium_ug: 0.5172
+      molybdenum_ug: 0.8276
+      vitamin_a_ug: 5.3793
+      vitamin_d_ug: 0.0828
+      vitamin_e_mg: 0.4914
+      vitamin_k_ug: 0.5172
+      vitamin_b1_mg: 0.0269
       vitamin_b2_mg: 0.031
-      vitamin_b3_mg: 0.081
-      vitamin_b5_mg: 0.056
-      vitamin_b6_mg: 0.035
-      vitamin_b7_ug: 0.52
-      vitamin_b9_ug: 1.97
-      vitamin_b12_ug: 0.065
-      choline_mg: 2.59
-      vitamin_c_mg: 0.052
+      vitamin_b3_mg: 0.0807
+      vitamin_b5_mg: 0.0559
+      vitamin_b6_mg: 0.0352
+      vitamin_b7_ug: 0.5172
+      vitamin_b9_ug: 1.9655
+      vitamin_b12_ug: 0.0652
+      choline_mg: 2.5862
+      vitamin_c_mg: 0.0517
       omega3_epa_mg: 0
       omega3_dha_mg: 0
-      omega3_ala_g: 0.016
-      omega6_la_g: 0.83
+      omega3_ala_g: 0.0155
+      omega6_la_g: 0.8276
       boron_mg: 0
       silicon_mg: 0
       vanadium_ug: 0
       nickel_ug: 0
-      polyols_g: 0
   - name: Amisa buckwheat crispbread
     food_bank_id: amisa_buckwheat_crispbread_5g_v1
     quantity: 1
