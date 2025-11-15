@@ -11,6 +11,7 @@ import sys
 import re
 from pathlib import Path
 from datetime import datetime, timezone
+from venue_categorization import categorize_venue as heuristic_categorize_venue, slugify
 
 try:
     import yaml
@@ -106,15 +107,6 @@ change_log: []
 """
 
 
-def slugify(text):
-    """Convert text to a filesystem-safe slug."""
-    slug = text.lower()
-    slug = re.sub(r'[^\w\s-]', '', slug)
-    slug = re.sub(r'[-\s]+', '-', slug)
-    slug = slug.strip('-')
-    return slug
-
-
 def load_venue_mappings():
     """Load venue categorization config from YAML file.
 
@@ -178,99 +170,8 @@ def categorize_venue(venue_display_name, override_category_type=None, override_f
                     if pattern.lower() in venue_lower:
                         return (category_type, venue_config['folder'])
 
-    # Tier 3: Heuristic fallback
-    venue_lower = venue_display_name.lower()
-
-    # Packaged product indicators
-    if '(packaged product)' in venue_lower or '(pack/ingredient)' in venue_lower:
-        return ('packaged', slugify(venue_display_name))
-
-    # Generic category keywords
-    if any(kw in venue_lower for kw in ['ingredient', 'generic', 'homemade', 'bakery', 'grocery', 'supplement']):
-        # Try to map to specific generic folder
-        if 'bakery' in venue_lower:
-            return ('generic', 'bakery')
-        elif 'ingredient' in venue_lower or venue_lower == 'generic':
-            return ('generic', 'ingredients')
-        elif 'homemade' in venue_lower or 'home' in venue_lower:
-            return ('generic', 'home-cooked')
-        elif 'grocery' in venue_lower:
-            return ('generic', 'grocery')
-        elif 'supplement' in venue_lower:
-            return ('generic', 'supplements')
-        elif 'pub' in venue_lower:
-            return ('generic', 'pub-bar')
-        elif 'fresh' in venue_lower or 'fruit' in venue_lower or 'produce' in venue_lower:
-            return ('generic', 'fresh-produce')
-        else:
-            return ('generic', 'ingredients')
-
-    # Shop/store indicators → generic category (check BEFORE location keywords)
-    # This prevents "Whole Foods Market" from being classified as venue
-    shop_patterns = [
-        'shop', 'store', 'market', 'supermarket', 'mart', 'grocer', 'deli',
-        'boutique', 'emporium', 'trading', 'retail', 'wholesale'
-    ]
-    if any(pattern in venue_lower for pattern in shop_patterns):
-        return ('generic', slugify(venue_display_name))
-
-    # Restaurant/venue indicators → venues category
-    restaurant_patterns = [
-        'restaurant', 'cafe', 'coffee', 'bistro', 'grill', 'kitchen', 'bar', 'pub', 'tavern',
-        'trattoria', 'brasserie', 'canteen', 'eatery', 'diner', 'pizzeria', 'steakhouse',
-        'pizza', 'burger', 'sushi', 'noodle', 'ramen', 'curry', 'thai', 'chinese',
-        'indian', 'italian', 'japanese', 'korean', 'vietnamese', 'mexican',
-        'bbq', 'barbecue', 'gourmet', 'dining', 'bites', 'eats', 'plates'
-    ]
-    if any(pattern in venue_lower for pattern in restaurant_patterns):
-        return ('venues', slugify(venue_display_name))
-
-    # UK/international location indicators → probably a venue
-    location_keywords = [
-        'london', 'manchester', 'birmingham', 'soho', 'mayfair', 'shoreditch',
-        'farringdon', 'marylebone', 'kings cross', 'covent garden', 'chelsea',
-        'camden', 'hackney', 'islington', 'street', 'road', 'square', 'market'
-    ]
-    if any(loc in venue_lower for loc in location_keywords):
-        return ('venues', slugify(venue_display_name))
-
-    # Packaged brand indicators → packaged category
-    brand_patterns = [
-        r'\bltd\b', r'\blimited\b', r'\binc\b', r'\bcorp\b', r'\bco\b',
-        r'\bbrand', r'\bfoods?\b', r'\bproducts?\b', r'\bindustries\b',
-        r'\borganics?\b', r'\bnutrition\b', r'\bhealth\b'
-    ]
-    if any(re.search(pattern, venue_lower) for pattern in brand_patterns):
-        # Check if it's actually a product brand (not just coincidental match)
-        words = venue_display_name.split()
-        # Short capitalized names (1-2 words) are usually brands
-        if len(words) <= 2 and all(w[0].isupper() for w in words if w):
-            return ('packaged', slugify(venue_display_name))
-
-    # Tier 4: Smart fallback based on name structure
-    words = venue_display_name.split()
-
-    # Single word, all caps → likely a brand
-    if len(words) == 1 and venue_display_name.isupper():
-        return ('packaged', slugify(venue_display_name))
-
-    # Contains numbers or version indicators → likely a packaged product
-    if any(char.isdigit() for char in venue_display_name) or 'v.' in venue_lower or 'version' in venue_lower:
-        return ('packaged', slugify(venue_display_name))
-
-    # Multi-word with formal business structure (e.g., "Pine Foods Ltd") → packaged
-    if len(words) >= 2 and any(w.lower() in ['ltd', 'limited', 'inc', 'corp', 'co.'] for w in words):
-        return ('packaged', slugify(venue_display_name))
-
-    # Check if name suggests it's a venue (has location or establishment words)
-    venue_suggesting_words = ['house', 'palace', 'corner', 'place', 'hall', 'room', 'club']
-    if any(word in venue_lower for word in venue_suggesting_words):
-        return ('venues', slugify(venue_display_name))
-
-    # Default: Use generic as safe fallback (most flexible)
-    # Works well for shops, retailers, and ambiguous cases
-    # User can override with --category-type venues if it's actually a restaurant
-    return ('generic', slugify(venue_display_name))
+    # Tier 3: Heuristic fallback using shared categorization logic
+    return heuristic_categorize_venue(venue_display_name)
 
 
 def create_dish_file(dish_id, venue_name, display_name, category, portion_desc, output_dir):
